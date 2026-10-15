@@ -64,7 +64,7 @@ RouteWeaver/
 
 ## 从公开克隆复验
 
-需要 Git、Node.js 24.19.0 和 Python 3.12.12；无需 npm / pip 依赖。
+需要 Git、Node.js 24.19.0 和 Python 3.12（CI 固定 3.12.10）；无需 npm / pip 依赖。
 
 ~~~sh
 git clone https://github.com/ffdm12138/RouteWeaver.git

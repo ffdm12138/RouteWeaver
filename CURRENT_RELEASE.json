@@ -63,5 +63,8 @@
   "macosRevision": "macos-r1",
   "macosDelivery": "releases/v14.3/metadata/macos-delivery.json",
   "macosReport": "docs/reports/v14.3/MacBook适配.md",
-  "macos": "CONFIG_SOURCE_WINDOWS_LOCAL_CORE_PASS_MAC_DEVICE_NOT_RUN"
+  "macos": "CONFIG_SOURCE_WINDOWS_LOCAL_CORE_PASS_MAC_DEVICE_NOT_RUN",
+  "distribution": "public",
+  "releaseTag": "v14.3.0-rc.1",
+  "personalRulesIncluded": false
 }
