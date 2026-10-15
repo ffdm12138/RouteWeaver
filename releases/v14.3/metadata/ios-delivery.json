@@ -1,0 +1,157 @@
+{
+  "version": "14.3",
+  "date": "2026-10-14",
+  "revision": "ios-delivery-r2",
+  "domesticProtocolRevision": "domestic-protocol-r1",
+  "status": "IOS_SOURCE_STATIC_LOCAL_CORE_PASS_NATIVE_DEVICE_PENDING",
+  "authorization": "User selected self-contained business DNS plus remote complete rules, and reviewed domestic TCP/UDP/DNS following 国内网站.",
+  "shadowrocket": {
+    "file": "src/ios/v14.3-shadowrocket.conf",
+    "sha256": "9829d7e7c74f949cfe5168c3b3f3359b0e41aeb3c81bd3b8e2420bf721f277ec",
+    "bytes": 1746654,
+    "revision": "shadowrocket-lean-r1",
+    "sourceBytesChanged": true,
+    "immutableSource": "validation/inputs/v14.2-baseline/src/ios/v14.2-shadowrocket.conf",
+    "immutableSourceSHA256": "4813040cc00845c0d0cfda47123194598dce6d6d89e4b5e8a377f3ac516774f9",
+    "beforeBytes": 6168748,
+    "provenance": {
+      "file": "metadata/shadowrocket-v14.2-provenance.json",
+      "sha256": "5028fe77adef7f32e3732792fb6371b6bbe6d5c8fb48aa32024945cd42ad9728"
+    },
+    "sourceManifest": {
+      "file": "metadata/shadowrocket-lean.json",
+      "sha256": "d37b37cda2a9a4100cca78e50f016785e2b7bce9e6c4c1f602eb992718b154b3"
+    },
+    "staticEvidence": {
+      "file": "validation/shadowrocket-lean.json",
+      "sha256": "5bed12d19c669db8e2966fa1fa53af301af885da30568934a02b3903e6589a27",
+      "status": "SHADOWROCKET_LEAN_STATIC_PASS_NATIVE_PENDING"
+    },
+    "fullBusinessDNS": "SELF_CONTAINED",
+    "remoteSources": 15,
+    "fullDomesticDNS": "NATIVE_DIRECT_OR_SELECTED_PROXY_REMOTE_RESOLUTION_REQUIRES_DEVICE_ACCEPTANCE",
+    "nativeAcceptance": "NOT_RUN"
+  },
+  "jsEntries": [
+    {
+      "file": "src/windows/v14.3.js",
+      "sha256": "7498c2044cbec1223a04be81b39d4a224f0e6c01249b19abfa81cb11786f28ea",
+      "bytes": 116057
+    },
+    {
+      "file": "src/android/v14.3-android.js",
+      "sha256": "2128a1019d0c6f719a9e9533a8bc6b1e61bb47277e96190c8fc22218a52d4f3f",
+      "bytes": 115943
+    },
+    {
+      "file": "src/ios/v14.3-clashmi.js",
+      "sha256": "80e4168bfeba2ab7e9c278811abb7263761ba04c33a1d1f243d72211b8d84f3c",
+      "bytes": 118837
+    },
+    {
+      "file": "src/ios/v14.3-clashmi-domestic-protocol-r1.js",
+      "sha256": "80e4168bfeba2ab7e9c278811abb7263761ba04c33a1d1f243d72211b8d84f3c",
+      "bytes": 118837
+    }
+  ],
+  "clashmiSourceInspection": {
+    "groups": [
+      "高纯净度AI用",
+      "高网速视频用",
+      "自动选择",
+      "公共基础服务",
+      "漏网之鱼",
+      "国内网站",
+      "OpenAI 服务",
+      "Anthropic 服务",
+      "谷歌服务",
+      "微软生态",
+      "Steam",
+      "Epic Games",
+      "Telegram",
+      "TikTok",
+      "Twitter",
+      "Discord",
+      "OpenRouter",
+      "Perplexity",
+      "Hugging Face",
+      "xAI",
+      "Netflix",
+      "Disney+",
+      "Spotify",
+      "Meta 服务",
+      "苹果国际",
+      "哔哩国际"
+    ],
+    "mode": "rule",
+    "ipv6": true,
+    "dnsIPv6": true,
+    "nameserver": [
+      "tls://dns.alidns.com:853#漏网之鱼&disable-reuse=true",
+      "tls://dot.pub:853#漏网之鱼&disable-reuse=true"
+    ],
+    "fallback": [],
+    "tun": {
+      "enable": true,
+      "stack": "gvisor",
+      "mtu": 1280,
+      "auto-route": true,
+      "auto-detect-interface": false,
+      "strict-route": true,
+      "inet4-address": [
+        "172.19.0.1/30"
+      ],
+      "inet6-address": [
+        "fdfe:dcbe:9876::1/126"
+      ],
+      "route-address": [
+        "0.0.0.0/0",
+        "::/0"
+      ],
+      "dns-hijack": [
+        "any:53",
+        "tcp://any:53"
+      ]
+    }
+  },
+  "clashmiSettings": {
+    "bindScriptToActiveSubscription": true,
+    "appendBuiltin": "noOverwrite",
+    "coreMode": "rule",
+    "coreIPv6": true,
+    "profileOverwriteRules": false,
+    "profileOverwriteProxyGroups": false,
+    "appendApplePushRules": false,
+    "tunOverwrite": false,
+    "includeAllNetworks": true,
+    "enforceRoutes": true,
+    "excludeLocalNetworks": false,
+    "excludeApns": false,
+    "excludeCellularServices": false,
+    "excludeDeviceCommunication": false,
+    "autoRouteUseSubRangesByDefault": false
+  },
+  "officialSourceEvidence": {
+    "file": "metadata/clashmi-compatibility.json",
+    "sha256": "c13d5678ef753003262e3a23fc06a024fb60acfb433bb47b4a1fc6d0ef0f1a05"
+  },
+  "localCoreEvidence": {
+    "file": "validation/native-core.json",
+    "sha256": "e06b81af1741d92ceeb3912e75e3cd375737d154524b3d846075bd3180097573",
+    "status": "BALANCED_LOCAL_CORE_PASS"
+  },
+  "historicalFailedInvestigation": {
+    "file": "archive/v14.3-before-domestic-protocol-r1-20261013/releases/v14.3/validation/clashmi-ios-investigation.json",
+    "sha256": "4d777ffcd60c7eed9c6943143ec081749d058d5af4101efaae7a8e9ae7089043",
+    "status": "FAIL",
+    "currentAcceptance": false
+  },
+  "wechatUploadRootCause": "UNRESOLVED_DEVICE_LOG_AND_VPN_OFF_COMPARISON_NOT_PROVIDED",
+  "report": "docs/reports/v14.3/国内协议跟组与小火箭精简.md",
+  "restorationTool": {
+    "file": "tools/restore-ios-delivery.py",
+    "sha256": "1174a560846f8fe6d370e5426b1d0d565f6c605188495e576745d443d7714dc6"
+  },
+  "clientDeployment": false,
+  "deviceAcceptance": "NOT_RUN"
+}

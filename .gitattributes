@@ -1,0 +1,7 @@
+# Source, requirements, snapshots and receipts are SHA256-bound. Preserve bytes
+# on Windows and Linux; do not normalize existing line endings on checkout.
+* -text whitespace=cr-at-eol
+# Upstream snapshots are immutable, including upstream whitespace.
+releases/v14.3/validation/inputs/** -whitespace
+*.mrs binary
+*.zip binary

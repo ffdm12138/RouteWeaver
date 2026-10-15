@@ -1,0 +1,601 @@
+{
+  "version": "14.2",
+  "date": "2026-10-12",
+  "revision": "embedded-domain-r1",
+  "priorRevision": "apple-inline-r1",
+  "status": "EMBEDDED_DOMAIN_SOURCE_LOCAL_CORE_PASS_DEVICE_PENDING",
+  "authorization": "User requested embedding business/domestic domain tables with remote supplements, plus latest upstream review",
+  "contract": {
+    "file": "docs/需求.md",
+    "sha256": "5f0086ba18755d8c10c96e2b255e3d7e456afdf4f9c0e6e7f36b7926110859f0"
+  },
+  "priorMetadata": {
+    "file": "metadata/apple-inline-review.json",
+    "sha256": "909fa70e4d26a67cc4185e2da4bd0ca0d02cd41152c027abf7c39a8ead3607ee"
+  },
+  "beforeManifest": {
+    "file": "validation/inputs/embedded-domain-before/manifest.json",
+    "sha256": "1ab918217af208c26d88f99999f168355ff8f1721dd95c1451d73fab70cedbfe"
+  },
+  "preservedArchive": {
+    "directory": "archive/v14.2-before-embedded-domain-r1-20261011",
+    "manifestSHA256": "8b97f5d684d47fa2af03a13dba839aacdac11ce2b846c8337bc8356268d57fe8",
+    "files": 549
+  },
+  "lockedSources": {
+    "file": "data/rule-sources.lock.json",
+    "sha256": "50dcaa46d1b16123858f54ccfa1e7504a7d936522c895937be398c26ab5aebad",
+    "count": 45
+  },
+  "latestSourceReview": {
+    "file": "data/rules/embedded-source-review.json",
+    "sha256": "acfef0fa3690b4c7e6cbe7b67a8a1961f869f297a045ef2db498ed0bf5e96841"
+  },
+  "embeddedSnapshot": {
+    "file": "data/rules/embedded-domains.json",
+    "sha256": "f1a7d8337ee73635febbde1b8f81b9701fef859b0779286b07f4645be29a6317"
+  },
+  "runtimeClassificationChanges": 0,
+  "entries": [
+    {
+      "file": "src/windows/v14.2.js",
+      "sha256": "26e46c85f0a2d4facd76e1723a2eeea5c80b5fa901286a5241d4df1fc8ea4bb4"
+    },
+    {
+      "file": "src/android/v14.2-android.js",
+      "sha256": "7d6a3cbcc30a7b29dfa021e2162cd47b98647c1fdae823f3b47ff62a97638e64"
+    },
+    {
+      "file": "src/ios/v14.2-shadowrocket.conf",
+      "sha256": "4813040cc00845c0d0cfda47123194598dce6d6d89e4b5e8a377f3ac516774f9"
+    },
+    {
+      "file": "tools/generate-v14.2-shadowrocket.js",
+      "sha256": "34c0a6c2c23f4848bcda1a69021f883fe8b2c15d614ed38b8dc75d4caec96c53"
+    },
+    {
+      "file": "metadata/shadowrocket-sources.json",
+      "sha256": "5028fe77adef7f32e3732792fb6371b6bbe6d5c8fb48aa32024945cd42ad9728"
+    },
+    {
+      "file": "tools/sync-reviewed-data.cjs",
+      "sha256": "ff9959764f43428978401819bf8ae0dc2fd98101fb381dd33083f78f27095681"
+    },
+    {
+      "file": "tools/build-embedded-domains.cjs",
+      "sha256": "b3a7d6ada2a90684f142afb7fcdf2875da8d9e3197ad64cdc1a0df7a4829da36"
+    }
+  ],
+  "runtimeDelta": "Reviewed domain inline provider immediately precedes its former HTTP table at the same priority; business DNS uses both in the same order; domestic DNS/UDP retains fallback; same cached classification, remote supplements retained",
+  "findings": [
+    {
+      "id": "EMBEDDED-01",
+      "problem": "Remote-only business domain baselines could demote to fallback/domestic when empty",
+      "resolutionStatus": "REPAIRED_VERIFIED"
+    },
+    {
+      "id": "EMBEDDED-02",
+      "problem": "Domestic reviewed table was not fully available without provider content",
+      "resolutionStatus": "REPAIRED_VERIFIED"
+    }
+  ],
+  "requirements": [
+    {
+      "id": 1,
+      "sourceContract": "PASS",
+      "currentReceipts": [
+        {
+          "file": "validation/static.json",
+          "sha256": "8bb1c63fc35244a42396bbffa21c4eb4f34df9814c70fffffab12f6a19a3ee67",
+          "status": "STATIC_PASS"
+        },
+        {
+          "file": "validation/embedded-domains.json",
+          "sha256": "cf724a2a3e37c6f4b379c67cb9e00f8aa69e0f134316bc20859031c470cb8bc2",
+          "status": "EMBEDDED_DOMAIN_STATIC_PASS"
+        },
+        {
+          "file": "validation/thunder-r4.json",
+          "sha256": "d75df18f57afb5b47b81b5706024f39bd2921464564afd8e5db34fbbbd82ea18",
+          "status": "THUNDER_R4_ELEVEN_CONTRACTS_STATIC_PASS"
+        },
+        {
+          "file": "validation/thunder-r5.json",
+          "sha256": "71765241946297470e04321fe7b0f7f6645bd59839d4db1b8e828e6ca1847eba",
+          "status": "THUNDER_R5_ELEVEN_CONTRACTS_STATIC_PASS"
+        }
+      ],
+      "device": "NOT_RUN"
+    },
+    {
+      "id": 2,
+      "sourceContract": "PASS",
+      "currentReceipts": [
+        {
+          "file": "validation/static.json",
+          "sha256": "8bb1c63fc35244a42396bbffa21c4eb4f34df9814c70fffffab12f6a19a3ee67",
+          "status": "STATIC_PASS"
+        },
+        {
+          "file": "validation/embedded-domains.json",
+          "sha256": "cf724a2a3e37c6f4b379c67cb9e00f8aa69e0f134316bc20859031c470cb8bc2",
+          "status": "EMBEDDED_DOMAIN_STATIC_PASS"
+        },
+        {
+          "file": "validation/thunder-r4.json",
+          "sha256": "d75df18f57afb5b47b81b5706024f39bd2921464564afd8e5db34fbbbd82ea18",
+          "status": "THUNDER_R4_ELEVEN_CONTRACTS_STATIC_PASS"
+        },
+        {
+          "file": "validation/thunder-r5.json",
+          "sha256": "71765241946297470e04321fe7b0f7f6645bd59839d4db1b8e828e6ca1847eba",
+          "status": "THUNDER_R5_ELEVEN_CONTRACTS_STATIC_PASS"
+        }
+      ],
+      "device": "NOT_RUN"
+    },
+    {
+      "id": 3,
+      "sourceContract": "PASS",
+      "currentReceipts": [
+        {
+          "file": "validation/static.json",
+          "sha256": "8bb1c63fc35244a42396bbffa21c4eb4f34df9814c70fffffab12f6a19a3ee67",
+          "status": "STATIC_PASS"
+        },
+        {
+          "file": "validation/embedded-domains.json",
+          "sha256": "cf724a2a3e37c6f4b379c67cb9e00f8aa69e0f134316bc20859031c470cb8bc2",
+          "status": "EMBEDDED_DOMAIN_STATIC_PASS"
+        },
+        {
+          "file": "validation/thunder-r4.json",
+          "sha256": "d75df18f57afb5b47b81b5706024f39bd2921464564afd8e5db34fbbbd82ea18",
+          "status": "THUNDER_R4_ELEVEN_CONTRACTS_STATIC_PASS"
+        },
+        {
+          "file": "validation/thunder-r5.json",
+          "sha256": "71765241946297470e04321fe7b0f7f6645bd59839d4db1b8e828e6ca1847eba",
+          "status": "THUNDER_R5_ELEVEN_CONTRACTS_STATIC_PASS"
+        }
+      ],
+      "device": "NOT_RUN"
+    },
+    {
+      "id": 4,
+      "sourceContract": "PASS",
+      "currentReceipts": [
+        {
+          "file": "validation/static.json",
+          "sha256": "8bb1c63fc35244a42396bbffa21c4eb4f34df9814c70fffffab12f6a19a3ee67",
+          "status": "STATIC_PASS"
+        },
+        {
+          "file": "validation/embedded-domains.json",
+          "sha256": "cf724a2a3e37c6f4b379c67cb9e00f8aa69e0f134316bc20859031c470cb8bc2",
+          "status": "EMBEDDED_DOMAIN_STATIC_PASS"
+        },
+        {
+          "file": "validation/thunder-r4.json",
+          "sha256": "d75df18f57afb5b47b81b5706024f39bd2921464564afd8e5db34fbbbd82ea18",
+          "status": "THUNDER_R4_ELEVEN_CONTRACTS_STATIC_PASS"
+        },
+        {
+          "file": "validation/thunder-r5.json",
+          "sha256": "71765241946297470e04321fe7b0f7f6645bd59839d4db1b8e828e6ca1847eba",
+          "status": "THUNDER_R5_ELEVEN_CONTRACTS_STATIC_PASS"
+        }
+      ],
+      "device": "NOT_RUN"
+    },
+    {
+      "id": 5,
+      "sourceContract": "PASS",
+      "currentReceipts": [
+        {
+          "file": "validation/static.json",
+          "sha256": "8bb1c63fc35244a42396bbffa21c4eb4f34df9814c70fffffab12f6a19a3ee67",
+          "status": "STATIC_PASS"
+        },
+        {
+          "file": "validation/embedded-domains.json",
+          "sha256": "cf724a2a3e37c6f4b379c67cb9e00f8aa69e0f134316bc20859031c470cb8bc2",
+          "status": "EMBEDDED_DOMAIN_STATIC_PASS"
+        },
+        {
+          "file": "validation/thunder-r4.json",
+          "sha256": "d75df18f57afb5b47b81b5706024f39bd2921464564afd8e5db34fbbbd82ea18",
+          "status": "THUNDER_R4_ELEVEN_CONTRACTS_STATIC_PASS"
+        },
+        {
+          "file": "validation/thunder-r5.json",
+          "sha256": "71765241946297470e04321fe7b0f7f6645bd59839d4db1b8e828e6ca1847eba",
+          "status": "THUNDER_R5_ELEVEN_CONTRACTS_STATIC_PASS"
+        }
+      ],
+      "device": "NOT_RUN"
+    },
+    {
+      "id": 6,
+      "sourceContract": "PASS",
+      "currentReceipts": [
+        {
+          "file": "validation/static.json",
+          "sha256": "8bb1c63fc35244a42396bbffa21c4eb4f34df9814c70fffffab12f6a19a3ee67",
+          "status": "STATIC_PASS"
+        },
+        {
+          "file": "validation/embedded-domains.json",
+          "sha256": "cf724a2a3e37c6f4b379c67cb9e00f8aa69e0f134316bc20859031c470cb8bc2",
+          "status": "EMBEDDED_DOMAIN_STATIC_PASS"
+        },
+        {
+          "file": "validation/thunder-r4.json",
+          "sha256": "d75df18f57afb5b47b81b5706024f39bd2921464564afd8e5db34fbbbd82ea18",
+          "status": "THUNDER_R4_ELEVEN_CONTRACTS_STATIC_PASS"
+        },
+        {
+          "file": "validation/thunder-r5.json",
+          "sha256": "71765241946297470e04321fe7b0f7f6645bd59839d4db1b8e828e6ca1847eba",
+          "status": "THUNDER_R5_ELEVEN_CONTRACTS_STATIC_PASS"
+        }
+      ],
+      "device": "NOT_RUN"
+    },
+    {
+      "id": 7,
+      "sourceContract": "PASS",
+      "currentReceipts": [
+        {
+          "file": "validation/static.json",
+          "sha256": "8bb1c63fc35244a42396bbffa21c4eb4f34df9814c70fffffab12f6a19a3ee67",
+          "status": "STATIC_PASS"
+        },
+        {
+          "file": "validation/embedded-domains.json",
+          "sha256": "cf724a2a3e37c6f4b379c67cb9e00f8aa69e0f134316bc20859031c470cb8bc2",
+          "status": "EMBEDDED_DOMAIN_STATIC_PASS"
+        },
+        {
+          "file": "validation/thunder-r4.json",
+          "sha256": "d75df18f57afb5b47b81b5706024f39bd2921464564afd8e5db34fbbbd82ea18",
+          "status": "THUNDER_R4_ELEVEN_CONTRACTS_STATIC_PASS"
+        },
+        {
+          "file": "validation/thunder-r5.json",
+          "sha256": "71765241946297470e04321fe7b0f7f6645bd59839d4db1b8e828e6ca1847eba",
+          "status": "THUNDER_R5_ELEVEN_CONTRACTS_STATIC_PASS"
+        }
+      ],
+      "device": "NOT_RUN"
+    },
+    {
+      "id": 8,
+      "sourceContract": "PASS",
+      "currentReceipts": [
+        {
+          "file": "validation/static.json",
+          "sha256": "8bb1c63fc35244a42396bbffa21c4eb4f34df9814c70fffffab12f6a19a3ee67",
+          "status": "STATIC_PASS"
+        },
+        {
+          "file": "validation/embedded-domains.json",
+          "sha256": "cf724a2a3e37c6f4b379c67cb9e00f8aa69e0f134316bc20859031c470cb8bc2",
+          "status": "EMBEDDED_DOMAIN_STATIC_PASS"
+        },
+        {
+          "file": "validation/thunder-r4.json",
+          "sha256": "d75df18f57afb5b47b81b5706024f39bd2921464564afd8e5db34fbbbd82ea18",
+          "status": "THUNDER_R4_ELEVEN_CONTRACTS_STATIC_PASS"
+        },
+        {
+          "file": "validation/thunder-r5.json",
+          "sha256": "71765241946297470e04321fe7b0f7f6645bd59839d4db1b8e828e6ca1847eba",
+          "status": "THUNDER_R5_ELEVEN_CONTRACTS_STATIC_PASS"
+        }
+      ],
+      "device": "NOT_RUN"
+    },
+    {
+      "id": 9,
+      "sourceContract": "PASS",
+      "currentReceipts": [
+        {
+          "file": "validation/static.json",
+          "sha256": "8bb1c63fc35244a42396bbffa21c4eb4f34df9814c70fffffab12f6a19a3ee67",
+          "status": "STATIC_PASS"
+        },
+        {
+          "file": "validation/embedded-domains.json",
+          "sha256": "cf724a2a3e37c6f4b379c67cb9e00f8aa69e0f134316bc20859031c470cb8bc2",
+          "status": "EMBEDDED_DOMAIN_STATIC_PASS"
+        },
+        {
+          "file": "validation/thunder-r4.json",
+          "sha256": "d75df18f57afb5b47b81b5706024f39bd2921464564afd8e5db34fbbbd82ea18",
+          "status": "THUNDER_R4_ELEVEN_CONTRACTS_STATIC_PASS"
+        },
+        {
+          "file": "validation/thunder-r5.json",
+          "sha256": "71765241946297470e04321fe7b0f7f6645bd59839d4db1b8e828e6ca1847eba",
+          "status": "THUNDER_R5_ELEVEN_CONTRACTS_STATIC_PASS"
+        }
+      ],
+      "device": "NOT_RUN"
+    },
+    {
+      "id": 10,
+      "sourceContract": "PASS",
+      "currentReceipts": [
+        {
+          "file": "validation/static.json",
+          "sha256": "8bb1c63fc35244a42396bbffa21c4eb4f34df9814c70fffffab12f6a19a3ee67",
+          "status": "STATIC_PASS"
+        },
+        {
+          "file": "validation/embedded-domains.json",
+          "sha256": "cf724a2a3e37c6f4b379c67cb9e00f8aa69e0f134316bc20859031c470cb8bc2",
+          "status": "EMBEDDED_DOMAIN_STATIC_PASS"
+        },
+        {
+          "file": "validation/thunder-r4.json",
+          "sha256": "d75df18f57afb5b47b81b5706024f39bd2921464564afd8e5db34fbbbd82ea18",
+          "status": "THUNDER_R4_ELEVEN_CONTRACTS_STATIC_PASS"
+        },
+        {
+          "file": "validation/thunder-r5.json",
+          "sha256": "71765241946297470e04321fe7b0f7f6645bd59839d4db1b8e828e6ca1847eba",
+          "status": "THUNDER_R5_ELEVEN_CONTRACTS_STATIC_PASS"
+        }
+      ],
+      "device": "NOT_RUN"
+    },
+    {
+      "id": 11,
+      "sourceContract": "PASS",
+      "currentReceipts": [
+        {
+          "file": "validation/static.json",
+          "sha256": "8bb1c63fc35244a42396bbffa21c4eb4f34df9814c70fffffab12f6a19a3ee67",
+          "status": "STATIC_PASS"
+        },
+        {
+          "file": "validation/embedded-domains.json",
+          "sha256": "cf724a2a3e37c6f4b379c67cb9e00f8aa69e0f134316bc20859031c470cb8bc2",
+          "status": "EMBEDDED_DOMAIN_STATIC_PASS"
+        },
+        {
+          "file": "validation/thunder-r4.json",
+          "sha256": "d75df18f57afb5b47b81b5706024f39bd2921464564afd8e5db34fbbbd82ea18",
+          "status": "THUNDER_R4_ELEVEN_CONTRACTS_STATIC_PASS"
+        },
+        {
+          "file": "validation/thunder-r5.json",
+          "sha256": "71765241946297470e04321fe7b0f7f6645bd59839d4db1b8e828e6ca1847eba",
+          "status": "THUNDER_R5_ELEVEN_CONTRACTS_STATIC_PASS"
+        }
+      ],
+      "device": "NOT_RUN"
+    }
+  ],
+  "testEvidence": {
+    "static": {
+      "file": "validation/static.json",
+      "sha256": "8bb1c63fc35244a42396bbffa21c4eb4f34df9814c70fffffab12f6a19a3ee67",
+      "status": "STATIC_PASS"
+    },
+    "embedded-domains": {
+      "file": "validation/embedded-domains.json",
+      "sha256": "cf724a2a3e37c6f4b379c67cb9e00f8aa69e0f134316bc20859031c470cb8bc2",
+      "status": "EMBEDDED_DOMAIN_STATIC_PASS"
+    },
+    "embedded-domains-core": {
+      "file": "validation/embedded-domains-core.json",
+      "sha256": "08d441f8b31bfb8cc3f17d0317bfc914e0b54eaeae208a6dd4f9a0430a18ca32",
+      "status": "EMBEDDED_DOMAIN_LOCAL_CORE_PASS"
+    },
+    "embedded-domains-download-failure": {
+      "file": "validation/embedded-domains-download-failure.json",
+      "sha256": "449f21ba02cc8e6463d704a0d2684f9ee7f24f822c10b2d3d7fd5f7f8bc4f153",
+      "status": "EMBEDDED_DOMAIN_COLD_DOWNLOAD_CORE_PASS"
+    },
+    "apple-inline": {
+      "file": "validation/apple-inline.json",
+      "sha256": "70a526176e0bb32781a7a804bb9ef16252932e4c308b02994da58add53f33310",
+      "status": "APPLE_INLINE_STATIC_PASS"
+    },
+    "apple-inline-core": {
+      "file": "validation/apple-inline-core.json",
+      "sha256": "fb56233d48286fb8bcf2e5863dffeedade259ecab41bbe8f379f5187bcbef8d6",
+      "status": "APPLE_INLINE_LOCAL_CORE_PASS"
+    },
+    "repair-review": {
+      "file": "validation/repair-review.json",
+      "sha256": "6866a67053416d3a3ae2107710a46391b99ad80b5eabe1b8d40f31757348094b",
+      "status": "REPAIR_REGRESSION_PASS"
+    },
+    "domestic-audit": {
+      "file": "validation/domestic-audit.json",
+      "sha256": "b0c67288f9922fab5aca13be9a78685d01df8210cb77160faeb54655384dc1c0",
+      "status": "DOMESTIC_AUDIT_PASS"
+    },
+    "domestic-selector": {
+      "file": "validation/domestic-selector.json",
+      "sha256": "2c53a78fdff0b57046ee275e7f3c8189eda8ba33751e5ccee3bc0c1303304ebc",
+      "status": "DOMESTIC_SELECTOR_PASS"
+    },
+    "api-browser-compat": {
+      "file": "validation/api-browser-compat.json",
+      "sha256": "c50512703a75e99a2dab59efbf5af5cd128b4325d2e4c53b9df2d1ff333b505d",
+      "status": "API_BROWSER_COMPAT_STATIC_PASS"
+    },
+    "api-browser-regression": {
+      "file": "validation/api-browser-regression.json",
+      "sha256": "8a91fe3fbe21ea7358838013dcbde6b1c4291dcd8d1ff40fec984a2064195c9a",
+      "status": "API_REAL_IP_CORE_PASS_BROWSER_TUN_RETEST_PENDING"
+    },
+    "native-routing": {
+      "file": "validation/native-routing.json",
+      "sha256": "3858f86e07f247df39a20de477348196624c47f11cf1bae2c9e8e49bc5ab9802",
+      "status": "CORE_ROUTING_PASS"
+    },
+    "native-dns-egress": {
+      "file": "validation/native-dns-egress.json",
+      "sha256": "f034fc231600cb074089f8ee9af7ace4b718143e39706c39c99894f57e033258",
+      "status": "CORE_DNS_EGRESS_PASS"
+    },
+    "native-selectors": {
+      "file": "validation/native-selectors.json",
+      "sha256": "b44f1e70bf4feab49406956d685ff4d757e21f8b85271e756f0ccea636ddc8ed",
+      "status": "CORE_MANUAL_SELECTORS_PASS"
+    },
+    "native-inbound-guard": {
+      "file": "validation/native-inbound-guard.json",
+      "sha256": "c7977079b3a946fc33d166dce4d39885bf8e9e08f0faab72db4f96c2b542c72c",
+      "status": "CORE_INBOUND_GUARD_PASS"
+    },
+    "thunder-repair": {
+      "file": "validation/thunder-repair.json",
+      "sha256": "a6a9e6ed5f89cbff781c301cb6b75a3be277f8824e65fc34f1160f6b198c7aae",
+      "status": "THUNDER_REPAIR_STATIC_PASS"
+    },
+    "thunder-r2": {
+      "file": "validation/thunder-r2.json",
+      "sha256": "412bfe6f1deef15927cddddf5275464db39b55a4f9c6eed40589286cb5f408b8",
+      "status": "THUNDER_R2_STATIC_PASS"
+    },
+    "thunder-r3": {
+      "file": "validation/thunder-r3.json",
+      "sha256": "d17831ffcc628f7dbf3c7f20a348b5877673f2adb06514c1148f50f1a72dedf2",
+      "status": "THUNDER_R3_STATIC_PASS"
+    },
+    "thunder-r4": {
+      "file": "validation/thunder-r4.json",
+      "sha256": "d75df18f57afb5b47b81b5706024f39bd2921464564afd8e5db34fbbbd82ea18",
+      "status": "THUNDER_R4_ELEVEN_CONTRACTS_STATIC_PASS"
+    },
+    "thunder-r5": {
+      "file": "validation/thunder-r5.json",
+      "sha256": "71765241946297470e04321fe7b0f7f6645bd59839d4db1b8e828e6ca1847eba",
+      "status": "THUNDER_R5_ELEVEN_CONTRACTS_STATIC_PASS"
+    },
+    "thunder-closeout": {
+      "file": "validation/thunder-closeout.json",
+      "sha256": "65bfdee9cc0533a7bc1c39a93ce691d9af113805e4a62ea449c5716ebe5a9353",
+      "status": "THUNDER_CLOSEOUT_EDGE_AUDIT_PASS"
+    },
+    "thunder-domain-coverage": {
+      "file": "validation/thunder-domain-coverage.json",
+      "sha256": "fc1703456e2fb569974407a630c5a7f3ee487971cff124f18de390a47e9981f9",
+      "status": "THUNDER_DOMAIN_COVERAGE_PASS"
+    },
+    "independent-r5": {
+      "file": "validation/independent-r5.json",
+      "sha256": "5e86d7d157bcc6e3793844e04b06c0aee581b3de13b1295b29fe2a137d5e7c6a",
+      "status": "THREE_PLATFORM_INDEPENDENT_REVIEW_PASS"
+    }
+  },
+  "metrics": {
+    "staticChecks": 2674,
+    "embeddedStaticChecks": 30,
+    "businessDomainSamples": 9846,
+    "businessObservations": 147690,
+    "domesticDomainRows": 111595,
+    "domesticObservations": 1339140,
+    "beforeCounterexamples": 72,
+    "inlineClassifierRows": 115438,
+    "reviewedLatestSources": 52,
+    "emptyRoutingCases": 188,
+    "emptyDNSCases": 196,
+    "coldDownloadRoutingCases": 188,
+    "coldDownloadDNSCases": 196,
+    "nativeRoutingCases": 1764,
+    "nativeDNSCases": 818
+  },
+  "attempts": [
+    {
+      "file": "validation/inputs/embedded-domain-attempts/embedded-static-first.log",
+      "sha256": "ec573b4923e4e06b2e58a195beba93a0d73de912376190efeb00b7e815af5359"
+    },
+    {
+      "file": "validation/inputs/embedded-domain-attempts/final-native-apple.log",
+      "sha256": "2c2e77e75b2ea1dde201647c5ca675c085bd7bb1d3686e42e45659378e1bc936"
+    },
+    {
+      "file": "validation/inputs/embedded-domain-attempts/final-native-dns.log",
+      "sha256": "8b830d289da6a0c662e83522c7ccc6be490c7a321530d2ac8852a29d950d2bb1"
+    },
+    {
+      "file": "validation/inputs/embedded-domain-attempts/final-native-embedded-cold.log",
+      "sha256": "7f970145760f2c458fcf66a5f2d4e8fe05b8c63a735aaee00c0e853e8f309634"
+    },
+    {
+      "file": "validation/inputs/embedded-domain-attempts/final-native-embedded-empty.log",
+      "sha256": "bd0cbfee6c277481b25a14e6df97080f9feb6c689126126cc99b21993ad943ec"
+    },
+    {
+      "file": "validation/inputs/embedded-domain-attempts/final-native-inbound-reviewed.log",
+      "sha256": "cadab01e8e4e6f610579194e1df3617b10f933bab2f81f61352b797c711639d7"
+    },
+    {
+      "file": "validation/inputs/embedded-domain-attempts/final-native-inbound.log",
+      "sha256": "19e289115bb1fd023aba9a718232c26f4901a5bdc93ddfd232470182eac14e41"
+    },
+    {
+      "file": "validation/inputs/embedded-domain-attempts/final-native-routing.log",
+      "sha256": "a24002a0215cce440613ca59ac993035ae051e4025eb11379e8b8bea2959fc41"
+    },
+    {
+      "file": "validation/inputs/embedded-domain-attempts/final-native-selectors.log",
+      "sha256": "68cba48689f9eea86a7ea47e9e985534e4162b6144a03a1091b822d9c5d667d6"
+    },
+    {
+      "file": "validation/inputs/embedded-domain-attempts/independent-final.log",
+      "sha256": "be861ca549dd6c4328bf8a072ac8f54df500cd9af219faff16115da92d961dc1"
+    },
+    {
+      "file": "validation/inputs/embedded-domain-attempts/initial-static.log",
+      "sha256": "04fad2cce66791867c29117d5052da36dd2a87ce9cccee41a6b8bc3069ba171d"
+    },
+    {
+      "file": "validation/inputs/embedded-domain-attempts/native-cold-download-first.log",
+      "sha256": "7f970145760f2c458fcf66a5f2d4e8fe05b8c63a735aaee00c0e853e8f309634"
+    },
+    {
+      "file": "validation/inputs/embedded-domain-attempts/native-embedded-approved.log",
+      "sha256": "bd0cbfee6c277481b25a14e6df97080f9feb6c689126126cc99b21993ad943ec"
+    },
+    {
+      "file": "validation/inputs/embedded-domain-attempts/native-embedded-first.log",
+      "sha256": "05f99a95372b1cac9a0d36eae7d042deee2dd6f8b07160c538dfcf958db6c3e4"
+    },
+    {
+      "file": "validation/inputs/embedded-domain-attempts/static-after-historical-bindings.log",
+      "sha256": "8cd6aff0d782ccca2fd3fe707b78e71ce00b3cead0a1205e0034893800d6591d"
+    },
+    {
+      "file": "validation/inputs/embedded-domain-attempts/static-final.log",
+      "sha256": "74a1df09d67f67f2ee4b25f372e70bfc84b4d799ac3b0905cd7553f019397c1e"
+    }
+  ],
+  "retainedBoundaries": {
+    "scope": "Finite reviewed classifiers, not every website",
+    "remoteSources": "Pinned reviewed commits; upstream content updates require candidate delta review",
+    "remoteIPProviders": "Retained as remote, not embedded",
+    "singleLabelLAN": "52 historical names remain different between Mihomo and native iOS source model",
+    "shadowrocketRemoteDNS": "New remote business domains require regenerated reviewed Host DNS; native parser/size limits NOT_RUN",
+    "nativeIOS": "NOT_RUN",
+    "TUNVPN": "NOT_RUN",
+    "publicIPv6": "NOT_RUN",
+    "deployedClientChanged": false
+  },
+  "appleUserSmoke": {
+    "result": "USER_REPORTED_WINDOWS_LOGIN_SUCCESS_AFTER_APPLE_INLINE_R1",
+    "independentBrowserReproduction": "NOT_RUN",
+    "HTTP541RootCause": "UNRESOLVED"
+  },
+  "recordingTool": {
+    "file": "tools/record-embedded-domains.py",
+    "sha256": "7912d4ca45866eb8b393c63944454cd94a053fc23aa68b4f4ce064c93ba2af02"
+  }
+}

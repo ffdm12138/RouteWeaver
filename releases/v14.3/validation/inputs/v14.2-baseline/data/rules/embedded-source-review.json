@@ -1,0 +1,935 @@
+{
+  "date": "2026-10-12",
+  "revision": "embedded-domain-r1",
+  "status": "REVIEWED_SEMANTICALLY_EQUIVALENT",
+  "authorization": "User requested embedded business/domestic domains with remote supplements and review of latest tables",
+  "commits": {
+    "MetaCubeX/meta-rules-dat": "b4d414227a182c5bc954283e4a83ee176dad671b",
+    "blackmatrix7/ios_rule_script": "83f37120c155f67c8eef43221dabe15cc3c95fec"
+  },
+  "branches": [
+    {
+      "repo": "MetaCubeX/meta-rules-dat",
+      "branch": "meta",
+      "commit": "b4d414227a182c5bc954283e4a83ee176dad671b",
+      "commitDate": "2026-10-11T01:11:11Z",
+      "file": "MetaCubeX-head.json",
+      "sha256": "09671acc5bb8c4c7c8999a775df3723efa0c88c6e6a684c80b66f4e2a7803aa8"
+    },
+    {
+      "repo": "blackmatrix7/ios_rule_script",
+      "branch": "master",
+      "commit": "83f37120c155f67c8eef43221dabe15cc3c95fec",
+      "commitDate": "2026-10-09T22:09:47Z",
+      "file": "blackmatrix7-head.json",
+      "sha256": "697d8489dce4e3f000ef21e162c39d06189c632ac9fe877f79b39a0d7004f639"
+    }
+  ],
+  "candidateManifest": {
+    "file": "validation/inputs/embedded-domain-candidate/manifest.json",
+    "sha256": "1ab87d843cfba211dec76eee2a6cd48b46c03269eabfff37fc711a5ec104948f"
+  },
+  "baselineLockSHA256": "f2a025cd566c0ace7371ba004bb90c7cfc23747493ee541b083c4e5a6e64ddca",
+  "sourceCount": 52,
+  "runtimeSources": 45,
+  "classificationChanges": 0,
+  "newRows": [
+    {
+      "source": "core-microsoft",
+      "row": "DOMAIN-SUFFIX,cafe.github.com",
+      "decision": "ACCEPT_REDUNDANT_ALREADY_COVERED",
+      "parent": "DOMAIN-SUFFIX,github.com"
+    }
+  ],
+  "observations": [
+    {
+      "platform": "desktop",
+      "host": "cafe.github.com",
+      "tcp": "微软生态",
+      "udp": "微软生态",
+      "dns": "微软生态",
+      "basis": "Existing reviewed github.com suffix already covers the new child suffix"
+    },
+    {
+      "platform": "desktop",
+      "host": "probe.cafe.github.com",
+      "tcp": "微软生态",
+      "udp": "微软生态",
+      "dns": "微软生态",
+      "basis": "Existing reviewed github.com suffix already covers the new child suffix"
+    },
+    {
+      "platform": "android",
+      "host": "cafe.github.com",
+      "tcp": "微软生态",
+      "udp": "微软生态",
+      "dns": "微软生态",
+      "basis": "Existing reviewed github.com suffix already covers the new child suffix"
+    },
+    {
+      "platform": "android",
+      "host": "probe.cafe.github.com",
+      "tcp": "微软生态",
+      "udp": "微软生态",
+      "dns": "微软生态",
+      "basis": "Existing reviewed github.com suffix already covers the new child suffix"
+    },
+    {
+      "platform": "shadowrocket",
+      "host": "cafe.github.com",
+      "tcp": "微软生态",
+      "udp": "微软生态",
+      "dns": "微软生态",
+      "basis": "Existing reviewed github.com suffix already covers the new child suffix"
+    },
+    {
+      "platform": "shadowrocket",
+      "host": "probe.cafe.github.com",
+      "tcp": "微软生态",
+      "udp": "微软生态",
+      "dns": "微软生态",
+      "basis": "Existing reviewed github.com suffix already covers the new child suffix"
+    }
+  ],
+  "sources": [
+    {
+      "id": "v12r-domain-private",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/private.yaml",
+      "sha256": "58bcdd58c8d5663ba87a4f13083995ffc3cd14f97b4c12b03215190add2384af",
+      "classifier": {
+        "file": "v12r-domain-private.classifier.list",
+        "sha256": "47e1f2c1242bee27fe450326779e0b8780eb121ac91e1a47b9264e2b0ecc8416"
+      },
+      "rows": 131,
+      "baseRows": 131,
+      "added": [],
+      "removed": [],
+      "baselineFile": "data/rules/reviewed/v12r-domain-private.list",
+      "baselineSHA256": "47e1f2c1242bee27fe450326779e0b8780eb121ac91e1a47b9264e2b0ecc8416",
+      "decision": "IDENTICAL_CLASSIFIER"
+    },
+    {
+      "id": "v12r-domain-category-doh",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/category-doh.yaml",
+      "sha256": "be0e04f22894374695c68ef46d84873ee20b0d9410a2c9d84d6462fcb73beab9",
+      "classifier": {
+        "file": "v12r-domain-category-doh.classifier.list",
+        "sha256": "96455367dfafb67e3a58e0f040e57eb8279dfc45efd043481e82a5d7ace621cf"
+      },
+      "rows": 127,
+      "baseRows": 127,
+      "added": [],
+      "removed": [],
+      "baselineFile": "data/rules/reviewed/v12r-domain-category-doh.list",
+      "baselineSHA256": "96455367dfafb67e3a58e0f040e57eb8279dfc45efd043481e82a5d7ace621cf",
+      "decision": "IDENTICAL_CLASSIFIER"
+    },
+    {
+      "id": "v12r-domain-douyin",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/douyin.yaml",
+      "sha256": "05adddd7142fb4238054a40c78ad3955e10bae77c09f7d6a4531ca8893871759",
+      "classifier": {
+        "file": "v12r-domain-douyin.classifier.list",
+        "sha256": "911bb17f7fea207a800981dca7bb8dde7481684da332a36e8b9b2a55790c751b"
+      },
+      "rows": 71,
+      "baseRows": 71,
+      "added": [],
+      "removed": [],
+      "baselineFile": "data/rules/reviewed/v12r-domain-douyin.list",
+      "baselineSHA256": "911bb17f7fea207a800981dca7bb8dde7481684da332a36e8b9b2a55790c751b",
+      "decision": "IDENTICAL_CLASSIFIER"
+    },
+    {
+      "id": "v12r-domain-apple_at_cn",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/apple@cn.yaml",
+      "sha256": "2a8718e3638878e5f9fce24d753bf6ff231e6564f4c38fba9a577f42ed8fedec",
+      "classifier": {
+        "file": "v12r-domain-apple_at_cn.classifier.list",
+        "sha256": "a75d2358772a6d2835ca97e9deb60c2f22e6c8743d55d883c6cb434b77c0690e"
+      },
+      "rows": 296,
+      "baseRows": 296,
+      "added": [],
+      "removed": [],
+      "baselineFile": "data/rules/reviewed/v12r-domain-apple_at_cn.list",
+      "baselineSHA256": "0683c809caeff184cb57371b55fcd26a5116af90fc8d3aea750c1aa629f94fe6",
+      "decision": "IDENTICAL_CLASSIFIER"
+    },
+    {
+      "id": "v12r-domain-google_at_cn",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/google@cn.yaml",
+      "sha256": "04829d19a1a61c3f9b41c1ef0350c1ff52633ed0178255f83edae7aca86f0e3b",
+      "classifier": {
+        "file": "v12r-domain-google_at_cn.classifier.list",
+        "sha256": "698b656b96d31791fbdea23596e63ab57949e3649b0f17feed3d7c6256c0eac8"
+      },
+      "rows": 126,
+      "baseRows": 126,
+      "added": [],
+      "removed": [],
+      "baselineFile": "data/rules/reviewed/v12r-domain-google_at_cn.list",
+      "baselineSHA256": "fe9d1c63f7932407e8ed8987dd8fc7bd9e8d1a0e92b51e4979488e779022c8c8",
+      "decision": "IDENTICAL_CLASSIFIER"
+    },
+    {
+      "id": "v12r-domain-microsoft_at_cn",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/microsoft@cn.yaml",
+      "sha256": "beaac8d2a67a31d6bd9079b30842229d97cb6d5d1826f1b7efe0a7dad881abbf",
+      "classifier": {
+        "file": "v12r-domain-microsoft_at_cn.classifier.list",
+        "sha256": "9ce97eff7e86a5cb2d0b923e6af5eb02b19b6b910d116a12001924f489ed75a7"
+      },
+      "rows": 189,
+      "baseRows": 189,
+      "added": [],
+      "removed": [],
+      "baselineFile": "data/rules/reviewed/v12r-domain-microsoft_at_cn.list",
+      "baselineSHA256": "3736b0b53a5bdf25b9ddc42d7518df59f132febb48e5461f427bfdf8980c9ee5",
+      "decision": "IDENTICAL_CLASSIFIER"
+    },
+    {
+      "id": "v12r-domain-steam_at_cn",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/steam@cn.yaml",
+      "sha256": "52d6b64b9e3a73e51bcdd31cc46e8736cd5ab105c0402bd9325af33856cd32bf",
+      "classifier": {
+        "file": "v12r-domain-steam_at_cn.classifier.list",
+        "sha256": "4ae2540001216910ec89a3c035b209654cbacfe4bc329996a775336791655602"
+      },
+      "rows": 19,
+      "baseRows": 19,
+      "added": [],
+      "removed": [],
+      "baselineFile": "data/rules/reviewed/v12r-domain-steam_at_cn.list",
+      "baselineSHA256": "4ae2540001216910ec89a3c035b209654cbacfe4bc329996a775336791655602",
+      "decision": "IDENTICAL_CLASSIFIER"
+    },
+    {
+      "id": "v12r-domain-cn",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/cn.mrs",
+      "sha256": "e92bda4f0b9f05623663a882331a320ab4e266cada2046d3828a94572cdded46",
+      "classifier": {
+        "file": "v12r-domain-cn.classifier.list",
+        "sha256": "5fb1cc7b7c155cc3db2664eb3200d46e242701e11523ef1b94dffc6638806967"
+      },
+      "rows": 111595,
+      "baseRows": 111595,
+      "added": [],
+      "removed": [],
+      "baselineFile": "data/rules/reviewed/v12r-domain-cn.list",
+      "baselineSHA256": "5fb1cc7b7c155cc3db2664eb3200d46e242701e11523ef1b94dffc6638806967",
+      "decision": "IDENTICAL_CLASSIFIER"
+    },
+    {
+      "id": "v12r-domain-netflix",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/netflix.yaml",
+      "sha256": "d2dd4babc01c6794931f71807936650cc0d886c4620ef6f014150575b38b6fb2",
+      "classifier": {
+        "file": "v12r-domain-netflix.classifier.list",
+        "sha256": "47c3ed0adaa5f47b2b8bda2dd7721668899290942afeeac801ab598607ea205e"
+      },
+      "rows": 28,
+      "baseRows": 28,
+      "added": [],
+      "removed": [],
+      "baselineFile": "data/rules/reviewed/v12r-domain-netflix.list",
+      "baselineSHA256": "47c3ed0adaa5f47b2b8bda2dd7721668899290942afeeac801ab598607ea205e",
+      "decision": "IDENTICAL_CLASSIFIER"
+    },
+    {
+      "id": "v12r-domain-disney",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/disney.yaml",
+      "sha256": "544dcc0a803d4cd91281e76120c67a47697c962b3417f91656d3dac401e542d8",
+      "classifier": {
+        "file": "v12r-domain-disney.classifier.list",
+        "sha256": "3cec2abf3b67dd982792e3962704408016c6fc9b0bae94cf74b3bbbfd0abe1d6"
+      },
+      "rows": 225,
+      "baseRows": 225,
+      "added": [],
+      "removed": [],
+      "baselineFile": "data/rules/reviewed/v12r-domain-disney.list",
+      "baselineSHA256": "d3f46d4bdc82fdf29157c17a7765092e9b0cf4fcc8fc6652d05b72a59add4dea",
+      "decision": "IDENTICAL_CLASSIFIER"
+    },
+    {
+      "id": "v12r-domain-spotify",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/spotify.yaml",
+      "sha256": "f9c46687ea734730410f15296274e531c7491d9a1eca870041b7e4d788c22638",
+      "classifier": {
+        "file": "v12r-domain-spotify.classifier.list",
+        "sha256": "bbdf8eb50559fc69c2654f3890182cefaae64df7215b1a7cf6ab1ac679abffe0"
+      },
+      "rows": 28,
+      "baseRows": 28,
+      "added": [],
+      "removed": [],
+      "baselineFile": "data/rules/reviewed/v12r-domain-spotify.list",
+      "baselineSHA256": "bbdf8eb50559fc69c2654f3890182cefaae64df7215b1a7cf6ab1ac679abffe0",
+      "decision": "IDENTICAL_CLASSIFIER"
+    },
+    {
+      "id": "v12r-domain-telegram",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/telegram.yaml",
+      "sha256": "6c357c7799ad105074a318f6251d33901a1bfffd60051fa7e5fad73c04d0af4b",
+      "classifier": {
+        "file": "v12r-domain-telegram.classifier.list",
+        "sha256": "a1a39e45b89ce8da3def2ed862bdeef0fa67acb9ca50ea3cb017b9a2dd4623d8"
+      },
+      "rows": 21,
+      "baseRows": 21,
+      "added": [],
+      "removed": [],
+      "baselineFile": "data/rules/reviewed/v12r-domain-telegram.list",
+      "baselineSHA256": "a1a39e45b89ce8da3def2ed862bdeef0fa67acb9ca50ea3cb017b9a2dd4623d8",
+      "decision": "IDENTICAL_CLASSIFIER"
+    },
+    {
+      "id": "v12r-domain-discord",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/discord.yaml",
+      "sha256": "feb6a7cbe204600ae8d3f8d54d7ad723ff0031854613de3dbcbd184daf988269",
+      "classifier": {
+        "file": "v12r-domain-discord.classifier.list",
+        "sha256": "81aafa9b79a15d98167655e7d4e51baff38525b37247fbe41b74e9be7febaf59"
+      },
+      "rows": 28,
+      "baseRows": 28,
+      "added": [],
+      "removed": [],
+      "baselineFile": "data/rules/reviewed/v12r-domain-discord.list",
+      "baselineSHA256": "81aafa9b79a15d98167655e7d4e51baff38525b37247fbe41b74e9be7febaf59",
+      "decision": "IDENTICAL_CLASSIFIER"
+    },
+    {
+      "id": "v12r-domain-tiktok",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/tiktok.yaml",
+      "sha256": "61512676a2cf5f79b5e69fac594bbc87ff0277f74c8af6e3e921a1d667c4c16a",
+      "classifier": {
+        "file": "v12r-domain-tiktok.classifier.list",
+        "sha256": "69ab6466561c7a5e231ce4c986f17d724e060f19cc888fa826bc552e7aae221c"
+      },
+      "rows": 37,
+      "baseRows": 37,
+      "added": [],
+      "removed": [],
+      "baselineFile": "data/rules/reviewed/v12r-domain-tiktok.list",
+      "baselineSHA256": "69ab6466561c7a5e231ce4c986f17d724e060f19cc888fa826bc552e7aae221c",
+      "decision": "IDENTICAL_CLASSIFIER"
+    },
+    {
+      "id": "v12r-domain-twitter",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/twitter.yaml",
+      "sha256": "3c9277372816fc5fe4dc79a3a72465af12efd84a6d328f52ee7ff4b400bf6db4",
+      "classifier": {
+        "file": "v12r-domain-twitter.classifier.list",
+        "sha256": "74f3f9f4a004ce32af096e45fdc9dcb54c781f3719d0763e2bb9778078e0256c"
+      },
+      "rows": 24,
+      "baseRows": 24,
+      "added": [],
+      "removed": [],
+      "baselineFile": "data/rules/reviewed/v12r-domain-twitter.list",
+      "baselineSHA256": "74f3f9f4a004ce32af096e45fdc9dcb54c781f3719d0763e2bb9778078e0256c",
+      "decision": "IDENTICAL_CLASSIFIER"
+    },
+    {
+      "id": "v12r-domain-meta",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/meta.yaml",
+      "sha256": "5405d43a058d81334f2720fce20ecfbf58c980d9cf1b3855a0c77491247b9282",
+      "classifier": {
+        "file": "v12r-domain-meta.classifier.list",
+        "sha256": "761f193f14cc91a0e4e8bd0aea0bcd4f8bc2cb3aafb7028938f1b38dfc233362"
+      },
+      "rows": 555,
+      "baseRows": 555,
+      "added": [],
+      "removed": [],
+      "baselineFile": "data/rules/reviewed/v12r-domain-meta.list",
+      "baselineSHA256": "ea85a2d98b6df724bbb00d6fe156252b0509a465d3d53c62cb17adbad5f40fac",
+      "decision": "IDENTICAL_CLASSIFIER"
+    },
+    {
+      "id": "v12r-domain-steam",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/steam.yaml",
+      "sha256": "b33b20dcc828cb698c29b994d4a5bd65b57b12ab7a10cff57d849fb7343b0109",
+      "classifier": {
+        "file": "v12r-domain-steam.classifier.list",
+        "sha256": "2e3117f30009c26d558fa7ae044f31f2d743e60ca67742785633fa1e0a08b5ca"
+      },
+      "rows": 60,
+      "baseRows": 60,
+      "added": [],
+      "removed": [],
+      "baselineFile": "data/rules/reviewed/v12r-domain-steam.list",
+      "baselineSHA256": "2e3117f30009c26d558fa7ae044f31f2d743e60ca67742785633fa1e0a08b5ca",
+      "decision": "IDENTICAL_CLASSIFIER"
+    },
+    {
+      "id": "v12r-domain-epicgames",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/epicgames.yaml",
+      "sha256": "4e4389b52aa9da4418608910457c43cc6ae31064a4b15d7601cea10a550a8e73",
+      "classifier": {
+        "file": "v12r-domain-epicgames.classifier.list",
+        "sha256": "3831cbfabc72c22e9b6aa036c77cded0ae2c08f5e3d88c5b269551fba7893f5f"
+      },
+      "rows": 33,
+      "baseRows": 33,
+      "added": [],
+      "removed": [],
+      "baselineFile": "data/rules/reviewed/v12r-domain-epicgames.list",
+      "baselineSHA256": "3831cbfabc72c22e9b6aa036c77cded0ae2c08f5e3d88c5b269551fba7893f5f",
+      "decision": "IDENTICAL_CLASSIFIER"
+    },
+    {
+      "id": "v12r-domain-apple",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/apple.yaml",
+      "sha256": "4313df1652e744c679c2e3215875b4fa2845bf534c8644b71d19e5457768cab9",
+      "classifier": {
+        "file": "v12r-domain-apple.classifier.list",
+        "sha256": "92f2ebc55a4c4c86bc5e3f5701385427a59c1a786ccf1ee475bbe411c3f696a9"
+      },
+      "rows": 1792,
+      "baseRows": 1792,
+      "added": [],
+      "removed": [],
+      "baselineFile": "data/rules/reviewed/v12r-domain-apple.list",
+      "baselineSHA256": "7c589262d627b93853efe0efeab724db35b462e4eb95026fd4c634e7043281ba",
+      "decision": "IDENTICAL_CLASSIFIER"
+    },
+    {
+      "id": "v12r-domain-bilibili",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/bilibili.yaml",
+      "sha256": "ba54536a3973f53c7a78d950c8d56c199e661b8e95f1c522c754c4e9c5c0f098",
+      "classifier": {
+        "file": "v12r-domain-bilibili.classifier.list",
+        "sha256": "dfc74e8b01ee1dee314735a49e4511f7e9a405414c51724195a20b345ed2a9db"
+      },
+      "rows": 53,
+      "baseRows": 53,
+      "added": [],
+      "removed": [],
+      "baselineFile": "data/rules/reviewed/v12r-domain-bilibili.list",
+      "baselineSHA256": "dfc74e8b01ee1dee314735a49e4511f7e9a405414c51724195a20b345ed2a9db",
+      "decision": "IDENTICAL_CLASSIFIER"
+    },
+    {
+      "id": "v12r-ip-netflix",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geoip/netflix.mrs",
+      "sha256": "3fba174fdae1efe489d9b489126fa48e8a340f6d1f96b1478afad0c43781c14a",
+      "classifier": {
+        "file": "v12r-ip-netflix.classifier.list",
+        "sha256": "d7c71269113609b715d66f6986bec29774527d2d131cbc0dea9c7280dcc5c779"
+      },
+      "rows": 122,
+      "baseRows": 122,
+      "added": [],
+      "removed": [],
+      "baselineFile": "data/rules/reviewed/v12r-ip-netflix.list",
+      "baselineSHA256": "d7c71269113609b715d66f6986bec29774527d2d131cbc0dea9c7280dcc5c779",
+      "decision": "IDENTICAL_CLASSIFIER"
+    },
+    {
+      "id": "v12r-ip-telegram",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geoip/telegram.mrs",
+      "sha256": "d121af95b9aeca3d8c29b2112d5e6685b2a6716383df8ae31b5fbb3408c527b3",
+      "classifier": {
+        "file": "v12r-ip-telegram.classifier.list",
+        "sha256": "53437464eec1ac4396b00e8b6ad427ed0cf54bfac6339575a2cef48d8753e961"
+      },
+      "rows": 12,
+      "baseRows": 12,
+      "added": [],
+      "removed": [],
+      "baselineFile": "data/rules/reviewed/v12r-ip-telegram.list",
+      "baselineSHA256": "53437464eec1ac4396b00e8b6ad427ed0cf54bfac6339575a2cef48d8753e961",
+      "decision": "IDENTICAL_CLASSIFIER"
+    },
+    {
+      "id": "v12r-ip-twitter",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geoip/twitter.mrs",
+      "sha256": "e8fc8a292d91cf630475a1e759d52acf81cf38bc7283329253be5914dc23630f",
+      "classifier": {
+        "file": "v12r-ip-twitter.classifier.list",
+        "sha256": "7e37c6f264f5e614b15fe26c789d4e38b10df5a878c43d7b0fc86e5858bf9909"
+      },
+      "rows": 19,
+      "baseRows": 19,
+      "added": [],
+      "removed": [],
+      "baselineFile": "data/rules/reviewed/v12r-ip-twitter.list",
+      "baselineSHA256": "7e37c6f264f5e614b15fe26c789d4e38b10df5a878c43d7b0fc86e5858bf9909",
+      "decision": "IDENTICAL_CLASSIFIER"
+    },
+    {
+      "id": "v12r-ip-cn",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geoip/cn.mrs",
+      "sha256": "d95b3d125f6c74ce3c15e19ef794f142de91e21c3b8fb7767e76aebfabff5149",
+      "classifier": {
+        "file": "v12r-ip-cn.classifier.list",
+        "sha256": "3376f850bb29d2ae310d461d2df045252f486843caeeb89633f9543ce694d684"
+      },
+      "rows": 9609,
+      "baseRows": 9609,
+      "added": [],
+      "removed": [],
+      "baselineFile": "data/rules/reviewed/v12r-ip-cn.list",
+      "baselineSHA256": "3376f850bb29d2ae310d461d2df045252f486843caeeb89633f9543ce694d684",
+      "decision": "IDENTICAL_CLASSIFIER"
+    },
+    {
+      "id": "sr-01",
+      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/83f37120c155f67c8eef43221dabe15cc3c95fec/rule/Shadowrocket/Lan/Lan.list",
+      "sha256": "e524edec216ed7f2fa2f3eb3fe09fe70121acf88408c2394d19b3e2331c54de7",
+      "classifier": {
+        "file": "sr-01.classifier.list",
+        "sha256": "1287e092eb99dd9dbfcb480b0af712d9c84efb4ed62dbeb8e477c59fb265c386"
+      },
+      "rows": 140,
+      "baseRows": 140,
+      "added": [],
+      "removed": [],
+      "baselineFile": "data/rules/reviewed/sr-01.list",
+      "baselineSHA256": "1287e092eb99dd9dbfcb480b0af712d9c84efb4ed62dbeb8e477c59fb265c386",
+      "decision": "IDENTICAL_CLASSIFIER"
+    },
+    {
+      "id": "sr-02",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/douyin.list",
+      "sha256": "2d9de1ae9494450fa85ad6f9a38b36f84a37a571d32afca7baf86c1b1a82cdf9",
+      "classifier": {
+        "file": "sr-02.classifier.list",
+        "sha256": "911bb17f7fea207a800981dca7bb8dde7481684da332a36e8b9b2a55790c751b"
+      },
+      "rows": 71,
+      "baseRows": 71,
+      "added": [],
+      "removed": [],
+      "baselineFile": "data/rules/reviewed/sr-02.list",
+      "baselineSHA256": "911bb17f7fea207a800981dca7bb8dde7481684da332a36e8b9b2a55790c751b",
+      "decision": "IDENTICAL_CLASSIFIER"
+    },
+    {
+      "id": "sr-03",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/apple@cn.list",
+      "sha256": "a0a5e23be226334bec28887c4d6200cadd40615a254bee9469d999b1aa222e83",
+      "classifier": {
+        "file": "sr-03.classifier.list",
+        "sha256": "a75d2358772a6d2835ca97e9deb60c2f22e6c8743d55d883c6cb434b77c0690e"
+      },
+      "rows": 296,
+      "baseRows": 296,
+      "added": [],
+      "removed": [],
+      "baselineFile": "data/rules/reviewed/sr-03.list",
+      "baselineSHA256": "0683c809caeff184cb57371b55fcd26a5116af90fc8d3aea750c1aa629f94fe6",
+      "decision": "IDENTICAL_CLASSIFIER"
+    },
+    {
+      "id": "sr-04",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/microsoft@cn.list",
+      "sha256": "85c62f2ed6f4b5a28873e027b30e321cfa8e6e51199611089f7db272b81af9d6",
+      "classifier": {
+        "file": "sr-04.classifier.list",
+        "sha256": "9ce97eff7e86a5cb2d0b923e6af5eb02b19b6b910d116a12001924f489ed75a7"
+      },
+      "rows": 189,
+      "baseRows": 189,
+      "added": [],
+      "removed": [],
+      "baselineFile": "data/rules/reviewed/sr-04.list",
+      "baselineSHA256": "3736b0b53a5bdf25b9ddc42d7518df59f132febb48e5461f427bfdf8980c9ee5",
+      "decision": "IDENTICAL_CLASSIFIER"
+    },
+    {
+      "id": "sr-05",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/steam@cn.list",
+      "sha256": "79e907235e9b2e7963fda08fddc3f0bd75b0a74763e831bb201456779b1505d5",
+      "classifier": {
+        "file": "sr-05.classifier.list",
+        "sha256": "4ae2540001216910ec89a3c035b209654cbacfe4bc329996a775336791655602"
+      },
+      "rows": 19,
+      "baseRows": 19,
+      "added": [],
+      "removed": [],
+      "baselineFile": "data/rules/reviewed/sr-05.list",
+      "baselineSHA256": "4ae2540001216910ec89a3c035b209654cbacfe4bc329996a775336791655602",
+      "decision": "IDENTICAL_CLASSIFIER"
+    },
+    {
+      "id": "sr-06",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/cn.list",
+      "sha256": "1d0d38baed8eac254424a59af43df23c15c116074cc158d82400bc4d8121e852",
+      "classifier": {
+        "file": "sr-06.classifier.list",
+        "sha256": "76b89fece35fc3c7bcf99e2f31db42dc186a7b07f7d0184569ea363356f7514e"
+      },
+      "rows": 111595,
+      "baseRows": 111595,
+      "added": [],
+      "removed": [],
+      "baselineFile": "data/rules/reviewed/sr-06.list",
+      "baselineSHA256": "76b89fece35fc3c7bcf99e2f31db42dc186a7b07f7d0184569ea363356f7514e",
+      "decision": "IDENTICAL_CLASSIFIER"
+    },
+    {
+      "id": "sr-11",
+      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/83f37120c155f67c8eef43221dabe15cc3c95fec/rule/Shadowrocket/Netflix/Netflix.list",
+      "sha256": "ec37f90727e7db062d754487c4bed68ae8bba28f349aef0995f10c06f5e8b231",
+      "classifier": {
+        "file": "sr-11.classifier.list",
+        "sha256": "6c0043676e2a34c8ac18cf67149732f5a751897ba840e4b614294f9d04de79f8"
+      },
+      "rows": 1157,
+      "baseRows": 1157,
+      "added": [],
+      "removed": [],
+      "baselineFile": "data/rules/reviewed/sr-11.list",
+      "baselineSHA256": "6c0043676e2a34c8ac18cf67149732f5a751897ba840e4b614294f9d04de79f8",
+      "decision": "IDENTICAL_CLASSIFIER"
+    },
+    {
+      "id": "sr-12",
+      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/83f37120c155f67c8eef43221dabe15cc3c95fec/rule/Shadowrocket/Disney/Disney.list",
+      "sha256": "65ededc7b608e440f3d918f6e95b19ca52460c8fe368dbd9e840b4bc8669f753",
+      "classifier": {
+        "file": "sr-12.classifier.list",
+        "sha256": "851646ffda40afd75f50194bda1eed3e270187a39ed220e333d54aa84f29729e"
+      },
+      "rows": 173,
+      "baseRows": 173,
+      "added": [],
+      "removed": [],
+      "baselineFile": "data/rules/reviewed/sr-12.list",
+      "baselineSHA256": "851646ffda40afd75f50194bda1eed3e270187a39ed220e333d54aa84f29729e",
+      "decision": "IDENTICAL_CLASSIFIER"
+    },
+    {
+      "id": "sr-13",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/spotify.list",
+      "sha256": "650c4841d5732fff621613a257ce831f26bdb82b47722519ef436e85e7ad5f13",
+      "classifier": {
+        "file": "sr-13.classifier.list",
+        "sha256": "bbdf8eb50559fc69c2654f3890182cefaae64df7215b1a7cf6ab1ac679abffe0"
+      },
+      "rows": 28,
+      "baseRows": 28,
+      "added": [],
+      "removed": [],
+      "baselineFile": "data/rules/reviewed/sr-13.list",
+      "baselineSHA256": "bbdf8eb50559fc69c2654f3890182cefaae64df7215b1a7cf6ab1ac679abffe0",
+      "decision": "IDENTICAL_CLASSIFIER"
+    },
+    {
+      "id": "sr-14",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/telegram.list",
+      "sha256": "619df30317e41c5958311c5d4f76abe1bfa45ae4ba399129a0fec2fe4edd43d9",
+      "classifier": {
+        "file": "sr-14.classifier.list",
+        "sha256": "a1a39e45b89ce8da3def2ed862bdeef0fa67acb9ca50ea3cb017b9a2dd4623d8"
+      },
+      "rows": 21,
+      "baseRows": 21,
+      "added": [],
+      "removed": [],
+      "baselineFile": "data/rules/reviewed/sr-14.list",
+      "baselineSHA256": "a1a39e45b89ce8da3def2ed862bdeef0fa67acb9ca50ea3cb017b9a2dd4623d8",
+      "decision": "IDENTICAL_CLASSIFIER"
+    },
+    {
+      "id": "sr-15",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/discord.list",
+      "sha256": "d79aac40ce905d022c13be738352ff38806af9bc3a8e49ad6848a215bc2fe9c6",
+      "classifier": {
+        "file": "sr-15.classifier.list",
+        "sha256": "81aafa9b79a15d98167655e7d4e51baff38525b37247fbe41b74e9be7febaf59"
+      },
+      "rows": 28,
+      "baseRows": 28,
+      "added": [],
+      "removed": [],
+      "baselineFile": "data/rules/reviewed/sr-15.list",
+      "baselineSHA256": "81aafa9b79a15d98167655e7d4e51baff38525b37247fbe41b74e9be7febaf59",
+      "decision": "IDENTICAL_CLASSIFIER"
+    },
+    {
+      "id": "sr-16",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/tiktok.list",
+      "sha256": "2c0c941815c7dc696cce3fe45d33acdd416fbde419a468924cab500c9169cfc9",
+      "classifier": {
+        "file": "sr-16.classifier.list",
+        "sha256": "69ab6466561c7a5e231ce4c986f17d724e060f19cc888fa826bc552e7aae221c"
+      },
+      "rows": 37,
+      "baseRows": 37,
+      "added": [],
+      "removed": [],
+      "baselineFile": "data/rules/reviewed/sr-16.list",
+      "baselineSHA256": "69ab6466561c7a5e231ce4c986f17d724e060f19cc888fa826bc552e7aae221c",
+      "decision": "IDENTICAL_CLASSIFIER"
+    },
+    {
+      "id": "sr-17",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/twitter.list",
+      "sha256": "9e86c896de40eba53bbeeec6b8f11e6eb7ef325de69001b01399386def08ef5e",
+      "classifier": {
+        "file": "sr-17.classifier.list",
+        "sha256": "74f3f9f4a004ce32af096e45fdc9dcb54c781f3719d0763e2bb9778078e0256c"
+      },
+      "rows": 24,
+      "baseRows": 24,
+      "added": [],
+      "removed": [],
+      "baselineFile": "data/rules/reviewed/sr-17.list",
+      "baselineSHA256": "74f3f9f4a004ce32af096e45fdc9dcb54c781f3719d0763e2bb9778078e0256c",
+      "decision": "IDENTICAL_CLASSIFIER"
+    },
+    {
+      "id": "sr-18",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/meta.list",
+      "sha256": "d833c2210673a225d8245ea80063993a5c9989767ab3c520f12c76274fb92bc2",
+      "classifier": {
+        "file": "sr-18.classifier.list",
+        "sha256": "761f193f14cc91a0e4e8bd0aea0bcd4f8bc2cb3aafb7028938f1b38dfc233362"
+      },
+      "rows": 555,
+      "baseRows": 555,
+      "added": [],
+      "removed": [],
+      "baselineFile": "data/rules/reviewed/sr-18.list",
+      "baselineSHA256": "ea85a2d98b6df724bbb00d6fe156252b0509a465d3d53c62cb17adbad5f40fac",
+      "decision": "IDENTICAL_CLASSIFIER"
+    },
+    {
+      "id": "sr-19",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/steam.list",
+      "sha256": "b5f03434912e8371c0f0f5aff1c42e179874232216409e0d47a618bb8d954e74",
+      "classifier": {
+        "file": "sr-19.classifier.list",
+        "sha256": "2e3117f30009c26d558fa7ae044f31f2d743e60ca67742785633fa1e0a08b5ca"
+      },
+      "rows": 60,
+      "baseRows": 60,
+      "added": [],
+      "removed": [],
+      "baselineFile": "data/rules/reviewed/sr-19.list",
+      "baselineSHA256": "2e3117f30009c26d558fa7ae044f31f2d743e60ca67742785633fa1e0a08b5ca",
+      "decision": "IDENTICAL_CLASSIFIER"
+    },
+    {
+      "id": "sr-20",
+      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/83f37120c155f67c8eef43221dabe15cc3c95fec/rule/Shadowrocket/Epic/Epic.list",
+      "sha256": "8f5fcadadd967023aa81273803de80beb2ceadd9af4e9352b565b3b00ccf464d",
+      "classifier": {
+        "file": "sr-20.classifier.list",
+        "sha256": "7996135bc776b0d0ba2cdd4a2474bc3604e5a6dc3a95f03a2fe88bfe79b573ea"
+      },
+      "rows": 15,
+      "baseRows": 15,
+      "added": [],
+      "removed": [],
+      "baselineFile": "data/rules/reviewed/sr-20.list",
+      "baselineSHA256": "7996135bc776b0d0ba2cdd4a2474bc3604e5a6dc3a95f03a2fe88bfe79b573ea",
+      "decision": "IDENTICAL_CLASSIFIER"
+    },
+    {
+      "id": "sr-23",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/apple.list",
+      "sha256": "8f1b00378ff9287fcb9c276fe4acf676ff4fdc89edf31881332cd180df3cdf60",
+      "classifier": {
+        "file": "sr-23.classifier.list",
+        "sha256": "92f2ebc55a4c4c86bc5e3f5701385427a59c1a786ccf1ee475bbe411c3f696a9"
+      },
+      "rows": 1792,
+      "baseRows": 1792,
+      "added": [],
+      "removed": [],
+      "baselineFile": "data/rules/reviewed/sr-23.list",
+      "baselineSHA256": "7c589262d627b93853efe0efeab724db35b462e4eb95026fd4c634e7043281ba",
+      "decision": "IDENTICAL_CLASSIFIER"
+    },
+    {
+      "id": "sr-24",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/bilibili.list",
+      "sha256": "b93ec1a29d89731cc67c3ca13dd39b79742fb0b0faaf1def097d598cafa92c78",
+      "classifier": {
+        "file": "sr-24.classifier.list",
+        "sha256": "dfc74e8b01ee1dee314735a49e4511f7e9a405414c51724195a20b345ed2a9db"
+      },
+      "rows": 53,
+      "baseRows": 53,
+      "added": [],
+      "removed": [],
+      "baselineFile": "data/rules/reviewed/sr-24.list",
+      "baselineSHA256": "dfc74e8b01ee1dee314735a49e4511f7e9a405414c51724195a20b345ed2a9db",
+      "decision": "IDENTICAL_CLASSIFIER"
+    },
+    {
+      "id": "sr-25",
+      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/83f37120c155f67c8eef43221dabe15cc3c95fec/rule/Shadowrocket/Telegram/Telegram.list",
+      "sha256": "09f093cce5b3e2994147a2640e03040aac75e1db7bf2103fd1c9a2509b0176ab",
+      "classifier": {
+        "file": "sr-25.classifier.list",
+        "sha256": "43a22d2da5cd88139819a9f33caff68a19ccf51d1e2282d62175f6365127d3dd"
+      },
+      "rows": 40,
+      "baseRows": 40,
+      "added": [],
+      "removed": [],
+      "baselineFile": "data/rules/reviewed/sr-25.list",
+      "baselineSHA256": "43a22d2da5cd88139819a9f33caff68a19ccf51d1e2282d62175f6365127d3dd",
+      "decision": "IDENTICAL_CLASSIFIER"
+    },
+    {
+      "id": "sr-26",
+      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/83f37120c155f67c8eef43221dabe15cc3c95fec/rule/Shadowrocket/Twitter/Twitter.list",
+      "sha256": "64c836f2431ca0d4728cc545bb74280ee50c886e346040012e6cdd2f3eee3f97",
+      "classifier": {
+        "file": "sr-26.classifier.list",
+        "sha256": "371a1ead914bfa4ff5ff4ca338111d6e088517cf4792dd0bd43448b9331d1eb8"
+      },
+      "rows": 33,
+      "baseRows": 33,
+      "added": [],
+      "removed": [],
+      "baselineFile": "data/rules/reviewed/sr-26.list",
+      "baselineSHA256": "371a1ead914bfa4ff5ff4ca338111d6e088517cf4792dd0bd43448b9331d1eb8",
+      "decision": "IDENTICAL_CLASSIFIER"
+    },
+    {
+      "id": "sr-27",
+      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/83f37120c155f67c8eef43221dabe15cc3c95fec/rule/Shadowrocket/ChinaIPs/ChinaIPs.list",
+      "sha256": "d0448a52e17c634c5fb2801f644e606f575ff8df21c03cec1e974843ff755c36",
+      "classifier": {
+        "file": "sr-27.classifier.list",
+        "sha256": "85766aa75797d97df6c23807f0645ace36103ded2575e496eaf7877aed118f07"
+      },
+      "rows": 19225,
+      "baseRows": 19225,
+      "added": [],
+      "removed": [],
+      "baselineFile": "data/rules/reviewed/sr-27.list",
+      "baselineSHA256": "85766aa75797d97df6c23807f0645ace36103ded2575e496eaf7877aed118f07",
+      "decision": "IDENTICAL_CLASSIFIER"
+    },
+    {
+      "id": "core-openai",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/openai.yaml",
+      "sha256": "ea7ffb2db4d913f8cc67d3e7be19035155aba5247032592d8130b8f6552fdd56",
+      "classifier": {
+        "file": "core-openai.classifier.list",
+        "sha256": "991f1e4c35e5e8722642a979adac590473d7291653ffd77050e75ff770a4c827"
+      },
+      "rows": 23,
+      "baseRows": 23,
+      "added": [],
+      "removed": [],
+      "baselineFile": "data/rules/company-inputs/openai.list",
+      "baselineSHA256": "5aa9a38539026b693135c769f6db10962345ac46860977cb168a52c9d5bfbf6d",
+      "decision": "IDENTICAL_CLASSIFIER"
+    },
+    {
+      "id": "core-anthropic",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/anthropic.yaml",
+      "sha256": "5b59537cd09e1dc487943af6270d739ad3c9a4b41fd22b1df886fe3a7b693f4f",
+      "classifier": {
+        "file": "core-anthropic.classifier.list",
+        "sha256": "b2b8e9a3a14980d2bcf8ef4e2ec231894855089533f6f3054af50b8d6636f64f"
+      },
+      "rows": 9,
+      "baseRows": 9,
+      "added": [],
+      "removed": [],
+      "baselineFile": "data/rules/company-inputs/anthropic.list",
+      "baselineSHA256": "b1790d825efa0d22258c89c5d3cd3b39cb98d1d13c9dae05d56fd434ea0856d8",
+      "decision": "IDENTICAL_CLASSIFIER"
+    },
+    {
+      "id": "core-google-gemini",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/google-gemini.yaml",
+      "sha256": "e12fdc7a138b896cb3d7fb7bba8bb3dfd7910eac72becb0bd009e2ce602661be",
+      "classifier": {
+        "file": "core-google-gemini.classifier.list",
+        "sha256": "11f2c91b20c87030128d799e072e30679917f808dcb481acb5e48cb28e9aa881"
+      },
+      "rows": 46,
+      "baseRows": 46,
+      "added": [],
+      "removed": [],
+      "baselineFile": "data/rules/company-inputs/google-gemini.list",
+      "baselineSHA256": "5d0bdd30ba80c9ac3feb2b7963a0704026d90ed7a4e2253ab7f283805ce17766",
+      "decision": "IDENTICAL_CLASSIFIER"
+    },
+    {
+      "id": "core-youtube",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/youtube.yaml",
+      "sha256": "c4e9bdb1ca911692a3887a950fe06cc09e3d525a4916ae78a9b5a2a9568d2ec1",
+      "classifier": {
+        "file": "core-youtube.classifier.list",
+        "sha256": "ff1bc1631adc9c139ab19bf509a59507871b8f0663ade80dffa9f2b1665e41b9"
+      },
+      "rows": 178,
+      "baseRows": 178,
+      "added": [],
+      "removed": [],
+      "baselineFile": "data/rules/company-inputs/youtube.list",
+      "baselineSHA256": "b50b8cabe440d8b3a4c0e7385e2a9ac59a77ba784a2e150f1d3aebd94790149f",
+      "decision": "IDENTICAL_CLASSIFIER"
+    },
+    {
+      "id": "core-google",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/google.yaml",
+      "sha256": "c8778b757e5d66d0b6e608ee5497cc670ae570575652e5758b73bc7a6e8aeb87",
+      "classifier": {
+        "file": "core-google.classifier.list",
+        "sha256": "30a56af54dabc79751bfc2bbf89b02ee372031dcfe9e4d559b2f56e5394d9e3d"
+      },
+      "rows": 1077,
+      "baseRows": 1077,
+      "added": [],
+      "removed": [],
+      "baselineFile": "data/rules/company-inputs/google.list",
+      "baselineSHA256": "56ac54d4d1e852b06ed75af5a69c5c07466ddbbf6ec0fc1892e40fc57004d9d6",
+      "decision": "IDENTICAL_CLASSIFIER"
+    },
+    {
+      "id": "core-microsoft",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/microsoft.yaml",
+      "sha256": "5c0884d72bf4d7fc5de98abefef6e0d6eb0f2e449e27e53a093f89eca24f5961",
+      "classifier": {
+        "file": "core-microsoft.classifier.list",
+        "sha256": "b5468d07ee0646db04e91de3c1c65bec1ea88615109e5613165cace571a8d320"
+      },
+      "rows": 752,
+      "baseRows": 751,
+      "added": [
+        "DOMAIN-SUFFIX,cafe.github.com"
+      ],
+      "removed": [],
+      "baselineFile": "data/rules/company-inputs/microsoft.list",
+      "baselineSHA256": "54a6df0795e1dfde03057226e5fed0c818a9b9363ae230367c011e7effef6cf6",
+      "decision": "REDUNDANT_CHILD_COVERED_BY_RETAINED_PARENT"
+    },
+    {
+      "id": "core-linkedin",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/linkedin.yaml",
+      "sha256": "bfbbaba1deb3be57ab255031152373ec7ac316fe04c89fafedce1d793e56f116",
+      "classifier": {
+        "file": "core-linkedin.classifier.list",
+        "sha256": "e54bbe7546b5b807fc73e5911672e7fafb2c5f502c4f3343884412cd487c0bf3"
+      },
+      "rows": 12,
+      "baseRows": 12,
+      "added": [],
+      "removed": [],
+      "baselineFile": "data/rules/company-inputs/linkedin.list",
+      "baselineSHA256": "8d2966e073ca3fec2a28b4e7319ee346f7020ca6dbc41a742403bbf6f5b88234",
+      "decision": "IDENTICAL_CLASSIFIER"
+    }
+  ],
+  "boundaries": [
+    "Latest at GitHub branch lookup time; runtime URLs remain reviewed immutable commits",
+    "No per-domain ownership or liveness guarantee from membership",
+    "No active client/provider refresh, browser login, TUN/VPN or native iOS test"
+  ]
+}

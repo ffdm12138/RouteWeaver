@@ -1,0 +1,827 @@
+{
+  "version": "14.3",
+  "date": "2026-10-12",
+  "revision": "balanced-r1",
+  "commits": {
+    "MetaCubeX/meta-rules-dat": "b4d414227a182c5bc954283e4a83ee176dad671b",
+    "blackmatrix7/ios_rule_script": "83f37120c155f67c8eef43221dabe15cc3c95fec"
+  },
+  "sources": [
+    {
+      "id": "v12r-domain-private",
+      "platforms": [
+        "desktop",
+        "android",
+        "clashmi"
+      ],
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/private.yaml",
+      "format": "yaml",
+      "behavior": "classical",
+      "file": "data/rules/reviewed/v12r-domain-private.yaml",
+      "bytes": 5031,
+      "sha256": "58bcdd58c8d5663ba87a4f13083995ffc3cd14f97b4c12b03215190add2384af",
+      "classifier": {
+        "file": "data/rules/reviewed/v12r-domain-private.list",
+        "sha256": "47e1f2c1242bee27fe450326779e0b8780eb121ac91e1a47b9264e2b0ecc8416"
+      },
+      "snapshotOrigin": "Fresh downloaded fixed candidate reviewed 2026-10-12; native MRS decoded with hash-bound core; semantically identical classifier retains prior exact byte representation and order",
+      "upstreamURL": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/private.yaml",
+      "runtimeRevision": "FIXED_REVIEWED_COMMIT",
+      "reviewDelta": {
+        "baseSHA256": "47e1f2c1242bee27fe450326779e0b8780eb121ac91e1a47b9264e2b0ecc8416",
+        "baseRows": 131,
+        "rows": 131,
+        "added": [],
+        "removed": []
+      },
+      "reviewStatus": "REVIEWED: latest classifier identical to retained approved classifier"
+    },
+    {
+      "id": "v12r-domain-category-doh",
+      "platforms": [
+        "desktop",
+        "android",
+        "clashmi"
+      ],
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/category-doh.yaml",
+      "format": "yaml",
+      "behavior": "classical",
+      "file": "data/rules/reviewed/v12r-domain-category-doh.yaml",
+      "bytes": 3915,
+      "sha256": "be0e04f22894374695c68ef46d84873ee20b0d9410a2c9d84d6462fcb73beab9",
+      "classifier": {
+        "file": "data/rules/reviewed/v12r-domain-category-doh.list",
+        "sha256": "96455367dfafb67e3a58e0f040e57eb8279dfc45efd043481e82a5d7ace621cf"
+      },
+      "snapshotOrigin": "Fresh downloaded fixed candidate reviewed 2026-10-12; native MRS decoded with hash-bound core; semantically identical classifier retains prior exact byte representation and order",
+      "upstreamURL": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/category-doh.yaml",
+      "runtimeRevision": "FIXED_REVIEWED_COMMIT",
+      "reviewDelta": {
+        "baseSHA256": "96455367dfafb67e3a58e0f040e57eb8279dfc45efd043481e82a5d7ace621cf",
+        "baseRows": 127,
+        "rows": 127,
+        "added": [],
+        "removed": []
+      },
+      "reviewStatus": "REVIEWED: latest classifier identical to retained approved classifier"
+    },
+    {
+      "id": "v12r-domain-douyin",
+      "platforms": [
+        "desktop",
+        "android",
+        "clashmi"
+      ],
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/douyin.yaml",
+      "format": "yaml",
+      "behavior": "classical",
+      "file": "data/rules/reviewed/v12r-domain-douyin.yaml",
+      "bytes": 2496,
+      "sha256": "05adddd7142fb4238054a40c78ad3955e10bae77c09f7d6a4531ca8893871759",
+      "classifier": {
+        "file": "data/rules/reviewed/v12r-domain-douyin.list",
+        "sha256": "911bb17f7fea207a800981dca7bb8dde7481684da332a36e8b9b2a55790c751b"
+      },
+      "snapshotOrigin": "Fresh downloaded fixed candidate reviewed 2026-10-12; native MRS decoded with hash-bound core; semantically identical classifier retains prior exact byte representation and order",
+      "upstreamURL": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/douyin.yaml",
+      "runtimeRevision": "FIXED_REVIEWED_COMMIT",
+      "reviewDelta": {
+        "baseSHA256": "911bb17f7fea207a800981dca7bb8dde7481684da332a36e8b9b2a55790c751b",
+        "baseRows": 71,
+        "rows": 71,
+        "added": [],
+        "removed": []
+      },
+      "reviewStatus": "REVIEWED: latest classifier identical to retained approved classifier"
+    },
+    {
+      "id": "v12r-domain-apple_at_cn",
+      "platforms": [
+        "desktop",
+        "android",
+        "clashmi"
+      ],
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/apple@cn.yaml",
+      "format": "yaml",
+      "behavior": "classical",
+      "file": "data/rules/reviewed/v12r-domain-apple_at_cn.yaml",
+      "bytes": 11168,
+      "sha256": "2a8718e3638878e5f9fce24d753bf6ff231e6564f4c38fba9a577f42ed8fedec",
+      "classifier": {
+        "file": "data/rules/reviewed/v12r-domain-apple_at_cn.list",
+        "sha256": "0683c809caeff184cb57371b55fcd26a5116af90fc8d3aea750c1aa629f94fe6"
+      },
+      "snapshotOrigin": "Fresh downloaded fixed candidate reviewed 2026-10-12; native MRS decoded with hash-bound core; semantically identical classifier retains prior exact byte representation and order",
+      "upstreamURL": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/apple@cn.yaml",
+      "runtimeRevision": "FIXED_REVIEWED_COMMIT",
+      "reviewDelta": {
+        "baseSHA256": "0683c809caeff184cb57371b55fcd26a5116af90fc8d3aea750c1aa629f94fe6",
+        "baseRows": 296,
+        "rows": 296,
+        "added": [],
+        "removed": []
+      },
+      "reviewStatus": "REVIEWED: latest classifier identical to retained approved classifier"
+    },
+    {
+      "id": "v12r-domain-google_at_cn",
+      "platforms": [
+        "desktop",
+        "android",
+        "clashmi"
+      ],
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/google@cn.yaml",
+      "format": "yaml",
+      "behavior": "classical",
+      "file": "data/rules/reviewed/v12r-domain-google_at_cn.yaml",
+      "bytes": 4468,
+      "sha256": "04829d19a1a61c3f9b41c1ef0350c1ff52633ed0178255f83edae7aca86f0e3b",
+      "classifier": {
+        "file": "data/rules/reviewed/v12r-domain-google_at_cn.list",
+        "sha256": "fe9d1c63f7932407e8ed8987dd8fc7bd9e8d1a0e92b51e4979488e779022c8c8"
+      },
+      "snapshotOrigin": "Fresh downloaded fixed candidate reviewed 2026-10-12; native MRS decoded with hash-bound core; semantically identical classifier retains prior exact byte representation and order",
+      "upstreamURL": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/google@cn.yaml",
+      "runtimeRevision": "FIXED_REVIEWED_COMMIT",
+      "reviewDelta": {
+        "baseSHA256": "fe9d1c63f7932407e8ed8987dd8fc7bd9e8d1a0e92b51e4979488e779022c8c8",
+        "baseRows": 126,
+        "rows": 126,
+        "added": [],
+        "removed": []
+      },
+      "reviewStatus": "REVIEWED: latest classifier identical to retained approved classifier"
+    },
+    {
+      "id": "v12r-domain-microsoft_at_cn",
+      "platforms": [
+        "desktop",
+        "android",
+        "clashmi"
+      ],
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/microsoft@cn.yaml",
+      "format": "yaml",
+      "behavior": "classical",
+      "file": "data/rules/reviewed/v12r-domain-microsoft_at_cn.yaml",
+      "bytes": 7397,
+      "sha256": "beaac8d2a67a31d6bd9079b30842229d97cb6d5d1826f1b7efe0a7dad881abbf",
+      "classifier": {
+        "file": "data/rules/reviewed/v12r-domain-microsoft_at_cn.list",
+        "sha256": "3736b0b53a5bdf25b9ddc42d7518df59f132febb48e5461f427bfdf8980c9ee5"
+      },
+      "snapshotOrigin": "Fresh downloaded fixed candidate reviewed 2026-10-12; native MRS decoded with hash-bound core; semantically identical classifier retains prior exact byte representation and order",
+      "upstreamURL": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/microsoft@cn.yaml",
+      "runtimeRevision": "FIXED_REVIEWED_COMMIT",
+      "reviewDelta": {
+        "baseSHA256": "3736b0b53a5bdf25b9ddc42d7518df59f132febb48e5461f427bfdf8980c9ee5",
+        "baseRows": 189,
+        "rows": 189,
+        "added": [],
+        "removed": []
+      },
+      "reviewStatus": "REVIEWED: latest classifier identical to retained approved classifier"
+    },
+    {
+      "id": "v12r-domain-steam_at_cn",
+      "platforms": [
+        "desktop",
+        "android",
+        "clashmi"
+      ],
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/steam@cn.yaml",
+      "format": "yaml",
+      "behavior": "classical",
+      "file": "data/rules/reviewed/v12r-domain-steam_at_cn.yaml",
+      "bytes": 744,
+      "sha256": "52d6b64b9e3a73e51bcdd31cc46e8736cd5ab105c0402bd9325af33856cd32bf",
+      "classifier": {
+        "file": "data/rules/reviewed/v12r-domain-steam_at_cn.list",
+        "sha256": "4ae2540001216910ec89a3c035b209654cbacfe4bc329996a775336791655602"
+      },
+      "snapshotOrigin": "Fresh downloaded fixed candidate reviewed 2026-10-12; native MRS decoded with hash-bound core; semantically identical classifier retains prior exact byte representation and order",
+      "upstreamURL": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/steam@cn.yaml",
+      "runtimeRevision": "FIXED_REVIEWED_COMMIT",
+      "reviewDelta": {
+        "baseSHA256": "4ae2540001216910ec89a3c035b209654cbacfe4bc329996a775336791655602",
+        "baseRows": 19,
+        "rows": 19,
+        "added": [],
+        "removed": []
+      },
+      "reviewStatus": "REVIEWED: latest classifier identical to retained approved classifier"
+    },
+    {
+      "id": "v12r-domain-cn",
+      "platforms": [
+        "desktop",
+        "android",
+        "clashmi"
+      ],
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/cn.mrs",
+      "format": "mrs",
+      "behavior": "domain",
+      "file": "data/rules/reviewed/v12r-domain-cn.mrs",
+      "bytes": 540748,
+      "sha256": "e92bda4f0b9f05623663a882331a320ab4e266cada2046d3828a94572cdded46",
+      "classifier": {
+        "file": "data/rules/reviewed/v12r-domain-cn.list",
+        "sha256": "5fb1cc7b7c155cc3db2664eb3200d46e242701e11523ef1b94dffc6638806967"
+      },
+      "snapshotOrigin": "Fresh downloaded fixed candidate reviewed 2026-10-12; native MRS decoded with hash-bound core; semantically identical classifier retains prior exact byte representation and order",
+      "upstreamURL": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.mrs",
+      "runtimeRevision": "FIXED_REVIEWED_COMMIT",
+      "reviewDelta": {
+        "baseSHA256": "5fb1cc7b7c155cc3db2664eb3200d46e242701e11523ef1b94dffc6638806967",
+        "baseRows": 111595,
+        "rows": 111595,
+        "added": [],
+        "removed": []
+      },
+      "reviewStatus": "REVIEWED: latest classifier identical to retained approved classifier"
+    },
+    {
+      "id": "v12r-domain-netflix",
+      "platforms": [
+        "desktop",
+        "android",
+        "clashmi"
+      ],
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/netflix.yaml",
+      "format": "yaml",
+      "behavior": "classical",
+      "file": "data/rules/reviewed/v12r-domain-netflix.yaml",
+      "bytes": 1163,
+      "sha256": "d2dd4babc01c6794931f71807936650cc0d886c4620ef6f014150575b38b6fb2",
+      "classifier": {
+        "file": "data/rules/reviewed/v12r-domain-netflix.list",
+        "sha256": "47c3ed0adaa5f47b2b8bda2dd7721668899290942afeeac801ab598607ea205e"
+      },
+      "snapshotOrigin": "Fresh downloaded fixed candidate reviewed 2026-10-12; native MRS decoded with hash-bound core; semantically identical classifier retains prior exact byte representation and order",
+      "upstreamURL": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/netflix.yaml",
+      "runtimeRevision": "FIXED_REVIEWED_COMMIT",
+      "reviewDelta": {
+        "baseSHA256": "47c3ed0adaa5f47b2b8bda2dd7721668899290942afeeac801ab598607ea205e",
+        "baseRows": 28,
+        "rows": 28,
+        "added": [],
+        "removed": []
+      },
+      "reviewStatus": "REVIEWED: latest classifier identical to retained approved classifier"
+    },
+    {
+      "id": "v12r-domain-disney",
+      "platforms": [
+        "desktop",
+        "android",
+        "clashmi"
+      ],
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/disney.yaml",
+      "format": "yaml",
+      "behavior": "classical",
+      "file": "data/rules/reviewed/v12r-domain-disney.yaml",
+      "bytes": 8182,
+      "sha256": "544dcc0a803d4cd91281e76120c67a47697c962b3417f91656d3dac401e542d8",
+      "classifier": {
+        "file": "data/rules/reviewed/v12r-domain-disney.list",
+        "sha256": "d3f46d4bdc82fdf29157c17a7765092e9b0cf4fcc8fc6652d05b72a59add4dea"
+      },
+      "snapshotOrigin": "Fresh downloaded fixed candidate reviewed 2026-10-12; native MRS decoded with hash-bound core; semantically identical classifier retains prior exact byte representation and order",
+      "upstreamURL": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/disney.yaml",
+      "runtimeRevision": "FIXED_REVIEWED_COMMIT",
+      "reviewDelta": {
+        "baseSHA256": "d3f46d4bdc82fdf29157c17a7765092e9b0cf4fcc8fc6652d05b72a59add4dea",
+        "baseRows": 225,
+        "rows": 225,
+        "added": [],
+        "removed": []
+      },
+      "reviewStatus": "REVIEWED: latest classifier identical to retained approved classifier"
+    },
+    {
+      "id": "v12r-domain-spotify",
+      "platforms": [
+        "desktop",
+        "android",
+        "clashmi"
+      ],
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/spotify.yaml",
+      "format": "yaml",
+      "behavior": "classical",
+      "file": "data/rules/reviewed/v12r-domain-spotify.yaml",
+      "bytes": 1081,
+      "sha256": "f9c46687ea734730410f15296274e531c7491d9a1eca870041b7e4d788c22638",
+      "classifier": {
+        "file": "data/rules/reviewed/v12r-domain-spotify.list",
+        "sha256": "bbdf8eb50559fc69c2654f3890182cefaae64df7215b1a7cf6ab1ac679abffe0"
+      },
+      "snapshotOrigin": "Fresh downloaded fixed candidate reviewed 2026-10-12; native MRS decoded with hash-bound core; semantically identical classifier retains prior exact byte representation and order",
+      "upstreamURL": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/spotify.yaml",
+      "runtimeRevision": "FIXED_REVIEWED_COMMIT",
+      "reviewDelta": {
+        "baseSHA256": "bbdf8eb50559fc69c2654f3890182cefaae64df7215b1a7cf6ab1ac679abffe0",
+        "baseRows": 28,
+        "rows": 28,
+        "added": [],
+        "removed": []
+      },
+      "reviewStatus": "REVIEWED: latest classifier identical to retained approved classifier"
+    },
+    {
+      "id": "v12r-domain-telegram",
+      "platforms": [
+        "desktop",
+        "android",
+        "clashmi"
+      ],
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/telegram.yaml",
+      "format": "yaml",
+      "behavior": "classical",
+      "file": "data/rules/reviewed/v12r-domain-telegram.yaml",
+      "bytes": 681,
+      "sha256": "6c357c7799ad105074a318f6251d33901a1bfffd60051fa7e5fad73c04d0af4b",
+      "classifier": {
+        "file": "data/rules/reviewed/v12r-domain-telegram.list",
+        "sha256": "a1a39e45b89ce8da3def2ed862bdeef0fa67acb9ca50ea3cb017b9a2dd4623d8"
+      },
+      "snapshotOrigin": "Fresh downloaded fixed candidate reviewed 2026-10-12; native MRS decoded with hash-bound core; semantically identical classifier retains prior exact byte representation and order",
+      "upstreamURL": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/telegram.yaml",
+      "runtimeRevision": "FIXED_REVIEWED_COMMIT",
+      "reviewDelta": {
+        "baseSHA256": "a1a39e45b89ce8da3def2ed862bdeef0fa67acb9ca50ea3cb017b9a2dd4623d8",
+        "baseRows": 21,
+        "rows": 21,
+        "added": [],
+        "removed": []
+      },
+      "reviewStatus": "REVIEWED: latest classifier identical to retained approved classifier"
+    },
+    {
+      "id": "v12r-domain-discord",
+      "platforms": [
+        "desktop",
+        "android",
+        "clashmi"
+      ],
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/discord.yaml",
+      "format": "yaml",
+      "behavior": "classical",
+      "file": "data/rules/reviewed/v12r-domain-discord.yaml",
+      "bytes": 1046,
+      "sha256": "feb6a7cbe204600ae8d3f8d54d7ad723ff0031854613de3dbcbd184daf988269",
+      "classifier": {
+        "file": "data/rules/reviewed/v12r-domain-discord.list",
+        "sha256": "81aafa9b79a15d98167655e7d4e51baff38525b37247fbe41b74e9be7febaf59"
+      },
+      "snapshotOrigin": "Fresh downloaded fixed candidate reviewed 2026-10-12; native MRS decoded with hash-bound core; semantically identical classifier retains prior exact byte representation and order",
+      "upstreamURL": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/discord.yaml",
+      "runtimeRevision": "FIXED_REVIEWED_COMMIT",
+      "reviewDelta": {
+        "baseSHA256": "81aafa9b79a15d98167655e7d4e51baff38525b37247fbe41b74e9be7febaf59",
+        "baseRows": 28,
+        "rows": 28,
+        "added": [],
+        "removed": []
+      },
+      "reviewStatus": "REVIEWED: latest classifier identical to retained approved classifier"
+    },
+    {
+      "id": "v12r-domain-tiktok",
+      "platforms": [
+        "desktop",
+        "android",
+        "clashmi"
+      ],
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/tiktok.yaml",
+      "format": "yaml",
+      "behavior": "classical",
+      "file": "data/rules/reviewed/v12r-domain-tiktok.yaml",
+      "bytes": 1419,
+      "sha256": "61512676a2cf5f79b5e69fac594bbc87ff0277f74c8af6e3e921a1d667c4c16a",
+      "classifier": {
+        "file": "data/rules/reviewed/v12r-domain-tiktok.list",
+        "sha256": "69ab6466561c7a5e231ce4c986f17d724e060f19cc888fa826bc552e7aae221c"
+      },
+      "snapshotOrigin": "Fresh downloaded fixed candidate reviewed 2026-10-12; native MRS decoded with hash-bound core; semantically identical classifier retains prior exact byte representation and order",
+      "upstreamURL": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/tiktok.yaml",
+      "runtimeRevision": "FIXED_REVIEWED_COMMIT",
+      "reviewDelta": {
+        "baseSHA256": "69ab6466561c7a5e231ce4c986f17d724e060f19cc888fa826bc552e7aae221c",
+        "baseRows": 37,
+        "rows": 37,
+        "added": [],
+        "removed": []
+      },
+      "reviewStatus": "REVIEWED: latest classifier identical to retained approved classifier"
+    },
+    {
+      "id": "v12r-domain-twitter",
+      "platforms": [
+        "desktop",
+        "android",
+        "clashmi"
+      ],
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/twitter.yaml",
+      "format": "yaml",
+      "behavior": "classical",
+      "file": "data/rules/reviewed/v12r-domain-twitter.yaml",
+      "bytes": 811,
+      "sha256": "3c9277372816fc5fe4dc79a3a72465af12efd84a6d328f52ee7ff4b400bf6db4",
+      "classifier": {
+        "file": "data/rules/reviewed/v12r-domain-twitter.list",
+        "sha256": "74f3f9f4a004ce32af096e45fdc9dcb54c781f3719d0763e2bb9778078e0256c"
+      },
+      "snapshotOrigin": "Fresh downloaded fixed candidate reviewed 2026-10-12; native MRS decoded with hash-bound core; semantically identical classifier retains prior exact byte representation and order",
+      "upstreamURL": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/twitter.yaml",
+      "runtimeRevision": "FIXED_REVIEWED_COMMIT",
+      "reviewDelta": {
+        "baseSHA256": "74f3f9f4a004ce32af096e45fdc9dcb54c781f3719d0763e2bb9778078e0256c",
+        "baseRows": 24,
+        "rows": 24,
+        "added": [],
+        "removed": []
+      },
+      "reviewStatus": "REVIEWED: latest classifier identical to retained approved classifier"
+    },
+    {
+      "id": "v12r-domain-meta",
+      "platforms": [
+        "desktop",
+        "android",
+        "clashmi"
+      ],
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/meta.yaml",
+      "format": "yaml",
+      "behavior": "classical",
+      "file": "data/rules/reviewed/v12r-domain-meta.yaml",
+      "bytes": 19915,
+      "sha256": "5405d43a058d81334f2720fce20ecfbf58c980d9cf1b3855a0c77491247b9282",
+      "classifier": {
+        "file": "data/rules/reviewed/v12r-domain-meta.list",
+        "sha256": "ea85a2d98b6df724bbb00d6fe156252b0509a465d3d53c62cb17adbad5f40fac"
+      },
+      "snapshotOrigin": "Fresh downloaded fixed candidate reviewed 2026-10-12; native MRS decoded with hash-bound core; semantically identical classifier retains prior exact byte representation and order",
+      "upstreamURL": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/meta.yaml",
+      "runtimeRevision": "FIXED_REVIEWED_COMMIT",
+      "reviewDelta": {
+        "baseSHA256": "ea85a2d98b6df724bbb00d6fe156252b0509a465d3d53c62cb17adbad5f40fac",
+        "baseRows": 555,
+        "rows": 555,
+        "added": [],
+        "removed": []
+      },
+      "reviewStatus": "REVIEWED: latest classifier identical to retained approved classifier"
+    },
+    {
+      "id": "v12r-domain-steam",
+      "platforms": [
+        "desktop",
+        "android",
+        "clashmi"
+      ],
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/steam.yaml",
+      "format": "yaml",
+      "behavior": "classical",
+      "file": "data/rules/reviewed/v12r-domain-steam.yaml",
+      "bytes": 2365,
+      "sha256": "b33b20dcc828cb698c29b994d4a5bd65b57b12ab7a10cff57d849fb7343b0109",
+      "classifier": {
+        "file": "data/rules/reviewed/v12r-domain-steam.list",
+        "sha256": "2e3117f30009c26d558fa7ae044f31f2d743e60ca67742785633fa1e0a08b5ca"
+      },
+      "snapshotOrigin": "Fresh downloaded fixed candidate reviewed 2026-10-12; native MRS decoded with hash-bound core; semantically identical classifier retains prior exact byte representation and order",
+      "upstreamURL": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/steam.yaml",
+      "runtimeRevision": "FIXED_REVIEWED_COMMIT",
+      "reviewDelta": {
+        "baseSHA256": "2e3117f30009c26d558fa7ae044f31f2d743e60ca67742785633fa1e0a08b5ca",
+        "baseRows": 60,
+        "rows": 60,
+        "added": [],
+        "removed": []
+      },
+      "reviewStatus": "REVIEWED: latest classifier identical to retained approved classifier"
+    },
+    {
+      "id": "v12r-domain-epicgames",
+      "platforms": [
+        "desktop",
+        "android",
+        "clashmi"
+      ],
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/epicgames.yaml",
+      "format": "yaml",
+      "behavior": "classical",
+      "file": "data/rules/reviewed/v12r-domain-epicgames.yaml",
+      "bytes": 1266,
+      "sha256": "4e4389b52aa9da4418608910457c43cc6ae31064a4b15d7601cea10a550a8e73",
+      "classifier": {
+        "file": "data/rules/reviewed/v12r-domain-epicgames.list",
+        "sha256": "3831cbfabc72c22e9b6aa036c77cded0ae2c08f5e3d88c5b269551fba7893f5f"
+      },
+      "snapshotOrigin": "Fresh downloaded fixed candidate reviewed 2026-10-12; native MRS decoded with hash-bound core; semantically identical classifier retains prior exact byte representation and order",
+      "upstreamURL": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/epicgames.yaml",
+      "runtimeRevision": "FIXED_REVIEWED_COMMIT",
+      "reviewDelta": {
+        "baseSHA256": "3831cbfabc72c22e9b6aa036c77cded0ae2c08f5e3d88c5b269551fba7893f5f",
+        "baseRows": 33,
+        "rows": 33,
+        "added": [],
+        "removed": []
+      },
+      "reviewStatus": "REVIEWED: latest classifier identical to retained approved classifier"
+    },
+    {
+      "id": "v12r-domain-apple",
+      "platforms": [
+        "desktop",
+        "android",
+        "clashmi"
+      ],
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/apple.yaml",
+      "format": "yaml",
+      "behavior": "classical",
+      "file": "data/rules/reviewed/v12r-domain-apple.yaml",
+      "bytes": 67871,
+      "sha256": "4313df1652e744c679c2e3215875b4fa2845bf534c8644b71d19e5457768cab9",
+      "classifier": {
+        "file": "data/rules/reviewed/v12r-domain-apple.list",
+        "sha256": "7c589262d627b93853efe0efeab724db35b462e4eb95026fd4c634e7043281ba"
+      },
+      "snapshotOrigin": "Fresh downloaded fixed candidate reviewed 2026-10-12; native MRS decoded with hash-bound core; semantically identical classifier retains prior exact byte representation and order",
+      "upstreamURL": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/apple.yaml",
+      "runtimeRevision": "FIXED_REVIEWED_COMMIT",
+      "reviewDelta": {
+        "baseSHA256": "7c589262d627b93853efe0efeab724db35b462e4eb95026fd4c634e7043281ba",
+        "baseRows": 1792,
+        "rows": 1792,
+        "added": [],
+        "removed": []
+      },
+      "reviewStatus": "REVIEWED: latest classifier identical to retained approved classifier"
+    },
+    {
+      "id": "v12r-domain-bilibili",
+      "platforms": [
+        "desktop",
+        "android",
+        "clashmi"
+      ],
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/bilibili.yaml",
+      "format": "yaml",
+      "behavior": "classical",
+      "file": "data/rules/reviewed/v12r-domain-bilibili.yaml",
+      "bytes": 1737,
+      "sha256": "ba54536a3973f53c7a78d950c8d56c199e661b8e95f1c522c754c4e9c5c0f098",
+      "classifier": {
+        "file": "data/rules/reviewed/v12r-domain-bilibili.list",
+        "sha256": "dfc74e8b01ee1dee314735a49e4511f7e9a405414c51724195a20b345ed2a9db"
+      },
+      "snapshotOrigin": "Fresh downloaded fixed candidate reviewed 2026-10-12; native MRS decoded with hash-bound core; semantically identical classifier retains prior exact byte representation and order",
+      "upstreamURL": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/bilibili.yaml",
+      "runtimeRevision": "FIXED_REVIEWED_COMMIT",
+      "reviewDelta": {
+        "baseSHA256": "dfc74e8b01ee1dee314735a49e4511f7e9a405414c51724195a20b345ed2a9db",
+        "baseRows": 53,
+        "rows": 53,
+        "added": [],
+        "removed": []
+      },
+      "reviewStatus": "REVIEWED: latest classifier identical to retained approved classifier"
+    },
+    {
+      "id": "v12r-ip-netflix",
+      "platforms": [
+        "desktop",
+        "android",
+        "clashmi"
+      ],
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geoip/netflix.mrs",
+      "format": "mrs",
+      "behavior": "ipcidr",
+      "file": "data/rules/reviewed/v12r-ip-netflix.mrs",
+      "bytes": 364,
+      "sha256": "3fba174fdae1efe489d9b489126fa48e8a340f6d1f96b1478afad0c43781c14a",
+      "classifier": {
+        "file": "data/rules/reviewed/v12r-ip-netflix.list",
+        "sha256": "d7c71269113609b715d66f6986bec29774527d2d131cbc0dea9c7280dcc5c779"
+      },
+      "snapshotOrigin": "Fresh downloaded fixed candidate reviewed 2026-10-12; native MRS decoded with hash-bound core; semantically identical classifier retains prior exact byte representation and order",
+      "upstreamURL": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/netflix.mrs",
+      "runtimeRevision": "FIXED_REVIEWED_COMMIT",
+      "reviewDelta": {
+        "baseSHA256": "d7c71269113609b715d66f6986bec29774527d2d131cbc0dea9c7280dcc5c779",
+        "baseRows": 122,
+        "rows": 122,
+        "added": [],
+        "removed": []
+      },
+      "reviewStatus": "REVIEWED: latest classifier identical to retained approved classifier"
+    },
+    {
+      "id": "v12r-ip-telegram",
+      "platforms": [
+        "desktop",
+        "android",
+        "clashmi"
+      ],
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geoip/telegram.mrs",
+      "format": "mrs",
+      "behavior": "ipcidr",
+      "file": "data/rules/reviewed/v12r-ip-telegram.mrs",
+      "bytes": 145,
+      "sha256": "d121af95b9aeca3d8c29b2112d5e6685b2a6716383df8ae31b5fbb3408c527b3",
+      "classifier": {
+        "file": "data/rules/reviewed/v12r-ip-telegram.list",
+        "sha256": "53437464eec1ac4396b00e8b6ad427ed0cf54bfac6339575a2cef48d8753e961"
+      },
+      "snapshotOrigin": "Fresh downloaded fixed candidate reviewed 2026-10-12; native MRS decoded with hash-bound core; semantically identical classifier retains prior exact byte representation and order",
+      "upstreamURL": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/telegram.mrs",
+      "runtimeRevision": "FIXED_REVIEWED_COMMIT",
+      "reviewDelta": {
+        "baseSHA256": "53437464eec1ac4396b00e8b6ad427ed0cf54bfac6339575a2cef48d8753e961",
+        "baseRows": 12,
+        "rows": 12,
+        "added": [],
+        "removed": []
+      },
+      "reviewStatus": "REVIEWED: latest classifier identical to retained approved classifier"
+    },
+    {
+      "id": "v12r-ip-twitter",
+      "platforms": [
+        "desktop",
+        "android",
+        "clashmi"
+      ],
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geoip/twitter.mrs",
+      "format": "mrs",
+      "behavior": "ipcidr",
+      "file": "data/rules/reviewed/v12r-ip-twitter.mrs",
+      "bytes": 198,
+      "sha256": "e8fc8a292d91cf630475a1e759d52acf81cf38bc7283329253be5914dc23630f",
+      "classifier": {
+        "file": "data/rules/reviewed/v12r-ip-twitter.list",
+        "sha256": "7e37c6f264f5e614b15fe26c789d4e38b10df5a878c43d7b0fc86e5858bf9909"
+      },
+      "snapshotOrigin": "Fresh downloaded fixed candidate reviewed 2026-10-12; native MRS decoded with hash-bound core; semantically identical classifier retains prior exact byte representation and order",
+      "upstreamURL": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/twitter.mrs",
+      "runtimeRevision": "FIXED_REVIEWED_COMMIT",
+      "reviewDelta": {
+        "baseSHA256": "7e37c6f264f5e614b15fe26c789d4e38b10df5a878c43d7b0fc86e5858bf9909",
+        "baseRows": 19,
+        "rows": 19,
+        "added": [],
+        "removed": []
+      },
+      "reviewStatus": "REVIEWED: latest classifier identical to retained approved classifier"
+    },
+    {
+      "id": "v12r-ip-cn",
+      "platforms": [
+        "desktop",
+        "android",
+        "clashmi"
+      ],
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geoip/cn.mrs",
+      "format": "mrs",
+      "behavior": "ipcidr",
+      "file": "data/rules/reviewed/v12r-ip-cn.mrs",
+      "bytes": 37538,
+      "sha256": "d95b3d125f6c74ce3c15e19ef794f142de91e21c3b8fb7767e76aebfabff5149",
+      "classifier": {
+        "file": "data/rules/reviewed/v12r-ip-cn.list",
+        "sha256": "3376f850bb29d2ae310d461d2df045252f486843caeeb89633f9543ce694d684"
+      },
+      "snapshotOrigin": "Fresh downloaded fixed candidate reviewed 2026-10-12; native MRS decoded with hash-bound core; semantically identical classifier retains prior exact byte representation and order",
+      "upstreamURL": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.mrs",
+      "runtimeRevision": "FIXED_REVIEWED_COMMIT",
+      "reviewDelta": {
+        "baseSHA256": "3376f850bb29d2ae310d461d2df045252f486843caeeb89633f9543ce694d684",
+        "baseRows": 9609,
+        "rows": 9609,
+        "added": [],
+        "removed": []
+      },
+      "reviewStatus": "REVIEWED: latest classifier identical to retained approved classifier"
+    },
+    {
+      "id": "v12r-domain-openai",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/openai.yaml",
+      "file": "data/rules/reviewed/v12r-domain-openai.yaml",
+      "sha256": "ea7ffb2db4d913f8cc67d3e7be19035155aba5247032592d8130b8f6552fdd56",
+      "behavior": "classical",
+      "format": "yaml",
+      "classifier": {
+        "file": "data/rules/reviewed/v12r-domain-openai.list",
+        "sha256": "991f1e4c35e5e8722642a979adac590473d7291653ffd77050e75ff770a4c827"
+      },
+      "platforms": [
+        "desktop",
+        "android",
+        "clashmi"
+      ]
+    },
+    {
+      "id": "v12r-domain-anthropic",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/anthropic.yaml",
+      "file": "data/rules/reviewed/v12r-domain-anthropic.yaml",
+      "sha256": "5b59537cd09e1dc487943af6270d739ad3c9a4b41fd22b1df886fe3a7b693f4f",
+      "behavior": "classical",
+      "format": "yaml",
+      "classifier": {
+        "file": "data/rules/reviewed/v12r-domain-anthropic.list",
+        "sha256": "b2b8e9a3a14980d2bcf8ef4e2ec231894855089533f6f3054af50b8d6636f64f"
+      },
+      "platforms": [
+        "desktop",
+        "android",
+        "clashmi"
+      ]
+    },
+    {
+      "id": "v12r-domain-google-gemini",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/google-gemini.yaml",
+      "file": "data/rules/reviewed/v12r-domain-google-gemini.yaml",
+      "sha256": "e12fdc7a138b896cb3d7fb7bba8bb3dfd7910eac72becb0bd009e2ce602661be",
+      "behavior": "classical",
+      "format": "yaml",
+      "classifier": {
+        "file": "data/rules/reviewed/v12r-domain-google-gemini.list",
+        "sha256": "11f2c91b20c87030128d799e072e30679917f808dcb481acb5e48cb28e9aa881"
+      },
+      "platforms": [
+        "desktop",
+        "android",
+        "clashmi"
+      ]
+    },
+    {
+      "id": "v12r-domain-youtube",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/youtube.yaml",
+      "file": "data/rules/reviewed/v12r-domain-youtube.yaml",
+      "sha256": "c4e9bdb1ca911692a3887a950fe06cc09e3d525a4916ae78a9b5a2a9568d2ec1",
+      "behavior": "classical",
+      "format": "yaml",
+      "classifier": {
+        "file": "data/rules/reviewed/v12r-domain-youtube.list",
+        "sha256": "ff1bc1631adc9c139ab19bf509a59507871b8f0663ade80dffa9f2b1665e41b9"
+      },
+      "platforms": [
+        "desktop",
+        "android",
+        "clashmi"
+      ]
+    },
+    {
+      "id": "v12r-domain-google",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/google.yaml",
+      "file": "data/rules/reviewed/v12r-domain-google.yaml",
+      "sha256": "c8778b757e5d66d0b6e608ee5497cc670ae570575652e5758b73bc7a6e8aeb87",
+      "behavior": "classical",
+      "format": "yaml",
+      "classifier": {
+        "file": "data/rules/reviewed/v12r-domain-google.list",
+        "sha256": "30a56af54dabc79751bfc2bbf89b02ee372031dcfe9e4d559b2f56e5394d9e3d"
+      },
+      "platforms": [
+        "desktop",
+        "android",
+        "clashmi"
+      ]
+    },
+    {
+      "id": "v12r-domain-microsoft",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/microsoft.yaml",
+      "file": "data/rules/reviewed/v12r-domain-microsoft.yaml",
+      "sha256": "5c0884d72bf4d7fc5de98abefef6e0d6eb0f2e449e27e53a093f89eca24f5961",
+      "behavior": "classical",
+      "format": "yaml",
+      "classifier": {
+        "file": "data/rules/reviewed/v12r-domain-microsoft.list",
+        "sha256": "b5468d07ee0646db04e91de3c1c65bec1ea88615109e5613165cace571a8d320"
+      },
+      "platforms": [
+        "desktop",
+        "android",
+        "clashmi"
+      ]
+    },
+    {
+      "id": "v12r-domain-linkedin",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/linkedin.yaml",
+      "file": "data/rules/reviewed/v12r-domain-linkedin.yaml",
+      "sha256": "bfbbaba1deb3be57ab255031152373ec7ac316fe04c89fafedce1d793e56f116",
+      "behavior": "classical",
+      "format": "yaml",
+      "classifier": {
+        "file": "data/rules/reviewed/v12r-domain-linkedin.list",
+        "sha256": "e54bbe7546b5b807fc73e5911672e7fafb2c5f502c4f3343884412cd487c0bf3"
+      },
+      "platforms": [
+        "desktop",
+        "android",
+        "clashmi"
+      ]
+    }
+  ],
+  "scope": "Full native domain/IP rules; company tables protected by inline shared namespace and exact tenant rules; fixed reviewed commits only"
+}

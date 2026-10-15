@@ -1,0 +1,536 @@
+{
+  "version": "14.2",
+  "revision": "apple-inline-r1",
+  "provenance": "Common V14.2 service table; Apple suffixes apple.com.cn and aaplimg.com promoted from the already reviewed pinned Apple classifier to embedded routing and DNS protection; remote sources unchanged",
+  "services": [
+    {
+      "name": "OpenAI 服务",
+      "sets": [
+        "openai"
+      ],
+      "seeds": [
+        "openai.com",
+        "chatgpt.com",
+        "chat.com",
+        "sora.com",
+        "oaistatic.com",
+        "oaistatsig.com",
+        "oaiusercontent.com",
+        "chatgpt.site"
+      ],
+      "exact": [
+        "chatgpt.livekit.cloud",
+        "host.livekit.cloud",
+        "turn.livekit.cloud",
+        "openaiapi-site.azureedge.net",
+        "openaiassets.blob.core.windows.net",
+        "openaicom-api-bdcpf8c6d2e9atf6.z01.azurefd.net",
+        "openaicom.imgix.net",
+        "openaicomproductionae4b.blob.core.windows.net",
+        "production-openaicom-storage.azureedge.net",
+        "cdn.openaimerge.com",
+        "openai.qualtrics.com",
+        "openai.com.cdn.cloudflare.net",
+        "chatgpt-async-webps-prod-eastus-1.webpubsub.azure.com",
+        "chatgpt-async-webps-prod-eastus-17.webpubsub.azure.com",
+        "chatgpt-async-webps-prod-eastus-23.webpubsub.azure.com"
+      ]
+    },
+    {
+      "name": "Anthropic 服务",
+      "sets": [
+        "anthropic"
+      ],
+      "seeds": [
+        "anthropic.com",
+        "claude.ai",
+        "claude.com",
+        "claudeusercontent.com",
+        "clau.de",
+        "claudemcpclient.com",
+        "claudemcpcontent.com"
+      ]
+    },
+    {
+      "name": "谷歌服务",
+      "sets": [
+        "google-gemini",
+        "youtube",
+        "google"
+      ],
+      "seeds": [
+        "gemini.google.com",
+        "aistudio.google.com",
+        "generativelanguage.googleapis.com",
+        "notebooklm.google.com",
+        "notebooklm.google",
+        "deepmind.google",
+        "generativeai.google",
+        "ai.google.dev",
+        "jules.google",
+        "google.com",
+        "googleapis.com",
+        "googleapis.cn",
+        "gstatic.com",
+        "googleusercontent.com",
+        "gmail.com",
+        "google.com.hk",
+        "google.co.jp",
+        "google.co.uk",
+        "google.com.tw",
+        "google.com.sg",
+        "youtube.com",
+        "youtu.be",
+        "googlevideo.com",
+        "ytimg.com",
+        "youtube-nocookie.com",
+        "ggpht.com",
+        "gvt1.com",
+        "gvt2.com",
+        "gvt3.com",
+        "xn--ngstr-lra8j.com",
+        "android.com",
+        "googleplay.com",
+        "google-analytics.com",
+        "googlezip.net",
+        "pki.goog",
+        "recaptcha.net",
+        "doubleclick.net",
+        "googlesyndication.com",
+        "googleadservices.com",
+        "googletagmanager.com",
+        "firebase.google.com",
+        "googlecloud.com",
+        "cloud.google.com",
+        "waze.com",
+        "fitbit.com",
+        "nest.com",
+        "blogger.com",
+        "blogspot.com",
+        "withgoogle.com"
+      ]
+    },
+    {
+      "name": "OpenRouter",
+      "sets": [],
+      "seeds": [
+        "openrouter.ai"
+      ]
+    },
+    {
+      "name": "Perplexity",
+      "sets": [],
+      "seeds": [
+        "perplexity.ai",
+        "perplexity.com",
+        "pplx.ai"
+      ],
+      "exact": [
+        "ppl-ai-file-upload.s3.amazonaws.com",
+        "pplx-res.cloudinary.com"
+      ]
+    },
+    {
+      "name": "Hugging Face",
+      "sets": [],
+      "seeds": [
+        "huggingface.co",
+        "hf.co",
+        "hf.space"
+      ]
+    },
+    {
+      "name": "xAI",
+      "sets": [],
+      "seeds": [
+        "x.ai",
+        "grok.com",
+        "grok.me"
+      ]
+    },
+    {
+      "name": "Netflix",
+      "sets": [
+        "netflix"
+      ],
+      "ips": [
+        "netflix"
+      ],
+      "seeds": [
+        "netflix.com",
+        "nflxvideo.net",
+        "nflximg.net"
+      ]
+    },
+    {
+      "name": "Disney+",
+      "sets": [
+        "disney"
+      ],
+      "seeds": [
+        "disneyplus.com",
+        "dssott.com",
+        "bamgrid.com"
+      ],
+      "exact": [
+        "hses.akamaized.net",
+        "hses1.akamaized.net",
+        "hses2.akamaized.net",
+        "hses3.akamaized.net",
+        "hses4.akamaized.net",
+        "hses5.akamaized.net",
+        "hses6.akamaized.net",
+        "hses7.akamaized.net"
+      ]
+    },
+    {
+      "name": "Spotify",
+      "sets": [
+        "spotify"
+      ],
+      "seeds": [
+        "spotify.com",
+        "scdn.co"
+      ]
+    },
+    {
+      "name": "Telegram",
+      "sets": [
+        "telegram"
+      ],
+      "ips": [
+        "telegram"
+      ],
+      "seeds": [
+        "telegram.org",
+        "t.me",
+        "telegra.ph"
+      ]
+    },
+    {
+      "name": "Discord",
+      "sets": [
+        "discord"
+      ],
+      "seeds": [
+        "discord.com",
+        "discord.gg",
+        "discordapp.com",
+        "discordapp.net"
+      ]
+    },
+    {
+      "name": "TikTok",
+      "sets": [
+        "tiktok"
+      ],
+      "seeds": [
+        "tiktok.com",
+        "tiktokcdn.com",
+        "tiktokv.com",
+        "tiktokcdn-us.com",
+        "byteoversea.com",
+        "ibytedtos.com",
+        "musical.ly",
+        "muscdn.com",
+        "capcut.com",
+        "larksuite.com",
+        "trae.ai"
+      ]
+    },
+    {
+      "name": "Twitter",
+      "sets": [
+        "twitter"
+      ],
+      "ips": [
+        "twitter"
+      ],
+      "seeds": [
+        "x.com",
+        "twitter.com",
+        "twimg.com",
+        "t.co"
+      ]
+    },
+    {
+      "name": "Meta 服务",
+      "sets": [
+        "meta"
+      ],
+      "seeds": [
+        "facebook.com",
+        "fb.com",
+        "fb.me",
+        "fbcdn.net",
+        "fbsbx.com",
+        "messenger.com",
+        "instagram.com",
+        "cdninstagram.com",
+        "whatsapp.com",
+        "whatsapp.net",
+        "threads.net",
+        "threads.com",
+        "meta.com",
+        "meta.ai",
+        "oculus.com"
+      ]
+    },
+    {
+      "name": "Steam",
+      "sets": [
+        "steam"
+      ],
+      "seeds": [
+        "steamcontent.com",
+        "dl.steam.clngaa.com",
+        "st.dl.bscstorage.net",
+        "st.dl.eccdnx.com",
+        "st.dl.pinyuncloud.com",
+        "steampowered.com",
+        "steamcommunity.com",
+        "steamstatic.com",
+        "steamserver.net",
+        "steamusercontent.com",
+        "s.team"
+      ],
+      "exact": [
+        "steamcdn-a.akamaihd.net",
+        "steampipe.akamaized.net",
+        "steampipe-partner.akamaized.net"
+      ]
+    },
+    {
+      "name": "Epic Games",
+      "sets": [
+        "epicgames"
+      ],
+      "seeds": [
+        "epicgames.com",
+        "epicgames.dev",
+        "epicgamescdn.com"
+      ],
+      "exact": [
+        "epicgames-download0.akamaized.net",
+        "epicgames-download1.akamaized.net",
+        "epicgames-download2.akamaized.net",
+        "epicgames-download3.akamaized.net",
+        "epicgames-download4.akamaized.net",
+        "epicgames-download5.akamaized.net",
+        "epicgames-download6.akamaized.net",
+        "epicgames-download7.akamaized.net",
+        "epicgames-download8.akamaized.net",
+        "epicgames-download9.akamaized.net",
+        "cdn0-epicgames-0.file.myqcloud.com",
+        "cdn0-epicgames-1.file.myqcloud.com",
+        "cdn0-epicgames-17.file.myqcloud.com",
+        "cdn0-epicgames-23.file.myqcloud.com",
+        "cdn0-epicgames-999.file.myqcloud.com",
+        "cdn1-epicgames-0.file.myqcloud.com",
+        "cdn1-epicgames-1.file.myqcloud.com",
+        "cdn1-epicgames-17.file.myqcloud.com",
+        "cdn1-epicgames-23.file.myqcloud.com",
+        "cdn1-epicgames-999.file.myqcloud.com",
+        "cdn2-epicgames-0.file.myqcloud.com",
+        "cdn2-epicgames-1.file.myqcloud.com",
+        "cdn2-epicgames-17.file.myqcloud.com",
+        "cdn2-epicgames-23.file.myqcloud.com",
+        "cdn2-epicgames-999.file.myqcloud.com",
+        "cdn3-epicgames-0.file.myqcloud.com",
+        "cdn3-epicgames-1.file.myqcloud.com",
+        "cdn3-epicgames-17.file.myqcloud.com",
+        "cdn3-epicgames-23.file.myqcloud.com",
+        "cdn3-epicgames-999.file.myqcloud.com",
+        "cdn4-epicgames-0.file.myqcloud.com",
+        "cdn4-epicgames-1.file.myqcloud.com",
+        "cdn4-epicgames-17.file.myqcloud.com",
+        "cdn4-epicgames-23.file.myqcloud.com",
+        "cdn4-epicgames-999.file.myqcloud.com",
+        "cdn5-epicgames-0.file.myqcloud.com",
+        "cdn5-epicgames-1.file.myqcloud.com",
+        "cdn5-epicgames-17.file.myqcloud.com",
+        "cdn5-epicgames-23.file.myqcloud.com",
+        "cdn5-epicgames-999.file.myqcloud.com",
+        "cdn6-epicgames-0.file.myqcloud.com",
+        "cdn6-epicgames-1.file.myqcloud.com",
+        "cdn6-epicgames-17.file.myqcloud.com",
+        "cdn6-epicgames-23.file.myqcloud.com",
+        "cdn6-epicgames-999.file.myqcloud.com",
+        "cdn7-epicgames-0.file.myqcloud.com",
+        "cdn7-epicgames-1.file.myqcloud.com",
+        "cdn7-epicgames-17.file.myqcloud.com",
+        "cdn7-epicgames-23.file.myqcloud.com",
+        "cdn7-epicgames-999.file.myqcloud.com",
+        "cdn8-epicgames-0.file.myqcloud.com",
+        "cdn8-epicgames-1.file.myqcloud.com",
+        "cdn8-epicgames-17.file.myqcloud.com",
+        "cdn8-epicgames-23.file.myqcloud.com",
+        "cdn8-epicgames-999.file.myqcloud.com",
+        "cdn9-epicgames-0.file.myqcloud.com",
+        "cdn9-epicgames-1.file.myqcloud.com",
+        "cdn9-epicgames-17.file.myqcloud.com",
+        "cdn9-epicgames-23.file.myqcloud.com",
+        "cdn9-epicgames-999.file.myqcloud.com",
+        "epicgames-download0-0.file.myqcloud.com",
+        "epicgames-download0-1.file.myqcloud.com",
+        "epicgames-download0-17.file.myqcloud.com",
+        "epicgames-download0-23.file.myqcloud.com",
+        "epicgames-download0-999.file.myqcloud.com",
+        "epicgames-download1-0.file.myqcloud.com",
+        "epicgames-download1-1.file.myqcloud.com",
+        "epicgames-download1-17.file.myqcloud.com",
+        "epicgames-download1-23.file.myqcloud.com",
+        "epicgames-download1-999.file.myqcloud.com",
+        "epicgames-download2-0.file.myqcloud.com",
+        "epicgames-download2-1.file.myqcloud.com",
+        "epicgames-download2-17.file.myqcloud.com",
+        "epicgames-download2-23.file.myqcloud.com",
+        "epicgames-download2-999.file.myqcloud.com",
+        "epicgames-download3-0.file.myqcloud.com",
+        "epicgames-download3-1.file.myqcloud.com",
+        "epicgames-download3-17.file.myqcloud.com",
+        "epicgames-download3-23.file.myqcloud.com",
+        "epicgames-download3-999.file.myqcloud.com",
+        "epicgames-download4-0.file.myqcloud.com",
+        "epicgames-download4-1.file.myqcloud.com",
+        "epicgames-download4-17.file.myqcloud.com",
+        "epicgames-download4-23.file.myqcloud.com",
+        "epicgames-download4-999.file.myqcloud.com",
+        "epicgames-download5-0.file.myqcloud.com",
+        "epicgames-download5-1.file.myqcloud.com",
+        "epicgames-download5-17.file.myqcloud.com",
+        "epicgames-download5-23.file.myqcloud.com",
+        "epicgames-download5-999.file.myqcloud.com",
+        "epicgames-download6-0.file.myqcloud.com",
+        "epicgames-download6-1.file.myqcloud.com",
+        "epicgames-download6-17.file.myqcloud.com",
+        "epicgames-download6-23.file.myqcloud.com",
+        "epicgames-download6-999.file.myqcloud.com",
+        "epicgames-download7-0.file.myqcloud.com",
+        "epicgames-download7-1.file.myqcloud.com",
+        "epicgames-download7-17.file.myqcloud.com",
+        "epicgames-download7-23.file.myqcloud.com",
+        "epicgames-download7-999.file.myqcloud.com",
+        "epicgames-download8-0.file.myqcloud.com",
+        "epicgames-download8-1.file.myqcloud.com",
+        "epicgames-download8-17.file.myqcloud.com",
+        "epicgames-download8-23.file.myqcloud.com",
+        "epicgames-download8-999.file.myqcloud.com",
+        "epicgames-download9-0.file.myqcloud.com",
+        "epicgames-download9-1.file.myqcloud.com",
+        "epicgames-download9-17.file.myqcloud.com",
+        "epicgames-download9-23.file.myqcloud.com",
+        "epicgames-download9-999.file.myqcloud.com"
+      ]
+    },
+    {
+      "name": "微软生态",
+      "sets": [
+        "microsoft",
+        "linkedin"
+      ],
+      "seeds": [
+        "microsoft.com",
+        "microsoftonline.com",
+        "microsoftstore.com",
+        "windows.com",
+        "windowsupdate.com",
+        "update.microsoft.com",
+        "office.com",
+        "office.net",
+        "office365.com",
+        "live.com",
+        "aka.ms",
+        "onedrive.com",
+        "sharepoint.com",
+        "msftconnecttest.com",
+        "msftncsi.com",
+        "bing.com",
+        "copilot.microsoft.com",
+        "copilot.bing.com",
+        "githubcopilot.com",
+        "github.com",
+        "githubusercontent.com",
+        "githubassets.com",
+        "microsoftazure.com",
+        "msn.com",
+        "skype.com",
+        "linkedin.com",
+        "licdn.com",
+        "xbox.com",
+        "xboxlive.com"
+      ],
+      "exact": [
+        "go.microsoft.com",
+        "download.microsoft.com",
+        "download.windowsupdate.com",
+        "software.download.prss.microsoft.com",
+        "dl.delivery.mp.microsoft.com",
+        "fe3.delivery.mp.microsoft.com",
+        "storeedgefd.dsx.mp.microsoft.com",
+        "bingsettingssearch.trafficmanager.net",
+        "dtlgalleryint.cloudapp.net",
+        "poshtestgallery.cloudapp.net",
+        "psg-int-centralus.cloudapp.net",
+        "psg-int-eastus.cloudapp.net",
+        "vscode-sync-insiders.trafficmanager.net",
+        "vscode-sync.trafficmanager.net"
+      ]
+    },
+    {
+      "name": "苹果国际",
+      "sets": [
+        "apple"
+      ],
+      "seeds": [
+        "apple.com",
+        "apple.com.cn",
+        "aaplimg.com",
+        "icloud.com",
+        "icloud-content.com",
+        "apple-cloudkit.com",
+        "mzstatic.com",
+        "cdn-apple.com",
+        "apple-dns.net",
+        "itunes.com",
+        "appstore.com"
+      ],
+      "exact": [
+        "swcdn.apple.com",
+        "swdist.apple.com",
+        "swdownload.apple.com",
+        "swscan.apple.com",
+        "oscdn.apple.com",
+        "osrecovery.apple.com",
+        "updates.cdn-apple.com",
+        "updates-http.cdn-apple.com",
+        "gdmf-ados.apple.com",
+        "gsra.apple.com",
+        "wkms-public.apple.com",
+        "fcs-keys-pub-prod.cdn-apple.com"
+      ]
+    },
+    {
+      "name": "哔哩国际",
+      "sets": [
+        "bilibili"
+      ],
+      "seeds": [
+        "bilibili.com",
+        "bilivideo.com",
+        "hdslb.com",
+        "bilibili.tv",
+        "biliintl.com"
+      ]
+    }
+  ],
+  "azureAsyncReview": {
+    "file": "data/rules/azure-async-review.json",
+    "sha256": "9fa362952593a1979b00a14a1c246cab184c9b90241fc447e3f29752b13a387f",
+    "revision": "thunder-repair-r4"
+  },
+  "cdnRegexReview": {
+    "file": "data/rules/cdn-regex-review.json",
+    "sha256": "1d393c85f119828b861ba64a1c5bc6d5a2d13070af6e6c0cc39f05f1446c2d21"
+  }
+}

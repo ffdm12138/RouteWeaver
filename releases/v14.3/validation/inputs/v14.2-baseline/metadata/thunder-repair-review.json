@@ -1,0 +1,76 @@
+{
+  "version": "14.2",
+  "date": "2026-10-10",
+  "revision": "thunder-repair-r1",
+  "classificationRevision": "review-fixes-r1",
+  "status": "REVIEWED",
+  "authorization": "User approved repairs after five-finding thunder audit: 好的兄弟，修复吧",
+  "remoteSourceChanges": 0,
+  "contractSHA256": "5f0086ba18755d8c10c96e2b255e3d7e456afdf4f9c0e6e7f36b7926110859f0",
+  "beforeManifest": {
+    "file": "validation/inputs/thunder-repair-before/manifest.json",
+    "sha256": "7901a8ac2237e3e23c19863005b3f40e1537f0e7bd2b1e4905017048b87842fd"
+  },
+  "auditManifest": {
+    "file": "validation/inputs/thunder-audit-20261010/manifest.json",
+    "sha256": "7380d60f7cc20bf5e16f945f9a8dd4f9d3fcbd98f5a294a5aaa5d1ef2ce48ea2"
+  },
+  "findings": [
+    {
+      "id": "P1-01",
+      "change": "Provider raw-type filtering with explicit DIRECT/REJECT retained; custom nontransport overrides hidden and rejected",
+      "sourceStatus": "REPAIRED",
+      "coreStatus": "PASS_WINDOWS_AND_ANDROID_CONFIGS",
+      "iosStatus": "PUBLIC_GROUP_STATIC_CANDIDATE_NATIVE_NOT_RUN"
+    },
+    {
+      "id": "P1-02",
+      "change": "Domestic first fallback REJECT; separate initial explicit default DIRECT",
+      "sourceStatus": "REPAIRED",
+      "coreStatus": "PASS_SELECTED_NODE_REMOVAL_AND_INTENTIONAL_DIRECT",
+      "iosStatus": "FIRST_REJECT_DEFAULT_NAME_DIRECT_CANDIDATE_NATIVE_CACHE_NOT_RUN"
+    },
+    {
+      "id": "P1-03",
+      "change": "OpenAI Cloudflare tenant exact host ahead of shared parent; unconfirmed descendants retain shared routing and DNS",
+      "sourceStatus": "REPAIRED",
+      "coreStatus": "PASS_TCP_UDP_A_AAAA_CONFLICTING_SELECTORS",
+      "iosStatus": "STATIC_PASS_NATIVE_NOT_RUN"
+    },
+    {
+      "id": "P1-04",
+      "change": "All reviewed native DOMAIN/DOMAIN-SUFFIX company classifiers drive Host DNS using routing ownership",
+      "sourceStatus": "REPAIRED",
+      "coreStatus": "NOT_APPLICABLE_IOS",
+      "iosStatus": "5030_MISSING_REMOTE_DOMAIN_BINDINGS_CLOSED_STATIC_NATIVE_NOT_RUN"
+    },
+    {
+      "id": "P2-01",
+      "change": "One shared reviewed service table embedded in both JS entries and inherited by iOS",
+      "sourceStatus": "REPAIRED",
+      "coreStatus": "PASS_COUNTEREXAMPLES",
+      "iosStatus": "STATIC_PASS_NATIVE_NOT_RUN"
+    }
+  ],
+  "entries": [
+    {
+      "file": "src/windows/v14.2.js",
+      "sha256": "9e29763e3660fbfd63878823d910f177e782298ae8b6242c1108cf9c6b4a0fc4"
+    },
+    {
+      "file": "src/android/v14.2-android.js",
+      "sha256": "8f01f90c5d66d5ef7540b68d8b37562d70c0a27f7df66ccf50b6cc8b20bba4c7"
+    },
+    {
+      "file": "src/ios/v14.2-shadowrocket.conf",
+      "sha256": "8189efc087e1f4bc3d6d0b099bac0065931c35fd8d0102bb64f2048da90bcbe5"
+    }
+  ],
+  "limits": [
+    "Shadowrocket native Host/proxy, DNS reuse and missing-cache behavior NOT_RUN",
+    "Windows and Android TUN/VPN device traffic NOT_RUN",
+    "Known native regex/wildcard/private classifier differences retained",
+    "Whole regex language and every possible remote tenant not exhaustively verified"
+  ],
+  "clientDeployment": false
+}

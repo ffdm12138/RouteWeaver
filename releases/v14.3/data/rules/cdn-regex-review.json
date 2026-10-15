@@ -1,0 +1,196 @@
+{
+  "revision": "thunder-repair-r5",
+  "status": "REVIEWED_EXACT_POLICY_SUBSET",
+  "remoteSourceChanges": 0,
+  "basis": "Frozen approved regex classifiers; finite Akamai languages fully expanded, infinite myqcloud number language restricted to independently audited exact endpoints, remaining family consistently shared and proxy-capable.",
+  "currentOwnershipOrLiveness": "NOT_VERIFIED",
+  "legacyClassifiers": [
+    {
+      "file": "data/rules/reviewed/v12r-domain-disney.list",
+      "sha256": "d3f46d4bdc82fdf29157c17a7765092e9b0cf4fcc8fc6652d05b72a59add4dea",
+      "rows": [
+        "DOMAIN-REGEX,^hses[1-7]?\\.akamaized\\.net$"
+      ],
+      "policy": "Disney+"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-epicgames.list",
+      "sha256": "3831cbfabc72c22e9b6aa036c77cded0ae2c08f5e3d88c5b269551fba7893f5f",
+      "rows": [
+        "DOMAIN-REGEX,^epicgames-download\\d\\.akamaized\\.net$",
+        "DOMAIN-REGEX,^cdn\\d-epicgames-\\d+\\.file\\.myqcloud\\.com$",
+        "DOMAIN-REGEX,^epicgames-download\\d-\\d+\\.file\\.myqcloud\\.com$"
+      ],
+      "policy": "Epic Games"
+    }
+  ],
+  "entries": [
+    {
+      "sourceRow": "DOMAIN-REGEX,^hses[1-7]?\\.akamaized\\.net$",
+      "policy": "Disney+",
+      "hosts": [
+        "hses.akamaized.net",
+        "hses1.akamaized.net",
+        "hses2.akamaized.net",
+        "hses3.akamaized.net",
+        "hses4.akamaized.net",
+        "hses5.akamaized.net",
+        "hses6.akamaized.net",
+        "hses7.akamaized.net"
+      ],
+      "exhaustive": true
+    },
+    {
+      "sourceRow": "DOMAIN-REGEX,^epicgames-download\\d\\.akamaized\\.net$",
+      "policy": "Epic Games",
+      "hosts": [
+        "epicgames-download0.akamaized.net",
+        "epicgames-download1.akamaized.net",
+        "epicgames-download2.akamaized.net",
+        "epicgames-download3.akamaized.net",
+        "epicgames-download4.akamaized.net",
+        "epicgames-download5.akamaized.net",
+        "epicgames-download6.akamaized.net",
+        "epicgames-download7.akamaized.net",
+        "epicgames-download8.akamaized.net",
+        "epicgames-download9.akamaized.net"
+      ],
+      "exhaustive": true
+    },
+    {
+      "sourceRow": "DOMAIN-REGEX,^cdn\\d-epicgames-\\d+\\.file\\.myqcloud\\.com$",
+      "policy": "Epic Games",
+      "hosts": [
+        "cdn0-epicgames-0.file.myqcloud.com",
+        "cdn0-epicgames-1.file.myqcloud.com",
+        "cdn0-epicgames-17.file.myqcloud.com",
+        "cdn0-epicgames-23.file.myqcloud.com",
+        "cdn0-epicgames-999.file.myqcloud.com",
+        "cdn1-epicgames-0.file.myqcloud.com",
+        "cdn1-epicgames-1.file.myqcloud.com",
+        "cdn1-epicgames-17.file.myqcloud.com",
+        "cdn1-epicgames-23.file.myqcloud.com",
+        "cdn1-epicgames-999.file.myqcloud.com",
+        "cdn2-epicgames-0.file.myqcloud.com",
+        "cdn2-epicgames-1.file.myqcloud.com",
+        "cdn2-epicgames-17.file.myqcloud.com",
+        "cdn2-epicgames-23.file.myqcloud.com",
+        "cdn2-epicgames-999.file.myqcloud.com",
+        "cdn3-epicgames-0.file.myqcloud.com",
+        "cdn3-epicgames-1.file.myqcloud.com",
+        "cdn3-epicgames-17.file.myqcloud.com",
+        "cdn3-epicgames-23.file.myqcloud.com",
+        "cdn3-epicgames-999.file.myqcloud.com",
+        "cdn4-epicgames-0.file.myqcloud.com",
+        "cdn4-epicgames-1.file.myqcloud.com",
+        "cdn4-epicgames-17.file.myqcloud.com",
+        "cdn4-epicgames-23.file.myqcloud.com",
+        "cdn4-epicgames-999.file.myqcloud.com",
+        "cdn5-epicgames-0.file.myqcloud.com",
+        "cdn5-epicgames-1.file.myqcloud.com",
+        "cdn5-epicgames-17.file.myqcloud.com",
+        "cdn5-epicgames-23.file.myqcloud.com",
+        "cdn5-epicgames-999.file.myqcloud.com",
+        "cdn6-epicgames-0.file.myqcloud.com",
+        "cdn6-epicgames-1.file.myqcloud.com",
+        "cdn6-epicgames-17.file.myqcloud.com",
+        "cdn6-epicgames-23.file.myqcloud.com",
+        "cdn6-epicgames-999.file.myqcloud.com",
+        "cdn7-epicgames-0.file.myqcloud.com",
+        "cdn7-epicgames-1.file.myqcloud.com",
+        "cdn7-epicgames-17.file.myqcloud.com",
+        "cdn7-epicgames-23.file.myqcloud.com",
+        "cdn7-epicgames-999.file.myqcloud.com",
+        "cdn8-epicgames-0.file.myqcloud.com",
+        "cdn8-epicgames-1.file.myqcloud.com",
+        "cdn8-epicgames-17.file.myqcloud.com",
+        "cdn8-epicgames-23.file.myqcloud.com",
+        "cdn8-epicgames-999.file.myqcloud.com",
+        "cdn9-epicgames-0.file.myqcloud.com",
+        "cdn9-epicgames-1.file.myqcloud.com",
+        "cdn9-epicgames-17.file.myqcloud.com",
+        "cdn9-epicgames-23.file.myqcloud.com",
+        "cdn9-epicgames-999.file.myqcloud.com"
+      ],
+      "exhaustive": false
+    },
+    {
+      "sourceRow": "DOMAIN-REGEX,^epicgames-download\\d-\\d+\\.file\\.myqcloud\\.com$",
+      "policy": "Epic Games",
+      "hosts": [
+        "epicgames-download0-0.file.myqcloud.com",
+        "epicgames-download0-1.file.myqcloud.com",
+        "epicgames-download0-17.file.myqcloud.com",
+        "epicgames-download0-23.file.myqcloud.com",
+        "epicgames-download0-999.file.myqcloud.com",
+        "epicgames-download1-0.file.myqcloud.com",
+        "epicgames-download1-1.file.myqcloud.com",
+        "epicgames-download1-17.file.myqcloud.com",
+        "epicgames-download1-23.file.myqcloud.com",
+        "epicgames-download1-999.file.myqcloud.com",
+        "epicgames-download2-0.file.myqcloud.com",
+        "epicgames-download2-1.file.myqcloud.com",
+        "epicgames-download2-17.file.myqcloud.com",
+        "epicgames-download2-23.file.myqcloud.com",
+        "epicgames-download2-999.file.myqcloud.com",
+        "epicgames-download3-0.file.myqcloud.com",
+        "epicgames-download3-1.file.myqcloud.com",
+        "epicgames-download3-17.file.myqcloud.com",
+        "epicgames-download3-23.file.myqcloud.com",
+        "epicgames-download3-999.file.myqcloud.com",
+        "epicgames-download4-0.file.myqcloud.com",
+        "epicgames-download4-1.file.myqcloud.com",
+        "epicgames-download4-17.file.myqcloud.com",
+        "epicgames-download4-23.file.myqcloud.com",
+        "epicgames-download4-999.file.myqcloud.com",
+        "epicgames-download5-0.file.myqcloud.com",
+        "epicgames-download5-1.file.myqcloud.com",
+        "epicgames-download5-17.file.myqcloud.com",
+        "epicgames-download5-23.file.myqcloud.com",
+        "epicgames-download5-999.file.myqcloud.com",
+        "epicgames-download6-0.file.myqcloud.com",
+        "epicgames-download6-1.file.myqcloud.com",
+        "epicgames-download6-17.file.myqcloud.com",
+        "epicgames-download6-23.file.myqcloud.com",
+        "epicgames-download6-999.file.myqcloud.com",
+        "epicgames-download7-0.file.myqcloud.com",
+        "epicgames-download7-1.file.myqcloud.com",
+        "epicgames-download7-17.file.myqcloud.com",
+        "epicgames-download7-23.file.myqcloud.com",
+        "epicgames-download7-999.file.myqcloud.com",
+        "epicgames-download8-0.file.myqcloud.com",
+        "epicgames-download8-1.file.myqcloud.com",
+        "epicgames-download8-17.file.myqcloud.com",
+        "epicgames-download8-23.file.myqcloud.com",
+        "epicgames-download8-999.file.myqcloud.com",
+        "epicgames-download9-0.file.myqcloud.com",
+        "epicgames-download9-1.file.myqcloud.com",
+        "epicgames-download9-17.file.myqcloud.com",
+        "epicgames-download9-23.file.myqcloud.com",
+        "epicgames-download9-999.file.myqcloud.com"
+      ],
+      "exhaustive": false
+    }
+  ],
+  "sharedGuards": [
+    {
+      "mihomo": "DOMAIN-REGEX,^cdn.*-epicgames-.*\\.file\\.myqcloud\\.com$",
+      "shadowrocket": "DOMAIN-WILDCARD,cdn*-epicgames-*.file.myqcloud.com",
+      "dnsHost": "cdn*-epicgames-*.file.myqcloud.com"
+    },
+    {
+      "mihomo": "DOMAIN-REGEX,^epicgames-download.*-.*\\.file\\.myqcloud\\.com$",
+      "shadowrocket": "DOMAIN-WILDCARD,epicgames-download*-*.file.myqcloud.com",
+      "dnsHost": "epicgames-download*-*.file.myqcloud.com"
+    }
+  ],
+  "fallbackPolicy": "公共基础服务",
+  "numberTails": [
+    "0",
+    "1",
+    "17",
+    "23",
+    "999"
+  ],
+  "reviewBoundary": "No company wildcard added. New myqcloud endpoint numbers require exact review before company promotion. Shared guard is narrow to the two labelled families; other Tencent/Akamai tenants remain unaltered."
+}

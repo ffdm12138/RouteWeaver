@@ -1,0 +1,102 @@
+{
+  "version": "14.3",
+  "date": "2026-10-14",
+  "revision": "macos-r1",
+  "domesticProtocolRevision": "domestic-protocol-r1",
+  "status": "MACOS_STATIC_PASS",
+  "scope": "Exact routing/DNS/selector/provider equivalence to current Windows/iOS entries, finite complete domains, upgrade/idempotence and platform guards; Mac apps/TUN NOT_RUN",
+  "checks": [
+    "deterministic-generation-size-and-source-binding",
+    "macos-flclash:exact-business-DNS-UDP-selectors-and-fixed-provider-equivalence",
+    "macos-flclash:complete-reviewed-domain-inventory-and-existing-failure-cases",
+    "macos-flclash:cold-and-partial-provider-business-equivalence",
+    "macos-flclash:three-pass-idempotence-and-existing-release-upgrades",
+    "macos-flclash:client-specific-tunnel-object-bridge-and-input-immutability",
+    "macos-clashmi:exact-business-DNS-UDP-selectors-and-fixed-provider-equivalence",
+    "macos-clashmi:complete-reviewed-domain-inventory-and-existing-failure-cases",
+    "macos-clashmi:cold-and-partial-provider-business-equivalence",
+    "macos-clashmi:three-pass-idempotence-and-existing-release-upgrades",
+    "macos-clashmi:client-specific-tunnel-object-bridge-and-input-immutability"
+  ],
+  "failures": [],
+  "platforms": [
+    {
+      "platform": "macos-flclash",
+      "fullInventoryHosts": 233096,
+      "normalRouting": 233096,
+      "normalDNS": 233096,
+      "existingCases": 917
+    },
+    {
+      "platform": "macos-clashmi",
+      "fullInventoryHosts": 233096,
+      "normalRouting": 233096,
+      "normalDNS": 233096,
+      "existingCases": 917
+    }
+  ],
+  "sourceFiles": [
+    {
+      "file": "tests/macos-static.cjs",
+      "sha256": "510fde63df396a6ded744133ddf381af42e760ae0292e5fcbb5d317df19788b0"
+    },
+    {
+      "file": "tests/macos-fixture.cjs",
+      "sha256": "f986c4f95ac00894b5c4746dd71cb69481931c5da9a071e03a006c3557c09988"
+    },
+    {
+      "file": "tests/fixture.cjs",
+      "sha256": "328defa554087c36412fa6c7119c6b25e6d20938ef1af41463622866f7a3ec4c"
+    },
+    {
+      "file": "tests/domain-index.cjs",
+      "sha256": "4b3314187dc88fafb30902b04c122079b3c71dd2ba85055e2bf6a6cf85df48d0"
+    },
+    {
+      "file": "tests/cases.cjs",
+      "sha256": "13fb907db82fbbe99044becf697e168c68212f90a2789c8020e6e5aae5c7c86c"
+    },
+    {
+      "file": "data/rule-sources.lock.json",
+      "sha256": "cd4f33e36b88aafe1e6eda4c56f63a202940aa84cd0901502b22941af4e46acb"
+    },
+    {
+      "file": "metadata/macos-sources.json",
+      "sha256": "8e4288576f6e70d221aae79edafe5c0d335340f08da8da3244e1d953303848d4"
+    },
+    {
+      "file": "tools/build-macos.cjs",
+      "sha256": "559ed90a24282f0891ee8cde5c8062aa8ec757a15e3efc6deaa2f3646e7214db"
+    },
+    {
+      "file": "tools/macos-flclash-adapter.js",
+      "sha256": "15862ccc2eb0f24ff4ac0337f2ac96e8353b33fc4e0afa3b4ac528d3abce583d"
+    },
+    {
+      "file": "metadata/balanced-sources.json",
+      "sha256": "af5700a2b39d1013ec0086e41965a8d7a6455a1490fe378adb48002e5f5ec74b"
+    },
+    {
+      "file": "metadata/clashmi-compatibility.json",
+      "sha256": "c13d5678ef753003262e3a23fc06a024fb60acfb433bb47b4a1fc6d0ef0f1a05"
+    },
+    {
+      "file": "src/windows/v14.3.js",
+      "sha256": "7498c2044cbec1223a04be81b39d4a224f0e6c01249b19abfa81cb11786f28ea"
+    },
+    {
+      "file": "src/ios/v14.3-clashmi.js",
+      "sha256": "80e4168bfeba2ab7e9c278811abb7263761ba04c33a1d1f243d72211b8d84f3c"
+    },
+    {
+      "file": "src/macos/v14.3-macos-flclash.js",
+      "sha256": "33228beb8181846059a1764da338c3ab1daadfec1c48a47faccf95bf002b165a"
+    },
+    {
+      "file": "src/macos/v14.3-macos-clashmi.js",
+      "sha256": "5cb0eaad24cf2d5e567aa91924a7736d6ee4a4a2c716fcee980b37efbb7f21bf"
+    }
+  ],
+  "clientDeployment": false,
+  "deviceAcceptance": "NOT_RUN"
+}

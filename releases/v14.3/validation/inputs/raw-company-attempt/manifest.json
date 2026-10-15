@@ -1,0 +1,33 @@
+{
+  "reason": "Preserved raw OpenAI third-party and Microsoft keyword counterexamples before the source-selection repair",
+  "files": [
+    {
+      "file": "validation/static.json",
+      "sha256": "37ffdd08db9431c83c6237af091da0014d3ab086b63f8f868853d043984b51cb"
+    },
+    {
+      "file": "data/rule-sources.lock.json",
+      "sha256": "b422d72c45421bf22d4eba9137cdc9cac2bcc97ecfe77a69cef0c10ff553ae70"
+    },
+    {
+      "file": "data/rules/embedded-policy.json",
+      "sha256": "fb4703d26573b23a3afe1d593454387df4568b10c7c7ca8045edd5d7326b2a01"
+    },
+    {
+      "file": "metadata/balanced-sources.json",
+      "sha256": "1a0a593d092b0c019d92259302fbc4892bc8d364ba2418345801dac6ebcc1ec6"
+    },
+    {
+      "file": "src/windows/v14.3.js",
+      "sha256": "38fd7f024816a305cad3c3db21fb8a7bdbe53e7b58057d6ed22ffaae8a006c15"
+    },
+    {
+      "file": "src/android/v14.3-android.js",
+      "sha256": "1f802e044b7d854934f38110e21087be829b5fdb5edd80b5ec3ec549f582f19b"
+    },
+    {
+      "file": "src/ios/v14.3-clashmi.js",
+      "sha256": "b8112678710d15b0625dc69d61050bd9badf2f6c6bbed218884ae41fe6261e4b"
+    }
+  ]
+}

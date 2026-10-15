@@ -1,0 +1,188 @@
+{
+  "schemaVersion": 1,
+  "releaseTag": "v14.3.0-rc.1",
+  "correspondingSource": "https://github.com/ffdm12138/RouteWeaver/tree/v14.3.0-rc.1",
+  "rootLicenseScope": "Original RouteWeaver contributions only; upstream data and excerpts retain their own terms.",
+  "licenses": [
+    {
+      "repository": "https://github.com/MetaCubeX/meta-rules-dat",
+      "file": "third_party/licenses/MetaCubeX-GPL-3.0.txt",
+      "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+      "upstreamLicenseGitBlobSHA": "f288702d2fa16d3cdf0035b15a9fcbc552cd88e7",
+      "verifiedDate": "2026-10-15",
+      "upstreamGitBlobURL": "https://api.github.com/repos/MetaCubeX/meta-rules-dat/git/blobs/f288702d2fa16d3cdf0035b15a9fcbc552cd88e7"
+    },
+    {
+      "repository": "https://github.com/blackmatrix7/ios_rule_script",
+      "file": "third_party/licenses/blackmatrix7-GPL-2.0.txt",
+      "sha256": "8177f97513213526df2cf6184d8ff986c675afb514d4e68a404010521b880643",
+      "upstreamLicenseGitBlobSHA": "d159169d1050894d3ea3b98e1c965c4058208fe1",
+      "verifiedDate": "2026-10-15",
+      "upstreamGitBlobURL": "https://api.github.com/repos/blackmatrix7/ios_rule_script/git/blobs/d159169d1050894d3ea3b98e1c965c4058208fe1"
+    },
+    {
+      "repository": "https://github.com/KaringX/clashmi",
+      "file": "releases/v14.3/validation/inputs/clashmi-upstream/LICENSE",
+      "sha256": "230184f60bae2feaf244f10a8bac053c8ff33a183bcc365b4d8b876d2b7f4809",
+      "sourceURL": "https://github.com/KaringX/clashmi/blob/daef7be6c40d49a98a174a82c10599e163e71afd/LICENSE"
+    },
+    {
+      "repository": "https://github.com/KaringX/clashmi",
+      "file": "releases/v14.3/validation/inputs/clashmi-upstream-1.0.30.1605/LICENSE",
+      "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+      "sourceURL": "https://github.com/KaringX/clashmi/blob/f897cbddffb59a4d7f4b667c3659e5d77a15fea7/LICENSE"
+    }
+  ],
+  "sourceManifests": [
+    {
+      "file": "releases/v14.3/data/rule-sources.lock.json",
+      "sha256": "cd4f33e36b88aafe1e6eda4c56f63a202940aa84cd0901502b22941af4e46acb",
+      "pinnedRevisions": {
+        "MetaCubeX/meta-rules-dat": "b4d414227a182c5bc954283e4a83ee176dad671b",
+        "blackmatrix7/ios_rule_script": "83f37120c155f67c8eef43221dabe15cc3c95fec"
+      }
+    },
+    {
+      "file": "releases/v14.3/validation/inputs/v14.2-baseline/data/rule-sources.lock.json",
+      "sha256": "50dcaa46d1b16123858f54ccfa1e7504a7d936522c895937be398c26ab5aebad",
+      "pinnedRevisions": {
+        "MetaCubeX/meta-rules-dat": "b4d414227a182c5bc954283e4a83ee176dad671b",
+        "blackmatrix7/ios_rule_script": "83f37120c155f67c8eef43221dabe15cc3c95fec"
+      }
+    },
+    {
+      "file": "releases/v14.3/validation/inputs/latest-candidate/manifest.json",
+      "sha256": "e324ec885bcaf655b9b2b07ca80e6b2c2668f51f504bbf29b37a23d0b6349309",
+      "candidateRevisions": [
+        "83c8208bdfae92b1caaa29745f51f233b6f1847e"
+      ]
+    },
+    {
+      "file": "releases/v14.3/metadata/clashmi-compatibility.json",
+      "sha256": "c13d5678ef753003262e3a23fc06a024fb60acfb433bb47b4a1fc6d0ef0f1a05",
+      "unmodifiedExcerpts": [
+        {
+          "path": "pubspec.yaml",
+          "file": "validation/inputs/clashmi-upstream/pubspec.yaml",
+          "sha256": "9647a133ec22b5e6cfd49c2993f38b46d7df2d6344ccf5e5d80c6be7498a8a87",
+          "url": "https://github.com/KaringX/clashmi/blob/daef7be6c40d49a98a174a82c10599e163e71afd/pubspec.yaml"
+        },
+        {
+          "path": "LICENSE",
+          "file": "validation/inputs/clashmi-upstream/LICENSE",
+          "sha256": "230184f60bae2feaf244f10a8bac053c8ff33a183bcc365b4d8b876d2b7f4809",
+          "url": "https://github.com/KaringX/clashmi/blob/daef7be6c40d49a98a174a82c10599e163e71afd/LICENSE"
+        },
+        {
+          "path": "lib/app/modules/profile_patch_manager.dart",
+          "file": "validation/inputs/clashmi-upstream/lib/app/modules/profile_patch_manager.dart",
+          "sha256": "1d866313c10e3ff38306c87d04246e9dd2d6b639772b0906e927ddf08a5da19f",
+          "url": "https://github.com/KaringX/clashmi/blob/daef7be6c40d49a98a174a82c10599e163e71afd/lib/app/modules/profile_patch_manager.dart"
+        },
+        {
+          "path": "lib/app/modules/clash_setting_manager.dart",
+          "file": "validation/inputs/clashmi-upstream/lib/app/modules/clash_setting_manager.dart",
+          "sha256": "8d903471e1c11d0afda0329fc7c6466868323a06c5d03e6326485f4ce54a6d51",
+          "url": "https://github.com/KaringX/clashmi/blob/daef7be6c40d49a98a174a82c10599e163e71afd/lib/app/modules/clash_setting_manager.dart"
+        },
+        {
+          "path": "lib/app/modules/profile_manager.dart",
+          "file": "validation/inputs/clashmi-upstream/lib/app/modules/profile_manager.dart",
+          "sha256": "82406f016eb54053d99b82d899386c6875ed3234d5968c45934e917a18366b25",
+          "url": "https://github.com/KaringX/clashmi/blob/daef7be6c40d49a98a174a82c10599e163e71afd/lib/app/modules/profile_manager.dart"
+        },
+        {
+          "path": "lib/app/local_services/vpn_service.dart",
+          "file": "validation/inputs/clashmi-upstream/lib/app/local_services/vpn_service.dart",
+          "sha256": "61c173cdd1e2c6033636f8fbfba667477163f843b08daab7af4799893840a29b",
+          "url": "https://github.com/KaringX/clashmi/blob/daef7be6c40d49a98a174a82c10599e163e71afd/lib/app/local_services/vpn_service.dart"
+        },
+        {
+          "path": "lib/screens/profile_patch_settings_edit_screen.dart",
+          "file": "validation/inputs/clashmi-upstream/lib/screens/profile_patch_settings_edit_screen.dart",
+          "sha256": "e414d1505a976438373861afac739b7f940e1da620c3c13e7381e8ee9ca6cafb",
+          "url": "https://github.com/KaringX/clashmi/blob/daef7be6c40d49a98a174a82c10599e163e71afd/lib/screens/profile_patch_settings_edit_screen.dart"
+        },
+        {
+          "path": "lib/screens/group_helper.dart",
+          "file": "validation/inputs/clashmi-upstream/lib/screens/group_helper.dart",
+          "sha256": "6336e141f5d0a79779b03fd466536f7ddd9d67f5d85ce1095d3741a3d2197dc3",
+          "url": "https://github.com/KaringX/clashmi/blob/daef7be6c40d49a98a174a82c10599e163e71afd/lib/screens/group_helper.dart"
+        },
+        {
+          "path": "bind/apple/LibVpnCore/ExtensionPlatformInterface.swift",
+          "file": "validation/inputs/clashmi-upstream/bind/apple/LibVpnCore/ExtensionPlatformInterface.swift",
+          "sha256": "f230a6bb60f2cbead74a2c3f82880e8595e54a1348da5e95d0674430957ae028",
+          "url": "https://github.com/KaringX/clashmi/blob/daef7be6c40d49a98a174a82c10599e163e71afd/bind/apple/LibVpnCore/ExtensionPlatformInterface.swift"
+        },
+        {
+          "path": "pubspec.yaml",
+          "file": "validation/inputs/clashmi-upstream-1.0.30.1605/pubspec.yaml",
+          "sha256": "9a757910ab2867dfed12d0ec54db32c261080fa59f238b121c42f2390a743235",
+          "url": "https://github.com/KaringX/clashmi/blob/f897cbddffb59a4d7f4b667c3659e5d77a15fea7/pubspec.yaml"
+        },
+        {
+          "path": "LICENSE",
+          "file": "validation/inputs/clashmi-upstream-1.0.30.1605/LICENSE",
+          "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+          "url": "https://github.com/KaringX/clashmi/blob/f897cbddffb59a4d7f4b667c3659e5d77a15fea7/LICENSE"
+        },
+        {
+          "path": "lib/app/modules/profile_patch_manager.dart",
+          "file": "validation/inputs/clashmi-upstream-1.0.30.1605/lib/app/modules/profile_patch_manager.dart",
+          "sha256": "002796cd2d1f5044386639f8583e45870a66751ef6a07997d48cf4762ac2ca0c",
+          "url": "https://github.com/KaringX/clashmi/blob/f897cbddffb59a4d7f4b667c3659e5d77a15fea7/lib/app/modules/profile_patch_manager.dart"
+        },
+        {
+          "path": "lib/app/modules/clash_setting_manager.dart",
+          "file": "validation/inputs/clashmi-upstream-1.0.30.1605/lib/app/modules/clash_setting_manager.dart",
+          "sha256": "64b0ee0c65db240fba862d554906b3974c3c7441b8c1ef779dc9a718f7d173e8",
+          "url": "https://github.com/KaringX/clashmi/blob/f897cbddffb59a4d7f4b667c3659e5d77a15fea7/lib/app/modules/clash_setting_manager.dart"
+        },
+        {
+          "path": "lib/app/modules/profile_manager.dart",
+          "file": "validation/inputs/clashmi-upstream-1.0.30.1605/lib/app/modules/profile_manager.dart",
+          "sha256": "b1fec6fae52b312a9699fef543ad4619066f73e08af53131289bbab552a48906",
+          "url": "https://github.com/KaringX/clashmi/blob/f897cbddffb59a4d7f4b667c3659e5d77a15fea7/lib/app/modules/profile_manager.dart"
+        },
+        {
+          "path": "lib/app/local_services/vpn_service.dart",
+          "file": "validation/inputs/clashmi-upstream-1.0.30.1605/lib/app/local_services/vpn_service.dart",
+          "sha256": "2d8af481914375d373a56b5e1c7f334ab9e884e934aa8192f2ec7840432407e1",
+          "url": "https://github.com/KaringX/clashmi/blob/f897cbddffb59a4d7f4b667c3659e5d77a15fea7/lib/app/local_services/vpn_service.dart"
+        },
+        {
+          "path": "lib/screens/profile_patch_settings_edit_screen.dart",
+          "file": "validation/inputs/clashmi-upstream-1.0.30.1605/lib/screens/profile_patch_settings_edit_screen.dart",
+          "sha256": "b93067f3aa3ae964bcda9e9147fedef96b907dc2fe30724fc7d366338fce8a08",
+          "url": "https://github.com/KaringX/clashmi/blob/f897cbddffb59a4d7f4b667c3659e5d77a15fea7/lib/screens/profile_patch_settings_edit_screen.dart"
+        },
+        {
+          "path": "lib/screens/group_helper.dart",
+          "file": "validation/inputs/clashmi-upstream-1.0.30.1605/lib/screens/group_helper.dart",
+          "sha256": "c8144a721d56797941ddde5ab589740fc0f3685f5347d363345cc3879caeba97",
+          "url": "https://github.com/KaringX/clashmi/blob/f897cbddffb59a4d7f4b667c3659e5d77a15fea7/lib/screens/group_helper.dart"
+        },
+        {
+          "path": "lib/app/clash/clash_config.dart",
+          "file": "validation/inputs/clashmi-upstream-1.0.30.1605/lib/app/clash/clash_config.dart",
+          "sha256": "b7f91873042cb2cb5d6f5a85c5c906ca794b17169ba442a522b997c23ad97c15",
+          "url": "https://github.com/KaringX/clashmi/blob/f897cbddffb59a4d7f4b667c3659e5d77a15fea7/lib/app/clash/clash_config.dart"
+        },
+        {
+          "path": "bind/apple/LibVpnCore/ExtensionPlatformInterface.swift",
+          "file": "validation/inputs/clashmi-upstream-1.0.30.1605/bind/apple/LibVpnCore/ExtensionPlatformInterface.swift",
+          "sha256": "9534f4ead0dc60016e86938fb1bf336b57a106104d8f7495366d2969af6b4c99",
+          "url": "https://github.com/KaringX/clashmi/blob/f897cbddffb59a4d7f4b667c3659e5d77a15fea7/bind/apple/LibVpnCore/ExtensionPlatformInterface.swift"
+        }
+      ]
+    }
+  ],
+  "transformations": [
+    "MRS decoding to finite test classifiers",
+    "Rule normalization and policy-group assignment",
+    "Reviewed embedded subset selection",
+    "Removal of duplicate domestic Shadowrocket rows"
+  ],
+  "runtimeSourceChangedForPublication": false
+}

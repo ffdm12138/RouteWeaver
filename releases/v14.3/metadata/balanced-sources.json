@@ -1,0 +1,95 @@
+{
+  "version": "14.3",
+  "date": "2026-10-12",
+  "revision": "balanced-r1",
+  "status": "GENERATED_DEVICE_PENDING",
+  "limits": {
+    "maxScriptBytes": 131072,
+    "maxGeneratedConfigBytes": 196608
+  },
+  "entries": [
+    {
+      "file": "src/windows/v14.3.js",
+      "sha256": "7498c2044cbec1223a04be81b39d4a224f0e6c01249b19abfa81cb11786f28ea",
+      "bytes": 116057,
+      "generatedConfigBytes": 176141,
+      "inlineRows": 819,
+      "remoteSources": 30
+    },
+    {
+      "file": "src/android/v14.3-android.js",
+      "sha256": "2128a1019d0c6f719a9e9533a8bc6b1e61bb47277e96190c8fc22218a52d4f3f",
+      "bytes": 115943,
+      "generatedConfigBytes": 175952,
+      "inlineRows": 819,
+      "remoteSources": 29
+    },
+    {
+      "file": "src/ios/v14.3-clashmi.js",
+      "sha256": "80e4168bfeba2ab7e9c278811abb7263761ba04c33a1d1f243d72211b8d84f3c",
+      "bytes": 118837,
+      "generatedConfigBytes": 177039,
+      "inlineRows": 819,
+      "remoteSources": 29
+    },
+    {
+      "file": "src/ios/v14.3-clashmi-domestic-protocol-r1.js",
+      "sha256": "80e4168bfeba2ab7e9c278811abb7263761ba04c33a1d1f243d72211b8d84f3c",
+      "bytes": 118837,
+      "generatedConfigBytes": 177039,
+      "inlineRows": 819,
+      "remoteSources": 29
+    }
+  ],
+  "domesticProtocolRevision": "domestic-protocol-r1",
+  "baselineManifest": {
+    "file": "validation/inputs/v14.2-baseline/manifest.json",
+    "sha256": "e11723e746a3cb12d663c05240b677db0230bbe2d6fbec951fc338567b349459"
+  },
+  "policy": {
+    "file": "data/rules/embedded-policy.json",
+    "sha256": "059d71af3ec13dd1de8ac2e8303e4045f589f9257f210d08f519a033a8795a75"
+  },
+  "inputs": [
+    {
+      "file": "tools/build-balanced.cjs",
+      "sha256": "89df60b6b341b5c49d8af064c2fba9514e61c61c0fd70f98b6cdb2f434c8f83d"
+    },
+    {
+      "file": "tools/domestic-protocol.cjs",
+      "sha256": "09723ed5dad32c85fbd8527a27bc4a260014a62a4d08fe0edef52daee6e514fa"
+    },
+    {
+      "file": "tools/clashmi-adapter.js",
+      "sha256": "22fa1a686fc55e831cfb3225eb88e7265df05bbb8ea6a8399f04b9df66b9d268"
+    },
+    {
+      "file": "tools/validate-azure-async.cjs",
+      "sha256": "ff0c993ec52e3fb04596243545bffd026a9fb0c573841ef6a3543dc7d4ba3a6a"
+    },
+    {
+      "file": "tools/validate-cdn-regex.cjs",
+      "sha256": "8f2e85321c28ed7c47e47dd3f3c9d797d186b91744581de26a38cef8c5056f42"
+    },
+    {
+      "file": "data/rule-sources.lock.json",
+      "sha256": "cd4f33e36b88aafe1e6eda4c56f63a202940aa84cd0901502b22941af4e46acb"
+    },
+    {
+      "file": "data/rules/azure-async-review.json",
+      "sha256": "9fa362952593a1979b00a14a1c246cab184c9b90241fc447e3f29752b13a387f"
+    },
+    {
+      "file": "data/rules/cdn-regex-review.json",
+      "sha256": "1d393c85f119828b861ba64a1c5bc6d5a2d13070af6e6c0cc39f05f1446c2d21"
+    },
+    {
+      "file": "metadata/clashmi-compatibility.json",
+      "sha256": "c13d5678ef753003262e3a23fc06a024fb60acfb433bb47b4a1fc6d0ef0f1a05"
+    }
+  ],
+  "clientDeployment": false,
+  "appJavaScriptCore": "NOT_RUN",
+  "iOSMemory": "NOT_RUN",
+  "deviceAcceptance": "NOT_RUN"
+}

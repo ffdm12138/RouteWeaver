@@ -1,0 +1,629 @@
+{
+  "version": "14.2",
+  "date": "2026-10-11",
+  "revision": "thunder-closeout-r6",
+  "priorRevision": "thunder-repair-r5",
+  "status": "FINAL_SOURCE_LOCAL_CORE_REVIEW_PASS_DEVICE_ACCEPTANCE_PENDING",
+  "authorization": "User requested another final eleven-requirement thunder audit and no changes to running clients; scoped source repairs and updated packages continue the authorized work.",
+  "contract": {
+    "file": "docs/需求.md",
+    "sha256": "5f0086ba18755d8c10c96e2b255e3d7e456afdf4f9c0e6e7f36b7926110859f0",
+    "amended": false
+  },
+  "lockedSources": {
+    "file": "data/rule-sources.lock.json",
+    "sha256": "f2a025cd566c0ace7371ba004bb90c7cfc23747493ee541b083c4e5a6e64ddca",
+    "count": 45
+  },
+  "remoteSourceChanges": 0,
+  "clientDeployment": false,
+  "priorMetadata": {
+    "file": "metadata/thunder-r5-review.json",
+    "sha256": "3094a35ae2326086d260e40b287b2c4a9e3a65afeba601d118064bd6e87ff1d6"
+  },
+  "beforeManifest": {
+    "file": "validation/inputs/thunder-r6-before/manifest.json",
+    "sha256": "0c0adfb5f529009c06288e7af5f2b504de82619dd14ef1ffafe3664141a9683f"
+  },
+  "entries": [
+    {
+      "file": "src/windows/v14.2.js",
+      "sha256": "c206f11d77f8d56d01740ad344da523800aa8fb0370a4b2f5b520609503adaab"
+    },
+    {
+      "file": "src/android/v14.2-android.js",
+      "sha256": "99827b3be0824b13b912deb2e9cc661d96d10600bb1c97c005cc0b580120442e"
+    },
+    {
+      "file": "src/ios/v14.2-shadowrocket.conf",
+      "sha256": "4158a61ada985706709b2d004753bea567b86491ec581659ad6ca57e6c7a223a"
+    },
+    {
+      "file": "tools/generate-v14.2-shadowrocket.js",
+      "sha256": "ccc3056f7e9ad417a7ab7cbb5c0e1fabcc8155deaebd88b69b91864d4ed5da94"
+    },
+    {
+      "file": "tools/refresh-api-evidence.cjs",
+      "sha256": "ab09763ba97874d163ef8383f42358f4a859609ab23ca5d48450a78ac56c6e49"
+    },
+    {
+      "file": "metadata/shadowrocket-sources.json",
+      "sha256": "545c48cca56150fbe812d4bed8351e434fdcf7f0d19424d54e95044bdb973dbc"
+    },
+    {
+      "file": "tests/static.cjs",
+      "sha256": "cc76de4cc9bfa7a30173f28a1cf2c1e8d32e873649db2726ab596326308600fc"
+    },
+    {
+      "file": "tests/thunder-closeout.cjs",
+      "sha256": "b79530d0482c0fc500bdb482405b8482e1389ed99f1796e8707e0121998a97cb"
+    },
+    {
+      "file": "tests/fixture.cjs",
+      "sha256": "163fec0bb6c68824daa951d44d68ee23856c6bc94b36524fd2ed006d2f3bb286"
+    },
+    {
+      "file": "data/rules/safety-classifiers.json",
+      "sha256": "de175c19f2cef8d01752026498a5d447eee36d148c6c65a80626aca528843093"
+    }
+  ],
+  "testEvidence": {
+    "static": {
+      "file": "validation/static.json",
+      "sha256": "7624c287acfecfc199e87d0c86cc8c158c5df0e719fb6abf8896b55a1ec78584",
+      "status": "STATIC_PASS"
+    },
+    "thunder-r5": {
+      "file": "validation/thunder-r5.json",
+      "sha256": "812c150ac176d47660c06b082851a33c287c1d07afe74a15cfe2ab3375bd84e6",
+      "status": "THUNDER_R5_ELEVEN_CONTRACTS_STATIC_PASS"
+    },
+    "independent-r5": {
+      "file": "validation/independent-r5.json",
+      "sha256": "1a641c83e0949cad3f52268cc1e3647c0632dd2c55114c489b151169c72d3e6d",
+      "status": "THREE_PLATFORM_INDEPENDENT_REVIEW_PASS"
+    },
+    "thunder-closeout": {
+      "file": "validation/thunder-closeout.json",
+      "sha256": "6aa14752cb436668c005cabab4165f4b83109d8cc46e130334241ea9dd7841cf",
+      "status": "THUNDER_CLOSEOUT_EDGE_AUDIT_PASS"
+    },
+    "thunder-domain-coverage": {
+      "file": "validation/thunder-domain-coverage.json",
+      "sha256": "0e592e5944d9e6e2f9fc8b422125be30cd69fb1cc37e0d6fa54f69e967beaf11",
+      "status": "THUNDER_DOMAIN_COVERAGE_PASS"
+    },
+    "native-routing": {
+      "file": "validation/native-routing.json",
+      "sha256": "cdc3b01d650e1249e389cf62cd870bc36f54a1971bcaa88644b429161430d79e",
+      "status": "CORE_ROUTING_PASS"
+    },
+    "native-dns-egress": {
+      "file": "validation/native-dns-egress.json",
+      "sha256": "ec6e8139aa12c1c7c46f02505b7bf55a9d674d445acbbf3a8ec634dac61ab872",
+      "status": "CORE_DNS_EGRESS_PASS"
+    },
+    "native-selectors": {
+      "file": "validation/native-selectors.json",
+      "sha256": "eaae442c227f7b74a1870a8354c68f8c07d93a28857797cecec4209fbda85e37",
+      "status": "CORE_MANUAL_SELECTORS_PASS"
+    },
+    "native-inbound-guard": {
+      "file": "validation/native-inbound-guard.json",
+      "sha256": "e5878ef33e72b37d9cb9ef63c309c8400a0f20df3254bde389360c2b2c7db85d",
+      "status": "CORE_INBOUND_GUARD_PASS"
+    },
+    "api-browser-regression": {
+      "file": "validation/api-browser-regression.json",
+      "sha256": "873b2cbde59d2d70a5dd965dd93d909c052440ac473aabff2071b79a952bd7af",
+      "status": "API_REAL_IP_CORE_PASS_BROWSER_TUN_RETEST_PENDING"
+    }
+  },
+  "metrics": {
+    "staticChecks": 2672,
+    "closeoutEdgeChecks": 136,
+    "elevenContractRegressionChecks": 1574,
+    "independentDiscoveryChecks": 221,
+    "finiteBusinessDomainNames": 10636,
+    "domesticSuffixes": 111595,
+    "domesticApexAndChildNames": 223190,
+    "domesticRouteObservations": 2008710,
+    "domesticBusinessDNSChecks": 744,
+    "knownSingleLabelDifferences": 52,
+    "unexpectedDomesticDifferences": 0,
+    "localCoreRoutingCases": 1764,
+    "localCoreDNSCases": 818,
+    "localCoreSelectorObservations": 224,
+    "localCoreInboundObservations": 4
+  },
+  "requirements": [
+    {
+      "id": 1,
+      "name": "公司归组与共享边界",
+      "sourceContract": "PASS",
+      "dedicatedChecks": 384,
+      "sourceReceipt": {
+        "file": "validation/thunder-r5.json",
+        "sha256": "812c150ac176d47660c06b082851a33c287c1d07afe74a15cfe2ab3375bd84e6",
+        "status": "THUNDER_R5_ELEVEN_CONTRACTS_STATIC_PASS"
+      },
+      "retainedElevenContractReceipt": {
+        "file": "validation/thunder-r5.json",
+        "sha256": "812c150ac176d47660c06b082851a33c287c1d07afe74a15cfe2ab3375bd84e6",
+        "status": "THUNDER_R5_ELEVEN_CONTRACTS_STATIC_PASS"
+      },
+      "localMihomoEvidence": [
+        {
+          "file": "validation/native-routing.json",
+          "sha256": "cdc3b01d650e1249e389cf62cd870bc36f54a1971bcaa88644b429161430d79e",
+          "status": "CORE_ROUTING_PASS"
+        },
+        {
+          "file": "validation/native-dns-egress.json",
+          "sha256": "ec6e8139aa12c1c7c46f02505b7bf55a9d674d445acbbf3a8ec634dac61ab872",
+          "status": "CORE_DNS_EGRESS_PASS"
+        }
+      ],
+      "iOSNative": "NOT_RUN",
+      "windowsAndroidDevice": "NOT_RUN",
+      "acceptance": "SOURCE_REVIEWED_LOCAL_CORE_SUPPORTED_DEVICE_PENDING",
+      "closeoutSupplement": {
+        "file": "validation/thunder-closeout.json",
+        "sha256": "6aa14752cb436668c005cabab4165f4b83109d8cc46e130334241ea9dd7841cf",
+        "status": "THUNDER_CLOSEOUT_EDGE_AUDIT_PASS"
+      }
+    },
+    {
+      "id": 2,
+      "name": "DNS 随业务选择",
+      "sourceContract": "PASS",
+      "dedicatedChecks": 354,
+      "sourceReceipt": {
+        "file": "validation/thunder-r5.json",
+        "sha256": "812c150ac176d47660c06b082851a33c287c1d07afe74a15cfe2ab3375bd84e6",
+        "status": "THUNDER_R5_ELEVEN_CONTRACTS_STATIC_PASS"
+      },
+      "retainedElevenContractReceipt": {
+        "file": "validation/thunder-r5.json",
+        "sha256": "812c150ac176d47660c06b082851a33c287c1d07afe74a15cfe2ab3375bd84e6",
+        "status": "THUNDER_R5_ELEVEN_CONTRACTS_STATIC_PASS"
+      },
+      "localMihomoEvidence": [
+        {
+          "file": "validation/native-dns-egress.json",
+          "sha256": "ec6e8139aa12c1c7c46f02505b7bf55a9d674d445acbbf3a8ec634dac61ab872",
+          "status": "CORE_DNS_EGRESS_PASS"
+        }
+      ],
+      "iOSNative": "NOT_RUN",
+      "windowsAndroidDevice": "NOT_RUN",
+      "acceptance": "SOURCE_REVIEWED_LOCAL_CORE_SUPPORTED_DEVICE_PENDING",
+      "closeoutSupplement": {
+        "file": "validation/thunder-closeout.json",
+        "sha256": "6aa14752cb436668c005cabab4165f4b83109d8cc46e130334241ea9dd7841cf",
+        "status": "THUNDER_CLOSEOUT_EDGE_AUDIT_PASS"
+      }
+    },
+    {
+      "id": 3,
+      "name": "UDP 不支持拒绝",
+      "sourceContract": "PASS",
+      "dedicatedChecks": 354,
+      "sourceReceipt": {
+        "file": "validation/thunder-r5.json",
+        "sha256": "812c150ac176d47660c06b082851a33c287c1d07afe74a15cfe2ab3375bd84e6",
+        "status": "THUNDER_R5_ELEVEN_CONTRACTS_STATIC_PASS"
+      },
+      "retainedElevenContractReceipt": {
+        "file": "validation/thunder-r5.json",
+        "sha256": "812c150ac176d47660c06b082851a33c287c1d07afe74a15cfe2ab3375bd84e6",
+        "status": "THUNDER_R5_ELEVEN_CONTRACTS_STATIC_PASS"
+      },
+      "localMihomoEvidence": [
+        {
+          "file": "validation/native-routing.json",
+          "sha256": "cdc3b01d650e1249e389cf62cd870bc36f54a1971bcaa88644b429161430d79e",
+          "status": "CORE_ROUTING_PASS"
+        }
+      ],
+      "iOSNative": "NOT_RUN",
+      "windowsAndroidDevice": "NOT_RUN",
+      "acceptance": "SOURCE_REVIEWED_LOCAL_CORE_SUPPORTED_DEVICE_PENDING",
+      "closeoutSupplement": {
+        "file": "validation/thunder-closeout.json",
+        "sha256": "6aa14752cb436668c005cabab4165f4b83109d8cc46e130334241ea9dd7841cf",
+        "status": "THUNDER_CLOSEOUT_EDGE_AUDIT_PASS"
+      }
+    },
+    {
+      "id": 4,
+      "name": "IPv4/IPv6 双栈",
+      "sourceContract": "PASS",
+      "dedicatedChecks": 21,
+      "sourceReceipt": {
+        "file": "validation/thunder-r5.json",
+        "sha256": "812c150ac176d47660c06b082851a33c287c1d07afe74a15cfe2ab3375bd84e6",
+        "status": "THUNDER_R5_ELEVEN_CONTRACTS_STATIC_PASS"
+      },
+      "retainedElevenContractReceipt": {
+        "file": "validation/thunder-r5.json",
+        "sha256": "812c150ac176d47660c06b082851a33c287c1d07afe74a15cfe2ab3375bd84e6",
+        "status": "THUNDER_R5_ELEVEN_CONTRACTS_STATIC_PASS"
+      },
+      "localMihomoEvidence": [
+        {
+          "file": "validation/native-routing.json",
+          "sha256": "cdc3b01d650e1249e389cf62cd870bc36f54a1971bcaa88644b429161430d79e",
+          "status": "CORE_ROUTING_PASS"
+        },
+        {
+          "file": "validation/native-dns-egress.json",
+          "sha256": "ec6e8139aa12c1c7c46f02505b7bf55a9d674d445acbbf3a8ec634dac61ab872",
+          "status": "CORE_DNS_EGRESS_PASS"
+        }
+      ],
+      "iOSNative": "NOT_RUN",
+      "windowsAndroidDevice": "NOT_RUN",
+      "acceptance": "SOURCE_REVIEWED_LOCAL_CORE_SUPPORTED_DEVICE_PENDING",
+      "closeoutSupplement": {
+        "file": "validation/thunder-closeout.json",
+        "sha256": "6aa14752cb436668c005cabab4165f4b83109d8cc46e130334241ea9dd7841cf",
+        "status": "THUNDER_CLOSEOUT_EDGE_AUDIT_PASS"
+      }
+    },
+    {
+      "id": 5,
+      "name": "主动 DIRECT 保留",
+      "sourceContract": "PASS",
+      "dedicatedChecks": 354,
+      "sourceReceipt": {
+        "file": "validation/thunder-r5.json",
+        "sha256": "812c150ac176d47660c06b082851a33c287c1d07afe74a15cfe2ab3375bd84e6",
+        "status": "THUNDER_R5_ELEVEN_CONTRACTS_STATIC_PASS"
+      },
+      "retainedElevenContractReceipt": {
+        "file": "validation/thunder-r5.json",
+        "sha256": "812c150ac176d47660c06b082851a33c287c1d07afe74a15cfe2ab3375bd84e6",
+        "status": "THUNDER_R5_ELEVEN_CONTRACTS_STATIC_PASS"
+      },
+      "localMihomoEvidence": [
+        {
+          "file": "validation/native-routing.json",
+          "sha256": "cdc3b01d650e1249e389cf62cd870bc36f54a1971bcaa88644b429161430d79e",
+          "status": "CORE_ROUTING_PASS"
+        },
+        {
+          "file": "validation/native-dns-egress.json",
+          "sha256": "ec6e8139aa12c1c7c46f02505b7bf55a9d674d445acbbf3a8ec634dac61ab872",
+          "status": "CORE_DNS_EGRESS_PASS"
+        }
+      ],
+      "iOSNative": "NOT_RUN",
+      "windowsAndroidDevice": "NOT_RUN",
+      "acceptance": "SOURCE_REVIEWED_LOCAL_CORE_SUPPORTED_DEVICE_PENDING",
+      "closeoutSupplement": {
+        "file": "validation/thunder-closeout.json",
+        "sha256": "6aa14752cb436668c005cabab4165f4b83109d8cc46e130334241ea9dd7841cf",
+        "status": "THUNDER_CLOSEOUT_EDGE_AUDIT_PASS"
+      }
+    },
+    {
+      "id": 6,
+      "name": "两个手动公共组",
+      "sourceContract": "PASS",
+      "dedicatedChecks": 3,
+      "sourceReceipt": {
+        "file": "validation/thunder-r5.json",
+        "sha256": "812c150ac176d47660c06b082851a33c287c1d07afe74a15cfe2ab3375bd84e6",
+        "status": "THUNDER_R5_ELEVEN_CONTRACTS_STATIC_PASS"
+      },
+      "retainedElevenContractReceipt": {
+        "file": "validation/thunder-r5.json",
+        "sha256": "812c150ac176d47660c06b082851a33c287c1d07afe74a15cfe2ab3375bd84e6",
+        "status": "THUNDER_R5_ELEVEN_CONTRACTS_STATIC_PASS"
+      },
+      "localMihomoEvidence": [
+        {
+          "file": "validation/native-selectors.json",
+          "sha256": "eaae442c227f7b74a1870a8354c68f8c07d93a28857797cecec4209fbda85e37",
+          "status": "CORE_MANUAL_SELECTORS_PASS"
+        },
+        {
+          "file": "validation/native-routing.json",
+          "sha256": "cdc3b01d650e1249e389cf62cd870bc36f54a1971bcaa88644b429161430d79e",
+          "status": "CORE_ROUTING_PASS"
+        },
+        {
+          "file": "validation/native-dns-egress.json",
+          "sha256": "ec6e8139aa12c1c7c46f02505b7bf55a9d674d445acbbf3a8ec634dac61ab872",
+          "status": "CORE_DNS_EGRESS_PASS"
+        }
+      ],
+      "iOSNative": "NOT_RUN",
+      "windowsAndroidDevice": "NOT_RUN",
+      "acceptance": "SOURCE_REVIEWED_LOCAL_CORE_SUPPORTED_DEVICE_PENDING",
+      "closeoutSupplement": {
+        "file": "validation/thunder-closeout.json",
+        "sha256": "6aa14752cb436668c005cabab4165f4b83109d8cc46e130334241ea9dd7841cf",
+        "status": "THUNDER_CLOSEOUT_EDGE_AUDIT_PASS"
+      }
+    },
+    {
+      "id": 7,
+      "name": "未知流量统一代理兜底",
+      "sourceContract": "PASS",
+      "dedicatedChecks": 6,
+      "sourceReceipt": {
+        "file": "validation/thunder-r5.json",
+        "sha256": "812c150ac176d47660c06b082851a33c287c1d07afe74a15cfe2ab3375bd84e6",
+        "status": "THUNDER_R5_ELEVEN_CONTRACTS_STATIC_PASS"
+      },
+      "retainedElevenContractReceipt": {
+        "file": "validation/thunder-r5.json",
+        "sha256": "812c150ac176d47660c06b082851a33c287c1d07afe74a15cfe2ab3375bd84e6",
+        "status": "THUNDER_R5_ELEVEN_CONTRACTS_STATIC_PASS"
+      },
+      "localMihomoEvidence": [
+        {
+          "file": "validation/native-routing.json",
+          "sha256": "cdc3b01d650e1249e389cf62cd870bc36f54a1971bcaa88644b429161430d79e",
+          "status": "CORE_ROUTING_PASS"
+        },
+        {
+          "file": "validation/native-dns-egress.json",
+          "sha256": "ec6e8139aa12c1c7c46f02505b7bf55a9d674d445acbbf3a8ec634dac61ab872",
+          "status": "CORE_DNS_EGRESS_PASS"
+        }
+      ],
+      "iOSNative": "NOT_RUN",
+      "windowsAndroidDevice": "NOT_RUN",
+      "acceptance": "SOURCE_REVIEWED_LOCAL_CORE_SUPPORTED_DEVICE_PENDING",
+      "closeoutSupplement": {
+        "file": "validation/thunder-closeout.json",
+        "sha256": "6aa14752cb436668c005cabab4165f4b83109d8cc46e130334241ea9dd7841cf",
+        "status": "THUNDER_CLOSEOUT_EDGE_AUDIT_PASS"
+      }
+    },
+    {
+      "id": 8,
+      "name": "业务与 STUN 优先级",
+      "sourceContract": "PASS",
+      "dedicatedChecks": 85,
+      "sourceReceipt": {
+        "file": "validation/thunder-r5.json",
+        "sha256": "812c150ac176d47660c06b082851a33c287c1d07afe74a15cfe2ab3375bd84e6",
+        "status": "THUNDER_R5_ELEVEN_CONTRACTS_STATIC_PASS"
+      },
+      "retainedElevenContractReceipt": {
+        "file": "validation/thunder-r5.json",
+        "sha256": "812c150ac176d47660c06b082851a33c287c1d07afe74a15cfe2ab3375bd84e6",
+        "status": "THUNDER_R5_ELEVEN_CONTRACTS_STATIC_PASS"
+      },
+      "localMihomoEvidence": [
+        {
+          "file": "validation/native-routing.json",
+          "sha256": "cdc3b01d650e1249e389cf62cd870bc36f54a1971bcaa88644b429161430d79e",
+          "status": "CORE_ROUTING_PASS"
+        }
+      ],
+      "iOSNative": "NOT_RUN",
+      "windowsAndroidDevice": "NOT_RUN",
+      "acceptance": "SOURCE_REVIEWED_LOCAL_CORE_SUPPORTED_DEVICE_PENDING",
+      "closeoutSupplement": {
+        "file": "validation/thunder-closeout.json",
+        "sha256": "6aa14752cb436668c005cabab4165f4b83109d8cc46e130334241ea9dd7841cf",
+        "status": "THUNDER_CLOSEOUT_EDGE_AUDIT_PASS"
+      }
+    },
+    {
+      "id": 9,
+      "name": "审核固定来源",
+      "sourceContract": "PASS",
+      "dedicatedChecks": 2,
+      "sourceReceipt": {
+        "file": "validation/thunder-r5.json",
+        "sha256": "812c150ac176d47660c06b082851a33c287c1d07afe74a15cfe2ab3375bd84e6",
+        "status": "THUNDER_R5_ELEVEN_CONTRACTS_STATIC_PASS"
+      },
+      "retainedElevenContractReceipt": {
+        "file": "validation/thunder-r5.json",
+        "sha256": "812c150ac176d47660c06b082851a33c287c1d07afe74a15cfe2ab3375bd84e6",
+        "status": "THUNDER_R5_ELEVEN_CONTRACTS_STATIC_PASS"
+      },
+      "localMihomoEvidence": [],
+      "iOSNative": "NOT_RUN",
+      "windowsAndroidDevice": "NOT_RUN",
+      "acceptance": "SOURCE_FIXED_HASH_AND_NEGATIVE_UPDATE_GUARDS_PASS",
+      "closeoutSupplement": {
+        "file": "validation/thunder-closeout.json",
+        "sha256": "6aa14752cb436668c005cabab4165f4b83109d8cc46e130334241ea9dd7841cf",
+        "status": "THUNDER_CLOSEOUT_EDGE_AUDIT_PASS"
+      }
+    },
+    {
+      "id": 10,
+      "name": "三端一致性与分层验收",
+      "sourceContract": "PASS",
+      "dedicatedChecks": 2,
+      "sourceReceipt": {
+        "file": "validation/thunder-r5.json",
+        "sha256": "812c150ac176d47660c06b082851a33c287c1d07afe74a15cfe2ab3375bd84e6",
+        "status": "THUNDER_R5_ELEVEN_CONTRACTS_STATIC_PASS"
+      },
+      "retainedElevenContractReceipt": {
+        "file": "validation/thunder-r5.json",
+        "sha256": "812c150ac176d47660c06b082851a33c287c1d07afe74a15cfe2ab3375bd84e6",
+        "status": "THUNDER_R5_ELEVEN_CONTRACTS_STATIC_PASS"
+      },
+      "localMihomoEvidence": [
+        {
+          "file": "validation/native-routing.json",
+          "sha256": "cdc3b01d650e1249e389cf62cd870bc36f54a1971bcaa88644b429161430d79e",
+          "status": "CORE_ROUTING_PASS"
+        },
+        {
+          "file": "validation/native-dns-egress.json",
+          "sha256": "ec6e8139aa12c1c7c46f02505b7bf55a9d674d445acbbf3a8ec634dac61ab872",
+          "status": "CORE_DNS_EGRESS_PASS"
+        },
+        {
+          "file": "validation/native-selectors.json",
+          "sha256": "eaae442c227f7b74a1870a8354c68f8c07d93a28857797cecec4209fbda85e37",
+          "status": "CORE_MANUAL_SELECTORS_PASS"
+        },
+        {
+          "file": "validation/native-inbound-guard.json",
+          "sha256": "e5878ef33e72b37d9cb9ef63c309c8400a0f20df3254bde389360c2b2c7db85d",
+          "status": "CORE_INBOUND_GUARD_PASS"
+        }
+      ],
+      "iOSNative": "NOT_RUN",
+      "windowsAndroidDevice": "NOT_RUN",
+      "acceptance": "SOURCE_REVIEWED_LOCAL_CORE_SUPPORTED_DEVICE_PENDING",
+      "closeoutSupplement": {
+        "file": "validation/thunder-closeout.json",
+        "sha256": "6aa14752cb436668c005cabab4165f4b83109d8cc46e130334241ea9dd7841cf",
+        "status": "THUNDER_CLOSEOUT_EDGE_AUDIT_PASS"
+      },
+      "singleLabelLANBoundary": "52 known source-model differences retained from R3; omitted iOS regex is not native-certified"
+    },
+    {
+      "id": 11,
+      "name": "国内集中切换",
+      "sourceContract": "PASS",
+      "dedicatedChecks": 9,
+      "sourceReceipt": {
+        "file": "validation/thunder-r5.json",
+        "sha256": "812c150ac176d47660c06b082851a33c287c1d07afe74a15cfe2ab3375bd84e6",
+        "status": "THUNDER_R5_ELEVEN_CONTRACTS_STATIC_PASS"
+      },
+      "retainedElevenContractReceipt": {
+        "file": "validation/thunder-r5.json",
+        "sha256": "812c150ac176d47660c06b082851a33c287c1d07afe74a15cfe2ab3375bd84e6",
+        "status": "THUNDER_R5_ELEVEN_CONTRACTS_STATIC_PASS"
+      },
+      "localMihomoEvidence": [
+        {
+          "file": "validation/native-routing.json",
+          "sha256": "cdc3b01d650e1249e389cf62cd870bc36f54a1971bcaa88644b429161430d79e",
+          "status": "CORE_ROUTING_PASS"
+        },
+        {
+          "file": "validation/native-selectors.json",
+          "sha256": "eaae442c227f7b74a1870a8354c68f8c07d93a28857797cecec4209fbda85e37",
+          "status": "CORE_MANUAL_SELECTORS_PASS"
+        },
+        {
+          "file": "validation/native-dns-egress.json",
+          "sha256": "ec6e8139aa12c1c7c46f02505b7bf55a9d674d445acbbf3a8ec634dac61ab872",
+          "status": "CORE_DNS_EGRESS_PASS"
+        }
+      ],
+      "iOSNative": "NOT_RUN",
+      "windowsAndroidDevice": "NOT_RUN",
+      "acceptance": "SOURCE_REVIEWED_LOCAL_CORE_SUPPORTED_DEVICE_PENDING",
+      "closeoutSupplement": {
+        "file": "validation/thunder-closeout.json",
+        "sha256": "6aa14752cb436668c005cabab4165f4b83109d8cc46e130334241ea9dd7841cf",
+        "status": "THUNDER_CLOSEOUT_EDGE_AUDIT_PASS"
+      }
+    }
+  ],
+  "priorFourFindingsRevalidated": [
+    {
+      "id": "R5-01",
+      "priority": "P1",
+      "description": "iOS omitted Epic/Disney regex; 100 domestic DIRECT and 18 proxy-only company differences.",
+      "resolution": "All 118 independently audited exact endpoints are common routing/DNS entries; finite Akamai regex languages fully expanded; infinite Tencent number language restricted to the explicit subset, all other labelled family names shared on every platform.",
+      "resolutionStatus": "REPAIRED_VERIFIED_WITH_DECLARED_SCOPE"
+    },
+    {
+      "id": "R5-02",
+      "priority": "P1",
+      "description": "Only generic UDP protected STUN; 30 TCP controls followed domestic default DIRECT.",
+      "resolution": "TCP 3478/5349/19302-19309 and recognisable stun/turn host labels are protected after company/manual/LAN rules and before domestic rules; Mihomo INNER resolver traffic is excluded.",
+      "resolutionStatus": "REPAIRED_VERIFIED_WITH_DECLARED_SCOPE"
+    },
+    {
+      "id": "R5-03",
+      "priority": "P3",
+      "description": "Android replay dropped the IPv6 device reminder after forcing core flags true.",
+      "resolution": "Retain only the exact current-version device reminder on replay; all four IPv6 input combinations preserve full output, other obsolete warnings are not copied.",
+      "resolutionStatus": "REPAIRED_VERIFIED_WITH_DECLARED_SCOPE"
+    },
+    {
+      "id": "R5-04",
+      "priority": "P2",
+      "description": "DNS experiment identified egress by source port alone and retained closed mappings; old observed label disagreed with core log.",
+      "resolution": "Observer uses normalised live source/destination address/port tuple; close removes only the matching registration. Deterministic collision/lifecycle tests and actual DoH/DoT A/AAAA switch/DIRECT/failure experiments pass. Original specific reused tuple remains unrecorded.",
+      "resolutionStatus": "REPAIRED_VERIFIED_WITH_DECLARED_SCOPE"
+    }
+  ],
+  "findings": [
+    {
+      "id": "R6-01",
+      "priority": "P3",
+      "description": "Windows replay lost TUN bypass-removal reminders; discarded address-set dependencies survived only the first override.",
+      "resolution": "Sanitise the already-disallowed TUN fields before dependency collection; retain only exact seven current-version desktop reminders. Surviving sniffer dependencies are retained. Three full replays pass.",
+      "resolutionStatus": "REPAIRED_VERIFIED"
+    },
+    {
+      "id": "R6-02",
+      "priority": "P3",
+      "description": "Android console described domestic TCP as unconditional direct although the domestic selector is switchable.",
+      "resolution": "Describe the domestic selector and initial DIRECT default consistently with Windows.",
+      "resolutionStatus": "REPAIRED_VERIFIED"
+    }
+  ],
+  "retainedBoundaries": {
+    "singleLabelLAN": {
+      "knownNames": 52,
+      "sourceReceipt": {
+        "file": "validation/thunder-closeout.json",
+        "sha256": "6aa14752cb436668c005cabab4165f4b83109d8cc46e130334241ea9dd7841cf",
+        "status": "THUNDER_CLOSEOUT_EDGE_AUDIT_PASS"
+      },
+      "nativeIOS": "NOT_RUN",
+      "sourceSemantics": "Mihomo approved private single-label regex permits DIRECT; iOS deliberately omits that unverified regex, retains domestic TCP and proxy-only UDP."
+    },
+    "previousLimits": [
+      "Windows TUN, Android VpnService, Shadowrocket native execution and public IPv6 device acceptance NOT_RUN.",
+      "Tencent numeric-tail regex was deliberately narrowed to 100 audited exact names, all remaining labelled family names consistently shared; new exact numbers require review.",
+      "Exact CDN attribution derives from frozen reviewed classifiers and finite audit expansion, not current ownership/liveness verification.",
+      "STUN standard ports and recognisable host labels are guarded; arbitrary STUN hidden in ordinary domestic HTTPS without identifiable host/port is not payload-inspected.",
+      "TCP STUN Binding probes verify chosen route. Port 5349 tests routing and failure, not a complete public STUNS TLS exchange.",
+      "DoH/DoT loopback labels are now live-tuple based; the original failing run did not record the tuple, so its exact port reuse event is not retroactively proven.",
+      "Finite source classification is not arbitrary domain/IP/CNAME/app-encrypted-DNS or whole-device leak certification."
+    ],
+    "deviceAcceptance": "NOT_RUN"
+  },
+  "attempts": [
+    {
+      "file": "validation/inputs/r6-attempts/valid-before-audit.json",
+      "sha256": "18e03dc3e90d4c95c1f902241920bd534a00b4500d4a0dbf1643d16deb0dbdda",
+      "result": "FAIL: ten assertions identify two defects; all domestic differences are the retained R3 single-label boundary."
+    },
+    {
+      "file": "validation/inputs/r6-attempts/initial-audit.json",
+      "sha256": "8344a3775c6825e96de9b73f8979c2b75ffc369be7a705a4826cba434ff6ffee",
+      "result": "Initial harness supplied missing test rule-provider and counted the known R3 omission as unexpected; corrected only the test fixtures and explicit known-boundary check."
+    },
+    {
+      "file": "validation/inputs/r6-attempts/sandbox-native-routing.json",
+      "sha256": "23cc25e01c20dd9921cd508ee229d58e5c575afd7feb186433114d92ca7730b3",
+      "result": "ENVIRONMENT_BLOCKED: EACCES to loopback controller; rerun with permission for isolated core processes."
+    }
+  ],
+  "nativeRun": {
+    "file": "validation/closeout-native-run.json",
+    "sha256": "c39213990f7613cb3d4f5d9d7cb2c0b8fe94e2585bab9b5d2baf68a8508a746c"
+  },
+  "deviceGates": {
+    "windowsTUN": "NOT_RUN",
+    "androidVpnService": "NOT_RUN",
+    "shadowrocketNative": "NOT_RUN",
+    "publicIPv6": "NOT_RUN",
+    "browserRetest": "NOT_RUN"
+  },
+  "conclusion": "No remaining actionable source defect found in this finite audit. Eleven source contracts and local core checks pass with the declared LAN boundary; full device acceptance and a zero-bug guarantee are not established."
+}

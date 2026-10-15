@@ -1,0 +1,36 @@
+{
+  "version": "14.2",
+  "date": "2026-10-10",
+  "compatibilityRevision": "api-real-ip-r1",
+  "authorization": "User requested final audit and investigation of same-node V14.2 API browser regression; supplied Chrome public-to-local address-space rejection",
+  "change": "Append exact api.openai.com to Mihomo fake-ip-filter blacklist; real A/AAAA, retained OpenAI nameserver-policy and company fail-closed routes",
+  "platforms": [
+    "windows",
+    "android"
+  ],
+  "ipv6Disabled": false,
+  "dnsTransportChanged": false,
+  "ruleSourcesChanged": false,
+  "beforeManifest": {
+    "file": "validation/inputs/api-browser-before/manifest.json",
+    "sha256": "bcf6b20d510de3f35208d5bbc6860d6202f230e07be378b85fc6ea3d37e1a7ee"
+  },
+  "entries": [
+    {
+      "file": "src/windows/v14.2.js",
+      "sha256": "9e29763e3660fbfd63878823d910f177e782298ae8b6242c1108cf9c6b4a0fc4"
+    },
+    {
+      "file": "src/android/v14.2-android.js",
+      "sha256": "8f01f90c5d66d5ef7540b68d8b37562d70c0a27f7df66ccf50b6cc8b20bba4c7"
+    }
+  ],
+  "browserTUNAcceptance": "PENDING_USER_IMPORT_AND_RETEST",
+  "versionDifferenceCause": "NOT_INDEPENDENTLY_ISOLATED_BOTH_VERSIONS_USE_SAME_IPV6_FAKE_RANGE",
+  "clientDeployment": false,
+  "auditRepairRevision": "thunder-repair-r1",
+  "priorMetadata": {
+    "file": "validation/inputs/thunder-repair-before/metadata/api-browser-compatibility.json",
+    "sha256": "3a531315902c2436dc20678fd5aa4867bd2fa8824468c301fe7c37ac748c77a4"
+  }
+}

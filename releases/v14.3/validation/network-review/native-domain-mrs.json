@@ -1,0 +1,23 @@
+{
+  "status": "PINNED_MRS_DOWNLOAD_DECODE_PASS",
+  "observations": [
+    {
+      "id": "v12r-domain-google",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/google.mrs",
+      "sha256": "3f70be19243180b98ab65c9812db9af5d0327fe72a58480cb97e422f3e829271",
+      "classifierSHA256": "6c524f9540b8783d6c0cf11a5538495f67632d02ba1431bbfe3a24cc41a52a79",
+      "decoderSHA256": "1fa8055e03596fc35167f70e9ecd1890517d38d960a39177445746a1b0defc2b",
+      "bytes": 8927,
+      "records": 1049
+    },
+    {
+      "id": "v12r-domain-microsoft",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/microsoft.mrs",
+      "sha256": "554fd51c2b088abebf6b859c4401d532c1fb1f50f5823bcda7e1bae995552e4b",
+      "classifierSHA256": "64897f4b0ae2fb7e477ff6f5ff912c33a2fb2ce24671a57e7af324869c4a43b0",
+      "decoderSHA256": "1fa8055e03596fc35167f70e9ecd1890517d38d960a39177445746a1b0defc2b",
+      "bytes": 7992,
+      "records": 747
+    }
+  ]
+}

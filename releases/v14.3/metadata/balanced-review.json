@@ -1,0 +1,217 @@
+{
+  "version": "14.3",
+  "date": "2026-10-14",
+  "revision": "balanced-r1",
+  "domesticProtocolRevision": "domestic-protocol-r1",
+  "status": "DOMESTIC_PROTOCOL_SOURCE_LOCAL_CORE_PASS_DEVICE_PENDING",
+  "authorization": "User selected reviewed domestic TCP/UDP/DNS following 国内网站 and self-contained Shadowrocket business DNS; unknown IP-only UDP and generic STUN remain protected.",
+  "contract": {
+    "file": "docs/需求.md",
+    "sha256": "59d0b918703246646286d17123d6689689471163fa0bf61f088ebe2a0cb09ee6",
+    "originalBytesPreserved": false,
+    "previousFile": "archive/v14.3-before-domestic-protocol-r1-20261013/docs/需求.md",
+    "previousSHA256": "5f0086ba18755d8c10c96e2b255e3d7e456afdf4f9c0e6e7f36b7926110859f0",
+    "change": "User-authorized requirement 11 domestic domain protocol and DNS affinity; earlier contract preserved in archive. Additive Mac adapters retain this business contract and have separate delivery evidence."
+  },
+  "sourceManifest": {
+    "file": "metadata/balanced-sources.json",
+    "sha256": "af5700a2b39d1013ec0086e41965a8d7a6455a1490fe378adb48002e5f5ec74b"
+  },
+  "entries": [
+    {
+      "file": "src/windows/v14.3.js",
+      "sha256": "7498c2044cbec1223a04be81b39d4a224f0e6c01249b19abfa81cb11786f28ea",
+      "bytes": 116057,
+      "generatedConfigBytes": 176141,
+      "inlineRows": 819,
+      "remoteSources": 30
+    },
+    {
+      "file": "src/android/v14.3-android.js",
+      "sha256": "2128a1019d0c6f719a9e9533a8bc6b1e61bb47277e96190c8fc22218a52d4f3f",
+      "bytes": 115943,
+      "generatedConfigBytes": 175952,
+      "inlineRows": 819,
+      "remoteSources": 29
+    },
+    {
+      "file": "src/ios/v14.3-clashmi.js",
+      "sha256": "80e4168bfeba2ab7e9c278811abb7263761ba04c33a1d1f243d72211b8d84f3c",
+      "bytes": 118837,
+      "generatedConfigBytes": 177039,
+      "inlineRows": 819,
+      "remoteSources": 29
+    },
+    {
+      "file": "src/ios/v14.3-clashmi-domestic-protocol-r1.js",
+      "sha256": "80e4168bfeba2ab7e9c278811abb7263761ba04c33a1d1f243d72211b8d84f3c",
+      "bytes": 118837,
+      "generatedConfigBytes": 177039,
+      "inlineRows": 819,
+      "remoteSources": 29
+    }
+  ],
+  "testEvidence": {
+    "static": {
+      "file": "validation/static.json",
+      "sha256": "b8fd13d88c9bb062b4ef71554bff2bc7adaf9fe8ca88ff5238709d8b0132ed54",
+      "status": "BALANCED_STATIC_PASS"
+    },
+    "native-core": {
+      "file": "validation/native-core.json",
+      "sha256": "e06b81af1741d92ceeb3912e75e3cd375737d154524b3d846075bd3180097573",
+      "status": "BALANCED_LOCAL_CORE_PASS"
+    },
+    "balanced-empty-core": {
+      "file": "validation/balanced-empty-core.json",
+      "sha256": "27acaf39366473254fea0bf2e2f2c85842dbc54df5a2b8fa0aa45ee2365e9bf6",
+      "status": "BALANCED_LOCAL_CORE_PASS"
+    },
+    "balanced-download-failure": {
+      "file": "validation/balanced-download-failure.json",
+      "sha256": "63ee50c8cc78915446c881f439b95185cf1d537ff1693d3bbf23bf8ba45e6086",
+      "status": "BALANCED_COLD_DOWNLOAD_CORE_PASS"
+    },
+    "shadowrocket-lean": {
+      "file": "validation/shadowrocket-lean.json",
+      "sha256": "5bed12d19c669db8e2966fa1fa53af301af885da30568934a02b3903e6589a27",
+      "status": "SHADOWROCKET_LEAN_STATIC_PASS_NATIVE_PENDING"
+    }
+  },
+  "sourceComparison": {
+    "file": "metadata/source-comparison.json",
+    "sha256": "db052078f5623ac45464c593ef07d3e9c5851f6d41b8f3b2426e919819b61d83"
+  },
+  "latestCandidates": {
+    "file": "validation/inputs/latest-candidate/manifest.json",
+    "sha256": "e324ec885bcaf655b9b2b07ca80e6b2c2668f51f504bbf29b37a23d0b6349309"
+  },
+  "preservedArchive": {
+    "directory": "archive/v14.2-before-balanced-r1-20261012",
+    "manifestSHA256": "0940d226488263d3038c41ff75f27a8ba9f8d44b90e8a94506a7a793c77afbb3",
+    "releaseManifestSHA256": "d60b9fc76290337e4e3433cde87b7cae33bd9c4c6180a385300e89a77a603521"
+  },
+  "protocolBeforeArchive": {
+    "directory": "archive/v14.3-before-domestic-protocol-r1-20261013",
+    "manifestSHA256": "d8fcd45afcfab08025409198ec2dd0ab3f6c2bd2152bb53f461ef7054accd217"
+  },
+  "iosDelivery": {
+    "file": "metadata/ios-delivery.json",
+    "sha256": "657debf193abbee48cda9502ee53972fd8ee478a5e32ce49d704f7c928ecc687",
+    "revision": "ios-delivery-r2",
+    "status": "IOS_SOURCE_STATIC_LOCAL_CORE_PASS_NATIVE_DEVICE_PENDING"
+  },
+  "metrics": {
+    "fullInventoryHostsPerPlatform": 233396,
+    "criticalEmptyHostsPerPlatform": 1058,
+    "staticChecks": 27,
+    "nativeObservations": {
+      "routing": 2751,
+      "dns-egress": 1293,
+      "selectors": 336,
+      "inbound-guard": 6
+    },
+    "businessParents": 199,
+    "businessExact": 164,
+    "criticalDomesticParents": 51,
+    "nativeSourceLock": 30,
+    "shadowrocketRuntimeSources": 15,
+    "latestSemanticDeltas": 0
+  },
+  "requirements": [
+    {
+      "number": 1,
+      "sourceContract": "PASS_JS_AND_DECLARED_SHADOWROCKET_MODEL",
+      "localCore": "PASS_JS_WITH_DECLARED_SCOPE",
+      "shadowrocketNative": "NOT_RUN",
+      "deviceAcceptance": "NOT_RUN"
+    },
+    {
+      "number": 2,
+      "sourceContract": "PASS_JS_AND_DECLARED_SHADOWROCKET_MODEL",
+      "localCore": "PASS_JS_WITH_DECLARED_SCOPE",
+      "shadowrocketNative": "NOT_RUN",
+      "deviceAcceptance": "NOT_RUN"
+    },
+    {
+      "number": 3,
+      "sourceContract": "PASS_JS_AND_DECLARED_SHADOWROCKET_MODEL",
+      "localCore": "PASS_JS_WITH_DECLARED_SCOPE",
+      "shadowrocketNative": "NOT_RUN",
+      "deviceAcceptance": "NOT_RUN"
+    },
+    {
+      "number": 4,
+      "sourceContract": "PASS_JS_AND_DECLARED_SHADOWROCKET_MODEL",
+      "localCore": "PASS_JS_WITH_DECLARED_SCOPE",
+      "shadowrocketNative": "NOT_RUN",
+      "deviceAcceptance": "NOT_RUN"
+    },
+    {
+      "number": 5,
+      "sourceContract": "PASS_JS_AND_DECLARED_SHADOWROCKET_MODEL",
+      "localCore": "PASS_JS_WITH_DECLARED_SCOPE",
+      "shadowrocketNative": "NOT_RUN",
+      "deviceAcceptance": "NOT_RUN"
+    },
+    {
+      "number": 6,
+      "sourceContract": "PASS_JS_AND_DECLARED_SHADOWROCKET_MODEL",
+      "localCore": "PASS_JS_WITH_DECLARED_SCOPE",
+      "shadowrocketNative": "NOT_RUN",
+      "deviceAcceptance": "NOT_RUN"
+    },
+    {
+      "number": 7,
+      "sourceContract": "PASS_JS_AND_DECLARED_SHADOWROCKET_MODEL",
+      "localCore": "PASS_JS_WITH_DECLARED_SCOPE",
+      "shadowrocketNative": "NOT_RUN",
+      "deviceAcceptance": "NOT_RUN"
+    },
+    {
+      "number": 8,
+      "sourceContract": "PASS_JS_AND_DECLARED_SHADOWROCKET_MODEL",
+      "localCore": "PASS_JS_WITH_DECLARED_SCOPE",
+      "shadowrocketNative": "NOT_RUN",
+      "deviceAcceptance": "NOT_RUN"
+    },
+    {
+      "number": 9,
+      "sourceContract": "PASS_JS_AND_DECLARED_SHADOWROCKET_MODEL",
+      "localCore": "PASS_JS_WITH_DECLARED_SCOPE",
+      "shadowrocketNative": "NOT_RUN",
+      "deviceAcceptance": "NOT_RUN"
+    },
+    {
+      "number": 10,
+      "sourceContract": "PASS_JS_AND_DECLARED_SHADOWROCKET_MODEL",
+      "localCore": "PASS_JS_WITH_DECLARED_SCOPE",
+      "shadowrocketNative": "NOT_RUN",
+      "deviceAcceptance": "NOT_RUN"
+    },
+    {
+      "number": 11,
+      "sourceContract": "PASS_JS_AND_DECLARED_SHADOWROCKET_MODEL",
+      "localCore": "PASS_JS_WITH_DECLARED_SCOPE",
+      "shadowrocketNative": "NOT_RUN",
+      "deviceAcceptance": "NOT_RUN"
+    }
+  ],
+  "scope": "Three standalone JS entries, finite domain models and owned Mihomo loopback. Shadowrocket finite source model only; full domestic DNS relies on native direct/selected-node resolution and is not native verified.",
+  "historicalCounterexample": "NOT_RUN; prior failed evidence preserved",
+  "appJavaScriptCore": "NOT_RUN",
+  "vpnCapture": "NOT_RUN",
+  "publicIPv6": "NOT_RUN",
+  "longRunMemory": "NOT_RUN",
+  "clientDeployment": false,
+  "recordingTool": {
+    "file": "tools/record-v14.3.py",
+    "sha256": "472a9db8fd319618bcc6c496f3330ee4be9b187506df79bf95162d7664174934"
+  },
+  "macosDelivery": {
+    "file": "metadata/macos-delivery.json",
+    "sha256": "90bd8a1de1c7d4a319f4a7008920caade63360a08cd9a67fc29fe66d76f68d0e",
+    "revision": "macos-r1",
+    "status": "MACOS_SOURCE_LOCAL_CORE_PASS_DEVICE_PENDING"
+  }
+}

@@ -1,0 +1,248 @@
+{
+  "version": "14.2",
+  "revision": "review-fixes-r1",
+  "date": "2026-10-10",
+  "status": "REVIEWED",
+  "baselineCoreSHA256": "7464561708af61c6578b8c8810c6ecd1a044705ff621ecfe2108c45b0e3769cd",
+  "scope": "Bounded verified namespaces; no claim of complete public-cloud tenant inventory",
+  "evidence": [
+    {
+      "id": "azure-public",
+      "url": "https://learn.microsoft.com/en-us/azure/security/fundamentals/azure-domains",
+      "reason": "Customer-named hosted services and regional VM namespaces"
+    },
+    {
+      "id": "azure-storage",
+      "url": "https://learn.microsoft.com/en-us/azure/storage/common/storage-account-overview",
+      "reason": "Account-specific file/queue/table/web endpoints"
+    },
+    {
+      "id": "azure-china",
+      "url": "https://learn.microsoft.com/en-us/azure/china/concepts-service-availability",
+      "reason": "Separate hosted endpoints and Microsoft management/login domains"
+    },
+    {
+      "id": "azure-china-apim",
+      "url": "https://docs.azure.cn/en-us/api-management/configure-custom-domain",
+      "reason": "Customers receive <service-name>.azure-api.cn"
+    },
+    {
+      "id": "gcf",
+      "url": "https://docs.cloud.google.com/functions/1stgendocs/tutorials/http-1st-gen",
+      "reason": "REGION-PROJECT_ID.cloudfunctions.net"
+    },
+    {
+      "id": "gcs",
+      "url": "https://docs.cloud.google.com/storage/docs/request-endpoints",
+      "reason": "Buckets and objects use shared Storage API/browser endpoints"
+    }
+  ],
+  "addedSharedSuffixes": [
+    {
+      "domain": "cloudapp.net",
+      "evidence": "azure-public"
+    },
+    {
+      "domain": "cloudapp.azure.com",
+      "evidence": "azure-public"
+    },
+    {
+      "domain": "azure-api.net",
+      "evidence": "azure-public"
+    },
+    {
+      "domain": "azurecontainer.io",
+      "evidence": "azure-public"
+    },
+    {
+      "domain": "trafficmanager.net",
+      "evidence": "azure-public"
+    },
+    {
+      "domain": "azurecr.io",
+      "evidence": "azure-public"
+    },
+    {
+      "domain": "cosmos.azure.com",
+      "evidence": "azure-public"
+    },
+    {
+      "domain": "documents.azure.com",
+      "evidence": "azure-public"
+    },
+    {
+      "domain": "vault.azure.net",
+      "evidence": "azure-public"
+    },
+    {
+      "domain": "azmk8s.io",
+      "evidence": "azure-public"
+    },
+    {
+      "domain": "servicebus.windows.net",
+      "evidence": "azure-public"
+    },
+    {
+      "domain": "database.windows.net",
+      "evidence": "azure-public"
+    },
+    {
+      "domain": "file.core.windows.net",
+      "evidence": "azure-storage"
+    },
+    {
+      "domain": "queue.core.windows.net",
+      "evidence": "azure-storage"
+    },
+    {
+      "domain": "table.core.windows.net",
+      "evidence": "azure-storage"
+    },
+    {
+      "domain": "web.core.windows.net",
+      "evidence": "azure-storage"
+    },
+    {
+      "domain": "dfs.core.windows.net",
+      "evidence": "azure-storage"
+    },
+    {
+      "domain": "chinacloudapp.cn",
+      "evidence": "azure-china"
+    },
+    {
+      "domain": "blob.core.chinacloudapi.cn",
+      "evidence": "azure-china"
+    },
+    {
+      "domain": "queue.core.chinacloudapi.cn",
+      "evidence": "azure-china"
+    },
+    {
+      "domain": "table.core.chinacloudapi.cn",
+      "evidence": "azure-china"
+    },
+    {
+      "domain": "dfs.core.chinacloudapi.cn",
+      "evidence": "azure-china"
+    },
+    {
+      "domain": "database.chinacloudapi.cn",
+      "evidence": "azure-china"
+    },
+    {
+      "domain": "servicebus.chinacloudapi.cn",
+      "evidence": "azure-china"
+    },
+    {
+      "domain": "vault.azure.cn",
+      "evidence": "azure-china"
+    },
+    {
+      "domain": "azure-api.cn",
+      "evidence": "azure-china-apim"
+    },
+    {
+      "domain": "cloudfunctions.net",
+      "evidence": "gcf"
+    },
+    {
+      "domain": "storage.googleapis.com",
+      "evidence": "gcs"
+    },
+    {
+      "domain": "content-storage.googleapis.com",
+      "evidence": "gcs"
+    },
+    {
+      "domain": "storage.cloud.google.com",
+      "evidence": "gcs"
+    },
+    {
+      "domain": "storage.mtls.googleapis.com",
+      "evidence": "gcs"
+    },
+    {
+      "domain": "storage.mtls.cloud.google.com",
+      "evidence": "gcs"
+    }
+  ],
+  "removedCompanyRows": [
+    {
+      "group": "谷歌服务",
+      "row": "DOMAIN-SUFFIX,cloudfunctions.net",
+      "reason": "Shared customer namespace; provider brand does not identify tenant"
+    },
+    {
+      "group": "微软生态",
+      "row": "DOMAIN-SUFFIX,cloudapp.net",
+      "reason": "Shared customer namespace; provider brand does not identify tenant"
+    },
+    {
+      "group": "微软生态",
+      "row": "DOMAIN-SUFFIX,azure-api.net",
+      "reason": "Shared customer namespace; provider brand does not identify tenant"
+    },
+    {
+      "group": "微软生态",
+      "row": "DOMAIN-SUFFIX,azurecontainer.io",
+      "reason": "Shared customer namespace; provider brand does not identify tenant"
+    },
+    {
+      "group": "微软生态",
+      "row": "DOMAIN-SUFFIX,trafficmanager.net",
+      "reason": "Shared customer namespace; provider brand does not identify tenant"
+    },
+    {
+      "group": "微软生态",
+      "row": "DOMAIN-SUFFIX,azure-api.cn",
+      "reason": "Shared customer namespace; provider brand does not identify tenant"
+    },
+    {
+      "group": "微软生态",
+      "row": "DOMAIN-SUFFIX,chinacloudapp.cn",
+      "reason": "Shared customer namespace; provider brand does not identify tenant"
+    }
+  ],
+  "preservedCompanyExact": [
+    {
+      "group": "微软生态",
+      "host": "bingsettingssearch.trafficmanager.net",
+      "evidence": "Existing reviewed exact classifier; preserve only this host, no descendants"
+    },
+    {
+      "group": "微软生态",
+      "host": "dtlgalleryint.cloudapp.net",
+      "evidence": "Existing reviewed exact classifier; preserve only this host, no descendants"
+    },
+    {
+      "group": "微软生态",
+      "host": "poshtestgallery.cloudapp.net",
+      "evidence": "Existing reviewed exact classifier; preserve only this host, no descendants"
+    },
+    {
+      "group": "微软生态",
+      "host": "psg-int-centralus.cloudapp.net",
+      "evidence": "Existing reviewed exact classifier; preserve only this host, no descendants"
+    },
+    {
+      "group": "微软生态",
+      "host": "psg-int-eastus.cloudapp.net",
+      "evidence": "Existing reviewed exact classifier; preserve only this host, no descendants"
+    },
+    {
+      "group": "微软生态",
+      "host": "vscode-sync-insiders.trafficmanager.net",
+      "evidence": "Existing reviewed exact classifier; preserve only this host, no descendants"
+    },
+    {
+      "group": "微软生态",
+      "host": "vscode-sync.trafficmanager.net",
+      "evidence": "Existing reviewed exact classifier; preserve only this host, no descendants"
+    }
+  ],
+  "regexBeforeShared": [
+    "webpubsub.azure.com"
+  ],
+  "remoteSourceChanges": 0
+}

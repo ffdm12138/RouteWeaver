@@ -1,0 +1,715 @@
+{
+  "version": "14.3",
+  "date": "2026-10-12",
+  "revision": "balanced-r1",
+  "status": "FAIL",
+  "scope": "Finite full reviewed inventories, critical empty/partial providers, metadata and object bridge; native core/device are separate",
+  "checks": [
+    "immutable-full-V14.2-before-bytes",
+    "52-fresh-pinned-downloads-plus-two-domain-MRS-and-classifier-bindings",
+    "deterministic-standalone-generation-and-size-budget",
+    "desktop:critical-domains-with-all-remote-files-empty",
+    "desktop:business-table-loss-does-not-expose-domestic-DIRECT-on-critical-hosts",
+    "desktop:same-transport-DNS-upstreams-selectors-and-inbound-config",
+    "desktop:three-pass-idempotence-and-upgrade-from-full-V14.2",
+    "desktop:selectors-fixed-cache-and-proxy-failure-contract",
+    "android:critical-domains-with-all-remote-files-empty",
+    "android:business-table-loss-does-not-expose-domestic-DIRECT-on-critical-hosts",
+    "android:same-transport-DNS-upstreams-selectors-and-inbound-config",
+    "android:three-pass-idempotence-and-upgrade-from-full-V14.2",
+    "android:selectors-fixed-cache-and-proxy-failure-contract",
+    "clashmi:critical-domains-with-all-remote-files-empty",
+    "clashmi:business-table-loss-does-not-expose-domestic-DIRECT-on-critical-hosts",
+    "clashmi:same-transport-DNS-upstreams-selectors-and-inbound-config",
+    "clashmi:three-pass-idempotence-and-upgrade-from-full-V14.2",
+    "clashmi:selectors-fixed-cache-and-proxy-failure-contract",
+    "actual-Clash-Mi-object-return-and-string-counterexample",
+    "raw-source-counterexamples-fixed-without-expanding-ownership",
+    "latest-30-candidates-saved-and-no-floating-runtime"
+  ],
+  "failures": [
+    {
+      "name": "desktop:all-domain-inventories-full-remote-same-routing-and-DNS",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n+ [\n+   {\n+     afterDNS: [\n+       '国内网站'\n+     ],\n+     beforeDNS: [\n+       '漏网之鱼'\n+     ],\n+     host: 'dns.pub',\n+     key: 'rule-set:v12r-domain-cn'\n+   },\n+   {\n+     afterDNS: [\n+       '国内网站'\n+     ],\n+     beforeDNS: [\n+       '漏网之鱼'\n+     ],\n+     host: 'doh.pub',\n+     key: 'rule-set:v12r-domain-cn'\n+   },\n+   {\n+     afterDNS: [\n+       '国内网站'\n+     ],\n+     beforeDNS: [\n+       '漏网之鱼'\n+     ],\n+     host: 'dns.alidns.com',\n+     key: 'rule-set:v12r-domain-cn'\n+   },\n+   {\n+     afterDNS: [\n+       '国内网站'\n+     ],\n+     beforeDNS: [\n+       '漏网之鱼'\n+     ],\n+     host: 'dns.cfiec.net',\n+     key: 'rule-set:v12r-domain-cn'\n+   },\n+   {\n+     afterDNS: [\n+       '国内网站'\n+     ],\n+     beforeDNS: [\n+       '漏网之鱼'\n+     ],\n+     host: 'sm2.doh.pub',\n+     key: 'rule-set:v12r-domain-cn'\n+   },\n+   {\n+     afterDNS: [\n+       '国内网站'\n+     ],\n+     beforeDNS: [\n+       '漏网之鱼'\n+     ],\n+     host: 'doh.360.cn',\n+     key: 'rule-set:v14-domestic-protocol-seeds'\n+   },\n+   {\n+     afterDNS: [\n+       '国内网站'\n+     ],\n+     beforeDNS: [\n+       '漏网之鱼'\n+     ],\n+     host: 'doh-pure.onedns.net',\n+     key: 'rule-set:v12r-domain-cn'\n+   },\n+   {\n+     afterDNS: [\n+       '国内网站'\n+     ],\n+     beforeDNS: [\n+       '漏网之鱼'\n+     ],\n+     host: 'doh.onedns.net',\n+     key: 'rule-set:v12r-domain-cn'\n+   },\n+   {\n+     afterDNS: [\n+       '国内网站'\n+     ],\n+     beforeDNS: [\n+       '漏网之鱼'\n+     ],\n+     host: 'doh.18bit.cn',\n+     key: 'rule-set:v14-domestic-protocol-seeds'\n+   }\n+ ]\n- []\n\n    at E:\\2\\覆写脚本\\releases\\v14.3\\tests\\static.cjs:24:736\n    at check (E:\\2\\覆写脚本\\releases\\v14.3\\tests\\static.cjs:6:29)\n    at Object.<anonymous> (E:\\2\\覆写脚本\\releases\\v14.3\\tests\\static.cjs:24:2)\n    at Module._compile (node:internal/modules/cjs/loader:1872:14)\n    at Object..js (node:internal/modules/cjs/loader:2003:10)\n    at Module.load (node:internal/modules/cjs/loader:1594:32)\n    at Module._load (node:internal/modules/cjs/loader:1396:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\n    at node:internal/main/run_main_module:33:47"
+    },
+    {
+      "name": "desktop:existing-business-UDP-IPv6-and-explicit-DIRECT-cases",
+      "error": "AssertionError [ERR_ASSERTION]: unknown-no-udp-relay.example.cn\n\n'DIRECT' !== 'REJECT'\n\n    at E:\\2\\覆写脚本\\releases\\v14.3\\tests\\static.cjs:25:203\n    at check (E:\\2\\覆写脚本\\releases\\v14.3\\tests\\static.cjs:6:29)\n    at Object.<anonymous> (E:\\2\\覆写脚本\\releases\\v14.3\\tests\\static.cjs:25:2)\n    at Module._compile (node:internal/modules/cjs/loader:1872:14)\n    at Object..js (node:internal/modules/cjs/loader:2003:10)\n    at Module.load (node:internal/modules/cjs/loader:1594:32)\n    at Module._load (node:internal/modules/cjs/loader:1396:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\n    at node:internal/main/run_main_module:33:47"
+    },
+    {
+      "name": "android:all-domain-inventories-full-remote-same-routing-and-DNS",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n+ [\n+   {\n+     afterDNS: [\n+       '国内网站'\n+     ],\n+     beforeDNS: [\n+       '漏网之鱼'\n+     ],\n+     host: 'dns.pub',\n+     key: 'rule-set:v12r-domain-cn'\n+   },\n+   {\n+     afterDNS: [\n+       '国内网站'\n+     ],\n+     beforeDNS: [\n+       '漏网之鱼'\n+     ],\n+     host: 'doh.pub',\n+     key: 'rule-set:v12r-domain-cn'\n+   },\n+   {\n+     afterDNS: [\n+       '国内网站'\n+     ],\n+     beforeDNS: [\n+       '漏网之鱼'\n+     ],\n+     host: 'dns.alidns.com',\n+     key: 'rule-set:v12r-domain-cn'\n+   },\n+   {\n+     afterDNS: [\n+       '国内网站'\n+     ],\n+     beforeDNS: [\n+       '漏网之鱼'\n+     ],\n+     host: 'dns.cfiec.net',\n+     key: 'rule-set:v12r-domain-cn'\n+   },\n+   {\n+     afterDNS: [\n+       '国内网站'\n+     ],\n+     beforeDNS: [\n+       '漏网之鱼'\n+     ],\n+     host: 'sm2.doh.pub',\n+     key: 'rule-set:v12r-domain-cn'\n+   },\n+   {\n+     afterDNS: [\n+       '国内网站'\n+     ],\n+     beforeDNS: [\n+       '漏网之鱼'\n+     ],\n+     host: 'doh.360.cn',\n+     key: 'rule-set:v14-domestic-protocol-seeds'\n+   },\n+   {\n+     afterDNS: [\n+       '国内网站'\n+     ],\n+     beforeDNS: [\n+       '漏网之鱼'\n+     ],\n+     host: 'doh-pure.onedns.net',\n+     key: 'rule-set:v12r-domain-cn'\n+   },\n+   {\n+     afterDNS: [\n+       '国内网站'\n+     ],\n+     beforeDNS: [\n+       '漏网之鱼'\n+     ],\n+     host: 'doh.onedns.net',\n+     key: 'rule-set:v12r-domain-cn'\n+   },\n+   {\n+     afterDNS: [\n+       '国内网站'\n+     ],\n+     beforeDNS: [\n+       '漏网之鱼'\n+     ],\n+     host: 'doh.18bit.cn',\n+     key: 'rule-set:v14-domestic-protocol-seeds'\n+   }\n+ ]\n- []\n\n    at E:\\2\\覆写脚本\\releases\\v14.3\\tests\\static.cjs:24:736\n    at check (E:\\2\\覆写脚本\\releases\\v14.3\\tests\\static.cjs:6:29)\n    at Object.<anonymous> (E:\\2\\覆写脚本\\releases\\v14.3\\tests\\static.cjs:24:2)\n    at Module._compile (node:internal/modules/cjs/loader:1872:14)\n    at Object..js (node:internal/modules/cjs/loader:2003:10)\n    at Module.load (node:internal/modules/cjs/loader:1594:32)\n    at Module._load (node:internal/modules/cjs/loader:1396:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\n    at node:internal/main/run_main_module:33:47"
+    },
+    {
+      "name": "android:existing-business-UDP-IPv6-and-explicit-DIRECT-cases",
+      "error": "AssertionError [ERR_ASSERTION]: unknown-no-udp-relay.example.cn\n\n'DIRECT' !== 'REJECT'\n\n    at E:\\2\\覆写脚本\\releases\\v14.3\\tests\\static.cjs:25:203\n    at check (E:\\2\\覆写脚本\\releases\\v14.3\\tests\\static.cjs:6:29)\n    at Object.<anonymous> (E:\\2\\覆写脚本\\releases\\v14.3\\tests\\static.cjs:25:2)\n    at Module._compile (node:internal/modules/cjs/loader:1872:14)\n    at Object..js (node:internal/modules/cjs/loader:2003:10)\n    at Module.load (node:internal/modules/cjs/loader:1594:32)\n    at Module._load (node:internal/modules/cjs/loader:1396:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\n    at node:internal/main/run_main_module:33:47"
+    },
+    {
+      "name": "clashmi:all-domain-inventories-full-remote-same-routing-and-DNS",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n+ [\n+   {\n+     afterDNS: [\n+       '国内网站'\n+     ],\n+     beforeDNS: [\n+       '漏网之鱼'\n+     ],\n+     host: 'dns.pub',\n+     key: 'rule-set:v12r-domain-cn'\n+   },\n+   {\n+     afterDNS: [\n+       '国内网站'\n+     ],\n+     beforeDNS: [\n+       '漏网之鱼'\n+     ],\n+     host: 'doh.pub',\n+     key: 'rule-set:v12r-domain-cn'\n+   },\n+   {\n+     afterDNS: [\n+       '国内网站'\n+     ],\n+     beforeDNS: [\n+       '漏网之鱼'\n+     ],\n+     host: 'dns.alidns.com',\n+     key: 'rule-set:v12r-domain-cn'\n+   },\n+   {\n+     afterDNS: [\n+       '国内网站'\n+     ],\n+     beforeDNS: [\n+       '漏网之鱼'\n+     ],\n+     host: 'dns.cfiec.net',\n+     key: 'rule-set:v12r-domain-cn'\n+   },\n+   {\n+     afterDNS: [\n+       '国内网站'\n+     ],\n+     beforeDNS: [\n+       '漏网之鱼'\n+     ],\n+     host: 'sm2.doh.pub',\n+     key: 'rule-set:v12r-domain-cn'\n+   },\n+   {\n+     afterDNS: [\n+       '国内网站'\n+     ],\n+     beforeDNS: [\n+       '漏网之鱼'\n+     ],\n+     host: 'doh.360.cn',\n+     key: 'rule-set:v14-domestic-protocol-seeds'\n+   },\n+   {\n+     afterDNS: [\n+       '国内网站'\n+     ],\n+     beforeDNS: [\n+       '漏网之鱼'\n+     ],\n+     host: 'doh-pure.onedns.net',\n+     key: 'rule-set:v12r-domain-cn'\n+   },\n+   {\n+     afterDNS: [\n+       '国内网站'\n+     ],\n+     beforeDNS: [\n+       '漏网之鱼'\n+     ],\n+     host: 'doh.onedns.net',\n+     key: 'rule-set:v12r-domain-cn'\n+   },\n+   {\n+     afterDNS: [\n+       '国内网站'\n+     ],\n+     beforeDNS: [\n+       '漏网之鱼'\n+     ],\n+     host: 'doh.18bit.cn',\n+     key: 'rule-set:v14-domestic-protocol-seeds'\n+   }\n+ ]\n- []\n\n    at E:\\2\\覆写脚本\\releases\\v14.3\\tests\\static.cjs:24:736\n    at check (E:\\2\\覆写脚本\\releases\\v14.3\\tests\\static.cjs:6:29)\n    at Object.<anonymous> (E:\\2\\覆写脚本\\releases\\v14.3\\tests\\static.cjs:24:2)\n    at Module._compile (node:internal/modules/cjs/loader:1872:14)\n    at Object..js (node:internal/modules/cjs/loader:2003:10)\n    at Module.load (node:internal/modules/cjs/loader:1594:32)\n    at Module._load (node:internal/modules/cjs/loader:1396:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\n    at node:internal/main/run_main_module:33:47"
+    },
+    {
+      "name": "clashmi:existing-business-UDP-IPv6-and-explicit-DIRECT-cases",
+      "error": "AssertionError [ERR_ASSERTION]: unknown-no-udp-relay.example.cn\n\n'DIRECT' !== 'REJECT'\n\n    at E:\\2\\覆写脚本\\releases\\v14.3\\tests\\static.cjs:25:203\n    at check (E:\\2\\覆写脚本\\releases\\v14.3\\tests\\static.cjs:6:29)\n    at Object.<anonymous> (E:\\2\\覆写脚本\\releases\\v14.3\\tests\\static.cjs:25:2)\n    at Module._compile (node:internal/modules/cjs/loader:1872:14)\n    at Object..js (node:internal/modules/cjs/loader:2003:10)\n    at Module.load (node:internal/modules/cjs/loader:1594:32)\n    at Module._load (node:internal/modules/cjs/loader:1396:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\n    at node:internal/main/run_main_module:33:47"
+    }
+  ],
+  "platforms": [
+    {
+      "platform": "desktop",
+      "fullInventoryHosts": 233396,
+      "normalRouting": 233396,
+      "normalDNS": 233396,
+      "criticalColdRouting": 4232,
+      "criticalColdDNS": 1058,
+      "existingCases": 592
+    },
+    {
+      "platform": "android",
+      "fullInventoryHosts": 233396,
+      "normalRouting": 233396,
+      "normalDNS": 233396,
+      "criticalColdRouting": 4232,
+      "criticalColdDNS": 1058,
+      "existingCases": 592
+    },
+    {
+      "platform": "clashmi",
+      "fullInventoryHosts": 233396,
+      "normalRouting": 233396,
+      "normalDNS": 233396,
+      "criticalColdRouting": 4232,
+      "criticalColdDNS": 1058,
+      "existingCases": 592
+    }
+  ],
+  "sourceFiles": [
+    {
+      "file": "tools/build-balanced.cjs",
+      "sha256": "89df60b6b341b5c49d8af064c2fba9514e61c61c0fd70f98b6cdb2f434c8f83d"
+    },
+    {
+      "file": "tools/domestic-protocol.cjs",
+      "sha256": "b1585678378c7c957761efdc3273ad1155bcd0ed26819e6af6d5002f5f588a69"
+    },
+    {
+      "file": "tools/clashmi-adapter.js",
+      "sha256": "22fa1a686fc55e831cfb3225eb88e7265df05bbb8ea6a8399f04b9df66b9d268"
+    },
+    {
+      "file": "tests/static.cjs",
+      "sha256": "9e3d948f0f3b6138522029b6f808d5ab0519aea16a5ffa6c79762e773e53f4b2"
+    },
+    {
+      "file": "tests/domestic-contract.cjs",
+      "sha256": "58f777c8c9de152ed9b232885a10fd68596e6740efdf95750ff7c680521cee26"
+    },
+    {
+      "file": "tests/fixture.cjs",
+      "sha256": "328defa554087c36412fa6c7119c6b25e6d20938ef1af41463622866f7a3ec4c"
+    },
+    {
+      "file": "tests/domain-index.cjs",
+      "sha256": "4b3314187dc88fafb30902b04c122079b3c71dd2ba85055e2bf6a6cf85df48d0"
+    },
+    {
+      "file": "tests/cases.cjs",
+      "sha256": "3cc9e55ce707f74dd85b9e8810403725c4be26e4f17c4ed185091d677b4b63d0"
+    },
+    {
+      "file": "data/rules/embedded-policy.json",
+      "sha256": "059d71af3ec13dd1de8ac2e8303e4045f589f9257f210d08f519a033a8795a75"
+    },
+    {
+      "file": "data/rules/company-core.json",
+      "sha256": "83e390ff6ebc9f8eff47a7b62583978163a61513f979113d70cf0e1bd508c80b"
+    },
+    {
+      "file": "data/rules/business-services.json",
+      "sha256": "6fddabd1e91a404bc7362b776ed72c943d6bf6a09d0f7367a8541820055ddd2f"
+    },
+    {
+      "file": "data/rule-sources.lock.json",
+      "sha256": "cd4f33e36b88aafe1e6eda4c56f63a202940aa84cd0901502b22941af4e46acb"
+    },
+    {
+      "file": "metadata/balanced-sources.json",
+      "sha256": "29c693cf4cda97c0f84576e0e9a84e221758ffdfd79c59edfc60432694481881"
+    },
+    {
+      "file": "metadata/source-comparison.json",
+      "sha256": "db052078f5623ac45464c593ef07d3e9c5851f6d41b8f3b2426e919819b61d83"
+    },
+    {
+      "file": "validation/network-review/manifest.json",
+      "sha256": "5868ca79a56f6bb2c740067e7dc64d533bc095d4f7202229442e610b151fe034"
+    },
+    {
+      "file": "validation/network-review/native-domain-mrs.json",
+      "sha256": "51cd4a213ee1ad55c9a728d8b1e7e984a31610cbc3f031369457b3a978416df3"
+    },
+    {
+      "file": "validation/inputs/raw-company-attempt/manifest.json",
+      "sha256": "6de5490ad6730e1ee1ba815fc65ac157b7ab07b9a758474256074cb088fba31b"
+    },
+    {
+      "file": "validation/inputs/latest-candidate/manifest.json",
+      "sha256": "e324ec885bcaf655b9b2b07ca80e6b2c2668f51f504bbf29b37a23d0b6349309"
+    },
+    {
+      "file": "src/windows/v14.3.js",
+      "sha256": "884c64236a1371faea4f3a32ec90177125a02c85636d90c6c33e9177409cbe64"
+    },
+    {
+      "file": "src/android/v14.3-android.js",
+      "sha256": "165b4ba40ce4af7933c85f801f11bbad0ef5e9b230353da68d55b17a8f568880"
+    },
+    {
+      "file": "src/ios/v14.3-clashmi.js",
+      "sha256": "4197824f424ab8526b25e9a5a03d55c8ae3f9f7698e7fc0fe246d60c6e071fc6"
+    },
+    {
+      "file": "src/ios/v14.3-clashmi-domestic-protocol-r1.js",
+      "sha256": "4197824f424ab8526b25e9a5a03d55c8ae3f9f7698e7fc0fe246d60c6e071fc6"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-private.yaml",
+      "sha256": "58bcdd58c8d5663ba87a4f13083995ffc3cd14f97b4c12b03215190add2384af"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-private.list",
+      "sha256": "47e1f2c1242bee27fe450326779e0b8780eb121ac91e1a47b9264e2b0ecc8416"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-category-doh.yaml",
+      "sha256": "be0e04f22894374695c68ef46d84873ee20b0d9410a2c9d84d6462fcb73beab9"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-category-doh.list",
+      "sha256": "96455367dfafb67e3a58e0f040e57eb8279dfc45efd043481e82a5d7ace621cf"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-douyin.yaml",
+      "sha256": "05adddd7142fb4238054a40c78ad3955e10bae77c09f7d6a4531ca8893871759"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-douyin.list",
+      "sha256": "911bb17f7fea207a800981dca7bb8dde7481684da332a36e8b9b2a55790c751b"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-apple_at_cn.yaml",
+      "sha256": "2a8718e3638878e5f9fce24d753bf6ff231e6564f4c38fba9a577f42ed8fedec"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-apple_at_cn.list",
+      "sha256": "0683c809caeff184cb57371b55fcd26a5116af90fc8d3aea750c1aa629f94fe6"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-google_at_cn.yaml",
+      "sha256": "04829d19a1a61c3f9b41c1ef0350c1ff52633ed0178255f83edae7aca86f0e3b"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-google_at_cn.list",
+      "sha256": "fe9d1c63f7932407e8ed8987dd8fc7bd9e8d1a0e92b51e4979488e779022c8c8"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-microsoft_at_cn.yaml",
+      "sha256": "beaac8d2a67a31d6bd9079b30842229d97cb6d5d1826f1b7efe0a7dad881abbf"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-microsoft_at_cn.list",
+      "sha256": "3736b0b53a5bdf25b9ddc42d7518df59f132febb48e5461f427bfdf8980c9ee5"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-steam_at_cn.yaml",
+      "sha256": "52d6b64b9e3a73e51bcdd31cc46e8736cd5ab105c0402bd9325af33856cd32bf"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-steam_at_cn.list",
+      "sha256": "4ae2540001216910ec89a3c035b209654cbacfe4bc329996a775336791655602"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-cn.mrs",
+      "sha256": "e92bda4f0b9f05623663a882331a320ab4e266cada2046d3828a94572cdded46"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-cn.list",
+      "sha256": "5fb1cc7b7c155cc3db2664eb3200d46e242701e11523ef1b94dffc6638806967"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-netflix.yaml",
+      "sha256": "d2dd4babc01c6794931f71807936650cc0d886c4620ef6f014150575b38b6fb2"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-netflix.list",
+      "sha256": "47c3ed0adaa5f47b2b8bda2dd7721668899290942afeeac801ab598607ea205e"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-disney.yaml",
+      "sha256": "544dcc0a803d4cd91281e76120c67a47697c962b3417f91656d3dac401e542d8"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-disney.list",
+      "sha256": "d3f46d4bdc82fdf29157c17a7765092e9b0cf4fcc8fc6652d05b72a59add4dea"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-spotify.yaml",
+      "sha256": "f9c46687ea734730410f15296274e531c7491d9a1eca870041b7e4d788c22638"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-spotify.list",
+      "sha256": "bbdf8eb50559fc69c2654f3890182cefaae64df7215b1a7cf6ab1ac679abffe0"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-telegram.yaml",
+      "sha256": "6c357c7799ad105074a318f6251d33901a1bfffd60051fa7e5fad73c04d0af4b"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-telegram.list",
+      "sha256": "a1a39e45b89ce8da3def2ed862bdeef0fa67acb9ca50ea3cb017b9a2dd4623d8"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-discord.yaml",
+      "sha256": "feb6a7cbe204600ae8d3f8d54d7ad723ff0031854613de3dbcbd184daf988269"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-discord.list",
+      "sha256": "81aafa9b79a15d98167655e7d4e51baff38525b37247fbe41b74e9be7febaf59"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-tiktok.yaml",
+      "sha256": "61512676a2cf5f79b5e69fac594bbc87ff0277f74c8af6e3e921a1d667c4c16a"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-tiktok.list",
+      "sha256": "69ab6466561c7a5e231ce4c986f17d724e060f19cc888fa826bc552e7aae221c"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-twitter.yaml",
+      "sha256": "3c9277372816fc5fe4dc79a3a72465af12efd84a6d328f52ee7ff4b400bf6db4"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-twitter.list",
+      "sha256": "74f3f9f4a004ce32af096e45fdc9dcb54c781f3719d0763e2bb9778078e0256c"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-meta.yaml",
+      "sha256": "5405d43a058d81334f2720fce20ecfbf58c980d9cf1b3855a0c77491247b9282"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-meta.list",
+      "sha256": "ea85a2d98b6df724bbb00d6fe156252b0509a465d3d53c62cb17adbad5f40fac"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-steam.yaml",
+      "sha256": "b33b20dcc828cb698c29b994d4a5bd65b57b12ab7a10cff57d849fb7343b0109"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-steam.list",
+      "sha256": "2e3117f30009c26d558fa7ae044f31f2d743e60ca67742785633fa1e0a08b5ca"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-epicgames.yaml",
+      "sha256": "4e4389b52aa9da4418608910457c43cc6ae31064a4b15d7601cea10a550a8e73"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-epicgames.list",
+      "sha256": "3831cbfabc72c22e9b6aa036c77cded0ae2c08f5e3d88c5b269551fba7893f5f"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-apple.yaml",
+      "sha256": "4313df1652e744c679c2e3215875b4fa2845bf534c8644b71d19e5457768cab9"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-apple.list",
+      "sha256": "7c589262d627b93853efe0efeab724db35b462e4eb95026fd4c634e7043281ba"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-bilibili.yaml",
+      "sha256": "ba54536a3973f53c7a78d950c8d56c199e661b8e95f1c522c754c4e9c5c0f098"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-bilibili.list",
+      "sha256": "dfc74e8b01ee1dee314735a49e4511f7e9a405414c51724195a20b345ed2a9db"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-ip-netflix.mrs",
+      "sha256": "3fba174fdae1efe489d9b489126fa48e8a340f6d1f96b1478afad0c43781c14a"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-ip-netflix.list",
+      "sha256": "d7c71269113609b715d66f6986bec29774527d2d131cbc0dea9c7280dcc5c779"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-ip-telegram.mrs",
+      "sha256": "d121af95b9aeca3d8c29b2112d5e6685b2a6716383df8ae31b5fbb3408c527b3"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-ip-telegram.list",
+      "sha256": "53437464eec1ac4396b00e8b6ad427ed0cf54bfac6339575a2cef48d8753e961"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-ip-twitter.mrs",
+      "sha256": "e8fc8a292d91cf630475a1e759d52acf81cf38bc7283329253be5914dc23630f"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-ip-twitter.list",
+      "sha256": "7e37c6f264f5e614b15fe26c789d4e38b10df5a878c43d7b0fc86e5858bf9909"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-ip-cn.mrs",
+      "sha256": "d95b3d125f6c74ce3c15e19ef794f142de91e21c3b8fb7767e76aebfabff5149"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-ip-cn.list",
+      "sha256": "3376f850bb29d2ae310d461d2df045252f486843caeeb89633f9543ce694d684"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-anthropic.yaml",
+      "sha256": "5b59537cd09e1dc487943af6270d739ad3c9a4b41fd22b1df886fe3a7b693f4f"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-anthropic.list",
+      "sha256": "b2b8e9a3a14980d2bcf8ef4e2ec231894855089533f6f3054af50b8d6636f64f"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-google-gemini.yaml",
+      "sha256": "e12fdc7a138b896cb3d7fb7bba8bb3dfd7910eac72becb0bd009e2ce602661be"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-google-gemini.list",
+      "sha256": "11f2c91b20c87030128d799e072e30679917f808dcb481acb5e48cb28e9aa881"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-youtube.yaml",
+      "sha256": "c4e9bdb1ca911692a3887a950fe06cc09e3d525a4916ae78a9b5a2a9568d2ec1"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-youtube.list",
+      "sha256": "ff1bc1631adc9c139ab19bf509a59507871b8f0663ade80dffa9f2b1665e41b9"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-google.mrs",
+      "sha256": "3f70be19243180b98ab65c9812db9af5d0327fe72a58480cb97e422f3e829271"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-google-mrs.list",
+      "sha256": "6c524f9540b8783d6c0cf11a5538495f67632d02ba1431bbfe3a24cc41a52a79"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-microsoft.mrs",
+      "sha256": "554fd51c2b088abebf6b859c4401d532c1fb1f50f5823bcda7e1bae995552e4b"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-microsoft-mrs.list",
+      "sha256": "64897f4b0ae2fb7e477ff6f5ff912c33a2fb2ce24671a57e7af324869c4a43b0"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-linkedin.yaml",
+      "sha256": "bfbbaba1deb3be57ab255031152373ec7ac316fe04c89fafedce1d793e56f116"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-linkedin.list",
+      "sha256": "e54bbe7546b5b807fc73e5911672e7fafb2c5f502c4f3343884412cd487c0bf3"
+    }
+  ],
+  "normalMismatches": [
+    {
+      "platform": "desktop",
+      "host": "dns.pub",
+      "beforeDNS": [
+        "漏网之鱼"
+      ],
+      "afterDNS": [
+        "国内网站"
+      ],
+      "key": "rule-set:v12r-domain-cn"
+    },
+    {
+      "platform": "desktop",
+      "host": "doh.pub",
+      "beforeDNS": [
+        "漏网之鱼"
+      ],
+      "afterDNS": [
+        "国内网站"
+      ],
+      "key": "rule-set:v12r-domain-cn"
+    },
+    {
+      "platform": "desktop",
+      "host": "dns.alidns.com",
+      "beforeDNS": [
+        "漏网之鱼"
+      ],
+      "afterDNS": [
+        "国内网站"
+      ],
+      "key": "rule-set:v12r-domain-cn"
+    },
+    {
+      "platform": "desktop",
+      "host": "dns.cfiec.net",
+      "beforeDNS": [
+        "漏网之鱼"
+      ],
+      "afterDNS": [
+        "国内网站"
+      ],
+      "key": "rule-set:v12r-domain-cn"
+    },
+    {
+      "platform": "desktop",
+      "host": "sm2.doh.pub",
+      "beforeDNS": [
+        "漏网之鱼"
+      ],
+      "afterDNS": [
+        "国内网站"
+      ],
+      "key": "rule-set:v12r-domain-cn"
+    },
+    {
+      "platform": "desktop",
+      "host": "doh.360.cn",
+      "beforeDNS": [
+        "漏网之鱼"
+      ],
+      "afterDNS": [
+        "国内网站"
+      ],
+      "key": "rule-set:v14-domestic-protocol-seeds"
+    },
+    {
+      "platform": "desktop",
+      "host": "doh-pure.onedns.net",
+      "beforeDNS": [
+        "漏网之鱼"
+      ],
+      "afterDNS": [
+        "国内网站"
+      ],
+      "key": "rule-set:v12r-domain-cn"
+    },
+    {
+      "platform": "desktop",
+      "host": "doh.onedns.net",
+      "beforeDNS": [
+        "漏网之鱼"
+      ],
+      "afterDNS": [
+        "国内网站"
+      ],
+      "key": "rule-set:v12r-domain-cn"
+    },
+    {
+      "platform": "desktop",
+      "host": "doh.18bit.cn",
+      "beforeDNS": [
+        "漏网之鱼"
+      ],
+      "afterDNS": [
+        "国内网站"
+      ],
+      "key": "rule-set:v14-domestic-protocol-seeds"
+    },
+    {
+      "platform": "android",
+      "host": "dns.pub",
+      "beforeDNS": [
+        "漏网之鱼"
+      ],
+      "afterDNS": [
+        "国内网站"
+      ],
+      "key": "rule-set:v12r-domain-cn"
+    },
+    {
+      "platform": "android",
+      "host": "doh.pub",
+      "beforeDNS": [
+        "漏网之鱼"
+      ],
+      "afterDNS": [
+        "国内网站"
+      ],
+      "key": "rule-set:v12r-domain-cn"
+    },
+    {
+      "platform": "android",
+      "host": "dns.alidns.com",
+      "beforeDNS": [
+        "漏网之鱼"
+      ],
+      "afterDNS": [
+        "国内网站"
+      ],
+      "key": "rule-set:v12r-domain-cn"
+    },
+    {
+      "platform": "android",
+      "host": "dns.cfiec.net",
+      "beforeDNS": [
+        "漏网之鱼"
+      ],
+      "afterDNS": [
+        "国内网站"
+      ],
+      "key": "rule-set:v12r-domain-cn"
+    },
+    {
+      "platform": "android",
+      "host": "sm2.doh.pub",
+      "beforeDNS": [
+        "漏网之鱼"
+      ],
+      "afterDNS": [
+        "国内网站"
+      ],
+      "key": "rule-set:v12r-domain-cn"
+    },
+    {
+      "platform": "android",
+      "host": "doh.360.cn",
+      "beforeDNS": [
+        "漏网之鱼"
+      ],
+      "afterDNS": [
+        "国内网站"
+      ],
+      "key": "rule-set:v14-domestic-protocol-seeds"
+    },
+    {
+      "platform": "android",
+      "host": "doh-pure.onedns.net",
+      "beforeDNS": [
+        "漏网之鱼"
+      ],
+      "afterDNS": [
+        "国内网站"
+      ],
+      "key": "rule-set:v12r-domain-cn"
+    },
+    {
+      "platform": "android",
+      "host": "doh.onedns.net",
+      "beforeDNS": [
+        "漏网之鱼"
+      ],
+      "afterDNS": [
+        "国内网站"
+      ],
+      "key": "rule-set:v12r-domain-cn"
+    },
+    {
+      "platform": "android",
+      "host": "doh.18bit.cn",
+      "beforeDNS": [
+        "漏网之鱼"
+      ],
+      "afterDNS": [
+        "国内网站"
+      ],
+      "key": "rule-set:v14-domestic-protocol-seeds"
+    },
+    {
+      "platform": "clashmi",
+      "host": "dns.pub",
+      "beforeDNS": [
+        "漏网之鱼"
+      ],
+      "afterDNS": [
+        "国内网站"
+      ],
+      "key": "rule-set:v12r-domain-cn"
+    },
+    {
+      "platform": "clashmi",
+      "host": "doh.pub",
+      "beforeDNS": [
+        "漏网之鱼"
+      ],
+      "afterDNS": [
+        "国内网站"
+      ],
+      "key": "rule-set:v12r-domain-cn"
+    },
+    {
+      "platform": "clashmi",
+      "host": "dns.alidns.com",
+      "beforeDNS": [
+        "漏网之鱼"
+      ],
+      "afterDNS": [
+        "国内网站"
+      ],
+      "key": "rule-set:v12r-domain-cn"
+    },
+    {
+      "platform": "clashmi",
+      "host": "dns.cfiec.net",
+      "beforeDNS": [
+        "漏网之鱼"
+      ],
+      "afterDNS": [
+        "国内网站"
+      ],
+      "key": "rule-set:v12r-domain-cn"
+    },
+    {
+      "platform": "clashmi",
+      "host": "sm2.doh.pub",
+      "beforeDNS": [
+        "漏网之鱼"
+      ],
+      "afterDNS": [
+        "国内网站"
+      ],
+      "key": "rule-set:v12r-domain-cn"
+    },
+    {
+      "platform": "clashmi",
+      "host": "doh.360.cn",
+      "beforeDNS": [
+        "漏网之鱼"
+      ],
+      "afterDNS": [
+        "国内网站"
+      ],
+      "key": "rule-set:v14-domestic-protocol-seeds"
+    },
+    {
+      "platform": "clashmi",
+      "host": "doh-pure.onedns.net",
+      "beforeDNS": [
+        "漏网之鱼"
+      ],
+      "afterDNS": [
+        "国内网站"
+      ],
+      "key": "rule-set:v12r-domain-cn"
+    },
+    {
+      "platform": "clashmi",
+      "host": "doh.onedns.net",
+      "beforeDNS": [
+        "漏网之鱼"
+      ],
+      "afterDNS": [
+        "国内网站"
+      ],
+      "key": "rule-set:v12r-domain-cn"
+    },
+    {
+      "platform": "clashmi",
+      "host": "doh.18bit.cn",
+      "beforeDNS": [
+        "漏网之鱼"
+      ],
+      "afterDNS": [
+        "国内网站"
+      ],
+      "key": "rule-set:v14-domestic-protocol-seeds"
+    }
+  ],
+  "coldMismatches": []
+}

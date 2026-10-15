@@ -1,0 +1,213 @@
+{
+  "version": "14.3",
+  "date": "2026-10-13",
+  "revision": "shadowrocket-lean-r1",
+  "domesticProtocolRevision": "domestic-protocol-r1",
+  "status": "SHADOWROCKET_LEAN_STATIC_PASS_NATIVE_PENDING",
+  "checks": [
+    {
+      "name": "size-groups-fixed-sources-and-general-settings",
+      "status": "PASS"
+    },
+    {
+      "name": "all-reviewed-domain-TCP-preserved-and-ordinary-UDP-follows-domestic",
+      "status": "PASS"
+    },
+    {
+      "name": "business-Host-DNS-preserved-except-authorized-domestic-keys",
+      "status": "PASS"
+    },
+    {
+      "name": "critical-domestic-WeChat-selector-and-DNS-affinity",
+      "status": "PASS"
+    },
+    {
+      "name": "unknown-IP-STUN-company-priority-and-no-UDP-DIRECT-fallback",
+      "status": "PASS"
+    }
+  ],
+  "failures": [],
+  "metrics": {
+    "routingHosts": 232528,
+    "tcp": 232528,
+    "udp": 232528,
+    "businessDNS": 9129,
+    "criticalDomesticDNS": 6,
+    "coldRouting": 36,
+    "protectedFlows": 9
+  },
+  "sourceFiles": [
+    {
+      "file": "tests/shadowrocket-lean.cjs",
+      "sha256": "4cbea35c88e4d0dc06d9bfd1efc124761ec31f26b2e295c0e8da21cd1a5251e6"
+    },
+    {
+      "file": "tests/domestic-contract.cjs",
+      "sha256": "58f777c8c9de152ed9b232885a10fd68596e6740efdf95750ff7c680521cee26"
+    },
+    {
+      "file": "tests/fixture.cjs",
+      "sha256": "328defa554087c36412fa6c7119c6b25e6d20938ef1af41463622866f7a3ec4c"
+    },
+    {
+      "file": "tests/domain-index.cjs",
+      "sha256": "4b3314187dc88fafb30902b04c122079b3c71dd2ba85055e2bf6a6cf85df48d0"
+    },
+    {
+      "file": "tools/build-shadowrocket-lean.cjs",
+      "sha256": "15b7625f84a9b5f942f08e9e1731cf3cd2eb764600a8261c30a45d5d40790ebb"
+    },
+    {
+      "file": "metadata/shadowrocket-lean.json",
+      "sha256": "d37b37cda2a9a4100cca78e50f016785e2b7bce9e6c4c1f602eb992718b154b3"
+    },
+    {
+      "file": "src/ios/v14.3-shadowrocket.conf",
+      "sha256": "9829d7e7c74f949cfe5168c3b3f3359b0e41aeb3c81bd3b8e2420bf721f277ec"
+    },
+    {
+      "file": "src/android/v14.3-android.js",
+      "sha256": "2128a1019d0c6f719a9e9533a8bc6b1e61bb47277e96190c8fc22218a52d4f3f"
+    },
+    {
+      "file": "data/rules/embedded-policy.json",
+      "sha256": "059d71af3ec13dd1de8ac2e8303e4045f589f9257f210d08f519a033a8795a75"
+    },
+    {
+      "file": "validation/inputs/v14.2-baseline/manifest.json",
+      "sha256": "e11723e746a3cb12d663c05240b677db0230bbe2d6fbec951fc338567b349459"
+    },
+    {
+      "file": "validation/inputs/v14.2-baseline/metadata/shadowrocket-sources.json",
+      "sha256": "5028fe77adef7f32e3732792fb6371b6bbe6d5c8fb48aa32024945cd42ad9728"
+    },
+    {
+      "file": "validation/inputs/v14.2-baseline/data/rule-sources.lock.json",
+      "sha256": "50dcaa46d1b16123858f54ccfa1e7504a7d936522c895937be398c26ab5aebad"
+    },
+    {
+      "file": "validation/inputs/v14.2-baseline/data/rules/reviewed/sr-13.text",
+      "sha256": "650c4841d5732fff621613a257ce831f26bdb82b47722519ef436e85e7ad5f13"
+    },
+    {
+      "file": "validation/inputs/v14.2-baseline/data/rules/reviewed/sr-13.list",
+      "sha256": "bbdf8eb50559fc69c2654f3890182cefaae64df7215b1a7cf6ab1ac679abffe0"
+    },
+    {
+      "file": "validation/inputs/v14.2-baseline/data/rules/reviewed/sr-14.text",
+      "sha256": "619df30317e41c5958311c5d4f76abe1bfa45ae4ba399129a0fec2fe4edd43d9"
+    },
+    {
+      "file": "validation/inputs/v14.2-baseline/data/rules/reviewed/sr-14.list",
+      "sha256": "a1a39e45b89ce8da3def2ed862bdeef0fa67acb9ca50ea3cb017b9a2dd4623d8"
+    },
+    {
+      "file": "validation/inputs/v14.2-baseline/data/rules/reviewed/sr-15.text",
+      "sha256": "d79aac40ce905d022c13be738352ff38806af9bc3a8e49ad6848a215bc2fe9c6"
+    },
+    {
+      "file": "validation/inputs/v14.2-baseline/data/rules/reviewed/sr-15.list",
+      "sha256": "81aafa9b79a15d98167655e7d4e51baff38525b37247fbe41b74e9be7febaf59"
+    },
+    {
+      "file": "validation/inputs/v14.2-baseline/data/rules/reviewed/sr-16.text",
+      "sha256": "2c0c941815c7dc696cce3fe45d33acdd416fbde419a468924cab500c9169cfc9"
+    },
+    {
+      "file": "validation/inputs/v14.2-baseline/data/rules/reviewed/sr-16.list",
+      "sha256": "69ab6466561c7a5e231ce4c986f17d724e060f19cc888fa826bc552e7aae221c"
+    },
+    {
+      "file": "validation/inputs/v14.2-baseline/data/rules/reviewed/sr-17.text",
+      "sha256": "9e86c896de40eba53bbeeec6b8f11e6eb7ef325de69001b01399386def08ef5e"
+    },
+    {
+      "file": "validation/inputs/v14.2-baseline/data/rules/reviewed/sr-17.list",
+      "sha256": "74f3f9f4a004ce32af096e45fdc9dcb54c781f3719d0763e2bb9778078e0256c"
+    },
+    {
+      "file": "validation/inputs/v14.2-baseline/data/rules/reviewed/sr-18.text",
+      "sha256": "d833c2210673a225d8245ea80063993a5c9989767ab3c520f12c76274fb92bc2"
+    },
+    {
+      "file": "validation/inputs/v14.2-baseline/data/rules/reviewed/sr-18.list",
+      "sha256": "ea85a2d98b6df724bbb00d6fe156252b0509a465d3d53c62cb17adbad5f40fac"
+    },
+    {
+      "file": "validation/inputs/v14.2-baseline/data/rules/reviewed/sr-19.text",
+      "sha256": "b5f03434912e8371c0f0f5aff1c42e179874232216409e0d47a618bb8d954e74"
+    },
+    {
+      "file": "validation/inputs/v14.2-baseline/data/rules/reviewed/sr-19.list",
+      "sha256": "2e3117f30009c26d558fa7ae044f31f2d743e60ca67742785633fa1e0a08b5ca"
+    },
+    {
+      "file": "validation/inputs/v14.2-baseline/data/rules/reviewed/sr-23.text",
+      "sha256": "8f1b00378ff9287fcb9c276fe4acf676ff4fdc89edf31881332cd180df3cdf60"
+    },
+    {
+      "file": "validation/inputs/v14.2-baseline/data/rules/reviewed/sr-23.list",
+      "sha256": "7c589262d627b93853efe0efeab724db35b462e4eb95026fd4c634e7043281ba"
+    },
+    {
+      "file": "validation/inputs/v14.2-baseline/data/rules/reviewed/sr-24.text",
+      "sha256": "b93ec1a29d89731cc67c3ca13dd39b79742fb0b0faaf1def097d598cafa92c78"
+    },
+    {
+      "file": "validation/inputs/v14.2-baseline/data/rules/reviewed/sr-24.list",
+      "sha256": "dfc74e8b01ee1dee314735a49e4511f7e9a405414c51724195a20b345ed2a9db"
+    },
+    {
+      "file": "validation/inputs/v14.2-baseline/data/rules/reviewed/sr-02.text",
+      "sha256": "2d9de1ae9494450fa85ad6f9a38b36f84a37a571d32afca7baf86c1b1a82cdf9"
+    },
+    {
+      "file": "validation/inputs/v14.2-baseline/data/rules/reviewed/sr-02.list",
+      "sha256": "911bb17f7fea207a800981dca7bb8dde7481684da332a36e8b9b2a55790c751b"
+    },
+    {
+      "file": "validation/inputs/v14.2-baseline/data/rules/reviewed/sr-03.text",
+      "sha256": "a0a5e23be226334bec28887c4d6200cadd40615a254bee9469d999b1aa222e83"
+    },
+    {
+      "file": "validation/inputs/v14.2-baseline/data/rules/reviewed/sr-03.list",
+      "sha256": "0683c809caeff184cb57371b55fcd26a5116af90fc8d3aea750c1aa629f94fe6"
+    },
+    {
+      "file": "validation/inputs/v14.2-baseline/data/rules/reviewed/sr-04.text",
+      "sha256": "85c62f2ed6f4b5a28873e027b30e321cfa8e6e51199611089f7db272b81af9d6"
+    },
+    {
+      "file": "validation/inputs/v14.2-baseline/data/rules/reviewed/sr-04.list",
+      "sha256": "3736b0b53a5bdf25b9ddc42d7518df59f132febb48e5461f427bfdf8980c9ee5"
+    },
+    {
+      "file": "validation/inputs/v14.2-baseline/data/rules/reviewed/sr-05.text",
+      "sha256": "79e907235e9b2e7963fda08fddc3f0bd75b0a74763e831bb201456779b1505d5"
+    },
+    {
+      "file": "validation/inputs/v14.2-baseline/data/rules/reviewed/sr-05.list",
+      "sha256": "4ae2540001216910ec89a3c035b209654cbacfe4bc329996a775336791655602"
+    },
+    {
+      "file": "validation/inputs/v14.2-baseline/data/rules/reviewed/sr-06.text",
+      "sha256": "1d0d38baed8eac254424a59af43df23c15c116074cc158d82400bc4d8121e852"
+    },
+    {
+      "file": "validation/inputs/v14.2-baseline/data/rules/reviewed/sr-06.list",
+      "sha256": "76b89fece35fc3c7bcf99e2f31db42dc186a7b07f7d0184569ea363356f7514e"
+    },
+    {
+      "file": "validation/inputs/v14.2-baseline/data/rules/reviewed/sr-27.text",
+      "sha256": "d0448a52e17c634c5fb2801f644e606f575ff8df21c03cec1e974843ff755c36"
+    },
+    {
+      "file": "validation/inputs/v14.2-baseline/data/rules/reviewed/sr-27.list",
+      "sha256": "85766aa75797d97df6c23807f0645ace36103ded2575e496eaf7877aed118f07"
+    }
+  ],
+  "scope": "Finite domain/selector/Host model and SHA verification only; native parsing, DNS order/remote resolution and iOS VPN NOT_RUN",
+  "nativeAcceptance": "NOT_RUN",
+  "deviceAcceptance": "NOT_RUN",
+  "clientDeployment": false
+}

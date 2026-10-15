@@ -1,0 +1,1295 @@
+{
+  "version": "14.3",
+  "date": "2026-10-12",
+  "revision": "balanced-r1",
+  "status": "FAIL",
+  "scope": "Finite full reviewed inventories, critical empty/partial providers, metadata and object bridge; native core/device are separate",
+  "checks": [
+    "immutable-full-V14.2-before-bytes",
+    "52-fresh-pinned-downloads-and-classifier-bindings",
+    "deterministic-standalone-generation-and-size-budget",
+    "desktop:same-transport-DNS-upstreams-selectors-and-inbound-config",
+    "desktop:three-pass-idempotence-and-upgrade-from-full-V14.2",
+    "desktop:selectors-fixed-cache-and-proxy-failure-contract",
+    "android:same-transport-DNS-upstreams-selectors-and-inbound-config",
+    "android:three-pass-idempotence-and-upgrade-from-full-V14.2",
+    "android:selectors-fixed-cache-and-proxy-failure-contract",
+    "clashmi:same-transport-DNS-upstreams-selectors-and-inbound-config",
+    "clashmi:three-pass-idempotence-and-upgrade-from-full-V14.2",
+    "clashmi:selectors-fixed-cache-and-proxy-failure-contract",
+    "actual-Clash-Mi-object-return-and-string-counterexample"
+  ],
+  "failures": [
+    {
+      "name": "desktop:all-domain-inventories-full-remote-same-routing-and-DNS",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n+ [\n+   {\n+     after: '微软生态',\n+     before: '国内网站',\n+     host: '51drv.com',\n+     member: 'DOMAIN-KEYWORD,1drv',\n+     rule: 'RULE-SET,v12r-domain-microsoft,微软生态'\n+   },\n+   {\n+     afterDNS: [\n+       '微软生态'\n+     ],\n+     beforeDNS: [\n+       '漏网之鱼'\n+     ],\n+     host: '51drv.com',\n+     key: 'rule-set:v12r-domain-microsoft'\n+   },\n+   {\n+     after: '微软生态',\n+     before: '国内网站',\n+     host: 'review-probe.51drv.com',\n+     member: 'DOMAIN-KEYWORD,1drv',\n+     rule: 'RULE-SET,v12r-domain-microsoft,微软生态'\n+   },\n+   {\n+     afterDNS: [\n+       '微软生态'\n+     ],\n+     beforeDNS: [\n+       '漏网之鱼'\n+     ],\n+     host: 'review-probe.51drv.com',\n+     key: 'rule-set:v12r-domain-microsoft'\n+   },\n+   {\n+     after: 'OpenAI 服务',\n+     before: '漏网之鱼',\n+     host: 'crixet.com',\n+     member: 'DOMAIN-SUFFIX,crixet.com',\n+     rule: 'RULE-SET,v12r-domain-openai,OpenAI 服务'\n+   },\n+   {\n+     afterDNS: [\n+       'OpenAI 服务'\n+     ],\n+     beforeDNS: [\n+       '漏网之鱼'\n+     ],\n+     host: 'crixet.com',\n+     key: 'rule-set:v12r-domain-openai'\n+   },\n+   {\n+     after: 'OpenAI 服务',\n+     before: '漏网之鱼',\n+     host: 'review-probe.crixet.com',\n+     member: 'DOMAIN-SUFFIX,crixet.com',\n+     rule: 'RULE-SET,v12r-domain-openai,OpenAI 服务'\n+   },\n+   {\n+     afterDNS: [\n+       'OpenAI 服务'\n+     ],\n+     beforeDNS: [\n+       '漏网之鱼'\n+     ],\n+     host: 'review-probe.crixet.com',\n+     key: 'rule-set:v12r-domain-openai'\n+   }\n+ ]\n- []\n\n    at E:\\2\\覆写脚本\\releases\\v14.3\\tests\\static.cjs:22:692\n    at check (E:\\2\\覆写脚本\\releases\\v14.3\\tests\\static.cjs:5:29)\n    at Object.<anonymous> (E:\\2\\覆写脚本\\releases\\v14.3\\tests\\static.cjs:22:2)\n    at Module._compile (node:internal/modules/cjs/loader:1872:14)\n    at Object..js (node:internal/modules/cjs/loader:2003:10)\n    at Module.load (node:internal/modules/cjs/loader:1594:32)\n    at Module._load (node:internal/modules/cjs/loader:1396:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\n    at node:internal/main/run_main_module:33:47"
+    },
+    {
+      "name": "desktop:existing-business-UDP-IPv6-and-explicit-DIRECT-cases",
+      "error": "AssertionError [ERR_ASSERTION]: unknown-udp-crixet.com-443\n+ actual - expected\n\n+ 'OpenAI 服务'\n- '漏网之鱼'\n\n    at E:\\2\\覆写脚本\\releases\\v14.3\\tests\\static.cjs:23:203\n    at check (E:\\2\\覆写脚本\\releases\\v14.3\\tests\\static.cjs:5:29)\n    at Object.<anonymous> (E:\\2\\覆写脚本\\releases\\v14.3\\tests\\static.cjs:23:2)\n    at Module._compile (node:internal/modules/cjs/loader:1872:14)\n    at Object..js (node:internal/modules/cjs/loader:2003:10)\n    at Module.load (node:internal/modules/cjs/loader:1594:32)\n    at Module._load (node:internal/modules/cjs/loader:1396:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\n    at node:internal/main/run_main_module:33:47"
+    },
+    {
+      "name": "desktop:critical-domains-with-all-remote-files-empty",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n+ [\n+   {\n+     after: '漏网之鱼',\n+     before: 'DIRECT',\n+     host: 'critical-probe.cdn0-epicgames-0.file.myqcloud.com',\n+     protocol: 'TCP',\n+     rule: 'MATCH,漏网之鱼',\n+     supported: true\n+   },\n+   {\n+     after: '漏网之鱼',\n+     before: 'DIRECT',\n+     host: 'critical-probe.cdn0-epicgames-0.file.myqcloud.com',\n+     protocol: 'TCP',\n+     rule: 'MATCH,漏网之鱼',\n+     supported: false\n+   },\n+   {\n+     after: '漏网之鱼',\n+     before: 'DIRECT',\n+     host: 'critical-probe.cdn0-epicgames-1.file.myqcloud.com',\n+     protocol: 'TCP',\n+     rule: 'MATCH,漏网之鱼',\n+     supported: true\n+   },\n+   {\n+     after: '漏网之鱼',\n+     before: 'DIRECT',\n+     host: 'critical-probe.cdn0-epicgames-1.file.myqcloud.com',\n+     protocol: 'TCP',\n+     rule: 'MATCH,漏网之鱼',\n+     supported: false\n+   },\n+   {\n+     after: '漏网之鱼',\n+     before: 'DIRECT',\n+     host: 'critical-probe.cdn0-epicgames-17.file.myqcloud.com',\n+     protocol: 'TCP',\n+     rule: 'MATCH,漏网之鱼',\n+     supported: true\n+   },\n+   {\n+     after: '漏网之鱼',\n+     before: 'DIRECT',\n+     host: 'critical-probe.cdn0-epicgames-17.file.myqcloud.com',\n+     protocol: 'TCP',\n+     rule: 'MATCH,漏网之鱼',\n+     supported: false\n+   },\n+   {\n+     after: '漏网之鱼',\n+     before: 'DIRECT',\n+     host: 'critical-probe.cdn0-epicgames-23.file.myqcloud.com',\n+     protocol: 'TCP',\n+     rule: 'MATCH,漏网之鱼',\n+     supported: true\n+   },\n+   {\n+     after: '漏网之鱼',\n+     before: 'DIRECT',\n+     host: 'critical-probe.cdn0-epicgames-23.file.myqcloud.com',\n+     protocol: 'TCP',\n+     rule: 'MATCH,漏网之鱼',\n+     supported: false\n+   },\n+   {\n+     after: '漏网之鱼',\n+     before: 'DIRECT',\n+     host: 'critical-probe.cdn0-epicgames-999.file.myqcloud.com',\n+     protocol: 'TCP',\n+     rule: 'MATCH,漏网之鱼',\n+     supported: true\n+   },\n+   {\n+     after: '漏网之鱼',\n+     before: 'DIRECT',\n+     host: 'critical-probe.cdn0-epicgames-999.file.myqcloud.com',\n+     protocol: 'TCP',\n+     rule: 'MATCH,漏网之鱼',\n+     supported: false\n+   },\n+   {\n+     after: '漏网之鱼',\n+     before: 'DIRECT',\n+     host: 'critical-probe.cdn1-epicgames-0.file.myqcloud.com',\n+     protocol: 'TCP',\n+     rule: 'MATCH,漏网之鱼',\n+     supported: true\n+   },\n+   {\n+     after: '漏网之鱼',\n+     before: 'DIRECT',\n+     host: 'critical-probe.cdn1-epicgames-0.file.myqcloud.com',\n+     protocol: 'TCP',\n+     rule: 'MATCH,漏网之鱼',\n+     supported: false\n+   },\n+   {\n+     after: '漏网之鱼',\n+     before: 'DIRECT',\n+     host: 'critical-probe.cdn1-epicgames-1.file.myqcloud.com',\n+     protocol: 'TCP',\n+     rule: 'MATCH,漏网之鱼',\n+     supported: true\n+   },\n+   {\n+     after: '漏网之鱼',\n+     before: 'DIRECT',\n+     host: 'critical-probe.cdn1-epicgames-1.file.myqcloud.com',\n+     protocol: 'TCP',\n+     rule: 'MATCH,漏网之鱼',\n+     supported: false\n+   },\n+   {\n+     after: '漏网之鱼',\n+     before: 'DIRECT',\n+     host: 'critical-probe.cdn1-epicgames-17.file.myqcloud.com',\n+     protocol: 'TCP',\n+     rule: 'MATCH,漏网之鱼',\n+     supported: true\n+   },\n+   {\n+     after: '漏网之鱼',\n+     before: 'DIRECT',\n+     host: 'critical-probe.cdn1-epicgames-17.file.myqcloud.com',\n+     protocol: 'TCP',\n+     rule: 'MATCH,漏网之鱼',\n+     supported: false\n+   },\n+   {\n+     after: '漏网之鱼',\n+     before: 'DIRECT',\n+     host: 'critical-probe.cdn1-epicgames-23.file.myqcloud.com',\n+     protocol: 'TCP',\n+     rule: 'MATCH,漏网之鱼',\n+     supported: true\n+   },\n+   {\n+     after: '漏网之鱼',\n+     before: 'DIRECT',\n+     host: 'critical-probe.cdn1-epicgames-23.file.myqcloud.com',\n+     protocol: 'TCP',\n+     rule: 'MATCH,漏网之鱼',\n+     supported: false\n+   },\n+   {\n+     after: '漏网之鱼',\n+     before: 'DIRECT',\n+     host: 'critical-probe.cdn1-epicgames-999.file.myqcloud.com',\n+     protocol: 'TCP',\n+     rule: 'MATCH,漏网之鱼',\n+     supported: true\n+   },\n+   {\n+     after: '漏网之鱼',\n+     before: 'DIRECT',\n+     host: 'critical-probe.cdn1-epicgames-999.file.myqcloud.com',\n+     protocol: 'TCP',\n+     rule: 'MATCH,漏网之鱼',\n+     supported: false\n+   },\n+   {\n+     after: '漏网之鱼',\n+     before: 'DIRECT',\n+     host: 'critical-probe.cdn2-epicgames-0.file.myqcloud.com',\n+     protocol: 'TCP',\n+     rule: 'MATCH,漏网之鱼',\n+     supported: true\n+   },\n+   {\n+     after: '漏网之鱼',\n+     before: 'DIRECT',\n+     host: 'critical-probe.cdn2-epicgames-0.file.myqcloud.com',\n+     protocol: 'TCP',\n+     rule: 'MATCH,漏网之鱼',\n+     supported: false\n+   },\n+   {\n+     after: '漏网之鱼',\n+     before: 'DIRECT',\n+     host: 'critical-probe.cdn2-epicgames-1.file.myqcloud.com',\n+     protocol: 'TCP',\n+     rule: 'MATCH,漏网之鱼',\n+     supported: true\n+   },\n+   {\n+     after: '漏网之鱼',\n+     before: 'DIRECT',\n+     host: 'critical-probe.cdn2-epicgames-1.file.myqcloud.com',\n+     protocol: 'TCP',\n+     rule: 'MATCH,漏网之鱼',\n+     supported: false\n+   }\n+ ]\n- []\n\n    at E:\\2\\覆写脚本\\releases\\v14.3\\tests\\static.cjs:28:797\n    at check (E:\\2\\覆写脚本\\releases\\v14.3\\tests\\static.cjs:5:29)\n    at Object.<anonymous> (E:\\2\\覆写脚本\\releases\\v14.3\\tests\\static.cjs:28:2)\n    at Module._compile (node:internal/modules/cjs/loader:1872:14)\n    at Object..js (node:internal/modules/cjs/loader:2003:10)\n    at Module.load (node:internal/modules/cjs/loader:1594:32)\n    at Module._load (node:internal/modules/cjs/loader:1396:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\n    at node:internal/main/run_main_module:33:47"
+    },
+    {
+      "name": "desktop:business-table-loss-does-not-expose-domestic-DIRECT-on-critical-hosts",
+      "error": "AssertionError [ERR_ASSERTION]: critical-probe.scholar.google.ae\n\n'漏网之鱼' !== '谷歌服务'\n\n    at E:\\2\\覆写脚本\\releases\\v14.3\\tests\\static.cjs:29:510\n    at check (E:\\2\\覆写脚本\\releases\\v14.3\\tests\\static.cjs:5:29)\n    at Object.<anonymous> (E:\\2\\覆写脚本\\releases\\v14.3\\tests\\static.cjs:29:2)\n    at Module._compile (node:internal/modules/cjs/loader:1872:14)\n    at Object..js (node:internal/modules/cjs/loader:2003:10)\n    at Module.load (node:internal/modules/cjs/loader:1594:32)\n    at Module._load (node:internal/modules/cjs/loader:1396:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\n    at node:internal/main/run_main_module:33:47"
+    },
+    {
+      "name": "android:all-domain-inventories-full-remote-same-routing-and-DNS",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n+ [\n+   {\n+     after: '微软生态',\n+     before: '国内网站',\n+     host: '51drv.com',\n+     member: 'DOMAIN-KEYWORD,1drv',\n+     rule: 'RULE-SET,v12r-domain-microsoft,微软生态'\n+   },\n+   {\n+     afterDNS: [\n+       '微软生态'\n+     ],\n+     beforeDNS: [\n+       '漏网之鱼'\n+     ],\n+     host: '51drv.com',\n+     key: 'rule-set:v12r-domain-microsoft'\n+   },\n+   {\n+     after: '微软生态',\n+     before: '国内网站',\n+     host: 'review-probe.51drv.com',\n+     member: 'DOMAIN-KEYWORD,1drv',\n+     rule: 'RULE-SET,v12r-domain-microsoft,微软生态'\n+   },\n+   {\n+     afterDNS: [\n+       '微软生态'\n+     ],\n+     beforeDNS: [\n+       '漏网之鱼'\n+     ],\n+     host: 'review-probe.51drv.com',\n+     key: 'rule-set:v12r-domain-microsoft'\n+   },\n+   {\n+     after: 'OpenAI 服务',\n+     before: '漏网之鱼',\n+     host: 'crixet.com',\n+     member: 'DOMAIN-SUFFIX,crixet.com',\n+     rule: 'RULE-SET,v12r-domain-openai,OpenAI 服务'\n+   },\n+   {\n+     afterDNS: [\n+       'OpenAI 服务'\n+     ],\n+     beforeDNS: [\n+       '漏网之鱼'\n+     ],\n+     host: 'crixet.com',\n+     key: 'rule-set:v12r-domain-openai'\n+   },\n+   {\n+     after: 'OpenAI 服务',\n+     before: '漏网之鱼',\n+     host: 'review-probe.crixet.com',\n+     member: 'DOMAIN-SUFFIX,crixet.com',\n+     rule: 'RULE-SET,v12r-domain-openai,OpenAI 服务'\n+   },\n+   {\n+     afterDNS: [\n+       'OpenAI 服务'\n+     ],\n+     beforeDNS: [\n+       '漏网之鱼'\n+     ],\n+     host: 'review-probe.crixet.com',\n+     key: 'rule-set:v12r-domain-openai'\n+   }\n+ ]\n- []\n\n    at E:\\2\\覆写脚本\\releases\\v14.3\\tests\\static.cjs:22:692\n    at check (E:\\2\\覆写脚本\\releases\\v14.3\\tests\\static.cjs:5:29)\n    at Object.<anonymous> (E:\\2\\覆写脚本\\releases\\v14.3\\tests\\static.cjs:22:2)\n    at Module._compile (node:internal/modules/cjs/loader:1872:14)\n    at Object..js (node:internal/modules/cjs/loader:2003:10)\n    at Module.load (node:internal/modules/cjs/loader:1594:32)\n    at Module._load (node:internal/modules/cjs/loader:1396:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\n    at node:internal/main/run_main_module:33:47"
+    },
+    {
+      "name": "android:existing-business-UDP-IPv6-and-explicit-DIRECT-cases",
+      "error": "AssertionError [ERR_ASSERTION]: unknown-udp-crixet.com-443\n+ actual - expected\n\n+ 'OpenAI 服务'\n- '漏网之鱼'\n\n    at E:\\2\\覆写脚本\\releases\\v14.3\\tests\\static.cjs:23:203\n    at check (E:\\2\\覆写脚本\\releases\\v14.3\\tests\\static.cjs:5:29)\n    at Object.<anonymous> (E:\\2\\覆写脚本\\releases\\v14.3\\tests\\static.cjs:23:2)\n    at Module._compile (node:internal/modules/cjs/loader:1872:14)\n    at Object..js (node:internal/modules/cjs/loader:2003:10)\n    at Module.load (node:internal/modules/cjs/loader:1594:32)\n    at Module._load (node:internal/modules/cjs/loader:1396:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\n    at node:internal/main/run_main_module:33:47"
+    },
+    {
+      "name": "android:critical-domains-with-all-remote-files-empty",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n+ [\n+   {\n+     after: '漏网之鱼',\n+     before: 'DIRECT',\n+     host: 'critical-probe.cdn0-epicgames-0.file.myqcloud.com',\n+     protocol: 'TCP',\n+     rule: 'MATCH,漏网之鱼',\n+     supported: true\n+   },\n+   {\n+     after: '漏网之鱼',\n+     before: 'DIRECT',\n+     host: 'critical-probe.cdn0-epicgames-0.file.myqcloud.com',\n+     protocol: 'TCP',\n+     rule: 'MATCH,漏网之鱼',\n+     supported: false\n+   },\n+   {\n+     after: '漏网之鱼',\n+     before: 'DIRECT',\n+     host: 'critical-probe.cdn0-epicgames-1.file.myqcloud.com',\n+     protocol: 'TCP',\n+     rule: 'MATCH,漏网之鱼',\n+     supported: true\n+   },\n+   {\n+     after: '漏网之鱼',\n+     before: 'DIRECT',\n+     host: 'critical-probe.cdn0-epicgames-1.file.myqcloud.com',\n+     protocol: 'TCP',\n+     rule: 'MATCH,漏网之鱼',\n+     supported: false\n+   },\n+   {\n+     after: '漏网之鱼',\n+     before: 'DIRECT',\n+     host: 'critical-probe.cdn0-epicgames-17.file.myqcloud.com',\n+     protocol: 'TCP',\n+     rule: 'MATCH,漏网之鱼',\n+     supported: true\n+   },\n+   {\n+     after: '漏网之鱼',\n+     before: 'DIRECT',\n+     host: 'critical-probe.cdn0-epicgames-17.file.myqcloud.com',\n+     protocol: 'TCP',\n+     rule: 'MATCH,漏网之鱼',\n+     supported: false\n+   },\n+   {\n+     after: '漏网之鱼',\n+     before: 'DIRECT',\n+     host: 'critical-probe.cdn0-epicgames-23.file.myqcloud.com',\n+     protocol: 'TCP',\n+     rule: 'MATCH,漏网之鱼',\n+     supported: true\n+   },\n+   {\n+     after: '漏网之鱼',\n+     before: 'DIRECT',\n+     host: 'critical-probe.cdn0-epicgames-23.file.myqcloud.com',\n+     protocol: 'TCP',\n+     rule: 'MATCH,漏网之鱼',\n+     supported: false\n+   },\n+   {\n+     after: '漏网之鱼',\n+     before: 'DIRECT',\n+     host: 'critical-probe.cdn0-epicgames-999.file.myqcloud.com',\n+     protocol: 'TCP',\n+     rule: 'MATCH,漏网之鱼',\n+     supported: true\n+   },\n+   {\n+     after: '漏网之鱼',\n+     before: 'DIRECT',\n+     host: 'critical-probe.cdn0-epicgames-999.file.myqcloud.com',\n+     protocol: 'TCP',\n+     rule: 'MATCH,漏网之鱼',\n+     supported: false\n+   },\n+   {\n+     after: '漏网之鱼',\n+     before: 'DIRECT',\n+     host: 'critical-probe.cdn1-epicgames-0.file.myqcloud.com',\n+     protocol: 'TCP',\n+     rule: 'MATCH,漏网之鱼',\n+     supported: true\n+   },\n+   {\n+     after: '漏网之鱼',\n+     before: 'DIRECT',\n+     host: 'critical-probe.cdn1-epicgames-0.file.myqcloud.com',\n+     protocol: 'TCP',\n+     rule: 'MATCH,漏网之鱼',\n+     supported: false\n+   },\n+   {\n+     after: '漏网之鱼',\n+     before: 'DIRECT',\n+     host: 'critical-probe.cdn1-epicgames-1.file.myqcloud.com',\n+     protocol: 'TCP',\n+     rule: 'MATCH,漏网之鱼',\n+     supported: true\n+   },\n+   {\n+     after: '漏网之鱼',\n+     before: 'DIRECT',\n+     host: 'critical-probe.cdn1-epicgames-1.file.myqcloud.com',\n+     protocol: 'TCP',\n+     rule: 'MATCH,漏网之鱼',\n+     supported: false\n+   },\n+   {\n+     after: '漏网之鱼',\n+     before: 'DIRECT',\n+     host: 'critical-probe.cdn1-epicgames-17.file.myqcloud.com',\n+     protocol: 'TCP',\n+     rule: 'MATCH,漏网之鱼',\n+     supported: true\n+   },\n+   {\n+     after: '漏网之鱼',\n+     before: 'DIRECT',\n+     host: 'critical-probe.cdn1-epicgames-17.file.myqcloud.com',\n+     protocol: 'TCP',\n+     rule: 'MATCH,漏网之鱼',\n+     supported: false\n+   },\n+   {\n+     after: '漏网之鱼',\n+     before: 'DIRECT',\n+     host: 'critical-probe.cdn1-epicgames-23.file.myqcloud.com',\n+     protocol: 'TCP',\n+     rule: 'MATCH,漏网之鱼',\n+     supported: true\n+   },\n+   {\n+     after: '漏网之鱼',\n+     before: 'DIRECT',\n+     host: 'critical-probe.cdn1-epicgames-23.file.myqcloud.com',\n+     protocol: 'TCP',\n+     rule: 'MATCH,漏网之鱼',\n+     supported: false\n+   },\n+   {\n+     after: '漏网之鱼',\n+     before: 'DIRECT',\n+     host: 'critical-probe.cdn1-epicgames-999.file.myqcloud.com',\n+     protocol: 'TCP',\n+     rule: 'MATCH,漏网之鱼',\n+     supported: true\n+   },\n+   {\n+     after: '漏网之鱼',\n+     before: 'DIRECT',\n+     host: 'critical-probe.cdn1-epicgames-999.file.myqcloud.com',\n+     protocol: 'TCP',\n+     rule: 'MATCH,漏网之鱼',\n+     supported: false\n+   },\n+   {\n+     after: '漏网之鱼',\n+     before: 'DIRECT',\n+     host: 'critical-probe.cdn2-epicgames-0.file.myqcloud.com',\n+     protocol: 'TCP',\n+     rule: 'MATCH,漏网之鱼',\n+     supported: true\n+   },\n+   {\n+     after: '漏网之鱼',\n+     before: 'DIRECT',\n+     host: 'critical-probe.cdn2-epicgames-0.file.myqcloud.com',\n+     protocol: 'TCP',\n+     rule: 'MATCH,漏网之鱼',\n+     supported: false\n+   },\n+   {\n+     after: '漏网之鱼',\n+     before: 'DIRECT',\n+     host: 'critical-probe.cdn2-epicgames-1.file.myqcloud.com',\n+     protocol: 'TCP',\n+     rule: 'MATCH,漏网之鱼',\n+     supported: true\n+   },\n+   {\n+     after: '漏网之鱼',\n+     before: 'DIRECT',\n+     host: 'critical-probe.cdn2-epicgames-1.file.myqcloud.com',\n+     protocol: 'TCP',\n+     rule: 'MATCH,漏网之鱼',\n+     supported: false\n+   }\n+ ]\n- []\n\n    at E:\\2\\覆写脚本\\releases\\v14.3\\tests\\static.cjs:28:797\n    at check (E:\\2\\覆写脚本\\releases\\v14.3\\tests\\static.cjs:5:29)\n    at Object.<anonymous> (E:\\2\\覆写脚本\\releases\\v14.3\\tests\\static.cjs:28:2)\n    at Module._compile (node:internal/modules/cjs/loader:1872:14)\n    at Object..js (node:internal/modules/cjs/loader:2003:10)\n    at Module.load (node:internal/modules/cjs/loader:1594:32)\n    at Module._load (node:internal/modules/cjs/loader:1396:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\n    at node:internal/main/run_main_module:33:47"
+    },
+    {
+      "name": "android:business-table-loss-does-not-expose-domestic-DIRECT-on-critical-hosts",
+      "error": "AssertionError [ERR_ASSERTION]: critical-probe.scholar.google.ae\n\n'漏网之鱼' !== '谷歌服务'\n\n    at E:\\2\\覆写脚本\\releases\\v14.3\\tests\\static.cjs:29:510\n    at check (E:\\2\\覆写脚本\\releases\\v14.3\\tests\\static.cjs:5:29)\n    at Object.<anonymous> (E:\\2\\覆写脚本\\releases\\v14.3\\tests\\static.cjs:29:2)\n    at Module._compile (node:internal/modules/cjs/loader:1872:14)\n    at Object..js (node:internal/modules/cjs/loader:2003:10)\n    at Module.load (node:internal/modules/cjs/loader:1594:32)\n    at Module._load (node:internal/modules/cjs/loader:1396:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\n    at node:internal/main/run_main_module:33:47"
+    },
+    {
+      "name": "clashmi:all-domain-inventories-full-remote-same-routing-and-DNS",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n+ [\n+   {\n+     after: '微软生态',\n+     before: '国内网站',\n+     host: '51drv.com',\n+     member: 'DOMAIN-KEYWORD,1drv',\n+     rule: 'RULE-SET,v12r-domain-microsoft,微软生态'\n+   },\n+   {\n+     afterDNS: [\n+       '微软生态'\n+     ],\n+     beforeDNS: [\n+       '漏网之鱼'\n+     ],\n+     host: '51drv.com',\n+     key: 'rule-set:v12r-domain-microsoft'\n+   },\n+   {\n+     after: '微软生态',\n+     before: '国内网站',\n+     host: 'review-probe.51drv.com',\n+     member: 'DOMAIN-KEYWORD,1drv',\n+     rule: 'RULE-SET,v12r-domain-microsoft,微软生态'\n+   },\n+   {\n+     afterDNS: [\n+       '微软生态'\n+     ],\n+     beforeDNS: [\n+       '漏网之鱼'\n+     ],\n+     host: 'review-probe.51drv.com',\n+     key: 'rule-set:v12r-domain-microsoft'\n+   },\n+   {\n+     after: 'OpenAI 服务',\n+     before: '漏网之鱼',\n+     host: 'crixet.com',\n+     member: 'DOMAIN-SUFFIX,crixet.com',\n+     rule: 'RULE-SET,v12r-domain-openai,OpenAI 服务'\n+   },\n+   {\n+     afterDNS: [\n+       'OpenAI 服务'\n+     ],\n+     beforeDNS: [\n+       '漏网之鱼'\n+     ],\n+     host: 'crixet.com',\n+     key: 'rule-set:v12r-domain-openai'\n+   },\n+   {\n+     after: 'OpenAI 服务',\n+     before: '漏网之鱼',\n+     host: 'review-probe.crixet.com',\n+     member: 'DOMAIN-SUFFIX,crixet.com',\n+     rule: 'RULE-SET,v12r-domain-openai,OpenAI 服务'\n+   },\n+   {\n+     afterDNS: [\n+       'OpenAI 服务'\n+     ],\n+     beforeDNS: [\n+       '漏网之鱼'\n+     ],\n+     host: 'review-probe.crixet.com',\n+     key: 'rule-set:v12r-domain-openai'\n+   }\n+ ]\n- []\n\n    at E:\\2\\覆写脚本\\releases\\v14.3\\tests\\static.cjs:22:692\n    at check (E:\\2\\覆写脚本\\releases\\v14.3\\tests\\static.cjs:5:29)\n    at Object.<anonymous> (E:\\2\\覆写脚本\\releases\\v14.3\\tests\\static.cjs:22:2)\n    at Module._compile (node:internal/modules/cjs/loader:1872:14)\n    at Object..js (node:internal/modules/cjs/loader:2003:10)\n    at Module.load (node:internal/modules/cjs/loader:1594:32)\n    at Module._load (node:internal/modules/cjs/loader:1396:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\n    at node:internal/main/run_main_module:33:47"
+    },
+    {
+      "name": "clashmi:existing-business-UDP-IPv6-and-explicit-DIRECT-cases",
+      "error": "AssertionError [ERR_ASSERTION]: unknown-udp-crixet.com-443\n+ actual - expected\n\n+ 'OpenAI 服务'\n- '漏网之鱼'\n\n    at E:\\2\\覆写脚本\\releases\\v14.3\\tests\\static.cjs:23:203\n    at check (E:\\2\\覆写脚本\\releases\\v14.3\\tests\\static.cjs:5:29)\n    at Object.<anonymous> (E:\\2\\覆写脚本\\releases\\v14.3\\tests\\static.cjs:23:2)\n    at Module._compile (node:internal/modules/cjs/loader:1872:14)\n    at Object..js (node:internal/modules/cjs/loader:2003:10)\n    at Module.load (node:internal/modules/cjs/loader:1594:32)\n    at Module._load (node:internal/modules/cjs/loader:1396:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\n    at node:internal/main/run_main_module:33:47"
+    },
+    {
+      "name": "clashmi:critical-domains-with-all-remote-files-empty",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n+ [\n+   {\n+     after: '漏网之鱼',\n+     before: 'DIRECT',\n+     host: 'critical-probe.cdn0-epicgames-0.file.myqcloud.com',\n+     protocol: 'TCP',\n+     rule: 'MATCH,漏网之鱼',\n+     supported: true\n+   },\n+   {\n+     after: '漏网之鱼',\n+     before: 'DIRECT',\n+     host: 'critical-probe.cdn0-epicgames-0.file.myqcloud.com',\n+     protocol: 'TCP',\n+     rule: 'MATCH,漏网之鱼',\n+     supported: false\n+   },\n+   {\n+     after: '漏网之鱼',\n+     before: 'DIRECT',\n+     host: 'critical-probe.cdn0-epicgames-1.file.myqcloud.com',\n+     protocol: 'TCP',\n+     rule: 'MATCH,漏网之鱼',\n+     supported: true\n+   },\n+   {\n+     after: '漏网之鱼',\n+     before: 'DIRECT',\n+     host: 'critical-probe.cdn0-epicgames-1.file.myqcloud.com',\n+     protocol: 'TCP',\n+     rule: 'MATCH,漏网之鱼',\n+     supported: false\n+   },\n+   {\n+     after: '漏网之鱼',\n+     before: 'DIRECT',\n+     host: 'critical-probe.cdn0-epicgames-17.file.myqcloud.com',\n+     protocol: 'TCP',\n+     rule: 'MATCH,漏网之鱼',\n+     supported: true\n+   },\n+   {\n+     after: '漏网之鱼',\n+     before: 'DIRECT',\n+     host: 'critical-probe.cdn0-epicgames-17.file.myqcloud.com',\n+     protocol: 'TCP',\n+     rule: 'MATCH,漏网之鱼',\n+     supported: false\n+   },\n+   {\n+     after: '漏网之鱼',\n+     before: 'DIRECT',\n+     host: 'critical-probe.cdn0-epicgames-23.file.myqcloud.com',\n+     protocol: 'TCP',\n+     rule: 'MATCH,漏网之鱼',\n+     supported: true\n+   },\n+   {\n+     after: '漏网之鱼',\n+     before: 'DIRECT',\n+     host: 'critical-probe.cdn0-epicgames-23.file.myqcloud.com',\n+     protocol: 'TCP',\n+     rule: 'MATCH,漏网之鱼',\n+     supported: false\n+   },\n+   {\n+     after: '漏网之鱼',\n+     before: 'DIRECT',\n+     host: 'critical-probe.cdn0-epicgames-999.file.myqcloud.com',\n+     protocol: 'TCP',\n+     rule: 'MATCH,漏网之鱼',\n+     supported: true\n+   },\n+   {\n+     after: '漏网之鱼',\n+     before: 'DIRECT',\n+     host: 'critical-probe.cdn0-epicgames-999.file.myqcloud.com',\n+     protocol: 'TCP',\n+     rule: 'MATCH,漏网之鱼',\n+     supported: false\n+   },\n+   {\n+     after: '漏网之鱼',\n+     before: 'DIRECT',\n+     host: 'critical-probe.cdn1-epicgames-0.file.myqcloud.com',\n+     protocol: 'TCP',\n+     rule: 'MATCH,漏网之鱼',\n+     supported: true\n+   },\n+   {\n+     after: '漏网之鱼',\n+     before: 'DIRECT',\n+     host: 'critical-probe.cdn1-epicgames-0.file.myqcloud.com',\n+     protocol: 'TCP',\n+     rule: 'MATCH,漏网之鱼',\n+     supported: false\n+   },\n+   {\n+     after: '漏网之鱼',\n+     before: 'DIRECT',\n+     host: 'critical-probe.cdn1-epicgames-1.file.myqcloud.com',\n+     protocol: 'TCP',\n+     rule: 'MATCH,漏网之鱼',\n+     supported: true\n+   },\n+   {\n+     after: '漏网之鱼',\n+     before: 'DIRECT',\n+     host: 'critical-probe.cdn1-epicgames-1.file.myqcloud.com',\n+     protocol: 'TCP',\n+     rule: 'MATCH,漏网之鱼',\n+     supported: false\n+   },\n+   {\n+     after: '漏网之鱼',\n+     before: 'DIRECT',\n+     host: 'critical-probe.cdn1-epicgames-17.file.myqcloud.com',\n+     protocol: 'TCP',\n+     rule: 'MATCH,漏网之鱼',\n+     supported: true\n+   },\n+   {\n+     after: '漏网之鱼',\n+     before: 'DIRECT',\n+     host: 'critical-probe.cdn1-epicgames-17.file.myqcloud.com',\n+     protocol: 'TCP',\n+     rule: 'MATCH,漏网之鱼',\n+     supported: false\n+   },\n+   {\n+     after: '漏网之鱼',\n+     before: 'DIRECT',\n+     host: 'critical-probe.cdn1-epicgames-23.file.myqcloud.com',\n+     protocol: 'TCP',\n+     rule: 'MATCH,漏网之鱼',\n+     supported: true\n+   },\n+   {\n+     after: '漏网之鱼',\n+     before: 'DIRECT',\n+     host: 'critical-probe.cdn1-epicgames-23.file.myqcloud.com',\n+     protocol: 'TCP',\n+     rule: 'MATCH,漏网之鱼',\n+     supported: false\n+   },\n+   {\n+     after: '漏网之鱼',\n+     before: 'DIRECT',\n+     host: 'critical-probe.cdn1-epicgames-999.file.myqcloud.com',\n+     protocol: 'TCP',\n+     rule: 'MATCH,漏网之鱼',\n+     supported: true\n+   },\n+   {\n+     after: '漏网之鱼',\n+     before: 'DIRECT',\n+     host: 'critical-probe.cdn1-epicgames-999.file.myqcloud.com',\n+     protocol: 'TCP',\n+     rule: 'MATCH,漏网之鱼',\n+     supported: false\n+   },\n+   {\n+     after: '漏网之鱼',\n+     before: 'DIRECT',\n+     host: 'critical-probe.cdn2-epicgames-0.file.myqcloud.com',\n+     protocol: 'TCP',\n+     rule: 'MATCH,漏网之鱼',\n+     supported: true\n+   },\n+   {\n+     after: '漏网之鱼',\n+     before: 'DIRECT',\n+     host: 'critical-probe.cdn2-epicgames-0.file.myqcloud.com',\n+     protocol: 'TCP',\n+     rule: 'MATCH,漏网之鱼',\n+     supported: false\n+   },\n+   {\n+     after: '漏网之鱼',\n+     before: 'DIRECT',\n+     host: 'critical-probe.cdn2-epicgames-1.file.myqcloud.com',\n+     protocol: 'TCP',\n+     rule: 'MATCH,漏网之鱼',\n+     supported: true\n+   },\n+   {\n+     after: '漏网之鱼',\n+     before: 'DIRECT',\n+     host: 'critical-probe.cdn2-epicgames-1.file.myqcloud.com',\n+     protocol: 'TCP',\n+     rule: 'MATCH,漏网之鱼',\n+     supported: false\n+   }\n+ ]\n- []\n\n    at E:\\2\\覆写脚本\\releases\\v14.3\\tests\\static.cjs:28:797\n    at check (E:\\2\\覆写脚本\\releases\\v14.3\\tests\\static.cjs:5:29)\n    at Object.<anonymous> (E:\\2\\覆写脚本\\releases\\v14.3\\tests\\static.cjs:28:2)\n    at Module._compile (node:internal/modules/cjs/loader:1872:14)\n    at Object..js (node:internal/modules/cjs/loader:2003:10)\n    at Module.load (node:internal/modules/cjs/loader:1594:32)\n    at Module._load (node:internal/modules/cjs/loader:1396:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\n    at node:internal/main/run_main_module:33:47"
+    },
+    {
+      "name": "clashmi:business-table-loss-does-not-expose-domestic-DIRECT-on-critical-hosts",
+      "error": "AssertionError [ERR_ASSERTION]: critical-probe.scholar.google.ae\n\n'漏网之鱼' !== '谷歌服务'\n\n    at E:\\2\\覆写脚本\\releases\\v14.3\\tests\\static.cjs:29:510\n    at check (E:\\2\\覆写脚本\\releases\\v14.3\\tests\\static.cjs:5:29)\n    at Object.<anonymous> (E:\\2\\覆写脚本\\releases\\v14.3\\tests\\static.cjs:29:2)\n    at Module._compile (node:internal/modules/cjs/loader:1872:14)\n    at Object..js (node:internal/modules/cjs/loader:2003:10)\n    at Module.load (node:internal/modules/cjs/loader:1594:32)\n    at Module._load (node:internal/modules/cjs/loader:1396:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\n    at node:internal/main/run_main_module:33:47"
+    }
+  ],
+  "platforms": [
+    {
+      "platform": "desktop",
+      "fullInventoryHosts": 233400,
+      "normalRouting": 233400,
+      "normalDNS": 233400,
+      "criticalColdRouting": 6116,
+      "criticalColdDNS": 1529,
+      "existingCases": 628
+    },
+    {
+      "platform": "android",
+      "fullInventoryHosts": 233400,
+      "normalRouting": 233400,
+      "normalDNS": 233400,
+      "criticalColdRouting": 6116,
+      "criticalColdDNS": 1529,
+      "existingCases": 628
+    },
+    {
+      "platform": "clashmi",
+      "fullInventoryHosts": 233400,
+      "normalRouting": 233400,
+      "normalDNS": 233400,
+      "criticalColdRouting": 6116,
+      "criticalColdDNS": 1529,
+      "existingCases": 628
+    }
+  ],
+  "sourceFiles": [
+    {
+      "file": "tools/build-balanced.cjs",
+      "sha256": "6bcb43dbca2f4225d1cfe15bcf4f63ba38a9ea68a8c7cb6aec1016393d981a92"
+    },
+    {
+      "file": "tools/clashmi-adapter.js",
+      "sha256": "22fa1a686fc55e831cfb3225eb88e7265df05bbb8ea6a8399f04b9df66b9d268"
+    },
+    {
+      "file": "tests/static.cjs",
+      "sha256": "c9bb9986d393c211ec668539bd119c39d6ec9776f79ef2ad935b8b7d8559a2db"
+    },
+    {
+      "file": "tests/fixture.cjs",
+      "sha256": "096426ca7d29d24d38c788a7090f256b4a9f425cda5c88f1f93a9fc60731e111"
+    },
+    {
+      "file": "tests/domain-index.cjs",
+      "sha256": "9b764916859f1aca805beaba359604e6bcd425234428a085316b6b9da230dad1"
+    },
+    {
+      "file": "tests/cases.cjs",
+      "sha256": "6c0ef6919164447fd93e98d8b0cd63f6de15f078e7f01535d8a78310b9830cf1"
+    },
+    {
+      "file": "data/rules/embedded-policy.json",
+      "sha256": "fb4703d26573b23a3afe1d593454387df4568b10c7c7ca8045edd5d7326b2a01"
+    },
+    {
+      "file": "data/rules/company-core.json",
+      "sha256": "83e390ff6ebc9f8eff47a7b62583978163a61513f979113d70cf0e1bd508c80b"
+    },
+    {
+      "file": "data/rules/business-services.json",
+      "sha256": "6fddabd1e91a404bc7362b776ed72c943d6bf6a09d0f7367a8541820055ddd2f"
+    },
+    {
+      "file": "data/rule-sources.lock.json",
+      "sha256": "b422d72c45421bf22d4eba9137cdc9cac2bcc97ecfe77a69cef0c10ff553ae70"
+    },
+    {
+      "file": "metadata/balanced-sources.json",
+      "sha256": "1a0a593d092b0c019d92259302fbc4892bc8d364ba2418345801dac6ebcc1ec6"
+    },
+    {
+      "file": "validation/network-review/manifest.json",
+      "sha256": "5868ca79a56f6bb2c740067e7dc64d533bc095d4f7202229442e610b151fe034"
+    },
+    {
+      "file": "src/windows/v14.3.js",
+      "sha256": "38fd7f024816a305cad3c3db21fb8a7bdbe53e7b58057d6ed22ffaae8a006c15"
+    },
+    {
+      "file": "src/android/v14.3-android.js",
+      "sha256": "1f802e044b7d854934f38110e21087be829b5fdb5edd80b5ec3ec549f582f19b"
+    },
+    {
+      "file": "src/ios/v14.3-clashmi.js",
+      "sha256": "b8112678710d15b0625dc69d61050bd9badf2f6c6bbed218884ae41fe6261e4b"
+    },
+    {
+      "file": "src/ios/v14.3-clashmi-balanced-r1.js",
+      "sha256": "b8112678710d15b0625dc69d61050bd9badf2f6c6bbed218884ae41fe6261e4b"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-private.yaml",
+      "sha256": "58bcdd58c8d5663ba87a4f13083995ffc3cd14f97b4c12b03215190add2384af"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-private.list",
+      "sha256": "47e1f2c1242bee27fe450326779e0b8780eb121ac91e1a47b9264e2b0ecc8416"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-category-doh.yaml",
+      "sha256": "be0e04f22894374695c68ef46d84873ee20b0d9410a2c9d84d6462fcb73beab9"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-category-doh.list",
+      "sha256": "96455367dfafb67e3a58e0f040e57eb8279dfc45efd043481e82a5d7ace621cf"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-douyin.yaml",
+      "sha256": "05adddd7142fb4238054a40c78ad3955e10bae77c09f7d6a4531ca8893871759"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-douyin.list",
+      "sha256": "911bb17f7fea207a800981dca7bb8dde7481684da332a36e8b9b2a55790c751b"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-apple_at_cn.yaml",
+      "sha256": "2a8718e3638878e5f9fce24d753bf6ff231e6564f4c38fba9a577f42ed8fedec"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-apple_at_cn.list",
+      "sha256": "0683c809caeff184cb57371b55fcd26a5116af90fc8d3aea750c1aa629f94fe6"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-google_at_cn.yaml",
+      "sha256": "04829d19a1a61c3f9b41c1ef0350c1ff52633ed0178255f83edae7aca86f0e3b"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-google_at_cn.list",
+      "sha256": "fe9d1c63f7932407e8ed8987dd8fc7bd9e8d1a0e92b51e4979488e779022c8c8"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-microsoft_at_cn.yaml",
+      "sha256": "beaac8d2a67a31d6bd9079b30842229d97cb6d5d1826f1b7efe0a7dad881abbf"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-microsoft_at_cn.list",
+      "sha256": "3736b0b53a5bdf25b9ddc42d7518df59f132febb48e5461f427bfdf8980c9ee5"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-steam_at_cn.yaml",
+      "sha256": "52d6b64b9e3a73e51bcdd31cc46e8736cd5ab105c0402bd9325af33856cd32bf"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-steam_at_cn.list",
+      "sha256": "4ae2540001216910ec89a3c035b209654cbacfe4bc329996a775336791655602"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-cn.mrs",
+      "sha256": "e92bda4f0b9f05623663a882331a320ab4e266cada2046d3828a94572cdded46"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-cn.list",
+      "sha256": "5fb1cc7b7c155cc3db2664eb3200d46e242701e11523ef1b94dffc6638806967"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-netflix.yaml",
+      "sha256": "d2dd4babc01c6794931f71807936650cc0d886c4620ef6f014150575b38b6fb2"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-netflix.list",
+      "sha256": "47c3ed0adaa5f47b2b8bda2dd7721668899290942afeeac801ab598607ea205e"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-disney.yaml",
+      "sha256": "544dcc0a803d4cd91281e76120c67a47697c962b3417f91656d3dac401e542d8"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-disney.list",
+      "sha256": "d3f46d4bdc82fdf29157c17a7765092e9b0cf4fcc8fc6652d05b72a59add4dea"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-spotify.yaml",
+      "sha256": "f9c46687ea734730410f15296274e531c7491d9a1eca870041b7e4d788c22638"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-spotify.list",
+      "sha256": "bbdf8eb50559fc69c2654f3890182cefaae64df7215b1a7cf6ab1ac679abffe0"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-telegram.yaml",
+      "sha256": "6c357c7799ad105074a318f6251d33901a1bfffd60051fa7e5fad73c04d0af4b"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-telegram.list",
+      "sha256": "a1a39e45b89ce8da3def2ed862bdeef0fa67acb9ca50ea3cb017b9a2dd4623d8"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-discord.yaml",
+      "sha256": "feb6a7cbe204600ae8d3f8d54d7ad723ff0031854613de3dbcbd184daf988269"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-discord.list",
+      "sha256": "81aafa9b79a15d98167655e7d4e51baff38525b37247fbe41b74e9be7febaf59"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-tiktok.yaml",
+      "sha256": "61512676a2cf5f79b5e69fac594bbc87ff0277f74c8af6e3e921a1d667c4c16a"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-tiktok.list",
+      "sha256": "69ab6466561c7a5e231ce4c986f17d724e060f19cc888fa826bc552e7aae221c"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-twitter.yaml",
+      "sha256": "3c9277372816fc5fe4dc79a3a72465af12efd84a6d328f52ee7ff4b400bf6db4"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-twitter.list",
+      "sha256": "74f3f9f4a004ce32af096e45fdc9dcb54c781f3719d0763e2bb9778078e0256c"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-meta.yaml",
+      "sha256": "5405d43a058d81334f2720fce20ecfbf58c980d9cf1b3855a0c77491247b9282"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-meta.list",
+      "sha256": "ea85a2d98b6df724bbb00d6fe156252b0509a465d3d53c62cb17adbad5f40fac"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-steam.yaml",
+      "sha256": "b33b20dcc828cb698c29b994d4a5bd65b57b12ab7a10cff57d849fb7343b0109"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-steam.list",
+      "sha256": "2e3117f30009c26d558fa7ae044f31f2d743e60ca67742785633fa1e0a08b5ca"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-epicgames.yaml",
+      "sha256": "4e4389b52aa9da4418608910457c43cc6ae31064a4b15d7601cea10a550a8e73"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-epicgames.list",
+      "sha256": "3831cbfabc72c22e9b6aa036c77cded0ae2c08f5e3d88c5b269551fba7893f5f"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-apple.yaml",
+      "sha256": "4313df1652e744c679c2e3215875b4fa2845bf534c8644b71d19e5457768cab9"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-apple.list",
+      "sha256": "7c589262d627b93853efe0efeab724db35b462e4eb95026fd4c634e7043281ba"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-bilibili.yaml",
+      "sha256": "ba54536a3973f53c7a78d950c8d56c199e661b8e95f1c522c754c4e9c5c0f098"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-bilibili.list",
+      "sha256": "dfc74e8b01ee1dee314735a49e4511f7e9a405414c51724195a20b345ed2a9db"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-ip-netflix.mrs",
+      "sha256": "3fba174fdae1efe489d9b489126fa48e8a340f6d1f96b1478afad0c43781c14a"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-ip-netflix.list",
+      "sha256": "d7c71269113609b715d66f6986bec29774527d2d131cbc0dea9c7280dcc5c779"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-ip-telegram.mrs",
+      "sha256": "d121af95b9aeca3d8c29b2112d5e6685b2a6716383df8ae31b5fbb3408c527b3"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-ip-telegram.list",
+      "sha256": "53437464eec1ac4396b00e8b6ad427ed0cf54bfac6339575a2cef48d8753e961"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-ip-twitter.mrs",
+      "sha256": "e8fc8a292d91cf630475a1e759d52acf81cf38bc7283329253be5914dc23630f"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-ip-twitter.list",
+      "sha256": "7e37c6f264f5e614b15fe26c789d4e38b10df5a878c43d7b0fc86e5858bf9909"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-ip-cn.mrs",
+      "sha256": "d95b3d125f6c74ce3c15e19ef794f142de91e21c3b8fb7767e76aebfabff5149"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-ip-cn.list",
+      "sha256": "3376f850bb29d2ae310d461d2df045252f486843caeeb89633f9543ce694d684"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-openai.yaml",
+      "sha256": "ea7ffb2db4d913f8cc67d3e7be19035155aba5247032592d8130b8f6552fdd56"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-openai.list",
+      "sha256": "991f1e4c35e5e8722642a979adac590473d7291653ffd77050e75ff770a4c827"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-anthropic.yaml",
+      "sha256": "5b59537cd09e1dc487943af6270d739ad3c9a4b41fd22b1df886fe3a7b693f4f"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-anthropic.list",
+      "sha256": "b2b8e9a3a14980d2bcf8ef4e2ec231894855089533f6f3054af50b8d6636f64f"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-google-gemini.yaml",
+      "sha256": "e12fdc7a138b896cb3d7fb7bba8bb3dfd7910eac72becb0bd009e2ce602661be"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-google-gemini.list",
+      "sha256": "11f2c91b20c87030128d799e072e30679917f808dcb481acb5e48cb28e9aa881"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-youtube.yaml",
+      "sha256": "c4e9bdb1ca911692a3887a950fe06cc09e3d525a4916ae78a9b5a2a9568d2ec1"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-youtube.list",
+      "sha256": "ff1bc1631adc9c139ab19bf509a59507871b8f0663ade80dffa9f2b1665e41b9"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-google.yaml",
+      "sha256": "c8778b757e5d66d0b6e608ee5497cc670ae570575652e5758b73bc7a6e8aeb87"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-google.list",
+      "sha256": "30a56af54dabc79751bfc2bbf89b02ee372031dcfe9e4d559b2f56e5394d9e3d"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-microsoft.yaml",
+      "sha256": "5c0884d72bf4d7fc5de98abefef6e0d6eb0f2e449e27e53a093f89eca24f5961"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-microsoft.list",
+      "sha256": "b5468d07ee0646db04e91de3c1c65bec1ea88615109e5613165cace571a8d320"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-linkedin.yaml",
+      "sha256": "bfbbaba1deb3be57ab255031152373ec7ac316fe04c89fafedce1d793e56f116"
+    },
+    {
+      "file": "data/rules/reviewed/v12r-domain-linkedin.list",
+      "sha256": "e54bbe7546b5b807fc73e5911672e7fafb2c5f502c4f3343884412cd487c0bf3"
+    }
+  ],
+  "normalMismatches": [
+    {
+      "platform": "desktop",
+      "host": "51drv.com",
+      "before": "国内网站",
+      "after": "微软生态",
+      "rule": "RULE-SET,v12r-domain-microsoft,微软生态",
+      "member": "DOMAIN-KEYWORD,1drv"
+    },
+    {
+      "platform": "desktop",
+      "host": "51drv.com",
+      "beforeDNS": [
+        "漏网之鱼"
+      ],
+      "afterDNS": [
+        "微软生态"
+      ],
+      "key": "rule-set:v12r-domain-microsoft"
+    },
+    {
+      "platform": "desktop",
+      "host": "review-probe.51drv.com",
+      "before": "国内网站",
+      "after": "微软生态",
+      "rule": "RULE-SET,v12r-domain-microsoft,微软生态",
+      "member": "DOMAIN-KEYWORD,1drv"
+    },
+    {
+      "platform": "desktop",
+      "host": "review-probe.51drv.com",
+      "beforeDNS": [
+        "漏网之鱼"
+      ],
+      "afterDNS": [
+        "微软生态"
+      ],
+      "key": "rule-set:v12r-domain-microsoft"
+    },
+    {
+      "platform": "desktop",
+      "host": "crixet.com",
+      "before": "漏网之鱼",
+      "after": "OpenAI 服务",
+      "rule": "RULE-SET,v12r-domain-openai,OpenAI 服务",
+      "member": "DOMAIN-SUFFIX,crixet.com"
+    },
+    {
+      "platform": "desktop",
+      "host": "crixet.com",
+      "beforeDNS": [
+        "漏网之鱼"
+      ],
+      "afterDNS": [
+        "OpenAI 服务"
+      ],
+      "key": "rule-set:v12r-domain-openai"
+    },
+    {
+      "platform": "desktop",
+      "host": "review-probe.crixet.com",
+      "before": "漏网之鱼",
+      "after": "OpenAI 服务",
+      "rule": "RULE-SET,v12r-domain-openai,OpenAI 服务",
+      "member": "DOMAIN-SUFFIX,crixet.com"
+    },
+    {
+      "platform": "desktop",
+      "host": "review-probe.crixet.com",
+      "beforeDNS": [
+        "漏网之鱼"
+      ],
+      "afterDNS": [
+        "OpenAI 服务"
+      ],
+      "key": "rule-set:v12r-domain-openai"
+    },
+    {
+      "platform": "android",
+      "host": "51drv.com",
+      "before": "国内网站",
+      "after": "微软生态",
+      "rule": "RULE-SET,v12r-domain-microsoft,微软生态",
+      "member": "DOMAIN-KEYWORD,1drv"
+    },
+    {
+      "platform": "android",
+      "host": "51drv.com",
+      "beforeDNS": [
+        "漏网之鱼"
+      ],
+      "afterDNS": [
+        "微软生态"
+      ],
+      "key": "rule-set:v12r-domain-microsoft"
+    },
+    {
+      "platform": "android",
+      "host": "review-probe.51drv.com",
+      "before": "国内网站",
+      "after": "微软生态",
+      "rule": "RULE-SET,v12r-domain-microsoft,微软生态",
+      "member": "DOMAIN-KEYWORD,1drv"
+    },
+    {
+      "platform": "android",
+      "host": "review-probe.51drv.com",
+      "beforeDNS": [
+        "漏网之鱼"
+      ],
+      "afterDNS": [
+        "微软生态"
+      ],
+      "key": "rule-set:v12r-domain-microsoft"
+    },
+    {
+      "platform": "android",
+      "host": "crixet.com",
+      "before": "漏网之鱼",
+      "after": "OpenAI 服务",
+      "rule": "RULE-SET,v12r-domain-openai,OpenAI 服务",
+      "member": "DOMAIN-SUFFIX,crixet.com"
+    },
+    {
+      "platform": "android",
+      "host": "crixet.com",
+      "beforeDNS": [
+        "漏网之鱼"
+      ],
+      "afterDNS": [
+        "OpenAI 服务"
+      ],
+      "key": "rule-set:v12r-domain-openai"
+    },
+    {
+      "platform": "android",
+      "host": "review-probe.crixet.com",
+      "before": "漏网之鱼",
+      "after": "OpenAI 服务",
+      "rule": "RULE-SET,v12r-domain-openai,OpenAI 服务",
+      "member": "DOMAIN-SUFFIX,crixet.com"
+    },
+    {
+      "platform": "android",
+      "host": "review-probe.crixet.com",
+      "beforeDNS": [
+        "漏网之鱼"
+      ],
+      "afterDNS": [
+        "OpenAI 服务"
+      ],
+      "key": "rule-set:v12r-domain-openai"
+    },
+    {
+      "platform": "clashmi",
+      "host": "51drv.com",
+      "before": "国内网站",
+      "after": "微软生态",
+      "rule": "RULE-SET,v12r-domain-microsoft,微软生态",
+      "member": "DOMAIN-KEYWORD,1drv"
+    },
+    {
+      "platform": "clashmi",
+      "host": "51drv.com",
+      "beforeDNS": [
+        "漏网之鱼"
+      ],
+      "afterDNS": [
+        "微软生态"
+      ],
+      "key": "rule-set:v12r-domain-microsoft"
+    },
+    {
+      "platform": "clashmi",
+      "host": "review-probe.51drv.com",
+      "before": "国内网站",
+      "after": "微软生态",
+      "rule": "RULE-SET,v12r-domain-microsoft,微软生态",
+      "member": "DOMAIN-KEYWORD,1drv"
+    },
+    {
+      "platform": "clashmi",
+      "host": "review-probe.51drv.com",
+      "beforeDNS": [
+        "漏网之鱼"
+      ],
+      "afterDNS": [
+        "微软生态"
+      ],
+      "key": "rule-set:v12r-domain-microsoft"
+    },
+    {
+      "platform": "clashmi",
+      "host": "crixet.com",
+      "before": "漏网之鱼",
+      "after": "OpenAI 服务",
+      "rule": "RULE-SET,v12r-domain-openai,OpenAI 服务",
+      "member": "DOMAIN-SUFFIX,crixet.com"
+    },
+    {
+      "platform": "clashmi",
+      "host": "crixet.com",
+      "beforeDNS": [
+        "漏网之鱼"
+      ],
+      "afterDNS": [
+        "OpenAI 服务"
+      ],
+      "key": "rule-set:v12r-domain-openai"
+    },
+    {
+      "platform": "clashmi",
+      "host": "review-probe.crixet.com",
+      "before": "漏网之鱼",
+      "after": "OpenAI 服务",
+      "rule": "RULE-SET,v12r-domain-openai,OpenAI 服务",
+      "member": "DOMAIN-SUFFIX,crixet.com"
+    },
+    {
+      "platform": "clashmi",
+      "host": "review-probe.crixet.com",
+      "beforeDNS": [
+        "漏网之鱼"
+      ],
+      "afterDNS": [
+        "OpenAI 服务"
+      ],
+      "key": "rule-set:v12r-domain-openai"
+    }
+  ],
+  "coldMismatches": [
+    {
+      "platform": "desktop",
+      "host": "critical-probe.cdn0-epicgames-0.file.myqcloud.com",
+      "protocol": "TCP",
+      "supported": true,
+      "before": "DIRECT",
+      "after": "漏网之鱼",
+      "rule": "MATCH,漏网之鱼"
+    },
+    {
+      "platform": "desktop",
+      "host": "critical-probe.cdn0-epicgames-0.file.myqcloud.com",
+      "protocol": "TCP",
+      "supported": false,
+      "before": "DIRECT",
+      "after": "漏网之鱼",
+      "rule": "MATCH,漏网之鱼"
+    },
+    {
+      "platform": "desktop",
+      "host": "critical-probe.cdn0-epicgames-1.file.myqcloud.com",
+      "protocol": "TCP",
+      "supported": true,
+      "before": "DIRECT",
+      "after": "漏网之鱼",
+      "rule": "MATCH,漏网之鱼"
+    },
+    {
+      "platform": "desktop",
+      "host": "critical-probe.cdn0-epicgames-1.file.myqcloud.com",
+      "protocol": "TCP",
+      "supported": false,
+      "before": "DIRECT",
+      "after": "漏网之鱼",
+      "rule": "MATCH,漏网之鱼"
+    },
+    {
+      "platform": "desktop",
+      "host": "critical-probe.cdn0-epicgames-17.file.myqcloud.com",
+      "protocol": "TCP",
+      "supported": true,
+      "before": "DIRECT",
+      "after": "漏网之鱼",
+      "rule": "MATCH,漏网之鱼"
+    },
+    {
+      "platform": "desktop",
+      "host": "critical-probe.cdn0-epicgames-17.file.myqcloud.com",
+      "protocol": "TCP",
+      "supported": false,
+      "before": "DIRECT",
+      "after": "漏网之鱼",
+      "rule": "MATCH,漏网之鱼"
+    },
+    {
+      "platform": "desktop",
+      "host": "critical-probe.cdn0-epicgames-23.file.myqcloud.com",
+      "protocol": "TCP",
+      "supported": true,
+      "before": "DIRECT",
+      "after": "漏网之鱼",
+      "rule": "MATCH,漏网之鱼"
+    },
+    {
+      "platform": "desktop",
+      "host": "critical-probe.cdn0-epicgames-23.file.myqcloud.com",
+      "protocol": "TCP",
+      "supported": false,
+      "before": "DIRECT",
+      "after": "漏网之鱼",
+      "rule": "MATCH,漏网之鱼"
+    },
+    {
+      "platform": "desktop",
+      "host": "critical-probe.cdn0-epicgames-999.file.myqcloud.com",
+      "protocol": "TCP",
+      "supported": true,
+      "before": "DIRECT",
+      "after": "漏网之鱼",
+      "rule": "MATCH,漏网之鱼"
+    },
+    {
+      "platform": "desktop",
+      "host": "critical-probe.cdn0-epicgames-999.file.myqcloud.com",
+      "protocol": "TCP",
+      "supported": false,
+      "before": "DIRECT",
+      "after": "漏网之鱼",
+      "rule": "MATCH,漏网之鱼"
+    },
+    {
+      "platform": "desktop",
+      "host": "critical-probe.cdn1-epicgames-0.file.myqcloud.com",
+      "protocol": "TCP",
+      "supported": true,
+      "before": "DIRECT",
+      "after": "漏网之鱼",
+      "rule": "MATCH,漏网之鱼"
+    },
+    {
+      "platform": "desktop",
+      "host": "critical-probe.cdn1-epicgames-0.file.myqcloud.com",
+      "protocol": "TCP",
+      "supported": false,
+      "before": "DIRECT",
+      "after": "漏网之鱼",
+      "rule": "MATCH,漏网之鱼"
+    },
+    {
+      "platform": "desktop",
+      "host": "critical-probe.cdn1-epicgames-1.file.myqcloud.com",
+      "protocol": "TCP",
+      "supported": true,
+      "before": "DIRECT",
+      "after": "漏网之鱼",
+      "rule": "MATCH,漏网之鱼"
+    },
+    {
+      "platform": "desktop",
+      "host": "critical-probe.cdn1-epicgames-1.file.myqcloud.com",
+      "protocol": "TCP",
+      "supported": false,
+      "before": "DIRECT",
+      "after": "漏网之鱼",
+      "rule": "MATCH,漏网之鱼"
+    },
+    {
+      "platform": "desktop",
+      "host": "critical-probe.cdn1-epicgames-17.file.myqcloud.com",
+      "protocol": "TCP",
+      "supported": true,
+      "before": "DIRECT",
+      "after": "漏网之鱼",
+      "rule": "MATCH,漏网之鱼"
+    },
+    {
+      "platform": "desktop",
+      "host": "critical-probe.cdn1-epicgames-17.file.myqcloud.com",
+      "protocol": "TCP",
+      "supported": false,
+      "before": "DIRECT",
+      "after": "漏网之鱼",
+      "rule": "MATCH,漏网之鱼"
+    },
+    {
+      "platform": "desktop",
+      "host": "critical-probe.cdn1-epicgames-23.file.myqcloud.com",
+      "protocol": "TCP",
+      "supported": true,
+      "before": "DIRECT",
+      "after": "漏网之鱼",
+      "rule": "MATCH,漏网之鱼"
+    },
+    {
+      "platform": "desktop",
+      "host": "critical-probe.cdn1-epicgames-23.file.myqcloud.com",
+      "protocol": "TCP",
+      "supported": false,
+      "before": "DIRECT",
+      "after": "漏网之鱼",
+      "rule": "MATCH,漏网之鱼"
+    },
+    {
+      "platform": "desktop",
+      "host": "critical-probe.cdn1-epicgames-999.file.myqcloud.com",
+      "protocol": "TCP",
+      "supported": true,
+      "before": "DIRECT",
+      "after": "漏网之鱼",
+      "rule": "MATCH,漏网之鱼"
+    },
+    {
+      "platform": "desktop",
+      "host": "critical-probe.cdn1-epicgames-999.file.myqcloud.com",
+      "protocol": "TCP",
+      "supported": false,
+      "before": "DIRECT",
+      "after": "漏网之鱼",
+      "rule": "MATCH,漏网之鱼"
+    },
+    {
+      "platform": "desktop",
+      "host": "critical-probe.cdn2-epicgames-0.file.myqcloud.com",
+      "protocol": "TCP",
+      "supported": true,
+      "before": "DIRECT",
+      "after": "漏网之鱼",
+      "rule": "MATCH,漏网之鱼"
+    },
+    {
+      "platform": "desktop",
+      "host": "critical-probe.cdn2-epicgames-0.file.myqcloud.com",
+      "protocol": "TCP",
+      "supported": false,
+      "before": "DIRECT",
+      "after": "漏网之鱼",
+      "rule": "MATCH,漏网之鱼"
+    },
+    {
+      "platform": "desktop",
+      "host": "critical-probe.cdn2-epicgames-1.file.myqcloud.com",
+      "protocol": "TCP",
+      "supported": true,
+      "before": "DIRECT",
+      "after": "漏网之鱼",
+      "rule": "MATCH,漏网之鱼"
+    },
+    {
+      "platform": "desktop",
+      "host": "critical-probe.cdn2-epicgames-1.file.myqcloud.com",
+      "protocol": "TCP",
+      "supported": false,
+      "before": "DIRECT",
+      "after": "漏网之鱼",
+      "rule": "MATCH,漏网之鱼"
+    },
+    {
+      "platform": "android",
+      "host": "critical-probe.cdn0-epicgames-0.file.myqcloud.com",
+      "protocol": "TCP",
+      "supported": true,
+      "before": "DIRECT",
+      "after": "漏网之鱼",
+      "rule": "MATCH,漏网之鱼"
+    },
+    {
+      "platform": "android",
+      "host": "critical-probe.cdn0-epicgames-0.file.myqcloud.com",
+      "protocol": "TCP",
+      "supported": false,
+      "before": "DIRECT",
+      "after": "漏网之鱼",
+      "rule": "MATCH,漏网之鱼"
+    },
+    {
+      "platform": "android",
+      "host": "critical-probe.cdn0-epicgames-1.file.myqcloud.com",
+      "protocol": "TCP",
+      "supported": true,
+      "before": "DIRECT",
+      "after": "漏网之鱼",
+      "rule": "MATCH,漏网之鱼"
+    },
+    {
+      "platform": "android",
+      "host": "critical-probe.cdn0-epicgames-1.file.myqcloud.com",
+      "protocol": "TCP",
+      "supported": false,
+      "before": "DIRECT",
+      "after": "漏网之鱼",
+      "rule": "MATCH,漏网之鱼"
+    },
+    {
+      "platform": "android",
+      "host": "critical-probe.cdn0-epicgames-17.file.myqcloud.com",
+      "protocol": "TCP",
+      "supported": true,
+      "before": "DIRECT",
+      "after": "漏网之鱼",
+      "rule": "MATCH,漏网之鱼"
+    },
+    {
+      "platform": "android",
+      "host": "critical-probe.cdn0-epicgames-17.file.myqcloud.com",
+      "protocol": "TCP",
+      "supported": false,
+      "before": "DIRECT",
+      "after": "漏网之鱼",
+      "rule": "MATCH,漏网之鱼"
+    },
+    {
+      "platform": "android",
+      "host": "critical-probe.cdn0-epicgames-23.file.myqcloud.com",
+      "protocol": "TCP",
+      "supported": true,
+      "before": "DIRECT",
+      "after": "漏网之鱼",
+      "rule": "MATCH,漏网之鱼"
+    },
+    {
+      "platform": "android",
+      "host": "critical-probe.cdn0-epicgames-23.file.myqcloud.com",
+      "protocol": "TCP",
+      "supported": false,
+      "before": "DIRECT",
+      "after": "漏网之鱼",
+      "rule": "MATCH,漏网之鱼"
+    },
+    {
+      "platform": "android",
+      "host": "critical-probe.cdn0-epicgames-999.file.myqcloud.com",
+      "protocol": "TCP",
+      "supported": true,
+      "before": "DIRECT",
+      "after": "漏网之鱼",
+      "rule": "MATCH,漏网之鱼"
+    },
+    {
+      "platform": "android",
+      "host": "critical-probe.cdn0-epicgames-999.file.myqcloud.com",
+      "protocol": "TCP",
+      "supported": false,
+      "before": "DIRECT",
+      "after": "漏网之鱼",
+      "rule": "MATCH,漏网之鱼"
+    },
+    {
+      "platform": "android",
+      "host": "critical-probe.cdn1-epicgames-0.file.myqcloud.com",
+      "protocol": "TCP",
+      "supported": true,
+      "before": "DIRECT",
+      "after": "漏网之鱼",
+      "rule": "MATCH,漏网之鱼"
+    },
+    {
+      "platform": "android",
+      "host": "critical-probe.cdn1-epicgames-0.file.myqcloud.com",
+      "protocol": "TCP",
+      "supported": false,
+      "before": "DIRECT",
+      "after": "漏网之鱼",
+      "rule": "MATCH,漏网之鱼"
+    },
+    {
+      "platform": "android",
+      "host": "critical-probe.cdn1-epicgames-1.file.myqcloud.com",
+      "protocol": "TCP",
+      "supported": true,
+      "before": "DIRECT",
+      "after": "漏网之鱼",
+      "rule": "MATCH,漏网之鱼"
+    },
+    {
+      "platform": "android",
+      "host": "critical-probe.cdn1-epicgames-1.file.myqcloud.com",
+      "protocol": "TCP",
+      "supported": false,
+      "before": "DIRECT",
+      "after": "漏网之鱼",
+      "rule": "MATCH,漏网之鱼"
+    },
+    {
+      "platform": "android",
+      "host": "critical-probe.cdn1-epicgames-17.file.myqcloud.com",
+      "protocol": "TCP",
+      "supported": true,
+      "before": "DIRECT",
+      "after": "漏网之鱼",
+      "rule": "MATCH,漏网之鱼"
+    },
+    {
+      "platform": "android",
+      "host": "critical-probe.cdn1-epicgames-17.file.myqcloud.com",
+      "protocol": "TCP",
+      "supported": false,
+      "before": "DIRECT",
+      "after": "漏网之鱼",
+      "rule": "MATCH,漏网之鱼"
+    },
+    {
+      "platform": "android",
+      "host": "critical-probe.cdn1-epicgames-23.file.myqcloud.com",
+      "protocol": "TCP",
+      "supported": true,
+      "before": "DIRECT",
+      "after": "漏网之鱼",
+      "rule": "MATCH,漏网之鱼"
+    },
+    {
+      "platform": "android",
+      "host": "critical-probe.cdn1-epicgames-23.file.myqcloud.com",
+      "protocol": "TCP",
+      "supported": false,
+      "before": "DIRECT",
+      "after": "漏网之鱼",
+      "rule": "MATCH,漏网之鱼"
+    },
+    {
+      "platform": "android",
+      "host": "critical-probe.cdn1-epicgames-999.file.myqcloud.com",
+      "protocol": "TCP",
+      "supported": true,
+      "before": "DIRECT",
+      "after": "漏网之鱼",
+      "rule": "MATCH,漏网之鱼"
+    },
+    {
+      "platform": "android",
+      "host": "critical-probe.cdn1-epicgames-999.file.myqcloud.com",
+      "protocol": "TCP",
+      "supported": false,
+      "before": "DIRECT",
+      "after": "漏网之鱼",
+      "rule": "MATCH,漏网之鱼"
+    },
+    {
+      "platform": "android",
+      "host": "critical-probe.cdn2-epicgames-0.file.myqcloud.com",
+      "protocol": "TCP",
+      "supported": true,
+      "before": "DIRECT",
+      "after": "漏网之鱼",
+      "rule": "MATCH,漏网之鱼"
+    },
+    {
+      "platform": "android",
+      "host": "critical-probe.cdn2-epicgames-0.file.myqcloud.com",
+      "protocol": "TCP",
+      "supported": false,
+      "before": "DIRECT",
+      "after": "漏网之鱼",
+      "rule": "MATCH,漏网之鱼"
+    },
+    {
+      "platform": "android",
+      "host": "critical-probe.cdn2-epicgames-1.file.myqcloud.com",
+      "protocol": "TCP",
+      "supported": true,
+      "before": "DIRECT",
+      "after": "漏网之鱼",
+      "rule": "MATCH,漏网之鱼"
+    },
+    {
+      "platform": "android",
+      "host": "critical-probe.cdn2-epicgames-1.file.myqcloud.com",
+      "protocol": "TCP",
+      "supported": false,
+      "before": "DIRECT",
+      "after": "漏网之鱼",
+      "rule": "MATCH,漏网之鱼"
+    },
+    {
+      "platform": "clashmi",
+      "host": "critical-probe.cdn0-epicgames-0.file.myqcloud.com",
+      "protocol": "TCP",
+      "supported": true,
+      "before": "DIRECT",
+      "after": "漏网之鱼",
+      "rule": "MATCH,漏网之鱼"
+    },
+    {
+      "platform": "clashmi",
+      "host": "critical-probe.cdn0-epicgames-0.file.myqcloud.com",
+      "protocol": "TCP",
+      "supported": false,
+      "before": "DIRECT",
+      "after": "漏网之鱼",
+      "rule": "MATCH,漏网之鱼"
+    },
+    {
+      "platform": "clashmi",
+      "host": "critical-probe.cdn0-epicgames-1.file.myqcloud.com",
+      "protocol": "TCP",
+      "supported": true,
+      "before": "DIRECT",
+      "after": "漏网之鱼",
+      "rule": "MATCH,漏网之鱼"
+    },
+    {
+      "platform": "clashmi",
+      "host": "critical-probe.cdn0-epicgames-1.file.myqcloud.com",
+      "protocol": "TCP",
+      "supported": false,
+      "before": "DIRECT",
+      "after": "漏网之鱼",
+      "rule": "MATCH,漏网之鱼"
+    },
+    {
+      "platform": "clashmi",
+      "host": "critical-probe.cdn0-epicgames-17.file.myqcloud.com",
+      "protocol": "TCP",
+      "supported": true,
+      "before": "DIRECT",
+      "after": "漏网之鱼",
+      "rule": "MATCH,漏网之鱼"
+    },
+    {
+      "platform": "clashmi",
+      "host": "critical-probe.cdn0-epicgames-17.file.myqcloud.com",
+      "protocol": "TCP",
+      "supported": false,
+      "before": "DIRECT",
+      "after": "漏网之鱼",
+      "rule": "MATCH,漏网之鱼"
+    },
+    {
+      "platform": "clashmi",
+      "host": "critical-probe.cdn0-epicgames-23.file.myqcloud.com",
+      "protocol": "TCP",
+      "supported": true,
+      "before": "DIRECT",
+      "after": "漏网之鱼",
+      "rule": "MATCH,漏网之鱼"
+    },
+    {
+      "platform": "clashmi",
+      "host": "critical-probe.cdn0-epicgames-23.file.myqcloud.com",
+      "protocol": "TCP",
+      "supported": false,
+      "before": "DIRECT",
+      "after": "漏网之鱼",
+      "rule": "MATCH,漏网之鱼"
+    },
+    {
+      "platform": "clashmi",
+      "host": "critical-probe.cdn0-epicgames-999.file.myqcloud.com",
+      "protocol": "TCP",
+      "supported": true,
+      "before": "DIRECT",
+      "after": "漏网之鱼",
+      "rule": "MATCH,漏网之鱼"
+    },
+    {
+      "platform": "clashmi",
+      "host": "critical-probe.cdn0-epicgames-999.file.myqcloud.com",
+      "protocol": "TCP",
+      "supported": false,
+      "before": "DIRECT",
+      "after": "漏网之鱼",
+      "rule": "MATCH,漏网之鱼"
+    },
+    {
+      "platform": "clashmi",
+      "host": "critical-probe.cdn1-epicgames-0.file.myqcloud.com",
+      "protocol": "TCP",
+      "supported": true,
+      "before": "DIRECT",
+      "after": "漏网之鱼",
+      "rule": "MATCH,漏网之鱼"
+    },
+    {
+      "platform": "clashmi",
+      "host": "critical-probe.cdn1-epicgames-0.file.myqcloud.com",
+      "protocol": "TCP",
+      "supported": false,
+      "before": "DIRECT",
+      "after": "漏网之鱼",
+      "rule": "MATCH,漏网之鱼"
+    },
+    {
+      "platform": "clashmi",
+      "host": "critical-probe.cdn1-epicgames-1.file.myqcloud.com",
+      "protocol": "TCP",
+      "supported": true,
+      "before": "DIRECT",
+      "after": "漏网之鱼",
+      "rule": "MATCH,漏网之鱼"
+    },
+    {
+      "platform": "clashmi",
+      "host": "critical-probe.cdn1-epicgames-1.file.myqcloud.com",
+      "protocol": "TCP",
+      "supported": false,
+      "before": "DIRECT",
+      "after": "漏网之鱼",
+      "rule": "MATCH,漏网之鱼"
+    },
+    {
+      "platform": "clashmi",
+      "host": "critical-probe.cdn1-epicgames-17.file.myqcloud.com",
+      "protocol": "TCP",
+      "supported": true,
+      "before": "DIRECT",
+      "after": "漏网之鱼",
+      "rule": "MATCH,漏网之鱼"
+    },
+    {
+      "platform": "clashmi",
+      "host": "critical-probe.cdn1-epicgames-17.file.myqcloud.com",
+      "protocol": "TCP",
+      "supported": false,
+      "before": "DIRECT",
+      "after": "漏网之鱼",
+      "rule": "MATCH,漏网之鱼"
+    },
+    {
+      "platform": "clashmi",
+      "host": "critical-probe.cdn1-epicgames-23.file.myqcloud.com",
+      "protocol": "TCP",
+      "supported": true,
+      "before": "DIRECT",
+      "after": "漏网之鱼",
+      "rule": "MATCH,漏网之鱼"
+    },
+    {
+      "platform": "clashmi",
+      "host": "critical-probe.cdn1-epicgames-23.file.myqcloud.com",
+      "protocol": "TCP",
+      "supported": false,
+      "before": "DIRECT",
+      "after": "漏网之鱼",
+      "rule": "MATCH,漏网之鱼"
+    },
+    {
+      "platform": "clashmi",
+      "host": "critical-probe.cdn1-epicgames-999.file.myqcloud.com",
+      "protocol": "TCP",
+      "supported": true,
+      "before": "DIRECT",
+      "after": "漏网之鱼",
+      "rule": "MATCH,漏网之鱼"
+    },
+    {
+      "platform": "clashmi",
+      "host": "critical-probe.cdn1-epicgames-999.file.myqcloud.com",
+      "protocol": "TCP",
+      "supported": false,
+      "before": "DIRECT",
+      "after": "漏网之鱼",
+      "rule": "MATCH,漏网之鱼"
+    },
+    {
+      "platform": "clashmi",
+      "host": "critical-probe.cdn2-epicgames-0.file.myqcloud.com",
+      "protocol": "TCP",
+      "supported": true,
+      "before": "DIRECT",
+      "after": "漏网之鱼",
+      "rule": "MATCH,漏网之鱼"
+    },
+    {
+      "platform": "clashmi",
+      "host": "critical-probe.cdn2-epicgames-0.file.myqcloud.com",
+      "protocol": "TCP",
+      "supported": false,
+      "before": "DIRECT",
+      "after": "漏网之鱼",
+      "rule": "MATCH,漏网之鱼"
+    },
+    {
+      "platform": "clashmi",
+      "host": "critical-probe.cdn2-epicgames-1.file.myqcloud.com",
+      "protocol": "TCP",
+      "supported": true,
+      "before": "DIRECT",
+      "after": "漏网之鱼",
+      "rule": "MATCH,漏网之鱼"
+    },
+    {
+      "platform": "clashmi",
+      "host": "critical-probe.cdn2-epicgames-1.file.myqcloud.com",
+      "protocol": "TCP",
+      "supported": false,
+      "before": "DIRECT",
+      "after": "漏网之鱼",
+      "rule": "MATCH,漏网之鱼"
+    }
+  ]
+}

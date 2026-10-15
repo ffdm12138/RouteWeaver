@@ -1,0 +1,213 @@
+{
+  "version": "14.2",
+  "date": "2026-10-12",
+  "revision": "clashmi-object-r2",
+  "status": "CLASHMI_SOURCE_LOCAL_CORE_PASS_DEVICE_PENDING",
+  "authorization": "User requested Clash Mi and reported String-to-Map evaluation failure on iOS 1.0.30.1605; repair the script and delivery.",
+  "classificationRevision": "embedded-domain-r1",
+  "retainedOriginalEntries": [
+    {
+      "file": "src/windows/v14.2.js",
+      "sha256": "26e46c85f0a2d4facd76e1723a2eeea5c80b5fa901286a5241d4df1fc8ea4bb4"
+    },
+    {
+      "file": "src/android/v14.2-android.js",
+      "sha256": "7d6a3cbcc30a7b29dfa021e2162cd47b98647c1fdae823f3b47ff62a97638e64"
+    },
+    {
+      "file": "src/ios/v14.2-shadowrocket.conf",
+      "sha256": "4813040cc00845c0d0cfda47123194598dce6d6d89e4b5e8a377f3ac516774f9"
+    }
+  ],
+  "frozenContract": {
+    "file": "docs/需求.md",
+    "sha256": "5f0086ba18755d8c10c96e2b255e3d7e456afdf4f9c0e6e7f36b7926110859f0",
+    "additiveScope": "User added Clash Mi as a fourth client; inherit all eleven requirements; original contract bytes preserved"
+  },
+  "beforeManifest": {
+    "file": "validation/inputs/clashmi-before/manifest.json",
+    "sha256": "fec96a61f840b7aa2601f0c068461cc34e33efa43a9d2e499cd5f20465be5187"
+  },
+  "compatibility": {
+    "file": "metadata/clashmi-compatibility.json",
+    "sha256": "c13d5678ef753003262e3a23fc06a024fb60acfb433bb47b4a1fc6d0ef0f1a05"
+  },
+  "generatedSources": {
+    "file": "metadata/clashmi-sources.json",
+    "sha256": "e8d64b8451a3687fd58589409897d26f9c01da9e82191c598a6e3fa91249d2e3"
+  },
+  "entries": [
+    {
+      "file": "src/ios/v14.2-clashmi.js",
+      "sha256": "7584f5a4bb6eb10613e9e0c538195d35c2cb77ea5ef2e15b2fe534b89b2535af"
+    },
+    {
+      "file": "src/ios/v14.2-clashmi-object-r2.js",
+      "sha256": "7584f5a4bb6eb10613e9e0c538195d35c2cb77ea5ef2e15b2fe534b89b2535af"
+    },
+    {
+      "file": "tools/clashmi-adapter.js",
+      "sha256": "22fa1a686fc55e831cfb3225eb88e7265df05bbb8ea6a8399f04b9df66b9d268"
+    },
+    {
+      "file": "tools/generate-v14.2-clashmi.cjs",
+      "sha256": "2fd7951ca4b45a0b45a2c6e31a8d82b3367c51ee9089c0ad19a911e2cf282886"
+    },
+    {
+      "file": "tests/clashmi.cjs",
+      "sha256": "d046a8a1e99261b8465da6499abd87027678c55fc29e91195f625662471f605a"
+    },
+    {
+      "file": "tests/clashmi-fixture.cjs",
+      "sha256": "705928a8729c624a38508c286464ec9ab230f0abd699c4f13ea8694e4c4a3a4a"
+    },
+    {
+      "file": "tests/native-clashmi.cjs",
+      "sha256": "cec4ef01c848325bc281fa6a93525f1ea48606eacb9d81d35e0970872f1905bf"
+    },
+    {
+      "file": "data/rule-sources.lock.json",
+      "sha256": "50dcaa46d1b16123858f54ccfa1e7504a7d936522c895937be398c26ab5aebad"
+    }
+  ],
+  "evidence": {
+    "clashmi": {
+      "file": "validation/clashmi.json",
+      "sha256": "fb388aa136e1cdc708d98fe3a1022a7e14e37cc7c46d8de1a960d56365b98649",
+      "status": "CLASHMI_STATIC_PASS"
+    },
+    "clashmi-core": {
+      "file": "validation/clashmi-core.json",
+      "sha256": "957bd934f9428b1409deab17b8348e0297684180ff3af2beb295353319f3c26e",
+      "status": "CLASHMI_LOCAL_CORE_PASS"
+    }
+  },
+  "metrics": {
+    "staticChecks": 11,
+    "staticRoutingCases": 882,
+    "staticDNSCases": 604,
+    "coreRoutingCases": 882,
+    "coreDNSCases": 409,
+    "coreSelectorObservations": 112
+  },
+  "requirements": [
+    {
+      "id": 1,
+      "sourceContract": "PASS",
+      "localCore": "PASS",
+      "nativeIOS": "NOT_RUN"
+    },
+    {
+      "id": 2,
+      "sourceContract": "PASS",
+      "localCore": "PASS",
+      "nativeIOS": "NOT_RUN"
+    },
+    {
+      "id": 3,
+      "sourceContract": "PASS",
+      "localCore": "PASS",
+      "nativeIOS": "NOT_RUN"
+    },
+    {
+      "id": 4,
+      "sourceContract": "PASS",
+      "localCore": "PASS",
+      "nativeIOS": "NOT_RUN"
+    },
+    {
+      "id": 5,
+      "sourceContract": "PASS",
+      "localCore": "PASS",
+      "nativeIOS": "NOT_RUN"
+    },
+    {
+      "id": 6,
+      "sourceContract": "PASS",
+      "localCore": "PASS",
+      "nativeIOS": "NOT_RUN"
+    },
+    {
+      "id": 7,
+      "sourceContract": "PASS",
+      "localCore": "PASS",
+      "nativeIOS": "NOT_RUN"
+    },
+    {
+      "id": 8,
+      "sourceContract": "PASS",
+      "localCore": "PASS",
+      "nativeIOS": "NOT_RUN"
+    },
+    {
+      "id": 9,
+      "sourceContract": "PASS",
+      "localCore": "PINNED_SOURCE_AND_REVIEW_GUARDS_PASS",
+      "nativeIOS": "NOT_RUN"
+    },
+    {
+      "id": 10,
+      "sourceContract": "PASS",
+      "localCore": "PASS",
+      "nativeIOS": "NOT_RUN"
+    },
+    {
+      "id": 11,
+      "sourceContract": "PASS",
+      "localCore": "PASS",
+      "nativeIOS": "NOT_RUN"
+    }
+  ],
+  "firstAttempts": [
+    {
+      "file": "validation/inputs/clashmi-attempts/first-static/receipt.json",
+      "sha256": "5a7bb9e12ad3544ea4bf628ac08593de54222d7be76ebe4d57cdd3243a4038a0"
+    },
+    {
+      "file": "validation/inputs/clashmi-attempts/second-static.json",
+      "sha256": "a596a0ce32a6e641d5f074fe4fb26536d3e48bfa0495d45a4c8e4f1a0f8583b0"
+    },
+    {
+      "file": "validation/inputs/clashmi-attempts/sandbox-core.json",
+      "sha256": "2dc9ad64d26bb36eb002c5894afdc9e2a248f0c87cd78d36c33430e45034c77b"
+    }
+  ],
+  "deviceGates": {
+    "javaScriptCore": "NOT_RUN",
+    "finalAppPatch": "NOT_RUN",
+    "networkExtension": "NOT_RUN",
+    "publicIPv6": "NOT_RUN",
+    "memory50MB": "NOT_RUN"
+  },
+  "priorPackages": {
+    "directory": "archive/v14.2-before-clashmi-object-r2-20261012",
+    "manifestSHA256": "138933aca6005308dcbe95325bcac60a416074f1638e7928b5f1ad12dd566aee"
+  },
+  "clientDeployment": false,
+  "recordingTool": {
+    "file": "tools/record-clashmi.py",
+    "sha256": "d37fe4d526d33e0667f5d0cac8c80c4f54137e9dd7133ba194a1dd6e89c3afd0"
+  },
+  "beforeObjectManifest": {
+    "file": "validation/inputs/clashmi-object-before/manifest.json",
+    "sha256": "7eb077897ed148db3a1ed4cc9466b2ff130db26bf40ec0ef1b4d2569a534b8ac"
+  },
+  "priorObjectReview": {
+    "file": "validation/inputs/clashmi-object-before/project/releases/v14.2/metadata/clashmi-review.json",
+    "sha256": "c4ffed9102aa9452143c6aead77928a6a3f0a686894b0e32dc25ae813c155104"
+  },
+  "userEvidence": {
+    "file": "validation/inputs/clashmi-object-error/user-observations.json",
+    "sha256": "c385c13b53c3e7660ecdf2fc65384927d26c02bc7d5f4cf85450dc0268ed4d0b"
+  },
+  "objectBridgeRegression": {
+    "beforeReturnType": "string",
+    "afterReturnType": "object",
+    "beforeRejected": true,
+    "afterAccepted": true,
+    "nativeJavaScriptCore": "NOT_RUN"
+  },
+  "observedAppVersion": "1.0.30.1605 ios",
+  "priorIOSBridge": "USER_REPORTED_STRING_TO_MAP_FAIL",
+  "repairScope": "main return type and bridge test: String -> object; routing/DNS/UDP/TUN settings unchanged except generated metadata"
+}

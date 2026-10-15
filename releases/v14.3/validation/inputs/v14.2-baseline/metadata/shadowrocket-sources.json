@@ -1,0 +1,525 @@
+{
+  "date": "2026-10-12",
+  "version": "14.2",
+  "auditRepairRevision": "embedded-domain-r1",
+  "featureRevision": "domestic-selector-r1",
+  "platform": "shadowrocket",
+  "source": "src/android/v14.2-android.js",
+  "sourceVersion": "14.2",
+  "sourceSHA256": "7d6a3cbcc30a7b29dfa021e2162cd47b98647c1fdae823f3b47ff62a97638e64",
+  "generator": "tools/generate-v14.2-shadowrocket.js",
+  "generatorSHA256": "34c0a6c2c23f4848bcda1a69021f883fe8b2c15d614ed38b8dc75d4caec96c53",
+  "targetClient": {
+    "name": "Shadowrocket",
+    "version": "2.2.92",
+    "checkedDate": "2026-10-10",
+    "versionSource": "https://apps.apple.com/us/app/shadowrocket/id932747118",
+    "installedVersionVerified": false
+  },
+  "dnsInterception": {
+    "selector": ":53",
+    "scope": "Application Do53 inside the native VPN; port-wide declaration",
+    "selectorSource": "https://github.com/haritos90/shadowrocket-config-files#key-settings",
+    "sourceAuthority": "Configuration author example; not an official native parser guarantee",
+    "nativeIPv4UDP": "NOT_RUN",
+    "nativeIPv4TCP": "NOT_RUN",
+    "nativeIPv6UDP": "NOT_RUN",
+    "nativeIPv6TCP": "NOT_RUN",
+    "exclusions": [
+      "Traffic outside VPN",
+      "Application DoH/DoT or nonstandard DNS ports",
+      "Client bootstrap and upstream DNS ownership"
+    ]
+  },
+  "output": "src/ios/v14.2-shadowrocket.conf",
+  "outputSHA256": "4813040cc00845c0d0cfda47123194598dce6d6d89e4b5e8a377f3ac516774f9",
+  "dnsPolicy": {
+    "hostEntries": 9129,
+    "defaultGroup": "漏网之鱼",
+    "companySelection": "Ordered company ownership and reviewed native DOMAIN/DOMAIN-SUFFIX classifiers; Host DoH proxy=group declarations",
+    "nativeCompilation": "NOT_RUN",
+    "nativeGroupDNSAffinity": "NOT_RUN",
+    "lock": {
+      "file": "data/rule-sources.lock.json",
+      "sha256": "50dcaa46d1b16123858f54ccfa1e7504a7d936522c895937be398c26ab5aebad"
+    },
+    "reviewedInputs": [
+      {
+        "file": "data/rules/reviewed/sr-13.list",
+        "sha256": "bbdf8eb50559fc69c2654f3890182cefaae64df7215b1a7cf6ab1ac679abffe0",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/spotify.list"
+      },
+      {
+        "file": "data/rules/reviewed/sr-14.list",
+        "sha256": "a1a39e45b89ce8da3def2ed862bdeef0fa67acb9ca50ea3cb017b9a2dd4623d8",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/telegram.list"
+      },
+      {
+        "file": "data/rules/reviewed/sr-15.list",
+        "sha256": "81aafa9b79a15d98167655e7d4e51baff38525b37247fbe41b74e9be7febaf59",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/discord.list"
+      },
+      {
+        "file": "data/rules/reviewed/sr-16.list",
+        "sha256": "69ab6466561c7a5e231ce4c986f17d724e060f19cc888fa826bc552e7aae221c",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/tiktok.list"
+      },
+      {
+        "file": "data/rules/reviewed/sr-17.list",
+        "sha256": "74f3f9f4a004ce32af096e45fdc9dcb54c781f3719d0763e2bb9778078e0256c",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/twitter.list"
+      },
+      {
+        "file": "data/rules/reviewed/sr-18.list",
+        "sha256": "ea85a2d98b6df724bbb00d6fe156252b0509a465d3d53c62cb17adbad5f40fac",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/meta.list"
+      },
+      {
+        "file": "data/rules/reviewed/sr-19.list",
+        "sha256": "2e3117f30009c26d558fa7ae044f31f2d743e60ca67742785633fa1e0a08b5ca",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/steam.list"
+      },
+      {
+        "file": "data/rules/reviewed/sr-23.list",
+        "sha256": "7c589262d627b93853efe0efeab724db35b462e4eb95026fd4c634e7043281ba",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/apple.list"
+      },
+      {
+        "file": "data/rules/reviewed/sr-24.list",
+        "sha256": "dfc74e8b01ee1dee314735a49e4511f7e9a405414c51724195a20b345ed2a9db",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/bilibili.list"
+      }
+    ],
+    "nonFiniteMatchers": [
+      "DOMAIN-WILDCARD,cdn*-epicgames-*.file.myqcloud.com",
+      "DOMAIN-WILDCARD,epicgames-download*-*.file.myqcloud.com"
+    ]
+  },
+  "cdnRegexReview": {
+    "file": "data/rules/cdn-regex-review.json",
+    "sha256": "1d393c85f119828b861ba64a1c5bc6d5a2d13070af6e6c0cc39f05f1446c2d21",
+    "exactHosts": 118,
+    "policy": "REVIEWED_EXACT_POLICY_SUBSET",
+    "fallbackPolicy": "公共基础服务",
+    "nativeCompilation": "NOT_RUN"
+  },
+  "immutableCompanyCore": [
+    {
+      "group": "OpenAI 服务",
+      "records": 11
+    },
+    {
+      "group": "Anthropic 服务",
+      "records": 9
+    },
+    {
+      "group": "谷歌服务",
+      "records": 1108
+    },
+    {
+      "group": "微软生态",
+      "records": 715
+    },
+    {
+      "group": "公共基础服务",
+      "records": 70
+    }
+  ],
+  "embeddedDomainSnapshot": {
+    "file": "data/rules/embedded-domains.json",
+    "sha256": "f1a7d8337ee73635febbde1b8f81b9701fef859b0779286b07f4645be29a6317",
+    "records": 115438,
+    "nativeProjection": "Exact and suffix only; pre-existing regex exclusions retained; native parsing and size limit NOT_RUN"
+  },
+  "groups": [
+    "高纯净度AI用",
+    "高网速视频用",
+    "自动选择",
+    "公共基础服务",
+    "漏网之鱼",
+    "国内网站",
+    "OpenAI 服务",
+    "Anthropic 服务",
+    "谷歌服务",
+    "微软生态",
+    "Steam",
+    "Epic Games",
+    "Telegram",
+    "TikTok",
+    "Twitter",
+    "Discord",
+    "OpenRouter",
+    "Perplexity",
+    "Hugging Face",
+    "xAI",
+    "Netflix",
+    "Disney+",
+    "Spotify",
+    "Meta 服务",
+    "苹果国际",
+    "哔哩国际"
+  ],
+  "ruleCount": 116974,
+  "ruleSets": [
+    {
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/spotify.list",
+      "uses": [
+        {
+          "kind": "domain",
+          "tag": "spotify",
+          "policy": "Spotify",
+          "noResolve": false
+        }
+      ]
+    },
+    {
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/telegram.list",
+      "uses": [
+        {
+          "kind": "domain",
+          "tag": "telegram",
+          "policy": "Telegram",
+          "noResolve": false
+        }
+      ]
+    },
+    {
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/discord.list",
+      "uses": [
+        {
+          "kind": "domain",
+          "tag": "discord",
+          "policy": "Discord",
+          "noResolve": false
+        }
+      ]
+    },
+    {
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/tiktok.list",
+      "uses": [
+        {
+          "kind": "domain",
+          "tag": "tiktok",
+          "policy": "TikTok",
+          "noResolve": false
+        }
+      ]
+    },
+    {
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/twitter.list",
+      "uses": [
+        {
+          "kind": "domain",
+          "tag": "twitter",
+          "policy": "Twitter",
+          "noResolve": false
+        }
+      ]
+    },
+    {
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/meta.list",
+      "uses": [
+        {
+          "kind": "domain",
+          "tag": "meta",
+          "policy": "Meta 服务",
+          "noResolve": false
+        }
+      ]
+    },
+    {
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/steam.list",
+      "uses": [
+        {
+          "kind": "domain",
+          "tag": "steam",
+          "policy": "Steam",
+          "noResolve": false
+        }
+      ]
+    },
+    {
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/apple.list",
+      "uses": [
+        {
+          "kind": "domain",
+          "tag": "apple",
+          "policy": "苹果国际",
+          "noResolve": false
+        }
+      ]
+    },
+    {
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/bilibili.list",
+      "uses": [
+        {
+          "kind": "domain",
+          "tag": "bilibili",
+          "policy": "哔哩国际",
+          "noResolve": false
+        }
+      ]
+    },
+    {
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/douyin.list",
+      "uses": [
+        {
+          "kind": "domain",
+          "tag": "douyin",
+          "policy": "国内网站",
+          "noResolve": false
+        }
+      ]
+    },
+    {
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/apple@cn.list",
+      "uses": [
+        {
+          "kind": "domain",
+          "tag": "apple@cn",
+          "policy": "国内网站",
+          "noResolve": false
+        }
+      ]
+    },
+    {
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/microsoft@cn.list",
+      "uses": [
+        {
+          "kind": "domain",
+          "tag": "microsoft@cn",
+          "policy": "国内网站",
+          "noResolve": false
+        }
+      ]
+    },
+    {
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/steam@cn.list",
+      "uses": [
+        {
+          "kind": "domain",
+          "tag": "steam@cn",
+          "policy": "国内网站",
+          "noResolve": false
+        }
+      ]
+    },
+    {
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/cn.list",
+      "uses": [
+        {
+          "kind": "domain",
+          "tag": "cn",
+          "policy": "国内网站",
+          "noResolve": false
+        }
+      ]
+    },
+    {
+      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/83f37120c155f67c8eef43221dabe15cc3c95fec/rule/Shadowrocket/ChinaIPs/ChinaIPs.list",
+      "uses": [
+        {
+          "kind": "ip",
+          "tag": "cn",
+          "policy": "国内网站",
+          "noResolve": true
+        }
+      ]
+    }
+  ],
+  "classifierProjections": [
+    {
+      "kind": "domain",
+      "tag": "category-doh",
+      "policy": "REJECT",
+      "source": "v12r-domain-category-doh",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/category-doh.yaml",
+      "file": "data/rules/reviewed/v12r-domain-category-doh.yaml",
+      "sha256": "be0e04f22894374695c68ef46d84873ee20b0d9410a2c9d84d6462fcb73beab9",
+      "classifier": {
+        "file": "data/rules/reviewed/v12r-domain-category-doh.list",
+        "sha256": "96455367dfafb67e3a58e0f040e57eb8279dfc45efd043481e82a5d7ace621cf"
+      },
+      "inputRules": 127,
+      "outputRules": 127,
+      "omittedTypes": {},
+      "projection": "native-exact-and-suffix; CDN regex uses common reviewed exact subset with shared family guard; remove mixed IP/keyword/user-agent matchers"
+    },
+    {
+      "kind": "domain",
+      "tag": "netflix",
+      "policy": "Netflix",
+      "source": "v12r-domain-netflix",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/netflix.yaml",
+      "file": "data/rules/reviewed/v12r-domain-netflix.yaml",
+      "sha256": "d2dd4babc01c6794931f71807936650cc0d886c4620ef6f014150575b38b6fb2",
+      "classifier": {
+        "file": "data/rules/reviewed/v12r-domain-netflix.list",
+        "sha256": "47c3ed0adaa5f47b2b8bda2dd7721668899290942afeeac801ab598607ea205e"
+      },
+      "inputRules": 28,
+      "outputRules": 24,
+      "omittedTypes": {
+        "DOMAIN-REGEX": 4
+      },
+      "projection": "native-exact-and-suffix; CDN regex uses common reviewed exact subset with shared family guard; remove mixed IP/keyword/user-agent matchers"
+    },
+    {
+      "kind": "domain",
+      "tag": "disney",
+      "policy": "Disney+",
+      "source": "v12r-domain-disney",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/disney.yaml",
+      "file": "data/rules/reviewed/v12r-domain-disney.yaml",
+      "sha256": "544dcc0a803d4cd91281e76120c67a47697c962b3417f91656d3dac401e542d8",
+      "classifier": {
+        "file": "data/rules/reviewed/v12r-domain-disney.list",
+        "sha256": "d3f46d4bdc82fdf29157c17a7765092e9b0cf4fcc8fc6652d05b72a59add4dea"
+      },
+      "inputRules": 225,
+      "outputRules": 232,
+      "omittedTypes": {},
+      "projection": "native-exact-and-suffix; CDN regex uses common reviewed exact subset with shared family guard; remove mixed IP/keyword/user-agent matchers"
+    },
+    {
+      "kind": "domain",
+      "tag": "epicgames",
+      "policy": "Epic Games",
+      "source": "v12r-domain-epicgames",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/epicgames.yaml",
+      "file": "data/rules/reviewed/v12r-domain-epicgames.yaml",
+      "sha256": "4e4389b52aa9da4418608910457c43cc6ae31064a4b15d7601cea10a550a8e73",
+      "classifier": {
+        "file": "data/rules/reviewed/v12r-domain-epicgames.list",
+        "sha256": "3831cbfabc72c22e9b6aa036c77cded0ae2c08f5e3d88c5b269551fba7893f5f"
+      },
+      "inputRules": 33,
+      "outputRules": 140,
+      "omittedTypes": {},
+      "projection": "native-exact-and-suffix; CDN regex uses common reviewed exact subset with shared family guard; remove mixed IP/keyword/user-agent matchers"
+    },
+    {
+      "kind": "ip",
+      "tag": "netflix",
+      "policy": "Netflix",
+      "source": "v12r-ip-netflix",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geoip/netflix.mrs",
+      "file": "data/rules/reviewed/v12r-ip-netflix.mrs",
+      "sha256": "3fba174fdae1efe489d9b489126fa48e8a340f6d1f96b1478afad0c43781c14a",
+      "classifier": {
+        "file": "data/rules/reviewed/v12r-ip-netflix.list",
+        "sha256": "d7c71269113609b715d66f6986bec29774527d2d131cbc0dea9c7280dcc5c779"
+      },
+      "inputRules": 122,
+      "outputRules": 122,
+      "omittedTypes": {},
+      "projection": "shared-reviewed-Mihomo-CIDRs-only-no-resolve"
+    },
+    {
+      "kind": "ip",
+      "tag": "telegram",
+      "policy": "Telegram",
+      "source": "v12r-ip-telegram",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geoip/telegram.mrs",
+      "file": "data/rules/reviewed/v12r-ip-telegram.mrs",
+      "sha256": "d121af95b9aeca3d8c29b2112d5e6685b2a6716383df8ae31b5fbb3408c527b3",
+      "classifier": {
+        "file": "data/rules/reviewed/v12r-ip-telegram.list",
+        "sha256": "53437464eec1ac4396b00e8b6ad427ed0cf54bfac6339575a2cef48d8753e961"
+      },
+      "inputRules": 12,
+      "outputRules": 12,
+      "omittedTypes": {},
+      "projection": "shared-reviewed-Mihomo-CIDRs-only-no-resolve"
+    },
+    {
+      "kind": "ip",
+      "tag": "twitter",
+      "policy": "Twitter",
+      "source": "v12r-ip-twitter",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geoip/twitter.mrs",
+      "file": "data/rules/reviewed/v12r-ip-twitter.mrs",
+      "sha256": "e8fc8a292d91cf630475a1e759d52acf81cf38bc7283329253be5914dc23630f",
+      "classifier": {
+        "file": "data/rules/reviewed/v12r-ip-twitter.list",
+        "sha256": "7e37c6f264f5e614b15fe26c789d4e38b10df5a878c43d7b0fc86e5858bf9909"
+      },
+      "inputRules": 19,
+      "outputRules": 19,
+      "omittedTypes": {},
+      "projection": "shared-reviewed-Mihomo-CIDRs-only-no-resolve"
+    },
+    {
+      "kind": "domain",
+      "tag": "private",
+      "policy": "DIRECT",
+      "source": "v12r-domain-private",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/private.yaml",
+      "file": "data/rules/reviewed/v12r-domain-private.yaml",
+      "sha256": "58bcdd58c8d5663ba87a4f13083995ffc3cd14f97b4c12b03215190add2384af",
+      "classifier": {
+        "file": "data/rules/reviewed/v12r-domain-private.list",
+        "sha256": "47e1f2c1242bee27fe450326779e0b8780eb121ac91e1a47b9264e2b0ecc8416"
+      },
+      "inputRules": 131,
+      "outputRules": 130,
+      "omittedTypes": {
+        "DOMAIN-REGEX": 1
+      },
+      "projection": "native-exact-and-suffix; CDN regex uses common reviewed exact subset with shared family guard; remove mixed IP/keyword/user-agent matchers"
+    }
+  ],
+  "googleCnSnapshot": {
+    "file": "data/shadowrocket/google-cn.json",
+    "date": "2026-10-06",
+    "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/google@cn.list",
+    "sourceSHA256": "c5b22853bdfee1784ded9a270d432741e74adac734e5d12a3399f79862cd36d8",
+    "ruleCount": 124,
+    "unsupportedRegexes": [
+      "DOMAIN-REGEX,^r+[0-9]+(---|\\.)sn-(2x3|ni5|j5o)\\w{5}\\.xn--ngstr-lra8j\\.com$",
+      "DOMAIN-REGEX,^r+[0-9]+(---|\\.)sn-(2x3|ni5|j5o)\\w{5}\\.googlevideo\\.com$"
+    ]
+  },
+  "openaiSnapshot": {
+    "file": "data/shadowrocket/openai.json",
+    "date": "2026-10-06",
+    "verifiedDate": "2026-10-10",
+    "snapshotSHA256": "ff567e02f96dee6ae64095a2b0b2ae4310da8a7c4b48d368fee34a4e490c86a1",
+    "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/openai.list",
+    "sourceFile": "data/shadowrocket/openai-classical.list",
+    "sourceSHA256": "5aa9a38539026b693135c769f6db10962345ac46860977cb168a52c9d5bfbf6d",
+    "ruleCount": 22,
+    "verification": "Frozen 2026-10-06 snapshot membership matches the 2026-10-10 web-rendered upstream openai.yaml/list; current raw download failed TLS. Hash binds the packaged snapshot, not today's remote bytes.",
+    "wildcard": {
+      "source": "DOMAIN-REGEX,^chatgpt-async-webps-prod-\\S+-\\d+\\.webpubsub\\.azure\\.com$",
+      "rule": "DOMAIN-WILDCARD,chatgpt-async-webps-prod-*-*.webpubsub.azure.com",
+      "limitation": "Anchored service prefix and Azure suffix; unlike the Mihomo regex, wildcard matching does not enforce a numeric final segment. Native iOS compilation and live endpoint tests remain pending."
+    },
+    "wildcardProjection": "REVIEWED_EXACT_HOSTS_SHARED_BY_ALL_PLATFORMS",
+    "omittedRegex": "DOMAIN-REGEX,^chatgpt-async-webps-prod-\\S+-\\d+\\.webpubsub\\.azure\\.com$",
+    "azureAsyncReview": {
+      "file": "data/rules/azure-async-review.json",
+      "sha256": "9fa362952593a1979b00a14a1c246cab184c9b90241fc447e3f29752b13a387f",
+      "hosts": [
+        "chatgpt-async-webps-prod-eastus-1.webpubsub.azure.com",
+        "chatgpt-async-webps-prod-eastus-17.webpubsub.azure.com",
+        "chatgpt-async-webps-prod-eastus-23.webpubsub.azure.com"
+      ],
+      "unmatchedPolicy": "公共基础服务"
+    }
+  },
+  "adaptations": [
+    "Large classifiers use native Shadowrocket lists; GeoSite regex membership is not identical.",
+    "124 Google CN domain rules are embedded from a dated snapshot; 2 unportable CDN regexes are recorded.",
+    "OpenAI uses 22 bounded MetaCubeX snapshot domain rules; unsafe async Azure glob omitted; the Blackmatrix7 OpenAI remote classifier is removed.",
+    "All platforms use the same reviewed exact Azure async exceptions for routing and DNS; other Azure tenants stay shared. The old unbounded regex is retained only as historical evidence.",
+    "DoH and private domain projections share approved Mihomo snapshots; exact LAN entries are not broadened to suffixes.",
+    "Company Host DNS declares DoH through the corresponding URL-encoded group; native iOS interpretation is NOT_RUN.",
+    "Port-wide hijack-dns=:53 replaces the two Google DNS targets; native transport and IPv6 acceptance is pending.",
+    "Native unsupported-UDP behaviour is REJECT; Mihomo adjacent reject rules are not copied.",
+    "Company rules precede the domestic selector (default DIRECT); unidentified public UDP and DNS keep the protected fallback. Set domestic and fallback to the same master for one exit.",
+    "Dual-stack remains enabled; remote proxy exit IP family is node-controlled."
+  ],
+  "clientCompilation": "not-run-no-Shadowrocket-device",
+  "deviceAcceptance": "pending"
+}

@@ -1,0 +1,1400 @@
+{
+  "version": "14.2",
+  "date": "2026-10-10",
+  "status": "REVIEWED_SEMANTICALLY_EQUIVALENT",
+  "commits": {
+    "MetaCubeX/meta-rules-dat": "dad29637471fad8f29e85fdcee6a67d08ee5a779",
+    "blackmatrix7/ios_rule_script": "83f37120c155f67c8eef43221dabe15cc3c95fec"
+  },
+  "sources": [
+    {
+      "id": "v12r-domain-private",
+      "platforms": [
+        "desktop",
+        "android"
+      ],
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/dad29637471fad8f29e85fdcee6a67d08ee5a779/geo/geosite/classical/private.yaml",
+      "format": "yaml",
+      "behavior": "classical",
+      "file": "data/rules/reviewed/v12r-domain-private.yaml",
+      "bytes": 5031,
+      "sha256": "58bcdd58c8d5663ba87a4f13083995ffc3cd14f97b4c12b03215190add2384af",
+      "classifier": {
+        "file": "data/rules/reviewed/v12r-domain-private.list",
+        "sha256": "47e1f2c1242bee27fe450326779e0b8780eb121ac91e1a47b9264e2b0ecc8416"
+      },
+      "snapshotOrigin": "Exact approved immutable candidate; raw bytes and native MRS conversion verified on promotion",
+      "upstreamURL": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/private.yaml",
+      "runtimeRevision": "FIXED_REVIEWED_COMMIT",
+      "reviewDelta": {
+        "baseSHA256": "58bcdd58c8d5663ba87a4f13083995ffc3cd14f97b4c12b03215190add2384af",
+        "baseRows": 131,
+        "unchanged": true
+      },
+      "reviewStatus": "REVIEWED: identical classifier or deletion covered by retained parent suffix"
+    },
+    {
+      "id": "v12r-domain-category-doh",
+      "platforms": [
+        "desktop",
+        "android"
+      ],
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/dad29637471fad8f29e85fdcee6a67d08ee5a779/geo/geosite/classical/category-doh.yaml",
+      "format": "yaml",
+      "behavior": "classical",
+      "file": "data/rules/reviewed/v12r-domain-category-doh.yaml",
+      "bytes": 3915,
+      "sha256": "be0e04f22894374695c68ef46d84873ee20b0d9410a2c9d84d6462fcb73beab9",
+      "classifier": {
+        "file": "data/rules/reviewed/v12r-domain-category-doh.list",
+        "sha256": "96455367dfafb67e3a58e0f040e57eb8279dfc45efd043481e82a5d7ace621cf"
+      },
+      "snapshotOrigin": "Preserved local cache; original download time unavailable, not a fresh remote download",
+      "upstreamURL": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/category-doh.yaml",
+      "runtimeRevision": "FIXED_REVIEWED_COMMIT",
+      "reviewDelta": {
+        "baseSHA256": "be0e04f22894374695c68ef46d84873ee20b0d9410a2c9d84d6462fcb73beab9",
+        "baseRows": 127,
+        "rows": 127,
+        "added": [],
+        "removed": []
+      },
+      "reviewStatus": "REVIEWED: identical classifier or deletion covered by retained parent suffix"
+    },
+    {
+      "id": "v12r-domain-douyin",
+      "platforms": [
+        "desktop",
+        "android"
+      ],
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/dad29637471fad8f29e85fdcee6a67d08ee5a779/geo/geosite/classical/douyin.yaml",
+      "format": "yaml",
+      "behavior": "classical",
+      "file": "data/rules/reviewed/v12r-domain-douyin.yaml",
+      "bytes": 2496,
+      "sha256": "05adddd7142fb4238054a40c78ad3955e10bae77c09f7d6a4531ca8893871759",
+      "classifier": {
+        "file": "data/rules/reviewed/v12r-domain-douyin.list",
+        "sha256": "911bb17f7fea207a800981dca7bb8dde7481684da332a36e8b9b2a55790c751b"
+      },
+      "snapshotOrigin": "Exact approved immutable candidate; raw bytes and native MRS conversion verified on promotion",
+      "upstreamURL": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/douyin.yaml",
+      "runtimeRevision": "FIXED_REVIEWED_COMMIT",
+      "reviewDelta": {
+        "baseSHA256": "05adddd7142fb4238054a40c78ad3955e10bae77c09f7d6a4531ca8893871759",
+        "baseRows": 71,
+        "unchanged": true
+      },
+      "reviewStatus": "REVIEWED: identical classifier or deletion covered by retained parent suffix"
+    },
+    {
+      "id": "v12r-domain-apple_at_cn",
+      "platforms": [
+        "desktop",
+        "android"
+      ],
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/dad29637471fad8f29e85fdcee6a67d08ee5a779/geo/geosite/classical/apple@cn.yaml",
+      "format": "yaml",
+      "behavior": "classical",
+      "file": "data/rules/reviewed/v12r-domain-apple_at_cn.yaml",
+      "bytes": 11168,
+      "sha256": "3b3135149358c9832a89a8da4bcf78d9f2f71d7c2c2b4c0cbabd048ba99f5783",
+      "classifier": {
+        "file": "data/rules/reviewed/v12r-domain-apple_at_cn.list",
+        "sha256": "0683c809caeff184cb57371b55fcd26a5116af90fc8d3aea750c1aa629f94fe6"
+      },
+      "snapshotOrigin": "Exact approved immutable candidate; raw bytes and native MRS conversion verified on promotion",
+      "upstreamURL": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/apple@cn.yaml",
+      "runtimeRevision": "FIXED_REVIEWED_COMMIT",
+      "reviewDelta": {
+        "baseSHA256": "3b3135149358c9832a89a8da4bcf78d9f2f71d7c2c2b4c0cbabd048ba99f5783",
+        "baseRows": 296,
+        "unchanged": true
+      },
+      "reviewStatus": "REVIEWED: identical classifier or deletion covered by retained parent suffix"
+    },
+    {
+      "id": "v12r-domain-google_at_cn",
+      "platforms": [
+        "desktop",
+        "android"
+      ],
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/dad29637471fad8f29e85fdcee6a67d08ee5a779/geo/geosite/classical/google@cn.yaml",
+      "format": "yaml",
+      "behavior": "classical",
+      "file": "data/rules/reviewed/v12r-domain-google_at_cn.yaml",
+      "bytes": 4468,
+      "sha256": "31efa93c9c8e16c562e7443936750047a98004b567279434fef1b6193f63d969",
+      "classifier": {
+        "file": "data/rules/reviewed/v12r-domain-google_at_cn.list",
+        "sha256": "fe9d1c63f7932407e8ed8987dd8fc7bd9e8d1a0e92b51e4979488e779022c8c8"
+      },
+      "snapshotOrigin": "Exact approved immutable candidate; raw bytes and native MRS conversion verified on promotion",
+      "upstreamURL": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/google@cn.yaml",
+      "runtimeRevision": "FIXED_REVIEWED_COMMIT",
+      "reviewDelta": {
+        "baseSHA256": "31efa93c9c8e16c562e7443936750047a98004b567279434fef1b6193f63d969",
+        "baseRows": 126,
+        "unchanged": true
+      },
+      "reviewStatus": "REVIEWED: identical classifier or deletion covered by retained parent suffix"
+    },
+    {
+      "id": "v12r-domain-microsoft_at_cn",
+      "platforms": [
+        "desktop",
+        "android"
+      ],
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/dad29637471fad8f29e85fdcee6a67d08ee5a779/geo/geosite/classical/microsoft@cn.yaml",
+      "format": "yaml",
+      "behavior": "classical",
+      "file": "data/rules/reviewed/v12r-domain-microsoft_at_cn.yaml",
+      "bytes": 7397,
+      "sha256": "988308e7ee4c0f63f219125635c8644d63e7a55f1bfce1b500809bb3e1424572",
+      "classifier": {
+        "file": "data/rules/reviewed/v12r-domain-microsoft_at_cn.list",
+        "sha256": "3736b0b53a5bdf25b9ddc42d7518df59f132febb48e5461f427bfdf8980c9ee5"
+      },
+      "snapshotOrigin": "Exact approved immutable candidate; raw bytes and native MRS conversion verified on promotion",
+      "upstreamURL": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/microsoft@cn.yaml",
+      "runtimeRevision": "FIXED_REVIEWED_COMMIT",
+      "reviewDelta": {
+        "baseSHA256": "988308e7ee4c0f63f219125635c8644d63e7a55f1bfce1b500809bb3e1424572",
+        "baseRows": 189,
+        "unchanged": true
+      },
+      "reviewStatus": "REVIEWED: identical classifier or deletion covered by retained parent suffix"
+    },
+    {
+      "id": "v12r-domain-steam_at_cn",
+      "platforms": [
+        "desktop",
+        "android"
+      ],
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/dad29637471fad8f29e85fdcee6a67d08ee5a779/geo/geosite/classical/steam@cn.yaml",
+      "format": "yaml",
+      "behavior": "classical",
+      "file": "data/rules/reviewed/v12r-domain-steam_at_cn.yaml",
+      "bytes": 744,
+      "sha256": "52d6b64b9e3a73e51bcdd31cc46e8736cd5ab105c0402bd9325af33856cd32bf",
+      "classifier": {
+        "file": "data/rules/reviewed/v12r-domain-steam_at_cn.list",
+        "sha256": "4ae2540001216910ec89a3c035b209654cbacfe4bc329996a775336791655602"
+      },
+      "snapshotOrigin": "Exact approved immutable candidate; raw bytes and native MRS conversion verified on promotion",
+      "upstreamURL": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/steam@cn.yaml",
+      "runtimeRevision": "FIXED_REVIEWED_COMMIT",
+      "reviewDelta": {
+        "baseSHA256": "52d6b64b9e3a73e51bcdd31cc46e8736cd5ab105c0402bd9325af33856cd32bf",
+        "baseRows": 19,
+        "unchanged": true
+      },
+      "reviewStatus": "REVIEWED: identical classifier or deletion covered by retained parent suffix"
+    },
+    {
+      "id": "v12r-domain-cn",
+      "platforms": [
+        "desktop",
+        "android"
+      ],
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/dad29637471fad8f29e85fdcee6a67d08ee5a779/geo/geosite/cn.mrs",
+      "format": "mrs",
+      "behavior": "domain",
+      "file": "data/rules/reviewed/v12r-domain-cn.mrs",
+      "bytes": 540748,
+      "sha256": "e92bda4f0b9f05623663a882331a320ab4e266cada2046d3828a94572cdded46",
+      "classifier": {
+        "file": "data/rules/reviewed/v12r-domain-cn.list",
+        "sha256": "5fb1cc7b7c155cc3db2664eb3200d46e242701e11523ef1b94dffc6638806967"
+      },
+      "snapshotOrigin": "Exact approved immutable candidate; raw bytes and native MRS conversion verified on promotion",
+      "upstreamURL": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.mrs",
+      "runtimeRevision": "FIXED_REVIEWED_COMMIT",
+      "reviewDelta": {
+        "baseSHA256": "e92bda4f0b9f05623663a882331a320ab4e266cada2046d3828a94572cdded46",
+        "baseRows": 111595,
+        "unchanged": true
+      },
+      "reviewStatus": "REVIEWED: identical classifier or deletion covered by retained parent suffix"
+    },
+    {
+      "id": "v12r-domain-netflix",
+      "platforms": [
+        "desktop",
+        "android"
+      ],
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/dad29637471fad8f29e85fdcee6a67d08ee5a779/geo/geosite/classical/netflix.yaml",
+      "format": "yaml",
+      "behavior": "classical",
+      "file": "data/rules/reviewed/v12r-domain-netflix.yaml",
+      "bytes": 1163,
+      "sha256": "d2dd4babc01c6794931f71807936650cc0d886c4620ef6f014150575b38b6fb2",
+      "classifier": {
+        "file": "data/rules/reviewed/v12r-domain-netflix.list",
+        "sha256": "47c3ed0adaa5f47b2b8bda2dd7721668899290942afeeac801ab598607ea205e"
+      },
+      "snapshotOrigin": "Preserved local cache; original download time unavailable, not a fresh remote download",
+      "upstreamURL": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/netflix.yaml",
+      "runtimeRevision": "FIXED_REVIEWED_COMMIT",
+      "reviewDelta": {
+        "baseSHA256": "d2dd4babc01c6794931f71807936650cc0d886c4620ef6f014150575b38b6fb2",
+        "baseRows": 28,
+        "rows": 28,
+        "added": [],
+        "removed": []
+      },
+      "reviewStatus": "REVIEWED: identical classifier or deletion covered by retained parent suffix"
+    },
+    {
+      "id": "v12r-domain-disney",
+      "platforms": [
+        "desktop",
+        "android"
+      ],
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/dad29637471fad8f29e85fdcee6a67d08ee5a779/geo/geosite/classical/disney.yaml",
+      "format": "yaml",
+      "behavior": "classical",
+      "file": "data/rules/reviewed/v12r-domain-disney.yaml",
+      "bytes": 8182,
+      "sha256": "0ddc927b1efbcd3b66706571c43fd1d90880a3342d298426eaf6cea454498b2d",
+      "classifier": {
+        "file": "data/rules/reviewed/v12r-domain-disney.list",
+        "sha256": "d3f46d4bdc82fdf29157c17a7765092e9b0cf4fcc8fc6652d05b72a59add4dea"
+      },
+      "snapshotOrigin": "Preserved local cache; original download time unavailable, not a fresh remote download",
+      "upstreamURL": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/disney.yaml",
+      "runtimeRevision": "FIXED_REVIEWED_COMMIT",
+      "reviewDelta": {
+        "baseSHA256": "d6bdcf1a83c51f457b2fed4e57b9202d227f22b5d4240d30eb3a99e8a073024b",
+        "baseRows": 225,
+        "rows": 225,
+        "added": [],
+        "removed": []
+      },
+      "reviewStatus": "REVIEWED: identical classifier or deletion covered by retained parent suffix"
+    },
+    {
+      "id": "v12r-domain-spotify",
+      "platforms": [
+        "desktop",
+        "android"
+      ],
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/dad29637471fad8f29e85fdcee6a67d08ee5a779/geo/geosite/classical/spotify.yaml",
+      "format": "yaml",
+      "behavior": "classical",
+      "file": "data/rules/reviewed/v12r-domain-spotify.yaml",
+      "bytes": 1081,
+      "sha256": "f9c46687ea734730410f15296274e531c7491d9a1eca870041b7e4d788c22638",
+      "classifier": {
+        "file": "data/rules/reviewed/v12r-domain-spotify.list",
+        "sha256": "bbdf8eb50559fc69c2654f3890182cefaae64df7215b1a7cf6ab1ac679abffe0"
+      },
+      "snapshotOrigin": "Preserved local cache; original download time unavailable, not a fresh remote download",
+      "upstreamURL": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/spotify.yaml",
+      "runtimeRevision": "FIXED_REVIEWED_COMMIT",
+      "reviewDelta": {
+        "baseSHA256": "f9c46687ea734730410f15296274e531c7491d9a1eca870041b7e4d788c22638",
+        "baseRows": 28,
+        "rows": 28,
+        "added": [],
+        "removed": []
+      },
+      "reviewStatus": "REVIEWED: identical classifier or deletion covered by retained parent suffix"
+    },
+    {
+      "id": "v12r-domain-telegram",
+      "platforms": [
+        "desktop",
+        "android"
+      ],
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/dad29637471fad8f29e85fdcee6a67d08ee5a779/geo/geosite/classical/telegram.yaml",
+      "format": "yaml",
+      "behavior": "classical",
+      "file": "data/rules/reviewed/v12r-domain-telegram.yaml",
+      "bytes": 681,
+      "sha256": "6c357c7799ad105074a318f6251d33901a1bfffd60051fa7e5fad73c04d0af4b",
+      "classifier": {
+        "file": "data/rules/reviewed/v12r-domain-telegram.list",
+        "sha256": "a1a39e45b89ce8da3def2ed862bdeef0fa67acb9ca50ea3cb017b9a2dd4623d8"
+      },
+      "snapshotOrigin": "Preserved local cache; original download time unavailable, not a fresh remote download",
+      "upstreamURL": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/telegram.yaml",
+      "runtimeRevision": "FIXED_REVIEWED_COMMIT",
+      "reviewDelta": {
+        "baseSHA256": "6c357c7799ad105074a318f6251d33901a1bfffd60051fa7e5fad73c04d0af4b",
+        "baseRows": 21,
+        "rows": 21,
+        "added": [],
+        "removed": []
+      },
+      "reviewStatus": "REVIEWED: identical classifier or deletion covered by retained parent suffix"
+    },
+    {
+      "id": "v12r-domain-discord",
+      "platforms": [
+        "desktop",
+        "android"
+      ],
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/dad29637471fad8f29e85fdcee6a67d08ee5a779/geo/geosite/classical/discord.yaml",
+      "format": "yaml",
+      "behavior": "classical",
+      "file": "data/rules/reviewed/v12r-domain-discord.yaml",
+      "bytes": 1046,
+      "sha256": "feb6a7cbe204600ae8d3f8d54d7ad723ff0031854613de3dbcbd184daf988269",
+      "classifier": {
+        "file": "data/rules/reviewed/v12r-domain-discord.list",
+        "sha256": "81aafa9b79a15d98167655e7d4e51baff38525b37247fbe41b74e9be7febaf59"
+      },
+      "snapshotOrigin": "Preserved local cache; original download time unavailable, not a fresh remote download",
+      "upstreamURL": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/discord.yaml",
+      "runtimeRevision": "FIXED_REVIEWED_COMMIT",
+      "reviewDelta": {
+        "baseSHA256": "feb6a7cbe204600ae8d3f8d54d7ad723ff0031854613de3dbcbd184daf988269",
+        "baseRows": 28,
+        "rows": 28,
+        "added": [],
+        "removed": []
+      },
+      "reviewStatus": "REVIEWED: identical classifier or deletion covered by retained parent suffix"
+    },
+    {
+      "id": "v12r-domain-tiktok",
+      "platforms": [
+        "desktop",
+        "android"
+      ],
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/dad29637471fad8f29e85fdcee6a67d08ee5a779/geo/geosite/classical/tiktok.yaml",
+      "format": "yaml",
+      "behavior": "classical",
+      "file": "data/rules/reviewed/v12r-domain-tiktok.yaml",
+      "bytes": 1419,
+      "sha256": "61512676a2cf5f79b5e69fac594bbc87ff0277f74c8af6e3e921a1d667c4c16a",
+      "classifier": {
+        "file": "data/rules/reviewed/v12r-domain-tiktok.list",
+        "sha256": "69ab6466561c7a5e231ce4c986f17d724e060f19cc888fa826bc552e7aae221c"
+      },
+      "snapshotOrigin": "Preserved local cache; original download time unavailable, not a fresh remote download",
+      "upstreamURL": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/tiktok.yaml",
+      "runtimeRevision": "FIXED_REVIEWED_COMMIT",
+      "reviewDelta": {
+        "baseSHA256": "61512676a2cf5f79b5e69fac594bbc87ff0277f74c8af6e3e921a1d667c4c16a",
+        "baseRows": 37,
+        "rows": 37,
+        "added": [],
+        "removed": []
+      },
+      "reviewStatus": "REVIEWED: identical classifier or deletion covered by retained parent suffix"
+    },
+    {
+      "id": "v12r-domain-twitter",
+      "platforms": [
+        "desktop",
+        "android"
+      ],
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/dad29637471fad8f29e85fdcee6a67d08ee5a779/geo/geosite/classical/twitter.yaml",
+      "format": "yaml",
+      "behavior": "classical",
+      "file": "data/rules/reviewed/v12r-domain-twitter.yaml",
+      "bytes": 811,
+      "sha256": "3c9277372816fc5fe4dc79a3a72465af12efd84a6d328f52ee7ff4b400bf6db4",
+      "classifier": {
+        "file": "data/rules/reviewed/v12r-domain-twitter.list",
+        "sha256": "74f3f9f4a004ce32af096e45fdc9dcb54c781f3719d0763e2bb9778078e0256c"
+      },
+      "snapshotOrigin": "Preserved local cache; original download time unavailable, not a fresh remote download",
+      "upstreamURL": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/twitter.yaml",
+      "runtimeRevision": "FIXED_REVIEWED_COMMIT",
+      "reviewDelta": {
+        "baseSHA256": "3c9277372816fc5fe4dc79a3a72465af12efd84a6d328f52ee7ff4b400bf6db4",
+        "baseRows": 24,
+        "rows": 24,
+        "added": [],
+        "removed": []
+      },
+      "reviewStatus": "REVIEWED: identical classifier or deletion covered by retained parent suffix"
+    },
+    {
+      "id": "v12r-domain-meta",
+      "platforms": [
+        "desktop",
+        "android"
+      ],
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/dad29637471fad8f29e85fdcee6a67d08ee5a779/geo/geosite/classical/meta.yaml",
+      "format": "yaml",
+      "behavior": "classical",
+      "file": "data/rules/reviewed/v12r-domain-meta.yaml",
+      "bytes": 19915,
+      "sha256": "145588a572f7b9ca0ab95d146871e35d95713f99630bae35f23929777faf3c15",
+      "classifier": {
+        "file": "data/rules/reviewed/v12r-domain-meta.list",
+        "sha256": "ea85a2d98b6df724bbb00d6fe156252b0509a465d3d53c62cb17adbad5f40fac"
+      },
+      "snapshotOrigin": "Preserved local cache; original download time unavailable, not a fresh remote download",
+      "upstreamURL": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/meta.yaml",
+      "runtimeRevision": "FIXED_REVIEWED_COMMIT",
+      "reviewDelta": {
+        "baseSHA256": "f7f1ba0fbc7fe0de9708a9ef8b173464bbe257aee7e9a47b805b6b3f33e5a39f",
+        "baseRows": 557,
+        "rows": 555,
+        "added": [],
+        "removed": [
+          "DOMAIN-SUFFIX,graph.whatsapp.com",
+          "DOMAIN-SUFFIX,graph.whatsapp.net"
+        ]
+      },
+      "reviewStatus": "REVIEWED: identical classifier or deletion covered by retained parent suffix"
+    },
+    {
+      "id": "v12r-domain-steam",
+      "platforms": [
+        "desktop",
+        "android"
+      ],
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/dad29637471fad8f29e85fdcee6a67d08ee5a779/geo/geosite/classical/steam.yaml",
+      "format": "yaml",
+      "behavior": "classical",
+      "file": "data/rules/reviewed/v12r-domain-steam.yaml",
+      "bytes": 2365,
+      "sha256": "b33b20dcc828cb698c29b994d4a5bd65b57b12ab7a10cff57d849fb7343b0109",
+      "classifier": {
+        "file": "data/rules/reviewed/v12r-domain-steam.list",
+        "sha256": "2e3117f30009c26d558fa7ae044f31f2d743e60ca67742785633fa1e0a08b5ca"
+      },
+      "snapshotOrigin": "Preserved local cache; original download time unavailable, not a fresh remote download",
+      "upstreamURL": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/steam.yaml",
+      "runtimeRevision": "FIXED_REVIEWED_COMMIT",
+      "reviewDelta": {
+        "baseSHA256": "b33b20dcc828cb698c29b994d4a5bd65b57b12ab7a10cff57d849fb7343b0109",
+        "baseRows": 60,
+        "rows": 60,
+        "added": [],
+        "removed": []
+      },
+      "reviewStatus": "REVIEWED: identical classifier or deletion covered by retained parent suffix"
+    },
+    {
+      "id": "v12r-domain-epicgames",
+      "platforms": [
+        "desktop",
+        "android"
+      ],
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/dad29637471fad8f29e85fdcee6a67d08ee5a779/geo/geosite/classical/epicgames.yaml",
+      "format": "yaml",
+      "behavior": "classical",
+      "file": "data/rules/reviewed/v12r-domain-epicgames.yaml",
+      "bytes": 1266,
+      "sha256": "4e4389b52aa9da4418608910457c43cc6ae31064a4b15d7601cea10a550a8e73",
+      "classifier": {
+        "file": "data/rules/reviewed/v12r-domain-epicgames.list",
+        "sha256": "3831cbfabc72c22e9b6aa036c77cded0ae2c08f5e3d88c5b269551fba7893f5f"
+      },
+      "snapshotOrigin": "Preserved local cache; original download time unavailable, not a fresh remote download",
+      "upstreamURL": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/epicgames.yaml",
+      "runtimeRevision": "FIXED_REVIEWED_COMMIT",
+      "reviewDelta": {
+        "baseSHA256": "4e4389b52aa9da4418608910457c43cc6ae31064a4b15d7601cea10a550a8e73",
+        "baseRows": 33,
+        "rows": 33,
+        "added": [],
+        "removed": []
+      },
+      "reviewStatus": "REVIEWED: identical classifier or deletion covered by retained parent suffix"
+    },
+    {
+      "id": "v12r-domain-apple",
+      "platforms": [
+        "desktop",
+        "android"
+      ],
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/dad29637471fad8f29e85fdcee6a67d08ee5a779/geo/geosite/classical/apple.yaml",
+      "format": "yaml",
+      "behavior": "classical",
+      "file": "data/rules/reviewed/v12r-domain-apple.yaml",
+      "bytes": 67871,
+      "sha256": "6431ae2fd176ea5ad636c6a0d4678bbc69b265ec600d3364d2f27586f912cfb0",
+      "classifier": {
+        "file": "data/rules/reviewed/v12r-domain-apple.list",
+        "sha256": "7c589262d627b93853efe0efeab724db35b462e4eb95026fd4c634e7043281ba"
+      },
+      "snapshotOrigin": "Preserved local cache; original download time unavailable, not a fresh remote download",
+      "upstreamURL": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/apple.yaml",
+      "runtimeRevision": "FIXED_REVIEWED_COMMIT",
+      "reviewDelta": {
+        "baseSHA256": "200582beca179afb7567b64ef325179beafec05b15479d98e60a9edfb20125cc",
+        "baseRows": 1792,
+        "rows": 1792,
+        "added": [],
+        "removed": []
+      },
+      "reviewStatus": "REVIEWED: identical classifier or deletion covered by retained parent suffix"
+    },
+    {
+      "id": "v12r-domain-bilibili",
+      "platforms": [
+        "desktop",
+        "android"
+      ],
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/dad29637471fad8f29e85fdcee6a67d08ee5a779/geo/geosite/classical/bilibili.yaml",
+      "format": "yaml",
+      "behavior": "classical",
+      "file": "data/rules/reviewed/v12r-domain-bilibili.yaml",
+      "bytes": 1737,
+      "sha256": "ba54536a3973f53c7a78d950c8d56c199e661b8e95f1c522c754c4e9c5c0f098",
+      "classifier": {
+        "file": "data/rules/reviewed/v12r-domain-bilibili.list",
+        "sha256": "dfc74e8b01ee1dee314735a49e4511f7e9a405414c51724195a20b345ed2a9db"
+      },
+      "snapshotOrigin": "Preserved local cache; original download time unavailable, not a fresh remote download",
+      "upstreamURL": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/bilibili.yaml",
+      "runtimeRevision": "FIXED_REVIEWED_COMMIT",
+      "reviewDelta": {
+        "baseSHA256": "ba54536a3973f53c7a78d950c8d56c199e661b8e95f1c522c754c4e9c5c0f098",
+        "baseRows": 53,
+        "rows": 53,
+        "added": [],
+        "removed": []
+      },
+      "reviewStatus": "REVIEWED: identical classifier or deletion covered by retained parent suffix"
+    },
+    {
+      "id": "v12r-ip-netflix",
+      "platforms": [
+        "desktop",
+        "android"
+      ],
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/dad29637471fad8f29e85fdcee6a67d08ee5a779/geo/geoip/netflix.mrs",
+      "format": "mrs",
+      "behavior": "ipcidr",
+      "file": "data/rules/reviewed/v12r-ip-netflix.mrs",
+      "bytes": 364,
+      "sha256": "3fba174fdae1efe489d9b489126fa48e8a340f6d1f96b1478afad0c43781c14a",
+      "classifier": {
+        "file": "data/rules/reviewed/v12r-ip-netflix.list",
+        "sha256": "d7c71269113609b715d66f6986bec29774527d2d131cbc0dea9c7280dcc5c779"
+      },
+      "snapshotOrigin": "Preserved local cache; original download time unavailable, not a fresh remote download",
+      "upstreamURL": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/netflix.mrs",
+      "runtimeRevision": "FIXED_REVIEWED_COMMIT",
+      "reviewDelta": {
+        "baseSHA256": "3fba174fdae1efe489d9b489126fa48e8a340f6d1f96b1478afad0c43781c14a",
+        "baseRows": 122,
+        "rows": 122,
+        "added": [],
+        "removed": []
+      },
+      "reviewStatus": "REVIEWED: identical classifier or deletion covered by retained parent suffix"
+    },
+    {
+      "id": "v12r-ip-telegram",
+      "platforms": [
+        "desktop",
+        "android"
+      ],
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/dad29637471fad8f29e85fdcee6a67d08ee5a779/geo/geoip/telegram.mrs",
+      "format": "mrs",
+      "behavior": "ipcidr",
+      "file": "data/rules/reviewed/v12r-ip-telegram.mrs",
+      "bytes": 145,
+      "sha256": "d121af95b9aeca3d8c29b2112d5e6685b2a6716383df8ae31b5fbb3408c527b3",
+      "classifier": {
+        "file": "data/rules/reviewed/v12r-ip-telegram.list",
+        "sha256": "53437464eec1ac4396b00e8b6ad427ed0cf54bfac6339575a2cef48d8753e961"
+      },
+      "snapshotOrigin": "Preserved local cache; original download time unavailable, not a fresh remote download",
+      "upstreamURL": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/telegram.mrs",
+      "runtimeRevision": "FIXED_REVIEWED_COMMIT",
+      "reviewDelta": {
+        "baseSHA256": "d121af95b9aeca3d8c29b2112d5e6685b2a6716383df8ae31b5fbb3408c527b3",
+        "baseRows": 12,
+        "rows": 12,
+        "added": [],
+        "removed": []
+      },
+      "reviewStatus": "REVIEWED: identical classifier or deletion covered by retained parent suffix"
+    },
+    {
+      "id": "v12r-ip-twitter",
+      "platforms": [
+        "desktop",
+        "android"
+      ],
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/dad29637471fad8f29e85fdcee6a67d08ee5a779/geo/geoip/twitter.mrs",
+      "format": "mrs",
+      "behavior": "ipcidr",
+      "file": "data/rules/reviewed/v12r-ip-twitter.mrs",
+      "bytes": 198,
+      "sha256": "e8fc8a292d91cf630475a1e759d52acf81cf38bc7283329253be5914dc23630f",
+      "classifier": {
+        "file": "data/rules/reviewed/v12r-ip-twitter.list",
+        "sha256": "7e37c6f264f5e614b15fe26c789d4e38b10df5a878c43d7b0fc86e5858bf9909"
+      },
+      "snapshotOrigin": "Preserved local cache; original download time unavailable, not a fresh remote download",
+      "upstreamURL": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/twitter.mrs",
+      "runtimeRevision": "FIXED_REVIEWED_COMMIT",
+      "reviewDelta": {
+        "baseSHA256": "e8fc8a292d91cf630475a1e759d52acf81cf38bc7283329253be5914dc23630f",
+        "baseRows": 19,
+        "rows": 19,
+        "added": [],
+        "removed": []
+      },
+      "reviewStatus": "REVIEWED: identical classifier or deletion covered by retained parent suffix"
+    },
+    {
+      "id": "v12r-ip-cn",
+      "platforms": [
+        "desktop",
+        "android"
+      ],
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/dad29637471fad8f29e85fdcee6a67d08ee5a779/geo/geoip/cn.mrs",
+      "format": "mrs",
+      "behavior": "ipcidr",
+      "file": "data/rules/reviewed/v12r-ip-cn.mrs",
+      "bytes": 37538,
+      "sha256": "d95b3d125f6c74ce3c15e19ef794f142de91e21c3b8fb7767e76aebfabff5149",
+      "classifier": {
+        "file": "data/rules/reviewed/v12r-ip-cn.list",
+        "sha256": "3376f850bb29d2ae310d461d2df045252f486843caeeb89633f9543ce694d684"
+      },
+      "snapshotOrigin": "Exact approved immutable candidate; raw bytes and native MRS conversion verified on promotion",
+      "upstreamURL": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.mrs",
+      "runtimeRevision": "FIXED_REVIEWED_COMMIT",
+      "reviewDelta": {
+        "baseSHA256": "d95b3d125f6c74ce3c15e19ef794f142de91e21c3b8fb7767e76aebfabff5149",
+        "baseRows": 9609,
+        "unchanged": true
+      },
+      "reviewStatus": "REVIEWED: identical classifier or deletion covered by retained parent suffix"
+    },
+    {
+      "id": "sr-01",
+      "platforms": [
+        "shadowrocket"
+      ],
+      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/83f37120c155f67c8eef43221dabe15cc3c95fec/rule/Shadowrocket/Lan/Lan.list",
+      "format": "text",
+      "behavior": "classical",
+      "file": "data/rules/reviewed/sr-01.text",
+      "bytes": 4776,
+      "sha256": "e524edec216ed7f2fa2f3eb3fe09fe70121acf88408c2394d19b3e2331c54de7",
+      "classifier": {
+        "file": "data/rules/reviewed/sr-01.list",
+        "sha256": "1287e092eb99dd9dbfcb480b0af712d9c84efb4ed62dbeb8e477c59fb265c386"
+      },
+      "uses": [
+        {
+          "kind": "domain",
+          "tag": "private",
+          "policy": "DIRECT",
+          "noResolve": false
+        }
+      ],
+      "snapshotOrigin": "Exact approved immutable candidate; raw bytes and native MRS conversion verified on promotion",
+      "upstreamURL": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Lan/Lan.list",
+      "runtimeRevision": "FIXED_REVIEWED_COMMIT",
+      "reviewDelta": {
+        "baseSHA256": "e524edec216ed7f2fa2f3eb3fe09fe70121acf88408c2394d19b3e2331c54de7",
+        "baseRows": 140,
+        "unchanged": true
+      },
+      "reviewStatus": "REVIEWED: identical classifier or deletion covered by retained parent suffix"
+    },
+    {
+      "id": "sr-02",
+      "platforms": [
+        "shadowrocket"
+      ],
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/dad29637471fad8f29e85fdcee6a67d08ee5a779/geo/geosite/classical/douyin.list",
+      "format": "text",
+      "behavior": "classical",
+      "file": "data/rules/reviewed/sr-02.text",
+      "bytes": 2060,
+      "sha256": "2d9de1ae9494450fa85ad6f9a38b36f84a37a571d32afca7baf86c1b1a82cdf9",
+      "classifier": {
+        "file": "data/rules/reviewed/sr-02.list",
+        "sha256": "911bb17f7fea207a800981dca7bb8dde7481684da332a36e8b9b2a55790c751b"
+      },
+      "uses": [
+        {
+          "kind": "domain",
+          "tag": "douyin",
+          "policy": "DIRECT",
+          "noResolve": false
+        }
+      ],
+      "snapshotOrigin": "Exact approved immutable candidate; raw bytes and native MRS conversion verified on promotion",
+      "upstreamURL": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/douyin.list",
+      "runtimeRevision": "FIXED_REVIEWED_COMMIT",
+      "reviewDelta": {
+        "baseSHA256": "2d9de1ae9494450fa85ad6f9a38b36f84a37a571d32afca7baf86c1b1a82cdf9",
+        "baseRows": 71,
+        "unchanged": true
+      },
+      "reviewStatus": "REVIEWED: identical classifier or deletion covered by retained parent suffix"
+    },
+    {
+      "id": "sr-03",
+      "platforms": [
+        "shadowrocket"
+      ],
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/dad29637471fad8f29e85fdcee6a67d08ee5a779/geo/geosite/classical/apple@cn.list",
+      "format": "text",
+      "behavior": "classical",
+      "file": "data/rules/reviewed/sr-03.text",
+      "bytes": 9382,
+      "sha256": "26d879885fb8e3dddde5055c1b3f852f2da210c1f9b9d2f989e731ccd03c59c8",
+      "classifier": {
+        "file": "data/rules/reviewed/sr-03.list",
+        "sha256": "0683c809caeff184cb57371b55fcd26a5116af90fc8d3aea750c1aa629f94fe6"
+      },
+      "uses": [
+        {
+          "kind": "domain",
+          "tag": "apple@cn",
+          "policy": "DIRECT",
+          "noResolve": false
+        }
+      ],
+      "snapshotOrigin": "Exact approved immutable candidate; raw bytes and native MRS conversion verified on promotion",
+      "upstreamURL": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/apple@cn.list",
+      "runtimeRevision": "FIXED_REVIEWED_COMMIT",
+      "reviewDelta": {
+        "baseSHA256": "26d879885fb8e3dddde5055c1b3f852f2da210c1f9b9d2f989e731ccd03c59c8",
+        "baseRows": 296,
+        "unchanged": true
+      },
+      "reviewStatus": "REVIEWED: identical classifier or deletion covered by retained parent suffix"
+    },
+    {
+      "id": "sr-04",
+      "platforms": [
+        "shadowrocket"
+      ],
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/dad29637471fad8f29e85fdcee6a67d08ee5a779/geo/geosite/classical/microsoft@cn.list",
+      "format": "text",
+      "behavior": "classical",
+      "file": "data/rules/reviewed/sr-04.text",
+      "bytes": 6253,
+      "sha256": "47ecb2cce28df8fc652e16b9a91497828992ef9818afa5c886dac93ebe32680b",
+      "classifier": {
+        "file": "data/rules/reviewed/sr-04.list",
+        "sha256": "3736b0b53a5bdf25b9ddc42d7518df59f132febb48e5461f427bfdf8980c9ee5"
+      },
+      "uses": [
+        {
+          "kind": "domain",
+          "tag": "microsoft@cn",
+          "policy": "DIRECT",
+          "noResolve": false
+        }
+      ],
+      "snapshotOrigin": "Exact approved immutable candidate; raw bytes and native MRS conversion verified on promotion",
+      "upstreamURL": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/microsoft@cn.list",
+      "runtimeRevision": "FIXED_REVIEWED_COMMIT",
+      "reviewDelta": {
+        "baseSHA256": "47ecb2cce28df8fc652e16b9a91497828992ef9818afa5c886dac93ebe32680b",
+        "baseRows": 189,
+        "unchanged": true
+      },
+      "reviewStatus": "REVIEWED: identical classifier or deletion covered by retained parent suffix"
+    },
+    {
+      "id": "sr-05",
+      "platforms": [
+        "shadowrocket"
+      ],
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/dad29637471fad8f29e85fdcee6a67d08ee5a779/geo/geosite/classical/steam@cn.list",
+      "format": "text",
+      "behavior": "classical",
+      "file": "data/rules/reviewed/sr-05.text",
+      "bytes": 620,
+      "sha256": "79e907235e9b2e7963fda08fddc3f0bd75b0a74763e831bb201456779b1505d5",
+      "classifier": {
+        "file": "data/rules/reviewed/sr-05.list",
+        "sha256": "4ae2540001216910ec89a3c035b209654cbacfe4bc329996a775336791655602"
+      },
+      "uses": [
+        {
+          "kind": "domain",
+          "tag": "steam@cn",
+          "policy": "DIRECT",
+          "noResolve": false
+        }
+      ],
+      "snapshotOrigin": "Exact approved immutable candidate; raw bytes and native MRS conversion verified on promotion",
+      "upstreamURL": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/steam@cn.list",
+      "runtimeRevision": "FIXED_REVIEWED_COMMIT",
+      "reviewDelta": {
+        "baseSHA256": "79e907235e9b2e7963fda08fddc3f0bd75b0a74763e831bb201456779b1505d5",
+        "baseRows": 19,
+        "unchanged": true
+      },
+      "reviewStatus": "REVIEWED: identical classifier or deletion covered by retained parent suffix"
+    },
+    {
+      "id": "sr-06",
+      "platforms": [
+        "shadowrocket"
+      ],
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/dad29637471fad8f29e85fdcee6a67d08ee5a779/geo/geosite/classical/cn.list",
+      "format": "text",
+      "behavior": "classical",
+      "file": "data/rules/reviewed/sr-06.text",
+      "bytes": 2975161,
+      "sha256": "1d0d38baed8eac254424a59af43df23c15c116074cc158d82400bc4d8121e852",
+      "classifier": {
+        "file": "data/rules/reviewed/sr-06.list",
+        "sha256": "76b89fece35fc3c7bcf99e2f31db42dc186a7b07f7d0184569ea363356f7514e"
+      },
+      "uses": [
+        {
+          "kind": "domain",
+          "tag": "cn",
+          "policy": "DIRECT",
+          "noResolve": false
+        }
+      ],
+      "snapshotOrigin": "Exact approved immutable candidate; raw bytes and native MRS conversion verified on promotion",
+      "upstreamURL": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/cn.list",
+      "runtimeRevision": "FIXED_REVIEWED_COMMIT",
+      "reviewDelta": {
+        "baseSHA256": "1d0d38baed8eac254424a59af43df23c15c116074cc158d82400bc4d8121e852",
+        "baseRows": 111595,
+        "unchanged": true
+      },
+      "reviewStatus": "REVIEWED: identical classifier or deletion covered by retained parent suffix"
+    },
+    {
+      "id": "sr-11",
+      "platforms": [
+        "shadowrocket"
+      ],
+      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/83f37120c155f67c8eef43221dabe15cc3c95fec/rule/Shadowrocket/Netflix/Netflix.list",
+      "format": "text",
+      "behavior": "classical",
+      "file": "data/rules/reviewed/sr-11.text",
+      "bytes": 40351,
+      "sha256": "ec37f90727e7db062d754487c4bed68ae8bba28f349aef0995f10c06f5e8b231",
+      "classifier": {
+        "file": "data/rules/reviewed/sr-11.list",
+        "sha256": "6c0043676e2a34c8ac18cf67149732f5a751897ba840e4b614294f9d04de79f8"
+      },
+      "uses": [
+        {
+          "kind": "domain",
+          "tag": "netflix",
+          "policy": "Netflix",
+          "noResolve": false
+        },
+        {
+          "kind": "ip",
+          "tag": "netflix",
+          "policy": "Netflix",
+          "noResolve": true
+        }
+      ],
+      "snapshotOrigin": "Preserved local cache; original download time unavailable, not a fresh remote download",
+      "upstreamURL": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Netflix/Netflix.list",
+      "runtimeRevision": "FIXED_REVIEWED_COMMIT",
+      "reviewDelta": {
+        "baseSHA256": "ec37f90727e7db062d754487c4bed68ae8bba28f349aef0995f10c06f5e8b231",
+        "baseRows": 1157,
+        "rows": 1157,
+        "added": [],
+        "removed": []
+      },
+      "reviewStatus": "REVIEWED: identical classifier or deletion covered by retained parent suffix"
+    },
+    {
+      "id": "sr-12",
+      "platforms": [
+        "shadowrocket"
+      ],
+      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/83f37120c155f67c8eef43221dabe15cc3c95fec/rule/Shadowrocket/Disney/Disney.list",
+      "format": "text",
+      "behavior": "classical",
+      "file": "data/rules/reviewed/sr-12.text",
+      "bytes": 5565,
+      "sha256": "65ededc7b608e440f3d918f6e95b19ca52460c8fe368dbd9e840b4bc8669f753",
+      "classifier": {
+        "file": "data/rules/reviewed/sr-12.list",
+        "sha256": "851646ffda40afd75f50194bda1eed3e270187a39ed220e333d54aa84f29729e"
+      },
+      "uses": [
+        {
+          "kind": "domain",
+          "tag": "disney",
+          "policy": "Disney+",
+          "noResolve": false
+        }
+      ],
+      "snapshotOrigin": "Preserved local cache; original download time unavailable, not a fresh remote download",
+      "upstreamURL": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Disney/Disney.list",
+      "runtimeRevision": "FIXED_REVIEWED_COMMIT",
+      "reviewDelta": {
+        "baseSHA256": "65ededc7b608e440f3d918f6e95b19ca52460c8fe368dbd9e840b4bc8669f753",
+        "baseRows": 173,
+        "rows": 173,
+        "added": [],
+        "removed": []
+      },
+      "reviewStatus": "REVIEWED: identical classifier or deletion covered by retained parent suffix"
+    },
+    {
+      "id": "sr-13",
+      "platforms": [
+        "shadowrocket"
+      ],
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/dad29637471fad8f29e85fdcee6a67d08ee5a779/geo/geosite/classical/spotify.list",
+      "format": "text",
+      "behavior": "classical",
+      "file": "data/rules/reviewed/sr-13.text",
+      "bytes": 903,
+      "sha256": "650c4841d5732fff621613a257ce831f26bdb82b47722519ef436e85e7ad5f13",
+      "classifier": {
+        "file": "data/rules/reviewed/sr-13.list",
+        "sha256": "bbdf8eb50559fc69c2654f3890182cefaae64df7215b1a7cf6ab1ac679abffe0"
+      },
+      "uses": [
+        {
+          "kind": "domain",
+          "tag": "spotify",
+          "policy": "Spotify",
+          "noResolve": false
+        }
+      ],
+      "snapshotOrigin": "Preserved local cache; original download time unavailable, not a fresh remote download",
+      "upstreamURL": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/spotify.list",
+      "runtimeRevision": "FIXED_REVIEWED_COMMIT",
+      "reviewDelta": {
+        "baseSHA256": "650c4841d5732fff621613a257ce831f26bdb82b47722519ef436e85e7ad5f13",
+        "baseRows": 28,
+        "rows": 28,
+        "added": [],
+        "removed": []
+      },
+      "reviewStatus": "REVIEWED: identical classifier or deletion covered by retained parent suffix"
+    },
+    {
+      "id": "sr-14",
+      "platforms": [
+        "shadowrocket"
+      ],
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/dad29637471fad8f29e85fdcee6a67d08ee5a779/geo/geosite/classical/telegram.list",
+      "format": "text",
+      "behavior": "classical",
+      "file": "data/rules/reviewed/sr-14.text",
+      "bytes": 545,
+      "sha256": "619df30317e41c5958311c5d4f76abe1bfa45ae4ba399129a0fec2fe4edd43d9",
+      "classifier": {
+        "file": "data/rules/reviewed/sr-14.list",
+        "sha256": "a1a39e45b89ce8da3def2ed862bdeef0fa67acb9ca50ea3cb017b9a2dd4623d8"
+      },
+      "uses": [
+        {
+          "kind": "domain",
+          "tag": "telegram",
+          "policy": "Telegram",
+          "noResolve": false
+        }
+      ],
+      "snapshotOrigin": "Preserved local cache; original download time unavailable, not a fresh remote download",
+      "upstreamURL": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/telegram.list",
+      "runtimeRevision": "FIXED_REVIEWED_COMMIT",
+      "reviewDelta": {
+        "baseSHA256": "619df30317e41c5958311c5d4f76abe1bfa45ae4ba399129a0fec2fe4edd43d9",
+        "baseRows": 21,
+        "rows": 21,
+        "added": [],
+        "removed": []
+      },
+      "reviewStatus": "REVIEWED: identical classifier or deletion covered by retained parent suffix"
+    },
+    {
+      "id": "sr-15",
+      "platforms": [
+        "shadowrocket"
+      ],
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/dad29637471fad8f29e85fdcee6a67d08ee5a779/geo/geosite/classical/discord.list",
+      "format": "text",
+      "behavior": "classical",
+      "file": "data/rules/reviewed/sr-15.text",
+      "bytes": 868,
+      "sha256": "d79aac40ce905d022c13be738352ff38806af9bc3a8e49ad6848a215bc2fe9c6",
+      "classifier": {
+        "file": "data/rules/reviewed/sr-15.list",
+        "sha256": "81aafa9b79a15d98167655e7d4e51baff38525b37247fbe41b74e9be7febaf59"
+      },
+      "uses": [
+        {
+          "kind": "domain",
+          "tag": "discord",
+          "policy": "Discord",
+          "noResolve": false
+        }
+      ],
+      "snapshotOrigin": "Preserved local cache; original download time unavailable, not a fresh remote download",
+      "upstreamURL": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/discord.list",
+      "runtimeRevision": "FIXED_REVIEWED_COMMIT",
+      "reviewDelta": {
+        "baseSHA256": "d79aac40ce905d022c13be738352ff38806af9bc3a8e49ad6848a215bc2fe9c6",
+        "baseRows": 28,
+        "rows": 28,
+        "added": [],
+        "removed": []
+      },
+      "reviewStatus": "REVIEWED: identical classifier or deletion covered by retained parent suffix"
+    },
+    {
+      "id": "sr-16",
+      "platforms": [
+        "shadowrocket"
+      ],
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/dad29637471fad8f29e85fdcee6a67d08ee5a779/geo/geosite/classical/tiktok.list",
+      "format": "text",
+      "behavior": "classical",
+      "file": "data/rules/reviewed/sr-16.text",
+      "bytes": 1187,
+      "sha256": "2c0c941815c7dc696cce3fe45d33acdd416fbde419a468924cab500c9169cfc9",
+      "classifier": {
+        "file": "data/rules/reviewed/sr-16.list",
+        "sha256": "69ab6466561c7a5e231ce4c986f17d724e060f19cc888fa826bc552e7aae221c"
+      },
+      "uses": [
+        {
+          "kind": "domain",
+          "tag": "tiktok",
+          "policy": "TikTok",
+          "noResolve": false
+        }
+      ],
+      "snapshotOrigin": "Preserved local cache; original download time unavailable, not a fresh remote download",
+      "upstreamURL": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/tiktok.list",
+      "runtimeRevision": "FIXED_REVIEWED_COMMIT",
+      "reviewDelta": {
+        "baseSHA256": "2c0c941815c7dc696cce3fe45d33acdd416fbde419a468924cab500c9169cfc9",
+        "baseRows": 37,
+        "rows": 37,
+        "added": [],
+        "removed": []
+      },
+      "reviewStatus": "REVIEWED: identical classifier or deletion covered by retained parent suffix"
+    },
+    {
+      "id": "sr-17",
+      "platforms": [
+        "shadowrocket"
+      ],
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/dad29637471fad8f29e85fdcee6a67d08ee5a779/geo/geosite/classical/twitter.list",
+      "format": "text",
+      "behavior": "classical",
+      "file": "data/rules/reviewed/sr-17.text",
+      "bytes": 657,
+      "sha256": "9e86c896de40eba53bbeeec6b8f11e6eb7ef325de69001b01399386def08ef5e",
+      "classifier": {
+        "file": "data/rules/reviewed/sr-17.list",
+        "sha256": "74f3f9f4a004ce32af096e45fdc9dcb54c781f3719d0763e2bb9778078e0256c"
+      },
+      "uses": [
+        {
+          "kind": "domain",
+          "tag": "twitter",
+          "policy": "Twitter",
+          "noResolve": false
+        }
+      ],
+      "snapshotOrigin": "Preserved local cache; original download time unavailable, not a fresh remote download",
+      "upstreamURL": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/twitter.list",
+      "runtimeRevision": "FIXED_REVIEWED_COMMIT",
+      "reviewDelta": {
+        "baseSHA256": "9e86c896de40eba53bbeeec6b8f11e6eb7ef325de69001b01399386def08ef5e",
+        "baseRows": 24,
+        "rows": 24,
+        "added": [],
+        "removed": []
+      },
+      "reviewStatus": "REVIEWED: identical classifier or deletion covered by retained parent suffix"
+    },
+    {
+      "id": "sr-18",
+      "platforms": [
+        "shadowrocket"
+      ],
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/dad29637471fad8f29e85fdcee6a67d08ee5a779/geo/geosite/classical/meta.list",
+      "format": "text",
+      "behavior": "classical",
+      "file": "data/rules/reviewed/sr-18.text",
+      "bytes": 16575,
+      "sha256": "484076df7d21f59494b1df769195d5193930c51a4e8c0d36e2eacf91f519bfc8",
+      "classifier": {
+        "file": "data/rules/reviewed/sr-18.list",
+        "sha256": "ea85a2d98b6df724bbb00d6fe156252b0509a465d3d53c62cb17adbad5f40fac"
+      },
+      "uses": [
+        {
+          "kind": "domain",
+          "tag": "meta",
+          "policy": "Meta 服务",
+          "noResolve": false
+        }
+      ],
+      "snapshotOrigin": "Preserved local cache; original download time unavailable, not a fresh remote download",
+      "upstreamURL": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/meta.list",
+      "runtimeRevision": "FIXED_REVIEWED_COMMIT",
+      "reviewDelta": {
+        "baseSHA256": "261c290af29315d4de24876c0a1747dce3cef66da12ebd174627654041801adb",
+        "baseRows": 557,
+        "rows": 555,
+        "added": [],
+        "removed": [
+          "DOMAIN-SUFFIX,graph.whatsapp.com",
+          "DOMAIN-SUFFIX,graph.whatsapp.net"
+        ]
+      },
+      "reviewStatus": "REVIEWED: identical classifier or deletion covered by retained parent suffix"
+    },
+    {
+      "id": "sr-19",
+      "platforms": [
+        "shadowrocket"
+      ],
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/dad29637471fad8f29e85fdcee6a67d08ee5a779/geo/geosite/classical/steam.list",
+      "format": "text",
+      "behavior": "classical",
+      "file": "data/rules/reviewed/sr-19.text",
+      "bytes": 1995,
+      "sha256": "b5f03434912e8371c0f0f5aff1c42e179874232216409e0d47a618bb8d954e74",
+      "classifier": {
+        "file": "data/rules/reviewed/sr-19.list",
+        "sha256": "2e3117f30009c26d558fa7ae044f31f2d743e60ca67742785633fa1e0a08b5ca"
+      },
+      "uses": [
+        {
+          "kind": "domain",
+          "tag": "steam",
+          "policy": "Steam",
+          "noResolve": false
+        }
+      ],
+      "snapshotOrigin": "Preserved local cache; original download time unavailable, not a fresh remote download",
+      "upstreamURL": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/steam.list",
+      "runtimeRevision": "FIXED_REVIEWED_COMMIT",
+      "reviewDelta": {
+        "baseSHA256": "b5f03434912e8371c0f0f5aff1c42e179874232216409e0d47a618bb8d954e74",
+        "baseRows": 60,
+        "rows": 60,
+        "added": [],
+        "removed": []
+      },
+      "reviewStatus": "REVIEWED: identical classifier or deletion covered by retained parent suffix"
+    },
+    {
+      "id": "sr-20",
+      "platforms": [
+        "shadowrocket"
+      ],
+      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/83f37120c155f67c8eef43221dabe15cc3c95fec/rule/Shadowrocket/Epic/Epic.list",
+      "format": "text",
+      "behavior": "classical",
+      "file": "data/rules/reviewed/sr-20.text",
+      "bytes": 588,
+      "sha256": "8f5fcadadd967023aa81273803de80beb2ceadd9af4e9352b565b3b00ccf464d",
+      "classifier": {
+        "file": "data/rules/reviewed/sr-20.list",
+        "sha256": "7996135bc776b0d0ba2cdd4a2474bc3604e5a6dc3a95f03a2fe88bfe79b573ea"
+      },
+      "uses": [
+        {
+          "kind": "domain",
+          "tag": "epicgames",
+          "policy": "Epic Games",
+          "noResolve": false
+        }
+      ],
+      "snapshotOrigin": "Preserved local cache; original download time unavailable, not a fresh remote download",
+      "upstreamURL": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Epic/Epic.list",
+      "runtimeRevision": "FIXED_REVIEWED_COMMIT",
+      "reviewDelta": {
+        "baseSHA256": "8f5fcadadd967023aa81273803de80beb2ceadd9af4e9352b565b3b00ccf464d",
+        "baseRows": 15,
+        "rows": 15,
+        "added": [],
+        "removed": []
+      },
+      "reviewStatus": "REVIEWED: identical classifier or deletion covered by retained parent suffix"
+    },
+    {
+      "id": "sr-23",
+      "platforms": [
+        "shadowrocket"
+      ],
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/dad29637471fad8f29e85fdcee6a67d08ee5a779/geo/geosite/classical/apple.list",
+      "format": "text",
+      "behavior": "classical",
+      "file": "data/rules/reviewed/sr-23.text",
+      "bytes": 57109,
+      "sha256": "96b83db98b1c69b38d20842b088dab05cda9d3acc407d65dd5a163287d52acac",
+      "classifier": {
+        "file": "data/rules/reviewed/sr-23.list",
+        "sha256": "7c589262d627b93853efe0efeab724db35b462e4eb95026fd4c634e7043281ba"
+      },
+      "uses": [
+        {
+          "kind": "domain",
+          "tag": "apple",
+          "policy": "苹果国际",
+          "noResolve": false
+        }
+      ],
+      "snapshotOrigin": "Preserved local cache; original download time unavailable, not a fresh remote download",
+      "upstreamURL": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/apple.list",
+      "runtimeRevision": "FIXED_REVIEWED_COMMIT",
+      "reviewDelta": {
+        "baseSHA256": "9ebc7b7ee8cf44ab6b4f9765d4848f1f21a8a92c2d504f68f068fb7566251719",
+        "baseRows": 1792,
+        "rows": 1792,
+        "added": [],
+        "removed": []
+      },
+      "reviewStatus": "REVIEWED: identical classifier or deletion covered by retained parent suffix"
+    },
+    {
+      "id": "sr-24",
+      "platforms": [
+        "shadowrocket"
+      ],
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/dad29637471fad8f29e85fdcee6a67d08ee5a779/geo/geosite/classical/bilibili.list",
+      "format": "text",
+      "behavior": "classical",
+      "file": "data/rules/reviewed/sr-24.text",
+      "bytes": 1409,
+      "sha256": "b93ec1a29d89731cc67c3ca13dd39b79742fb0b0faaf1def097d598cafa92c78",
+      "classifier": {
+        "file": "data/rules/reviewed/sr-24.list",
+        "sha256": "dfc74e8b01ee1dee314735a49e4511f7e9a405414c51724195a20b345ed2a9db"
+      },
+      "uses": [
+        {
+          "kind": "domain",
+          "tag": "bilibili",
+          "policy": "哔哩国际",
+          "noResolve": false
+        }
+      ],
+      "snapshotOrigin": "Preserved local cache; original download time unavailable, not a fresh remote download",
+      "upstreamURL": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/bilibili.list",
+      "runtimeRevision": "FIXED_REVIEWED_COMMIT",
+      "reviewDelta": {
+        "baseSHA256": "b93ec1a29d89731cc67c3ca13dd39b79742fb0b0faaf1def097d598cafa92c78",
+        "baseRows": 53,
+        "rows": 53,
+        "added": [],
+        "removed": []
+      },
+      "reviewStatus": "REVIEWED: identical classifier or deletion covered by retained parent suffix"
+    },
+    {
+      "id": "sr-25",
+      "platforms": [
+        "shadowrocket"
+      ],
+      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/83f37120c155f67c8eef43221dabe15cc3c95fec/rule/Shadowrocket/Telegram/Telegram.list",
+      "format": "text",
+      "behavior": "classical",
+      "file": "data/rules/reviewed/sr-25.text",
+      "bytes": 1338,
+      "sha256": "09f093cce5b3e2994147a2640e03040aac75e1db7bf2103fd1c9a2509b0176ab",
+      "classifier": {
+        "file": "data/rules/reviewed/sr-25.list",
+        "sha256": "43a22d2da5cd88139819a9f33caff68a19ccf51d1e2282d62175f6365127d3dd"
+      },
+      "uses": [
+        {
+          "kind": "ip",
+          "tag": "telegram",
+          "policy": "Telegram",
+          "noResolve": true
+        }
+      ],
+      "snapshotOrigin": "Preserved local cache; original download time unavailable, not a fresh remote download",
+      "upstreamURL": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Telegram/Telegram.list",
+      "runtimeRevision": "FIXED_REVIEWED_COMMIT",
+      "reviewDelta": {
+        "baseSHA256": "09f093cce5b3e2994147a2640e03040aac75e1db7bf2103fd1c9a2509b0176ab",
+        "baseRows": 40,
+        "rows": 40,
+        "added": [],
+        "removed": []
+      },
+      "reviewStatus": "REVIEWED: identical classifier or deletion covered by retained parent suffix"
+    },
+    {
+      "id": "sr-26",
+      "platforms": [
+        "shadowrocket"
+      ],
+      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/83f37120c155f67c8eef43221dabe15cc3c95fec/rule/Shadowrocket/Twitter/Twitter.list",
+      "format": "text",
+      "behavior": "classical",
+      "file": "data/rules/reviewed/sr-26.text",
+      "bytes": 1116,
+      "sha256": "64c836f2431ca0d4728cc545bb74280ee50c886e346040012e6cdd2f3eee3f97",
+      "classifier": {
+        "file": "data/rules/reviewed/sr-26.list",
+        "sha256": "371a1ead914bfa4ff5ff4ca338111d6e088517cf4792dd0bd43448b9331d1eb8"
+      },
+      "uses": [
+        {
+          "kind": "ip",
+          "tag": "twitter",
+          "policy": "Twitter",
+          "noResolve": true
+        }
+      ],
+      "snapshotOrigin": "Preserved local cache; original download time unavailable, not a fresh remote download",
+      "upstreamURL": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Twitter/Twitter.list",
+      "runtimeRevision": "FIXED_REVIEWED_COMMIT",
+      "reviewDelta": {
+        "baseSHA256": "64c836f2431ca0d4728cc545bb74280ee50c886e346040012e6cdd2f3eee3f97",
+        "baseRows": 33,
+        "rows": 33,
+        "added": [],
+        "removed": []
+      },
+      "reviewStatus": "REVIEWED: identical classifier or deletion covered by retained parent suffix"
+    },
+    {
+      "id": "sr-27",
+      "platforms": [
+        "shadowrocket"
+      ],
+      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/83f37120c155f67c8eef43221dabe15cc3c95fec/rule/Shadowrocket/ChinaIPs/ChinaIPs.list",
+      "format": "text",
+      "behavior": "classical",
+      "file": "data/rules/reviewed/sr-27.text",
+      "bytes": 685843,
+      "sha256": "d0448a52e17c634c5fb2801f644e606f575ff8df21c03cec1e974843ff755c36",
+      "classifier": {
+        "file": "data/rules/reviewed/sr-27.list",
+        "sha256": "85766aa75797d97df6c23807f0645ace36103ded2575e496eaf7877aed118f07"
+      },
+      "uses": [
+        {
+          "kind": "ip",
+          "tag": "cn",
+          "policy": "DIRECT",
+          "noResolve": true
+        }
+      ],
+      "snapshotOrigin": "Exact approved immutable candidate; raw bytes and native MRS conversion verified on promotion",
+      "upstreamURL": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/ChinaIPs/ChinaIPs.list",
+      "runtimeRevision": "FIXED_REVIEWED_COMMIT",
+      "reviewDelta": {
+        "baseSHA256": "d0448a52e17c634c5fb2801f644e606f575ff8df21c03cec1e974843ff755c36",
+        "baseRows": 19225,
+        "unchanged": true
+      },
+      "reviewStatus": "REVIEWED: identical classifier or deletion covered by retained parent suffix"
+    }
+  ]
+}

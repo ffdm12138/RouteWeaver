@@ -1,0 +1,1455 @@
+{
+  "version": "14.3",
+  "date": "2026-10-12",
+  "revision": "balanced-r1",
+  "scope": "Reviewed service parent domains, exact CDN/auth/Voice tenants, small private/DoH safety tables and bounded domestic parents; complete domain/IP inventories remain remote",
+  "core": {
+    "OpenAI 服务": [
+      "DOMAIN-SUFFIX,oaiusercontent.com",
+      "DOMAIN-SUFFIX,chatgpt.com",
+      "DOMAIN-SUFFIX,chatgpt.site",
+      "DOMAIN-SUFFIX,oaistatic.com",
+      "DOMAIN-SUFFIX,oaistatsig.com",
+      "DOMAIN-SUFFIX,chat.com",
+      "DOMAIN-SUFFIX,openai.com",
+      "DOMAIN-SUFFIX,sora.com",
+      "DOMAIN,chatgpt-async-webps-prod-eastus-1.webpubsub.azure.com",
+      "DOMAIN,chatgpt-async-webps-prod-eastus-17.webpubsub.azure.com",
+      "DOMAIN,chatgpt-async-webps-prod-eastus-23.webpubsub.azure.com"
+    ],
+    "Anthropic 服务": [
+      "DOMAIN,servd-anthropic-website.b-cdn.net",
+      "DOMAIN-SUFFIX,anthropic.com",
+      "DOMAIN-SUFFIX,clau.de",
+      "DOMAIN-SUFFIX,claude.ai",
+      "DOMAIN-SUFFIX,claude.com",
+      "DOMAIN-SUFFIX,claude.dev",
+      "DOMAIN-SUFFIX,claudemcpclient.com",
+      "DOMAIN-SUFFIX,claudemcpcontent.com",
+      "DOMAIN-SUFFIX,claudeusercontent.com"
+    ],
+    "谷歌服务": [
+      "DOMAIN,ai.google.dev",
+      "DOMAIN,alkalicore-pa.clients6.google.com",
+      "DOMAIN,alkalimakersuite-pa.clients6.google.com",
+      "DOMAIN,webchannel-alkalimakersuite-pa.clients6.google.com",
+      "DOMAIN,geminiweb-pa.clients.google.com",
+      "DOMAIN,geminiweb-pa.clients6.google.com",
+      "DOMAIN,cloudaicompanion.googleapis.com",
+      "DOMAIN,cloudcode-pa.googleapis.com",
+      "DOMAIN,daily-cloudcode-pa.googleapis.com",
+      "DOMAIN,notebooklm-pa.googleapis.com",
+      "DOMAIN,notebooklm.googleapis.com",
+      "DOMAIN,antigravity-pa.googleapis.com",
+      "DOMAIN,antigravity.googleapis.com",
+      "DOMAIN-SUFFIX,deepmind.google",
+      "DOMAIN-SUFFIX,generativeai.google",
+      "DOMAIN-SUFFIX,jules.google",
+      "DOMAIN-SUFFIX,notebooklm.google",
+      "DOMAIN-SUFFIX,gemini.google.com",
+      "DOMAIN-SUFFIX,notebooklm.google.com",
+      "DOMAIN-SUFFIX,aistudio.google.com",
+      "DOMAIN-SUFFIX,generativelanguage.googleapis.com",
+      "DOMAIN,yt3.googleusercontent.com",
+      "DOMAIN-SUFFIX,ytimg.com",
+      "DOMAIN-SUFFIX,youtu.be",
+      "DOMAIN-SUFFIX,youtube-nocookie.com",
+      "DOMAIN-SUFFIX,ggpht.com",
+      "DOMAIN-SUFFIX,youtube.com",
+      "DOMAIN-SUFFIX,googlevideo.com",
+      "DOMAIN,google-ohttp-relay-safebrowsing.fastly-edge.com",
+      "DOMAIN,firebase.googleapis.com",
+      "DOMAIN,firebaseappcheck.googleapis.com",
+      "DOMAIN,firebaseappdistribution.googleapis.com",
+      "DOMAIN,firebaseapptesters.googleapis.com",
+      "DOMAIN,firebasedynamiclinks-ipv4.googleapis.com",
+      "DOMAIN,firebasedynamiclinks-ipv6.googleapis.com",
+      "DOMAIN,firebasedynamiclinks.googleapis.com",
+      "DOMAIN,firebaseinappmessaging.googleapis.com",
+      "DOMAIN,firebaseinstallations.googleapis.com",
+      "DOMAIN,firebaselogging-pa.googleapis.com",
+      "DOMAIN,firebaselogging.googleapis.com",
+      "DOMAIN,firebaseperusertopics-pa.googleapis.com",
+      "DOMAIN,firebaseremoteconfig.googleapis.com",
+      "DOMAIN,scholar.google.ae",
+      "DOMAIN,scholar.google.at",
+      "DOMAIN,scholar.google.be",
+      "DOMAIN,scholar.google.bg",
+      "DOMAIN,scholar.google.ca",
+      "DOMAIN,scholar.google.cat",
+      "DOMAIN,scholar.google.ch",
+      "DOMAIN,scholar.google.cl",
+      "DOMAIN,scholar.google.cn",
+      "DOMAIN,scholar.google.co.cr",
+      "DOMAIN,scholar.google.co.id",
+      "DOMAIN,scholar.google.co.il",
+      "DOMAIN,scholar.google.co.in",
+      "DOMAIN,scholar.google.co.jp",
+      "DOMAIN,scholar.google.co.kr",
+      "DOMAIN,scholar.google.co.nz",
+      "DOMAIN,scholar.google.co.th",
+      "DOMAIN,scholar.google.co.uk",
+      "DOMAIN,scholar.google.co.ve",
+      "DOMAIN,scholar.google.co.za",
+      "DOMAIN,scholar.google.com",
+      "DOMAIN,scholar.google.com.ar",
+      "DOMAIN,scholar.google.com.au",
+      "DOMAIN,scholar.google.com.bo",
+      "DOMAIN,scholar.google.com.br",
+      "DOMAIN,scholar.google.com.co",
+      "DOMAIN,scholar.google.com.cu",
+      "DOMAIN,scholar.google.com.do",
+      "DOMAIN,scholar.google.com.ec",
+      "DOMAIN,scholar.google.com.eg",
+      "DOMAIN,scholar.google.com.gt",
+      "DOMAIN,scholar.google.com.hk",
+      "DOMAIN,scholar.google.com.ly",
+      "DOMAIN,scholar.google.com.mx",
+      "DOMAIN,scholar.google.com.my",
+      "DOMAIN,scholar.google.com.ni",
+      "DOMAIN,scholar.google.com.pa",
+      "DOMAIN,scholar.google.com.pe",
+      "DOMAIN,scholar.google.com.ph",
+      "DOMAIN,scholar.google.com.pk",
+      "DOMAIN,scholar.google.com.pr",
+      "DOMAIN,scholar.google.com.py",
+      "DOMAIN,scholar.google.com.sg",
+      "DOMAIN,scholar.google.com.sv",
+      "DOMAIN,scholar.google.com.tr",
+      "DOMAIN,scholar.google.com.tw",
+      "DOMAIN,scholar.google.com.ua",
+      "DOMAIN,scholar.google.com.uy",
+      "DOMAIN,scholar.google.com.vn",
+      "DOMAIN,scholar.google.cz",
+      "DOMAIN,scholar.google.de",
+      "DOMAIN,scholar.google.dk",
+      "DOMAIN,scholar.google.es",
+      "DOMAIN,scholar.google.fi",
+      "DOMAIN,scholar.google.fr",
+      "DOMAIN,scholar.google.gr",
+      "DOMAIN,scholar.google.hn",
+      "DOMAIN,scholar.google.hr",
+      "DOMAIN,scholar.google.hu",
+      "DOMAIN,scholar.google.is",
+      "DOMAIN,scholar.google.it",
+      "DOMAIN,scholar.google.li",
+      "DOMAIN,scholar.google.lt",
+      "DOMAIN,scholar.google.lu",
+      "DOMAIN,scholar.google.lv",
+      "DOMAIN,scholar.google.nl",
+      "DOMAIN,scholar.google.no",
+      "DOMAIN,scholar.google.pl",
+      "DOMAIN,scholar.google.pt",
+      "DOMAIN,scholar.google.ro",
+      "DOMAIN,scholar.google.ru",
+      "DOMAIN,scholar.google.se",
+      "DOMAIN,scholar.google.si",
+      "DOMAIN,scholar.google.sk",
+      "DOMAIN,scholar.googleusercontent.com",
+      "DOMAIN,scholar.l.google.com",
+      "DOMAIN,publicca.googleapis.com",
+      "DOMAIN,preprod-publicca.googleapis.com",
+      "DOMAIN,clients1.google.com",
+      "DOMAIN,pki.google.com",
+      "DOMAIN,android.googlesource.com",
+      "DOMAIN,alt7-mtalk.google.com",
+      "DOMAIN,alt8-mtalk.google.com",
+      "DOMAIN,mtalk-dev.google.com",
+      "DOMAIN,mtalk-staging.google.com",
+      "DOMAIN,mtalk4.google.com",
+      "DOMAIN-SUFFIX,google.com",
+      "DOMAIN-SUFFIX,blogger.com",
+      "DOMAIN-SUFFIX,blogspot.com",
+      "DOMAIN-SUFFIX,android.com",
+      "DOMAIN-SUFFIX,fitbit.com",
+      "DOMAIN-SUFFIX,gmail.com",
+      "DOMAIN-SUFFIX,googleapis.cn",
+      "DOMAIN-SUFFIX,googleapis.com",
+      "DOMAIN-SUFFIX,googleusercontent.com",
+      "DOMAIN-SUFFIX,googlezip.net",
+      "DOMAIN-SUFFIX,gstatic.com",
+      "DOMAIN-SUFFIX,gvt1.com",
+      "DOMAIN-SUFFIX,gvt2.com",
+      "DOMAIN-SUFFIX,gvt3.com",
+      "DOMAIN-SUFFIX,nest.com",
+      "DOMAIN-SUFFIX,waze.com",
+      "DOMAIN-SUFFIX,withgoogle.com",
+      "DOMAIN-SUFFIX,googleplay.com",
+      "DOMAIN-SUFFIX,xn--ngstr-lra8j.com",
+      "DOMAIN-SUFFIX,google.com.tw",
+      "DOMAIN-SUFFIX,google.com.sg",
+      "DOMAIN-SUFFIX,google.com.hk",
+      "DOMAIN-SUFFIX,google.co.uk",
+      "DOMAIN-SUFFIX,google.co.jp",
+      "DOMAIN-SUFFIX,doubleclick.net",
+      "DOMAIN-SUFFIX,google-analytics.com",
+      "DOMAIN-SUFFIX,googleadservices.com",
+      "DOMAIN-SUFFIX,googlesyndication.com",
+      "DOMAIN-SUFFIX,googletagmanager.com",
+      "DOMAIN,analytics.google.com",
+      "DOMAIN,recaptcha-cn.net",
+      "DOMAIN,recaptcha.net",
+      "DOMAIN,www.recaptcha-cn.net",
+      "DOMAIN,www.recaptcha.net",
+      "DOMAIN,2mdn-cn.net",
+      "DOMAIN,2mdn.net",
+      "DOMAIN,admob-cn.com",
+      "DOMAIN,adservice.google.com",
+      "DOMAIN,app-analytics-services.com",
+      "DOMAIN,app-measurement-cn.com",
+      "DOMAIN,app-measurement.com",
+      "DOMAIN,apps5.oingo.com",
+      "DOMAIN,avail.googleflights.net",
+      "DOMAIN,beacons.gcp.gvt2.com",
+      "DOMAIN,beacons.gvt2.com",
+      "DOMAIN,beacons2.gvt2.com",
+      "DOMAIN,beacons3.gvt2.com",
+      "DOMAIN,c.admob.com",
+      "DOMAIN,c.android.clients.google.com",
+      "DOMAIN,cache-management-prod.google.com",
+      "DOMAIN,cache.pack.google.com",
+      "DOMAIN,checkin.gstatic.com",
+      "DOMAIN,clickserve.cc-dt.com",
+      "DOMAIN,clickserve.dartsearch.net",
+      "DOMAIN,clickserver.googleads.com",
+      "DOMAIN,clientservices.googleapis.com",
+      "DOMAIN,cn.widevine.com",
+      "DOMAIN,connectivitycheck.gstatic.com",
+      "DOMAIN,csi.gstatic.com",
+      "DOMAIN,dartsearch-cn.net",
+      "DOMAIN,dg-meta.video.google.com",
+      "DOMAIN,dl.google.com",
+      "DOMAIN,dl.l.google.com",
+      "DOMAIN,doubleclick-cn.net",
+      "DOMAIN,doubleclick.net",
+      "DOMAIN,download.mlcc.google.com",
+      "DOMAIN,download.tensorflow.google.com",
+      "DOMAIN,fontfiles.googleapis.com",
+      "DOMAIN,fonts.googleapis.com",
+      "DOMAIN,fonts.gstatic.com",
+      "DOMAIN,g0.gstatic.com",
+      "DOMAIN,g1.gstatic.com",
+      "DOMAIN,g2.gstatic.com",
+      "DOMAIN,g3.gstatic.com",
+      "DOMAIN,gonglchuangl.net",
+      "DOMAIN,gongyichuangyi.net",
+      "DOMAIN,google-analytics-cn.com",
+      "DOMAIN,google-analytics.com",
+      "DOMAIN,googleadservices-cn.com",
+      "DOMAIN,googleadservices.com",
+      "DOMAIN,googleanalytics.com",
+      "DOMAIN,googleapis-cn.com",
+      "DOMAIN,googleapps-cn.com",
+      "DOMAIN,googleflights-cn.net",
+      "DOMAIN,googleoptimize-cn.com",
+      "DOMAIN,googleoptimize.com",
+      "DOMAIN,googlesyndication-cn.com",
+      "DOMAIN,googlesyndication.com",
+      "DOMAIN,googletagmanager-cn.com",
+      "DOMAIN,googletagmanager.com",
+      "DOMAIN,googletagservices-cn.com",
+      "DOMAIN,googletagservices.com",
+      "DOMAIN,googletraveladservices-cn.com",
+      "DOMAIN,googletraveladservices.com",
+      "DOMAIN,googlevads-cn.com",
+      "DOMAIN,gstatic-cn.com",
+      "DOMAIN,gstaticadssl.l.google.com",
+      "DOMAIN,gtm.oasisfeng.com",
+      "DOMAIN,imasdk.googleapis.com",
+      "DOMAIN,pagead-googlehosted.l.google.com",
+      "DOMAIN,performanceparameters.googleapis.com",
+      "DOMAIN,prod-controlbe.floonet.goog",
+      "DOMAIN,prod-databe.floonet.goog",
+      "DOMAIN,prod.databe.floonet.goog",
+      "DOMAIN,qiao-cn.com",
+      "DOMAIN,qpx.googleflights.net",
+      "DOMAIN,redirector.bdn.dev",
+      "DOMAIN,redirector.c.chat.google.com",
+      "DOMAIN,redirector.c.mail.google.com",
+      "DOMAIN,redirector.c.pack.google.com",
+      "DOMAIN,redirector.c.youtubeeducation.com",
+      "DOMAIN,redirector.gcpcdn.gvt1.com",
+      "DOMAIN,redirector.gvt1.com",
+      "DOMAIN,redirector.offline-maps.gvt1.com",
+      "DOMAIN,redirector.snap.gvt1.com",
+      "DOMAIN,redirector.xn--ngstr-lra8j.com",
+      "DOMAIN,safebrowsing-cache.google.com",
+      "DOMAIN,safebrowsing.googleapis.com",
+      "DOMAIN,service.urchin.com",
+      "DOMAIN,ssl-google-analytics.l.google.com",
+      "DOMAIN,ssl.gstatic.com",
+      "DOMAIN,staging-controlbe.floonet.goog",
+      "DOMAIN,staging-databe.floonet.goog",
+      "DOMAIN,staging.databe.floonet.goog",
+      "DOMAIN,tac.googleapis.com",
+      "DOMAIN,tools.google.com",
+      "DOMAIN,update.googleapis.com",
+      "DOMAIN,wear.googleapis.com",
+      "DOMAIN,www-google-analytics.l.google.com",
+      "DOMAIN,www-googletagmanager.l.google.com",
+      "DOMAIN,www.destinationurl.com",
+      "DOMAIN,www.gstatic.com",
+      "DOMAIN,www.pxcc.com",
+      "DOMAIN,crashlyticsreports-pa.googleapis.com",
+      "DOMAIN,firebase-settings.crashlytics.com",
+      "DOMAIN,update.crashlytics.com",
+      "DOMAIN-REGEX,^r+[0-9]+(---|\\.)sn-(2x3|ni5|j5o)\\w{5}\\.xn--ngstr-lra8j\\.com$",
+      "DOMAIN-REGEX,^r+[0-9]+(---|\\.)sn-(2x3|ni5|j5o)\\w{5}\\.googlevideo\\.com$",
+      "DOMAIN,redirector.c.play.google.com",
+      "DOMAIN,pki-goog.l.google.com",
+      "DOMAIN,c.pki.goog",
+      "DOMAIN,i.pki.goog",
+      "DOMAIN,o.pki.goog",
+      "DOMAIN,crl.pki.goog",
+      "DOMAIN,crls.pki.goog",
+      "DOMAIN,ocsp.pki.goog",
+      "DOMAIN,alt1-mtalk.google.com",
+      "DOMAIN,alt2-mtalk.google.com",
+      "DOMAIN,alt3-mtalk.google.com",
+      "DOMAIN,alt4-mtalk.google.com",
+      "DOMAIN,alt5-mtalk.google.com",
+      "DOMAIN,alt6-mtalk.google.com",
+      "DOMAIN,mtalk.google.com"
+    ],
+    "微软生态": [
+      "DOMAIN,img-prod-cms-rt-microsoft-com.akamaized.net",
+      "DOMAIN,img-s-msn-com.akamaized.net",
+      "DOMAIN,mwf-service.akamaized.net",
+      "DOMAIN,officecdn-microsoft-com.akamaized.net",
+      "DOMAIN,statics-marketingsites-eas-ms-com.akamaized.net",
+      "DOMAIN,statics-marketingsites-eus-ms-com.akamaized.net",
+      "DOMAIN,statics-marketingsites-wcus-ms-com.akamaized.net",
+      "DOMAIN,copilot-proxy.githubusercontent.com",
+      "DOMAIN,copilot-workspace.githubnext.com",
+      "DOMAIN,az764295.vo.msecnd.net",
+      "DOMAIN,bingsettingssearch.trafficmanager.net",
+      "DOMAIN,default.exp-tas.com",
+      "DOMAIN,developer.microsoft.com",
+      "DOMAIN,dtlgalleryint.cloudapp.net",
+      "DOMAIN,packages.microsoft.com",
+      "DOMAIN,poshtestgallery.cloudapp.net",
+      "DOMAIN,psg-int-centralus.cloudapp.net",
+      "DOMAIN,psg-int-eastus.cloudapp.net",
+      "DOMAIN,rink.hockeyapp.net",
+      "DOMAIN,vscode-sync-insiders.trafficmanager.net",
+      "DOMAIN,vscode-sync.trafficmanager.net",
+      "DOMAIN,vscode.search.windows.net",
+      "DOMAIN,vsmarketplacebadge.apphb.com",
+      "DOMAIN,crl.microsoft.com",
+      "DOMAIN,mscrl.microsoft.com",
+      "DOMAIN,ocsp.microsoft.com",
+      "DOMAIN,oneocsp.microsoft.com",
+      "DOMAIN,www.microsoft.com",
+      "DOMAIN,azure.microsoft.com",
+      "DOMAIN,azuremarketplace.microsoft.com",
+      "DOMAIN,location.microsoft.com",
+      "DOMAIN-SUFFIX,microsoft.com",
+      "DOMAIN-SUFFIX,github.com",
+      "DOMAIN-SUFFIX,aka.ms",
+      "DOMAIN-SUFFIX,live.com",
+      "DOMAIN-SUFFIX,microsoftonline.com",
+      "DOMAIN-SUFFIX,microsoftstore.com",
+      "DOMAIN-SUFFIX,msftconnecttest.com",
+      "DOMAIN-SUFFIX,msftncsi.com",
+      "DOMAIN-SUFFIX,office.com",
+      "DOMAIN-SUFFIX,office.net",
+      "DOMAIN-SUFFIX,office365.com",
+      "DOMAIN-SUFFIX,sharepoint.com",
+      "DOMAIN-SUFFIX,skype.com",
+      "DOMAIN-SUFFIX,windows.com",
+      "DOMAIN-SUFFIX,windowsupdate.com",
+      "DOMAIN-SUFFIX,githubassets.com",
+      "DOMAIN-SUFFIX,githubusercontent.com",
+      "DOMAIN-SUFFIX,githubcopilot.com",
+      "DOMAIN-SUFFIX,msn.com",
+      "DOMAIN-SUFFIX,onedrive.com",
+      "DOMAIN-SUFFIX,xbox.com",
+      "DOMAIN-SUFFIX,xboxlive.com",
+      "DOMAIN-SUFFIX,bing.com",
+      "DOMAIN,azuremigrate.download.prss.microsoft.com",
+      "DOMAIN,azuremigratetest.download.prss.microsoft.com",
+      "DOMAIN,azurestackhub.download.prss.microsoft.com",
+      "DOMAIN,azurestackhubuat.download.prss.microsoft.com",
+      "DOMAIN,b.c2r.ts.cdn.office.net",
+      "DOMAIN,cbdstest.download.prss.microsoft.com",
+      "DOMAIN,cn.windowssearch.com",
+      "DOMAIN,collaborate.download.prss.microsoft.com",
+      "DOMAIN,collaborateppe.download.prss.microsoft.com",
+      "DOMAIN,ctldl.windowsupdate.com",
+      "DOMAIN,download.microsoft.com",
+      "DOMAIN,dreamspark.download.prss.microsoft.com",
+      "DOMAIN,dreamsparkuat.download.prss.microsoft.com",
+      "DOMAIN,f.c2r.ts.cdn.office.net",
+      "DOMAIN,itacademy.download.prss.microsoft.com",
+      "DOMAIN,itacademyuat.download.prss.microsoft.com",
+      "DOMAIN,lex.download.prss.microsoft.com",
+      "DOMAIN,lexuat.download.prss.microsoft.com",
+      "DOMAIN,mbs.download.prss.microsoft.com",
+      "DOMAIN,mpnbenefits.download.prss.microsoft.com",
+      "DOMAIN,mpnbenefitsrtl.download.prss.microsoft.com",
+      "DOMAIN,mpnbenefitsrtluat.download.prss.microsoft.com",
+      "DOMAIN,msdn.download.prss.microsoft.com",
+      "DOMAIN,msdprod-ad.download.prss.microsoft.com",
+      "DOMAIN,msproduct.download.prss.microsoft.com",
+      "DOMAIN,myvs.download.prss.microsoft.com",
+      "DOMAIN,oemsoc.download.prss.microsoft.com",
+      "DOMAIN,oemsocuat.download.prss.microsoft.com",
+      "DOMAIN,officecdn.microsoft.com",
+      "DOMAIN,officemkt.download.prss.microsoft.com",
+      "DOMAIN,officemktuat.download.prss.microsoft.com",
+      "DOMAIN,osrelease.download.prss.microsoft.com",
+      "DOMAIN,rsm.download.prss.microsoft.com",
+      "DOMAIN,sdx.microsoft.com",
+      "DOMAIN,shell.cdn.office.net",
+      "DOMAIN,software.download.prss.microsoft.com",
+      "DOMAIN,statics.teams.cdn.office.net",
+      "DOMAIN,storecorefulfillment.download.prss.microsoft.com",
+      "DOMAIN,storeedge.microsoft.com",
+      "DOMAIN,storeedgefd.dsx.mp.microsoft.com",
+      "DOMAIN,surface.download.prss.microsoft.com",
+      "DOMAIN,surface.downloads.prss.microsoft.com",
+      "DOMAIN,vlportal.download.prss.microsoft.com",
+      "DOMAIN,volic.download.prss.microsoft.com",
+      "DOMAIN,vscode.download.prss.microsoft.com",
+      "DOMAIN,vz.download.prss.microsoft.com",
+      "DOMAIN,windbg.download.prss.microsoft.com",
+      "DOMAIN,copilot-telemetry-service.githubusercontent.com",
+      "DOMAIN,copilot-telemetry.githubusercontent.com",
+      "DOMAIN,download.visualstudio.microsoft.com",
+      "DOMAIN,bj1.api.bing.com",
+      "DOMAIN,e122475.dscg.akamaiedge.net",
+      "DOMAIN,licdn.cn.cdn20.com",
+      "DOMAIN,linkedin.sc.omtrdc.net",
+      "DOMAIN-SUFFIX,licdn.com",
+      "DOMAIN-SUFFIX,linkedin.com"
+    ],
+    "公共基础服务": [
+      "DOMAIN-SUFFIX,workos.com",
+      "DOMAIN-SUFFIX,workoscdn.com",
+      "DOMAIN-SUFFIX,stripe.com",
+      "DOMAIN-SUFFIX,stripe.network",
+      "DOMAIN-SUFFIX,browser-intake-datadoghq.com",
+      "DOMAIN-SUFFIX,sentry.io",
+      "DOMAIN-SUFFIX,intercom.io",
+      "DOMAIN-SUFFIX,intercomcdn.com",
+      "DOMAIN-SUFFIX,ct.sendgrid.net",
+      "DOMAIN-SUFFIX,auth0.com",
+      "DOMAIN-SUFFIX,livekit.cloud",
+      "DOMAIN-SUFFIX,cdn.cloudflare.net",
+      "DOMAIN-SUFFIX,cloudflare.com",
+      "DOMAIN-SUFFIX,webpubsub.azure.com",
+      "DOMAIN-SUFFIX,blob.core.windows.net",
+      "DOMAIN-SUFFIX,azurewebsites.net",
+      "DOMAIN-SUFFIX,azurestaticapps.net",
+      "DOMAIN-SUFFIX,azureedge.net",
+      "DOMAIN-SUFFIX,azurefd.net",
+      "DOMAIN-SUFFIX,appspot.com",
+      "DOMAIN-SUFFIX,firebaseio.com",
+      "DOMAIN-SUFFIX,firebaseapp.com",
+      "DOMAIN-SUFFIX,run.app",
+      "DOMAIN-SUFFIX,pages.dev",
+      "DOMAIN-SUFFIX,workers.dev",
+      "DOMAIN-SUFFIX,r2.dev",
+      "DOMAIN-SUFFIX,cloudfront.net",
+      "DOMAIN-SUFFIX,amazonaws.com",
+      "DOMAIN-SUFFIX,cloudinary.com",
+      "DOMAIN-SUFFIX,imgix.net",
+      "DOMAIN-SUFFIX,arkoselabs.com",
+      "DOMAIN-SUFFIX,usefathom.com",
+      "DOMAIN-SUFFIX,sendgrid.net",
+      "DOMAIN-SUFFIX,qualtrics.com",
+      "DOMAIN-SUFFIX,github.io",
+      "DOMAIN-SUFFIX,githubpreview.dev",
+      "DOMAIN,challenges.cloudflare.com",
+      "DOMAIN,workos.imgix.net",
+      "DOMAIN-SUFFIX,cloudapp.net",
+      "DOMAIN-SUFFIX,cloudapp.azure.com",
+      "DOMAIN-SUFFIX,azure-api.net",
+      "DOMAIN-SUFFIX,azurecontainer.io",
+      "DOMAIN-SUFFIX,trafficmanager.net",
+      "DOMAIN-SUFFIX,azurecr.io",
+      "DOMAIN-SUFFIX,cosmos.azure.com",
+      "DOMAIN-SUFFIX,documents.azure.com",
+      "DOMAIN-SUFFIX,vault.azure.net",
+      "DOMAIN-SUFFIX,azmk8s.io",
+      "DOMAIN-SUFFIX,servicebus.windows.net",
+      "DOMAIN-SUFFIX,database.windows.net",
+      "DOMAIN-SUFFIX,file.core.windows.net",
+      "DOMAIN-SUFFIX,queue.core.windows.net",
+      "DOMAIN-SUFFIX,table.core.windows.net",
+      "DOMAIN-SUFFIX,web.core.windows.net",
+      "DOMAIN-SUFFIX,dfs.core.windows.net",
+      "DOMAIN-SUFFIX,chinacloudapp.cn",
+      "DOMAIN-SUFFIX,blob.core.chinacloudapi.cn",
+      "DOMAIN-SUFFIX,queue.core.chinacloudapi.cn",
+      "DOMAIN-SUFFIX,table.core.chinacloudapi.cn",
+      "DOMAIN-SUFFIX,dfs.core.chinacloudapi.cn",
+      "DOMAIN-SUFFIX,database.chinacloudapi.cn",
+      "DOMAIN-SUFFIX,servicebus.chinacloudapi.cn",
+      "DOMAIN-SUFFIX,vault.azure.cn",
+      "DOMAIN-SUFFIX,azure-api.cn",
+      "DOMAIN-SUFFIX,cloudfunctions.net",
+      "DOMAIN-SUFFIX,storage.googleapis.com",
+      "DOMAIN-SUFFIX,content-storage.googleapis.com",
+      "DOMAIN-SUFFIX,storage.cloud.google.com",
+      "DOMAIN-SUFFIX,storage.mtls.googleapis.com",
+      "DOMAIN-SUFFIX,storage.mtls.cloud.google.com"
+    ]
+  },
+  "services": [
+    {
+      "name": "OpenAI 服务",
+      "sets": [
+        "openai"
+      ],
+      "seeds": [
+        "openai.com",
+        "chatgpt.com",
+        "chat.com",
+        "sora.com",
+        "oaistatic.com",
+        "oaistatsig.com",
+        "oaiusercontent.com",
+        "chatgpt.site"
+      ],
+      "exact": [
+        "chatgpt.livekit.cloud",
+        "host.livekit.cloud",
+        "turn.livekit.cloud",
+        "openaiapi-site.azureedge.net",
+        "openaiassets.blob.core.windows.net",
+        "openaicom-api-bdcpf8c6d2e9atf6.z01.azurefd.net",
+        "openaicom.imgix.net",
+        "openaicomproductionae4b.blob.core.windows.net",
+        "production-openaicom-storage.azureedge.net",
+        "cdn.openaimerge.com",
+        "openai.qualtrics.com",
+        "openai.com.cdn.cloudflare.net",
+        "chatgpt-async-webps-prod-eastus-1.webpubsub.azure.com",
+        "chatgpt-async-webps-prod-eastus-17.webpubsub.azure.com",
+        "chatgpt-async-webps-prod-eastus-23.webpubsub.azure.com"
+      ]
+    },
+    {
+      "name": "Anthropic 服务",
+      "sets": [
+        "anthropic"
+      ],
+      "seeds": [
+        "anthropic.com",
+        "claude.ai",
+        "claude.com",
+        "claudeusercontent.com",
+        "clau.de",
+        "claudemcpclient.com",
+        "claudemcpcontent.com"
+      ]
+    },
+    {
+      "name": "谷歌服务",
+      "sets": [
+        "google-gemini",
+        "youtube",
+        "google"
+      ],
+      "seeds": [
+        "gemini.google.com",
+        "aistudio.google.com",
+        "generativelanguage.googleapis.com",
+        "notebooklm.google.com",
+        "notebooklm.google",
+        "deepmind.google",
+        "generativeai.google",
+        "ai.google.dev",
+        "jules.google",
+        "google.com",
+        "googleapis.com",
+        "googleapis.cn",
+        "gstatic.com",
+        "googleusercontent.com",
+        "gmail.com",
+        "google.com.hk",
+        "google.co.jp",
+        "google.co.uk",
+        "google.com.tw",
+        "google.com.sg",
+        "youtube.com",
+        "youtu.be",
+        "googlevideo.com",
+        "ytimg.com",
+        "youtube-nocookie.com",
+        "ggpht.com",
+        "gvt1.com",
+        "gvt2.com",
+        "gvt3.com",
+        "xn--ngstr-lra8j.com",
+        "android.com",
+        "googleplay.com",
+        "google-analytics.com",
+        "googlezip.net",
+        "pki.goog",
+        "recaptcha.net",
+        "doubleclick.net",
+        "googlesyndication.com",
+        "googleadservices.com",
+        "googletagmanager.com",
+        "firebase.google.com",
+        "googlecloud.com",
+        "cloud.google.com",
+        "waze.com",
+        "fitbit.com",
+        "nest.com",
+        "blogger.com",
+        "blogspot.com",
+        "withgoogle.com"
+      ]
+    },
+    {
+      "name": "OpenRouter",
+      "sets": [],
+      "seeds": [
+        "openrouter.ai"
+      ]
+    },
+    {
+      "name": "Perplexity",
+      "sets": [],
+      "seeds": [
+        "perplexity.ai",
+        "perplexity.com",
+        "pplx.ai"
+      ],
+      "exact": [
+        "ppl-ai-file-upload.s3.amazonaws.com",
+        "pplx-res.cloudinary.com"
+      ]
+    },
+    {
+      "name": "Hugging Face",
+      "sets": [],
+      "seeds": [
+        "huggingface.co",
+        "hf.co",
+        "hf.space"
+      ]
+    },
+    {
+      "name": "xAI",
+      "sets": [],
+      "seeds": [
+        "x.ai",
+        "grok.com",
+        "grok.me"
+      ]
+    },
+    {
+      "name": "Netflix",
+      "sets": [
+        "netflix"
+      ],
+      "ips": [
+        "netflix"
+      ],
+      "seeds": [
+        "netflix.com",
+        "nflxvideo.net",
+        "nflximg.net",
+        "nflxext.com",
+        "nflxso.net",
+        "nflximg.com",
+        "netflix.net"
+      ]
+    },
+    {
+      "name": "Disney+",
+      "sets": [
+        "disney"
+      ],
+      "seeds": [
+        "disneyplus.com",
+        "dssott.com",
+        "bamgrid.com"
+      ],
+      "exact": [
+        "hses.akamaized.net",
+        "hses1.akamaized.net",
+        "hses2.akamaized.net",
+        "hses3.akamaized.net",
+        "hses4.akamaized.net",
+        "hses5.akamaized.net",
+        "hses6.akamaized.net",
+        "hses7.akamaized.net"
+      ]
+    },
+    {
+      "name": "Spotify",
+      "sets": [
+        "spotify"
+      ],
+      "seeds": [
+        "spotify.com",
+        "scdn.co",
+        "spotifycdn.com",
+        "spotifycdn.net"
+      ]
+    },
+    {
+      "name": "Telegram",
+      "sets": [
+        "telegram"
+      ],
+      "ips": [
+        "telegram"
+      ],
+      "seeds": [
+        "telegram.org",
+        "t.me",
+        "telegra.ph",
+        "cdn-telegram.org",
+        "telegram.me",
+        "tdesktop.com",
+        "telegram-cdn.org"
+      ]
+    },
+    {
+      "name": "Discord",
+      "sets": [
+        "discord"
+      ],
+      "seeds": [
+        "discord.com",
+        "discord.gg",
+        "discordapp.com",
+        "discordapp.net",
+        "discord.media",
+        "discordapp.io",
+        "discordcdn.com"
+      ]
+    },
+    {
+      "name": "TikTok",
+      "sets": [
+        "tiktok"
+      ],
+      "seeds": [
+        "tiktok.com",
+        "tiktokcdn.com",
+        "tiktokv.com",
+        "tiktokcdn-us.com",
+        "byteoversea.com",
+        "ibytedtos.com",
+        "musical.ly",
+        "muscdn.com",
+        "capcut.com",
+        "larksuite.com",
+        "trae.ai",
+        "tiktokd.net"
+      ]
+    },
+    {
+      "name": "Twitter",
+      "sets": [
+        "twitter"
+      ],
+      "ips": [
+        "twitter"
+      ],
+      "seeds": [
+        "x.com",
+        "twitter.com",
+        "twimg.com",
+        "t.co",
+        "tweetdeck.com"
+      ]
+    },
+    {
+      "name": "Meta 服务",
+      "sets": [
+        "meta"
+      ],
+      "seeds": [
+        "facebook.com",
+        "fb.com",
+        "fb.me",
+        "fbcdn.net",
+        "fbsbx.com",
+        "messenger.com",
+        "instagram.com",
+        "cdninstagram.com",
+        "whatsapp.com",
+        "whatsapp.net",
+        "threads.net",
+        "threads.com",
+        "meta.com",
+        "meta.ai",
+        "oculus.com",
+        "wa.me"
+      ]
+    },
+    {
+      "name": "Steam",
+      "sets": [
+        "steam"
+      ],
+      "seeds": [
+        "steamcontent.com",
+        "dl.steam.clngaa.com",
+        "st.dl.bscstorage.net",
+        "st.dl.eccdnx.com",
+        "st.dl.pinyuncloud.com",
+        "steampowered.com",
+        "steamcommunity.com",
+        "steamstatic.com",
+        "steamserver.net",
+        "steamusercontent.com",
+        "s.team",
+        "steam-chat.com"
+      ],
+      "exact": [
+        "steamcdn-a.akamaihd.net",
+        "steampipe.akamaized.net",
+        "steampipe-partner.akamaized.net"
+      ]
+    },
+    {
+      "name": "Epic Games",
+      "sets": [
+        "epicgames"
+      ],
+      "seeds": [
+        "epicgames.com",
+        "epicgames.dev",
+        "epicgamescdn.com",
+        "fortnite.com",
+        "unrealengine.com"
+      ],
+      "exact": [
+        "epicgames-download0.akamaized.net",
+        "epicgames-download1.akamaized.net",
+        "epicgames-download2.akamaized.net",
+        "epicgames-download3.akamaized.net",
+        "epicgames-download4.akamaized.net",
+        "epicgames-download5.akamaized.net",
+        "epicgames-download6.akamaized.net",
+        "epicgames-download7.akamaized.net",
+        "epicgames-download8.akamaized.net",
+        "epicgames-download9.akamaized.net",
+        "cdn0-epicgames-0.file.myqcloud.com",
+        "cdn0-epicgames-1.file.myqcloud.com",
+        "cdn0-epicgames-17.file.myqcloud.com",
+        "cdn0-epicgames-23.file.myqcloud.com",
+        "cdn0-epicgames-999.file.myqcloud.com",
+        "cdn1-epicgames-0.file.myqcloud.com",
+        "cdn1-epicgames-1.file.myqcloud.com",
+        "cdn1-epicgames-17.file.myqcloud.com",
+        "cdn1-epicgames-23.file.myqcloud.com",
+        "cdn1-epicgames-999.file.myqcloud.com",
+        "cdn2-epicgames-0.file.myqcloud.com",
+        "cdn2-epicgames-1.file.myqcloud.com",
+        "cdn2-epicgames-17.file.myqcloud.com",
+        "cdn2-epicgames-23.file.myqcloud.com",
+        "cdn2-epicgames-999.file.myqcloud.com",
+        "cdn3-epicgames-0.file.myqcloud.com",
+        "cdn3-epicgames-1.file.myqcloud.com",
+        "cdn3-epicgames-17.file.myqcloud.com",
+        "cdn3-epicgames-23.file.myqcloud.com",
+        "cdn3-epicgames-999.file.myqcloud.com",
+        "cdn4-epicgames-0.file.myqcloud.com",
+        "cdn4-epicgames-1.file.myqcloud.com",
+        "cdn4-epicgames-17.file.myqcloud.com",
+        "cdn4-epicgames-23.file.myqcloud.com",
+        "cdn4-epicgames-999.file.myqcloud.com",
+        "cdn5-epicgames-0.file.myqcloud.com",
+        "cdn5-epicgames-1.file.myqcloud.com",
+        "cdn5-epicgames-17.file.myqcloud.com",
+        "cdn5-epicgames-23.file.myqcloud.com",
+        "cdn5-epicgames-999.file.myqcloud.com",
+        "cdn6-epicgames-0.file.myqcloud.com",
+        "cdn6-epicgames-1.file.myqcloud.com",
+        "cdn6-epicgames-17.file.myqcloud.com",
+        "cdn6-epicgames-23.file.myqcloud.com",
+        "cdn6-epicgames-999.file.myqcloud.com",
+        "cdn7-epicgames-0.file.myqcloud.com",
+        "cdn7-epicgames-1.file.myqcloud.com",
+        "cdn7-epicgames-17.file.myqcloud.com",
+        "cdn7-epicgames-23.file.myqcloud.com",
+        "cdn7-epicgames-999.file.myqcloud.com",
+        "cdn8-epicgames-0.file.myqcloud.com",
+        "cdn8-epicgames-1.file.myqcloud.com",
+        "cdn8-epicgames-17.file.myqcloud.com",
+        "cdn8-epicgames-23.file.myqcloud.com",
+        "cdn8-epicgames-999.file.myqcloud.com",
+        "cdn9-epicgames-0.file.myqcloud.com",
+        "cdn9-epicgames-1.file.myqcloud.com",
+        "cdn9-epicgames-17.file.myqcloud.com",
+        "cdn9-epicgames-23.file.myqcloud.com",
+        "cdn9-epicgames-999.file.myqcloud.com",
+        "epicgames-download0-0.file.myqcloud.com",
+        "epicgames-download0-1.file.myqcloud.com",
+        "epicgames-download0-17.file.myqcloud.com",
+        "epicgames-download0-23.file.myqcloud.com",
+        "epicgames-download0-999.file.myqcloud.com",
+        "epicgames-download1-0.file.myqcloud.com",
+        "epicgames-download1-1.file.myqcloud.com",
+        "epicgames-download1-17.file.myqcloud.com",
+        "epicgames-download1-23.file.myqcloud.com",
+        "epicgames-download1-999.file.myqcloud.com",
+        "epicgames-download2-0.file.myqcloud.com",
+        "epicgames-download2-1.file.myqcloud.com",
+        "epicgames-download2-17.file.myqcloud.com",
+        "epicgames-download2-23.file.myqcloud.com",
+        "epicgames-download2-999.file.myqcloud.com",
+        "epicgames-download3-0.file.myqcloud.com",
+        "epicgames-download3-1.file.myqcloud.com",
+        "epicgames-download3-17.file.myqcloud.com",
+        "epicgames-download3-23.file.myqcloud.com",
+        "epicgames-download3-999.file.myqcloud.com",
+        "epicgames-download4-0.file.myqcloud.com",
+        "epicgames-download4-1.file.myqcloud.com",
+        "epicgames-download4-17.file.myqcloud.com",
+        "epicgames-download4-23.file.myqcloud.com",
+        "epicgames-download4-999.file.myqcloud.com",
+        "epicgames-download5-0.file.myqcloud.com",
+        "epicgames-download5-1.file.myqcloud.com",
+        "epicgames-download5-17.file.myqcloud.com",
+        "epicgames-download5-23.file.myqcloud.com",
+        "epicgames-download5-999.file.myqcloud.com",
+        "epicgames-download6-0.file.myqcloud.com",
+        "epicgames-download6-1.file.myqcloud.com",
+        "epicgames-download6-17.file.myqcloud.com",
+        "epicgames-download6-23.file.myqcloud.com",
+        "epicgames-download6-999.file.myqcloud.com",
+        "epicgames-download7-0.file.myqcloud.com",
+        "epicgames-download7-1.file.myqcloud.com",
+        "epicgames-download7-17.file.myqcloud.com",
+        "epicgames-download7-23.file.myqcloud.com",
+        "epicgames-download7-999.file.myqcloud.com",
+        "epicgames-download8-0.file.myqcloud.com",
+        "epicgames-download8-1.file.myqcloud.com",
+        "epicgames-download8-17.file.myqcloud.com",
+        "epicgames-download8-23.file.myqcloud.com",
+        "epicgames-download8-999.file.myqcloud.com",
+        "epicgames-download9-0.file.myqcloud.com",
+        "epicgames-download9-1.file.myqcloud.com",
+        "epicgames-download9-17.file.myqcloud.com",
+        "epicgames-download9-23.file.myqcloud.com",
+        "epicgames-download9-999.file.myqcloud.com"
+      ]
+    },
+    {
+      "name": "微软生态",
+      "sets": [
+        "microsoft",
+        "linkedin",
+        "linkedin"
+      ],
+      "seeds": [
+        "microsoft.com",
+        "microsoftonline.com",
+        "microsoftstore.com",
+        "windows.com",
+        "windowsupdate.com",
+        "update.microsoft.com",
+        "office.com",
+        "office.net",
+        "office365.com",
+        "live.com",
+        "aka.ms",
+        "onedrive.com",
+        "sharepoint.com",
+        "msftconnecttest.com",
+        "msftncsi.com",
+        "bing.com",
+        "copilot.microsoft.com",
+        "copilot.bing.com",
+        "githubcopilot.com",
+        "github.com",
+        "githubusercontent.com",
+        "githubassets.com",
+        "microsoftazure.com",
+        "msn.com",
+        "skype.com",
+        "linkedin.com",
+        "licdn.com",
+        "xbox.com",
+        "xboxlive.com"
+      ],
+      "exact": [
+        "go.microsoft.com",
+        "download.microsoft.com",
+        "download.windowsupdate.com",
+        "software.download.prss.microsoft.com",
+        "dl.delivery.mp.microsoft.com",
+        "fe3.delivery.mp.microsoft.com",
+        "storeedgefd.dsx.mp.microsoft.com",
+        "bingsettingssearch.trafficmanager.net",
+        "dtlgalleryint.cloudapp.net",
+        "poshtestgallery.cloudapp.net",
+        "psg-int-centralus.cloudapp.net",
+        "psg-int-eastus.cloudapp.net",
+        "vscode-sync-insiders.trafficmanager.net",
+        "vscode-sync.trafficmanager.net"
+      ]
+    },
+    {
+      "name": "苹果国际",
+      "sets": [
+        "apple"
+      ],
+      "seeds": [
+        "apple.com",
+        "apple.com.cn",
+        "aaplimg.com",
+        "icloud.com",
+        "icloud-content.com",
+        "apple-cloudkit.com",
+        "mzstatic.com",
+        "cdn-apple.com",
+        "apple-dns.net",
+        "itunes.com",
+        "appstore.com",
+        "apple-dns.cn"
+      ],
+      "exact": [
+        "swcdn.apple.com",
+        "swdist.apple.com",
+        "swdownload.apple.com",
+        "swscan.apple.com",
+        "oscdn.apple.com",
+        "osrecovery.apple.com",
+        "updates.cdn-apple.com",
+        "updates-http.cdn-apple.com",
+        "gdmf-ados.apple.com",
+        "gsra.apple.com",
+        "wkms-public.apple.com",
+        "fcs-keys-pub-prod.cdn-apple.com"
+      ]
+    },
+    {
+      "name": "哔哩国际",
+      "sets": [
+        "bilibili"
+      ],
+      "seeds": [
+        "bilibili.com",
+        "bilivideo.com",
+        "hdslb.com",
+        "bilibili.tv",
+        "biliintl.com",
+        "b23.tv"
+      ]
+    }
+  ],
+  "embedded": {
+    "private": {
+      "behavior": "classical",
+      "payloadText": "DOMAIN,instant.arubanetworks.com\nDOMAIN,setmeup.arubanetworks.com\nDOMAIN,asusrouter.com\nDOMAIN,router.asus.com\nDOMAIN,www.asusrouter.com\nDOMAIN,oasisauth.h3c.com\nDOMAIN,routerlogin.com\nDOMAIN,www.routerlogin.com\nDOMAIN,tplogin.cn\nDOMAIN,miwifi.com\nDOMAIN,www.miwifi.com\nDOMAIN,local.adguard.org\nDOMAIN-SUFFIX,internal\nDOMAIN-SUFFIX,localdomain\nDOMAIN-SUFFIX,example\nDOMAIN-SUFFIX,invalid\nDOMAIN-SUFFIX,localhost\nDOMAIN-SUFFIX,test\nDOMAIN-SUFFIX,local\nDOMAIN-SUFFIX,lan\nDOMAIN-SUFFIX,router.ctc\nDOMAIN-SUFFIX,my.router\nDOMAIN-SUFFIX,home.arpa\nDOMAIN-SUFFIX,zte.home\nDOMAIN-SUFFIX,tplinkwifi.net\nDOMAIN-SUFFIX,tendawifi.com\nDOMAIN-SUFFIX,plex.direct\nDOMAIN-SUFFIX,hiwifi.com\nDOMAIN-SUFFIX,phicomm.me\nDOMAIN-SUFFIX,peiluyou.com\nDOMAIN-SUFFIX,ts.net\nDOMAIN-SUFFIX,leike.cc\nDOMAIN-SUFFIX,127.in-addr.arpa\nDOMAIN-SUFFIX,10.in-addr.arpa\nDOMAIN-SUFFIX,82.100.in-addr.arpa\nDOMAIN-SUFFIX,93.100.in-addr.arpa\nDOMAIN-SUFFIX,29.172.in-addr.arpa\nDOMAIN-SUFFIX,30.172.in-addr.arpa\nDOMAIN-SUFFIX,31.172.in-addr.arpa\nDOMAIN-SUFFIX,16.172.in-addr.arpa\nDOMAIN-SUFFIX,17.172.in-addr.arpa\nDOMAIN-SUFFIX,27.172.in-addr.arpa\nDOMAIN-SUFFIX,168.192.in-addr.arpa\nDOMAIN-SUFFIX,254.169.in-addr.arpa\nDOMAIN-SUFFIX,18.172.in-addr.arpa\nDOMAIN-SUFFIX,localhost.ptlogin2.qq.com\nDOMAIN-SUFFIX,localhost.sec.qq.com\nDOMAIN-SUFFIX,19.172.in-addr.arpa\nDOMAIN-SUFFIX,20.172.in-addr.arpa\nDOMAIN-SUFFIX,21.172.in-addr.arpa\nDOMAIN-SUFFIX,22.172.in-addr.arpa\nDOMAIN-SUFFIX,d.f.ip6.arpa\nDOMAIN-SUFFIX,64.100.in-addr.arpa\nDOMAIN-SUFFIX,65.100.in-addr.arpa\nDOMAIN-SUFFIX,66.100.in-addr.arpa\nDOMAIN-SUFFIX,67.100.in-addr.arpa\nDOMAIN-SUFFIX,68.100.in-addr.arpa\nDOMAIN-SUFFIX,69.100.in-addr.arpa\nDOMAIN-SUFFIX,70.100.in-addr.arpa\nDOMAIN-SUFFIX,71.100.in-addr.arpa\nDOMAIN-SUFFIX,72.100.in-addr.arpa\nDOMAIN-SUFFIX,73.100.in-addr.arpa\nDOMAIN-SUFFIX,74.100.in-addr.arpa\nDOMAIN-SUFFIX,75.100.in-addr.arpa\nDOMAIN-SUFFIX,76.100.in-addr.arpa\nDOMAIN-SUFFIX,77.100.in-addr.arpa\nDOMAIN-SUFFIX,78.100.in-addr.arpa\nDOMAIN-SUFFIX,79.100.in-addr.arpa\nDOMAIN-SUFFIX,80.100.in-addr.arpa\nDOMAIN-SUFFIX,81.100.in-addr.arpa\nDOMAIN-SUFFIX,26.172.in-addr.arpa\nDOMAIN-SUFFIX,83.100.in-addr.arpa\nDOMAIN-SUFFIX,84.100.in-addr.arpa\nDOMAIN-SUFFIX,85.100.in-addr.arpa\nDOMAIN-SUFFIX,86.100.in-addr.arpa\nDOMAIN-SUFFIX,87.100.in-addr.arpa\nDOMAIN-SUFFIX,88.100.in-addr.arpa\nDOMAIN-SUFFIX,89.100.in-addr.arpa\nDOMAIN-SUFFIX,90.100.in-addr.arpa\nDOMAIN-SUFFIX,91.100.in-addr.arpa\nDOMAIN-SUFFIX,92.100.in-addr.arpa\nDOMAIN-SUFFIX,28.172.in-addr.arpa\nDOMAIN-SUFFIX,94.100.in-addr.arpa\nDOMAIN-SUFFIX,95.100.in-addr.arpa\nDOMAIN-SUFFIX,96.100.in-addr.arpa\nDOMAIN-SUFFIX,97.100.in-addr.arpa\nDOMAIN-SUFFIX,98.100.in-addr.arpa\nDOMAIN-SUFFIX,99.100.in-addr.arpa\nDOMAIN-SUFFIX,100.100.in-addr.arpa\nDOMAIN-SUFFIX,101.100.in-addr.arpa\nDOMAIN-SUFFIX,102.100.in-addr.arpa\nDOMAIN-SUFFIX,103.100.in-addr.arpa\nDOMAIN-SUFFIX,104.100.in-addr.arpa\nDOMAIN-SUFFIX,105.100.in-addr.arpa\nDOMAIN-SUFFIX,106.100.in-addr.arpa\nDOMAIN-SUFFIX,107.100.in-addr.arpa\nDOMAIN-SUFFIX,108.100.in-addr.arpa\nDOMAIN-SUFFIX,109.100.in-addr.arpa\nDOMAIN-SUFFIX,110.100.in-addr.arpa\nDOMAIN-SUFFIX,111.100.in-addr.arpa\nDOMAIN-SUFFIX,112.100.in-addr.arpa\nDOMAIN-SUFFIX,113.100.in-addr.arpa\nDOMAIN-SUFFIX,114.100.in-addr.arpa\nDOMAIN-SUFFIX,115.100.in-addr.arpa\nDOMAIN-SUFFIX,116.100.in-addr.arpa\nDOMAIN-SUFFIX,117.100.in-addr.arpa\nDOMAIN-SUFFIX,118.100.in-addr.arpa\nDOMAIN-SUFFIX,119.100.in-addr.arpa\nDOMAIN-SUFFIX,120.100.in-addr.arpa\nDOMAIN-SUFFIX,121.100.in-addr.arpa\nDOMAIN-SUFFIX,122.100.in-addr.arpa\nDOMAIN-SUFFIX,123.100.in-addr.arpa\nDOMAIN-SUFFIX,124.100.in-addr.arpa\nDOMAIN-SUFFIX,125.100.in-addr.arpa\nDOMAIN-SUFFIX,126.100.in-addr.arpa\nDOMAIN-SUFFIX,127.100.in-addr.arpa\nDOMAIN-SUFFIX,25.172.in-addr.arpa\nDOMAIN-SUFFIX,24.172.in-addr.arpa\nDOMAIN-SUFFIX,23.172.in-addr.arpa\nDOMAIN-SUFFIX,b.e.f.ip6.arpa\nDOMAIN-SUFFIX,a.e.f.ip6.arpa\nDOMAIN-SUFFIX,9.e.f.ip6.arpa\nDOMAIN-SUFFIX,8.e.f.ip6.arpa\nDOMAIN-SUFFIX,113.0.203.in-addr.arpa\nDOMAIN-SUFFIX,100.51.198.in-addr.arpa\nDOMAIN-SUFFIX,2.0.192.in-addr.arpa\nDOMAIN-SUFFIX,kis.v2.scr.kaspersky-labs.com\nDOMAIN-SUFFIX,255.255.255.255.in-addr.arpa\nDOMAIN-SUFFIX,8.b.d.0.1.0.0.2.ip6.arpa\nDOMAIN-SUFFIX,1.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.ip6.arpa\nDOMAIN-REGEX,^[a-z]([a-z0-9-]{0,61}[a-z0-9])?$"
+    },
+    "category-doh": {
+      "behavior": "classical",
+      "payloadText": "DOMAIN,dns.adguard.com\nDOMAIN,dns.adguard-dns.com\nDOMAIN,family.adguard-dns.com\nDOMAIN,unfiltered.adguard-dns.com\nDOMAIN,dns.alidns.com\nDOMAIN,doh.dns.apple.com\nDOMAIN,dns.caliph.dev\nDOMAIN,dns.bebasid.com\nDOMAIN,antivirus.bebasid.com\nDOMAIN,internetsehat.bebasid.com\nDOMAIN,dns.cfiec.net\nDOMAIN,doh.cleanbrowsing.org\nDOMAIN,one.one.one.one\nDOMAIN,dns.cloudflare.com\nDOMAIN,freedns.controld.com\nDOMAIN,dns.decloudus.com\nDOMAIN,futuredns.eu.org\nDOMAIN,dns.de.futuredns.eu.org\nDOMAIN,dns.us.futuredns.eu.org\nDOMAIN,doh.dns.sb\nDOMAIN,doh.sb\nDOMAIN,dns.sb\nDOMAIN,de-dus.doh.sb\nDOMAIN,de-fra.doh.sb\nDOMAIN,nl-ams.doh.sb\nDOMAIN,uk-lon.doh.sb\nDOMAIN,ee-tll.doh.sb\nDOMAIN,jp-kix.doh.sb\nDOMAIN,jp-nrt.doh.sb\nDOMAIN,hk-hkg.doh.sb\nDOMAIN,au-syd.doh.sb\nDOMAIN,us-chi.doh.sb\nDOMAIN,us-nyc.doh.sb\nDOMAIN,us-sjc.doh.sb\nDOMAIN,in-blr.doh.sb\nDOMAIN,sg-sin.doh.sb\nDOMAIN,kr-sel.doh.sb\nDOMAIN,ru-mow.doh.sb\nDOMAIN,ca-yyz.doh.sb\nDOMAIN,de-ber.doh.sb\nDOMAIN,doh.pub\nDOMAIN,dns.pub\nDOMAIN,sm2.doh.pub\nDOMAIN,zero.dns0.eu\nDOMAIN,dns.google\nDOMAIN,ordns.he.net\nDOMAIN,dns.mullvad.net\nDOMAIN,adblock.dns.mullvad.net\nDOMAIN,base.dns.mullvad.net\nDOMAIN,extended.dns.mullvad.net\nDOMAIN,family.dns.mullvad.net\nDOMAIN,all.dns.mullvad.net\nDOMAIN,ada.openbld.net\nDOMAIN,ric.openbld.net\nDOMAIN,dns.quad9.net\nDOMAIN,dns10.quad9.net\nDOMAIN,dns11.quad9.net\nDOMAIN,doh.qis.io\nDOMAIN,dns.rabbitdns.org\nDOMAIN,security.rabbitdns.org\nDOMAIN,family.rabbitdns.org\nDOMAIN,basic.rethinkdns.com\nDOMAIN,doh.360.cn\nDOMAIN,dns.surfsharkdns.com\nDOMAIN,v.recipes\nDOMAIN,wikimedia-dns.org\nDOMAIN,doh.applied-privacy.net\nDOMAIN,private.canadianshield.cira.ca\nDOMAIN,protected.canadianshield.cira.ca\nDOMAIN,family.canadianshield.cira.ca\nDOMAIN,dns.comss.one\nDOMAIN,router.comss.one\nDOMAIN,odvr.nic.cz\nDOMAIN,dns.digitale-gesellschaft.ch\nDOMAIN,dns-doh.dnsforfamily.com\nDOMAIN,protective.joindns4.eu\nDOMAIN,child.joindns4.eu\nDOMAIN,noads.joindns4.eu\nDOMAIN,child-noads.joindns4.eu\nDOMAIN,unfiltered.joindns4.eu\nDOMAIN,kaitain.restena.lu\nDOMAIN,public.dns.iij.jp\nDOMAIN,dns.jupitrdns.com\nDOMAIN,doh.libredns.gr\nDOMAIN,doh-pure.onedns.net\nDOMAIN,doh.onedns.net\nDOMAIN,dns.switch.ch\nDOMAIN,dns.twnic.tw\nDOMAIN,resolver.dnsprivacy.org.uk\nDOMAIN,dns.seia.io\nDOMAIN,secondary.dns.seia.io\nDOMAIN,common.dot.dns.yandex.net\nDOMAIN,safe.dot.dns.yandex.net\nDOMAIN,family.dot.dns.yandex.net\nDOMAIN,dns.shaw.ca\nDOMAIN,doh.xfinity.com\nDOMAIN,doh.nl.ahadns.net\nDOMAIN,doh.la.ahadns.net\nDOMAIN,dns.arapurayil.com\nDOMAIN,dandelionsprout.asuscomm.com\nDOMAIN,dnsforge.de\nDOMAIN,dns.dnswarden.com\nDOMAIN,doh.ffmuc.net\nDOMAIN,ibksturm.synology.me\nDOMAIN,resolver-eu.lelux.fi\nDOMAIN,dns.marbledfennec.net\nDOMAIN,dns.oszx.co\nDOMAIN,dns.pumplex.com\nDOMAIN,doh.tiarap.org\nDOMAIN,doh.tiar.app\nDOMAIN,jp.tiarap.org\nDOMAIN,jp.tiar.app\nDOMAIN,rx.techomespace.com\nDOMAIN,public.ns.nwps.fi\nDOMAIN,kids.ns.nwps.fi\nDOMAIN,dns.astracat.ru\nDOMAIN,frd4wvnobp.cloudflare-gateway.com\nDOMAIN,dnsguard.pub\nDOMAIN,doh.18bit.cn\nDOMAIN,5u35p8m9i7.cloudflare-gateway.com\nDOMAIN,dns.malw.link\nDOMAIN,dns.mafioznik.xyz\nDOMAIN,dns.geohide.ru\nDOMAIN,xbox-dns.ru\nDOMAIN-SUFFIX,opendns.com\nDOMAIN-SUFFIX,cloudflare-dns.com\nDOMAIN-SUFFIX,nextdns.io"
+    },
+    "cn": {
+      "behavior": "domain",
+      "payloadText": "+.baidu.com\n+.bdstatic.com\n+.bdimg.com\n+.qq.com\n+.qpic.cn\n+.gtimg.com\n+.weixin.qq.com\n+.taobao.com\n+.tmall.com\n+.alicdn.com\n+.alipay.com\n+.jd.com\n+.360buyimg.com\n+.weibo.com\n+.weibo.cn\n+.sina.com.cn\n+.zhihu.com\n+.zhimg.com\n+.163.com\n+.126.com\n+.127.net\n+.netease.com\n+.douban.com\n+.doubanio.com\n+.amap.com\n+.autonavi.com\n+.meituan.com\n+.dianping.com\n+.ele.me\n+.ctrip.com\n+.qunar.com\n+.csdn.net\n+.gitee.com\n+.mi.com\n+.xiaomi.com\n+.10010.com\n+.10086.cn\n+.10086.com\n+.189.cn\n+.iqiyi.com\n+.youku.com\n+.pinduoduo.com\n+.pddpic.com\n+.suning.com\n+.360.cn\n+.360.com\n+.sogou.com\n+.sohu.com\n+.bcebos.com\n+.xiaohongshu.com\n+.xhscdn.com"
+    }
+  },
+  "decisions": [
+    {
+      "group": "Netflix",
+      "domain": "nflxext.com",
+      "decision": "KEEP_REVIEWED_PARENT"
+    },
+    {
+      "group": "Netflix",
+      "domain": "nflxso.net",
+      "decision": "KEEP_REVIEWED_PARENT"
+    },
+    {
+      "group": "Netflix",
+      "domain": "nflximg.com",
+      "decision": "KEEP_REVIEWED_PARENT"
+    },
+    {
+      "group": "Netflix",
+      "domain": "netflix.net",
+      "decision": "KEEP_REVIEWED_PARENT"
+    },
+    {
+      "group": "Spotify",
+      "domain": "spotifycdn.com",
+      "decision": "KEEP_REVIEWED_PARENT"
+    },
+    {
+      "group": "Spotify",
+      "domain": "spotifycdn.net",
+      "decision": "KEEP_REVIEWED_PARENT"
+    },
+    {
+      "group": "Spotify",
+      "domain": "spotify.net",
+      "decision": "OMIT_NOT_IN_REVIEWED_GROUP",
+      "actual": "漏网之鱼"
+    },
+    {
+      "group": "Telegram",
+      "domain": "cdn-telegram.org",
+      "decision": "KEEP_REVIEWED_PARENT"
+    },
+    {
+      "group": "Telegram",
+      "domain": "telegram.me",
+      "decision": "KEEP_REVIEWED_PARENT"
+    },
+    {
+      "group": "Telegram",
+      "domain": "tdesktop.com",
+      "decision": "KEEP_REVIEWED_PARENT"
+    },
+    {
+      "group": "Telegram",
+      "domain": "telegram-cdn.org",
+      "decision": "KEEP_REVIEWED_PARENT"
+    },
+    {
+      "group": "Discord",
+      "domain": "discord.media",
+      "decision": "KEEP_REVIEWED_PARENT"
+    },
+    {
+      "group": "Discord",
+      "domain": "discordapp.io",
+      "decision": "KEEP_REVIEWED_PARENT"
+    },
+    {
+      "group": "Discord",
+      "domain": "discordcdn.com",
+      "decision": "KEEP_REVIEWED_PARENT"
+    },
+    {
+      "group": "TikTok",
+      "domain": "tiktokd.net",
+      "decision": "KEEP_REVIEWED_PARENT"
+    },
+    {
+      "group": "Twitter",
+      "domain": "tweetdeck.com",
+      "decision": "KEEP_REVIEWED_PARENT"
+    },
+    {
+      "group": "Meta 服务",
+      "domain": "wa.me",
+      "decision": "KEEP_REVIEWED_PARENT"
+    },
+    {
+      "group": "Steam",
+      "domain": "steam-chat.com",
+      "decision": "KEEP_REVIEWED_PARENT"
+    },
+    {
+      "group": "Epic Games",
+      "domain": "fortnite.com",
+      "decision": "KEEP_REVIEWED_PARENT"
+    },
+    {
+      "group": "Epic Games",
+      "domain": "unrealengine.com",
+      "decision": "KEEP_REVIEWED_PARENT"
+    },
+    {
+      "group": "苹果国际",
+      "domain": "apple-dns.cn",
+      "decision": "KEEP_REVIEWED_PARENT"
+    },
+    {
+      "group": "哔哩国际",
+      "domain": "b23.tv",
+      "decision": "KEEP_REVIEWED_PARENT"
+    },
+    {
+      "group": "国内网站",
+      "domain": "baidu.com",
+      "decision": "KEEP_REVIEWED_PARENT"
+    },
+    {
+      "group": "国内网站",
+      "domain": "bdstatic.com",
+      "decision": "KEEP_REVIEWED_PARENT"
+    },
+    {
+      "group": "国内网站",
+      "domain": "bdimg.com",
+      "decision": "KEEP_REVIEWED_PARENT"
+    },
+    {
+      "group": "国内网站",
+      "domain": "qq.com",
+      "decision": "KEEP_REVIEWED_PARENT"
+    },
+    {
+      "group": "国内网站",
+      "domain": "qpic.cn",
+      "decision": "KEEP_REVIEWED_PARENT"
+    },
+    {
+      "group": "国内网站",
+      "domain": "gtimg.com",
+      "decision": "KEEP_REVIEWED_PARENT"
+    },
+    {
+      "group": "国内网站",
+      "domain": "weixin.qq.com",
+      "decision": "KEEP_REVIEWED_PARENT"
+    },
+    {
+      "group": "国内网站",
+      "domain": "taobao.com",
+      "decision": "KEEP_REVIEWED_PARENT"
+    },
+    {
+      "group": "国内网站",
+      "domain": "tmall.com",
+      "decision": "KEEP_REVIEWED_PARENT"
+    },
+    {
+      "group": "国内网站",
+      "domain": "alicdn.com",
+      "decision": "KEEP_REVIEWED_PARENT"
+    },
+    {
+      "group": "国内网站",
+      "domain": "alipay.com",
+      "decision": "KEEP_REVIEWED_PARENT"
+    },
+    {
+      "group": "国内网站",
+      "domain": "jd.com",
+      "decision": "KEEP_REVIEWED_PARENT"
+    },
+    {
+      "group": "国内网站",
+      "domain": "360buyimg.com",
+      "decision": "KEEP_REVIEWED_PARENT"
+    },
+    {
+      "group": "国内网站",
+      "domain": "weibo.com",
+      "decision": "KEEP_REVIEWED_PARENT"
+    },
+    {
+      "group": "国内网站",
+      "domain": "weibo.cn",
+      "decision": "KEEP_REVIEWED_PARENT"
+    },
+    {
+      "group": "国内网站",
+      "domain": "sina.com.cn",
+      "decision": "KEEP_REVIEWED_PARENT"
+    },
+    {
+      "group": "国内网站",
+      "domain": "zhihu.com",
+      "decision": "KEEP_REVIEWED_PARENT"
+    },
+    {
+      "group": "国内网站",
+      "domain": "zhimg.com",
+      "decision": "KEEP_REVIEWED_PARENT"
+    },
+    {
+      "group": "国内网站",
+      "domain": "163.com",
+      "decision": "KEEP_REVIEWED_PARENT"
+    },
+    {
+      "group": "国内网站",
+      "domain": "126.com",
+      "decision": "KEEP_REVIEWED_PARENT"
+    },
+    {
+      "group": "国内网站",
+      "domain": "127.net",
+      "decision": "KEEP_REVIEWED_PARENT"
+    },
+    {
+      "group": "国内网站",
+      "domain": "netease.com",
+      "decision": "KEEP_REVIEWED_PARENT"
+    },
+    {
+      "group": "国内网站",
+      "domain": "douban.com",
+      "decision": "KEEP_REVIEWED_PARENT"
+    },
+    {
+      "group": "国内网站",
+      "domain": "doubanio.com",
+      "decision": "KEEP_REVIEWED_PARENT"
+    },
+    {
+      "group": "国内网站",
+      "domain": "amap.com",
+      "decision": "KEEP_REVIEWED_PARENT"
+    },
+    {
+      "group": "国内网站",
+      "domain": "autonavi.com",
+      "decision": "KEEP_REVIEWED_PARENT"
+    },
+    {
+      "group": "国内网站",
+      "domain": "meituan.com",
+      "decision": "KEEP_REVIEWED_PARENT"
+    },
+    {
+      "group": "国内网站",
+      "domain": "dianping.com",
+      "decision": "KEEP_REVIEWED_PARENT"
+    },
+    {
+      "group": "国内网站",
+      "domain": "ele.me",
+      "decision": "KEEP_REVIEWED_PARENT"
+    },
+    {
+      "group": "国内网站",
+      "domain": "ctrip.com",
+      "decision": "KEEP_REVIEWED_PARENT"
+    },
+    {
+      "group": "国内网站",
+      "domain": "qunar.com",
+      "decision": "KEEP_REVIEWED_PARENT"
+    },
+    {
+      "group": "国内网站",
+      "domain": "csdn.net",
+      "decision": "KEEP_REVIEWED_PARENT"
+    },
+    {
+      "group": "国内网站",
+      "domain": "gitee.com",
+      "decision": "KEEP_REVIEWED_PARENT"
+    },
+    {
+      "group": "国内网站",
+      "domain": "mi.com",
+      "decision": "KEEP_REVIEWED_PARENT"
+    },
+    {
+      "group": "国内网站",
+      "domain": "xiaomi.com",
+      "decision": "KEEP_REVIEWED_PARENT"
+    },
+    {
+      "group": "国内网站",
+      "domain": "10010.com",
+      "decision": "KEEP_REVIEWED_PARENT"
+    },
+    {
+      "group": "国内网站",
+      "domain": "10086.cn",
+      "decision": "KEEP_REVIEWED_PARENT"
+    },
+    {
+      "group": "国内网站",
+      "domain": "10086.com",
+      "decision": "KEEP_REVIEWED_PARENT"
+    },
+    {
+      "group": "国内网站",
+      "domain": "189.cn",
+      "decision": "KEEP_REVIEWED_PARENT"
+    },
+    {
+      "group": "国内网站",
+      "domain": "iqiyi.com",
+      "decision": "KEEP_REVIEWED_PARENT"
+    },
+    {
+      "group": "国内网站",
+      "domain": "youku.com",
+      "decision": "KEEP_REVIEWED_PARENT"
+    },
+    {
+      "group": "国内网站",
+      "domain": "pinduoduo.com",
+      "decision": "KEEP_REVIEWED_PARENT"
+    },
+    {
+      "group": "国内网站",
+      "domain": "pddpic.com",
+      "decision": "KEEP_REVIEWED_PARENT"
+    },
+    {
+      "group": "国内网站",
+      "domain": "suning.com",
+      "decision": "KEEP_REVIEWED_PARENT"
+    },
+    {
+      "group": "国内网站",
+      "domain": "360.cn",
+      "decision": "KEEP_REVIEWED_PARENT"
+    },
+    {
+      "group": "国内网站",
+      "domain": "360.com",
+      "decision": "KEEP_REVIEWED_PARENT"
+    },
+    {
+      "group": "国内网站",
+      "domain": "sogou.com",
+      "decision": "KEEP_REVIEWED_PARENT"
+    },
+    {
+      "group": "国内网站",
+      "domain": "sohu.com",
+      "decision": "KEEP_REVIEWED_PARENT"
+    },
+    {
+      "group": "国内网站",
+      "domain": "bcebos.com",
+      "decision": "KEEP_REVIEWED_PARENT"
+    },
+    {
+      "group": "国内网站",
+      "domain": "xiaohongshu.com",
+      "decision": "KEEP_REVIEWED_PARENT"
+    },
+    {
+      "group": "国内网站",
+      "domain": "xhscdn.com",
+      "decision": "KEEP_REVIEWED_PARENT"
+    }
+  ],
+  "limits": {
+    "maxScriptBytes": 131072,
+    "maxGeneratedConfigBytes": 196608
+  },
+  "inputs": [
+    {
+      "file": "data/rules/company-core.json",
+      "sha256": "83e390ff6ebc9f8eff47a7b62583978163a61513f979113d70cf0e1bd508c80b"
+    },
+    {
+      "file": "data/rules/business-services.json",
+      "sha256": "6fddabd1e91a404bc7362b776ed72c943d6bf6a09d0f7367a8541820055ddd2f"
+    },
+    {
+      "file": "data/rules/domestic-direct.json",
+      "sha256": "47d44654b24b595fe4930e40c94e494a9f812b19811c6e8ab7504357c823b435"
+    },
+    {
+      "file": "data/rules/safety-classifiers.json",
+      "sha256": "de175c19f2cef8d01752026498a5d447eee36d148c6c65a80626aca528843093"
+    },
+    {
+      "file": "data/rule-sources.lock.json",
+      "sha256": "b422d72c45421bf22d4eba9137cdc9cac2bcc97ecfe77a69cef0c10ff553ae70"
+    },
+    {
+      "file": "validation/inputs/v14.2-baseline/manifest.json",
+      "sha256": "e11723e746a3cb12d663c05240b677db0230bbe2d6fbec951fc338567b349459"
+    }
+  ]
+}

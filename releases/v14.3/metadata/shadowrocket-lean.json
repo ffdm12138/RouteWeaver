@@ -1,0 +1,4672 @@
+{
+  "version": "14.3",
+  "date": "2026-10-13",
+  "revision": "shadowrocket-lean-r1",
+  "domesticProtocolRevision": "domestic-protocol-r1",
+  "status": "GENERATED_NATIVE_ACCEPTANCE_PENDING",
+  "file": "src/ios/v14.3-shadowrocket.conf",
+  "sha256": "9829d7e7c74f949cfe5168c3b3f3359b0e41aeb3c81bd3b8e2420bf721f277ec",
+  "bytes": 1746654,
+  "before": {
+    "file": "validation/inputs/v14.2-baseline/src/ios/v14.2-shadowrocket.conf",
+    "sha256": "4813040cc00845c0d0cfda47123194598dce6d6d89e4b5e8a377f3ac516774f9",
+    "bytes": 6168748
+  },
+  "rules": {
+    "before": 116974,
+    "after": 5517,
+    "removedDuplicateCNRows": 111464,
+    "criticalDomesticRules": [
+      "DOMAIN-SUFFIX,douyin.com",
+      "DOMAIN-SUFFIX,douyincdn.com",
+      "DOMAIN-SUFFIX,jianying.com",
+      "DOMAIN-SUFFIX,jimeng.com",
+      "DOMAIN-SUFFIX,toutiao.com",
+      "DOMAIN-SUFFIX,ixigua.com",
+      "DOMAIN-SUFFIX,feishu.cn",
+      "DOMAIN-SUFFIX,volcengine.com",
+      "DOMAIN-SUFFIX,bilibili.com",
+      "DOMAIN-SUFFIX,bilivideo.com",
+      "DOMAIN-SUFFIX,hdslb.com",
+      "DOMAIN-SUFFIX,dl.steam.clngaa.com",
+      "DOMAIN-SUFFIX,st.dl.bscstorage.net",
+      "DOMAIN-SUFFIX,st.dl.eccdnx.com",
+      "DOMAIN-SUFFIX,st.dl.pinyuncloud.com",
+      "DOMAIN-SUFFIX,prts.plus",
+      "DOMAIN-SUFFIX,cnbeta.com",
+      "DOMAIN-SUFFIX,cnbetacdn.com",
+      "DOMAIN-SUFFIX,easou.com",
+      "DOMAIN-SUFFIX,mob.com",
+      "DOMAIN-SUFFIX,baidustatic.com",
+      "DOMAIN-SUFFIX,didi-labs.com",
+      "DOMAIN-SUFFIX,baidu.com",
+      "DOMAIN-SUFFIX,bdstatic.com",
+      "DOMAIN-SUFFIX,bdimg.com",
+      "DOMAIN-SUFFIX,qq.com",
+      "DOMAIN-SUFFIX,qpic.cn",
+      "DOMAIN-SUFFIX,gtimg.com",
+      "DOMAIN-SUFFIX,weixin.qq.com",
+      "DOMAIN-SUFFIX,taobao.com",
+      "DOMAIN-SUFFIX,tmall.com",
+      "DOMAIN-SUFFIX,alicdn.com",
+      "DOMAIN-SUFFIX,alipay.com",
+      "DOMAIN-SUFFIX,jd.com",
+      "DOMAIN-SUFFIX,360buyimg.com",
+      "DOMAIN-SUFFIX,weibo.com",
+      "DOMAIN-SUFFIX,weibo.cn",
+      "DOMAIN-SUFFIX,sina.com.cn",
+      "DOMAIN-SUFFIX,zhihu.com",
+      "DOMAIN-SUFFIX,zhimg.com",
+      "DOMAIN-SUFFIX,163.com",
+      "DOMAIN-SUFFIX,126.com",
+      "DOMAIN-SUFFIX,127.net",
+      "DOMAIN-SUFFIX,netease.com",
+      "DOMAIN-SUFFIX,douban.com",
+      "DOMAIN-SUFFIX,doubanio.com",
+      "DOMAIN-SUFFIX,amap.com",
+      "DOMAIN-SUFFIX,autonavi.com",
+      "DOMAIN-SUFFIX,meituan.com",
+      "DOMAIN-SUFFIX,dianping.com",
+      "DOMAIN-SUFFIX,ele.me",
+      "DOMAIN-SUFFIX,ctrip.com",
+      "DOMAIN-SUFFIX,qunar.com",
+      "DOMAIN-SUFFIX,csdn.net",
+      "DOMAIN-SUFFIX,gitee.com",
+      "DOMAIN-SUFFIX,mi.com",
+      "DOMAIN-SUFFIX,xiaomi.com",
+      "DOMAIN-SUFFIX,10010.com",
+      "DOMAIN-SUFFIX,10086.cn",
+      "DOMAIN-SUFFIX,10086.com",
+      "DOMAIN-SUFFIX,189.cn",
+      "DOMAIN-SUFFIX,iqiyi.com",
+      "DOMAIN-SUFFIX,youku.com",
+      "DOMAIN-SUFFIX,pinduoduo.com",
+      "DOMAIN-SUFFIX,pddpic.com",
+      "DOMAIN-SUFFIX,suning.com",
+      "DOMAIN-SUFFIX,360.cn",
+      "DOMAIN-SUFFIX,360.com",
+      "DOMAIN-SUFFIX,sogou.com",
+      "DOMAIN-SUFFIX,sohu.com",
+      "DOMAIN-SUFFIX,bcebos.com",
+      "DOMAIN-SUFFIX,xiaohongshu.com",
+      "DOMAIN-SUFFIX,xhscdn.com",
+      "DOMAIN-SUFFIX,cn"
+    ]
+  },
+  "dns": {
+    "beforeHostRows": 9130,
+    "afterHostRows": 9149,
+    "removedRedundantRows": 1024,
+    "redundantRowCertificates": [
+      {
+        "key": "go.microsoft.com",
+        "parent": "*.microsoft.com"
+      },
+      {
+        "key": "download.microsoft.com",
+        "parent": "*.microsoft.com"
+      },
+      {
+        "key": "download.windowsupdate.com",
+        "parent": "*.windowsupdate.com"
+      },
+      {
+        "key": "software.download.prss.microsoft.com",
+        "parent": "*.microsoft.com"
+      },
+      {
+        "key": "dl.delivery.mp.microsoft.com",
+        "parent": "*.microsoft.com"
+      },
+      {
+        "key": "fe3.delivery.mp.microsoft.com",
+        "parent": "*.microsoft.com"
+      },
+      {
+        "key": "storeedgefd.dsx.mp.microsoft.com",
+        "parent": "*.microsoft.com"
+      },
+      {
+        "key": "swcdn.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "swdist.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "swdownload.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "swscan.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "oscdn.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "osrecovery.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "updates.cdn-apple.com",
+        "parent": "*.cdn-apple.com"
+      },
+      {
+        "key": "updates-http.cdn-apple.com",
+        "parent": "*.cdn-apple.com"
+      },
+      {
+        "key": "gdmf-ados.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "gsra.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "wkms-public.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "fcs-keys-pub-prod.cdn-apple.com",
+        "parent": "*.cdn-apple.com"
+      },
+      {
+        "key": "*.chatgpt.livekit.cloud",
+        "parent": "*.livekit.cloud"
+      },
+      {
+        "key": "*.host.livekit.cloud",
+        "parent": "*.livekit.cloud"
+      },
+      {
+        "key": "*.turn.livekit.cloud",
+        "parent": "*.livekit.cloud"
+      },
+      {
+        "key": "challenges.cloudflare.com",
+        "parent": "*.cloudflare.com"
+      },
+      {
+        "key": "workos.imgix.net",
+        "parent": "*.imgix.net"
+      },
+      {
+        "key": "ct.sendgrid.net",
+        "parent": "*.sendgrid.net"
+      },
+      {
+        "key": "*.ct.sendgrid.net",
+        "parent": "*.sendgrid.net"
+      },
+      {
+        "key": "gemini.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "*.gemini.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "aistudio.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "*.aistudio.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "generativelanguage.googleapis.com",
+        "parent": "*.googleapis.com"
+      },
+      {
+        "key": "*.generativelanguage.googleapis.com",
+        "parent": "*.googleapis.com"
+      },
+      {
+        "key": "notebooklm.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "*.notebooklm.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "notebooklm.google",
+        "parent": "*.google"
+      },
+      {
+        "key": "*.notebooklm.google",
+        "parent": "*.google"
+      },
+      {
+        "key": "deepmind.google",
+        "parent": "*.google"
+      },
+      {
+        "key": "*.deepmind.google",
+        "parent": "*.google"
+      },
+      {
+        "key": "generativeai.google",
+        "parent": "*.google"
+      },
+      {
+        "key": "*.generativeai.google",
+        "parent": "*.google"
+      },
+      {
+        "key": "ai.google.dev",
+        "parent": "*.google.dev"
+      },
+      {
+        "key": "*.ai.google.dev",
+        "parent": "*.google.dev"
+      },
+      {
+        "key": "jules.google",
+        "parent": "*.google"
+      },
+      {
+        "key": "*.jules.google",
+        "parent": "*.google"
+      },
+      {
+        "key": "pki.goog",
+        "parent": "*.goog"
+      },
+      {
+        "key": "*.pki.goog",
+        "parent": "*.goog"
+      },
+      {
+        "key": "firebase.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "*.firebase.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "cloud.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "*.cloud.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "alkalicore-pa.clients6.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "alkalimakersuite-pa.clients6.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "webchannel-alkalimakersuite-pa.clients6.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "geminiweb-pa.clients.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "geminiweb-pa.clients6.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "cloudaicompanion.googleapis.com",
+        "parent": "*.googleapis.com"
+      },
+      {
+        "key": "cloudcode-pa.googleapis.com",
+        "parent": "*.googleapis.com"
+      },
+      {
+        "key": "daily-cloudcode-pa.googleapis.com",
+        "parent": "*.googleapis.com"
+      },
+      {
+        "key": "notebooklm-pa.googleapis.com",
+        "parent": "*.googleapis.com"
+      },
+      {
+        "key": "notebooklm.googleapis.com",
+        "parent": "*.googleapis.com"
+      },
+      {
+        "key": "antigravity-pa.googleapis.com",
+        "parent": "*.googleapis.com"
+      },
+      {
+        "key": "antigravity.googleapis.com",
+        "parent": "*.googleapis.com"
+      },
+      {
+        "key": "notebook.google",
+        "parent": "*.google"
+      },
+      {
+        "key": "*.notebook.google",
+        "parent": "*.google"
+      },
+      {
+        "key": "antigravity-unleash.goog",
+        "parent": "*.goog"
+      },
+      {
+        "key": "*.antigravity-unleash.goog",
+        "parent": "*.goog"
+      },
+      {
+        "key": "antigravity.google",
+        "parent": "*.google"
+      },
+      {
+        "key": "*.antigravity.google",
+        "parent": "*.google"
+      },
+      {
+        "key": "opal.google",
+        "parent": "*.google"
+      },
+      {
+        "key": "*.opal.google",
+        "parent": "*.google"
+      },
+      {
+        "key": "flow.google",
+        "parent": "*.google"
+      },
+      {
+        "key": "*.flow.google",
+        "parent": "*.google"
+      },
+      {
+        "key": "labs.google",
+        "parent": "*.google"
+      },
+      {
+        "key": "*.labs.google",
+        "parent": "*.google"
+      },
+      {
+        "key": "gemini.google",
+        "parent": "*.google"
+      },
+      {
+        "key": "*.gemini.google",
+        "parent": "*.google"
+      },
+      {
+        "key": "notebook.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "*.notebook.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "labs.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "*.labs.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "gemini.gstatic.com",
+        "parent": "*.gstatic.com"
+      },
+      {
+        "key": "*.gemini.gstatic.com",
+        "parent": "*.gstatic.com"
+      },
+      {
+        "key": "bard.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "*.bard.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "jules.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "*.jules.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "makersuite.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "*.makersuite.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "stitch.withgoogle.com",
+        "parent": "*.withgoogle.com"
+      },
+      {
+        "key": "*.stitch.withgoogle.com",
+        "parent": "*.withgoogle.com"
+      },
+      {
+        "key": "robinfrontend-pa.googleapis.com",
+        "parent": "*.googleapis.com"
+      },
+      {
+        "key": "*.robinfrontend-pa.googleapis.com",
+        "parent": "*.googleapis.com"
+      },
+      {
+        "key": "flow.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "*.flow.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "aisandbox-pa.googleapis.com",
+        "parent": "*.googleapis.com"
+      },
+      {
+        "key": "*.aisandbox-pa.googleapis.com",
+        "parent": "*.googleapis.com"
+      },
+      {
+        "key": "aicode.googleapis.com",
+        "parent": "*.googleapis.com"
+      },
+      {
+        "key": "*.aicode.googleapis.com",
+        "parent": "*.googleapis.com"
+      },
+      {
+        "key": "aida.googleapis.com",
+        "parent": "*.googleapis.com"
+      },
+      {
+        "key": "*.aida.googleapis.com",
+        "parent": "*.googleapis.com"
+      },
+      {
+        "key": "proactivebackend-pa.googleapis.com",
+        "parent": "*.googleapis.com"
+      },
+      {
+        "key": "*.proactivebackend-pa.googleapis.com",
+        "parent": "*.googleapis.com"
+      },
+      {
+        "key": "opal.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "*.opal.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "geller-pa.googleapis.com",
+        "parent": "*.googleapis.com"
+      },
+      {
+        "key": "*.geller-pa.googleapis.com",
+        "parent": "*.googleapis.com"
+      },
+      {
+        "key": "labstailwind.pa.googleapis.com",
+        "parent": "*.googleapis.com"
+      },
+      {
+        "key": "*.labstailwind.pa.googleapis.com",
+        "parent": "*.googleapis.com"
+      },
+      {
+        "key": "yt3.googleusercontent.com",
+        "parent": "*.googleusercontent.com"
+      },
+      {
+        "key": "youtube.googleapis.com",
+        "parent": "*.googleapis.com"
+      },
+      {
+        "key": "*.youtube.googleapis.com",
+        "parent": "*.googleapis.com"
+      },
+      {
+        "key": "youtubeembeddedplayer.googleapis.com",
+        "parent": "*.googleapis.com"
+      },
+      {
+        "key": "*.youtubeembeddedplayer.googleapis.com",
+        "parent": "*.googleapis.com"
+      },
+      {
+        "key": "youtubei.googleapis.com",
+        "parent": "*.googleapis.com"
+      },
+      {
+        "key": "*.youtubei.googleapis.com",
+        "parent": "*.googleapis.com"
+      },
+      {
+        "key": "youtube-ui.l.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "*.youtube-ui.l.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "wide-youtube.l.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "*.wide-youtube.l.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "ads.youtube.com",
+        "parent": "*.youtube.com"
+      },
+      {
+        "key": "*.ads.youtube.com",
+        "parent": "*.youtube.com"
+      },
+      {
+        "key": "firebase.googleapis.com",
+        "parent": "*.googleapis.com"
+      },
+      {
+        "key": "firebaseappcheck.googleapis.com",
+        "parent": "*.googleapis.com"
+      },
+      {
+        "key": "firebaseappdistribution.googleapis.com",
+        "parent": "*.googleapis.com"
+      },
+      {
+        "key": "firebaseapptesters.googleapis.com",
+        "parent": "*.googleapis.com"
+      },
+      {
+        "key": "firebasedynamiclinks-ipv4.googleapis.com",
+        "parent": "*.googleapis.com"
+      },
+      {
+        "key": "firebasedynamiclinks-ipv6.googleapis.com",
+        "parent": "*.googleapis.com"
+      },
+      {
+        "key": "firebasedynamiclinks.googleapis.com",
+        "parent": "*.googleapis.com"
+      },
+      {
+        "key": "firebaseinappmessaging.googleapis.com",
+        "parent": "*.googleapis.com"
+      },
+      {
+        "key": "firebaseinstallations.googleapis.com",
+        "parent": "*.googleapis.com"
+      },
+      {
+        "key": "firebaselogging-pa.googleapis.com",
+        "parent": "*.googleapis.com"
+      },
+      {
+        "key": "firebaselogging.googleapis.com",
+        "parent": "*.googleapis.com"
+      },
+      {
+        "key": "firebaseperusertopics-pa.googleapis.com",
+        "parent": "*.googleapis.com"
+      },
+      {
+        "key": "firebaseremoteconfig.googleapis.com",
+        "parent": "*.googleapis.com"
+      },
+      {
+        "key": "scholar.google.ae",
+        "parent": "*.google.ae"
+      },
+      {
+        "key": "scholar.google.at",
+        "parent": "*.google.at"
+      },
+      {
+        "key": "scholar.google.be",
+        "parent": "*.google.be"
+      },
+      {
+        "key": "scholar.google.bg",
+        "parent": "*.google.bg"
+      },
+      {
+        "key": "scholar.google.ca",
+        "parent": "*.google.ca"
+      },
+      {
+        "key": "scholar.google.cat",
+        "parent": "*.google.cat"
+      },
+      {
+        "key": "scholar.google.ch",
+        "parent": "*.google.ch"
+      },
+      {
+        "key": "scholar.google.cl",
+        "parent": "*.google.cl"
+      },
+      {
+        "key": "scholar.google.cn",
+        "parent": "*.google.cn"
+      },
+      {
+        "key": "scholar.google.co.cr",
+        "parent": "*.google.co.cr"
+      },
+      {
+        "key": "scholar.google.co.id",
+        "parent": "*.google.co.id"
+      },
+      {
+        "key": "scholar.google.co.il",
+        "parent": "*.google.co.il"
+      },
+      {
+        "key": "scholar.google.co.in",
+        "parent": "*.google.co.in"
+      },
+      {
+        "key": "scholar.google.co.jp",
+        "parent": "*.google.co.jp"
+      },
+      {
+        "key": "scholar.google.co.kr",
+        "parent": "*.google.co.kr"
+      },
+      {
+        "key": "scholar.google.co.nz",
+        "parent": "*.google.co.nz"
+      },
+      {
+        "key": "scholar.google.co.th",
+        "parent": "*.google.co.th"
+      },
+      {
+        "key": "scholar.google.co.uk",
+        "parent": "*.google.co.uk"
+      },
+      {
+        "key": "scholar.google.co.ve",
+        "parent": "*.google.co.ve"
+      },
+      {
+        "key": "scholar.google.co.za",
+        "parent": "*.google.co.za"
+      },
+      {
+        "key": "scholar.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "scholar.google.com.ar",
+        "parent": "*.google.com.ar"
+      },
+      {
+        "key": "scholar.google.com.au",
+        "parent": "*.google.com.au"
+      },
+      {
+        "key": "scholar.google.com.bo",
+        "parent": "*.google.com.bo"
+      },
+      {
+        "key": "scholar.google.com.br",
+        "parent": "*.google.com.br"
+      },
+      {
+        "key": "scholar.google.com.co",
+        "parent": "*.google.com.co"
+      },
+      {
+        "key": "scholar.google.com.cu",
+        "parent": "*.google.com.cu"
+      },
+      {
+        "key": "scholar.google.com.do",
+        "parent": "*.google.com.do"
+      },
+      {
+        "key": "scholar.google.com.ec",
+        "parent": "*.google.com.ec"
+      },
+      {
+        "key": "scholar.google.com.eg",
+        "parent": "*.google.com.eg"
+      },
+      {
+        "key": "scholar.google.com.gt",
+        "parent": "*.google.com.gt"
+      },
+      {
+        "key": "scholar.google.com.hk",
+        "parent": "*.google.com.hk"
+      },
+      {
+        "key": "scholar.google.com.ly",
+        "parent": "*.google.com.ly"
+      },
+      {
+        "key": "scholar.google.com.mx",
+        "parent": "*.google.com.mx"
+      },
+      {
+        "key": "scholar.google.com.my",
+        "parent": "*.google.com.my"
+      },
+      {
+        "key": "scholar.google.com.ni",
+        "parent": "*.google.com.ni"
+      },
+      {
+        "key": "scholar.google.com.pa",
+        "parent": "*.google.com.pa"
+      },
+      {
+        "key": "scholar.google.com.pe",
+        "parent": "*.google.com.pe"
+      },
+      {
+        "key": "scholar.google.com.ph",
+        "parent": "*.google.com.ph"
+      },
+      {
+        "key": "scholar.google.com.pk",
+        "parent": "*.google.com.pk"
+      },
+      {
+        "key": "scholar.google.com.pr",
+        "parent": "*.google.com.pr"
+      },
+      {
+        "key": "scholar.google.com.py",
+        "parent": "*.google.com.py"
+      },
+      {
+        "key": "scholar.google.com.sg",
+        "parent": "*.google.com.sg"
+      },
+      {
+        "key": "scholar.google.com.sv",
+        "parent": "*.google.com.sv"
+      },
+      {
+        "key": "scholar.google.com.tr",
+        "parent": "*.google.com.tr"
+      },
+      {
+        "key": "scholar.google.com.tw",
+        "parent": "*.google.com.tw"
+      },
+      {
+        "key": "scholar.google.com.ua",
+        "parent": "*.google.com.ua"
+      },
+      {
+        "key": "scholar.google.com.uy",
+        "parent": "*.google.com.uy"
+      },
+      {
+        "key": "scholar.google.com.vn",
+        "parent": "*.google.com.vn"
+      },
+      {
+        "key": "scholar.google.cz",
+        "parent": "*.google.cz"
+      },
+      {
+        "key": "scholar.google.de",
+        "parent": "*.google.de"
+      },
+      {
+        "key": "scholar.google.dk",
+        "parent": "*.google.dk"
+      },
+      {
+        "key": "scholar.google.es",
+        "parent": "*.google.es"
+      },
+      {
+        "key": "scholar.google.fi",
+        "parent": "*.google.fi"
+      },
+      {
+        "key": "scholar.google.fr",
+        "parent": "*.google.fr"
+      },
+      {
+        "key": "scholar.google.gr",
+        "parent": "*.google.gr"
+      },
+      {
+        "key": "scholar.google.hn",
+        "parent": "*.google.hn"
+      },
+      {
+        "key": "scholar.google.hr",
+        "parent": "*.google.hr"
+      },
+      {
+        "key": "scholar.google.hu",
+        "parent": "*.google.hu"
+      },
+      {
+        "key": "scholar.google.is",
+        "parent": "*.google.is"
+      },
+      {
+        "key": "scholar.google.it",
+        "parent": "*.google.it"
+      },
+      {
+        "key": "scholar.google.li",
+        "parent": "*.google.li"
+      },
+      {
+        "key": "scholar.google.lt",
+        "parent": "*.google.lt"
+      },
+      {
+        "key": "scholar.google.lu",
+        "parent": "*.google.lu"
+      },
+      {
+        "key": "scholar.google.lv",
+        "parent": "*.google.lv"
+      },
+      {
+        "key": "scholar.google.nl",
+        "parent": "*.google.nl"
+      },
+      {
+        "key": "scholar.google.no",
+        "parent": "*.google.no"
+      },
+      {
+        "key": "scholar.google.pl",
+        "parent": "*.google.pl"
+      },
+      {
+        "key": "scholar.google.pt",
+        "parent": "*.google.pt"
+      },
+      {
+        "key": "scholar.google.ro",
+        "parent": "*.google.ro"
+      },
+      {
+        "key": "scholar.google.ru",
+        "parent": "*.google.ru"
+      },
+      {
+        "key": "scholar.google.se",
+        "parent": "*.google.se"
+      },
+      {
+        "key": "scholar.google.si",
+        "parent": "*.google.si"
+      },
+      {
+        "key": "scholar.google.sk",
+        "parent": "*.google.sk"
+      },
+      {
+        "key": "scholar.googleusercontent.com",
+        "parent": "*.googleusercontent.com"
+      },
+      {
+        "key": "scholar.l.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "publicca.googleapis.com",
+        "parent": "*.googleapis.com"
+      },
+      {
+        "key": "preprod-publicca.googleapis.com",
+        "parent": "*.googleapis.com"
+      },
+      {
+        "key": "clients1.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "pki.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "android.googlesource.com",
+        "parent": "*.googlesource.com"
+      },
+      {
+        "key": "alt7-mtalk.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "alt8-mtalk.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "mtalk-dev.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "mtalk-staging.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "mtalk4.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "adservice.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "*.adservice.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "adtrafficquality.google",
+        "parent": "*.google"
+      },
+      {
+        "key": "*.adtrafficquality.google",
+        "parent": "*.google"
+      },
+      {
+        "key": "analytics-alv.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "*.analytics-alv.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "fcmatch.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "*.fcmatch.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "googleadapis.l.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "*.googleadapis.l.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "mail-ads.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "*.mail-ads.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "mobileads.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "*.mobileads.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "marketingplatform.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "*.marketingplatform.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "pagead.l.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "*.pagead.l.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "partnerad.l.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "*.partnerad.l.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "analytics.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "www.recaptcha.net",
+        "parent": "*.recaptcha.net"
+      },
+      {
+        "key": "beacons.gcp.gvt2.com",
+        "parent": "*.gvt2.com"
+      },
+      {
+        "key": "beacons.gvt2.com",
+        "parent": "*.gvt2.com"
+      },
+      {
+        "key": "beacons2.gvt2.com",
+        "parent": "*.gvt2.com"
+      },
+      {
+        "key": "beacons3.gvt2.com",
+        "parent": "*.gvt2.com"
+      },
+      {
+        "key": "c.admob.com",
+        "parent": "*.admob.com"
+      },
+      {
+        "key": "c.android.clients.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "cache-management-prod.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "cache.pack.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "checkin.gstatic.com",
+        "parent": "*.gstatic.com"
+      },
+      {
+        "key": "clickserve.dartsearch.net",
+        "parent": "*.dartsearch.net"
+      },
+      {
+        "key": "clickserver.googleads.com",
+        "parent": "*.googleads.com"
+      },
+      {
+        "key": "clientservices.googleapis.com",
+        "parent": "*.googleapis.com"
+      },
+      {
+        "key": "cn.widevine.com",
+        "parent": "*.widevine.com"
+      },
+      {
+        "key": "connectivitycheck.gstatic.com",
+        "parent": "*.gstatic.com"
+      },
+      {
+        "key": "csi.gstatic.com",
+        "parent": "*.gstatic.com"
+      },
+      {
+        "key": "dg-meta.video.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "dl.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "dl.l.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "download.mlcc.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "download.tensorflow.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "fontfiles.googleapis.com",
+        "parent": "*.googleapis.com"
+      },
+      {
+        "key": "fonts.googleapis.com",
+        "parent": "*.googleapis.com"
+      },
+      {
+        "key": "fonts.gstatic.com",
+        "parent": "*.gstatic.com"
+      },
+      {
+        "key": "g0.gstatic.com",
+        "parent": "*.gstatic.com"
+      },
+      {
+        "key": "g1.gstatic.com",
+        "parent": "*.gstatic.com"
+      },
+      {
+        "key": "g2.gstatic.com",
+        "parent": "*.gstatic.com"
+      },
+      {
+        "key": "g3.gstatic.com",
+        "parent": "*.gstatic.com"
+      },
+      {
+        "key": "gstaticadssl.l.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "imasdk.googleapis.com",
+        "parent": "*.googleapis.com"
+      },
+      {
+        "key": "pagead-googlehosted.l.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "performanceparameters.googleapis.com",
+        "parent": "*.googleapis.com"
+      },
+      {
+        "key": "prod-controlbe.floonet.goog",
+        "parent": "*.goog"
+      },
+      {
+        "key": "prod-databe.floonet.goog",
+        "parent": "*.goog"
+      },
+      {
+        "key": "prod.databe.floonet.goog",
+        "parent": "*.goog"
+      },
+      {
+        "key": "redirector.bdn.dev",
+        "parent": "*.bdn.dev"
+      },
+      {
+        "key": "redirector.c.chat.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "redirector.c.mail.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "redirector.c.pack.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "redirector.c.youtubeeducation.com",
+        "parent": "*.youtubeeducation.com"
+      },
+      {
+        "key": "redirector.gcpcdn.gvt1.com",
+        "parent": "*.gvt1.com"
+      },
+      {
+        "key": "redirector.gvt1.com",
+        "parent": "*.gvt1.com"
+      },
+      {
+        "key": "redirector.offline-maps.gvt1.com",
+        "parent": "*.gvt1.com"
+      },
+      {
+        "key": "redirector.snap.gvt1.com",
+        "parent": "*.gvt1.com"
+      },
+      {
+        "key": "redirector.xn--ngstr-lra8j.com",
+        "parent": "*.xn--ngstr-lra8j.com"
+      },
+      {
+        "key": "safebrowsing-cache.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "safebrowsing.googleapis.com",
+        "parent": "*.googleapis.com"
+      },
+      {
+        "key": "service.urchin.com",
+        "parent": "*.urchin.com"
+      },
+      {
+        "key": "ssl-google-analytics.l.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "ssl.gstatic.com",
+        "parent": "*.gstatic.com"
+      },
+      {
+        "key": "staging-controlbe.floonet.goog",
+        "parent": "*.goog"
+      },
+      {
+        "key": "staging-databe.floonet.goog",
+        "parent": "*.goog"
+      },
+      {
+        "key": "staging.databe.floonet.goog",
+        "parent": "*.goog"
+      },
+      {
+        "key": "tac.googleapis.com",
+        "parent": "*.googleapis.com"
+      },
+      {
+        "key": "tools.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "update.googleapis.com",
+        "parent": "*.googleapis.com"
+      },
+      {
+        "key": "wear.googleapis.com",
+        "parent": "*.googleapis.com"
+      },
+      {
+        "key": "www-google-analytics.l.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "www-googletagmanager.l.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "www.gstatic.com",
+        "parent": "*.gstatic.com"
+      },
+      {
+        "key": "crashlyticsreports-pa.googleapis.com",
+        "parent": "*.googleapis.com"
+      },
+      {
+        "key": "firebase-settings.crashlytics.com",
+        "parent": "*.crashlytics.com"
+      },
+      {
+        "key": "update.crashlytics.com",
+        "parent": "*.crashlytics.com"
+      },
+      {
+        "key": "redirector.c.play.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "pki-goog.l.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "c.pki.goog",
+        "parent": "*.pki.goog"
+      },
+      {
+        "key": "i.pki.goog",
+        "parent": "*.pki.goog"
+      },
+      {
+        "key": "o.pki.goog",
+        "parent": "*.pki.goog"
+      },
+      {
+        "key": "crl.pki.goog",
+        "parent": "*.pki.goog"
+      },
+      {
+        "key": "crls.pki.goog",
+        "parent": "*.pki.goog"
+      },
+      {
+        "key": "ocsp.pki.goog",
+        "parent": "*.pki.goog"
+      },
+      {
+        "key": "alt1-mtalk.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "alt2-mtalk.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "alt3-mtalk.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "alt4-mtalk.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "alt5-mtalk.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "alt6-mtalk.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "mtalk.google.com",
+        "parent": "*.google.com"
+      },
+      {
+        "key": "update.microsoft.com",
+        "parent": "*.microsoft.com"
+      },
+      {
+        "key": "*.update.microsoft.com",
+        "parent": "*.microsoft.com"
+      },
+      {
+        "key": "copilot.microsoft.com",
+        "parent": "*.microsoft.com"
+      },
+      {
+        "key": "*.copilot.microsoft.com",
+        "parent": "*.microsoft.com"
+      },
+      {
+        "key": "copilot.bing.com",
+        "parent": "*.bing.com"
+      },
+      {
+        "key": "*.copilot.bing.com",
+        "parent": "*.bing.com"
+      },
+      {
+        "key": "copilot-proxy.githubusercontent.com",
+        "parent": "*.githubusercontent.com"
+      },
+      {
+        "key": "copilot-workspace.githubnext.com",
+        "parent": "*.githubnext.com"
+      },
+      {
+        "key": "az764295.vo.msecnd.net",
+        "parent": "*.msecnd.net"
+      },
+      {
+        "key": "default.exp-tas.com",
+        "parent": "*.exp-tas.com"
+      },
+      {
+        "key": "developer.microsoft.com",
+        "parent": "*.microsoft.com"
+      },
+      {
+        "key": "packages.microsoft.com",
+        "parent": "*.microsoft.com"
+      },
+      {
+        "key": "vscode.search.windows.net",
+        "parent": "*.windows.net"
+      },
+      {
+        "key": "crl.microsoft.com",
+        "parent": "*.microsoft.com"
+      },
+      {
+        "key": "mscrl.microsoft.com",
+        "parent": "*.microsoft.com"
+      },
+      {
+        "key": "ocsp.microsoft.com",
+        "parent": "*.microsoft.com"
+      },
+      {
+        "key": "oneocsp.microsoft.com",
+        "parent": "*.microsoft.com"
+      },
+      {
+        "key": "www.microsoft.com",
+        "parent": "*.microsoft.com"
+      },
+      {
+        "key": "azure.microsoft.com",
+        "parent": "*.microsoft.com"
+      },
+      {
+        "key": "azuremarketplace.microsoft.com",
+        "parent": "*.microsoft.com"
+      },
+      {
+        "key": "location.microsoft.com",
+        "parent": "*.microsoft.com"
+      },
+      {
+        "key": "dcg.microsoft.com",
+        "parent": "*.microsoft.com"
+      },
+      {
+        "key": "*.dcg.microsoft.com",
+        "parent": "*.microsoft.com"
+      },
+      {
+        "key": "*.dl.delivery.mp.microsoft.com",
+        "parent": "*.microsoft.com"
+      },
+      {
+        "key": "*.download.windowsupdate.com",
+        "parent": "*.windowsupdate.com"
+      },
+      {
+        "key": "azuremigrate.download.prss.microsoft.com",
+        "parent": "*.microsoft.com"
+      },
+      {
+        "key": "azuremigratetest.download.prss.microsoft.com",
+        "parent": "*.microsoft.com"
+      },
+      {
+        "key": "azurestackhub.download.prss.microsoft.com",
+        "parent": "*.microsoft.com"
+      },
+      {
+        "key": "azurestackhubuat.download.prss.microsoft.com",
+        "parent": "*.microsoft.com"
+      },
+      {
+        "key": "b.c2r.ts.cdn.office.net",
+        "parent": "*.office.net"
+      },
+      {
+        "key": "cbdstest.download.prss.microsoft.com",
+        "parent": "*.microsoft.com"
+      },
+      {
+        "key": "cn.windowssearch.com",
+        "parent": "*.windowssearch.com"
+      },
+      {
+        "key": "collaborate.download.prss.microsoft.com",
+        "parent": "*.microsoft.com"
+      },
+      {
+        "key": "collaborateppe.download.prss.microsoft.com",
+        "parent": "*.microsoft.com"
+      },
+      {
+        "key": "ctldl.windowsupdate.com",
+        "parent": "*.windowsupdate.com"
+      },
+      {
+        "key": "dreamspark.download.prss.microsoft.com",
+        "parent": "*.microsoft.com"
+      },
+      {
+        "key": "dreamsparkuat.download.prss.microsoft.com",
+        "parent": "*.microsoft.com"
+      },
+      {
+        "key": "f.c2r.ts.cdn.office.net",
+        "parent": "*.office.net"
+      },
+      {
+        "key": "itacademy.download.prss.microsoft.com",
+        "parent": "*.microsoft.com"
+      },
+      {
+        "key": "itacademyuat.download.prss.microsoft.com",
+        "parent": "*.microsoft.com"
+      },
+      {
+        "key": "lex.download.prss.microsoft.com",
+        "parent": "*.microsoft.com"
+      },
+      {
+        "key": "lexuat.download.prss.microsoft.com",
+        "parent": "*.microsoft.com"
+      },
+      {
+        "key": "mbs.download.prss.microsoft.com",
+        "parent": "*.microsoft.com"
+      },
+      {
+        "key": "mpnbenefits.download.prss.microsoft.com",
+        "parent": "*.microsoft.com"
+      },
+      {
+        "key": "mpnbenefitsrtl.download.prss.microsoft.com",
+        "parent": "*.microsoft.com"
+      },
+      {
+        "key": "mpnbenefitsrtluat.download.prss.microsoft.com",
+        "parent": "*.microsoft.com"
+      },
+      {
+        "key": "msdn.download.prss.microsoft.com",
+        "parent": "*.microsoft.com"
+      },
+      {
+        "key": "msdprod-ad.download.prss.microsoft.com",
+        "parent": "*.microsoft.com"
+      },
+      {
+        "key": "msproduct.download.prss.microsoft.com",
+        "parent": "*.microsoft.com"
+      },
+      {
+        "key": "myvs.download.prss.microsoft.com",
+        "parent": "*.microsoft.com"
+      },
+      {
+        "key": "oemsoc.download.prss.microsoft.com",
+        "parent": "*.microsoft.com"
+      },
+      {
+        "key": "oemsocuat.download.prss.microsoft.com",
+        "parent": "*.microsoft.com"
+      },
+      {
+        "key": "officecdn.microsoft.com",
+        "parent": "*.microsoft.com"
+      },
+      {
+        "key": "officemkt.download.prss.microsoft.com",
+        "parent": "*.microsoft.com"
+      },
+      {
+        "key": "officemktuat.download.prss.microsoft.com",
+        "parent": "*.microsoft.com"
+      },
+      {
+        "key": "osrelease.download.prss.microsoft.com",
+        "parent": "*.microsoft.com"
+      },
+      {
+        "key": "rsm.download.prss.microsoft.com",
+        "parent": "*.microsoft.com"
+      },
+      {
+        "key": "sdx.microsoft.com",
+        "parent": "*.microsoft.com"
+      },
+      {
+        "key": "shell.cdn.office.net",
+        "parent": "*.office.net"
+      },
+      {
+        "key": "statics.teams.cdn.office.net",
+        "parent": "*.office.net"
+      },
+      {
+        "key": "storecorefulfillment.download.prss.microsoft.com",
+        "parent": "*.microsoft.com"
+      },
+      {
+        "key": "storeedge.microsoft.com",
+        "parent": "*.microsoft.com"
+      },
+      {
+        "key": "surface.download.prss.microsoft.com",
+        "parent": "*.microsoft.com"
+      },
+      {
+        "key": "surface.downloads.prss.microsoft.com",
+        "parent": "*.microsoft.com"
+      },
+      {
+        "key": "vlportal.download.prss.microsoft.com",
+        "parent": "*.microsoft.com"
+      },
+      {
+        "key": "volic.download.prss.microsoft.com",
+        "parent": "*.microsoft.com"
+      },
+      {
+        "key": "vscode.download.prss.microsoft.com",
+        "parent": "*.microsoft.com"
+      },
+      {
+        "key": "vz.download.prss.microsoft.com",
+        "parent": "*.microsoft.com"
+      },
+      {
+        "key": "windbg.download.prss.microsoft.com",
+        "parent": "*.microsoft.com"
+      },
+      {
+        "key": "collector.github.com",
+        "parent": "*.github.com"
+      },
+      {
+        "key": "*.collector.github.com",
+        "parent": "*.github.com"
+      },
+      {
+        "key": "copilot-telemetry-service.githubusercontent.com",
+        "parent": "*.githubusercontent.com"
+      },
+      {
+        "key": "copilot-telemetry.githubusercontent.com",
+        "parent": "*.githubusercontent.com"
+      },
+      {
+        "key": "download.visualstudio.microsoft.com",
+        "parent": "*.microsoft.com"
+      },
+      {
+        "key": "browser.events.data.msn.cn",
+        "parent": "*.msn.cn"
+      },
+      {
+        "key": "*.browser.events.data.msn.cn",
+        "parent": "*.msn.cn"
+      },
+      {
+        "key": "browser.events.data.msn.com",
+        "parent": "*.msn.com"
+      },
+      {
+        "key": "*.browser.events.data.msn.com",
+        "parent": "*.msn.com"
+      },
+      {
+        "key": "cn.bing.com",
+        "parent": "*.bing.com"
+      },
+      {
+        "key": "*.cn.bing.com",
+        "parent": "*.bing.com"
+      },
+      {
+        "key": "cn.bing.net",
+        "parent": "*.bing.net"
+      },
+      {
+        "key": "*.cn.bing.net",
+        "parent": "*.bing.net"
+      },
+      {
+        "key": "cn.mm.bing.net",
+        "parent": "*.bing.net"
+      },
+      {
+        "key": "*.cn.mm.bing.net",
+        "parent": "*.bing.net"
+      },
+      {
+        "key": "ditu.live.com",
+        "parent": "*.live.com"
+      },
+      {
+        "key": "*.ditu.live.com",
+        "parent": "*.live.com"
+      },
+      {
+        "key": "r.bing.com",
+        "parent": "*.bing.com"
+      },
+      {
+        "key": "*.r.bing.com",
+        "parent": "*.bing.com"
+      },
+      {
+        "key": "th.bing.com",
+        "parent": "*.bing.com"
+      },
+      {
+        "key": "*.th.bing.com",
+        "parent": "*.bing.com"
+      },
+      {
+        "key": "bj1.api.bing.com",
+        "parent": "*.bing.com"
+      },
+      {
+        "key": "l-0005.l-msedge.net",
+        "parent": "*.l-msedge.net"
+      },
+      {
+        "key": "*.l-0005.l-msedge.net",
+        "parent": "*.l-msedge.net"
+      },
+      {
+        "key": "espn.api.edge.bamgrid.com",
+        "parent": "*.bamgrid.com"
+      },
+      {
+        "key": "hulu.playback.edge.bamgrid.com",
+        "parent": "*.bamgrid.com"
+      },
+      {
+        "key": "disney.my.sentry.io",
+        "parent": "*.sentry.io"
+      },
+      {
+        "key": "adeventtracker.spotify.com",
+        "parent": "*.spotify.com"
+      },
+      {
+        "key": "adstudio-assets.scdn.co",
+        "parent": "*.scdn.co"
+      },
+      {
+        "key": "bloodhound.spotify.com",
+        "parent": "*.spotify.com"
+      },
+      {
+        "key": "discord-attachments-uploads-prd.storage.googleapis.com",
+        "parent": "*.storage.googleapis.com"
+      },
+      {
+        "key": "analytics.tiktok.com",
+        "parent": "*.tiktok.com"
+      },
+      {
+        "key": "*.analytics.tiktok.com",
+        "parent": "*.tiktok.com"
+      },
+      {
+        "key": "developers.facebook.com",
+        "parent": "*.facebook.com"
+      },
+      {
+        "key": "analytics.facebook.com",
+        "parent": "*.facebook.com"
+      },
+      {
+        "key": "*.analytics.facebook.com",
+        "parent": "*.facebook.com"
+      },
+      {
+        "key": "pixel.facebook.com",
+        "parent": "*.facebook.com"
+      },
+      {
+        "key": "*.pixel.facebook.com",
+        "parent": "*.facebook.com"
+      },
+      {
+        "key": "graph.instagram.com",
+        "parent": "*.instagram.com"
+      },
+      {
+        "key": "*.graph.instagram.com",
+        "parent": "*.instagram.com"
+      },
+      {
+        "key": "graph-fallback.instagram.com",
+        "parent": "*.instagram.com"
+      },
+      {
+        "key": "*.graph-fallback.instagram.com",
+        "parent": "*.instagram.com"
+      },
+      {
+        "key": "steamcloudsweden.blob.core.windows.net",
+        "parent": "*.blob.core.windows.net"
+      },
+      {
+        "key": "steamugcquincy.blob.core.windows.net",
+        "parent": "*.blob.core.windows.net"
+      },
+      {
+        "key": "alibaba.cdn.steampipe.steamcontent.com",
+        "parent": "*.steamcontent.com"
+      },
+      {
+        "key": "notary-submissions-prod.s3-accelerate.amazonaws.com",
+        "parent": "*.amazonaws.com"
+      },
+      {
+        "key": "notary-submissions-prod.s3.us-west-2.amazonaws.com",
+        "parent": "*.amazonaws.com"
+      },
+      {
+        "key": "apple-tv-plus-press.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "hls-amt.itunes.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "hls.itunes.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "np-edge.itunes.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "play-edge.itunes.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "tv.applemusic.com",
+        "parent": "*.applemusic.com"
+      },
+      {
+        "key": "uts-api.itunes.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "amp-api-edge.apps.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "amp-api-search-edge.apps.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "amp-api.apps.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "api-edge.apps.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "communities.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "discussionschinese.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "fides-pol.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "gspe11-2-cn-ssl.ls.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "gspe12-cn-ssl.ls.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "gspe85-cn-ssl.ls.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "init.gc.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "km.support.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "maps.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "tj-pod1-smp-device.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "tj-pod2-smp-device.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "tj-pod3-smp-device.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "www.support.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "a1.mzstatic.com",
+        "parent": "*.mzstatic.com"
+      },
+      {
+        "key": "a2.mzstatic.com",
+        "parent": "*.mzstatic.com"
+      },
+      {
+        "key": "a3.mzstatic.com",
+        "parent": "*.mzstatic.com"
+      },
+      {
+        "key": "a4.mzstatic.com",
+        "parent": "*.mzstatic.com"
+      },
+      {
+        "key": "a5.mzstatic.com",
+        "parent": "*.mzstatic.com"
+      },
+      {
+        "key": "cl1.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "cl2.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "cl3.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "cl4.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "cl5.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "is1.mzstatic.com",
+        "parent": "*.mzstatic.com"
+      },
+      {
+        "key": "is1-ssl.mzstatic.com",
+        "parent": "*.mzstatic.com"
+      },
+      {
+        "key": "is2.mzstatic.com",
+        "parent": "*.mzstatic.com"
+      },
+      {
+        "key": "is2-ssl.mzstatic.com",
+        "parent": "*.mzstatic.com"
+      },
+      {
+        "key": "is3.mzstatic.com",
+        "parent": "*.mzstatic.com"
+      },
+      {
+        "key": "is3-ssl.mzstatic.com",
+        "parent": "*.mzstatic.com"
+      },
+      {
+        "key": "is4.mzstatic.com",
+        "parent": "*.mzstatic.com"
+      },
+      {
+        "key": "is4-ssl.mzstatic.com",
+        "parent": "*.mzstatic.com"
+      },
+      {
+        "key": "is5.mzstatic.com",
+        "parent": "*.mzstatic.com"
+      },
+      {
+        "key": "is5-ssl.mzstatic.com",
+        "parent": "*.mzstatic.com"
+      },
+      {
+        "key": "s.mzstatic.com",
+        "parent": "*.mzstatic.com"
+      },
+      {
+        "key": "s1.mzstatic.com",
+        "parent": "*.mzstatic.com"
+      },
+      {
+        "key": "s2.mzstatic.com",
+        "parent": "*.mzstatic.com"
+      },
+      {
+        "key": "s3.mzstatic.com",
+        "parent": "*.mzstatic.com"
+      },
+      {
+        "key": "s4.mzstatic.com",
+        "parent": "*.mzstatic.com"
+      },
+      {
+        "key": "s5.mzstatic.com",
+        "parent": "*.mzstatic.com"
+      },
+      {
+        "key": "adcdownload.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "amp-api-updates.apps.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "amp-api.media.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "app-site-association.cdn-apple.com",
+        "parent": "*.cdn-apple.com"
+      },
+      {
+        "key": "appldnld.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "appldnld.g.aaplimg.com",
+        "parent": "*.aaplimg.com"
+      },
+      {
+        "key": "appleid.cdn-apple.com",
+        "parent": "*.cdn-apple.com"
+      },
+      {
+        "key": "apps.mzstatic.com",
+        "parent": "*.mzstatic.com"
+      },
+      {
+        "key": "cds-cdn.v.aaplimg.com",
+        "parent": "*.aaplimg.com"
+      },
+      {
+        "key": "cds.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "cdsassets.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "cl2-cn.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "cl4-cn.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "clientflow.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "cn-smp-paymentservices.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "configuration.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "cstat.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "cstat.cdn-apple.com",
+        "parent": "*.cdn-apple.com"
+      },
+      {
+        "key": "dejavu.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "devimages-cdn.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "devstreaming-cdn.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "download.developer.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "experiments.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "gs-loc-cn.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "gs-loc.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "gsp10-ssl-cn.ls.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "gsp11-cn.ls.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "gsp12-cn.ls.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "gsp13-cn.ls.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "gsp4-cn.ls.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "gsp5-cn.ls.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "gsp85-cn-ssl.ls.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "gspe19-2-cn-ssl.ls.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "gspe19-cn-ssl.ls.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "gspe19-cn.ls.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "gspe21-ssl.ls.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "gspe35-ssl.ls.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "gspe79-cn-ssl.ls.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "guzzoni-apple-com.v.aaplimg.com",
+        "parent": "*.aaplimg.com"
+      },
+      {
+        "key": "guzzoni.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "guzzoni.smoot.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "init-kt.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "init-p01md.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "init-p01st.push.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "init-s01st.push.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "init.ess.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "ipcdn.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "iphone-ld.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "mensura.cdn-apple.com",
+        "parent": "*.cdn-apple.com"
+      },
+      {
+        "key": "mesu.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "ml.cdn-apple.com",
+        "parent": "*.cdn-apple.com"
+      },
+      {
+        "key": "pancake.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "pba0.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "probe.siri.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "publicassets.cdn-apple.com",
+        "parent": "*.cdn-apple.com"
+      },
+      {
+        "key": "seed-sequoia.siri.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "seed-swallow.siri.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "seed.siri.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "sequoia.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "sh-pod2-smp-device.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "shazam-insights.cdn-apple.com",
+        "parent": "*.cdn-apple.com"
+      },
+      {
+        "key": "smp-device-content.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "static.gc.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "stocks-sparkline.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "store.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "store.storeimages.cdn-apple.com",
+        "parent": "*.cdn-apple.com"
+      },
+      {
+        "key": "support.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "swallow-apple-com.v.aaplimg.com",
+        "parent": "*.aaplimg.com"
+      },
+      {
+        "key": "swallow.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "swcatalog.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "swcdn.g.aaplimg.com",
+        "parent": "*.aaplimg.com"
+      },
+      {
+        "key": "sylvan.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "weather-data.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "weather-map.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "weather-map2.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "weatherkit.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "www.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "xp.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "advertising.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "*.advertising.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "api-adservices.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "*.api-adservices.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "iadsdk.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "*.iadsdk.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "iad.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "*.iad.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "cdn.apple-mapkit.com",
+        "parent": "*.apple-mapkit.com"
+      },
+      {
+        "key": "cdn1.apple-mapkit.com",
+        "parent": "*.apple-mapkit.com"
+      },
+      {
+        "key": "cdn2.apple-mapkit.com",
+        "parent": "*.apple-mapkit.com"
+      },
+      {
+        "key": "cdn3.apple-mapkit.com",
+        "parent": "*.apple-mapkit.com"
+      },
+      {
+        "key": "cdn4.apple-mapkit.com",
+        "parent": "*.apple-mapkit.com"
+      },
+      {
+        "key": "cdn-cn.apple-mapkit.com",
+        "parent": "*.apple-mapkit.com"
+      },
+      {
+        "key": "cdn-cn1.apple-mapkit.com",
+        "parent": "*.apple-mapkit.com"
+      },
+      {
+        "key": "cdn-cn2.apple-mapkit.com",
+        "parent": "*.apple-mapkit.com"
+      },
+      {
+        "key": "cdn-cn3.apple-mapkit.com",
+        "parent": "*.apple-mapkit.com"
+      },
+      {
+        "key": "cdn-cn4.apple-mapkit.com",
+        "parent": "*.apple-mapkit.com"
+      },
+      {
+        "key": "certs.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "crl.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "ocsp.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "ocsp2.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "valid.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "amp-api.podcasts.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "podcasts.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "amp-api-edge.music.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "amp-api.music.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "js-cdn.music.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "music.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "musicstatus.music.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "play.music.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "speedysub.music.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "amp-api-edge-lb-cn.itunes-apple.com.akadns.net",
+        "parent": "*.itunes-apple.com.akadns.net"
+      },
+      {
+        "key": "amp-api-edge-lb.itunes-apple.com.akadns.net",
+        "parent": "*.itunes-apple.com.akadns.net"
+      },
+      {
+        "key": "aod-ssl.itunes.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "aod.itunes.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "apptrailers.itunes.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "bag.itunes.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "bookkeeper.itunes.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "client-api.itunes.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "cma.itunes.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "downloaddispatch.itunes.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "entitlements-edge.itunes.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "fpinit.itunes.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "inappcheck-cn.itunes-apple.com.akadns.net",
+        "parent": "*.itunes-apple.com.akadns.net"
+      },
+      {
+        "key": "inappcheck-lb.itunes-apple.com.akadns.net",
+        "parent": "*.itunes-apple.com.akadns.net"
+      },
+      {
+        "key": "inappcheck.itunes.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "init.itunes.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "iosapps.itunes.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "misc-assets.itunes.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "mvod.itunes.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "myapp.itunes.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "osxapps.itunes.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "pd-nk.itunes.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "pd.itunes.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "play.itunes.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "podcasts.itunes.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "se-edge.itunes.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "se2.itunes.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "search.itunes.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "sf-api-token-service.itunes.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "sp.itunes.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "streamingaudio.itunes.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "su.itunes.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "sync.itunes.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "tf-feedback.itunes.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "universal-activity-service.itunes.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "upp.itunes.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "bag-cdn.itunes-apple.com.akadns.net",
+        "parent": "*.itunes-apple.com.akadns.net"
+      },
+      {
+        "key": "iosapps.itunes.g.aaplimg.com",
+        "parent": "*.aaplimg.com"
+      },
+      {
+        "key": "is-ssl.mzstatic.com-cn-lb.itunes-apple.com.akadns.net",
+        "parent": "*.itunes-apple.com.akadns.net"
+      },
+      {
+        "key": "itunes.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "itunesconnect.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "osxapps.itunes.g.aaplimg.com",
+        "parent": "*.aaplimg.com"
+      },
+      {
+        "key": "stun.hitv.com",
+        "parent": "default"
+      },
+      {
+        "key": "instant.arubanetworks.com",
+        "parent": "default"
+      },
+      {
+        "key": "setmeup.arubanetworks.com",
+        "parent": "default"
+      },
+      {
+        "key": "asusrouter.com",
+        "parent": "default"
+      },
+      {
+        "key": "router.asus.com",
+        "parent": "default"
+      },
+      {
+        "key": "www.asusrouter.com",
+        "parent": "default"
+      },
+      {
+        "key": "oasisauth.h3c.com",
+        "parent": "default"
+      },
+      {
+        "key": "routerlogin.com",
+        "parent": "default"
+      },
+      {
+        "key": "www.routerlogin.com",
+        "parent": "default"
+      },
+      {
+        "key": "miwifi.com",
+        "parent": "default"
+      },
+      {
+        "key": "www.miwifi.com",
+        "parent": "default"
+      },
+      {
+        "key": "local.adguard.org",
+        "parent": "default"
+      },
+      {
+        "key": "internal",
+        "parent": "default"
+      },
+      {
+        "key": "*.internal",
+        "parent": "default"
+      },
+      {
+        "key": "localdomain",
+        "parent": "default"
+      },
+      {
+        "key": "*.localdomain",
+        "parent": "default"
+      },
+      {
+        "key": "example",
+        "parent": "default"
+      },
+      {
+        "key": "*.example",
+        "parent": "default"
+      },
+      {
+        "key": "invalid",
+        "parent": "default"
+      },
+      {
+        "key": "*.invalid",
+        "parent": "default"
+      },
+      {
+        "key": "*.localhost",
+        "parent": "default"
+      },
+      {
+        "key": "test",
+        "parent": "default"
+      },
+      {
+        "key": "*.test",
+        "parent": "default"
+      },
+      {
+        "key": "local",
+        "parent": "default"
+      },
+      {
+        "key": "*.local",
+        "parent": "default"
+      },
+      {
+        "key": "lan",
+        "parent": "default"
+      },
+      {
+        "key": "*.lan",
+        "parent": "default"
+      },
+      {
+        "key": "router.ctc",
+        "parent": "default"
+      },
+      {
+        "key": "*.router.ctc",
+        "parent": "default"
+      },
+      {
+        "key": "my.router",
+        "parent": "default"
+      },
+      {
+        "key": "*.my.router",
+        "parent": "default"
+      },
+      {
+        "key": "home.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.home.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "zte.home",
+        "parent": "default"
+      },
+      {
+        "key": "*.zte.home",
+        "parent": "default"
+      },
+      {
+        "key": "tplinkwifi.net",
+        "parent": "default"
+      },
+      {
+        "key": "*.tplinkwifi.net",
+        "parent": "default"
+      },
+      {
+        "key": "tendawifi.com",
+        "parent": "default"
+      },
+      {
+        "key": "*.tendawifi.com",
+        "parent": "default"
+      },
+      {
+        "key": "plex.direct",
+        "parent": "default"
+      },
+      {
+        "key": "*.plex.direct",
+        "parent": "default"
+      },
+      {
+        "key": "hiwifi.com",
+        "parent": "default"
+      },
+      {
+        "key": "*.hiwifi.com",
+        "parent": "default"
+      },
+      {
+        "key": "phicomm.me",
+        "parent": "default"
+      },
+      {
+        "key": "*.phicomm.me",
+        "parent": "default"
+      },
+      {
+        "key": "peiluyou.com",
+        "parent": "default"
+      },
+      {
+        "key": "*.peiluyou.com",
+        "parent": "default"
+      },
+      {
+        "key": "ts.net",
+        "parent": "default"
+      },
+      {
+        "key": "*.ts.net",
+        "parent": "default"
+      },
+      {
+        "key": "leike.cc",
+        "parent": "default"
+      },
+      {
+        "key": "*.leike.cc",
+        "parent": "default"
+      },
+      {
+        "key": "127.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.127.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "10.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.10.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "82.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.82.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "93.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.93.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "29.172.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.29.172.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "30.172.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.30.172.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "31.172.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.31.172.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "16.172.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.16.172.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "17.172.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.17.172.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "27.172.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.27.172.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "168.192.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.168.192.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "254.169.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.254.169.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "18.172.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.18.172.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "19.172.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.19.172.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "20.172.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.20.172.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "21.172.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.21.172.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "22.172.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.22.172.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "d.f.ip6.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.d.f.ip6.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "64.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.64.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "65.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.65.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "66.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.66.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "67.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.67.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "68.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.68.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "69.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.69.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "70.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.70.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "71.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.71.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "72.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.72.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "73.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.73.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "74.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.74.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "75.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.75.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "76.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.76.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "77.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.77.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "78.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.78.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "79.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.79.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "80.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.80.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "81.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.81.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "26.172.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.26.172.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "83.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.83.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "84.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.84.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "85.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.85.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "86.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.86.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "87.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.87.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "88.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.88.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "89.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.89.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "90.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.90.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "91.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.91.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "92.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.92.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "28.172.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.28.172.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "94.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.94.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "95.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.95.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "96.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.96.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "97.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.97.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "98.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.98.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "99.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.99.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "100.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.100.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "101.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.101.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "102.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.102.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "103.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.103.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "104.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.104.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "105.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.105.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "106.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.106.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "107.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.107.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "108.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.108.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "109.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.109.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "110.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.110.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "111.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.111.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "112.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.112.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "113.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.113.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "114.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.114.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "115.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.115.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "116.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.116.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "117.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.117.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "118.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.118.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "119.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.119.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "120.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.120.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "121.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.121.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "122.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.122.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "123.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.123.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "124.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.124.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "125.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.125.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "126.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.126.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "127.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.127.100.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "25.172.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.25.172.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "24.172.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.24.172.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "23.172.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.23.172.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "b.e.f.ip6.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.b.e.f.ip6.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "a.e.f.ip6.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.a.e.f.ip6.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "9.e.f.ip6.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.9.e.f.ip6.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "8.e.f.ip6.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.8.e.f.ip6.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "113.0.203.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.113.0.203.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "100.51.198.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.100.51.198.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "2.0.192.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.2.0.192.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "kis.v2.scr.kaspersky-labs.com",
+        "parent": "default"
+      },
+      {
+        "key": "*.kis.v2.scr.kaspersky-labs.com",
+        "parent": "default"
+      },
+      {
+        "key": "255.255.255.255.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.255.255.255.255.in-addr.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "8.b.d.0.1.0.0.2.ip6.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.8.b.d.0.1.0.0.2.ip6.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "1.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.ip6.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "*.1.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.ip6.arpa",
+        "parent": "default"
+      },
+      {
+        "key": "dns.adguard.com",
+        "parent": "default"
+      },
+      {
+        "key": "dns.adguard-dns.com",
+        "parent": "default"
+      },
+      {
+        "key": "family.adguard-dns.com",
+        "parent": "default"
+      },
+      {
+        "key": "unfiltered.adguard-dns.com",
+        "parent": "default"
+      },
+      {
+        "key": "dns.alidns.com",
+        "parent": "default"
+      },
+      {
+        "key": "doh.dns.apple.com",
+        "parent": "*.apple.com"
+      },
+      {
+        "key": "dns.caliph.dev",
+        "parent": "default"
+      },
+      {
+        "key": "dns.bebasid.com",
+        "parent": "default"
+      },
+      {
+        "key": "antivirus.bebasid.com",
+        "parent": "default"
+      },
+      {
+        "key": "internetsehat.bebasid.com",
+        "parent": "default"
+      },
+      {
+        "key": "dns.cfiec.net",
+        "parent": "default"
+      },
+      {
+        "key": "doh.cleanbrowsing.org",
+        "parent": "default"
+      },
+      {
+        "key": "one.one.one.one",
+        "parent": "default"
+      },
+      {
+        "key": "dns.cloudflare.com",
+        "parent": "*.cloudflare.com"
+      },
+      {
+        "key": "freedns.controld.com",
+        "parent": "default"
+      },
+      {
+        "key": "dns.decloudus.com",
+        "parent": "default"
+      },
+      {
+        "key": "futuredns.eu.org",
+        "parent": "default"
+      },
+      {
+        "key": "dns.de.futuredns.eu.org",
+        "parent": "default"
+      },
+      {
+        "key": "dns.us.futuredns.eu.org",
+        "parent": "default"
+      },
+      {
+        "key": "doh.dns.sb",
+        "parent": "default"
+      },
+      {
+        "key": "doh.sb",
+        "parent": "default"
+      },
+      {
+        "key": "dns.sb",
+        "parent": "default"
+      },
+      {
+        "key": "de-dus.doh.sb",
+        "parent": "default"
+      },
+      {
+        "key": "de-fra.doh.sb",
+        "parent": "default"
+      },
+      {
+        "key": "nl-ams.doh.sb",
+        "parent": "default"
+      },
+      {
+        "key": "uk-lon.doh.sb",
+        "parent": "default"
+      },
+      {
+        "key": "ee-tll.doh.sb",
+        "parent": "default"
+      },
+      {
+        "key": "jp-kix.doh.sb",
+        "parent": "default"
+      },
+      {
+        "key": "jp-nrt.doh.sb",
+        "parent": "default"
+      },
+      {
+        "key": "hk-hkg.doh.sb",
+        "parent": "default"
+      },
+      {
+        "key": "au-syd.doh.sb",
+        "parent": "default"
+      },
+      {
+        "key": "us-chi.doh.sb",
+        "parent": "default"
+      },
+      {
+        "key": "us-nyc.doh.sb",
+        "parent": "default"
+      },
+      {
+        "key": "us-sjc.doh.sb",
+        "parent": "default"
+      },
+      {
+        "key": "in-blr.doh.sb",
+        "parent": "default"
+      },
+      {
+        "key": "sg-sin.doh.sb",
+        "parent": "default"
+      },
+      {
+        "key": "kr-sel.doh.sb",
+        "parent": "default"
+      },
+      {
+        "key": "ru-mow.doh.sb",
+        "parent": "default"
+      },
+      {
+        "key": "ca-yyz.doh.sb",
+        "parent": "default"
+      },
+      {
+        "key": "de-ber.doh.sb",
+        "parent": "default"
+      },
+      {
+        "key": "doh.pub",
+        "parent": "default"
+      },
+      {
+        "key": "dns.pub",
+        "parent": "default"
+      },
+      {
+        "key": "sm2.doh.pub",
+        "parent": "default"
+      },
+      {
+        "key": "zero.dns0.eu",
+        "parent": "default"
+      },
+      {
+        "key": "dns.google",
+        "parent": "*.google"
+      },
+      {
+        "key": "ordns.he.net",
+        "parent": "default"
+      },
+      {
+        "key": "dns.mullvad.net",
+        "parent": "default"
+      },
+      {
+        "key": "adblock.dns.mullvad.net",
+        "parent": "default"
+      },
+      {
+        "key": "base.dns.mullvad.net",
+        "parent": "default"
+      },
+      {
+        "key": "extended.dns.mullvad.net",
+        "parent": "default"
+      },
+      {
+        "key": "family.dns.mullvad.net",
+        "parent": "default"
+      },
+      {
+        "key": "all.dns.mullvad.net",
+        "parent": "default"
+      },
+      {
+        "key": "ada.openbld.net",
+        "parent": "default"
+      },
+      {
+        "key": "ric.openbld.net",
+        "parent": "default"
+      },
+      {
+        "key": "dns.quad9.net",
+        "parent": "default"
+      },
+      {
+        "key": "dns10.quad9.net",
+        "parent": "default"
+      },
+      {
+        "key": "dns11.quad9.net",
+        "parent": "default"
+      },
+      {
+        "key": "doh.qis.io",
+        "parent": "default"
+      },
+      {
+        "key": "dns.rabbitdns.org",
+        "parent": "default"
+      },
+      {
+        "key": "security.rabbitdns.org",
+        "parent": "default"
+      },
+      {
+        "key": "family.rabbitdns.org",
+        "parent": "default"
+      },
+      {
+        "key": "basic.rethinkdns.com",
+        "parent": "default"
+      },
+      {
+        "key": "dns.surfsharkdns.com",
+        "parent": "default"
+      },
+      {
+        "key": "v.recipes",
+        "parent": "default"
+      },
+      {
+        "key": "wikimedia-dns.org",
+        "parent": "default"
+      },
+      {
+        "key": "doh.applied-privacy.net",
+        "parent": "default"
+      },
+      {
+        "key": "private.canadianshield.cira.ca",
+        "parent": "default"
+      },
+      {
+        "key": "protected.canadianshield.cira.ca",
+        "parent": "default"
+      },
+      {
+        "key": "family.canadianshield.cira.ca",
+        "parent": "default"
+      },
+      {
+        "key": "dns.comss.one",
+        "parent": "default"
+      },
+      {
+        "key": "router.comss.one",
+        "parent": "default"
+      },
+      {
+        "key": "odvr.nic.cz",
+        "parent": "default"
+      },
+      {
+        "key": "dns.digitale-gesellschaft.ch",
+        "parent": "default"
+      },
+      {
+        "key": "dns-doh.dnsforfamily.com",
+        "parent": "default"
+      },
+      {
+        "key": "protective.joindns4.eu",
+        "parent": "default"
+      },
+      {
+        "key": "child.joindns4.eu",
+        "parent": "default"
+      },
+      {
+        "key": "noads.joindns4.eu",
+        "parent": "default"
+      },
+      {
+        "key": "child-noads.joindns4.eu",
+        "parent": "default"
+      },
+      {
+        "key": "unfiltered.joindns4.eu",
+        "parent": "default"
+      },
+      {
+        "key": "kaitain.restena.lu",
+        "parent": "default"
+      },
+      {
+        "key": "public.dns.iij.jp",
+        "parent": "default"
+      },
+      {
+        "key": "dns.jupitrdns.com",
+        "parent": "default"
+      },
+      {
+        "key": "doh.libredns.gr",
+        "parent": "default"
+      },
+      {
+        "key": "doh-pure.onedns.net",
+        "parent": "default"
+      },
+      {
+        "key": "doh.onedns.net",
+        "parent": "default"
+      },
+      {
+        "key": "dns.switch.ch",
+        "parent": "default"
+      },
+      {
+        "key": "dns.twnic.tw",
+        "parent": "default"
+      },
+      {
+        "key": "resolver.dnsprivacy.org.uk",
+        "parent": "default"
+      },
+      {
+        "key": "dns.seia.io",
+        "parent": "default"
+      },
+      {
+        "key": "secondary.dns.seia.io",
+        "parent": "default"
+      },
+      {
+        "key": "common.dot.dns.yandex.net",
+        "parent": "default"
+      },
+      {
+        "key": "safe.dot.dns.yandex.net",
+        "parent": "default"
+      },
+      {
+        "key": "family.dot.dns.yandex.net",
+        "parent": "default"
+      },
+      {
+        "key": "dns.shaw.ca",
+        "parent": "default"
+      },
+      {
+        "key": "doh.xfinity.com",
+        "parent": "default"
+      },
+      {
+        "key": "doh.nl.ahadns.net",
+        "parent": "default"
+      },
+      {
+        "key": "doh.la.ahadns.net",
+        "parent": "default"
+      },
+      {
+        "key": "dns.arapurayil.com",
+        "parent": "default"
+      },
+      {
+        "key": "dandelionsprout.asuscomm.com",
+        "parent": "default"
+      },
+      {
+        "key": "dnsforge.de",
+        "parent": "default"
+      },
+      {
+        "key": "dns.dnswarden.com",
+        "parent": "default"
+      },
+      {
+        "key": "doh.ffmuc.net",
+        "parent": "default"
+      },
+      {
+        "key": "ibksturm.synology.me",
+        "parent": "default"
+      },
+      {
+        "key": "resolver-eu.lelux.fi",
+        "parent": "default"
+      },
+      {
+        "key": "dns.marbledfennec.net",
+        "parent": "default"
+      },
+      {
+        "key": "dns.oszx.co",
+        "parent": "default"
+      },
+      {
+        "key": "dns.pumplex.com",
+        "parent": "default"
+      },
+      {
+        "key": "doh.tiarap.org",
+        "parent": "default"
+      },
+      {
+        "key": "doh.tiar.app",
+        "parent": "default"
+      },
+      {
+        "key": "jp.tiarap.org",
+        "parent": "default"
+      },
+      {
+        "key": "jp.tiar.app",
+        "parent": "default"
+      },
+      {
+        "key": "rx.techomespace.com",
+        "parent": "default"
+      },
+      {
+        "key": "public.ns.nwps.fi",
+        "parent": "default"
+      },
+      {
+        "key": "kids.ns.nwps.fi",
+        "parent": "default"
+      },
+      {
+        "key": "dns.astracat.ru",
+        "parent": "default"
+      },
+      {
+        "key": "frd4wvnobp.cloudflare-gateway.com",
+        "parent": "default"
+      },
+      {
+        "key": "dnsguard.pub",
+        "parent": "default"
+      },
+      {
+        "key": "5u35p8m9i7.cloudflare-gateway.com",
+        "parent": "default"
+      },
+      {
+        "key": "dns.malw.link",
+        "parent": "default"
+      },
+      {
+        "key": "dns.mafioznik.xyz",
+        "parent": "default"
+      },
+      {
+        "key": "dns.geohide.ru",
+        "parent": "default"
+      },
+      {
+        "key": "xbox-dns.ru",
+        "parent": "default"
+      },
+      {
+        "key": "opendns.com",
+        "parent": "default"
+      },
+      {
+        "key": "*.opendns.com",
+        "parent": "default"
+      },
+      {
+        "key": "cloudflare-dns.com",
+        "parent": "default"
+      },
+      {
+        "key": "*.cloudflare-dns.com",
+        "parent": "default"
+      },
+      {
+        "key": "nextdns.io",
+        "parent": "default"
+      },
+      {
+        "key": "*.nextdns.io",
+        "parent": "default"
+      },
+      {
+        "key": "feishu.cn",
+        "parent": "*.cn"
+      },
+      {
+        "key": "*.feishu.cn",
+        "parent": "*.cn"
+      },
+      {
+        "key": "qpic.cn",
+        "parent": "*.cn"
+      },
+      {
+        "key": "*.qpic.cn",
+        "parent": "*.cn"
+      },
+      {
+        "key": "weixin.qq.com",
+        "parent": "*.qq.com"
+      },
+      {
+        "key": "*.weixin.qq.com",
+        "parent": "*.qq.com"
+      },
+      {
+        "key": "weibo.cn",
+        "parent": "*.cn"
+      },
+      {
+        "key": "*.weibo.cn",
+        "parent": "*.cn"
+      },
+      {
+        "key": "sina.com.cn",
+        "parent": "*.cn"
+      },
+      {
+        "key": "*.sina.com.cn",
+        "parent": "*.cn"
+      },
+      {
+        "key": "10086.cn",
+        "parent": "*.cn"
+      },
+      {
+        "key": "*.10086.cn",
+        "parent": "*.cn"
+      },
+      {
+        "key": "189.cn",
+        "parent": "*.cn"
+      },
+      {
+        "key": "*.189.cn",
+        "parent": "*.cn"
+      },
+      {
+        "key": "360.cn",
+        "parent": "*.cn"
+      },
+      {
+        "key": "*.360.cn",
+        "parent": "*.cn"
+      }
+    ],
+    "domesticLiteralKeys": [
+      "douyin.com",
+      "*.douyin.com",
+      "douyincdn.com",
+      "*.douyincdn.com",
+      "jianying.com",
+      "*.jianying.com",
+      "jimeng.com",
+      "*.jimeng.com",
+      "toutiao.com",
+      "*.toutiao.com",
+      "ixigua.com",
+      "*.ixigua.com",
+      "feishu.cn",
+      "*.feishu.cn",
+      "volcengine.com",
+      "*.volcengine.com",
+      "prts.plus",
+      "*.prts.plus",
+      "cnbeta.com",
+      "*.cnbeta.com",
+      "cnbetacdn.com",
+      "*.cnbetacdn.com",
+      "easou.com",
+      "*.easou.com",
+      "mob.com",
+      "*.mob.com",
+      "baidustatic.com",
+      "*.baidustatic.com",
+      "didi-labs.com",
+      "*.didi-labs.com",
+      "baidu.com",
+      "*.baidu.com",
+      "bdstatic.com",
+      "*.bdstatic.com",
+      "bdimg.com",
+      "*.bdimg.com",
+      "qq.com",
+      "*.qq.com",
+      "qpic.cn",
+      "*.qpic.cn",
+      "gtimg.com",
+      "*.gtimg.com",
+      "weixin.qq.com",
+      "*.weixin.qq.com",
+      "taobao.com",
+      "*.taobao.com",
+      "tmall.com",
+      "*.tmall.com",
+      "alicdn.com",
+      "*.alicdn.com",
+      "alipay.com",
+      "*.alipay.com",
+      "jd.com",
+      "*.jd.com",
+      "360buyimg.com",
+      "*.360buyimg.com",
+      "weibo.com",
+      "*.weibo.com",
+      "weibo.cn",
+      "*.weibo.cn",
+      "sina.com.cn",
+      "*.sina.com.cn",
+      "zhihu.com",
+      "*.zhihu.com",
+      "zhimg.com",
+      "*.zhimg.com",
+      "163.com",
+      "*.163.com",
+      "126.com",
+      "*.126.com",
+      "127.net",
+      "*.127.net",
+      "netease.com",
+      "*.netease.com",
+      "douban.com",
+      "*.douban.com",
+      "doubanio.com",
+      "*.doubanio.com",
+      "amap.com",
+      "*.amap.com",
+      "autonavi.com",
+      "*.autonavi.com",
+      "meituan.com",
+      "*.meituan.com",
+      "dianping.com",
+      "*.dianping.com",
+      "ele.me",
+      "*.ele.me",
+      "ctrip.com",
+      "*.ctrip.com",
+      "qunar.com",
+      "*.qunar.com",
+      "csdn.net",
+      "*.csdn.net",
+      "gitee.com",
+      "*.gitee.com",
+      "mi.com",
+      "*.mi.com",
+      "xiaomi.com",
+      "*.xiaomi.com",
+      "10010.com",
+      "*.10010.com",
+      "10086.cn",
+      "*.10086.cn",
+      "10086.com",
+      "*.10086.com",
+      "189.cn",
+      "*.189.cn",
+      "iqiyi.com",
+      "*.iqiyi.com",
+      "youku.com",
+      "*.youku.com",
+      "pinduoduo.com",
+      "*.pinduoduo.com",
+      "pddpic.com",
+      "*.pddpic.com",
+      "suning.com",
+      "*.suning.com",
+      "360.cn",
+      "*.360.cn",
+      "360.com",
+      "*.360.com",
+      "sogou.com",
+      "*.sogou.com",
+      "sohu.com",
+      "*.sohu.com",
+      "bcebos.com",
+      "*.bcebos.com",
+      "xiaohongshu.com",
+      "*.xiaohongshu.com",
+      "xhscdn.com",
+      "*.xhscdn.com",
+      "cn",
+      "*.cn"
+    ],
+    "fullBusinessTable": "RETAINED",
+    "fullDomesticDNS": "NATIVE_DIRECT_OR_SELECTED_PROXY_REMOTE_RESOLUTION_REQUIRES_DEVICE_ACCEPTANCE",
+    "standaloneDomesticDNSAffinity": "NOT_NATIVE_VERIFIED"
+  },
+  "groups": [
+    "高纯净度AI用",
+    "高网速视频用",
+    "自动选择",
+    "公共基础服务",
+    "漏网之鱼",
+    "国内网站",
+    "OpenAI 服务",
+    "Anthropic 服务",
+    "谷歌服务",
+    "微软生态",
+    "Steam",
+    "Epic Games",
+    "Telegram",
+    "TikTok",
+    "Twitter",
+    "Discord",
+    "OpenRouter",
+    "Perplexity",
+    "Hugging Face",
+    "xAI",
+    "Netflix",
+    "Disney+",
+    "Spotify",
+    "Meta 服务",
+    "苹果国际",
+    "哔哩国际"
+  ],
+  "sources": [
+    {
+      "id": "sr-13",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/spotify.list",
+      "file": "validation/inputs/v14.2-baseline/data/rules/reviewed/sr-13.text",
+      "sha256": "650c4841d5732fff621613a257ce831f26bdb82b47722519ef436e85e7ad5f13",
+      "classifier": {
+        "file": "validation/inputs/v14.2-baseline/data/rules/reviewed/sr-13.list",
+        "sha256": "bbdf8eb50559fc69c2654f3890182cefaae64df7215b1a7cf6ab1ac679abffe0"
+      },
+      "uses": [
+        {
+          "kind": "domain",
+          "tag": "spotify",
+          "policy": "Spotify",
+          "noResolve": false
+        }
+      ]
+    },
+    {
+      "id": "sr-14",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/telegram.list",
+      "file": "validation/inputs/v14.2-baseline/data/rules/reviewed/sr-14.text",
+      "sha256": "619df30317e41c5958311c5d4f76abe1bfa45ae4ba399129a0fec2fe4edd43d9",
+      "classifier": {
+        "file": "validation/inputs/v14.2-baseline/data/rules/reviewed/sr-14.list",
+        "sha256": "a1a39e45b89ce8da3def2ed862bdeef0fa67acb9ca50ea3cb017b9a2dd4623d8"
+      },
+      "uses": [
+        {
+          "kind": "domain",
+          "tag": "telegram",
+          "policy": "Telegram",
+          "noResolve": false
+        }
+      ]
+    },
+    {
+      "id": "sr-15",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/discord.list",
+      "file": "validation/inputs/v14.2-baseline/data/rules/reviewed/sr-15.text",
+      "sha256": "d79aac40ce905d022c13be738352ff38806af9bc3a8e49ad6848a215bc2fe9c6",
+      "classifier": {
+        "file": "validation/inputs/v14.2-baseline/data/rules/reviewed/sr-15.list",
+        "sha256": "81aafa9b79a15d98167655e7d4e51baff38525b37247fbe41b74e9be7febaf59"
+      },
+      "uses": [
+        {
+          "kind": "domain",
+          "tag": "discord",
+          "policy": "Discord",
+          "noResolve": false
+        }
+      ]
+    },
+    {
+      "id": "sr-16",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/tiktok.list",
+      "file": "validation/inputs/v14.2-baseline/data/rules/reviewed/sr-16.text",
+      "sha256": "2c0c941815c7dc696cce3fe45d33acdd416fbde419a468924cab500c9169cfc9",
+      "classifier": {
+        "file": "validation/inputs/v14.2-baseline/data/rules/reviewed/sr-16.list",
+        "sha256": "69ab6466561c7a5e231ce4c986f17d724e060f19cc888fa826bc552e7aae221c"
+      },
+      "uses": [
+        {
+          "kind": "domain",
+          "tag": "tiktok",
+          "policy": "TikTok",
+          "noResolve": false
+        }
+      ]
+    },
+    {
+      "id": "sr-17",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/twitter.list",
+      "file": "validation/inputs/v14.2-baseline/data/rules/reviewed/sr-17.text",
+      "sha256": "9e86c896de40eba53bbeeec6b8f11e6eb7ef325de69001b01399386def08ef5e",
+      "classifier": {
+        "file": "validation/inputs/v14.2-baseline/data/rules/reviewed/sr-17.list",
+        "sha256": "74f3f9f4a004ce32af096e45fdc9dcb54c781f3719d0763e2bb9778078e0256c"
+      },
+      "uses": [
+        {
+          "kind": "domain",
+          "tag": "twitter",
+          "policy": "Twitter",
+          "noResolve": false
+        }
+      ]
+    },
+    {
+      "id": "sr-18",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/meta.list",
+      "file": "validation/inputs/v14.2-baseline/data/rules/reviewed/sr-18.text",
+      "sha256": "d833c2210673a225d8245ea80063993a5c9989767ab3c520f12c76274fb92bc2",
+      "classifier": {
+        "file": "validation/inputs/v14.2-baseline/data/rules/reviewed/sr-18.list",
+        "sha256": "ea85a2d98b6df724bbb00d6fe156252b0509a465d3d53c62cb17adbad5f40fac"
+      },
+      "uses": [
+        {
+          "kind": "domain",
+          "tag": "meta",
+          "policy": "Meta 服务",
+          "noResolve": false
+        }
+      ]
+    },
+    {
+      "id": "sr-19",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/steam.list",
+      "file": "validation/inputs/v14.2-baseline/data/rules/reviewed/sr-19.text",
+      "sha256": "b5f03434912e8371c0f0f5aff1c42e179874232216409e0d47a618bb8d954e74",
+      "classifier": {
+        "file": "validation/inputs/v14.2-baseline/data/rules/reviewed/sr-19.list",
+        "sha256": "2e3117f30009c26d558fa7ae044f31f2d743e60ca67742785633fa1e0a08b5ca"
+      },
+      "uses": [
+        {
+          "kind": "domain",
+          "tag": "steam",
+          "policy": "Steam",
+          "noResolve": false
+        }
+      ]
+    },
+    {
+      "id": "sr-23",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/apple.list",
+      "file": "validation/inputs/v14.2-baseline/data/rules/reviewed/sr-23.text",
+      "sha256": "8f1b00378ff9287fcb9c276fe4acf676ff4fdc89edf31881332cd180df3cdf60",
+      "classifier": {
+        "file": "validation/inputs/v14.2-baseline/data/rules/reviewed/sr-23.list",
+        "sha256": "7c589262d627b93853efe0efeab724db35b462e4eb95026fd4c634e7043281ba"
+      },
+      "uses": [
+        {
+          "kind": "domain",
+          "tag": "apple",
+          "policy": "苹果国际",
+          "noResolve": false
+        }
+      ]
+    },
+    {
+      "id": "sr-24",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/bilibili.list",
+      "file": "validation/inputs/v14.2-baseline/data/rules/reviewed/sr-24.text",
+      "sha256": "b93ec1a29d89731cc67c3ca13dd39b79742fb0b0faaf1def097d598cafa92c78",
+      "classifier": {
+        "file": "validation/inputs/v14.2-baseline/data/rules/reviewed/sr-24.list",
+        "sha256": "dfc74e8b01ee1dee314735a49e4511f7e9a405414c51724195a20b345ed2a9db"
+      },
+      "uses": [
+        {
+          "kind": "domain",
+          "tag": "bilibili",
+          "policy": "哔哩国际",
+          "noResolve": false
+        }
+      ]
+    },
+    {
+      "id": "sr-02",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/douyin.list",
+      "file": "validation/inputs/v14.2-baseline/data/rules/reviewed/sr-02.text",
+      "sha256": "2d9de1ae9494450fa85ad6f9a38b36f84a37a571d32afca7baf86c1b1a82cdf9",
+      "classifier": {
+        "file": "validation/inputs/v14.2-baseline/data/rules/reviewed/sr-02.list",
+        "sha256": "911bb17f7fea207a800981dca7bb8dde7481684da332a36e8b9b2a55790c751b"
+      },
+      "uses": [
+        {
+          "kind": "domain",
+          "tag": "douyin",
+          "policy": "国内网站",
+          "noResolve": false
+        }
+      ]
+    },
+    {
+      "id": "sr-03",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/apple@cn.list",
+      "file": "validation/inputs/v14.2-baseline/data/rules/reviewed/sr-03.text",
+      "sha256": "a0a5e23be226334bec28887c4d6200cadd40615a254bee9469d999b1aa222e83",
+      "classifier": {
+        "file": "validation/inputs/v14.2-baseline/data/rules/reviewed/sr-03.list",
+        "sha256": "0683c809caeff184cb57371b55fcd26a5116af90fc8d3aea750c1aa629f94fe6"
+      },
+      "uses": [
+        {
+          "kind": "domain",
+          "tag": "apple@cn",
+          "policy": "国内网站",
+          "noResolve": false
+        }
+      ]
+    },
+    {
+      "id": "sr-04",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/microsoft@cn.list",
+      "file": "validation/inputs/v14.2-baseline/data/rules/reviewed/sr-04.text",
+      "sha256": "85c62f2ed6f4b5a28873e027b30e321cfa8e6e51199611089f7db272b81af9d6",
+      "classifier": {
+        "file": "validation/inputs/v14.2-baseline/data/rules/reviewed/sr-04.list",
+        "sha256": "3736b0b53a5bdf25b9ddc42d7518df59f132febb48e5461f427bfdf8980c9ee5"
+      },
+      "uses": [
+        {
+          "kind": "domain",
+          "tag": "microsoft@cn",
+          "policy": "国内网站",
+          "noResolve": false
+        }
+      ]
+    },
+    {
+      "id": "sr-05",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/steam@cn.list",
+      "file": "validation/inputs/v14.2-baseline/data/rules/reviewed/sr-05.text",
+      "sha256": "79e907235e9b2e7963fda08fddc3f0bd75b0a74763e831bb201456779b1505d5",
+      "classifier": {
+        "file": "validation/inputs/v14.2-baseline/data/rules/reviewed/sr-05.list",
+        "sha256": "4ae2540001216910ec89a3c035b209654cbacfe4bc329996a775336791655602"
+      },
+      "uses": [
+        {
+          "kind": "domain",
+          "tag": "steam@cn",
+          "policy": "国内网站",
+          "noResolve": false
+        }
+      ]
+    },
+    {
+      "id": "sr-06",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/cn.list",
+      "file": "validation/inputs/v14.2-baseline/data/rules/reviewed/sr-06.text",
+      "sha256": "1d0d38baed8eac254424a59af43df23c15c116074cc158d82400bc4d8121e852",
+      "classifier": {
+        "file": "validation/inputs/v14.2-baseline/data/rules/reviewed/sr-06.list",
+        "sha256": "76b89fece35fc3c7bcf99e2f31db42dc186a7b07f7d0184569ea363356f7514e"
+      },
+      "uses": [
+        {
+          "kind": "domain",
+          "tag": "cn",
+          "policy": "国内网站",
+          "noResolve": false
+        }
+      ]
+    },
+    {
+      "id": "sr-27",
+      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/83f37120c155f67c8eef43221dabe15cc3c95fec/rule/Shadowrocket/ChinaIPs/ChinaIPs.list",
+      "file": "validation/inputs/v14.2-baseline/data/rules/reviewed/sr-27.text",
+      "sha256": "d0448a52e17c634c5fb2801f644e606f575ff8df21c03cec1e974843ff755c36",
+      "classifier": {
+        "file": "validation/inputs/v14.2-baseline/data/rules/reviewed/sr-27.list",
+        "sha256": "85766aa75797d97df6c23807f0645ace36103ded2575e496eaf7877aed118f07"
+      },
+      "uses": [
+        {
+          "kind": "ip",
+          "tag": "cn",
+          "policy": "国内网站",
+          "noResolve": true
+        }
+      ]
+    }
+  ],
+  "sourceContract": {
+    "file": "docs/需求.md",
+    "sha256": "59d0b918703246646286d17123d6689689471163fa0bf61f088ebe2a0cb09ee6"
+  },
+  "inputs": [
+    {
+      "file": "tools/build-shadowrocket-lean.cjs",
+      "sha256": "15b7625f84a9b5f942f08e9e1731cf3cd2eb764600a8261c30a45d5d40790ebb"
+    },
+    {
+      "file": "src/android/v14.3-android.js",
+      "sha256": "2128a1019d0c6f719a9e9533a8bc6b1e61bb47277e96190c8fc22218a52d4f3f"
+    },
+    {
+      "file": "data/rules/embedded-policy.json",
+      "sha256": "059d71af3ec13dd1de8ac2e8303e4045f589f9257f210d08f519a033a8795a75"
+    },
+    {
+      "file": "validation/inputs/v14.2-baseline/manifest.json",
+      "sha256": "e11723e746a3cb12d663c05240b677db0230bbe2d6fbec951fc338567b349459"
+    },
+    {
+      "file": "validation/inputs/v14.2-baseline/metadata/shadowrocket-sources.json",
+      "sha256": "5028fe77adef7f32e3732792fb6371b6bbe6d5c8fb48aa32024945cd42ad9728"
+    },
+    {
+      "file": "validation/inputs/v14.2-baseline/data/rule-sources.lock.json",
+      "sha256": "50dcaa46d1b16123858f54ccfa1e7504a7d936522c895937be398c26ab5aebad"
+    }
+  ],
+  "clientDeployment": false,
+  "nativeCompilation": "NOT_RUN",
+  "nativeDNSAffinity": "NOT_RUN",
+  "deviceAcceptance": "NOT_RUN"
+}

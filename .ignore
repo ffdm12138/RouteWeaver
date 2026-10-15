@@ -1,0 +1,6 @@
+# 当前资料默认搜索范围；查历史时显式指定 archive 并使用 --no-ignore。
+/archive/
+/.work/
+/dist/
+/releases/*/.work/
+/releases/*/validation/experiments/

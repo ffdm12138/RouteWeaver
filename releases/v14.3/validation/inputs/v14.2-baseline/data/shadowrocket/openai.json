@@ -1,0 +1,37 @@
+{
+  "date": "2026-10-06",
+  "verifiedDate": "2026-10-10",
+  "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/openai.list",
+  "sourceFile": "data/shadowrocket/openai-classical.list",
+  "sourceSHA256": "5aa9a38539026b693135c769f6db10962345ac46860977cb168a52c9d5bfbf6d",
+  "verification": "Frozen 2026-10-06 snapshot membership matches the 2026-10-10 web-rendered upstream openai.yaml/list; current raw download failed TLS. Hash binds the packaged snapshot, not today's remote bytes.",
+  "rules": [
+    "DOMAIN,openaiapi-site.azureedge.net",
+    "DOMAIN,openaiassets.blob.core.windows.net",
+    "DOMAIN,openaicom-api-bdcpf8c6d2e9atf6.z01.azurefd.net",
+    "DOMAIN,openaicom.imgix.net",
+    "DOMAIN,openaicomproductionae4b.blob.core.windows.net",
+    "DOMAIN,production-openaicom-storage.azureedge.net",
+    "DOMAIN-SUFFIX,oaiusercontent.com",
+    "DOMAIN-SUFFIX,chatgpt.com",
+    "DOMAIN-SUFFIX,chatgpt.site",
+    "DOMAIN-SUFFIX,crixet.com",
+    "DOMAIN-SUFFIX,oaistatic.com",
+    "DOMAIN-SUFFIX,oaistatsig.com",
+    "DOMAIN-SUFFIX,chat.com",
+    "DOMAIN-SUFFIX,openai.com",
+    "DOMAIN-SUFFIX,sora.com",
+    "DOMAIN-SUFFIX,chatgpt.livekit.cloud",
+    "DOMAIN-SUFFIX,host.livekit.cloud",
+    "DOMAIN-SUFFIX,turn.livekit.cloud",
+    "DOMAIN-SUFFIX,openai.com.cdn.cloudflare.net",
+    "DOMAIN,browser-intake-datadoghq.com",
+    "DOMAIN,o33249.ingest.sentry.io",
+    "DOMAIN,openai.qualtrics.com"
+  ],
+  "wildcard": {
+    "source": "DOMAIN-REGEX,^chatgpt-async-webps-prod-\\S+-\\d+\\.webpubsub\\.azure\\.com$",
+    "rule": "DOMAIN-WILDCARD,chatgpt-async-webps-prod-*-*.webpubsub.azure.com",
+    "limitation": "Anchored service prefix and Azure suffix; unlike the Mihomo regex, wildcard matching does not enforce a numeric final segment. Native iOS compilation and live endpoint tests remain pending."
+  }
+}

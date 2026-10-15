@@ -1,0 +1,76 @@
+{
+  "version": "14.3",
+  "date": "2026-10-14",
+  "revision": "macos-r1",
+  "domesticProtocolRevision": "domestic-protocol-r1",
+  "status": "MACOS_GENERATED_DEVICE_PENDING",
+  "entries": [
+    {
+      "client": "FlClash",
+      "file": "src/macos/v14.3-macos-flclash.js",
+      "sha256": "33228beb8181846059a1764da338c3ab1daadfec1c48a47faccf95bf002b165a",
+      "bytes": 117852,
+      "generatedConfigBytes": 176424,
+      "inlineRows": 819,
+      "remoteSources": 30
+    },
+    {
+      "client": "Clash Mi",
+      "file": "src/macos/v14.3-macos-clashmi.js",
+      "sha256": "5cb0eaad24cf2d5e567aa91924a7736d6ee4a4a2c716fcee980b37efbb7f21bf",
+      "bytes": 118839,
+      "generatedConfigBytes": 177037,
+      "inlineRows": 819,
+      "remoteSources": 29
+    }
+  ],
+  "scope": "FlClash Darwin utun adapter and Clash Mi Apple NetworkExtension adapter; business rules, DNS, UDP, selectors and pinned sources inherited unchanged",
+  "inputs": [
+    {
+      "file": "tools/build-macos.cjs",
+      "sha256": "559ed90a24282f0891ee8cde5c8062aa8ec757a15e3efc6deaa2f3646e7214db"
+    },
+    {
+      "file": "tools/macos-flclash-adapter.js",
+      "sha256": "15862ccc2eb0f24ff4ac0337f2ac96e8353b33fc4e0afa3b4ac528d3abce583d"
+    },
+    {
+      "file": "metadata/balanced-sources.json",
+      "sha256": "af5700a2b39d1013ec0086e41965a8d7a6455a1490fe378adb48002e5f5ec74b"
+    },
+    {
+      "file": "metadata/clashmi-compatibility.json",
+      "sha256": "c13d5678ef753003262e3a23fc06a024fb60acfb433bb47b4a1fc6d0ef0f1a05"
+    },
+    {
+      "file": "src/windows/v14.3.js",
+      "sha256": "7498c2044cbec1223a04be81b39d4a224f0e6c01249b19abfa81cb11786f28ea"
+    },
+    {
+      "file": "src/ios/v14.3-clashmi.js",
+      "sha256": "80e4168bfeba2ab7e9c278811abb7263761ba04c33a1d1f243d72211b8d84f3c"
+    }
+  ],
+  "officialReferences": [
+    {
+      "url": "https://raw.githubusercontent.com/MetaCubeX/mihomo/v1.19.31/listener/sing_tun/server.go",
+      "finding": "CalculateInterfaceName selects a free utun index on Darwin; file-descriptor path gets the actual native tunnel name"
+    },
+    {
+      "url": "https://github.com/KaringX/clashmi/blob/f897cbddffb59a4d7f4b667c3659e5d77a15fea7/lib/app/local_services/vpn_service.dart",
+      "finding": "macOS uses Apple VPN service and application-level include_all_networks/enforce_routes settings"
+    },
+    {
+      "url": "https://github.com/KaringX/clashmi/blob/f897cbddffb59a4d7f4b667c3659e5d77a15fea7/lib/app/modules/clash_setting_manager.dart",
+      "finding": "Apple platforms use gvisor/mips; final TUN patch comes from application settings"
+    },
+    {
+      "url": "https://wiki.metacubex.one/config/inbound/tun/",
+      "finding": "macOS needs utun; LAN DNS hijacking and physical-device capture need separate verification"
+    }
+  ],
+  "clientDeployment": false,
+  "flclashMacApp": "NOT_RUN",
+  "clashmiMacApp": "NOT_RUN",
+  "deviceAcceptance": "NOT_RUN"
+}

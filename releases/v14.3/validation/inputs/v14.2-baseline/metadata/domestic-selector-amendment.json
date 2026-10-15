@@ -1,0 +1,19 @@
+{
+  "version": "14.2",
+  "date": "2026-10-10",
+  "featureRevision": "domestic-selector-r1",
+  "authorization": "再做一个国内分组，里面打包所有国内网站，我偶尔需要切一下这个，实现全局代理的效果，这一条也写入需求文档",
+  "baselineContractSHA256": "4a727ec5ea637d0fb7c0f62b5addaf439b90c0821410bfcd8300d6b43bc1b684",
+  "currentContractSHA256": "5f0086ba18755d8c10c96e2b255e3d7e456afdf4f9c0e6e7f36b7926110859f0",
+  "preservedRequirements": "1-10 exact numbered lines",
+  "addedRequirement": 11,
+  "defaultPolicy": "DIRECT",
+  "group": "国内网站",
+  "scope": "Reviewed CN geographic TCP entries; company/shared/LAN/manual exceptions precede; unknown public UDP/DNS remain proxy fallback",
+  "geographicEntrypoints": {
+    "mihomo": 23,
+    "shadowrocket": 22
+  },
+  "remoteSourceChanges": 0,
+  "clientDeployment": false
+}

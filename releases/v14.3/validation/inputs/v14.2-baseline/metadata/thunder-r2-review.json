@@ -1,0 +1,146 @@
+{
+  "version": "14.2",
+  "date": "2026-10-10",
+  "revision": "thunder-repair-r2",
+  "priorRevision": "thunder-repair-r1",
+  "status": "REPAIRED_LOCAL_CORE_VERIFIED_IOS_DEVICE_PENDING",
+  "authorization": "User requested a thunder audit and repair of three independent Windows, Android and iOS profiles on 2026-10-10",
+  "contract": {
+    "file": "docs/需求.md",
+    "sha256": "5f0086ba18755d8c10c96e2b255e3d7e456afdf4f9c0e6e7f36b7926110859f0",
+    "amended": false
+  },
+  "remoteSourceChanges": 0,
+  "beforeManifest": {
+    "file": "validation/inputs/thunder-r2-before/manifest.json",
+    "sha256": "463dd7b0dd4c8aaabafea5b9b71d8bacf414338951c180a0afedad9eb18241b7"
+  },
+  "r1Metadata": {
+    "file": "metadata/thunder-repair-review.json",
+    "sha256": "c231ab5c90ca8e5d293da45c54306dbadd1cb51850f0398858e210a2745cc976"
+  },
+  "lockedSources": {
+    "file": "data/rule-sources.lock.json",
+    "sha256": "f2a025cd566c0ace7371ba004bb90c7cfc23747493ee541b083c4e5a6e64ddca",
+    "count": 45
+  },
+  "entries": [
+    {
+      "file": "src/windows/v14.2.js",
+      "sha256": "b5f3a083121193c1426c80e14e1115528d49d13750367f5c21aa0d63f46e875b"
+    },
+    {
+      "file": "src/android/v14.2-android.js",
+      "sha256": "b5e85f3fe84c663c5a7a801eecb8a44a6084f679db47e8e3e5e015fa86f252cb"
+    },
+    {
+      "file": "src/ios/v14.2-shadowrocket.conf",
+      "sha256": "2e0efa867690229cafdd014ce0b97fbe42637aabb70167dcdb1925f01c493f69"
+    },
+    {
+      "file": "tools/generate-v14.2-shadowrocket.js",
+      "sha256": "8576a158cd6b7ac38480438074928533e56d173c391176ae997411ee32036d8d"
+    },
+    {
+      "file": "metadata/shadowrocket-sources.json",
+      "sha256": "da38678bec61733e7be496b5314addb2d0ad064b6f8a77c523b102f43c9742ab"
+    },
+    {
+      "file": "tests/thunder-r2.cjs",
+      "sha256": "1c91fb001f0af420bffda62df6bb144a3cae3449923bc8e46274890888d2ea7d"
+    },
+    {
+      "file": "tests/cases.cjs",
+      "sha256": "4d7d99daea73af555db6fef058030bd1c9c3277e900f9bc7cfa26fec098e0046"
+    }
+  ],
+  "testEvidence": {
+    "static": {
+      "file": "validation/static.json",
+      "status": "STATIC_PASS",
+      "sha256": "ae4926c1d86b1887c3e0277d07bc978841ab39253b8ec51e97a54854c085ec0f"
+    },
+    "thunder-r2": {
+      "file": "validation/thunder-r2.json",
+      "status": "THUNDER_R2_STATIC_PASS",
+      "sha256": "388f1a03138f7a3c931ea7bb514d43fd1e5fd70b55f0066acec5f4fd5118c436"
+    },
+    "thunder-domain-coverage": {
+      "file": "validation/thunder-domain-coverage.json",
+      "status": "THUNDER_DOMAIN_COVERAGE_PASS",
+      "sha256": "e2d1f6056d1645a6bfc16031f11e33d687f16a01c7fbd6d391173b849d3977be"
+    },
+    "native-routing": {
+      "file": "validation/native-routing.json",
+      "status": "CORE_ROUTING_PASS",
+      "sha256": "e9bcb421c8d1dd5e39dc40c2db3c14a9839b89bc4529cc7e51609c57589f11b5"
+    },
+    "native-dns-egress": {
+      "file": "validation/native-dns-egress.json",
+      "status": "CORE_DNS_EGRESS_PASS",
+      "sha256": "9eeb91a084f5e7f9a9af4157ba19415f66c5fc11bd4ca05f0cbd17c4751a0fe5"
+    },
+    "native-selectors": {
+      "file": "validation/native-selectors.json",
+      "status": "CORE_MANUAL_SELECTORS_PASS",
+      "sha256": "6019c73f95e712563fdcd5abf572f19f181ff826fed476cba06cd43d226de735"
+    }
+  },
+  "findings": [
+    {
+      "id": "R2-01",
+      "severity": "MAJOR",
+      "description": "Legacy GEOSITE migration could download an unreviewed mutable branch",
+      "resolution": "Fail closed when no exact reviewed commit/path binding exists; distinguish recognition from source generation",
+      "acceptance": "STATIC_MUTATION_REPLAY_PASS"
+    },
+    {
+      "id": "R2-02",
+      "severity": "MAJOR",
+      "description": "Native mixed streaming media, ASN and keyword lists could steal unrelated company traffic and produce cross-group DNS",
+      "resolution": "Pin and embed reviewed Netflix/Disney/Epic Games DOMAIN/DOMAIN-SUFFIX plus separate no-resolve Mihomo-reviewed IP prefixes; suppress broad native keyword, ASN and User-Agent matching",
+      "acceptance": "CROSS_PLATFORM_STATIC_PASS_IOS_NATIVE_NOT_RUN"
+    },
+    {
+      "id": "R2-03",
+      "severity": "MAJOR",
+      "description": "Absent HTTP proxy provider bootstrap policy silently became DIRECT",
+      "resolution": "Set REJECT by default; preserve explicitly specified DIRECT or fixed usable node, retaining fail-closed semantics",
+      "acceptance": "STATIC_BOOTSTRAP_REPLAY_PASS"
+    },
+    {
+      "id": "R2-04",
+      "severity": "MAJOR",
+      "description": "Exact known external DoH hosts could reach Android/iOS domestic DIRECT",
+      "resolution": "Add ten reviewed exact resolver destinations to Android guard and generated iOS configuration; keep Windows preexisting block",
+      "acceptance": "THREE_PLATFORM_STATIC_AND_WINDOWS_ANDROID_CORE_ROUTING_PASS"
+    },
+    {
+      "id": "R2-05",
+      "severity": "MINOR",
+      "description": "Loopback core tests over-trusted asynchronous reject log lines and one-shot idempotent controller requests",
+      "resolution": "Judge REJECT by zero outbound relay connections and datagrams; retry only transient local API resets for idempotent GET, PUT and DELETE, without suppressing failed core results",
+      "acceptance": "TWO_CONSECUTIVE_FULL_NATIVE_ROUTING_REPLAYS_PASS"
+    }
+  ],
+  "metrics": {
+    "staticChecks": 2293,
+    "r2IndependentChecks": 109,
+    "r2PreviousCounterexamples": 25,
+    "localCoreRoutingCases": 1514,
+    "localCoreDNSCases": 658,
+    "localCoreSelectorObservations": 224,
+    "finiteDomainSample": 10325,
+    "crossPlatformClassifierDifferences": 136
+  },
+  "knownLimits": [
+    "Shadowrocket native parse/DNS proxy selectors/VPN/UDP unsupported and cache behavior NOT_RUN",
+    "Windows TUN/FlClash IPv6 public-network, Android VpnService and external packet capture NOT_RUN",
+    "A bounded set of 10 DoH destinations cannot stop arbitrary user-defined application DoH",
+    "Reviewed regex rules not expressible as safe bounded DOMAIN/DOMAIN-SUFFIX in native iOS are not projected; fall back to protected proxy",
+    "First full native-routing attempt saw intermittent REJECT log assertion failure, and later a connection reset; subsequent full reruns passed; flakiness needs device/core confirmation",
+    "All domain apex/subhost evidence is a finite set, not a proof of every keyword, regex, CNAME or dynamic tenant",
+    "Proxy provider bootstrap now refuses unauthenticated first downloads without an explicit outbound selection"
+  ],
+  "clientDeployment": false
+}

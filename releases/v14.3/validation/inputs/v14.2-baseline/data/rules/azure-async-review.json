@@ -1,0 +1,41 @@
+{
+  "version": "14.2",
+  "revision": "thunder-repair-r4",
+  "status": "REVIEWED_EXACT_POLICY_SUBSET",
+  "policy": "OpenAI 服务",
+  "fallbackPolicy": "公共基础服务",
+  "scope": "Finite exact exception subset of the previously reviewed OpenAI regex, shared by all platforms. No inference for other numbers, regions or descendants; current endpoint liveness and native iOS NOT_RUN.",
+  "legacyClassifier": {
+    "file": "data/rules/company-inputs/openai.list",
+    "sha256": "5aa9a38539026b693135c769f6db10962345ac46860977cb168a52c9d5bfbf6d",
+    "row": "DOMAIN-REGEX,^chatgpt-async-webps-prod-\\S+-\\d+\\.webpubsub\\.azure\\.com$"
+  },
+  "hosts": [
+    "chatgpt-async-webps-prod-eastus-1.webpubsub.azure.com",
+    "chatgpt-async-webps-prod-eastus-17.webpubsub.azure.com",
+    "chatgpt-async-webps-prod-eastus-23.webpubsub.azure.com"
+  ],
+  "evidence": [
+    {
+      "host": "chatgpt-async-webps-prod-eastus-1.webpubsub.azure.com",
+      "basis": "Previously reviewed routing target and the one recorded R3 platform discrepancy. Membership derives from the frozen classifier; this was a synthetic routing/DNS target, not a live ownership or connectivity observation."
+    },
+    {
+      "host": "chatgpt-async-webps-prod-eastus-17.webpubsub.azure.com",
+      "basis": "Reviewed subset of the frozen classifier with a historical first-hand streaming incident; current liveness unverified.",
+      "url": "https://community.openai.com/t/chatgpt-not-streaming-results/612095/5",
+      "observedDate": "2024-02-04"
+    },
+    {
+      "host": "chatgpt-async-webps-prod-eastus-23.webpubsub.azure.com",
+      "basis": "Reviewed subset of the frozen classifier with a historical first-hand streaming incident in the affected blocker project; current liveness unverified.",
+      "url": "https://github.com/EFForg/privacybadger/issues/2949",
+      "observedDate": "2024-02-02"
+    }
+  ],
+  "reviewDecision": "Narrow the old unbounded name heuristic to explicitly reviewed exact exceptions. Both routing and DNS read the same company/service tables; no unsafe native regex/glob approximation, no remote-source promotion, no DIRECT addition.",
+  "nativeSyntaxEvidence": "https://apps.apple.com/us/app/shadowrocket/id932747118",
+  "sharedNamespaceEvidence": "https://learn.microsoft.com/en-us/azure/azure-web-pubsub/howto-custom-domain",
+  "remoteSourceChanges": 0,
+  "clientDeployment": false
+}

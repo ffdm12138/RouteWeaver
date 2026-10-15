@@ -1,0 +1,69 @@
+{
+  "version": "14.2",
+  "date": "2026-10-12",
+  "revision": "clashmi-object-r2",
+  "classificationRevision": "embedded-domain-r1",
+  "platform": "clashmi-ios",
+  "status": "SOURCE_GENERATED_NATIVE_DEVICE_PENDING",
+  "base": {
+    "file": "src/android/v14.2-android.js",
+    "sha256": "7d6a3cbcc30a7b29dfa021e2162cd47b98647c1fdae823f3b47ff62a97638e64"
+  },
+  "adapter": {
+    "file": "tools/clashmi-adapter.js",
+    "sha256": "22fa1a686fc55e831cfb3225eb88e7265df05bbb8ea6a8399f04b9df66b9d268"
+  },
+  "generator": {
+    "file": "tools/generate-v14.2-clashmi.cjs",
+    "sha256": "2fd7951ca4b45a0b45a2c6e31a8d82b3367c51ee9089c0ad19a911e2cf282886"
+  },
+  "output": {
+    "file": "src/ios/v14.2-clashmi.js",
+    "sha256": "7584f5a4bb6eb10613e9e0c538195d35c2cb77ea5ef2e15b2fe534b89b2535af",
+    "bytes": 2036035
+  },
+  "versionedOutput": {
+    "file": "src/ios/v14.2-clashmi-object-r2.js",
+    "sha256": "7584f5a4bb6eb10613e9e0c538195d35c2cb77ea5ef2e15b2fe534b89b2535af",
+    "bytes": 2036035
+  },
+  "compatibility": {
+    "file": "metadata/clashmi-compatibility.json",
+    "sha256": "c13d5678ef753003262e3a23fc06a024fb60acfb433bb47b4a1fc6d0ef0f1a05"
+  },
+  "sources": [
+    {
+      "file": "data/rule-sources.lock.json",
+      "sha256": "50dcaa46d1b16123858f54ccfa1e7504a7d936522c895937be398c26ab5aebad"
+    },
+    {
+      "file": "data/rules/embedded-domains.json",
+      "sha256": "f1a7d8337ee73635febbde1b8f81b9701fef859b0779286b07f4645be29a6317"
+    },
+    {
+      "file": "data/rules/company-core.json",
+      "sha256": "83e390ff6ebc9f8eff47a7b62583978163a61513f979113d70cf0e1bd508c80b"
+    },
+    {
+      "file": "data/rules/business-services.json",
+      "sha256": "6fddabd1e91a404bc7362b776ed72c943d6bf6a09d0f7367a8541820055ddd2f"
+    },
+    {
+      "file": "data/rules/domestic-direct.json",
+      "sha256": "47d44654b24b595fe4930e40c94e494a9f812b19811c6e8ab7504357c823b435"
+    },
+    {
+      "file": "data/rules/safety-classifiers.json",
+      "sha256": "de175c19f2cef8d01752026498a5d447eee36d148c6c65a80626aca528843093"
+    }
+  ],
+  "embeddedDomesticSuffixes": 111595,
+  "embeddedDomainRows": 115438,
+  "lockedRemoteSources": 45,
+  "runtimeManagedRemoteSources": 23,
+  "bridge": "main(object) -> config object; JSON/YAML serialization by the client bridge",
+  "deviceAcceptance": "NOT_RUN",
+  "appJavaScriptCore": "NOT_RUN",
+  "memoryAcceptance": "NOT_RUN",
+  "clientDeployment": false
+}

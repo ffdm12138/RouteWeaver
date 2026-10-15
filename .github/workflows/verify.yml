@@ -1,0 +1,41 @@
+name: Verify public source
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '24.19.0'
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: '3.12.12'
+      - name: Audit indexed files
+        run: python tools/audit-publication.py --strict
+      - name: Check publication scanner
+        run: python -m unittest discover -s tools/tests -p "test_*.py"
+      - name: Verify source and bound receipts
+        run: python tools/verify-v14.3.py --skip-history
+      - name: Build licensed packages and replay extracted static tests
+        run: python tools/package-v14.3.py --skip-history
+      - name: Verify packages and scan all members
+        run: |
+          python tools/verify-v14.3.py --skip-history --with-packages
+          python tools/audit-publication.py --strict --archive dist/v14.3/v14.3-deployable.zip --archive dist/v14.3/v14.3-audit-evidence.zip --archive dist/v14.3/v14.3-macos.zip
+      - name: Ensure tracked inputs were not rewritten
+        run: git diff --exit-code

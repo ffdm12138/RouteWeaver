@@ -1,0 +1,487 @@
+{
+  "version": "14.2",
+  "date": "2026-10-11",
+  "revision": "apple-inline-r1",
+  "priorRevision": "thunder-closeout-r6",
+  "status": "APPLE_INLINE_SOURCE_LOCAL_CORE_PASS_DEVICE_PENDING",
+  "authorization": "User: 好的兄弟，修复！; embedded Apple repair and local validation; active client replacement not performed",
+  "contract": {
+    "file": "docs/需求.md",
+    "sha256": "5f0086ba18755d8c10c96e2b255e3d7e456afdf4f9c0e6e7f36b7926110859f0"
+  },
+  "priorMetadata": {
+    "file": "metadata/thunder-closeout-review.json",
+    "sha256": "46e31106baad198b52fc34a0d2e7c4d5c53e95501995f08137b474d4927cf61a"
+  },
+  "beforeManifest": {
+    "file": "validation/inputs/apple-inline-before/manifest.json",
+    "sha256": "cd61f2e772e438a09c02bc6a131775be668b591a27d2c3b483ce115024dcafc8"
+  },
+  "preservedArchive": {
+    "directory": "archive/v14.2-before-apple-inline-r1-20261011",
+    "manifestSHA256": "e23542936bdc6fa5c9498f1298b1455834138a953c60e5a14ec15610e55f471c",
+    "files": 515
+  },
+  "lockedSources": {
+    "file": "data/rule-sources.lock.json",
+    "sha256": "f2a025cd566c0ace7371ba004bb90c7cfc23747493ee541b083c4e5a6e64ddca",
+    "count": 45
+  },
+  "remoteSourceChanges": 0,
+  "entries": [
+    {
+      "file": "src/windows/v14.2.js",
+      "sha256": "6ff01e87c2ef69681097dedd20b5b320537b5cdb22a707dd2e862b78cb0cce21"
+    },
+    {
+      "file": "src/android/v14.2-android.js",
+      "sha256": "94ec263c594cb2620a0c8102809ef9d5c9026dc233a1418a01936d6f1754b783"
+    },
+    {
+      "file": "src/ios/v14.2-shadowrocket.conf",
+      "sha256": "be2c986b8cd89a90edaaa6c212169083f1b06aafa44a9866fc9d57f03723b5f2"
+    },
+    {
+      "file": "data/rules/business-services.json",
+      "sha256": "6fddabd1e91a404bc7362b776ed72c943d6bf6a09d0f7367a8541820055ddd2f"
+    },
+    {
+      "file": "tools/generate-v14.2-shadowrocket.js",
+      "sha256": "cfc9d4bc5bb4aee01ee35105a48df6c3f482fc23b786ab29a1c51d350cf1a015"
+    },
+    {
+      "file": "metadata/shadowrocket-sources.json",
+      "sha256": "ddc96a8482c1af81655ad49792613d3d9e8a7ce938833e30877df4601573d470"
+    }
+  ],
+  "reviewedOrigin": {
+    "file": "data/rules/reviewed/v12r-domain-apple.list",
+    "sha256": "7c589262d627b93853efe0efeab724db35b462e4eb95026fd4c634e7043281ba",
+    "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/dad29637471fad8f29e85fdcee6a67d08ee5a779/geo/geosite/classical/apple.yaml",
+    "promotedSuffixes": [
+      "apple.com.cn",
+      "aaplimg.com"
+    ]
+  },
+  "runtimeDelta": {
+    "embeddedSuffixes": [
+      "apple.com.cn",
+      "aaplimg.com"
+    ],
+    "mihomo": "Two suffix routes with adjacent REJECT and two literal nameserver policies",
+    "shadowrocket": "Two embedded suffix routes; existing apex/wildcard DNS entries promoted ahead of remote projections; native semantics NOT_RUN",
+    "otherOutput": "Complete output equality after removing only the reviewed delta and revision marker",
+    "DNSUpstreamsChanged": false,
+    "IPv6Changed": false,
+    "fakeIPChanged": false,
+    "providerDownloadProxyChanged": false
+  },
+  "findings": [
+    {
+      "id": "APPLE-INLINE-01",
+      "domain": "apple.com.cn",
+      "problem": "With valid empty Apple classifier, Windows/Android TCP reached domestic default DIRECT while DNS used fallback",
+      "resolutionStatus": "REPAIRED_VERIFIED"
+    },
+    {
+      "id": "APPLE-INLINE-02",
+      "domain": "aaplimg.com",
+      "problem": "With valid empty Apple classifier, apex/static child TCP reached domestic default DIRECT while DNS used fallback",
+      "resolutionStatus": "REPAIRED_VERIFIED"
+    }
+  ],
+  "requirements": [
+    {
+      "id": 1,
+      "sourceContract": "PASS",
+      "currentReceipts": [
+        {
+          "file": "validation/static.json",
+          "sha256": "221996b9ac97f0ba7b10df3809aaea99f2f080282498ec5e4f45867f8d7e7907",
+          "status": "STATIC_PASS"
+        },
+        {
+          "file": "validation/thunder-r4.json",
+          "sha256": "287c943a535908c01b4dab820074590b65566d3decb6e61fca04e8279d2d42f8",
+          "status": "THUNDER_R4_ELEVEN_CONTRACTS_STATIC_PASS"
+        },
+        {
+          "file": "validation/thunder-r5.json",
+          "sha256": "8b72f8b660216bb9fafd9cc97ae761ab3a312b2edc55d192c09863f724a45901",
+          "status": "THUNDER_R5_ELEVEN_CONTRACTS_STATIC_PASS"
+        }
+      ],
+      "device": "NOT_RUN"
+    },
+    {
+      "id": 2,
+      "sourceContract": "PASS",
+      "currentReceipts": [
+        {
+          "file": "validation/static.json",
+          "sha256": "221996b9ac97f0ba7b10df3809aaea99f2f080282498ec5e4f45867f8d7e7907",
+          "status": "STATIC_PASS"
+        },
+        {
+          "file": "validation/thunder-r4.json",
+          "sha256": "287c943a535908c01b4dab820074590b65566d3decb6e61fca04e8279d2d42f8",
+          "status": "THUNDER_R4_ELEVEN_CONTRACTS_STATIC_PASS"
+        },
+        {
+          "file": "validation/thunder-r5.json",
+          "sha256": "8b72f8b660216bb9fafd9cc97ae761ab3a312b2edc55d192c09863f724a45901",
+          "status": "THUNDER_R5_ELEVEN_CONTRACTS_STATIC_PASS"
+        }
+      ],
+      "device": "NOT_RUN"
+    },
+    {
+      "id": 3,
+      "sourceContract": "PASS",
+      "currentReceipts": [
+        {
+          "file": "validation/static.json",
+          "sha256": "221996b9ac97f0ba7b10df3809aaea99f2f080282498ec5e4f45867f8d7e7907",
+          "status": "STATIC_PASS"
+        },
+        {
+          "file": "validation/thunder-r4.json",
+          "sha256": "287c943a535908c01b4dab820074590b65566d3decb6e61fca04e8279d2d42f8",
+          "status": "THUNDER_R4_ELEVEN_CONTRACTS_STATIC_PASS"
+        },
+        {
+          "file": "validation/thunder-r5.json",
+          "sha256": "8b72f8b660216bb9fafd9cc97ae761ab3a312b2edc55d192c09863f724a45901",
+          "status": "THUNDER_R5_ELEVEN_CONTRACTS_STATIC_PASS"
+        }
+      ],
+      "device": "NOT_RUN"
+    },
+    {
+      "id": 4,
+      "sourceContract": "PASS",
+      "currentReceipts": [
+        {
+          "file": "validation/static.json",
+          "sha256": "221996b9ac97f0ba7b10df3809aaea99f2f080282498ec5e4f45867f8d7e7907",
+          "status": "STATIC_PASS"
+        },
+        {
+          "file": "validation/thunder-r4.json",
+          "sha256": "287c943a535908c01b4dab820074590b65566d3decb6e61fca04e8279d2d42f8",
+          "status": "THUNDER_R4_ELEVEN_CONTRACTS_STATIC_PASS"
+        },
+        {
+          "file": "validation/thunder-r5.json",
+          "sha256": "8b72f8b660216bb9fafd9cc97ae761ab3a312b2edc55d192c09863f724a45901",
+          "status": "THUNDER_R5_ELEVEN_CONTRACTS_STATIC_PASS"
+        }
+      ],
+      "device": "NOT_RUN"
+    },
+    {
+      "id": 5,
+      "sourceContract": "PASS",
+      "currentReceipts": [
+        {
+          "file": "validation/static.json",
+          "sha256": "221996b9ac97f0ba7b10df3809aaea99f2f080282498ec5e4f45867f8d7e7907",
+          "status": "STATIC_PASS"
+        },
+        {
+          "file": "validation/thunder-r4.json",
+          "sha256": "287c943a535908c01b4dab820074590b65566d3decb6e61fca04e8279d2d42f8",
+          "status": "THUNDER_R4_ELEVEN_CONTRACTS_STATIC_PASS"
+        },
+        {
+          "file": "validation/thunder-r5.json",
+          "sha256": "8b72f8b660216bb9fafd9cc97ae761ab3a312b2edc55d192c09863f724a45901",
+          "status": "THUNDER_R5_ELEVEN_CONTRACTS_STATIC_PASS"
+        }
+      ],
+      "device": "NOT_RUN"
+    },
+    {
+      "id": 6,
+      "sourceContract": "PASS",
+      "currentReceipts": [
+        {
+          "file": "validation/static.json",
+          "sha256": "221996b9ac97f0ba7b10df3809aaea99f2f080282498ec5e4f45867f8d7e7907",
+          "status": "STATIC_PASS"
+        },
+        {
+          "file": "validation/thunder-r4.json",
+          "sha256": "287c943a535908c01b4dab820074590b65566d3decb6e61fca04e8279d2d42f8",
+          "status": "THUNDER_R4_ELEVEN_CONTRACTS_STATIC_PASS"
+        },
+        {
+          "file": "validation/thunder-r5.json",
+          "sha256": "8b72f8b660216bb9fafd9cc97ae761ab3a312b2edc55d192c09863f724a45901",
+          "status": "THUNDER_R5_ELEVEN_CONTRACTS_STATIC_PASS"
+        }
+      ],
+      "device": "NOT_RUN"
+    },
+    {
+      "id": 7,
+      "sourceContract": "PASS",
+      "currentReceipts": [
+        {
+          "file": "validation/static.json",
+          "sha256": "221996b9ac97f0ba7b10df3809aaea99f2f080282498ec5e4f45867f8d7e7907",
+          "status": "STATIC_PASS"
+        },
+        {
+          "file": "validation/thunder-r4.json",
+          "sha256": "287c943a535908c01b4dab820074590b65566d3decb6e61fca04e8279d2d42f8",
+          "status": "THUNDER_R4_ELEVEN_CONTRACTS_STATIC_PASS"
+        },
+        {
+          "file": "validation/thunder-r5.json",
+          "sha256": "8b72f8b660216bb9fafd9cc97ae761ab3a312b2edc55d192c09863f724a45901",
+          "status": "THUNDER_R5_ELEVEN_CONTRACTS_STATIC_PASS"
+        }
+      ],
+      "device": "NOT_RUN"
+    },
+    {
+      "id": 8,
+      "sourceContract": "PASS",
+      "currentReceipts": [
+        {
+          "file": "validation/static.json",
+          "sha256": "221996b9ac97f0ba7b10df3809aaea99f2f080282498ec5e4f45867f8d7e7907",
+          "status": "STATIC_PASS"
+        },
+        {
+          "file": "validation/thunder-r4.json",
+          "sha256": "287c943a535908c01b4dab820074590b65566d3decb6e61fca04e8279d2d42f8",
+          "status": "THUNDER_R4_ELEVEN_CONTRACTS_STATIC_PASS"
+        },
+        {
+          "file": "validation/thunder-r5.json",
+          "sha256": "8b72f8b660216bb9fafd9cc97ae761ab3a312b2edc55d192c09863f724a45901",
+          "status": "THUNDER_R5_ELEVEN_CONTRACTS_STATIC_PASS"
+        }
+      ],
+      "device": "NOT_RUN"
+    },
+    {
+      "id": 9,
+      "sourceContract": "PASS",
+      "currentReceipts": [
+        {
+          "file": "validation/static.json",
+          "sha256": "221996b9ac97f0ba7b10df3809aaea99f2f080282498ec5e4f45867f8d7e7907",
+          "status": "STATIC_PASS"
+        },
+        {
+          "file": "validation/thunder-r4.json",
+          "sha256": "287c943a535908c01b4dab820074590b65566d3decb6e61fca04e8279d2d42f8",
+          "status": "THUNDER_R4_ELEVEN_CONTRACTS_STATIC_PASS"
+        },
+        {
+          "file": "validation/thunder-r5.json",
+          "sha256": "8b72f8b660216bb9fafd9cc97ae761ab3a312b2edc55d192c09863f724a45901",
+          "status": "THUNDER_R5_ELEVEN_CONTRACTS_STATIC_PASS"
+        }
+      ],
+      "device": "NOT_RUN"
+    },
+    {
+      "id": 10,
+      "sourceContract": "PASS",
+      "currentReceipts": [
+        {
+          "file": "validation/static.json",
+          "sha256": "221996b9ac97f0ba7b10df3809aaea99f2f080282498ec5e4f45867f8d7e7907",
+          "status": "STATIC_PASS"
+        },
+        {
+          "file": "validation/thunder-r4.json",
+          "sha256": "287c943a535908c01b4dab820074590b65566d3decb6e61fca04e8279d2d42f8",
+          "status": "THUNDER_R4_ELEVEN_CONTRACTS_STATIC_PASS"
+        },
+        {
+          "file": "validation/thunder-r5.json",
+          "sha256": "8b72f8b660216bb9fafd9cc97ae761ab3a312b2edc55d192c09863f724a45901",
+          "status": "THUNDER_R5_ELEVEN_CONTRACTS_STATIC_PASS"
+        }
+      ],
+      "device": "NOT_RUN"
+    },
+    {
+      "id": 11,
+      "sourceContract": "PASS",
+      "currentReceipts": [
+        {
+          "file": "validation/static.json",
+          "sha256": "221996b9ac97f0ba7b10df3809aaea99f2f080282498ec5e4f45867f8d7e7907",
+          "status": "STATIC_PASS"
+        },
+        {
+          "file": "validation/thunder-r4.json",
+          "sha256": "287c943a535908c01b4dab820074590b65566d3decb6e61fca04e8279d2d42f8",
+          "status": "THUNDER_R4_ELEVEN_CONTRACTS_STATIC_PASS"
+        },
+        {
+          "file": "validation/thunder-r5.json",
+          "sha256": "8b72f8b660216bb9fafd9cc97ae761ab3a312b2edc55d192c09863f724a45901",
+          "status": "THUNDER_R5_ELEVEN_CONTRACTS_STATIC_PASS"
+        }
+      ],
+      "device": "NOT_RUN"
+    }
+  ],
+  "testEvidence": {
+    "static": {
+      "file": "validation/static.json",
+      "sha256": "221996b9ac97f0ba7b10df3809aaea99f2f080282498ec5e4f45867f8d7e7907",
+      "status": "STATIC_PASS"
+    },
+    "apple-inline": {
+      "file": "validation/apple-inline.json",
+      "sha256": "4bb35f331e49eb25de2f1434d016f63d18715b8834af769da1160f7edbb7631d",
+      "status": "APPLE_INLINE_STATIC_PASS"
+    },
+    "apple-inline-core": {
+      "file": "validation/apple-inline-core.json",
+      "sha256": "7d135f638c5fa80c5b0eb1db31aa6c200276e4e2f1072e7ccb2c5cf6843cf78a",
+      "status": "APPLE_INLINE_LOCAL_CORE_PASS"
+    },
+    "repair-review": {
+      "file": "validation/repair-review.json",
+      "sha256": "1b5378201781c13585d330459fc0f399818369ff167e4ad022404cb06d9fc8b5",
+      "status": "REPAIR_REGRESSION_PASS"
+    },
+    "domestic-audit": {
+      "file": "validation/domestic-audit.json",
+      "sha256": "583016b3a2a91dec372aded349fac1c4934110466b028c7838ff8df776c3721f",
+      "status": "DOMESTIC_AUDIT_PASS"
+    },
+    "domestic-selector": {
+      "file": "validation/domestic-selector.json",
+      "sha256": "401338c8cd67d7140ef93cf75b397bdc81686f8017e62524ec48144ab2bf830c",
+      "status": "DOMESTIC_SELECTOR_PASS"
+    },
+    "api-browser-compat": {
+      "file": "validation/api-browser-compat.json",
+      "sha256": "0a303c5a6a148918b87fb79f8149e4add5a22ade850dcd76efdfe0760b4732af",
+      "status": "API_BROWSER_COMPAT_STATIC_PASS"
+    },
+    "api-browser-regression": {
+      "file": "validation/api-browser-regression.json",
+      "sha256": "67909161ac07644a1aa84b8a642d484e0104d4722340bf65ebeea708e99f8f8a",
+      "status": "API_REAL_IP_CORE_PASS_BROWSER_TUN_RETEST_PENDING"
+    },
+    "native-routing": {
+      "file": "validation/native-routing.json",
+      "sha256": "55f0e7be29f5f94a81a339bb1d0878f1af80feda7efa92fb2da825ba08e6636c",
+      "status": "CORE_ROUTING_PASS"
+    },
+    "native-dns-egress": {
+      "file": "validation/native-dns-egress.json",
+      "sha256": "0ebca902000e1b0efb64c1a87b2e7bcde1524d746d2873556f6b2e4cc7caed66",
+      "status": "CORE_DNS_EGRESS_PASS"
+    },
+    "native-selectors": {
+      "file": "validation/native-selectors.json",
+      "sha256": "fb8d90566adf5ababc9b6558d783b79bfdf52767e5c5ef572728e7dfe1d9ec92",
+      "status": "CORE_MANUAL_SELECTORS_PASS"
+    },
+    "native-inbound-guard": {
+      "file": "validation/native-inbound-guard.json",
+      "sha256": "e506666dc838fe06d0d6311d9026805415c58b517e54f041253413a789f7a6ea",
+      "status": "CORE_INBOUND_GUARD_PASS"
+    },
+    "thunder-repair": {
+      "file": "validation/thunder-repair.json",
+      "sha256": "b6617191d52715ee175398b6fe36eec9129cb58fb81348f40ed50c448e10113d",
+      "status": "THUNDER_REPAIR_STATIC_PASS"
+    },
+    "thunder-r2": {
+      "file": "validation/thunder-r2.json",
+      "sha256": "de42667ad81d98f12d72d578ea2ba0cde3c81aa7ec8158730fa584167646565f",
+      "status": "THUNDER_R2_STATIC_PASS"
+    },
+    "thunder-r3": {
+      "file": "validation/thunder-r3.json",
+      "sha256": "ef9d664c13ff3e029c35c9458a26637d99b552d5050ddcb918f4b5e6f1d91554",
+      "status": "THUNDER_R3_STATIC_PASS"
+    },
+    "thunder-r4": {
+      "file": "validation/thunder-r4.json",
+      "sha256": "287c943a535908c01b4dab820074590b65566d3decb6e61fca04e8279d2d42f8",
+      "status": "THUNDER_R4_ELEVEN_CONTRACTS_STATIC_PASS"
+    },
+    "thunder-r5": {
+      "file": "validation/thunder-r5.json",
+      "sha256": "8b72f8b660216bb9fafd9cc97ae761ab3a312b2edc55d192c09863f724a45901",
+      "status": "THUNDER_R5_ELEVEN_CONTRACTS_STATIC_PASS"
+    },
+    "thunder-closeout": {
+      "file": "validation/thunder-closeout.json",
+      "sha256": "5e7d7c978bf2493ad7bb0b58f63b9ce3a60c7029c7adabc155f8ce307c189679",
+      "status": "THUNDER_CLOSEOUT_EDGE_AUDIT_PASS"
+    },
+    "thunder-domain-coverage": {
+      "file": "validation/thunder-domain-coverage.json",
+      "sha256": "592700de2679094d55a1a95e5e2a2369afa2735db1e13ed57af28d95661f6fb7",
+      "status": "THUNDER_DOMAIN_COVERAGE_PASS"
+    },
+    "independent-r5": {
+      "file": "validation/independent-r5.json",
+      "sha256": "8c44d356dad3a4c82b2040be653fdd2dc9c8cc8a30883165f5bed5981d73384e",
+      "status": "THREE_PLATFORM_INDEPENDENT_REVIEW_PASS"
+    }
+  },
+  "attempts": [
+    {
+      "file": "validation/inputs/apple-inline-attempts/initial-static.json",
+      "sha256": "f1ed62a5adf292b0baa03e4000e49b68189095f424a5d8f506bf2712bcc17229",
+      "explanation": "Historical R5 table-delta test switched to immutable pre-Apple baseline; current exact Apple delta independently checked"
+    },
+    {
+      "file": "validation/inputs/apple-inline-attempts/initial-thunder-r5.json",
+      "sha256": "c114c8231f0931a072651133a1a046323ed4fdcec36a22388d3074947fb97c37",
+      "explanation": "Same historical R5 table-delta failure, not a production bug"
+    },
+    {
+      "file": "validation/inputs/apple-inline-attempts/sandbox-core-attempt.json",
+      "sha256": "dd0c0ca9e83a22ab4fa22d34236e1d7bdfb8b5de6f2a368aec209ea138d5ff91",
+      "explanation": "Sandbox denied owned loopback controller (EACCES); isolated permission rerun passed"
+    },
+    {
+      "file": "validation/inputs/apple-inline-attempts/inbound-first-attempt.json",
+      "sha256": "0a15f384a40c2ba88c451793de3e684d51a637aa720c118849aa925cc6653901",
+      "explanation": "Inherited harness probed before file providers were ready; strict readiness gate added; pre-fix bypass and post-fix REJECT both reproduced"
+    }
+  ],
+  "validationHarnessChanges": [
+    "R5/R6 historical exact deltas use immutable pre-Apple bytes; current exact delta independently enforced",
+    "Inbound test waits for all file providers and records its response body"
+  ],
+  "metrics": {
+    "staticChecks": 2673,
+    "appleStaticChecks": 98,
+    "appleBeforeCounterexamples": 8,
+    "appleRoutingCases": 130,
+    "appleDNSCases": 128,
+    "nativeRoutingCases": 1764,
+    "nativeDNSCases": 818
+  },
+  "retainedBoundaries": {
+    "emptyProviderIsNotDownloadFailure": true,
+    "HTTP541RootCause": "UNRESOLVED",
+    "browserLogin": "NOT_RUN",
+    "deviceAcceptance": "NOT_RUN",
+    "shadowrocketNative": "NOT_RUN",
+    "publicIPv6": "NOT_RUN",
+    "deployedClientChanged": false
+  },
+  "recordingTool": {
+    "file": "tools/record-apple-inline.py",
+    "sha256": "3d5a45259e074c2a9cf8f5a7ce396534806793489a431fcd2af2716ded6e46fc"
+  }
+}

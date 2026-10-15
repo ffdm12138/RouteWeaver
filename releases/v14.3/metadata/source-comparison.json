@@ -1,0 +1,20 @@
+{
+  "date": "2026-10-12",
+  "scope": "Official repositories and documented formats; stars are adoption indicators, not measured correctness or a reputation ranking",
+  "recommendation": "MetaCubeX native MRS and individually reviewed classical rules, with this project's critical inline ownership and shared-cloud corrections. Keep blackmatrix7 for the unchanged Shadowrocket candidate; do not import a generic final DIRECT policy.",
+  "projects": [
+    {"name": "MetaCubeX/meta-rules-dat", "url": "https://github.com/MetaCubeX/meta-rules-dat", "observedApproxStars": 5300, "fit": "Native Mihomo MRS, domain/IP/classical categories; CN aggregates blackmatrix7 ChinaMax; preferred native delivery format"},
+    {"name": "blackmatrix7/ios_rule_script", "url": "https://github.com/blackmatrix7/ios_rule_script", "observedApproxStars": 28200, "fit": "Detailed service lists across clients; useful upstream and Shadowrocket source, still requires ownership review"},
+    {"name": "Loyalsoldier/clash-rules", "url": "https://github.com/Loyalsoldier/clash-rules", "observedApproxStars": 28800, "fit": "Daily general-purpose white/black lists; good broad coverage, insufficient alone for per-company DNS/UDP exit contracts"},
+    {"name": "v2fly/domain-list-community", "url": "https://github.com/v2fly/domain-list-community", "observedApproxStars": 9700, "fit": "Community geosite upstream; not a drop-in native MRS release for these scripts"},
+    {"name": "ACL4SSR/ACL4SSR", "url": "https://github.com/ACL4SSR/ACL4SSR", "observedApproxStars": 6800, "fit": "Common Clash fragments and configuration ecosystem; final strategy and grouping need this project's review"}
+  ],
+  "findings": [
+    {"source": "MetaCubeX OpenAI classical", "row": "DOMAIN-SUFFIX,crixet.com", "issue": "Upstream app category is not evidence of OpenAI ownership", "decision": "Do not activate this raw provider; the complete approved OpenAI table stays small and inline"},
+    {"source": "MetaCubeX OpenAI classical", "issue": "Broad numbered/regional Azure async regex exceeds the exact approved eastus tenant list", "decision": "Keep only the reviewed exact eastus 1/17/23 exceptions and shared namespace guard"},
+    {"source": "MetaCubeX Microsoft classical", "row": "DOMAIN-KEYWORD,1drv", "counterexample": "51drv.com", "decision": "Use fixed native domain MRS instead of the broad keyword classifier; preserve exact Microsoft tenant exceptions inline"},
+    {"source": "Generic examples", "issue": "Default DIRECT or provider-brand grouping of cloud customer namespaces contradicts this project's contract", "decision": "Keep company-first routing, shared-cloud guards, group-affine DNS and proxy-only unknown fallback in the script"}
+  ],
+  "counterexamples": {"file": "validation/inputs/raw-company-attempt/manifest.json"},
+  "deviceAcceptance": "NOT_RUN"
+}

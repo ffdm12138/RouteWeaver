@@ -1,0 +1,176 @@
+{
+  "version": "14.2",
+  "date": "2026-10-10",
+  "revision": "thunder-repair-r3",
+  "priorRevision": "thunder-repair-r2",
+  "status": "REPAIRED_LOCAL_CORE_VERIFIED_IOS_DEVICE_PENDING",
+  "authorization": "User asked to resume the interrupted thunder audit and repair all three platform profiles.",
+  "contract": {
+    "file": "docs/需求.md",
+    "sha256": "5f0086ba18755d8c10c96e2b255e3d7e456afdf4f9c0e6e7f36b7926110859f0",
+    "amended": false
+  },
+  "remoteSourceChanges": 0,
+  "beforeManifest": {
+    "file": "validation/inputs/thunder-r3-before/manifest.json",
+    "sha256": "77a4550bed26d7b782fdbc6976a98a12c0ea79548ba90cf43606b5fc03d27095"
+  },
+  "r2Metadata": {
+    "file": "metadata/thunder-r2-review.json",
+    "sha256": "eba35e26687a58d667c98aba136033327ccb517ae5bcb1c6c5aab5013c35a4fb"
+  },
+  "lockedSources": {
+    "file": "data/rule-sources.lock.json",
+    "sha256": "f2a025cd566c0ace7371ba004bb90c7cfc23747493ee541b083c4e5a6e64ddca",
+    "count": 45
+  },
+  "entries": [
+    {
+      "file": "src/windows/v14.2.js",
+      "sha256": "1552a7672bed018032760909a40fa16f99c50989073b45cae8259be8369db296"
+    },
+    {
+      "file": "src/android/v14.2-android.js",
+      "sha256": "aeaf4795edbd928f85ef1c3981b42db40c3006d3efdefdd4b379b5614bb91996"
+    },
+    {
+      "file": "src/ios/v14.2-shadowrocket.conf",
+      "sha256": "c87518f9d73d3bc21d8b25cdebabb58bf858a1ff0ad0389779d0e5ad3550b11d"
+    },
+    {
+      "file": "tools/generate-v14.2-shadowrocket.js",
+      "sha256": "0dee3318974231f7b46e7de5fb4290fd43119ef50fffb139a68d7f8bb7e75862"
+    },
+    {
+      "file": "tools/sync-reviewed-data.cjs",
+      "sha256": "7d2635cec3d56662a7fc85d27abfaa38408f23f32a0eb303dadb7d4d6d250565"
+    },
+    {
+      "file": "metadata/shadowrocket-sources.json",
+      "sha256": "93bc8665f05fa4f41d89807f6e29417e80dcf3951ae4bc151a8605fade3bad19"
+    },
+    {
+      "file": "data/rules/safety-classifiers.json",
+      "sha256": "de175c19f2cef8d01752026498a5d447eee36d148c6c65a80626aca528843093"
+    },
+    {
+      "file": "tests/static.cjs",
+      "sha256": "6dea84311959a4ab9973fbf52f7d32f04b6275e3bbf24f90e20edaed9464469e"
+    },
+    {
+      "file": "tests/cases.cjs",
+      "sha256": "6bd1af3f624facf59b8ee16c4de2404338d5647d7713191d83bc9a8af2250016"
+    },
+    {
+      "file": "tests/thunder-r2.cjs",
+      "sha256": "4d2453bf5f27c7327c5bc1af5a2080063f04aa87a64f0b07e8cd16e05733285f"
+    },
+    {
+      "file": "tests/thunder-r3.cjs",
+      "sha256": "0a41a630fa208504f77e06134da28264c230bc1cd32469fc9f355b3c377ad2c8"
+    },
+    {
+      "file": "tests/r3-fixture.cjs",
+      "sha256": "4fcedfb50865bffb06c29564425d27c1800e937eb58ea260c3cc3df97d08c747"
+    },
+    {
+      "file": "tests/native-inbound-guard.cjs",
+      "sha256": "be01bdca7f6812a7a7e5198a56171d9b2052955e70f7a6a6b8dff39fac093fc5"
+    },
+    {
+      "file": "tests/domestic-audit.cjs",
+      "sha256": "24ddf37521716ba06688066f48dd30bc1baa3ea66e06ef90801a55526f264094"
+    }
+  ],
+  "testEvidence": {
+    "static": {
+      "file": "validation/static.json",
+      "sha256": "636223300690c17ed53b52f6c0ca9e340a4d45f7c5a0e2735fbb1e1607cfa0d2",
+      "status": "STATIC_PASS"
+    },
+    "thunder-r2": {
+      "file": "validation/thunder-r2.json",
+      "sha256": "df2c5a32ed084bf2c1bd085ee7aa29af265bf10601424d61d2b2f0d43c3ea14b",
+      "status": "THUNDER_R2_STATIC_PASS"
+    },
+    "thunder-r3": {
+      "file": "validation/thunder-r3.json",
+      "sha256": "6a8e7255cbe9f4d300d53fd56b8e9b12e913f5a27dc5daab9eaa33dfa1d5a757",
+      "status": "THUNDER_R3_STATIC_PASS"
+    },
+    "thunder-domain-coverage": {
+      "file": "validation/thunder-domain-coverage.json",
+      "sha256": "a4bd8b66b8ebad52cc1c0ed48312f29e6f2e280829a65a2ed505fe369ae86759",
+      "status": "THUNDER_DOMAIN_COVERAGE_PASS"
+    },
+    "native-routing": {
+      "file": "validation/native-routing.json",
+      "sha256": "79aa0cfdee4a5445fecc37e3f4e70f77df937a1b92285ffb754456c5718e7a38",
+      "status": "CORE_ROUTING_PASS"
+    },
+    "native-dns-egress": {
+      "file": "validation/native-dns-egress.json",
+      "sha256": "f576d8d196e5a6422e53b0da02f02349d3c27d66b0f90f26a393319b6db19f25",
+      "status": "CORE_DNS_EGRESS_PASS"
+    },
+    "native-selectors": {
+      "file": "validation/native-selectors.json",
+      "sha256": "b81ad895ee07ce46a5e338c750022a8d7f85d28b782e85764311ea1c17b5818f",
+      "status": "CORE_MANUAL_SELECTORS_PASS"
+    },
+    "native-inbound-guard": {
+      "file": "validation/native-inbound-guard.json",
+      "sha256": "6aae1b8fff157dc7c420120ed880d88e69e56d426bf1a078eb1092b2b7fa5814",
+      "status": "CORE_INBOUND_GUARD_PASS"
+    }
+  },
+  "findings": [
+    {
+      "id": "R3-01",
+      "severity": "MAJOR",
+      "description": "doh.18bit.cn remained domestic DIRECT on Android/iOS; approved resolver blocking differed across platforms",
+      "resolution": "Embed the same 127 approved exact/suffix DoH records; protect against missing remote caches; retain core resolver and explicit bootstrap behavior",
+      "acceptance": "STATIC_ALL_APPROVED_DESTINATIONS_AND_MIHOMO_ROUTING_PASS"
+    },
+    {
+      "id": "R3-02",
+      "severity": "MAJOR",
+      "description": "Native LAN list widened exact router hosts and added public namespace DIRECT exceptions",
+      "resolution": "Embed 130 exact/suffix records from the same approved private classifier, retain existing private CIDRs; omit the unverified single-label regex",
+      "acceptance": "STATIC_LAN_SCOPE_AND_MIHOMO_UNKNOWN_UDP_PASS_IOS_NATIVE_NOT_RUN"
+    },
+    {
+      "id": "R3-03",
+      "severity": "MAJOR",
+      "description": "Native Azure wildcard accepted nonnumeric or extra-label tenant names excluded by the reviewed OpenAI regex",
+      "resolution": "Omit the unsafe native glob for both routing and Host DNS; use the shared proxy group; disclose reduced OpenAI-specific native coverage",
+      "acceptance": "STATIC_NO_WRONG_COMPANY_OR_DNS_GROUP_IOS_ASYNC_COVERAGE_GAP"
+    },
+    {
+      "id": "R3-04",
+      "severity": "MAJOR",
+      "description": "Inherited listener proxy/rule or fixed tunnel outlet bypassed the main company/DNS/UDP guards",
+      "resolution": "Reject incompatible inputs before returning configuration; preserve ordinary listeners and source input bytes",
+      "acceptance": "STATIC_NEGATIVE_INPUTS_AND_REAL_CORE_BEFORE_AFTER_INBOUND_PASS"
+    }
+  ],
+  "metrics": {
+    "staticChecks": 2378,
+    "independentChecks": 302,
+    "priorCounterexamples": 20,
+    "localCoreRoutingCases": 1570,
+    "localCoreDNSCases": 658,
+    "localCoreSelectorObservations": 224,
+    "localCoreInboundObservations": 4,
+    "finiteDomainSample": 10325,
+    "crossPlatformClassifierDifferences": 1
+  },
+  "knownLimits": [
+    "Windows real TUN, Android VpnService, Shadowrocket native execution and public IPv6 packet capture NOT_RUN",
+    "Native Azure async regex coverage gap uses protected shared infrastructure; exact company hosts need independent evidence",
+    "Single-label private regex is omitted on iOS; unknown local labels may require an explicit reviewed exception",
+    "Known DoH destination guard cannot identify arbitrary encrypted DNS or application traffic outside VPN",
+    "Sandbox EACCES attempt is preserved separately; successful owned loopback tests used scoped execution permission"
+  ],
+  "clientDeployment": false
+}

@@ -1,0 +1,43 @@
+{
+  "version": "14.2",
+  "date": "2026-10-10",
+  "sourceVersion": "14.1",
+  "authorization": "Human user requested verification and repair of company grouping, DNS, UDP and dual-stack privacy",
+  "baseSources": [
+    {
+      "file": "v14.1.js",
+      "sha256": "d5d166a62dc1b36d2b3a28e0b65a1ed59a340c44ac223433a4117a7852548a43"
+    },
+    {
+      "file": "v14.1-android.js",
+      "sha256": "4404a94a40cb71c46721dfed43c7bcec4b43a5fdde7a537a7756293b7c1fd246"
+    },
+    {
+      "file": "generate-v14.1-shadowrocket.js",
+      "sha256": "0f31bc56a2a6ebc95dc514d9295d54b34dd77386595a0a542a6536f19c541c8f"
+    },
+    {
+      "file": "data/rule-sources.lock.json",
+      "sha256": "89019addf767aae7ad043e87c77f295b95bcebc8b3eb110051a9399daed31493"
+    },
+    {
+      "file": "data/direct-rule-pins.json",
+      "sha256": "b2926302714a07ee1770fffc9b99ea3a7db98c4627e38d8603ac1efae4cb7fab"
+    }
+  ],
+  "clientDeployment": false,
+  "companyCoreSHA256": "3831daa69dbe19bcac501d004c1e5981036e89c47ac67a1235703108728bdee3",
+  "layoutMigration": "validation/layout-migration.json",
+  "initialCompanyCoreSHA256": "7464561708af61c6578b8c8810c6ecd1a044705ff621ecfe2108c45b0e3769cd",
+  "currentSourceRevisions": {
+    "classification": "review-fixes-r1",
+    "feature": "domestic-selector-r1",
+    "compatibility": "api-real-ip-r1",
+    "auditRepair": "thunder-repair-r1"
+  },
+  "additionalAuthorization": [
+    "User requested domestic selector and requirement amendment",
+    "User requested investigation and repair of API browser regression",
+    "User approved repairs after five-finding thunder audit: 好的兄弟，修复吧"
+  ]
+}

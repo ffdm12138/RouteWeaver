@@ -1,0 +1,3540 @@
+{
+  "proxies": [
+    {
+      "name": "Upgrade test node",
+      "type": "ss",
+      "server": "proxy.example.net",
+      "port": 443,
+      "cipher": "aes-128-gcm",
+      "password": "test-only",
+      "udp": true
+    }
+  ],
+  "tun": {
+    "enable": false,
+    "auto-route": false
+  },
+  "ipv6": true,
+  "dns": {
+    "ipv6": true,
+    "enable": true,
+    "enhanced-mode": "fake-ip",
+    "fake-ip-range": "198.18.0.1/16",
+    "fake-ip-filter-mode": "blacklist",
+    "fake-ip-filter": [
+      "+.localhost",
+      "+.lan",
+      "+.local",
+      "+.localdomain",
+      "+.home.arpa"
+    ],
+    "use-hosts": true,
+    "use-system-hosts": true,
+    "respect-rules": false,
+    "prefer-h3": false,
+    "default-nameserver": [
+      "223.5.5.5",
+      "119.29.29.29"
+    ],
+    "proxy-server-nameserver": [
+      "https://dns.alidns.com/dns-query#DIRECT",
+      "https://doh.pub/dns-query#DIRECT"
+    ],
+    "nameserver": [
+      "https://dns.alidns.com/dns-query#漏网之鱼",
+      "https://doh.pub/dns-query#漏网之鱼"
+    ],
+    "fallback": [],
+    "nameserver-policy": {
+      "+.localhost": [
+        "system"
+      ],
+      "+.lan": [
+        "system"
+      ],
+      "+.local": [
+        "system"
+      ],
+      "+.localdomain": [
+        "system"
+      ],
+      "+.home.arpa": [
+        "system"
+      ],
+      "rule-set:v12r-domain-private": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.shiyi.click": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.net.coffee": [
+        "https://dns.alidns.com/dns-query#节点选择",
+        "https://doh.pub/dns-query#节点选择"
+      ],
+      "+.browserleaks.com": [
+        "https://dns.alidns.com/dns-query#节点选择",
+        "https://doh.pub/dns-query#节点选择"
+      ],
+      "+.browserleaks.org": [
+        "https://dns.alidns.com/dns-query#节点选择",
+        "https://doh.pub/dns-query#节点选择"
+      ],
+      "+.dnsleaktest.com": [
+        "https://dns.alidns.com/dns-query#节点选择",
+        "https://doh.pub/dns-query#节点选择"
+      ],
+      "+.dnscheck.tools": [
+        "https://dns.alidns.com/dns-query#节点选择",
+        "https://doh.pub/dns-query#节点选择"
+      ],
+      "+.ipleak.net": [
+        "https://dns.alidns.com/dns-query#节点选择",
+        "https://doh.pub/dns-query#节点选择"
+      ],
+      "stun.l.google.com": [
+        "https://dns.alidns.com/dns-query#漏网之鱼",
+        "https://doh.pub/dns-query#漏网之鱼"
+      ],
+      "stun.services.mozilla.com": [
+        "https://dns.alidns.com/dns-query#漏网之鱼",
+        "https://doh.pub/dns-query#漏网之鱼"
+      ],
+      "stun.cloudflare.com": [
+        "https://dns.alidns.com/dns-query#漏网之鱼",
+        "https://doh.pub/dns-query#漏网之鱼"
+      ],
+      "stun.chat.bilibili.com": [
+        "https://dns.alidns.com/dns-query#漏网之鱼",
+        "https://doh.pub/dns-query#漏网之鱼"
+      ],
+      "stun.hitv.com": [
+        "https://dns.alidns.com/dns-query#漏网之鱼",
+        "https://doh.pub/dns-query#漏网之鱼"
+      ],
+      ".chatgpt.livekit.cloud": [
+        "https://dns.alidns.com/dns-query#漏网之鱼",
+        "https://doh.pub/dns-query#漏网之鱼"
+      ],
+      ".host.livekit.cloud": [
+        "https://dns.alidns.com/dns-query#漏网之鱼",
+        "https://doh.pub/dns-query#漏网之鱼"
+      ],
+      ".turn.livekit.cloud": [
+        "https://dns.alidns.com/dns-query#漏网之鱼",
+        "https://doh.pub/dns-query#漏网之鱼"
+      ],
+      "+.googleapis.cn": [
+        "https://dns.alidns.com/dns-query#谷歌服务",
+        "https://doh.pub/dns-query#谷歌服务"
+      ],
+      "+.xn--ngstr-lra8j.com": [
+        "https://dns.alidns.com/dns-query#谷歌服务",
+        "https://doh.pub/dns-query#谷歌服务"
+      ],
+      "+.gvt1.com": [
+        "https://dns.alidns.com/dns-query#谷歌服务",
+        "https://doh.pub/dns-query#谷歌服务"
+      ],
+      "+.gvt2.com": [
+        "https://dns.alidns.com/dns-query#谷歌服务",
+        "https://doh.pub/dns-query#谷歌服务"
+      ],
+      "+.gvt3.com": [
+        "https://dns.alidns.com/dns-query#谷歌服务",
+        "https://doh.pub/dns-query#谷歌服务"
+      ],
+      "+.cn": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.douyin.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.douyincdn.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.jianying.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.jimeng.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.toutiao.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.ixigua.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.pstatp.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.feishu.cn": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.volcengine.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.bilibili.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.bilivideo.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.hdslb.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.dl.steam.clngaa.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.st.dl.bscstorage.net": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.st.dl.eccdnx.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.st.dl.pinyuncloud.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.prts.plus": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.cnbeta.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.cnbetacdn.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.easou.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.mob.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.126.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.126.net": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.127.net": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.163.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.360buyimg.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.36kr.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.acfun.tv": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.aixifan.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.amap.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.autonavi.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.bdimg.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.bdstatic.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.caiyunapp.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.csdn.net": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.ctrip.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.dgtle.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.dianping.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.douban.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.doubanio.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.duokan.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.ele.me": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.feng.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.fir.im": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.g-cores.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.gtimg.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.hongxiu.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.hxcdn.net": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.iciba.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.ifeng.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.ifengimg.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.iqiyi.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.jd.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.jianshu.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.le.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.lecloud.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.lemicp.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.luoo.net": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.meituan.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.meituan.net": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.mi.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.miaopai.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.miui.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.miwifi.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.netease.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.oschina.net": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.ppsimg.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.qcloud.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.qdaily.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.qdmm.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.qhimg.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.qhres.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.qidian.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.qihucdn.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.qiniu.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.qiniucdn.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.qiyipic.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.qq.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.qqurl.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.segmentfault.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.sinaapp.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.smzdm.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.sogou.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.sogoucdn.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.sohu.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.soku.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.sspai.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.suning.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.taobao.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.tencent.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.tenpay.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.tianyancha.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.tmall.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.tudou.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.umetrip.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.upaiyun.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.upyun.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.veryzhun.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.weibo.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.xiaomicp.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.ximalaya.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.xmcdn.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.xunlei.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.yhd.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.yihaodianimg.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.yinxiang.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.ykimg.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.youdao.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.youku.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.zealer.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.zhihu.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.zhimg.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.baidu.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.baidubce.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.baidupcs.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.baidustatic.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.bcebos.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.alipay.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.alipayobjects.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.alibaba.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.alibabagroup.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.aliyun.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.alicdn.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.1688.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.taobaocdn.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.aliexpress.cn": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.weixin.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.wechat.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.wechatpay.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.qpic.cn": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.xiaohongshu.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.xhscdn.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.kuaishou.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.gifshow.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.pinduoduo.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.yangkeduo.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.pddpic.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.vip.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.vipstatic.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.mgtv.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.hunantv.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.pptv.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.sina.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.sinaimg.cn": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.suning.cn": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.qunar.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.12306.cn": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.didi-labs.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.didiglobal.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "+.diditaxi.com": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "rule-set:v12r-domain-douyin": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "rule-set:v12r-domain-apple_at_cn": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "rule-set:v12r-domain-google_at_cn": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "rule-set:v12r-domain-microsoft_at_cn": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "rule-set:v12r-domain-steam_at_cn": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "rule-set:v12r-domain-cn": [
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT"
+      ],
+      "challenges.cloudflare.com": [
+        "https://dns.alidns.com/dns-query#公共基础服务",
+        "https://doh.pub/dns-query#公共基础服务"
+      ],
+      "workos.imgix.net": [
+        "https://dns.alidns.com/dns-query#公共基础服务",
+        "https://doh.pub/dns-query#公共基础服务"
+      ],
+      "+.workos.com": [
+        "https://dns.alidns.com/dns-query#公共基础服务",
+        "https://doh.pub/dns-query#公共基础服务"
+      ],
+      "+.workoscdn.com": [
+        "https://dns.alidns.com/dns-query#公共基础服务",
+        "https://doh.pub/dns-query#公共基础服务"
+      ],
+      "+.stripe.com": [
+        "https://dns.alidns.com/dns-query#公共基础服务",
+        "https://doh.pub/dns-query#公共基础服务"
+      ],
+      "+.stripe.network": [
+        "https://dns.alidns.com/dns-query#公共基础服务",
+        "https://doh.pub/dns-query#公共基础服务"
+      ],
+      "+.browser-intake-datadoghq.com": [
+        "https://dns.alidns.com/dns-query#公共基础服务",
+        "https://doh.pub/dns-query#公共基础服务"
+      ],
+      "+.sentry.io": [
+        "https://dns.alidns.com/dns-query#公共基础服务",
+        "https://doh.pub/dns-query#公共基础服务"
+      ],
+      "+.intercom.io": [
+        "https://dns.alidns.com/dns-query#公共基础服务",
+        "https://doh.pub/dns-query#公共基础服务"
+      ],
+      "+.intercomcdn.com": [
+        "https://dns.alidns.com/dns-query#公共基础服务",
+        "https://doh.pub/dns-query#公共基础服务"
+      ],
+      "+.ct.sendgrid.net": [
+        "https://dns.alidns.com/dns-query#公共基础服务",
+        "https://doh.pub/dns-query#公共基础服务"
+      ],
+      "chatgpt.livekit.cloud": [
+        "https://dns.alidns.com/dns-query#OpenAI 服务",
+        "https://doh.pub/dns-query#OpenAI 服务"
+      ],
+      "host.livekit.cloud": [
+        "https://dns.alidns.com/dns-query#OpenAI 服务",
+        "https://doh.pub/dns-query#OpenAI 服务"
+      ],
+      "turn.livekit.cloud": [
+        "https://dns.alidns.com/dns-query#OpenAI 服务",
+        "https://doh.pub/dns-query#OpenAI 服务"
+      ],
+      "openaiapi-site.azureedge.net": [
+        "https://dns.alidns.com/dns-query#OpenAI 服务",
+        "https://doh.pub/dns-query#OpenAI 服务"
+      ],
+      "openaiassets.blob.core.windows.net": [
+        "https://dns.alidns.com/dns-query#OpenAI 服务",
+        "https://doh.pub/dns-query#OpenAI 服务"
+      ],
+      "openaicom-api-bdcpf8c6d2e9atf6.z01.azurefd.net": [
+        "https://dns.alidns.com/dns-query#OpenAI 服务",
+        "https://doh.pub/dns-query#OpenAI 服务"
+      ],
+      "openaicom.imgix.net": [
+        "https://dns.alidns.com/dns-query#OpenAI 服务",
+        "https://doh.pub/dns-query#OpenAI 服务"
+      ],
+      "openaicomproductionae4b.blob.core.windows.net": [
+        "https://dns.alidns.com/dns-query#OpenAI 服务",
+        "https://doh.pub/dns-query#OpenAI 服务"
+      ],
+      "production-openaicom-storage.azureedge.net": [
+        "https://dns.alidns.com/dns-query#OpenAI 服务",
+        "https://doh.pub/dns-query#OpenAI 服务"
+      ],
+      "cdn.openaimerge.com": [
+        "https://dns.alidns.com/dns-query#OpenAI 服务",
+        "https://doh.pub/dns-query#OpenAI 服务"
+      ],
+      "+.openai.com": [
+        "https://dns.alidns.com/dns-query#OpenAI 服务",
+        "https://doh.pub/dns-query#OpenAI 服务"
+      ],
+      "+.chatgpt.com": [
+        "https://dns.alidns.com/dns-query#OpenAI 服务",
+        "https://doh.pub/dns-query#OpenAI 服务"
+      ],
+      "+.chat.com": [
+        "https://dns.alidns.com/dns-query#OpenAI 服务",
+        "https://doh.pub/dns-query#OpenAI 服务"
+      ],
+      "+.sora.com": [
+        "https://dns.alidns.com/dns-query#OpenAI 服务",
+        "https://doh.pub/dns-query#OpenAI 服务"
+      ],
+      "+.oaistatic.com": [
+        "https://dns.alidns.com/dns-query#OpenAI 服务",
+        "https://doh.pub/dns-query#OpenAI 服务"
+      ],
+      "+.oaistatsig.com": [
+        "https://dns.alidns.com/dns-query#OpenAI 服务",
+        "https://doh.pub/dns-query#OpenAI 服务"
+      ],
+      "+.oaiusercontent.com": [
+        "https://dns.alidns.com/dns-query#OpenAI 服务",
+        "https://doh.pub/dns-query#OpenAI 服务"
+      ],
+      "+.chatgpt.site": [
+        "https://dns.alidns.com/dns-query#OpenAI 服务",
+        "https://doh.pub/dns-query#OpenAI 服务"
+      ],
+      "+.crixet.com": [
+        "https://dns.alidns.com/dns-query#OpenAI 服务",
+        "https://doh.pub/dns-query#OpenAI 服务"
+      ],
+      "+.openai.com.cdn.cloudflare.net": [
+        "https://dns.alidns.com/dns-query#OpenAI 服务",
+        "https://doh.pub/dns-query#OpenAI 服务"
+      ],
+      "+.anthropic.com": [
+        "https://dns.alidns.com/dns-query#Anthropic 服务",
+        "https://doh.pub/dns-query#Anthropic 服务"
+      ],
+      "+.claude.ai": [
+        "https://dns.alidns.com/dns-query#Anthropic 服务",
+        "https://doh.pub/dns-query#Anthropic 服务"
+      ],
+      "+.claude.com": [
+        "https://dns.alidns.com/dns-query#Anthropic 服务",
+        "https://doh.pub/dns-query#Anthropic 服务"
+      ],
+      "+.claudeusercontent.com": [
+        "https://dns.alidns.com/dns-query#Anthropic 服务",
+        "https://doh.pub/dns-query#Anthropic 服务"
+      ],
+      "+.clau.de": [
+        "https://dns.alidns.com/dns-query#Anthropic 服务",
+        "https://doh.pub/dns-query#Anthropic 服务"
+      ],
+      "+.claudemcpclient.com": [
+        "https://dns.alidns.com/dns-query#Anthropic 服务",
+        "https://doh.pub/dns-query#Anthropic 服务"
+      ],
+      "+.claudemcpcontent.com": [
+        "https://dns.alidns.com/dns-query#Anthropic 服务",
+        "https://doh.pub/dns-query#Anthropic 服务"
+      ],
+      "+.gemini.google.com": [
+        "https://dns.alidns.com/dns-query#谷歌服务",
+        "https://doh.pub/dns-query#谷歌服务"
+      ],
+      "+.aistudio.google.com": [
+        "https://dns.alidns.com/dns-query#谷歌服务",
+        "https://doh.pub/dns-query#谷歌服务"
+      ],
+      "+.generativelanguage.googleapis.com": [
+        "https://dns.alidns.com/dns-query#谷歌服务",
+        "https://doh.pub/dns-query#谷歌服务"
+      ],
+      "+.notebooklm.google.com": [
+        "https://dns.alidns.com/dns-query#谷歌服务",
+        "https://doh.pub/dns-query#谷歌服务"
+      ],
+      "+.notebooklm.google": [
+        "https://dns.alidns.com/dns-query#谷歌服务",
+        "https://doh.pub/dns-query#谷歌服务"
+      ],
+      "+.deepmind.google": [
+        "https://dns.alidns.com/dns-query#谷歌服务",
+        "https://doh.pub/dns-query#谷歌服务"
+      ],
+      "+.generativeai.google": [
+        "https://dns.alidns.com/dns-query#谷歌服务",
+        "https://doh.pub/dns-query#谷歌服务"
+      ],
+      "+.ai.google.dev": [
+        "https://dns.alidns.com/dns-query#谷歌服务",
+        "https://doh.pub/dns-query#谷歌服务"
+      ],
+      "+.jules.google": [
+        "https://dns.alidns.com/dns-query#谷歌服务",
+        "https://doh.pub/dns-query#谷歌服务"
+      ],
+      "+.google.com": [
+        "https://dns.alidns.com/dns-query#谷歌服务",
+        "https://doh.pub/dns-query#谷歌服务"
+      ],
+      "+.googleapis.com": [
+        "https://dns.alidns.com/dns-query#谷歌服务",
+        "https://doh.pub/dns-query#谷歌服务"
+      ],
+      "+.gstatic.com": [
+        "https://dns.alidns.com/dns-query#谷歌服务",
+        "https://doh.pub/dns-query#谷歌服务"
+      ],
+      "+.googleusercontent.com": [
+        "https://dns.alidns.com/dns-query#谷歌服务",
+        "https://doh.pub/dns-query#谷歌服务"
+      ],
+      "+.gmail.com": [
+        "https://dns.alidns.com/dns-query#谷歌服务",
+        "https://doh.pub/dns-query#谷歌服务"
+      ],
+      "+.google.com.hk": [
+        "https://dns.alidns.com/dns-query#谷歌服务",
+        "https://doh.pub/dns-query#谷歌服务"
+      ],
+      "+.google.co.jp": [
+        "https://dns.alidns.com/dns-query#谷歌服务",
+        "https://doh.pub/dns-query#谷歌服务"
+      ],
+      "+.google.co.uk": [
+        "https://dns.alidns.com/dns-query#谷歌服务",
+        "https://doh.pub/dns-query#谷歌服务"
+      ],
+      "+.google.com.tw": [
+        "https://dns.alidns.com/dns-query#谷歌服务",
+        "https://doh.pub/dns-query#谷歌服务"
+      ],
+      "+.google.com.sg": [
+        "https://dns.alidns.com/dns-query#谷歌服务",
+        "https://doh.pub/dns-query#谷歌服务"
+      ],
+      "+.youtube.com": [
+        "https://dns.alidns.com/dns-query#谷歌服务",
+        "https://doh.pub/dns-query#谷歌服务"
+      ],
+      "+.youtu.be": [
+        "https://dns.alidns.com/dns-query#谷歌服务",
+        "https://doh.pub/dns-query#谷歌服务"
+      ],
+      "+.googlevideo.com": [
+        "https://dns.alidns.com/dns-query#谷歌服务",
+        "https://doh.pub/dns-query#谷歌服务"
+      ],
+      "+.ytimg.com": [
+        "https://dns.alidns.com/dns-query#谷歌服务",
+        "https://doh.pub/dns-query#谷歌服务"
+      ],
+      "+.youtube-nocookie.com": [
+        "https://dns.alidns.com/dns-query#谷歌服务",
+        "https://doh.pub/dns-query#谷歌服务"
+      ],
+      "+.ggpht.com": [
+        "https://dns.alidns.com/dns-query#谷歌服务",
+        "https://doh.pub/dns-query#谷歌服务"
+      ],
+      "+.android.com": [
+        "https://dns.alidns.com/dns-query#谷歌服务",
+        "https://doh.pub/dns-query#谷歌服务"
+      ],
+      "+.googleplay.com": [
+        "https://dns.alidns.com/dns-query#谷歌服务",
+        "https://doh.pub/dns-query#谷歌服务"
+      ],
+      "+.google-analytics.com": [
+        "https://dns.alidns.com/dns-query#谷歌服务",
+        "https://doh.pub/dns-query#谷歌服务"
+      ],
+      "+.googlezip.net": [
+        "https://dns.alidns.com/dns-query#谷歌服务",
+        "https://doh.pub/dns-query#谷歌服务"
+      ],
+      "+.pki.goog": [
+        "https://dns.alidns.com/dns-query#谷歌服务",
+        "https://doh.pub/dns-query#谷歌服务"
+      ],
+      "+.recaptcha.net": [
+        "https://dns.alidns.com/dns-query#谷歌服务",
+        "https://doh.pub/dns-query#谷歌服务"
+      ],
+      "+.doubleclick.net": [
+        "https://dns.alidns.com/dns-query#谷歌服务",
+        "https://doh.pub/dns-query#谷歌服务"
+      ],
+      "+.googlesyndication.com": [
+        "https://dns.alidns.com/dns-query#谷歌服务",
+        "https://doh.pub/dns-query#谷歌服务"
+      ],
+      "+.googleadservices.com": [
+        "https://dns.alidns.com/dns-query#谷歌服务",
+        "https://doh.pub/dns-query#谷歌服务"
+      ],
+      "+.googletagmanager.com": [
+        "https://dns.alidns.com/dns-query#谷歌服务",
+        "https://doh.pub/dns-query#谷歌服务"
+      ],
+      "+.firebase.google.com": [
+        "https://dns.alidns.com/dns-query#谷歌服务",
+        "https://doh.pub/dns-query#谷歌服务"
+      ],
+      "+.firebaseio.com": [
+        "https://dns.alidns.com/dns-query#谷歌服务",
+        "https://doh.pub/dns-query#谷歌服务"
+      ],
+      "+.firebaseapp.com": [
+        "https://dns.alidns.com/dns-query#谷歌服务",
+        "https://doh.pub/dns-query#谷歌服务"
+      ],
+      "+.appspot.com": [
+        "https://dns.alidns.com/dns-query#谷歌服务",
+        "https://doh.pub/dns-query#谷歌服务"
+      ],
+      "+.googlecloud.com": [
+        "https://dns.alidns.com/dns-query#谷歌服务",
+        "https://doh.pub/dns-query#谷歌服务"
+      ],
+      "+.cloud.google.com": [
+        "https://dns.alidns.com/dns-query#谷歌服务",
+        "https://doh.pub/dns-query#谷歌服务"
+      ],
+      "+.waze.com": [
+        "https://dns.alidns.com/dns-query#谷歌服务",
+        "https://doh.pub/dns-query#谷歌服务"
+      ],
+      "+.fitbit.com": [
+        "https://dns.alidns.com/dns-query#谷歌服务",
+        "https://doh.pub/dns-query#谷歌服务"
+      ],
+      "+.nest.com": [
+        "https://dns.alidns.com/dns-query#谷歌服务",
+        "https://doh.pub/dns-query#谷歌服务"
+      ],
+      "+.blogger.com": [
+        "https://dns.alidns.com/dns-query#谷歌服务",
+        "https://doh.pub/dns-query#谷歌服务"
+      ],
+      "+.blogspot.com": [
+        "https://dns.alidns.com/dns-query#谷歌服务",
+        "https://doh.pub/dns-query#谷歌服务"
+      ],
+      "+.withgoogle.com": [
+        "https://dns.alidns.com/dns-query#谷歌服务",
+        "https://doh.pub/dns-query#谷歌服务"
+      ],
+      "+.openrouter.ai": [
+        "https://dns.alidns.com/dns-query#OpenRouter",
+        "https://doh.pub/dns-query#OpenRouter"
+      ],
+      "ppl-ai-file-upload.s3.amazonaws.com": [
+        "https://dns.alidns.com/dns-query#Perplexity",
+        "https://doh.pub/dns-query#Perplexity"
+      ],
+      "pplx-res.cloudinary.com": [
+        "https://dns.alidns.com/dns-query#Perplexity",
+        "https://doh.pub/dns-query#Perplexity"
+      ],
+      "+.perplexity.ai": [
+        "https://dns.alidns.com/dns-query#Perplexity",
+        "https://doh.pub/dns-query#Perplexity"
+      ],
+      "+.perplexity.com": [
+        "https://dns.alidns.com/dns-query#Perplexity",
+        "https://doh.pub/dns-query#Perplexity"
+      ],
+      "+.pplx.ai": [
+        "https://dns.alidns.com/dns-query#Perplexity",
+        "https://doh.pub/dns-query#Perplexity"
+      ],
+      "+.huggingface.co": [
+        "https://dns.alidns.com/dns-query#Hugging Face",
+        "https://doh.pub/dns-query#Hugging Face"
+      ],
+      "+.hf.co": [
+        "https://dns.alidns.com/dns-query#Hugging Face",
+        "https://doh.pub/dns-query#Hugging Face"
+      ],
+      "+.hf.space": [
+        "https://dns.alidns.com/dns-query#Hugging Face",
+        "https://doh.pub/dns-query#Hugging Face"
+      ],
+      "+.x.ai": [
+        "https://dns.alidns.com/dns-query#xAI",
+        "https://doh.pub/dns-query#xAI"
+      ],
+      "+.grok.com": [
+        "https://dns.alidns.com/dns-query#xAI",
+        "https://doh.pub/dns-query#xAI"
+      ],
+      "+.grok.me": [
+        "https://dns.alidns.com/dns-query#xAI",
+        "https://doh.pub/dns-query#xAI"
+      ],
+      "+.netflix.com": [
+        "https://dns.alidns.com/dns-query#Netflix",
+        "https://doh.pub/dns-query#Netflix"
+      ],
+      "+.nflxvideo.net": [
+        "https://dns.alidns.com/dns-query#Netflix",
+        "https://doh.pub/dns-query#Netflix"
+      ],
+      "+.nflximg.net": [
+        "https://dns.alidns.com/dns-query#Netflix",
+        "https://doh.pub/dns-query#Netflix"
+      ],
+      "+.disneyplus.com": [
+        "https://dns.alidns.com/dns-query#Disney+",
+        "https://doh.pub/dns-query#Disney+"
+      ],
+      "+.dssott.com": [
+        "https://dns.alidns.com/dns-query#Disney+",
+        "https://doh.pub/dns-query#Disney+"
+      ],
+      "+.bamgrid.com": [
+        "https://dns.alidns.com/dns-query#Disney+",
+        "https://doh.pub/dns-query#Disney+"
+      ],
+      "+.spotify.com": [
+        "https://dns.alidns.com/dns-query#Spotify",
+        "https://doh.pub/dns-query#Spotify"
+      ],
+      "+.scdn.co": [
+        "https://dns.alidns.com/dns-query#Spotify",
+        "https://doh.pub/dns-query#Spotify"
+      ],
+      "+.telegram.org": [
+        "https://dns.alidns.com/dns-query#Telegram",
+        "https://doh.pub/dns-query#Telegram"
+      ],
+      "+.t.me": [
+        "https://dns.alidns.com/dns-query#Telegram",
+        "https://doh.pub/dns-query#Telegram"
+      ],
+      "+.telegra.ph": [
+        "https://dns.alidns.com/dns-query#Telegram",
+        "https://doh.pub/dns-query#Telegram"
+      ],
+      "+.discord.com": [
+        "https://dns.alidns.com/dns-query#Discord",
+        "https://doh.pub/dns-query#Discord"
+      ],
+      "+.discord.gg": [
+        "https://dns.alidns.com/dns-query#Discord",
+        "https://doh.pub/dns-query#Discord"
+      ],
+      "+.discordapp.com": [
+        "https://dns.alidns.com/dns-query#Discord",
+        "https://doh.pub/dns-query#Discord"
+      ],
+      "+.discordapp.net": [
+        "https://dns.alidns.com/dns-query#Discord",
+        "https://doh.pub/dns-query#Discord"
+      ],
+      "+.tiktok.com": [
+        "https://dns.alidns.com/dns-query#TikTok",
+        "https://doh.pub/dns-query#TikTok"
+      ],
+      "+.tiktokcdn.com": [
+        "https://dns.alidns.com/dns-query#TikTok",
+        "https://doh.pub/dns-query#TikTok"
+      ],
+      "+.tiktokv.com": [
+        "https://dns.alidns.com/dns-query#TikTok",
+        "https://doh.pub/dns-query#TikTok"
+      ],
+      "+.tiktokcdn-us.com": [
+        "https://dns.alidns.com/dns-query#TikTok",
+        "https://doh.pub/dns-query#TikTok"
+      ],
+      "+.byteoversea.com": [
+        "https://dns.alidns.com/dns-query#TikTok",
+        "https://doh.pub/dns-query#TikTok"
+      ],
+      "+.ibytedtos.com": [
+        "https://dns.alidns.com/dns-query#TikTok",
+        "https://doh.pub/dns-query#TikTok"
+      ],
+      "+.musical.ly": [
+        "https://dns.alidns.com/dns-query#TikTok",
+        "https://doh.pub/dns-query#TikTok"
+      ],
+      "+.muscdn.com": [
+        "https://dns.alidns.com/dns-query#TikTok",
+        "https://doh.pub/dns-query#TikTok"
+      ],
+      "+.capcut.com": [
+        "https://dns.alidns.com/dns-query#TikTok",
+        "https://doh.pub/dns-query#TikTok"
+      ],
+      "+.larksuite.com": [
+        "https://dns.alidns.com/dns-query#TikTok",
+        "https://doh.pub/dns-query#TikTok"
+      ],
+      "+.trae.ai": [
+        "https://dns.alidns.com/dns-query#TikTok",
+        "https://doh.pub/dns-query#TikTok"
+      ],
+      "+.x.com": [
+        "https://dns.alidns.com/dns-query#Twitter",
+        "https://doh.pub/dns-query#Twitter"
+      ],
+      "+.twitter.com": [
+        "https://dns.alidns.com/dns-query#Twitter",
+        "https://doh.pub/dns-query#Twitter"
+      ],
+      "+.twimg.com": [
+        "https://dns.alidns.com/dns-query#Twitter",
+        "https://doh.pub/dns-query#Twitter"
+      ],
+      "+.t.co": [
+        "https://dns.alidns.com/dns-query#Twitter",
+        "https://doh.pub/dns-query#Twitter"
+      ],
+      "+.facebook.com": [
+        "https://dns.alidns.com/dns-query#Meta 服务",
+        "https://doh.pub/dns-query#Meta 服务"
+      ],
+      "+.fb.com": [
+        "https://dns.alidns.com/dns-query#Meta 服务",
+        "https://doh.pub/dns-query#Meta 服务"
+      ],
+      "+.fb.me": [
+        "https://dns.alidns.com/dns-query#Meta 服务",
+        "https://doh.pub/dns-query#Meta 服务"
+      ],
+      "+.fbcdn.net": [
+        "https://dns.alidns.com/dns-query#Meta 服务",
+        "https://doh.pub/dns-query#Meta 服务"
+      ],
+      "+.fbsbx.com": [
+        "https://dns.alidns.com/dns-query#Meta 服务",
+        "https://doh.pub/dns-query#Meta 服务"
+      ],
+      "+.messenger.com": [
+        "https://dns.alidns.com/dns-query#Meta 服务",
+        "https://doh.pub/dns-query#Meta 服务"
+      ],
+      "+.instagram.com": [
+        "https://dns.alidns.com/dns-query#Meta 服务",
+        "https://doh.pub/dns-query#Meta 服务"
+      ],
+      "+.cdninstagram.com": [
+        "https://dns.alidns.com/dns-query#Meta 服务",
+        "https://doh.pub/dns-query#Meta 服务"
+      ],
+      "+.whatsapp.com": [
+        "https://dns.alidns.com/dns-query#Meta 服务",
+        "https://doh.pub/dns-query#Meta 服务"
+      ],
+      "+.whatsapp.net": [
+        "https://dns.alidns.com/dns-query#Meta 服务",
+        "https://doh.pub/dns-query#Meta 服务"
+      ],
+      "+.threads.net": [
+        "https://dns.alidns.com/dns-query#Meta 服务",
+        "https://doh.pub/dns-query#Meta 服务"
+      ],
+      "+.threads.com": [
+        "https://dns.alidns.com/dns-query#Meta 服务",
+        "https://doh.pub/dns-query#Meta 服务"
+      ],
+      "+.meta.com": [
+        "https://dns.alidns.com/dns-query#Meta 服务",
+        "https://doh.pub/dns-query#Meta 服务"
+      ],
+      "+.meta.ai": [
+        "https://dns.alidns.com/dns-query#Meta 服务",
+        "https://doh.pub/dns-query#Meta 服务"
+      ],
+      "+.oculus.com": [
+        "https://dns.alidns.com/dns-query#Meta 服务",
+        "https://doh.pub/dns-query#Meta 服务"
+      ],
+      "steamcdn-a.akamaihd.net": [
+        "https://dns.alidns.com/dns-query#Steam",
+        "https://doh.pub/dns-query#Steam"
+      ],
+      "steampipe.akamaized.net": [
+        "https://dns.alidns.com/dns-query#Steam",
+        "https://doh.pub/dns-query#Steam"
+      ],
+      "steampipe-partner.akamaized.net": [
+        "https://dns.alidns.com/dns-query#Steam",
+        "https://doh.pub/dns-query#Steam"
+      ],
+      "+.steamcontent.com": [
+        "https://dns.alidns.com/dns-query#Steam",
+        "https://doh.pub/dns-query#Steam"
+      ],
+      "+.steampowered.com": [
+        "https://dns.alidns.com/dns-query#Steam",
+        "https://doh.pub/dns-query#Steam"
+      ],
+      "+.steamcommunity.com": [
+        "https://dns.alidns.com/dns-query#Steam",
+        "https://doh.pub/dns-query#Steam"
+      ],
+      "+.steamstatic.com": [
+        "https://dns.alidns.com/dns-query#Steam",
+        "https://doh.pub/dns-query#Steam"
+      ],
+      "+.steamserver.net": [
+        "https://dns.alidns.com/dns-query#Steam",
+        "https://doh.pub/dns-query#Steam"
+      ],
+      "+.steamusercontent.com": [
+        "https://dns.alidns.com/dns-query#Steam",
+        "https://doh.pub/dns-query#Steam"
+      ],
+      "+.s.team": [
+        "https://dns.alidns.com/dns-query#Steam",
+        "https://doh.pub/dns-query#Steam"
+      ],
+      "+.epicgames.com": [
+        "https://dns.alidns.com/dns-query#Epic Games",
+        "https://doh.pub/dns-query#Epic Games"
+      ],
+      "+.epicgames.dev": [
+        "https://dns.alidns.com/dns-query#Epic Games",
+        "https://doh.pub/dns-query#Epic Games"
+      ],
+      "+.epicgamescdn.com": [
+        "https://dns.alidns.com/dns-query#Epic Games",
+        "https://doh.pub/dns-query#Epic Games"
+      ],
+      "go.microsoft.com": [
+        "https://dns.alidns.com/dns-query#微软生态",
+        "https://doh.pub/dns-query#微软生态"
+      ],
+      "download.microsoft.com": [
+        "https://dns.alidns.com/dns-query#微软生态",
+        "https://doh.pub/dns-query#微软生态"
+      ],
+      "download.windowsupdate.com": [
+        "https://dns.alidns.com/dns-query#微软生态",
+        "https://doh.pub/dns-query#微软生态"
+      ],
+      "software.download.prss.microsoft.com": [
+        "https://dns.alidns.com/dns-query#微软生态",
+        "https://doh.pub/dns-query#微软生态"
+      ],
+      "dl.delivery.mp.microsoft.com": [
+        "https://dns.alidns.com/dns-query#微软生态",
+        "https://doh.pub/dns-query#微软生态"
+      ],
+      "fe3.delivery.mp.microsoft.com": [
+        "https://dns.alidns.com/dns-query#微软生态",
+        "https://doh.pub/dns-query#微软生态"
+      ],
+      "storeedgefd.dsx.mp.microsoft.com": [
+        "https://dns.alidns.com/dns-query#微软生态",
+        "https://doh.pub/dns-query#微软生态"
+      ],
+      "+.microsoft.com": [
+        "https://dns.alidns.com/dns-query#微软生态",
+        "https://doh.pub/dns-query#微软生态"
+      ],
+      "+.microsoftonline.com": [
+        "https://dns.alidns.com/dns-query#微软生态",
+        "https://doh.pub/dns-query#微软生态"
+      ],
+      "+.microsoftstore.com": [
+        "https://dns.alidns.com/dns-query#微软生态",
+        "https://doh.pub/dns-query#微软生态"
+      ],
+      "+.windows.com": [
+        "https://dns.alidns.com/dns-query#微软生态",
+        "https://doh.pub/dns-query#微软生态"
+      ],
+      "+.windowsupdate.com": [
+        "https://dns.alidns.com/dns-query#微软生态",
+        "https://doh.pub/dns-query#微软生态"
+      ],
+      "+.update.microsoft.com": [
+        "https://dns.alidns.com/dns-query#微软生态",
+        "https://doh.pub/dns-query#微软生态"
+      ],
+      "+.office.com": [
+        "https://dns.alidns.com/dns-query#微软生态",
+        "https://doh.pub/dns-query#微软生态"
+      ],
+      "+.office.net": [
+        "https://dns.alidns.com/dns-query#微软生态",
+        "https://doh.pub/dns-query#微软生态"
+      ],
+      "+.office365.com": [
+        "https://dns.alidns.com/dns-query#微软生态",
+        "https://doh.pub/dns-query#微软生态"
+      ],
+      "+.live.com": [
+        "https://dns.alidns.com/dns-query#微软生态",
+        "https://doh.pub/dns-query#微软生态"
+      ],
+      "+.aka.ms": [
+        "https://dns.alidns.com/dns-query#微软生态",
+        "https://doh.pub/dns-query#微软生态"
+      ],
+      "+.onedrive.com": [
+        "https://dns.alidns.com/dns-query#微软生态",
+        "https://doh.pub/dns-query#微软生态"
+      ],
+      "+.sharepoint.com": [
+        "https://dns.alidns.com/dns-query#微软生态",
+        "https://doh.pub/dns-query#微软生态"
+      ],
+      "+.msftconnecttest.com": [
+        "https://dns.alidns.com/dns-query#微软生态",
+        "https://doh.pub/dns-query#微软生态"
+      ],
+      "+.msftncsi.com": [
+        "https://dns.alidns.com/dns-query#微软生态",
+        "https://doh.pub/dns-query#微软生态"
+      ],
+      "+.bing.com": [
+        "https://dns.alidns.com/dns-query#微软生态",
+        "https://doh.pub/dns-query#微软生态"
+      ],
+      "+.copilot.microsoft.com": [
+        "https://dns.alidns.com/dns-query#微软生态",
+        "https://doh.pub/dns-query#微软生态"
+      ],
+      "+.copilot.bing.com": [
+        "https://dns.alidns.com/dns-query#微软生态",
+        "https://doh.pub/dns-query#微软生态"
+      ],
+      "+.githubcopilot.com": [
+        "https://dns.alidns.com/dns-query#微软生态",
+        "https://doh.pub/dns-query#微软生态"
+      ],
+      "+.github.com": [
+        "https://dns.alidns.com/dns-query#微软生态",
+        "https://doh.pub/dns-query#微软生态"
+      ],
+      "+.githubusercontent.com": [
+        "https://dns.alidns.com/dns-query#微软生态",
+        "https://doh.pub/dns-query#微软生态"
+      ],
+      "+.githubassets.com": [
+        "https://dns.alidns.com/dns-query#微软生态",
+        "https://doh.pub/dns-query#微软生态"
+      ],
+      "+.microsoftazure.com": [
+        "https://dns.alidns.com/dns-query#微软生态",
+        "https://doh.pub/dns-query#微软生态"
+      ],
+      "+.msn.com": [
+        "https://dns.alidns.com/dns-query#微软生态",
+        "https://doh.pub/dns-query#微软生态"
+      ],
+      "+.skype.com": [
+        "https://dns.alidns.com/dns-query#微软生态",
+        "https://doh.pub/dns-query#微软生态"
+      ],
+      "+.linkedin.com": [
+        "https://dns.alidns.com/dns-query#微软生态",
+        "https://doh.pub/dns-query#微软生态"
+      ],
+      "+.licdn.com": [
+        "https://dns.alidns.com/dns-query#微软生态",
+        "https://doh.pub/dns-query#微软生态"
+      ],
+      "+.xbox.com": [
+        "https://dns.alidns.com/dns-query#微软生态",
+        "https://doh.pub/dns-query#微软生态"
+      ],
+      "+.xboxlive.com": [
+        "https://dns.alidns.com/dns-query#微软生态",
+        "https://doh.pub/dns-query#微软生态"
+      ],
+      "swcdn.apple.com": [
+        "https://dns.alidns.com/dns-query#苹果国际",
+        "https://doh.pub/dns-query#苹果国际"
+      ],
+      "swdist.apple.com": [
+        "https://dns.alidns.com/dns-query#苹果国际",
+        "https://doh.pub/dns-query#苹果国际"
+      ],
+      "swdownload.apple.com": [
+        "https://dns.alidns.com/dns-query#苹果国际",
+        "https://doh.pub/dns-query#苹果国际"
+      ],
+      "swscan.apple.com": [
+        "https://dns.alidns.com/dns-query#苹果国际",
+        "https://doh.pub/dns-query#苹果国际"
+      ],
+      "oscdn.apple.com": [
+        "https://dns.alidns.com/dns-query#苹果国际",
+        "https://doh.pub/dns-query#苹果国际"
+      ],
+      "osrecovery.apple.com": [
+        "https://dns.alidns.com/dns-query#苹果国际",
+        "https://doh.pub/dns-query#苹果国际"
+      ],
+      "updates.cdn-apple.com": [
+        "https://dns.alidns.com/dns-query#苹果国际",
+        "https://doh.pub/dns-query#苹果国际"
+      ],
+      "updates-http.cdn-apple.com": [
+        "https://dns.alidns.com/dns-query#苹果国际",
+        "https://doh.pub/dns-query#苹果国际"
+      ],
+      "gdmf-ados.apple.com": [
+        "https://dns.alidns.com/dns-query#苹果国际",
+        "https://doh.pub/dns-query#苹果国际"
+      ],
+      "gsra.apple.com": [
+        "https://dns.alidns.com/dns-query#苹果国际",
+        "https://doh.pub/dns-query#苹果国际"
+      ],
+      "wkms-public.apple.com": [
+        "https://dns.alidns.com/dns-query#苹果国际",
+        "https://doh.pub/dns-query#苹果国际"
+      ],
+      "fcs-keys-pub-prod.cdn-apple.com": [
+        "https://dns.alidns.com/dns-query#苹果国际",
+        "https://doh.pub/dns-query#苹果国际"
+      ],
+      "+.apple.com": [
+        "https://dns.alidns.com/dns-query#苹果国际",
+        "https://doh.pub/dns-query#苹果国际"
+      ],
+      "+.icloud.com": [
+        "https://dns.alidns.com/dns-query#苹果国际",
+        "https://doh.pub/dns-query#苹果国际"
+      ],
+      "+.icloud-content.com": [
+        "https://dns.alidns.com/dns-query#苹果国际",
+        "https://doh.pub/dns-query#苹果国际"
+      ],
+      "+.apple-cloudkit.com": [
+        "https://dns.alidns.com/dns-query#苹果国际",
+        "https://doh.pub/dns-query#苹果国际"
+      ],
+      "+.mzstatic.com": [
+        "https://dns.alidns.com/dns-query#苹果国际",
+        "https://doh.pub/dns-query#苹果国际"
+      ],
+      "+.cdn-apple.com": [
+        "https://dns.alidns.com/dns-query#苹果国际",
+        "https://doh.pub/dns-query#苹果国际"
+      ],
+      "+.apple-dns.net": [
+        "https://dns.alidns.com/dns-query#苹果国际",
+        "https://doh.pub/dns-query#苹果国际"
+      ],
+      "+.itunes.com": [
+        "https://dns.alidns.com/dns-query#苹果国际",
+        "https://doh.pub/dns-query#苹果国际"
+      ],
+      "+.appstore.com": [
+        "https://dns.alidns.com/dns-query#苹果国际",
+        "https://doh.pub/dns-query#苹果国际"
+      ],
+      "+.bilibili.tv": [
+        "https://dns.alidns.com/dns-query#哔哩国际",
+        "https://doh.pub/dns-query#哔哩国际"
+      ],
+      "+.biliintl.com": [
+        "https://dns.alidns.com/dns-query#哔哩国际",
+        "https://doh.pub/dns-query#哔哩国际"
+      ],
+      "rule-set:v12r-domain-openai": [
+        "https://dns.alidns.com/dns-query#OpenAI 服务",
+        "https://doh.pub/dns-query#OpenAI 服务"
+      ],
+      "rule-set:v12r-domain-anthropic": [
+        "https://dns.alidns.com/dns-query#Anthropic 服务",
+        "https://doh.pub/dns-query#Anthropic 服务"
+      ],
+      "rule-set:v12r-domain-google-gemini": [
+        "https://dns.alidns.com/dns-query#谷歌服务",
+        "https://doh.pub/dns-query#谷歌服务"
+      ],
+      "rule-set:v12r-domain-youtube": [
+        "https://dns.alidns.com/dns-query#谷歌服务",
+        "https://doh.pub/dns-query#谷歌服务"
+      ],
+      "rule-set:v12r-domain-google": [
+        "https://dns.alidns.com/dns-query#谷歌服务",
+        "https://doh.pub/dns-query#谷歌服务"
+      ],
+      "rule-set:v12r-domain-netflix": [
+        "https://dns.alidns.com/dns-query#Netflix",
+        "https://doh.pub/dns-query#Netflix"
+      ],
+      "rule-set:v12r-domain-disney": [
+        "https://dns.alidns.com/dns-query#Disney+",
+        "https://doh.pub/dns-query#Disney+"
+      ],
+      "rule-set:v12r-domain-spotify": [
+        "https://dns.alidns.com/dns-query#Spotify",
+        "https://doh.pub/dns-query#Spotify"
+      ],
+      "rule-set:v12r-domain-telegram": [
+        "https://dns.alidns.com/dns-query#Telegram",
+        "https://doh.pub/dns-query#Telegram"
+      ],
+      "rule-set:v12r-domain-discord": [
+        "https://dns.alidns.com/dns-query#Discord",
+        "https://doh.pub/dns-query#Discord"
+      ],
+      "rule-set:v12r-domain-tiktok": [
+        "https://dns.alidns.com/dns-query#TikTok",
+        "https://doh.pub/dns-query#TikTok"
+      ],
+      "rule-set:v12r-domain-twitter": [
+        "https://dns.alidns.com/dns-query#Twitter",
+        "https://doh.pub/dns-query#Twitter"
+      ],
+      "rule-set:v12r-domain-meta": [
+        "https://dns.alidns.com/dns-query#Meta 服务",
+        "https://doh.pub/dns-query#Meta 服务"
+      ],
+      "rule-set:v12r-domain-steam": [
+        "https://dns.alidns.com/dns-query#Steam",
+        "https://doh.pub/dns-query#Steam"
+      ],
+      "rule-set:v12r-domain-epicgames": [
+        "https://dns.alidns.com/dns-query#Epic Games",
+        "https://doh.pub/dns-query#Epic Games"
+      ],
+      "rule-set:v12r-domain-microsoft": [
+        "https://dns.alidns.com/dns-query#微软生态",
+        "https://doh.pub/dns-query#微软生态"
+      ],
+      "rule-set:v12r-domain-linkedin": [
+        "https://dns.alidns.com/dns-query#微软生态",
+        "https://doh.pub/dns-query#微软生态"
+      ],
+      "rule-set:v12r-domain-apple": [
+        "https://dns.alidns.com/dns-query#苹果国际",
+        "https://doh.pub/dns-query#苹果国际"
+      ],
+      "rule-set:v12r-domain-bilibili": [
+        "https://dns.alidns.com/dns-query#哔哩国际",
+        "https://doh.pub/dns-query#哔哩国际"
+      ]
+    },
+    "direct-nameserver": [
+      "https://dns.alidns.com/dns-query#DIRECT",
+      "https://doh.pub/dns-query#DIRECT"
+    ],
+    "direct-nameserver-follow-policy": false
+  },
+  "proxy-groups": [
+    {
+      "name": "节点选择",
+      "type": "select",
+      "proxies": [
+        "自动选择",
+        "Upgrade test node"
+      ],
+      "default-selected": "自动选择",
+      "empty-fallback": "REJECT"
+    },
+    {
+      "name": "自动选择",
+      "type": "url-test",
+      "proxies": [
+        "Upgrade test node"
+      ],
+      "url": "https://www.gstatic.com/generate_204",
+      "interval": 600,
+      "lazy": false,
+      "empty-fallback": "REJECT"
+    },
+    {
+      "name": "公共基础服务",
+      "type": "select",
+      "proxies": [
+        "节点选择",
+        "DIRECT",
+        "Upgrade test node"
+      ],
+      "default-selected": "节点选择",
+      "empty-fallback": "REJECT"
+    },
+    {
+      "name": "漏网之鱼",
+      "type": "select",
+      "proxies": [
+        "节点选择",
+        "Upgrade test node"
+      ],
+      "default-selected": "节点选择",
+      "empty-fallback": "REJECT"
+    },
+    {
+      "name": "OpenAI 服务",
+      "type": "select",
+      "proxies": [
+        "节点选择",
+        "DIRECT",
+        "Upgrade test node"
+      ],
+      "default-selected": "节点选择",
+      "empty-fallback": "REJECT"
+    },
+    {
+      "name": "Anthropic 服务",
+      "type": "select",
+      "proxies": [
+        "节点选择",
+        "DIRECT",
+        "Upgrade test node"
+      ],
+      "default-selected": "节点选择",
+      "empty-fallback": "REJECT"
+    },
+    {
+      "name": "谷歌服务",
+      "type": "select",
+      "proxies": [
+        "节点选择",
+        "DIRECT",
+        "Upgrade test node"
+      ],
+      "default-selected": "节点选择",
+      "empty-fallback": "REJECT"
+    },
+    {
+      "name": "微软生态",
+      "type": "select",
+      "proxies": [
+        "节点选择",
+        "DIRECT",
+        "Upgrade test node"
+      ],
+      "default-selected": "节点选择",
+      "empty-fallback": "REJECT"
+    },
+    {
+      "name": "Steam",
+      "type": "select",
+      "proxies": [
+        "节点选择",
+        "DIRECT",
+        "Upgrade test node"
+      ],
+      "default-selected": "节点选择",
+      "empty-fallback": "REJECT"
+    },
+    {
+      "name": "Epic Games",
+      "type": "select",
+      "proxies": [
+        "节点选择",
+        "DIRECT",
+        "Upgrade test node"
+      ],
+      "default-selected": "节点选择",
+      "empty-fallback": "REJECT"
+    },
+    {
+      "name": "Telegram",
+      "type": "select",
+      "proxies": [
+        "节点选择",
+        "DIRECT",
+        "Upgrade test node"
+      ],
+      "default-selected": "节点选择",
+      "empty-fallback": "REJECT"
+    },
+    {
+      "name": "TikTok",
+      "type": "select",
+      "proxies": [
+        "节点选择",
+        "DIRECT",
+        "Upgrade test node"
+      ],
+      "default-selected": "节点选择",
+      "empty-fallback": "REJECT"
+    },
+    {
+      "name": "Twitter",
+      "type": "select",
+      "proxies": [
+        "节点选择",
+        "DIRECT",
+        "Upgrade test node"
+      ],
+      "default-selected": "节点选择",
+      "empty-fallback": "REJECT"
+    },
+    {
+      "name": "Discord",
+      "type": "select",
+      "proxies": [
+        "节点选择",
+        "DIRECT",
+        "Upgrade test node"
+      ],
+      "default-selected": "节点选择",
+      "empty-fallback": "REJECT"
+    },
+    {
+      "name": "OpenRouter",
+      "type": "select",
+      "proxies": [
+        "节点选择",
+        "DIRECT",
+        "Upgrade test node"
+      ],
+      "default-selected": "节点选择",
+      "empty-fallback": "REJECT"
+    },
+    {
+      "name": "Perplexity",
+      "type": "select",
+      "proxies": [
+        "节点选择",
+        "DIRECT",
+        "Upgrade test node"
+      ],
+      "default-selected": "节点选择",
+      "empty-fallback": "REJECT"
+    },
+    {
+      "name": "Hugging Face",
+      "type": "select",
+      "proxies": [
+        "节点选择",
+        "DIRECT",
+        "Upgrade test node"
+      ],
+      "default-selected": "节点选择",
+      "empty-fallback": "REJECT"
+    },
+    {
+      "name": "xAI",
+      "type": "select",
+      "proxies": [
+        "节点选择",
+        "DIRECT",
+        "Upgrade test node"
+      ],
+      "default-selected": "节点选择",
+      "empty-fallback": "REJECT"
+    },
+    {
+      "name": "Netflix",
+      "type": "select",
+      "proxies": [
+        "节点选择",
+        "DIRECT",
+        "Upgrade test node"
+      ],
+      "default-selected": "节点选择",
+      "empty-fallback": "REJECT"
+    },
+    {
+      "name": "Disney+",
+      "type": "select",
+      "proxies": [
+        "节点选择",
+        "DIRECT",
+        "Upgrade test node"
+      ],
+      "default-selected": "节点选择",
+      "empty-fallback": "REJECT"
+    },
+    {
+      "name": "Spotify",
+      "type": "select",
+      "proxies": [
+        "节点选择",
+        "DIRECT",
+        "Upgrade test node"
+      ],
+      "default-selected": "节点选择",
+      "empty-fallback": "REJECT"
+    },
+    {
+      "name": "Meta 服务",
+      "type": "select",
+      "proxies": [
+        "节点选择",
+        "DIRECT",
+        "Upgrade test node"
+      ],
+      "default-selected": "节点选择",
+      "empty-fallback": "REJECT"
+    },
+    {
+      "name": "苹果国际",
+      "type": "select",
+      "proxies": [
+        "节点选择",
+        "DIRECT",
+        "Upgrade test node"
+      ],
+      "default-selected": "节点选择",
+      "empty-fallback": "REJECT"
+    },
+    {
+      "name": "哔哩国际",
+      "type": "select",
+      "proxies": [
+        "节点选择",
+        "DIRECT",
+        "Upgrade test node"
+      ],
+      "default-selected": "节点选择",
+      "empty-fallback": "REJECT"
+    }
+  ],
+  "proxy-providers": {},
+  "rule-providers": {
+    "v12r-domain-private": {
+      "type": "http",
+      "behavior": "classical",
+      "format": "yaml",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/dad29637471fad8f29e85fdcee6a67d08ee5a779/geo/geosite/classical/private.yaml",
+      "path": "./ruleset/v12-managed/domain-private-d7a17d6c.yaml",
+      "interval": 86400,
+      "proxy": "节点选择",
+      "size-limit": 16777216
+    },
+    "v12r-domain-category-doh": {
+      "type": "http",
+      "behavior": "classical",
+      "format": "yaml",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/category-doh.yaml",
+      "path": "./ruleset/v12-managed/domain-category-doh-d33f30b0.yaml",
+      "interval": 86400,
+      "proxy": "节点选择",
+      "size-limit": 16777216
+    },
+    "v12r-domain-douyin": {
+      "type": "http",
+      "behavior": "classical",
+      "format": "yaml",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/dad29637471fad8f29e85fdcee6a67d08ee5a779/geo/geosite/classical/douyin.yaml",
+      "path": "./ruleset/v12-managed/domain-douyin-4f993e51.yaml",
+      "interval": 86400,
+      "proxy": "节点选择",
+      "size-limit": 16777216
+    },
+    "v12r-domain-apple_at_cn": {
+      "type": "http",
+      "behavior": "classical",
+      "format": "yaml",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/dad29637471fad8f29e85fdcee6a67d08ee5a779/geo/geosite/classical/apple@cn.yaml",
+      "path": "./ruleset/v12-managed/domain-apple_at_cn-f43767ce.yaml",
+      "interval": 86400,
+      "proxy": "节点选择",
+      "size-limit": 16777216
+    },
+    "v12r-domain-google_at_cn": {
+      "type": "http",
+      "behavior": "classical",
+      "format": "yaml",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/dad29637471fad8f29e85fdcee6a67d08ee5a779/geo/geosite/classical/google@cn.yaml",
+      "path": "./ruleset/v12-managed/domain-google_at_cn-ea355d21.yaml",
+      "interval": 86400,
+      "proxy": "节点选择",
+      "size-limit": 16777216
+    },
+    "v12r-domain-microsoft_at_cn": {
+      "type": "http",
+      "behavior": "classical",
+      "format": "yaml",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/dad29637471fad8f29e85fdcee6a67d08ee5a779/geo/geosite/classical/microsoft@cn.yaml",
+      "path": "./ruleset/v12-managed/domain-microsoft_at_cn-e356d6f2.yaml",
+      "interval": 86400,
+      "proxy": "节点选择",
+      "size-limit": 16777216
+    },
+    "v12r-domain-steam_at_cn": {
+      "type": "http",
+      "behavior": "classical",
+      "format": "yaml",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/dad29637471fad8f29e85fdcee6a67d08ee5a779/geo/geosite/classical/steam@cn.yaml",
+      "path": "./ruleset/v12-managed/domain-steam_at_cn-8c08d19e.yaml",
+      "interval": 86400,
+      "proxy": "节点选择",
+      "size-limit": 16777216
+    },
+    "v12r-domain-cn": {
+      "type": "http",
+      "behavior": "domain",
+      "format": "mrs",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/dad29637471fad8f29e85fdcee6a67d08ee5a779/geo/geosite/cn.mrs",
+      "path": "./ruleset/v12-managed/domain-cn-5f12ef09.mrs",
+      "interval": 86400,
+      "proxy": "节点选择",
+      "size-limit": 16777216
+    },
+    "v12r-domain-openai": {
+      "type": "http",
+      "behavior": "classical",
+      "format": "yaml",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/openai.yaml",
+      "path": "./ruleset/v12-managed/domain-openai-105ee4b4.yaml",
+      "interval": 86400,
+      "proxy": "节点选择",
+      "size-limit": 16777216
+    },
+    "v12r-domain-anthropic": {
+      "type": "http",
+      "behavior": "classical",
+      "format": "yaml",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/anthropic.yaml",
+      "path": "./ruleset/v12-managed/domain-anthropic-10f07b6c.yaml",
+      "interval": 86400,
+      "proxy": "节点选择",
+      "size-limit": 16777216
+    },
+    "v12r-domain-google-gemini": {
+      "type": "http",
+      "behavior": "classical",
+      "format": "yaml",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/google-gemini.yaml",
+      "path": "./ruleset/v12-managed/domain-google-gemini-7443bacf.yaml",
+      "interval": 86400,
+      "proxy": "节点选择",
+      "size-limit": 16777216
+    },
+    "v12r-domain-youtube": {
+      "type": "http",
+      "behavior": "classical",
+      "format": "yaml",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/youtube.yaml",
+      "path": "./ruleset/v12-managed/domain-youtube-e1c8b433.yaml",
+      "interval": 86400,
+      "proxy": "节点选择",
+      "size-limit": 16777216
+    },
+    "v12r-domain-google": {
+      "type": "http",
+      "behavior": "classical",
+      "format": "yaml",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/google.yaml",
+      "path": "./ruleset/v12-managed/domain-google-c9eee24b.yaml",
+      "interval": 86400,
+      "proxy": "节点选择",
+      "size-limit": 16777216
+    },
+    "v12r-domain-netflix": {
+      "type": "http",
+      "behavior": "classical",
+      "format": "yaml",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/netflix.yaml",
+      "path": "./ruleset/v12-managed/domain-netflix-2776c124.yaml",
+      "interval": 86400,
+      "proxy": "节点选择",
+      "size-limit": 16777216
+    },
+    "v12r-domain-disney": {
+      "type": "http",
+      "behavior": "classical",
+      "format": "yaml",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/disney.yaml",
+      "path": "./ruleset/v12-managed/domain-disney-dcf45ca.yaml",
+      "interval": 86400,
+      "proxy": "节点选择",
+      "size-limit": 16777216
+    },
+    "v12r-domain-spotify": {
+      "type": "http",
+      "behavior": "classical",
+      "format": "yaml",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/spotify.yaml",
+      "path": "./ruleset/v12-managed/domain-spotify-fcc052de.yaml",
+      "interval": 86400,
+      "proxy": "节点选择",
+      "size-limit": 16777216
+    },
+    "v12r-domain-telegram": {
+      "type": "http",
+      "behavior": "classical",
+      "format": "yaml",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/telegram.yaml",
+      "path": "./ruleset/v12-managed/domain-telegram-22a7af0b.yaml",
+      "interval": 86400,
+      "proxy": "节点选择",
+      "size-limit": 16777216
+    },
+    "v12r-domain-discord": {
+      "type": "http",
+      "behavior": "classical",
+      "format": "yaml",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/discord.yaml",
+      "path": "./ruleset/v12-managed/domain-discord-44558a28.yaml",
+      "interval": 86400,
+      "proxy": "节点选择",
+      "size-limit": 16777216
+    },
+    "v12r-domain-tiktok": {
+      "type": "http",
+      "behavior": "classical",
+      "format": "yaml",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/tiktok.yaml",
+      "path": "./ruleset/v12-managed/domain-tiktok-7da174.yaml",
+      "interval": 86400,
+      "proxy": "节点选择",
+      "size-limit": 16777216
+    },
+    "v12r-domain-twitter": {
+      "type": "http",
+      "behavior": "classical",
+      "format": "yaml",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/twitter.yaml",
+      "path": "./ruleset/v12-managed/domain-twitter-a648bde1.yaml",
+      "interval": 86400,
+      "proxy": "节点选择",
+      "size-limit": 16777216
+    },
+    "v12r-domain-meta": {
+      "type": "http",
+      "behavior": "classical",
+      "format": "yaml",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/meta.yaml",
+      "path": "./ruleset/v12-managed/domain-meta-b5e2103d.yaml",
+      "interval": 86400,
+      "proxy": "节点选择",
+      "size-limit": 16777216
+    },
+    "v12r-domain-steam": {
+      "type": "http",
+      "behavior": "classical",
+      "format": "yaml",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/steam.yaml",
+      "path": "./ruleset/v12-managed/domain-steam-651acffc.yaml",
+      "interval": 86400,
+      "proxy": "节点选择",
+      "size-limit": 16777216
+    },
+    "v12r-domain-epicgames": {
+      "type": "http",
+      "behavior": "classical",
+      "format": "yaml",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/epicgames.yaml",
+      "path": "./ruleset/v12-managed/domain-epicgames-fb2b93c.yaml",
+      "interval": 86400,
+      "proxy": "节点选择",
+      "size-limit": 16777216
+    },
+    "v12r-domain-microsoft": {
+      "type": "http",
+      "behavior": "classical",
+      "format": "yaml",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/microsoft.yaml",
+      "path": "./ruleset/v12-managed/domain-microsoft-72827470.yaml",
+      "interval": 86400,
+      "proxy": "节点选择",
+      "size-limit": 16777216
+    },
+    "v12r-domain-linkedin": {
+      "type": "http",
+      "behavior": "classical",
+      "format": "yaml",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/linkedin.yaml",
+      "path": "./ruleset/v12-managed/domain-linkedin-f5063f00.yaml",
+      "interval": 86400,
+      "proxy": "节点选择",
+      "size-limit": 16777216
+    },
+    "v12r-domain-apple": {
+      "type": "http",
+      "behavior": "classical",
+      "format": "yaml",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/apple.yaml",
+      "path": "./ruleset/v12-managed/domain-apple-7d730ce0.yaml",
+      "interval": 86400,
+      "proxy": "节点选择",
+      "size-limit": 16777216
+    },
+    "v12r-domain-bilibili": {
+      "type": "http",
+      "behavior": "classical",
+      "format": "yaml",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/bilibili.yaml",
+      "path": "./ruleset/v12-managed/domain-bilibili-477b79d6.yaml",
+      "interval": 86400,
+      "proxy": "节点选择",
+      "size-limit": 16777216
+    },
+    "v12r-ip-netflix": {
+      "type": "http",
+      "behavior": "ipcidr",
+      "format": "mrs",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/netflix.mrs",
+      "path": "./ruleset/v12-managed/ip-netflix-11dc6cc5.mrs",
+      "interval": 86400,
+      "proxy": "节点选择",
+      "size-limit": 16777216
+    },
+    "v12r-ip-telegram": {
+      "type": "http",
+      "behavior": "ipcidr",
+      "format": "mrs",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/telegram.mrs",
+      "path": "./ruleset/v12-managed/ip-telegram-a2ef74f4.mrs",
+      "interval": 86400,
+      "proxy": "节点选择",
+      "size-limit": 16777216
+    },
+    "v12r-ip-twitter": {
+      "type": "http",
+      "behavior": "ipcidr",
+      "format": "mrs",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/twitter.mrs",
+      "path": "./ruleset/v12-managed/ip-twitter-78b6807e.mrs",
+      "interval": 86400,
+      "proxy": "节点选择",
+      "size-limit": 16777216
+    },
+    "v12r-ip-cn": {
+      "type": "http",
+      "behavior": "ipcidr",
+      "format": "mrs",
+      "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/dad29637471fad8f29e85fdcee6a67d08ee5a779/geo/geoip/cn.mrs",
+      "path": "./ruleset/v12-managed/ip-cn-21d759d7.mrs",
+      "interval": 86400,
+      "proxy": "节点选择",
+      "size-limit": 16777216
+    }
+  },
+  "rules": [
+    "DOMAIN,v14-runtime-check.invalid,REJECT",
+    "DOMAIN-SUFFIX,localhost,DIRECT",
+    "DOMAIN-SUFFIX,lan,DIRECT",
+    "DOMAIN-SUFFIX,local,DIRECT",
+    "DOMAIN-SUFFIX,localdomain,DIRECT",
+    "DOMAIN-SUFFIX,home.arpa,DIRECT",
+    "IP-CIDR,127.0.0.0/8,DIRECT,no-resolve",
+    "IP-CIDR,10.0.0.0/8,DIRECT,no-resolve",
+    "IP-CIDR,172.16.0.0/12,DIRECT,no-resolve",
+    "IP-CIDR,192.168.0.0/16,DIRECT,no-resolve",
+    "IP-CIDR,169.254.0.0/16,DIRECT,no-resolve",
+    "IP-CIDR,100.64.0.0/10,DIRECT,no-resolve",
+    "IP-CIDR6,::1/128,DIRECT,no-resolve",
+    "IP-CIDR6,fc00::/7,DIRECT,no-resolve",
+    "IP-CIDR6,fe80::/10,DIRECT,no-resolve",
+    "RULE-SET,v12r-domain-private,DIRECT",
+    "DOMAIN-SUFFIX,shiyi.click,DIRECT",
+    "DOMAIN-SUFFIX,net.coffee,节点选择",
+    "DOMAIN-SUFFIX,net.coffee,REJECT",
+    "DOMAIN-SUFFIX,browserleaks.com,节点选择",
+    "DOMAIN-SUFFIX,browserleaks.com,REJECT",
+    "DOMAIN-SUFFIX,browserleaks.org,节点选择",
+    "DOMAIN-SUFFIX,browserleaks.org,REJECT",
+    "DOMAIN-SUFFIX,dnsleaktest.com,节点选择",
+    "DOMAIN-SUFFIX,dnsleaktest.com,REJECT",
+    "DOMAIN-SUFFIX,dnscheck.tools,节点选择",
+    "DOMAIN-SUFFIX,dnscheck.tools,REJECT",
+    "DOMAIN-SUFFIX,ipleak.net,节点选择",
+    "DOMAIN-SUFFIX,ipleak.net,REJECT",
+    "DST-PORT,853,REJECT",
+    "DOMAIN,dns.google,REJECT",
+    "DOMAIN,cloudflare-dns.com,REJECT",
+    "DOMAIN,mozilla.cloudflare-dns.com,REJECT",
+    "DOMAIN,security.cloudflare-dns.com,REJECT",
+    "DOMAIN,family.cloudflare-dns.com,REJECT",
+    "DOMAIN,dns.quad9.net,REJECT",
+    "DOMAIN,dns.nextdns.io,REJECT",
+    "DOMAIN,doh.opendns.com,REJECT",
+    "DOMAIN,dns.adguard-dns.com,REJECT",
+    "DOMAIN,doh.cleanbrowsing.org,REJECT",
+    "RULE-SET,v12r-domain-category-doh,REJECT",
+    "DOMAIN-SUFFIX,googleapis.cn,谷歌服务",
+    "DOMAIN-SUFFIX,googleapis.cn,REJECT",
+    "DOMAIN-SUFFIX,xn--ngstr-lra8j.com,谷歌服务",
+    "DOMAIN-SUFFIX,xn--ngstr-lra8j.com,REJECT",
+    "DOMAIN-SUFFIX,gvt1.com,谷歌服务",
+    "DOMAIN-SUFFIX,gvt1.com,REJECT",
+    "DOMAIN-SUFFIX,gvt2.com,谷歌服务",
+    "DOMAIN-SUFFIX,gvt2.com,REJECT",
+    "DOMAIN-SUFFIX,gvt3.com,谷歌服务",
+    "DOMAIN-SUFFIX,gvt3.com,REJECT",
+    "DOMAIN,chatgpt.livekit.cloud,OpenAI 服务",
+    "DOMAIN,chatgpt.livekit.cloud,REJECT",
+    "DOMAIN,host.livekit.cloud,OpenAI 服务",
+    "DOMAIN,host.livekit.cloud,REJECT",
+    "DOMAIN,turn.livekit.cloud,OpenAI 服务",
+    "DOMAIN,turn.livekit.cloud,REJECT",
+    "IP-CIDR,102.37.57.54/32,OpenAI 服务,no-resolve",
+    "IP-CIDR,102.37.57.54/32,REJECT,no-resolve",
+    "IP-CIDR,13.71.25.29/32,OpenAI 服务,no-resolve",
+    "IP-CIDR,13.71.25.29/32,REJECT,no-resolve",
+    "IP-CIDR,135.220.40.201/32,OpenAI 服务,no-resolve",
+    "IP-CIDR,135.220.40.201/32,REJECT,no-resolve",
+    "IP-CIDR,172.203.39.49/32,OpenAI 服务,no-resolve",
+    "IP-CIDR,172.203.39.49/32,REJECT,no-resolve",
+    "IP-CIDR,172.207.173.200/32,OpenAI 服务,no-resolve",
+    "IP-CIDR,172.207.173.200/32,REJECT,no-resolve",
+    "IP-CIDR,172.214.226.198/32,OpenAI 服务,no-resolve",
+    "IP-CIDR,172.214.226.198/32,REJECT,no-resolve",
+    "IP-CIDR,191.233.251.27/32,OpenAI 服务,no-resolve",
+    "IP-CIDR,191.233.251.27/32,REJECT,no-resolve",
+    "IP-CIDR,20.162.96.163/32,OpenAI 服务,no-resolve",
+    "IP-CIDR,20.162.96.163/32,REJECT,no-resolve",
+    "IP-CIDR,20.168.48.117/32,OpenAI 服务,no-resolve",
+    "IP-CIDR,20.168.48.117/32,REJECT,no-resolve",
+    "IP-CIDR,20.184.36.134/32,OpenAI 服务,no-resolve",
+    "IP-CIDR,20.184.36.134/32,REJECT,no-resolve",
+    "IP-CIDR,20.203.144.245/32,OpenAI 服务,no-resolve",
+    "IP-CIDR,20.203.144.245/32,REJECT,no-resolve",
+    "IP-CIDR,20.74.221.21/32,OpenAI 服务,no-resolve",
+    "IP-CIDR,20.74.221.21/32,REJECT,no-resolve",
+    "IP-CIDR,4.151.200.38/32,OpenAI 服务,no-resolve",
+    "IP-CIDR,4.151.200.38/32,REJECT,no-resolve",
+    "IP-CIDR,4.155.146.196/32,OpenAI 服务,no-resolve",
+    "IP-CIDR,4.155.146.196/32,REJECT,no-resolve",
+    "IP-CIDR,4.197.172.116/32,OpenAI 服务,no-resolve",
+    "IP-CIDR,4.197.172.116/32,REJECT,no-resolve",
+    "IP-CIDR,4.217.235.100/32,OpenAI 服务,no-resolve",
+    "IP-CIDR,4.217.235.100/32,REJECT,no-resolve",
+    "IP-CIDR,4.245.198.13/32,OpenAI 服务,no-resolve",
+    "IP-CIDR,4.245.198.13/32,REJECT,no-resolve",
+    "IP-CIDR,40.118.236.137/32,OpenAI 服务,no-resolve",
+    "IP-CIDR,40.118.236.137/32,REJECT,no-resolve",
+    "IP-CIDR,51.4.112.173/32,OpenAI 服务,no-resolve",
+    "IP-CIDR,51.4.112.173/32,REJECT,no-resolve",
+    "IP-CIDR,52.143.181.161/32,OpenAI 服务,no-resolve",
+    "IP-CIDR,52.143.181.161/32,REJECT,no-resolve",
+    "IP-CIDR,68.155.152.41/32,OpenAI 服务,no-resolve",
+    "IP-CIDR,68.155.152.41/32,REJECT,no-resolve",
+    "IP-CIDR,72.146.20.246/32,OpenAI 服务,no-resolve",
+    "IP-CIDR,72.146.20.246/32,REJECT,no-resolve",
+    "IP-CIDR,74.248.148.7/32,OpenAI 服务,no-resolve",
+    "IP-CIDR,74.248.148.7/32,REJECT,no-resolve",
+    "DOMAIN-SUFFIX,chatgpt.livekit.cloud,漏网之鱼",
+    "DOMAIN-SUFFIX,chatgpt.livekit.cloud,REJECT",
+    "DOMAIN-SUFFIX,host.livekit.cloud,漏网之鱼",
+    "DOMAIN-SUFFIX,host.livekit.cloud,REJECT",
+    "DOMAIN-SUFFIX,turn.livekit.cloud,漏网之鱼",
+    "DOMAIN-SUFFIX,turn.livekit.cloud,REJECT",
+    "AND,((NETWORK,UDP),(IP-CIDR,91.108.56.0/22,no-resolve)),Telegram",
+    "AND,((NETWORK,UDP),(IP-CIDR,91.108.56.0/22,no-resolve)),REJECT",
+    "AND,((NETWORK,UDP),(IP-CIDR,91.108.4.0/22,no-resolve)),Telegram",
+    "AND,((NETWORK,UDP),(IP-CIDR,91.108.4.0/22,no-resolve)),REJECT",
+    "AND,((NETWORK,UDP),(IP-CIDR,91.108.8.0/22,no-resolve)),Telegram",
+    "AND,((NETWORK,UDP),(IP-CIDR,91.108.8.0/22,no-resolve)),REJECT",
+    "AND,((NETWORK,UDP),(IP-CIDR,91.108.16.0/22,no-resolve)),Telegram",
+    "AND,((NETWORK,UDP),(IP-CIDR,91.108.16.0/22,no-resolve)),REJECT",
+    "AND,((NETWORK,UDP),(IP-CIDR,91.108.12.0/22,no-resolve)),Telegram",
+    "AND,((NETWORK,UDP),(IP-CIDR,91.108.12.0/22,no-resolve)),REJECT",
+    "AND,((NETWORK,UDP),(IP-CIDR,149.154.160.0/20,no-resolve)),Telegram",
+    "AND,((NETWORK,UDP),(IP-CIDR,149.154.160.0/20,no-resolve)),REJECT",
+    "AND,((NETWORK,UDP),(IP-CIDR,91.105.192.0/23,no-resolve)),Telegram",
+    "AND,((NETWORK,UDP),(IP-CIDR,91.105.192.0/23,no-resolve)),REJECT",
+    "AND,((NETWORK,UDP),(IP-CIDR,91.108.20.0/22,no-resolve)),Telegram",
+    "AND,((NETWORK,UDP),(IP-CIDR,91.108.20.0/22,no-resolve)),REJECT",
+    "AND,((NETWORK,UDP),(IP-CIDR,185.76.151.0/24,no-resolve)),Telegram",
+    "AND,((NETWORK,UDP),(IP-CIDR,185.76.151.0/24,no-resolve)),REJECT",
+    "AND,((NETWORK,UDP),(IP-CIDR6,2001:b28:f23d::/48,no-resolve)),Telegram",
+    "AND,((NETWORK,UDP),(IP-CIDR6,2001:b28:f23d::/48,no-resolve)),REJECT",
+    "AND,((NETWORK,UDP),(IP-CIDR6,2001:b28:f23f::/48,no-resolve)),Telegram",
+    "AND,((NETWORK,UDP),(IP-CIDR6,2001:b28:f23f::/48,no-resolve)),REJECT",
+    "AND,((NETWORK,UDP),(IP-CIDR6,2001:67c:4e8::/48,no-resolve)),Telegram",
+    "AND,((NETWORK,UDP),(IP-CIDR6,2001:67c:4e8::/48,no-resolve)),REJECT",
+    "AND,((NETWORK,UDP),(IP-CIDR6,2001:b28:f23c::/48,no-resolve)),Telegram",
+    "AND,((NETWORK,UDP),(IP-CIDR6,2001:b28:f23c::/48,no-resolve)),REJECT",
+    "AND,((NETWORK,UDP),(IP-CIDR6,2a0a:f280::/32,no-resolve)),Telegram",
+    "AND,((NETWORK,UDP),(IP-CIDR6,2a0a:f280::/32,no-resolve)),REJECT",
+    "DOMAIN,stun.l.google.com,漏网之鱼",
+    "DOMAIN,stun.l.google.com,REJECT",
+    "DOMAIN,stun.services.mozilla.com,漏网之鱼",
+    "DOMAIN,stun.services.mozilla.com,REJECT",
+    "DOMAIN,stun.cloudflare.com,漏网之鱼",
+    "DOMAIN,stun.cloudflare.com,REJECT",
+    "DOMAIN,stun.chat.bilibili.com,漏网之鱼",
+    "DOMAIN,stun.chat.bilibili.com,REJECT",
+    "DOMAIN,stun.hitv.com,漏网之鱼",
+    "DOMAIN,stun.hitv.com,REJECT",
+    "AND,((NETWORK,UDP),(DST-PORT,3478)),漏网之鱼",
+    "AND,((NETWORK,UDP),(DST-PORT,3478)),REJECT",
+    "AND,((NETWORK,UDP),(DST-PORT,5349)),漏网之鱼",
+    "AND,((NETWORK,UDP),(DST-PORT,5349)),REJECT",
+    "AND,((NETWORK,UDP),(DST-PORT,19302-19309)),漏网之鱼",
+    "AND,((NETWORK,UDP),(DST-PORT,19302-19309)),REJECT",
+    "AND,((NETWORK,UDP),(DOMAIN-WILDCARD,stun.*)),漏网之鱼",
+    "AND,((NETWORK,UDP),(DOMAIN-WILDCARD,stun.*)),REJECT",
+    "AND,((NETWORK,UDP),(DOMAIN-WILDCARD,*.stun.*)),漏网之鱼",
+    "AND,((NETWORK,UDP),(DOMAIN-WILDCARD,*.stun.*)),REJECT",
+    "AND,((NETWORK,UDP),(DOMAIN-WILDCARD,turn.*)),漏网之鱼",
+    "AND,((NETWORK,UDP),(DOMAIN-WILDCARD,turn.*)),REJECT",
+    "AND,((NETWORK,UDP),(DOMAIN-WILDCARD,*.turn.*)),漏网之鱼",
+    "AND,((NETWORK,UDP),(DOMAIN-WILDCARD,*.turn.*)),REJECT",
+    "DOMAIN-SUFFIX,cn,DIRECT",
+    "DOMAIN-SUFFIX,douyin.com,DIRECT",
+    "DOMAIN-SUFFIX,douyincdn.com,DIRECT",
+    "DOMAIN-SUFFIX,jianying.com,DIRECT",
+    "DOMAIN-SUFFIX,jimeng.com,DIRECT",
+    "DOMAIN-SUFFIX,toutiao.com,DIRECT",
+    "DOMAIN-SUFFIX,ixigua.com,DIRECT",
+    "DOMAIN-SUFFIX,pstatp.com,DIRECT",
+    "DOMAIN-SUFFIX,feishu.cn,DIRECT",
+    "DOMAIN-SUFFIX,volcengine.com,DIRECT",
+    "DOMAIN-SUFFIX,bilibili.com,DIRECT",
+    "DOMAIN-SUFFIX,bilivideo.com,DIRECT",
+    "DOMAIN-SUFFIX,hdslb.com,DIRECT",
+    "DOMAIN-SUFFIX,dl.steam.clngaa.com,DIRECT",
+    "DOMAIN-SUFFIX,st.dl.bscstorage.net,DIRECT",
+    "DOMAIN-SUFFIX,st.dl.eccdnx.com,DIRECT",
+    "DOMAIN-SUFFIX,st.dl.pinyuncloud.com,DIRECT",
+    "DOMAIN-SUFFIX,prts.plus,DIRECT",
+    "DOMAIN-SUFFIX,cnbeta.com,DIRECT",
+    "DOMAIN-SUFFIX,cnbetacdn.com,DIRECT",
+    "DOMAIN-SUFFIX,easou.com,DIRECT",
+    "DOMAIN-SUFFIX,mob.com,DIRECT",
+    "DOMAIN-SUFFIX,126.com,DIRECT",
+    "DOMAIN-SUFFIX,126.net,DIRECT",
+    "DOMAIN-SUFFIX,127.net,DIRECT",
+    "DOMAIN-SUFFIX,163.com,DIRECT",
+    "DOMAIN-SUFFIX,360buyimg.com,DIRECT",
+    "DOMAIN-SUFFIX,36kr.com,DIRECT",
+    "DOMAIN-SUFFIX,acfun.tv,DIRECT",
+    "DOMAIN-SUFFIX,aixifan.com,DIRECT",
+    "DOMAIN-SUFFIX,amap.com,DIRECT",
+    "DOMAIN-SUFFIX,autonavi.com,DIRECT",
+    "DOMAIN-SUFFIX,bdimg.com,DIRECT",
+    "DOMAIN-SUFFIX,bdstatic.com,DIRECT",
+    "DOMAIN-SUFFIX,caiyunapp.com,DIRECT",
+    "DOMAIN-SUFFIX,csdn.net,DIRECT",
+    "DOMAIN-SUFFIX,ctrip.com,DIRECT",
+    "DOMAIN-SUFFIX,dgtle.com,DIRECT",
+    "DOMAIN-SUFFIX,dianping.com,DIRECT",
+    "DOMAIN-SUFFIX,douban.com,DIRECT",
+    "DOMAIN-SUFFIX,doubanio.com,DIRECT",
+    "DOMAIN-SUFFIX,duokan.com,DIRECT",
+    "DOMAIN-SUFFIX,ele.me,DIRECT",
+    "DOMAIN-SUFFIX,feng.com,DIRECT",
+    "DOMAIN-SUFFIX,fir.im,DIRECT",
+    "DOMAIN-SUFFIX,g-cores.com,DIRECT",
+    "DOMAIN-SUFFIX,gtimg.com,DIRECT",
+    "DOMAIN-SUFFIX,hongxiu.com,DIRECT",
+    "DOMAIN-SUFFIX,hxcdn.net,DIRECT",
+    "DOMAIN-SUFFIX,iciba.com,DIRECT",
+    "DOMAIN-SUFFIX,ifeng.com,DIRECT",
+    "DOMAIN-SUFFIX,ifengimg.com,DIRECT",
+    "DOMAIN-SUFFIX,iqiyi.com,DIRECT",
+    "DOMAIN-SUFFIX,jd.com,DIRECT",
+    "DOMAIN-SUFFIX,jianshu.com,DIRECT",
+    "DOMAIN-SUFFIX,le.com,DIRECT",
+    "DOMAIN-SUFFIX,lecloud.com,DIRECT",
+    "DOMAIN-SUFFIX,lemicp.com,DIRECT",
+    "DOMAIN-SUFFIX,luoo.net,DIRECT",
+    "DOMAIN-SUFFIX,meituan.com,DIRECT",
+    "DOMAIN-SUFFIX,meituan.net,DIRECT",
+    "DOMAIN-SUFFIX,mi.com,DIRECT",
+    "DOMAIN-SUFFIX,miaopai.com,DIRECT",
+    "DOMAIN-SUFFIX,miui.com,DIRECT",
+    "DOMAIN-SUFFIX,miwifi.com,DIRECT",
+    "DOMAIN-SUFFIX,netease.com,DIRECT",
+    "DOMAIN-SUFFIX,oschina.net,DIRECT",
+    "DOMAIN-SUFFIX,ppsimg.com,DIRECT",
+    "DOMAIN-SUFFIX,qcloud.com,DIRECT",
+    "DOMAIN-SUFFIX,qdaily.com,DIRECT",
+    "DOMAIN-SUFFIX,qdmm.com,DIRECT",
+    "DOMAIN-SUFFIX,qhimg.com,DIRECT",
+    "DOMAIN-SUFFIX,qhres.com,DIRECT",
+    "DOMAIN-SUFFIX,qidian.com,DIRECT",
+    "DOMAIN-SUFFIX,qihucdn.com,DIRECT",
+    "DOMAIN-SUFFIX,qiniu.com,DIRECT",
+    "DOMAIN-SUFFIX,qiniucdn.com,DIRECT",
+    "DOMAIN-SUFFIX,qiyipic.com,DIRECT",
+    "DOMAIN-SUFFIX,qq.com,DIRECT",
+    "DOMAIN-SUFFIX,qqurl.com,DIRECT",
+    "DOMAIN-SUFFIX,segmentfault.com,DIRECT",
+    "DOMAIN-SUFFIX,sinaapp.com,DIRECT",
+    "DOMAIN-SUFFIX,smzdm.com,DIRECT",
+    "DOMAIN-SUFFIX,sogou.com,DIRECT",
+    "DOMAIN-SUFFIX,sogoucdn.com,DIRECT",
+    "DOMAIN-SUFFIX,sohu.com,DIRECT",
+    "DOMAIN-SUFFIX,soku.com,DIRECT",
+    "DOMAIN-SUFFIX,sspai.com,DIRECT",
+    "DOMAIN-SUFFIX,suning.com,DIRECT",
+    "DOMAIN-SUFFIX,taobao.com,DIRECT",
+    "DOMAIN-SUFFIX,tencent.com,DIRECT",
+    "DOMAIN-SUFFIX,tenpay.com,DIRECT",
+    "DOMAIN-SUFFIX,tianyancha.com,DIRECT",
+    "DOMAIN-SUFFIX,tmall.com,DIRECT",
+    "DOMAIN-SUFFIX,tudou.com,DIRECT",
+    "DOMAIN-SUFFIX,umetrip.com,DIRECT",
+    "DOMAIN-SUFFIX,upaiyun.com,DIRECT",
+    "DOMAIN-SUFFIX,upyun.com,DIRECT",
+    "DOMAIN-SUFFIX,veryzhun.com,DIRECT",
+    "DOMAIN-SUFFIX,weibo.com,DIRECT",
+    "DOMAIN-SUFFIX,xiaomicp.com,DIRECT",
+    "DOMAIN-SUFFIX,ximalaya.com,DIRECT",
+    "DOMAIN-SUFFIX,xmcdn.com,DIRECT",
+    "DOMAIN-SUFFIX,xunlei.com,DIRECT",
+    "DOMAIN-SUFFIX,yhd.com,DIRECT",
+    "DOMAIN-SUFFIX,yihaodianimg.com,DIRECT",
+    "DOMAIN-SUFFIX,yinxiang.com,DIRECT",
+    "DOMAIN-SUFFIX,ykimg.com,DIRECT",
+    "DOMAIN-SUFFIX,youdao.com,DIRECT",
+    "DOMAIN-SUFFIX,youku.com,DIRECT",
+    "DOMAIN-SUFFIX,zealer.com,DIRECT",
+    "DOMAIN-SUFFIX,zhihu.com,DIRECT",
+    "DOMAIN-SUFFIX,zhimg.com,DIRECT",
+    "DOMAIN-SUFFIX,baidu.com,DIRECT",
+    "DOMAIN-SUFFIX,baidubce.com,DIRECT",
+    "DOMAIN-SUFFIX,baidupcs.com,DIRECT",
+    "DOMAIN-SUFFIX,baidustatic.com,DIRECT",
+    "DOMAIN-SUFFIX,bcebos.com,DIRECT",
+    "DOMAIN-SUFFIX,alipay.com,DIRECT",
+    "DOMAIN-SUFFIX,alipayobjects.com,DIRECT",
+    "DOMAIN-SUFFIX,alibaba.com,DIRECT",
+    "DOMAIN-SUFFIX,alibabagroup.com,DIRECT",
+    "DOMAIN-SUFFIX,aliyun.com,DIRECT",
+    "DOMAIN-SUFFIX,alicdn.com,DIRECT",
+    "DOMAIN-SUFFIX,1688.com,DIRECT",
+    "DOMAIN-SUFFIX,taobaocdn.com,DIRECT",
+    "DOMAIN-SUFFIX,aliexpress.cn,DIRECT",
+    "DOMAIN-SUFFIX,weixin.com,DIRECT",
+    "DOMAIN-SUFFIX,wechat.com,DIRECT",
+    "DOMAIN-SUFFIX,wechatpay.com,DIRECT",
+    "DOMAIN-SUFFIX,qpic.cn,DIRECT",
+    "DOMAIN-SUFFIX,xiaohongshu.com,DIRECT",
+    "DOMAIN-SUFFIX,xhscdn.com,DIRECT",
+    "DOMAIN-SUFFIX,kuaishou.com,DIRECT",
+    "DOMAIN-SUFFIX,gifshow.com,DIRECT",
+    "DOMAIN-SUFFIX,pinduoduo.com,DIRECT",
+    "DOMAIN-SUFFIX,yangkeduo.com,DIRECT",
+    "DOMAIN-SUFFIX,pddpic.com,DIRECT",
+    "DOMAIN-SUFFIX,vip.com,DIRECT",
+    "DOMAIN-SUFFIX,vipstatic.com,DIRECT",
+    "DOMAIN-SUFFIX,mgtv.com,DIRECT",
+    "DOMAIN-SUFFIX,hunantv.com,DIRECT",
+    "DOMAIN-SUFFIX,pptv.com,DIRECT",
+    "DOMAIN-SUFFIX,sina.com,DIRECT",
+    "DOMAIN-SUFFIX,sinaimg.cn,DIRECT",
+    "DOMAIN-SUFFIX,suning.cn,DIRECT",
+    "DOMAIN-SUFFIX,qunar.com,DIRECT",
+    "DOMAIN-SUFFIX,12306.cn,DIRECT",
+    "DOMAIN-SUFFIX,didi-labs.com,DIRECT",
+    "DOMAIN-SUFFIX,didiglobal.com,DIRECT",
+    "DOMAIN-SUFFIX,diditaxi.com,DIRECT",
+    "RULE-SET,v12r-domain-douyin,DIRECT",
+    "RULE-SET,v12r-domain-apple_at_cn,DIRECT",
+    "RULE-SET,v12r-domain-google_at_cn,DIRECT",
+    "RULE-SET,v12r-domain-microsoft_at_cn,DIRECT",
+    "RULE-SET,v12r-domain-steam_at_cn,DIRECT",
+    "RULE-SET,v12r-domain-cn,DIRECT",
+    "IP-CIDR,91.108.56.0/22,Telegram,no-resolve",
+    "IP-CIDR,91.108.56.0/22,REJECT,no-resolve",
+    "IP-CIDR,91.108.4.0/22,Telegram,no-resolve",
+    "IP-CIDR,91.108.4.0/22,REJECT,no-resolve",
+    "IP-CIDR,91.108.8.0/22,Telegram,no-resolve",
+    "IP-CIDR,91.108.8.0/22,REJECT,no-resolve",
+    "IP-CIDR,91.108.16.0/22,Telegram,no-resolve",
+    "IP-CIDR,91.108.16.0/22,REJECT,no-resolve",
+    "IP-CIDR,91.108.12.0/22,Telegram,no-resolve",
+    "IP-CIDR,91.108.12.0/22,REJECT,no-resolve",
+    "IP-CIDR,149.154.160.0/20,Telegram,no-resolve",
+    "IP-CIDR,149.154.160.0/20,REJECT,no-resolve",
+    "IP-CIDR,91.105.192.0/23,Telegram,no-resolve",
+    "IP-CIDR,91.105.192.0/23,REJECT,no-resolve",
+    "IP-CIDR,91.108.20.0/22,Telegram,no-resolve",
+    "IP-CIDR,91.108.20.0/22,REJECT,no-resolve",
+    "IP-CIDR,185.76.151.0/24,Telegram,no-resolve",
+    "IP-CIDR,185.76.151.0/24,REJECT,no-resolve",
+    "IP-CIDR6,2001:b28:f23d::/48,Telegram,no-resolve",
+    "IP-CIDR6,2001:b28:f23d::/48,REJECT,no-resolve",
+    "IP-CIDR6,2001:b28:f23f::/48,Telegram,no-resolve",
+    "IP-CIDR6,2001:b28:f23f::/48,REJECT,no-resolve",
+    "IP-CIDR6,2001:67c:4e8::/48,Telegram,no-resolve",
+    "IP-CIDR6,2001:67c:4e8::/48,REJECT,no-resolve",
+    "IP-CIDR6,2001:b28:f23c::/48,Telegram,no-resolve",
+    "IP-CIDR6,2001:b28:f23c::/48,REJECT,no-resolve",
+    "IP-CIDR6,2a0a:f280::/32,Telegram,no-resolve",
+    "IP-CIDR6,2a0a:f280::/32,REJECT,no-resolve",
+    "DOMAIN,challenges.cloudflare.com,公共基础服务",
+    "DOMAIN,challenges.cloudflare.com,REJECT",
+    "DOMAIN,workos.imgix.net,公共基础服务",
+    "DOMAIN,workos.imgix.net,REJECT",
+    "DOMAIN-SUFFIX,workos.com,公共基础服务",
+    "DOMAIN-SUFFIX,workos.com,REJECT",
+    "DOMAIN-SUFFIX,workoscdn.com,公共基础服务",
+    "DOMAIN-SUFFIX,workoscdn.com,REJECT",
+    "DOMAIN-SUFFIX,stripe.com,公共基础服务",
+    "DOMAIN-SUFFIX,stripe.com,REJECT",
+    "DOMAIN-SUFFIX,stripe.network,公共基础服务",
+    "DOMAIN-SUFFIX,stripe.network,REJECT",
+    "DOMAIN-SUFFIX,browser-intake-datadoghq.com,公共基础服务",
+    "DOMAIN-SUFFIX,browser-intake-datadoghq.com,REJECT",
+    "DOMAIN-SUFFIX,sentry.io,公共基础服务",
+    "DOMAIN-SUFFIX,sentry.io,REJECT",
+    "DOMAIN-SUFFIX,intercom.io,公共基础服务",
+    "DOMAIN-SUFFIX,intercom.io,REJECT",
+    "DOMAIN-SUFFIX,intercomcdn.com,公共基础服务",
+    "DOMAIN-SUFFIX,intercomcdn.com,REJECT",
+    "DOMAIN-SUFFIX,ct.sendgrid.net,公共基础服务",
+    "DOMAIN-SUFFIX,ct.sendgrid.net,REJECT",
+    "DOMAIN,openaiapi-site.azureedge.net,OpenAI 服务",
+    "DOMAIN,openaiapi-site.azureedge.net,REJECT",
+    "DOMAIN,openaiassets.blob.core.windows.net,OpenAI 服务",
+    "DOMAIN,openaiassets.blob.core.windows.net,REJECT",
+    "DOMAIN,openaicom-api-bdcpf8c6d2e9atf6.z01.azurefd.net,OpenAI 服务",
+    "DOMAIN,openaicom-api-bdcpf8c6d2e9atf6.z01.azurefd.net,REJECT",
+    "DOMAIN,openaicom.imgix.net,OpenAI 服务",
+    "DOMAIN,openaicom.imgix.net,REJECT",
+    "DOMAIN,openaicomproductionae4b.blob.core.windows.net,OpenAI 服务",
+    "DOMAIN,openaicomproductionae4b.blob.core.windows.net,REJECT",
+    "DOMAIN,production-openaicom-storage.azureedge.net,OpenAI 服务",
+    "DOMAIN,production-openaicom-storage.azureedge.net,REJECT",
+    "DOMAIN,cdn.openaimerge.com,OpenAI 服务",
+    "DOMAIN,cdn.openaimerge.com,REJECT",
+    "DOMAIN-SUFFIX,openai.com,OpenAI 服务",
+    "DOMAIN-SUFFIX,openai.com,REJECT",
+    "DOMAIN-SUFFIX,chatgpt.com,OpenAI 服务",
+    "DOMAIN-SUFFIX,chatgpt.com,REJECT",
+    "DOMAIN-SUFFIX,chat.com,OpenAI 服务",
+    "DOMAIN-SUFFIX,chat.com,REJECT",
+    "DOMAIN-SUFFIX,sora.com,OpenAI 服务",
+    "DOMAIN-SUFFIX,sora.com,REJECT",
+    "DOMAIN-SUFFIX,oaistatic.com,OpenAI 服务",
+    "DOMAIN-SUFFIX,oaistatic.com,REJECT",
+    "DOMAIN-SUFFIX,oaistatsig.com,OpenAI 服务",
+    "DOMAIN-SUFFIX,oaistatsig.com,REJECT",
+    "DOMAIN-SUFFIX,oaiusercontent.com,OpenAI 服务",
+    "DOMAIN-SUFFIX,oaiusercontent.com,REJECT",
+    "DOMAIN-SUFFIX,chatgpt.site,OpenAI 服务",
+    "DOMAIN-SUFFIX,chatgpt.site,REJECT",
+    "DOMAIN-SUFFIX,crixet.com,OpenAI 服务",
+    "DOMAIN-SUFFIX,crixet.com,REJECT",
+    "DOMAIN-SUFFIX,openai.com.cdn.cloudflare.net,OpenAI 服务",
+    "DOMAIN-SUFFIX,openai.com.cdn.cloudflare.net,REJECT",
+    "DOMAIN-SUFFIX,anthropic.com,Anthropic 服务",
+    "DOMAIN-SUFFIX,anthropic.com,REJECT",
+    "DOMAIN-SUFFIX,claude.ai,Anthropic 服务",
+    "DOMAIN-SUFFIX,claude.ai,REJECT",
+    "DOMAIN-SUFFIX,claude.com,Anthropic 服务",
+    "DOMAIN-SUFFIX,claude.com,REJECT",
+    "DOMAIN-SUFFIX,claudeusercontent.com,Anthropic 服务",
+    "DOMAIN-SUFFIX,claudeusercontent.com,REJECT",
+    "DOMAIN-SUFFIX,clau.de,Anthropic 服务",
+    "DOMAIN-SUFFIX,clau.de,REJECT",
+    "DOMAIN-SUFFIX,claudemcpclient.com,Anthropic 服务",
+    "DOMAIN-SUFFIX,claudemcpclient.com,REJECT",
+    "DOMAIN-SUFFIX,claudemcpcontent.com,Anthropic 服务",
+    "DOMAIN-SUFFIX,claudemcpcontent.com,REJECT",
+    "DOMAIN-SUFFIX,gemini.google.com,谷歌服务",
+    "DOMAIN-SUFFIX,gemini.google.com,REJECT",
+    "DOMAIN-SUFFIX,aistudio.google.com,谷歌服务",
+    "DOMAIN-SUFFIX,aistudio.google.com,REJECT",
+    "DOMAIN-SUFFIX,generativelanguage.googleapis.com,谷歌服务",
+    "DOMAIN-SUFFIX,generativelanguage.googleapis.com,REJECT",
+    "DOMAIN-SUFFIX,notebooklm.google.com,谷歌服务",
+    "DOMAIN-SUFFIX,notebooklm.google.com,REJECT",
+    "DOMAIN-SUFFIX,notebooklm.google,谷歌服务",
+    "DOMAIN-SUFFIX,notebooklm.google,REJECT",
+    "DOMAIN-SUFFIX,deepmind.google,谷歌服务",
+    "DOMAIN-SUFFIX,deepmind.google,REJECT",
+    "DOMAIN-SUFFIX,generativeai.google,谷歌服务",
+    "DOMAIN-SUFFIX,generativeai.google,REJECT",
+    "DOMAIN-SUFFIX,ai.google.dev,谷歌服务",
+    "DOMAIN-SUFFIX,ai.google.dev,REJECT",
+    "DOMAIN-SUFFIX,jules.google,谷歌服务",
+    "DOMAIN-SUFFIX,jules.google,REJECT",
+    "DOMAIN-SUFFIX,google.com,谷歌服务",
+    "DOMAIN-SUFFIX,google.com,REJECT",
+    "DOMAIN-SUFFIX,googleapis.com,谷歌服务",
+    "DOMAIN-SUFFIX,googleapis.com,REJECT",
+    "DOMAIN-SUFFIX,gstatic.com,谷歌服务",
+    "DOMAIN-SUFFIX,gstatic.com,REJECT",
+    "DOMAIN-SUFFIX,googleusercontent.com,谷歌服务",
+    "DOMAIN-SUFFIX,googleusercontent.com,REJECT",
+    "DOMAIN-SUFFIX,gmail.com,谷歌服务",
+    "DOMAIN-SUFFIX,gmail.com,REJECT",
+    "DOMAIN-SUFFIX,google.com.hk,谷歌服务",
+    "DOMAIN-SUFFIX,google.com.hk,REJECT",
+    "DOMAIN-SUFFIX,google.co.jp,谷歌服务",
+    "DOMAIN-SUFFIX,google.co.jp,REJECT",
+    "DOMAIN-SUFFIX,google.co.uk,谷歌服务",
+    "DOMAIN-SUFFIX,google.co.uk,REJECT",
+    "DOMAIN-SUFFIX,google.com.tw,谷歌服务",
+    "DOMAIN-SUFFIX,google.com.tw,REJECT",
+    "DOMAIN-SUFFIX,google.com.sg,谷歌服务",
+    "DOMAIN-SUFFIX,google.com.sg,REJECT",
+    "DOMAIN-SUFFIX,youtube.com,谷歌服务",
+    "DOMAIN-SUFFIX,youtube.com,REJECT",
+    "DOMAIN-SUFFIX,youtu.be,谷歌服务",
+    "DOMAIN-SUFFIX,youtu.be,REJECT",
+    "DOMAIN-SUFFIX,googlevideo.com,谷歌服务",
+    "DOMAIN-SUFFIX,googlevideo.com,REJECT",
+    "DOMAIN-SUFFIX,ytimg.com,谷歌服务",
+    "DOMAIN-SUFFIX,ytimg.com,REJECT",
+    "DOMAIN-SUFFIX,youtube-nocookie.com,谷歌服务",
+    "DOMAIN-SUFFIX,youtube-nocookie.com,REJECT",
+    "DOMAIN-SUFFIX,ggpht.com,谷歌服务",
+    "DOMAIN-SUFFIX,ggpht.com,REJECT",
+    "DOMAIN-SUFFIX,android.com,谷歌服务",
+    "DOMAIN-SUFFIX,android.com,REJECT",
+    "DOMAIN-SUFFIX,googleplay.com,谷歌服务",
+    "DOMAIN-SUFFIX,googleplay.com,REJECT",
+    "DOMAIN-SUFFIX,google-analytics.com,谷歌服务",
+    "DOMAIN-SUFFIX,google-analytics.com,REJECT",
+    "DOMAIN-SUFFIX,googlezip.net,谷歌服务",
+    "DOMAIN-SUFFIX,googlezip.net,REJECT",
+    "DOMAIN-SUFFIX,pki.goog,谷歌服务",
+    "DOMAIN-SUFFIX,pki.goog,REJECT",
+    "DOMAIN-SUFFIX,recaptcha.net,谷歌服务",
+    "DOMAIN-SUFFIX,recaptcha.net,REJECT",
+    "DOMAIN-SUFFIX,doubleclick.net,谷歌服务",
+    "DOMAIN-SUFFIX,doubleclick.net,REJECT",
+    "DOMAIN-SUFFIX,googlesyndication.com,谷歌服务",
+    "DOMAIN-SUFFIX,googlesyndication.com,REJECT",
+    "DOMAIN-SUFFIX,googleadservices.com,谷歌服务",
+    "DOMAIN-SUFFIX,googleadservices.com,REJECT",
+    "DOMAIN-SUFFIX,googletagmanager.com,谷歌服务",
+    "DOMAIN-SUFFIX,googletagmanager.com,REJECT",
+    "DOMAIN-SUFFIX,firebase.google.com,谷歌服务",
+    "DOMAIN-SUFFIX,firebase.google.com,REJECT",
+    "DOMAIN-SUFFIX,firebaseio.com,谷歌服务",
+    "DOMAIN-SUFFIX,firebaseio.com,REJECT",
+    "DOMAIN-SUFFIX,firebaseapp.com,谷歌服务",
+    "DOMAIN-SUFFIX,firebaseapp.com,REJECT",
+    "DOMAIN-SUFFIX,appspot.com,谷歌服务",
+    "DOMAIN-SUFFIX,appspot.com,REJECT",
+    "DOMAIN-SUFFIX,googlecloud.com,谷歌服务",
+    "DOMAIN-SUFFIX,googlecloud.com,REJECT",
+    "DOMAIN-SUFFIX,cloud.google.com,谷歌服务",
+    "DOMAIN-SUFFIX,cloud.google.com,REJECT",
+    "DOMAIN-SUFFIX,waze.com,谷歌服务",
+    "DOMAIN-SUFFIX,waze.com,REJECT",
+    "DOMAIN-SUFFIX,fitbit.com,谷歌服务",
+    "DOMAIN-SUFFIX,fitbit.com,REJECT",
+    "DOMAIN-SUFFIX,nest.com,谷歌服务",
+    "DOMAIN-SUFFIX,nest.com,REJECT",
+    "DOMAIN-SUFFIX,blogger.com,谷歌服务",
+    "DOMAIN-SUFFIX,blogger.com,REJECT",
+    "DOMAIN-SUFFIX,blogspot.com,谷歌服务",
+    "DOMAIN-SUFFIX,blogspot.com,REJECT",
+    "DOMAIN-SUFFIX,withgoogle.com,谷歌服务",
+    "DOMAIN-SUFFIX,withgoogle.com,REJECT",
+    "DOMAIN-SUFFIX,openrouter.ai,OpenRouter",
+    "DOMAIN-SUFFIX,openrouter.ai,REJECT",
+    "DOMAIN,ppl-ai-file-upload.s3.amazonaws.com,Perplexity",
+    "DOMAIN,ppl-ai-file-upload.s3.amazonaws.com,REJECT",
+    "DOMAIN,pplx-res.cloudinary.com,Perplexity",
+    "DOMAIN,pplx-res.cloudinary.com,REJECT",
+    "DOMAIN-SUFFIX,perplexity.ai,Perplexity",
+    "DOMAIN-SUFFIX,perplexity.ai,REJECT",
+    "DOMAIN-SUFFIX,perplexity.com,Perplexity",
+    "DOMAIN-SUFFIX,perplexity.com,REJECT",
+    "DOMAIN-SUFFIX,pplx.ai,Perplexity",
+    "DOMAIN-SUFFIX,pplx.ai,REJECT",
+    "DOMAIN-SUFFIX,huggingface.co,Hugging Face",
+    "DOMAIN-SUFFIX,huggingface.co,REJECT",
+    "DOMAIN-SUFFIX,hf.co,Hugging Face",
+    "DOMAIN-SUFFIX,hf.co,REJECT",
+    "DOMAIN-SUFFIX,hf.space,Hugging Face",
+    "DOMAIN-SUFFIX,hf.space,REJECT",
+    "DOMAIN-SUFFIX,x.ai,xAI",
+    "DOMAIN-SUFFIX,x.ai,REJECT",
+    "DOMAIN-SUFFIX,grok.com,xAI",
+    "DOMAIN-SUFFIX,grok.com,REJECT",
+    "DOMAIN-SUFFIX,grok.me,xAI",
+    "DOMAIN-SUFFIX,grok.me,REJECT",
+    "DOMAIN-SUFFIX,netflix.com,Netflix",
+    "DOMAIN-SUFFIX,netflix.com,REJECT",
+    "DOMAIN-SUFFIX,nflxvideo.net,Netflix",
+    "DOMAIN-SUFFIX,nflxvideo.net,REJECT",
+    "DOMAIN-SUFFIX,nflximg.net,Netflix",
+    "DOMAIN-SUFFIX,nflximg.net,REJECT",
+    "DOMAIN-SUFFIX,disneyplus.com,Disney+",
+    "DOMAIN-SUFFIX,disneyplus.com,REJECT",
+    "DOMAIN-SUFFIX,dssott.com,Disney+",
+    "DOMAIN-SUFFIX,dssott.com,REJECT",
+    "DOMAIN-SUFFIX,bamgrid.com,Disney+",
+    "DOMAIN-SUFFIX,bamgrid.com,REJECT",
+    "DOMAIN-SUFFIX,spotify.com,Spotify",
+    "DOMAIN-SUFFIX,spotify.com,REJECT",
+    "DOMAIN-SUFFIX,scdn.co,Spotify",
+    "DOMAIN-SUFFIX,scdn.co,REJECT",
+    "DOMAIN-SUFFIX,telegram.org,Telegram",
+    "DOMAIN-SUFFIX,telegram.org,REJECT",
+    "DOMAIN-SUFFIX,t.me,Telegram",
+    "DOMAIN-SUFFIX,t.me,REJECT",
+    "DOMAIN-SUFFIX,telegra.ph,Telegram",
+    "DOMAIN-SUFFIX,telegra.ph,REJECT",
+    "DOMAIN-SUFFIX,discord.com,Discord",
+    "DOMAIN-SUFFIX,discord.com,REJECT",
+    "DOMAIN-SUFFIX,discord.gg,Discord",
+    "DOMAIN-SUFFIX,discord.gg,REJECT",
+    "DOMAIN-SUFFIX,discordapp.com,Discord",
+    "DOMAIN-SUFFIX,discordapp.com,REJECT",
+    "DOMAIN-SUFFIX,discordapp.net,Discord",
+    "DOMAIN-SUFFIX,discordapp.net,REJECT",
+    "DOMAIN-SUFFIX,tiktok.com,TikTok",
+    "DOMAIN-SUFFIX,tiktok.com,REJECT",
+    "DOMAIN-SUFFIX,tiktokcdn.com,TikTok",
+    "DOMAIN-SUFFIX,tiktokcdn.com,REJECT",
+    "DOMAIN-SUFFIX,tiktokv.com,TikTok",
+    "DOMAIN-SUFFIX,tiktokv.com,REJECT",
+    "DOMAIN-SUFFIX,tiktokcdn-us.com,TikTok",
+    "DOMAIN-SUFFIX,tiktokcdn-us.com,REJECT",
+    "DOMAIN-SUFFIX,byteoversea.com,TikTok",
+    "DOMAIN-SUFFIX,byteoversea.com,REJECT",
+    "DOMAIN-SUFFIX,ibytedtos.com,TikTok",
+    "DOMAIN-SUFFIX,ibytedtos.com,REJECT",
+    "DOMAIN-SUFFIX,musical.ly,TikTok",
+    "DOMAIN-SUFFIX,musical.ly,REJECT",
+    "DOMAIN-SUFFIX,muscdn.com,TikTok",
+    "DOMAIN-SUFFIX,muscdn.com,REJECT",
+    "DOMAIN-SUFFIX,capcut.com,TikTok",
+    "DOMAIN-SUFFIX,capcut.com,REJECT",
+    "DOMAIN-SUFFIX,larksuite.com,TikTok",
+    "DOMAIN-SUFFIX,larksuite.com,REJECT",
+    "DOMAIN-SUFFIX,trae.ai,TikTok",
+    "DOMAIN-SUFFIX,trae.ai,REJECT",
+    "DOMAIN-SUFFIX,x.com,Twitter",
+    "DOMAIN-SUFFIX,x.com,REJECT",
+    "DOMAIN-SUFFIX,twitter.com,Twitter",
+    "DOMAIN-SUFFIX,twitter.com,REJECT",
+    "DOMAIN-SUFFIX,twimg.com,Twitter",
+    "DOMAIN-SUFFIX,twimg.com,REJECT",
+    "DOMAIN-SUFFIX,t.co,Twitter",
+    "DOMAIN-SUFFIX,t.co,REJECT",
+    "DOMAIN-SUFFIX,facebook.com,Meta 服务",
+    "DOMAIN-SUFFIX,facebook.com,REJECT",
+    "DOMAIN-SUFFIX,fb.com,Meta 服务",
+    "DOMAIN-SUFFIX,fb.com,REJECT",
+    "DOMAIN-SUFFIX,fb.me,Meta 服务",
+    "DOMAIN-SUFFIX,fb.me,REJECT",
+    "DOMAIN-SUFFIX,fbcdn.net,Meta 服务",
+    "DOMAIN-SUFFIX,fbcdn.net,REJECT",
+    "DOMAIN-SUFFIX,fbsbx.com,Meta 服务",
+    "DOMAIN-SUFFIX,fbsbx.com,REJECT",
+    "DOMAIN-SUFFIX,messenger.com,Meta 服务",
+    "DOMAIN-SUFFIX,messenger.com,REJECT",
+    "DOMAIN-SUFFIX,instagram.com,Meta 服务",
+    "DOMAIN-SUFFIX,instagram.com,REJECT",
+    "DOMAIN-SUFFIX,cdninstagram.com,Meta 服务",
+    "DOMAIN-SUFFIX,cdninstagram.com,REJECT",
+    "DOMAIN-SUFFIX,whatsapp.com,Meta 服务",
+    "DOMAIN-SUFFIX,whatsapp.com,REJECT",
+    "DOMAIN-SUFFIX,whatsapp.net,Meta 服务",
+    "DOMAIN-SUFFIX,whatsapp.net,REJECT",
+    "DOMAIN-SUFFIX,threads.net,Meta 服务",
+    "DOMAIN-SUFFIX,threads.net,REJECT",
+    "DOMAIN-SUFFIX,threads.com,Meta 服务",
+    "DOMAIN-SUFFIX,threads.com,REJECT",
+    "DOMAIN-SUFFIX,meta.com,Meta 服务",
+    "DOMAIN-SUFFIX,meta.com,REJECT",
+    "DOMAIN-SUFFIX,meta.ai,Meta 服务",
+    "DOMAIN-SUFFIX,meta.ai,REJECT",
+    "DOMAIN-SUFFIX,oculus.com,Meta 服务",
+    "DOMAIN-SUFFIX,oculus.com,REJECT",
+    "DOMAIN,steamcdn-a.akamaihd.net,Steam",
+    "DOMAIN,steamcdn-a.akamaihd.net,REJECT",
+    "DOMAIN,steampipe.akamaized.net,Steam",
+    "DOMAIN,steampipe.akamaized.net,REJECT",
+    "DOMAIN,steampipe-partner.akamaized.net,Steam",
+    "DOMAIN,steampipe-partner.akamaized.net,REJECT",
+    "DOMAIN-SUFFIX,steamcontent.com,Steam",
+    "DOMAIN-SUFFIX,steamcontent.com,REJECT",
+    "DOMAIN-SUFFIX,steampowered.com,Steam",
+    "DOMAIN-SUFFIX,steampowered.com,REJECT",
+    "DOMAIN-SUFFIX,steamcommunity.com,Steam",
+    "DOMAIN-SUFFIX,steamcommunity.com,REJECT",
+    "DOMAIN-SUFFIX,steamstatic.com,Steam",
+    "DOMAIN-SUFFIX,steamstatic.com,REJECT",
+    "DOMAIN-SUFFIX,steamserver.net,Steam",
+    "DOMAIN-SUFFIX,steamserver.net,REJECT",
+    "DOMAIN-SUFFIX,steamusercontent.com,Steam",
+    "DOMAIN-SUFFIX,steamusercontent.com,REJECT",
+    "DOMAIN-SUFFIX,s.team,Steam",
+    "DOMAIN-SUFFIX,s.team,REJECT",
+    "DOMAIN-SUFFIX,epicgames.com,Epic Games",
+    "DOMAIN-SUFFIX,epicgames.com,REJECT",
+    "DOMAIN-SUFFIX,epicgames.dev,Epic Games",
+    "DOMAIN-SUFFIX,epicgames.dev,REJECT",
+    "DOMAIN-SUFFIX,epicgamescdn.com,Epic Games",
+    "DOMAIN-SUFFIX,epicgamescdn.com,REJECT",
+    "DOMAIN,go.microsoft.com,微软生态",
+    "DOMAIN,go.microsoft.com,REJECT",
+    "DOMAIN,download.microsoft.com,微软生态",
+    "DOMAIN,download.microsoft.com,REJECT",
+    "DOMAIN,download.windowsupdate.com,微软生态",
+    "DOMAIN,download.windowsupdate.com,REJECT",
+    "DOMAIN,software.download.prss.microsoft.com,微软生态",
+    "DOMAIN,software.download.prss.microsoft.com,REJECT",
+    "DOMAIN,dl.delivery.mp.microsoft.com,微软生态",
+    "DOMAIN,dl.delivery.mp.microsoft.com,REJECT",
+    "DOMAIN,fe3.delivery.mp.microsoft.com,微软生态",
+    "DOMAIN,fe3.delivery.mp.microsoft.com,REJECT",
+    "DOMAIN,storeedgefd.dsx.mp.microsoft.com,微软生态",
+    "DOMAIN,storeedgefd.dsx.mp.microsoft.com,REJECT",
+    "DOMAIN-SUFFIX,microsoft.com,微软生态",
+    "DOMAIN-SUFFIX,microsoft.com,REJECT",
+    "DOMAIN-SUFFIX,microsoftonline.com,微软生态",
+    "DOMAIN-SUFFIX,microsoftonline.com,REJECT",
+    "DOMAIN-SUFFIX,microsoftstore.com,微软生态",
+    "DOMAIN-SUFFIX,microsoftstore.com,REJECT",
+    "DOMAIN-SUFFIX,windows.com,微软生态",
+    "DOMAIN-SUFFIX,windows.com,REJECT",
+    "DOMAIN-SUFFIX,windowsupdate.com,微软生态",
+    "DOMAIN-SUFFIX,windowsupdate.com,REJECT",
+    "DOMAIN-SUFFIX,update.microsoft.com,微软生态",
+    "DOMAIN-SUFFIX,update.microsoft.com,REJECT",
+    "DOMAIN-SUFFIX,office.com,微软生态",
+    "DOMAIN-SUFFIX,office.com,REJECT",
+    "DOMAIN-SUFFIX,office.net,微软生态",
+    "DOMAIN-SUFFIX,office.net,REJECT",
+    "DOMAIN-SUFFIX,office365.com,微软生态",
+    "DOMAIN-SUFFIX,office365.com,REJECT",
+    "DOMAIN-SUFFIX,live.com,微软生态",
+    "DOMAIN-SUFFIX,live.com,REJECT",
+    "DOMAIN-SUFFIX,aka.ms,微软生态",
+    "DOMAIN-SUFFIX,aka.ms,REJECT",
+    "DOMAIN-SUFFIX,onedrive.com,微软生态",
+    "DOMAIN-SUFFIX,onedrive.com,REJECT",
+    "DOMAIN-SUFFIX,sharepoint.com,微软生态",
+    "DOMAIN-SUFFIX,sharepoint.com,REJECT",
+    "DOMAIN-SUFFIX,msftconnecttest.com,微软生态",
+    "DOMAIN-SUFFIX,msftconnecttest.com,REJECT",
+    "DOMAIN-SUFFIX,msftncsi.com,微软生态",
+    "DOMAIN-SUFFIX,msftncsi.com,REJECT",
+    "DOMAIN-SUFFIX,bing.com,微软生态",
+    "DOMAIN-SUFFIX,bing.com,REJECT",
+    "DOMAIN-SUFFIX,copilot.microsoft.com,微软生态",
+    "DOMAIN-SUFFIX,copilot.microsoft.com,REJECT",
+    "DOMAIN-SUFFIX,copilot.bing.com,微软生态",
+    "DOMAIN-SUFFIX,copilot.bing.com,REJECT",
+    "DOMAIN-SUFFIX,githubcopilot.com,微软生态",
+    "DOMAIN-SUFFIX,githubcopilot.com,REJECT",
+    "DOMAIN-SUFFIX,github.com,微软生态",
+    "DOMAIN-SUFFIX,github.com,REJECT",
+    "DOMAIN-SUFFIX,githubusercontent.com,微软生态",
+    "DOMAIN-SUFFIX,githubusercontent.com,REJECT",
+    "DOMAIN-SUFFIX,githubassets.com,微软生态",
+    "DOMAIN-SUFFIX,githubassets.com,REJECT",
+    "DOMAIN-SUFFIX,microsoftazure.com,微软生态",
+    "DOMAIN-SUFFIX,microsoftazure.com,REJECT",
+    "DOMAIN-SUFFIX,msn.com,微软生态",
+    "DOMAIN-SUFFIX,msn.com,REJECT",
+    "DOMAIN-SUFFIX,skype.com,微软生态",
+    "DOMAIN-SUFFIX,skype.com,REJECT",
+    "DOMAIN-SUFFIX,linkedin.com,微软生态",
+    "DOMAIN-SUFFIX,linkedin.com,REJECT",
+    "DOMAIN-SUFFIX,licdn.com,微软生态",
+    "DOMAIN-SUFFIX,licdn.com,REJECT",
+    "DOMAIN-SUFFIX,xbox.com,微软生态",
+    "DOMAIN-SUFFIX,xbox.com,REJECT",
+    "DOMAIN-SUFFIX,xboxlive.com,微软生态",
+    "DOMAIN-SUFFIX,xboxlive.com,REJECT",
+    "DOMAIN,swcdn.apple.com,苹果国际",
+    "DOMAIN,swcdn.apple.com,REJECT",
+    "DOMAIN,swdist.apple.com,苹果国际",
+    "DOMAIN,swdist.apple.com,REJECT",
+    "DOMAIN,swdownload.apple.com,苹果国际",
+    "DOMAIN,swdownload.apple.com,REJECT",
+    "DOMAIN,swscan.apple.com,苹果国际",
+    "DOMAIN,swscan.apple.com,REJECT",
+    "DOMAIN,oscdn.apple.com,苹果国际",
+    "DOMAIN,oscdn.apple.com,REJECT",
+    "DOMAIN,osrecovery.apple.com,苹果国际",
+    "DOMAIN,osrecovery.apple.com,REJECT",
+    "DOMAIN,updates.cdn-apple.com,苹果国际",
+    "DOMAIN,updates.cdn-apple.com,REJECT",
+    "DOMAIN,updates-http.cdn-apple.com,苹果国际",
+    "DOMAIN,updates-http.cdn-apple.com,REJECT",
+    "DOMAIN,gdmf-ados.apple.com,苹果国际",
+    "DOMAIN,gdmf-ados.apple.com,REJECT",
+    "DOMAIN,gsra.apple.com,苹果国际",
+    "DOMAIN,gsra.apple.com,REJECT",
+    "DOMAIN,wkms-public.apple.com,苹果国际",
+    "DOMAIN,wkms-public.apple.com,REJECT",
+    "DOMAIN,fcs-keys-pub-prod.cdn-apple.com,苹果国际",
+    "DOMAIN,fcs-keys-pub-prod.cdn-apple.com,REJECT",
+    "DOMAIN-SUFFIX,apple.com,苹果国际",
+    "DOMAIN-SUFFIX,apple.com,REJECT",
+    "DOMAIN-SUFFIX,icloud.com,苹果国际",
+    "DOMAIN-SUFFIX,icloud.com,REJECT",
+    "DOMAIN-SUFFIX,icloud-content.com,苹果国际",
+    "DOMAIN-SUFFIX,icloud-content.com,REJECT",
+    "DOMAIN-SUFFIX,apple-cloudkit.com,苹果国际",
+    "DOMAIN-SUFFIX,apple-cloudkit.com,REJECT",
+    "DOMAIN-SUFFIX,mzstatic.com,苹果国际",
+    "DOMAIN-SUFFIX,mzstatic.com,REJECT",
+    "DOMAIN-SUFFIX,cdn-apple.com,苹果国际",
+    "DOMAIN-SUFFIX,cdn-apple.com,REJECT",
+    "DOMAIN-SUFFIX,apple-dns.net,苹果国际",
+    "DOMAIN-SUFFIX,apple-dns.net,REJECT",
+    "DOMAIN-SUFFIX,itunes.com,苹果国际",
+    "DOMAIN-SUFFIX,itunes.com,REJECT",
+    "DOMAIN-SUFFIX,appstore.com,苹果国际",
+    "DOMAIN-SUFFIX,appstore.com,REJECT",
+    "DOMAIN-SUFFIX,bilibili.tv,哔哩国际",
+    "DOMAIN-SUFFIX,bilibili.tv,REJECT",
+    "DOMAIN-SUFFIX,biliintl.com,哔哩国际",
+    "DOMAIN-SUFFIX,biliintl.com,REJECT",
+    "RULE-SET,v12r-domain-openai,OpenAI 服务",
+    "RULE-SET,v12r-domain-openai,REJECT",
+    "RULE-SET,v12r-domain-anthropic,Anthropic 服务",
+    "RULE-SET,v12r-domain-anthropic,REJECT",
+    "RULE-SET,v12r-domain-google-gemini,谷歌服务",
+    "RULE-SET,v12r-domain-google-gemini,REJECT",
+    "RULE-SET,v12r-domain-youtube,谷歌服务",
+    "RULE-SET,v12r-domain-youtube,REJECT",
+    "RULE-SET,v12r-domain-google,谷歌服务",
+    "RULE-SET,v12r-domain-google,REJECT",
+    "RULE-SET,v12r-domain-netflix,Netflix",
+    "RULE-SET,v12r-domain-netflix,REJECT",
+    "RULE-SET,v12r-domain-disney,Disney+",
+    "RULE-SET,v12r-domain-disney,REJECT",
+    "RULE-SET,v12r-domain-spotify,Spotify",
+    "RULE-SET,v12r-domain-spotify,REJECT",
+    "RULE-SET,v12r-domain-telegram,Telegram",
+    "RULE-SET,v12r-domain-telegram,REJECT",
+    "RULE-SET,v12r-domain-discord,Discord",
+    "RULE-SET,v12r-domain-discord,REJECT",
+    "RULE-SET,v12r-domain-tiktok,TikTok",
+    "RULE-SET,v12r-domain-tiktok,REJECT",
+    "RULE-SET,v12r-domain-twitter,Twitter",
+    "RULE-SET,v12r-domain-twitter,REJECT",
+    "RULE-SET,v12r-domain-meta,Meta 服务",
+    "RULE-SET,v12r-domain-meta,REJECT",
+    "RULE-SET,v12r-domain-steam,Steam",
+    "RULE-SET,v12r-domain-steam,REJECT",
+    "RULE-SET,v12r-domain-epicgames,Epic Games",
+    "RULE-SET,v12r-domain-epicgames,REJECT",
+    "RULE-SET,v12r-domain-microsoft,微软生态",
+    "RULE-SET,v12r-domain-microsoft,REJECT",
+    "RULE-SET,v12r-domain-linkedin,微软生态",
+    "RULE-SET,v12r-domain-linkedin,REJECT",
+    "RULE-SET,v12r-domain-apple,苹果国际",
+    "RULE-SET,v12r-domain-apple,REJECT",
+    "RULE-SET,v12r-domain-bilibili,哔哩国际",
+    "RULE-SET,v12r-domain-bilibili,REJECT",
+    "RULE-SET,v12r-ip-netflix,Netflix,no-resolve",
+    "RULE-SET,v12r-ip-netflix,REJECT,no-resolve",
+    "RULE-SET,v12r-ip-telegram,Telegram,no-resolve",
+    "RULE-SET,v12r-ip-telegram,REJECT,no-resolve",
+    "RULE-SET,v12r-ip-twitter,Twitter,no-resolve",
+    "RULE-SET,v12r-ip-twitter,REJECT,no-resolve",
+    "RULE-SET,v12r-ip-cn,DIRECT,no-resolve",
+    "AND,((NETWORK,UDP),(NOT,((IN-TYPE,INNER)))),漏网之鱼",
+    "AND,((NETWORK,UDP),(NOT,((IN-TYPE,INNER)))),REJECT",
+    "MATCH,漏网之鱼",
+    "MATCH,REJECT"
+  ],
+  "mode": "rule",
+  "profile": {
+    "store-selected": true,
+    "store-fake-ip": true
+  },
+  "sniffer": {
+    "enable": true,
+    "force-dns-mapping": true,
+    "parse-pure-ip": true,
+    "override-destination": false,
+    "sniff": {
+      "HTTP": {
+        "ports": [
+          80,
+          "8080-8880"
+        ],
+        "override-destination": false
+      },
+      "TLS": {
+        "ports": [
+          443,
+          8443
+        ]
+      },
+      "QUIC": {
+        "ports": [
+          443,
+          8443
+        ]
+      }
+    }
+  },
+  "geo-auto-update": false,
+  "x-v14-generated": {
+    "version": "14.1",
+    "routingRevision": "voice-tenant-guard-20261010",
+    "groups": [
+      "节点选择",
+      "自动选择",
+      "公共基础服务",
+      "漏网之鱼",
+      "OpenAI 服务",
+      "Anthropic 服务",
+      "谷歌服务",
+      "微软生态",
+      "Steam",
+      "Epic Games",
+      "Telegram",
+      "TikTok",
+      "Twitter",
+      "Discord",
+      "OpenRouter",
+      "Perplexity",
+      "Hugging Face",
+      "xAI",
+      "Netflix",
+      "Disney+",
+      "Spotify",
+      "Meta 服务",
+      "苹果国际",
+      "哔哩国际"
+    ],
+    "proxies": [],
+    "platform": "android",
+    "ruleDataMode": "hybrid-live-meta-no-local-geo",
+    "ruleProviders": [
+      "v12r-domain-private",
+      "v12r-domain-category-doh",
+      "v12r-domain-douyin",
+      "v12r-domain-apple_at_cn",
+      "v12r-domain-google_at_cn",
+      "v12r-domain-microsoft_at_cn",
+      "v12r-domain-steam_at_cn",
+      "v12r-domain-cn",
+      "v12r-domain-openai",
+      "v12r-domain-anthropic",
+      "v12r-domain-google-gemini",
+      "v12r-domain-youtube",
+      "v12r-domain-google",
+      "v12r-domain-netflix",
+      "v12r-domain-disney",
+      "v12r-domain-spotify",
+      "v12r-domain-telegram",
+      "v12r-domain-discord",
+      "v12r-domain-tiktok",
+      "v12r-domain-twitter",
+      "v12r-domain-meta",
+      "v12r-domain-steam",
+      "v12r-domain-epicgames",
+      "v12r-domain-microsoft",
+      "v12r-domain-linkedin",
+      "v12r-domain-apple",
+      "v12r-domain-bilibili",
+      "v12r-ip-netflix",
+      "v12r-ip-telegram",
+      "v12r-ip-twitter",
+      "v12r-ip-cn"
+    ],
+    "ruleSources": [
+      {
+        "kind": "domain",
+        "tag": "private",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/dad29637471fad8f29e85fdcee6a67d08ee5a779/geo/geosite/classical/private.yaml",
+        "behavior": "classical",
+        "format": "yaml",
+        "name": "v12r-domain-private",
+        "path": "./ruleset/v12-managed/domain-private-d7a17d6c.yaml",
+        "proxy": "节点选择"
+      },
+      {
+        "kind": "domain",
+        "tag": "category-doh",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/category-doh.yaml",
+        "behavior": "classical",
+        "format": "yaml",
+        "name": "v12r-domain-category-doh",
+        "path": "./ruleset/v12-managed/domain-category-doh-d33f30b0.yaml",
+        "proxy": "节点选择"
+      },
+      {
+        "kind": "domain",
+        "tag": "douyin",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/dad29637471fad8f29e85fdcee6a67d08ee5a779/geo/geosite/classical/douyin.yaml",
+        "behavior": "classical",
+        "format": "yaml",
+        "name": "v12r-domain-douyin",
+        "path": "./ruleset/v12-managed/domain-douyin-4f993e51.yaml",
+        "proxy": "节点选择"
+      },
+      {
+        "kind": "domain",
+        "tag": "apple@cn",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/dad29637471fad8f29e85fdcee6a67d08ee5a779/geo/geosite/classical/apple@cn.yaml",
+        "behavior": "classical",
+        "format": "yaml",
+        "name": "v12r-domain-apple_at_cn",
+        "path": "./ruleset/v12-managed/domain-apple_at_cn-f43767ce.yaml",
+        "proxy": "节点选择"
+      },
+      {
+        "kind": "domain",
+        "tag": "google@cn",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/dad29637471fad8f29e85fdcee6a67d08ee5a779/geo/geosite/classical/google@cn.yaml",
+        "behavior": "classical",
+        "format": "yaml",
+        "name": "v12r-domain-google_at_cn",
+        "path": "./ruleset/v12-managed/domain-google_at_cn-ea355d21.yaml",
+        "proxy": "节点选择"
+      },
+      {
+        "kind": "domain",
+        "tag": "microsoft@cn",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/dad29637471fad8f29e85fdcee6a67d08ee5a779/geo/geosite/classical/microsoft@cn.yaml",
+        "behavior": "classical",
+        "format": "yaml",
+        "name": "v12r-domain-microsoft_at_cn",
+        "path": "./ruleset/v12-managed/domain-microsoft_at_cn-e356d6f2.yaml",
+        "proxy": "节点选择"
+      },
+      {
+        "kind": "domain",
+        "tag": "steam@cn",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/dad29637471fad8f29e85fdcee6a67d08ee5a779/geo/geosite/classical/steam@cn.yaml",
+        "behavior": "classical",
+        "format": "yaml",
+        "name": "v12r-domain-steam_at_cn",
+        "path": "./ruleset/v12-managed/domain-steam_at_cn-8c08d19e.yaml",
+        "proxy": "节点选择"
+      },
+      {
+        "kind": "domain",
+        "tag": "cn",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/dad29637471fad8f29e85fdcee6a67d08ee5a779/geo/geosite/cn.mrs",
+        "behavior": "domain",
+        "format": "mrs",
+        "name": "v12r-domain-cn",
+        "path": "./ruleset/v12-managed/domain-cn-5f12ef09.mrs",
+        "proxy": "节点选择"
+      },
+      {
+        "kind": "domain",
+        "tag": "openai",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/openai.yaml",
+        "behavior": "classical",
+        "format": "yaml",
+        "name": "v12r-domain-openai",
+        "path": "./ruleset/v12-managed/domain-openai-105ee4b4.yaml",
+        "proxy": "节点选择"
+      },
+      {
+        "kind": "domain",
+        "tag": "anthropic",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/anthropic.yaml",
+        "behavior": "classical",
+        "format": "yaml",
+        "name": "v12r-domain-anthropic",
+        "path": "./ruleset/v12-managed/domain-anthropic-10f07b6c.yaml",
+        "proxy": "节点选择"
+      },
+      {
+        "kind": "domain",
+        "tag": "google-gemini",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/google-gemini.yaml",
+        "behavior": "classical",
+        "format": "yaml",
+        "name": "v12r-domain-google-gemini",
+        "path": "./ruleset/v12-managed/domain-google-gemini-7443bacf.yaml",
+        "proxy": "节点选择"
+      },
+      {
+        "kind": "domain",
+        "tag": "youtube",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/youtube.yaml",
+        "behavior": "classical",
+        "format": "yaml",
+        "name": "v12r-domain-youtube",
+        "path": "./ruleset/v12-managed/domain-youtube-e1c8b433.yaml",
+        "proxy": "节点选择"
+      },
+      {
+        "kind": "domain",
+        "tag": "google",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/google.yaml",
+        "behavior": "classical",
+        "format": "yaml",
+        "name": "v12r-domain-google",
+        "path": "./ruleset/v12-managed/domain-google-c9eee24b.yaml",
+        "proxy": "节点选择"
+      },
+      {
+        "kind": "domain",
+        "tag": "netflix",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/netflix.yaml",
+        "behavior": "classical",
+        "format": "yaml",
+        "name": "v12r-domain-netflix",
+        "path": "./ruleset/v12-managed/domain-netflix-2776c124.yaml",
+        "proxy": "节点选择"
+      },
+      {
+        "kind": "domain",
+        "tag": "disney",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/disney.yaml",
+        "behavior": "classical",
+        "format": "yaml",
+        "name": "v12r-domain-disney",
+        "path": "./ruleset/v12-managed/domain-disney-dcf45ca.yaml",
+        "proxy": "节点选择"
+      },
+      {
+        "kind": "domain",
+        "tag": "spotify",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/spotify.yaml",
+        "behavior": "classical",
+        "format": "yaml",
+        "name": "v12r-domain-spotify",
+        "path": "./ruleset/v12-managed/domain-spotify-fcc052de.yaml",
+        "proxy": "节点选择"
+      },
+      {
+        "kind": "domain",
+        "tag": "telegram",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/telegram.yaml",
+        "behavior": "classical",
+        "format": "yaml",
+        "name": "v12r-domain-telegram",
+        "path": "./ruleset/v12-managed/domain-telegram-22a7af0b.yaml",
+        "proxy": "节点选择"
+      },
+      {
+        "kind": "domain",
+        "tag": "discord",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/discord.yaml",
+        "behavior": "classical",
+        "format": "yaml",
+        "name": "v12r-domain-discord",
+        "path": "./ruleset/v12-managed/domain-discord-44558a28.yaml",
+        "proxy": "节点选择"
+      },
+      {
+        "kind": "domain",
+        "tag": "tiktok",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/tiktok.yaml",
+        "behavior": "classical",
+        "format": "yaml",
+        "name": "v12r-domain-tiktok",
+        "path": "./ruleset/v12-managed/domain-tiktok-7da174.yaml",
+        "proxy": "节点选择"
+      },
+      {
+        "kind": "domain",
+        "tag": "twitter",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/twitter.yaml",
+        "behavior": "classical",
+        "format": "yaml",
+        "name": "v12r-domain-twitter",
+        "path": "./ruleset/v12-managed/domain-twitter-a648bde1.yaml",
+        "proxy": "节点选择"
+      },
+      {
+        "kind": "domain",
+        "tag": "meta",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/meta.yaml",
+        "behavior": "classical",
+        "format": "yaml",
+        "name": "v12r-domain-meta",
+        "path": "./ruleset/v12-managed/domain-meta-b5e2103d.yaml",
+        "proxy": "节点选择"
+      },
+      {
+        "kind": "domain",
+        "tag": "steam",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/steam.yaml",
+        "behavior": "classical",
+        "format": "yaml",
+        "name": "v12r-domain-steam",
+        "path": "./ruleset/v12-managed/domain-steam-651acffc.yaml",
+        "proxy": "节点选择"
+      },
+      {
+        "kind": "domain",
+        "tag": "epicgames",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/epicgames.yaml",
+        "behavior": "classical",
+        "format": "yaml",
+        "name": "v12r-domain-epicgames",
+        "path": "./ruleset/v12-managed/domain-epicgames-fb2b93c.yaml",
+        "proxy": "节点选择"
+      },
+      {
+        "kind": "domain",
+        "tag": "microsoft",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/microsoft.yaml",
+        "behavior": "classical",
+        "format": "yaml",
+        "name": "v12r-domain-microsoft",
+        "path": "./ruleset/v12-managed/domain-microsoft-72827470.yaml",
+        "proxy": "节点选择"
+      },
+      {
+        "kind": "domain",
+        "tag": "linkedin",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/linkedin.yaml",
+        "behavior": "classical",
+        "format": "yaml",
+        "name": "v12r-domain-linkedin",
+        "path": "./ruleset/v12-managed/domain-linkedin-f5063f00.yaml",
+        "proxy": "节点选择"
+      },
+      {
+        "kind": "domain",
+        "tag": "apple",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/apple.yaml",
+        "behavior": "classical",
+        "format": "yaml",
+        "name": "v12r-domain-apple",
+        "path": "./ruleset/v12-managed/domain-apple-7d730ce0.yaml",
+        "proxy": "节点选择"
+      },
+      {
+        "kind": "domain",
+        "tag": "bilibili",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/bilibili.yaml",
+        "behavior": "classical",
+        "format": "yaml",
+        "name": "v12r-domain-bilibili",
+        "path": "./ruleset/v12-managed/domain-bilibili-477b79d6.yaml",
+        "proxy": "节点选择"
+      },
+      {
+        "kind": "ip",
+        "tag": "netflix",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/netflix.mrs",
+        "behavior": "ipcidr",
+        "format": "mrs",
+        "name": "v12r-ip-netflix",
+        "path": "./ruleset/v12-managed/ip-netflix-11dc6cc5.mrs",
+        "proxy": "节点选择"
+      },
+      {
+        "kind": "ip",
+        "tag": "telegram",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/telegram.mrs",
+        "behavior": "ipcidr",
+        "format": "mrs",
+        "name": "v12r-ip-telegram",
+        "path": "./ruleset/v12-managed/ip-telegram-a2ef74f4.mrs",
+        "proxy": "节点选择"
+      },
+      {
+        "kind": "ip",
+        "tag": "twitter",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/twitter.mrs",
+        "behavior": "ipcidr",
+        "format": "mrs",
+        "name": "v12r-ip-twitter",
+        "path": "./ruleset/v12-managed/ip-twitter-78b6807e.mrs",
+        "proxy": "节点选择"
+      },
+      {
+        "kind": "ip",
+        "tag": "cn",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/dad29637471fad8f29e85fdcee6a67d08ee5a779/geo/geoip/cn.mrs",
+        "behavior": "ipcidr",
+        "format": "mrs",
+        "name": "v12r-ip-cn",
+        "path": "./ruleset/v12-managed/ip-cn-21d759d7.mrs",
+        "proxy": "节点选择"
+      }
+    ],
+    "ruleDownloadProxy": "节点选择",
+    "ruleInterval": 86400,
+    "ruleReadiness": "not-observable-in-JS-check-core-providers",
+    "dnsMode": "domain-list-and-ruleset-group-affine-doh",
+    "udpMode": "company-group-stun-proxied-unified-fallback",
+    "notes": "Dual-stack proxy dialing enabled; remote exit IP family remains node-controlled; per-flow DNS affinity is not guaranteed",
+    "acceptedBoundaries": [
+      "remote-node-to-destination-ip-family",
+      "TUN and browser WebRTC enforcement outside JS",
+      "per-flow DNS affinity"
+    ],
+    "openIssues": [
+      "M02: per-flow DNS affinity for independently routed TCP/UDP",
+      "runtime DNS connection/cache behavior after selector changes",
+      "Windows/Android device TUN and IPv6 leak acceptance"
+    ],
+    "validationWarnings": [],
+    "releaseStatus": "offline-regression-tested-device-acceptance-pending"
+  }
+}
