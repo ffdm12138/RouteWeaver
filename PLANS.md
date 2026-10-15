@@ -7,8 +7,10 @@
 | 00 | 固定公开输入、共同需求与六个无个人例外入口，独立 Git 边界 | COMPLETE |
 | 01 | 根文档、使用/维护/参考索引、Harness、许可和来源 | COMPLETE |
 | 02 | 配置差异、生成、静态、公开克隆、包校验、内容扫描 | COMPLETE |
-| 03 | main、预发布标签、GitHub CI、Release 附件与下载复验 | IN PROGRESS |
+| 03 | main、预发布标签、GitHub CI、Release 附件与下载复验 | COMPLETE |
 
 下一步：分别补充 Windows/Android/iOS/macOS 原生设备、完整国内 DNS、节点失败、UDP、IPv6、WebRTC、浏览器和长时运行验收。记录客户端/系统版本和网络条件，保留失败及未解决结论。
+
+已公开 [v14.3.0-rc.1](https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-rc.1)，发布提交 `750b4ccd1320b260228a1c739a7b7939294fe146` 的 Windows/Ubuntu CI 通过。14 个附件重新下载后全部匹配 SHA256，未登录访问和下载核对通过。原生设备验收继续作为后续工作。
 
 需求合同、分流优先级和固定远程规则源变化需明确审核。发版不安装客户端、不改外层工作区。实际结果见 [build-log](harness/build-log.md)。
