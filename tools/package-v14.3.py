@@ -112,7 +112,7 @@ for file in release.rglob('*'):
     rel=file.relative_to(release)
     if 'experiments' in rel.parts or '.work' in rel.parts or '__pycache__' in rel.parts:
         continue
-    if file.suffix.lower() in {'.pyc','.key','.pem','.exe','.dll','.zip','.download'}:
+    if file.suffix.lower() in {'.pyc','.key','.pem','.exe','.dll','.zip'}:
         continue
     audit[rel.as_posix()]=file.read_bytes()
 audit.update(docs())

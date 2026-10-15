@@ -3,7 +3,6 @@ archive/
 dist/
 releases/*/.work/
 releases/*/validation/experiments/
-releases/*/validation/network-review/*.download
 **/__pycache__/
 *.py[cod]
 node_modules/
@@ -27,4 +26,3 @@ venv/
 Thumbs.db
 .idea/
 .vscode/
-/opensource/
