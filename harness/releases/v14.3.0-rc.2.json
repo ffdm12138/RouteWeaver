@@ -1,0 +1,150 @@
+{
+  "status": "REMOTE_RELEASE_20_ASSETS_SHA256_PASS",
+  "tag": "v14.3.0-rc.2",
+  "sourceCommit": "3b56ff81fa424d8a223709b4eace6ed6b5bebbde",
+  "releaseURL": "https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-rc.2",
+  "releaseId": 414663810,
+  "publishedAt": "2026-10-16T07:27:37Z",
+  "assets": [
+    {
+      "file": "SHA256SUMS.txt",
+      "sha256": "60504b6de3f00f34bbb2c6b2ba896d5517c46a3d866ad60adbcfddb3c7737782",
+      "bytes": 1757
+    },
+    {
+      "file": "package-verification.json",
+      "sha256": "7723feeba87b71e90b74e7af1473965af1f6d19a1d23708eedecb1fa0d00f698",
+      "bytes": 3841
+    },
+    {
+      "file": "v14.3-android-ipv4-local.js",
+      "sha256": "9bc95a3b110d4a04614acf3219a797d7cad96c4be6e3e8dbdac7067a39f76750",
+      "bytes": 119138
+    },
+    {
+      "file": "v14.3-android.js",
+      "sha256": "1b9b03160e11dd0196dd6ad9de649c7436b84991f30fcf7ad1beeacde88e8c14",
+      "bytes": 117341
+    },
+    {
+      "file": "v14.3-audit-evidence.zip",
+      "sha256": "9e8a03cb38302ef2c779d7d0e31161573199db053b96f10a05f63e7fa8dbd642",
+      "bytes": 12195206
+    },
+    {
+      "file": "v14.3-audit-evidence.zip.sha256",
+      "sha256": "fd2b766726d6c7a9962bfdce782019fb7df88c96c2afdd688c9312178ae9f7c8",
+      "bytes": 92
+    },
+    {
+      "file": "v14.3-clashmi-domestic-protocol-r1.js",
+      "sha256": "09014cec334f287506e0f0afba590e143a526784954016244cf87042cda682ff",
+      "bytes": 120235
+    },
+    {
+      "file": "v14.3-clashmi-ipv4-local.js",
+      "sha256": "25b1d9f535be3a918cb51e1c1d454cb2a53c43623e000e89ca453f88b40107f5",
+      "bytes": 122032
+    },
+    {
+      "file": "v14.3-deployable.zip",
+      "sha256": "445b3fcb7ff14867425f0319b0e83f77329f29618b87245e9805ee3dacc54382",
+      "bytes": 620232
+    },
+    {
+      "file": "v14.3-deployable.zip.sha256",
+      "sha256": "254f8465c77cb1f981b191d462b1fa6b0672d55e31508e4712bc192559de6042",
+      "bytes": 88
+    },
+    {
+      "file": "v14.3-ipv4-local.js",
+      "sha256": "1a77bf1723137e6379a36866f69402af3ab06ad0b135ba206736b9c9def8936f",
+      "bytes": 119252
+    },
+    {
+      "file": "v14.3-macos-clashmi-ipv4-local.js",
+      "sha256": "c8b54058c5460a6fbee89d34721a75bec7965edc90d2a6711659edf88c3cb4ce",
+      "bytes": 122034
+    },
+    {
+      "file": "v14.3-macos-clashmi.js",
+      "sha256": "59431f8e9255ec2c60e5fad684df29ab8e11c729bf7a5915322d598c550c664d",
+      "bytes": 120237
+    },
+    {
+      "file": "v14.3-macos-flclash-ipv4-local.js",
+      "sha256": "537258ed81e119bfa58fd714da5da310bc056faa205557d24e8ea7195d9d4010",
+      "bytes": 121047
+    },
+    {
+      "file": "v14.3-macos-flclash.js",
+      "sha256": "c5eb299d23010f3dc2879968025fd6cd89f98e2ee9ba08332436a5f19398007e",
+      "bytes": 119250
+    },
+    {
+      "file": "v14.3-macos.zip",
+      "sha256": "b65230f946a125e3854effe619b552c314e4344c2ca87aa57d5d262482987213",
+      "bytes": 171715
+    },
+    {
+      "file": "v14.3-macos.zip.sha256",
+      "sha256": "f6311bd98347d6f9418acc13d7f1af2decce8a3510b340d7b5647791f15be3d7",
+      "bytes": 83
+    },
+    {
+      "file": "v14.3-shadowrocket-ipv4-local.conf",
+      "sha256": "c49e34cf5446bd8e0a4815f6a78b8c636947a9ea1a142acc37e6be671ff00685",
+      "bytes": 1746923
+    },
+    {
+      "file": "v14.3-shadowrocket.conf",
+      "sha256": "9829d7e7c74f949cfe5168c3b3f3359b0e41aeb3c81bd3b8e2420bf721f277ec",
+      "bytes": 1746654
+    },
+    {
+      "file": "v14.3.js",
+      "sha256": "9a93c71ae3dbdd3dcb7e9bf45ef86e60d7ffdaac81cc17005ffc540d7f4fb02f",
+      "bytes": 117455
+    }
+  ],
+  "clientDeployment": false,
+  "deviceAcceptance": "NOT_RUN",
+  "scope": "Published public release, source tag and CI verified; all 20 assets downloaded without login and matched prepared clean-clone bytes. Native device capture and application IPv4 retry remain NOT_RUN.",
+  "verificationDate": "2026-10-16",
+  "anonymousDownloads": {
+    "status": "PASS",
+    "assets": 20,
+    "method": "curl HTTPS browser download URLs, curlrc disabled, no Authorization or login; all bytes and SHA256SUMS checked"
+  },
+  "tagVerification": {
+    "status": "PASS",
+    "annotatedTagObject": "d9af927ee8c888128e9e5e2e587114ee6eb2d7bf",
+    "peeledCommit": "3b56ff81fa424d8a223709b4eace6ed6b5bebbde"
+  },
+  "ci": {
+    "status": "PASS",
+    "url": "https://github.com/ffdm12138/RouteWeaver/actions/runs/38866257475",
+    "sourceCommit": "3b56ff81fa424d8a223709b4eace6ed6b5bebbde",
+    "jobs": [
+      {
+        "name": "verify (ubuntu-latest)",
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-10-16T07:17:22Z",
+        "completedAt": "2026-10-16T07:22:39Z"
+      },
+      {
+        "name": "verify (windows-latest)",
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-10-16T07:17:22Z",
+        "completedAt": "2026-10-16T07:23:10Z"
+      }
+    ]
+  },
+  "publicContentAudit": {
+    "indexedFilesBeforePublicationRecord": 615,
+    "credentialFindings": 0,
+    "personalDestinationLiteralMatches": 0
+  }
+}

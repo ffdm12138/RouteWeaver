@@ -14,3 +14,5 @@
 新增 31 项静态、37 项隔离 Mihomo 检查及完整既有回归通过；拒绝规则实验关闭系统 TUN，明确将 TUN 入站替换为 SOCKS。各平台真实 TUN/VPN、应用 IPv4 重试、网络切换、公网 IPv6 和 Shadowrocket 原生仍待验收，因此继续 **Pre-release**。本次不替换用户运行客户端。
 
 下载对应单文件，或全平台部署包 / Mac 包；审核包供离线复验。文件不含节点或订阅。全部附件校验和在 `SHA256SUMS.txt`。
+
+验证完成：源码提交 `3b56ff81fa424d8a223709b4eace6ed6b5bebbde` 的 [Windows/Ubuntu CI](https://github.com/ffdm12138/RouteWeaver/actions/runs/38866257475) 均成功；20 个附件已全部未登录下载并逐一匹配 SHA256。完整 [发布回执](https://github.com/ffdm12138/RouteWeaver/blob/main/harness/releases/v14.3.0-rc.2.json) 随发布后文档补记保存。
