@@ -9,3 +9,5 @@
 **rc.2 与 rc.3 的 Windows 媒体实测均失败。rc.4 尚未完成微信媒体实测。** 日志仍有无法嗅探的 IPv6 连接，JS 不能把无域名的任意 IPv6 转成 IPv4；原 DIRECT 策略不会静默改成代理。各平台 TUN/VPN、公开 IPv6、跨网络切换及 Shadowrocket 原生未验收，继续 Pre-release。不会自动安装或修改运行客户端。
 
 十二个单文件、三种 ZIP 和包回执不包含订阅或节点。附件校验和见 `SHA256SUMS.txt`，详细[问题和验证范围](https://github.com/ffdm12138/RouteWeaver/blob/v14.3.0-rc.4/docs/reports/v14.3/HTTP%E5%9F%9F%E5%90%8D%E9%87%8D%E8%A7%A3%E6%9E%90%E4%BF%AE%E5%A4%8D.md)。
+
+发布核验完成：源码 `3d8a485dc078b50e6b528514e582e9d92e35e9f7` 的 [Windows/Ubuntu CI](https://github.com/ffdm12138/RouteWeaver/actions/runs/38884042324) 均成功，20 个附件全部匿名下载并逐一匹配 SHA256，三份 ZIP CRC 通过。[发布回执](https://github.com/ffdm12138/RouteWeaver/blob/main/harness/releases/v14.3.0-rc.4.json)在发布后补记。媒体复测与无域名 IPv6 仍未解决。
