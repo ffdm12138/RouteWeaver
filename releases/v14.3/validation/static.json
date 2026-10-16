@@ -66,7 +66,7 @@
   "sourceFiles": [
     {
       "file": "tools/build-balanced.cjs",
-      "sha256": "76e8be3445e1126f52e701f7eae07bfebe1c0a35b5e2506ac1109e206239a77f"
+      "sha256": "353586bcbc96da42d4bba3bfbdb93b44f0c02916d2a039a4ac1d1e9c945ed519"
     },
     {
       "file": "tools/domestic-protocol.cjs",
@@ -78,7 +78,7 @@
     },
     {
       "file": "tests/static.cjs",
-      "sha256": "9e3d948f0f3b6138522029b6f808d5ab0519aea16a5ffa6c79762e773e53f4b2"
+      "sha256": "fc582c089ce8f4e239737855f52bc3418f3228a3afb69ddf02546f4518127fa7"
     },
     {
       "file": "tests/domestic-contract.cjs",
@@ -86,7 +86,7 @@
     },
     {
       "file": "tests/fixture.cjs",
-      "sha256": "328defa554087c36412fa6c7119c6b25e6d20938ef1af41463622866f7a3ec4c"
+      "sha256": "238de968f94b2bc40070a053a47969dddfc4541ff841b555a0ecf5924869d39e"
     },
     {
       "file": "tests/domain-index.cjs",
@@ -114,7 +114,7 @@
     },
     {
       "file": "metadata/balanced-sources.json",
-      "sha256": "cf373cf9b912b44402409bc28540900451641d4ee739b073a055c565ebb0e263"
+      "sha256": "8b7ba12a8c244a81b125f005c5d0a03b7d8718b51a2b264243538efb1d076810"
     },
     {
       "file": "metadata/source-comparison.json",
@@ -138,19 +138,15 @@
     },
     {
       "file": "src/windows/v14.3.js",
-      "sha256": "b2ac9021a498ebd8e2b0b53d7bbd3db92ef99e918b9f49eec046c5c4210cf054"
+      "sha256": "8a151f980c5291cedf30d70b76aaa414fd1378540b4e8001dc11ba547ac5539e"
     },
     {
       "file": "src/android/v14.3-android.js",
-      "sha256": "cfdc2eba7e3552bb067bca46a638596409510dde03f7558f31cebe6feab71d57"
-    },
-    {
-      "file": "src/ios/v14.3-clashmi.js",
-      "sha256": "9ded4aef098b1b5b0334597eda4a07996f6f7e8d3c8a24cdc0bfad457e705903"
+      "sha256": "33b55bccbb40024424db37eed946711bd52161c580687dde6f5c448d2de474c1"
     },
     {
       "file": "src/ios/v14.3-clashmi-domestic-protocol-r1.js",
-      "sha256": "9ded4aef098b1b5b0334597eda4a07996f6f7e8d3c8a24cdc0bfad457e705903"
+      "sha256": "7cd08073bceb572b8c8e95558c82a1f1d2a5398d99176bcb2d30a06ad55bfdaf"
     },
     {
       "file": "data/rules/reviewed/v12r-domain-private.yaml",

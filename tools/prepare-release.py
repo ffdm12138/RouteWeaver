@@ -13,7 +13,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--tag', default='v14.3.0-rc.4')
+    parser.add_argument('--tag', default='v14.3.0-rc.5')
     args = parser.parse_args()
     if not re.fullmatch(r'v14\.3\.\d+(?:-rc\.\d+)?', args.tag):
         parser.error('Expected a v14.3.x or v14.3.x-rc.n tag.')
@@ -26,7 +26,7 @@ def main():
         raise SystemExit('Personalized workspace: prepare public assets only inside opensource/RouteWeaver/.')
     receipt = read('dist/v14.3/package-verification.json')
     assert receipt['packageToolSHA256'] == digest(ROOT / 'tools/package-v14.3.py')
-    assets = [ROOT / name for name in [*current['entries'].values(), *current['compatibilityEntries'].values()]]
+    assets = [ROOT / name for name in [*current['entries'].values(), *current.get('compatibilityEntries',{}).values()]]
     for package in receipt['packages']:
         path = ROOT / package['file']
         assert digest(path) == package['sha256']
@@ -34,6 +34,15 @@ def main():
         assert sidecar.read_text(encoding='utf-8').split()[0] == package['sha256']
         assets.extend([path, sidecar])
     assets.append(ROOT / 'dist/v14.3/package-verification.json')
+    core_proof = ROOT / 'dist/v14.3/core-package-verification.json'
+    if core_proof.exists():
+        core = json.loads(core_proof.read_text(encoding='utf8'))
+        assert core['status'] == 'CORE_PAIR_CORRESPONDING_SOURCE_CRC_SHA_PASS'
+        for entry in core['packages']:
+            path = ROOT / entry['file']
+            assert digest(path) == entry['sha256']
+            assets.extend([path, path.with_name(path.name+'.sha256')])
+        assets.append(core_proof)
     target = ROOT / 'dist/v14.3/github' / args.tag
     target.mkdir(parents=True, exist_ok=True)
     expected = {path.name for path in assets} | {'SHA256SUMS.txt'}

@@ -1,7 +1,9 @@
 {
   "version": "14.3",
-  "date": "2026-10-12",
+  "date": "2026-10-16",
   "revision": "balanced-r1",
+  "runtimeRevision": "shared-runtime-r1",
+  "entryRevision": "single-entry-r1",
   "status": "GENERATED_DEVICE_PENDING",
   "limits": {
     "maxScriptBytes": 131072,
@@ -9,33 +11,28 @@
   },
   "entries": [
     {
+      "platform": "windows",
       "file": "src/windows/v14.3.js",
-      "sha256": "b2ac9021a498ebd8e2b0b53d7bbd3db92ef99e918b9f49eec046c5c4210cf054",
-      "bytes": 117455,
+      "sha256": "8a151f980c5291cedf30d70b76aaa414fd1378540b4e8001dc11ba547ac5539e",
+      "bytes": 122822,
       "generatedConfigBytes": 176293,
       "inlineRows": 819,
       "remoteSources": 30
     },
     {
+      "platform": "android",
       "file": "src/android/v14.3-android.js",
-      "sha256": "cfdc2eba7e3552bb067bca46a638596409510dde03f7558f31cebe6feab71d57",
-      "bytes": 117341,
+      "sha256": "33b55bccbb40024424db37eed946711bd52161c580687dde6f5c448d2de474c1",
+      "bytes": 122708,
       "generatedConfigBytes": 176104,
       "inlineRows": 819,
       "remoteSources": 29
     },
     {
-      "file": "src/ios/v14.3-clashmi.js",
-      "sha256": "9ded4aef098b1b5b0334597eda4a07996f6f7e8d3c8a24cdc0bfad457e705903",
-      "bytes": 120235,
-      "generatedConfigBytes": 177191,
-      "inlineRows": 819,
-      "remoteSources": 29
-    },
-    {
+      "platform": "clashmi",
       "file": "src/ios/v14.3-clashmi-domestic-protocol-r1.js",
-      "sha256": "9ded4aef098b1b5b0334597eda4a07996f6f7e8d3c8a24cdc0bfad457e705903",
-      "bytes": 120235,
+      "sha256": "7cd08073bceb572b8c8e95558c82a1f1d2a5398d99176bcb2d30a06ad55bfdaf",
+      "bytes": 125730,
       "generatedConfigBytes": 177191,
       "inlineRows": 819,
       "remoteSources": 29
@@ -53,23 +50,167 @@
   "inputs": [
     {
       "file": "tools/build-balanced.cjs",
-      "sha256": "76e8be3445e1126f52e701f7eae07bfebe1c0a35b5e2506ac1109e206239a77f"
+      "sha256": "353586bcbc96da42d4bba3bfbdb93b44f0c02916d2a039a4ac1d1e9c945ed519"
     },
     {
-      "file": "tools/domestic-protocol.cjs",
-      "sha256": "09723ed5dad32c85fbd8527a27bc4a260014a62a4d08fe0edef52daee6e514fa"
+      "file": "tools/build-macos.cjs",
+      "sha256": "353586bcbc96da42d4bba3bfbdb93b44f0c02916d2a039a4ac1d1e9c945ed519"
     },
     {
-      "file": "tools/network-compat.cjs",
-      "sha256": "f6da6582d1dca8fb3ccc5147cad82af183887f9fc89b31bc2f8f2889feb0ba21"
+      "file": "tools/build-clash-verge.cjs",
+      "sha256": "353586bcbc96da42d4bba3bfbdb93b44f0c02916d2a039a4ac1d1e9c945ed519"
     },
     {
-      "file": "tools/network-compat-runtime.js",
-      "sha256": "dcf2fb9431989a8e1c37780b6a752641900b00ab5c7776ac7c9c135f3818c06b"
+      "file": "tools/build-network-compat.cjs",
+      "sha256": "353586bcbc96da42d4bba3bfbdb93b44f0c02916d2a039a4ac1d1e9c945ed519"
+    },
+    {
+      "file": "tools/lib/build-entries.cjs",
+      "sha256": "77b15d3285181c2039c24018b72c93b663ef12626133ec4f893894eb86ca2808"
+    },
+    {
+      "file": "tools/lib/compile-entries.cjs",
+      "sha256": "8298730ee0e8bd34245f88781197188f67f05f548ea0169bf21526430e3f0c36"
+    },
+    {
+      "file": "tools/lib/render-runtime.cjs",
+      "sha256": "0e4496cb2be246f232f52c11b53704c2ea07094192f9eec2409f47fe1b765161"
+    },
+    {
+      "file": "tools/lib/reviewed-policy.cjs",
+      "sha256": "fede3d21c30cfb52c223177d5bfea36a87ca2e8b0a4610bac84b579802828ce7"
     },
     {
       "file": "tools/clashmi-adapter.js",
       "sha256": "22fa1a686fc55e831cfb3225eb88e7265df05bbb8ea6a8399f04b9df66b9d268"
+    },
+    {
+      "file": "tools/macos-flclash-adapter.js",
+      "sha256": "15862ccc2eb0f24ff4ac0337f2ac96e8353b33fc4e0afa3b4ac528d3abce583d"
+    },
+    {
+      "file": "tools/clash-verge-adapter.js",
+      "sha256": "114a9f870a0e679ff0d81eab149ec95057045da910f1d38e0e1ea4572700c8a9"
+    },
+    {
+      "file": "tools/ipv4-local-adapter.js",
+      "sha256": "412f0a15d01afbdbb72a9b6d81f56bb9be36c6b407804c17c0cc18349f0d70ab"
+    },
+    {
+      "file": "data/client-capabilities.json",
+      "sha256": "8d0597e5c55fafa52538ae6e2449b8e9149620ffbcc617e02d4d8152b776c4dd"
+    },
+    {
+      "file": "runtime/platforms/desktop/layout.json",
+      "sha256": "a8ac9e2982b005542e0aafa1f49e6cb346f31e93bbeaad7c46c539c229f83ecc"
+    },
+    {
+      "file": "runtime/platforms/desktop/preamble.js.in",
+      "sha256": "1e73b0019d8bec2ede26d206979b7706f994ef45a5b8e08cf86562d0d163a1e9"
+    },
+    {
+      "file": "runtime/shared/v14Fail.js.in",
+      "sha256": "3526ae79ad2ec38054e2e75a7c5fee183b1ea630c6c20d12f820106deb87acc6"
+    },
+    {
+      "file": "runtime/shared/v14Object.js.in",
+      "sha256": "002d7052217fcc6d5c57470730d91bb30ecc7b131be58808ce0d6a0c27cb6eac"
+    },
+    {
+      "file": "runtime/shared/v14Copy.js.in",
+      "sha256": "e2a51d628c4d621882628a8e655aa05dc0d5e190c0108ccaf8351018b44f0b7a"
+    },
+    {
+      "file": "runtime/shared/v14Unique.js.in",
+      "sha256": "81ff5b555193286013767f1f6b63247f03dc5e82101818087cb16c7763a8aab5"
+    },
+    {
+      "file": "runtime/shared/v14Hash.js.in",
+      "sha256": "70d6f9074184d00a07c76b98a15609f4648649b5f8e32e12ebc6d71eae2e252b"
+    },
+    {
+      "file": "runtime/shared/v14Ipv6Literal.js.in",
+      "sha256": "c20aa9fc913eac04dd9c3e66f20d1fb304e8d8a6da5558a3b66f7a24a9438f42"
+    },
+    {
+      "file": "runtime/shared/v14Transport.js.in",
+      "sha256": "875642d4b49d6b52196f97f377658a34af797667e645dd2461e84ed041a207a9"
+    },
+    {
+      "file": "runtime/shared/v14DnsFor.js.in",
+      "sha256": "53fa059396e04f160c8475d5326ab5909c480670c1b48760cc916efb872d4cca"
+    },
+    {
+      "file": "runtime/shared/v14Strings.js.in",
+      "sha256": "49f25768f268413f6277223e558938da9f10c8eccc6f115a4d0dbafc64ea0a5a"
+    },
+    {
+      "file": "runtime/shared/v14Target.js.in",
+      "sha256": "18adb104b27c180f45f07e634b43cab23f1e4b5899a8109802c57b4cb125bb79"
+    },
+    {
+      "file": "runtime/shared/v14InboundGuard.js.in",
+      "sha256": "2a5e20459646a8156c5b8e41ec4230921664efc1e7315267cbcb7cb3db2d0f64"
+    },
+    {
+      "file": "runtime/shared/v14KeepLegacy.js.in",
+      "sha256": "2c3b7f595161fdbf348823100130ccd3eda787e38fc073201590f6ecfd028d51"
+    },
+    {
+      "file": "runtime/shared/v14NetworkDefaults.js.in",
+      "sha256": "dafbdd00d3faaadf72f62bf9b114d74e92d1927a2b66723afbddd1429c978716"
+    },
+    {
+      "file": "runtime/shared/v14ProviderGuard.js.in",
+      "sha256": "fa6afc3ea10263ade3114e9822c4e50add258552dd14476b881be0b9d02f11f6"
+    },
+    {
+      "file": "runtime/shared/v14GraphCheck.js.in",
+      "sha256": "1961ec60e207dc938756795a2268700ffcba3d4144a7bbb16e36ad41788d2544"
+    },
+    {
+      "file": "runtime/shared/v14Source.js.in",
+      "sha256": "5b9554d9d25abc9d1b4088342cca83c6d80a604c66bff09016b469f86f157487"
+    },
+    {
+      "file": "runtime/shared/v14ManagedSource.js.in",
+      "sha256": "6d24d4476755de0fceb0ed10a981264c80ca56145c340694f5b76a05ed081165"
+    },
+    {
+      "file": "runtime/shared/v14AuxRefs.js.in",
+      "sha256": "37aead292b2e2c76a41e8ee998f27db23d87d843670c26a9f0dd27abf6e21a96"
+    },
+    {
+      "file": "runtime/shared/v14WalkRule.js.in",
+      "sha256": "f49d2d7fc19e81243595b126877d004219152a21e262a7bb3ccfe836d8c20e00"
+    },
+    {
+      "file": "runtime/shared/v14RuleRegistry.js.in",
+      "sha256": "5617ceb12b4eba12f09e64ba5241d996f851727a6afa08ebfffd0d3f53e00bb5"
+    },
+    {
+      "file": "runtime/shared/v14ValidateDomainTables.js.in",
+      "sha256": "8229ca16fb8d5a32d6bc63473e3459b88ee92017c46458e3ec8e69f95628c825"
+    },
+    {
+      "file": "runtime/shared/main.js.in",
+      "sha256": "18f2e9c0e4b410a4fdd82b1eb8a0a77e333100915d8a77bbbf406cd445f9c5a1"
+    },
+    {
+      "file": "runtime/platforms/android/layout.json",
+      "sha256": "b050ad679557cd6b6d320ff8f33bcd60343be0e6c71b070ab52ce46fba03adea"
+    },
+    {
+      "file": "runtime/platforms/android/preamble.js.in",
+      "sha256": "d1ba04237e8a4813d8734e29b884f40986eda8545f4b4dbe2269e76c96d0d368"
+    },
+    {
+      "file": "runtime/platforms/android/v14RuleRegistry.js.in",
+      "sha256": "bdfaad2605c8b106d6231ef10a990ba5ed65a7cd0943a4738c245527b189457e"
+    },
+    {
+      "file": "runtime/platforms/android/main.js.in",
+      "sha256": "1d320039066b8ed86544774b585725a64b2a91f7ea20ac94706fe1b6165b6391"
     },
     {
       "file": "tools/validate-azure-async.cjs",

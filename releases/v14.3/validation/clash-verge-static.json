@@ -1,0 +1,66 @@
+{
+  "status": "CLASH_VERGE_STATIC_PASS",
+  "date": "2026-10-16",
+  "checks": [
+    {
+      "name": "dual-stack:business-DNS-groups-and-rules-equal-Windows",
+      "status": "PASS"
+    },
+    {
+      "name": "dual-stack:three-pass-idempotence",
+      "status": "PASS"
+    },
+    {
+      "name": "dual-stack:strict-route-and-dual-stack-with-app-switches-retained",
+      "status": "PASS"
+    },
+    {
+      "name": "ipv4-local:business-DNS-groups-and-rules-equal-Windows",
+      "status": "PASS"
+    },
+    {
+      "name": "ipv4-local:three-pass-idempotence",
+      "status": "PASS"
+    },
+    {
+      "name": "ipv4-local:strict-route-and-dual-stack-with-app-switches-retained",
+      "status": "PASS"
+    },
+    {
+      "name": "foreign-privileged-TUN-fields-removed",
+      "status": "PASS"
+    },
+    {
+      "name": "one-entry-can-explicitly-switch-back-to-dual-stack",
+      "status": "PASS"
+    },
+    {
+      "name": "mode-selection-does-not-change-business-egress",
+      "status": "PASS"
+    },
+    {
+      "name": "source-registry-is-hash-bound",
+      "status": "PASS"
+    }
+  ],
+  "sourceFiles": [
+    {
+      "file": "src/clash-verge/v14.3-clash-verge.js",
+      "sha256": "5535812b44ee65b399d1a977ea7d7e9326c287efaba5c21d599e8aca9528ca2c"
+    },
+    {
+      "file": "tests/clash-verge.cjs",
+      "sha256": "3da5d1f61da13d2515fb4d01190536c041aab9fbb3c6cda1aa2f1a7201f7f9e4"
+    },
+    {
+      "file": "tests/fixture.cjs",
+      "sha256": "238de968f94b2bc40070a053a47969dddfc4541ff841b555a0ecf5924869d39e"
+    },
+    {
+      "file": "metadata/clash-verge-sources.json",
+      "sha256": "ed3d896c5e270709cca42d4cb7c484ecb8d17f0b198596662876a9e98a0760f4"
+    }
+  ],
+  "nativeClientAcceptance": "NOT_RUN",
+  "scope": "Actual single Verge script; Windows business/DNS/UDP parity, mode switching, idempotence, TUN boundary. App final merge and native capture separate."
+}

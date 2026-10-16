@@ -1,0 +1,26 @@
+{
+  "status": "CORE_PAIR_CORRESPONDING_SOURCE_CRC_SHA_PASS",
+  "date": "2026-10-16",
+  "packages": [
+    {
+      "file": "dist/v14.3/v14.3-flclash-windows-core.zip",
+      "sha256": "779c38d744383b029f4669c1e7546805811623bd72bac563bba38feb49564ad4",
+      "bytes": 26905202,
+      "members": 424
+    },
+    {
+      "file": "dist/v14.3/v14.3-flclash-corresponding-source.zip",
+      "sha256": "5bfcc200f69e8c0cc9ac62cc3f8a1db5f582363ec7be997152c6d4c8131d756b",
+      "bytes": 48557478,
+      "members": 15021
+    }
+  ],
+  "productionCoreSHA256": "9c06f5ec0cc36938eef27490253f9bf60ea72c71f89cfe4c5e1e261e2d3fa3f8",
+  "correspondingSourceFiles": 15020,
+  "matchingHelperVerified": true,
+  "installerScope": "Exact original Windows core hash, three files only, backup/rollback and owner SID preserved",
+  "sourceManifestSHA256": "e704da261ee9866d71fbe1f9c99a87ff59b95012b9bec9392f6aec067bdc4ff5",
+  "sourcePackageContainsLockedVendorDependencies": true,
+  "packageToolSHA256": "4862a60b73b306585cd768ed69f86ff0e94783b56ba5b0c7b04b553d5deb5762",
+  "reproducibility": "Fixed source/dependencies and verified member hashes; binary identity across dependency layouts is not promised"
+}

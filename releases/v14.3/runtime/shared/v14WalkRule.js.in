@@ -1,0 +1,45 @@
+function v14WalkRule(text, atom, owner) {
+  if (typeof text !== "string" || !text.trim()) v14Fail(owner + " 含无效规则。");
+  const lead = /^\s*([A-Za-z0-9-]+)\s*(?:,|$)/.exec(text);
+  if (!lead) v14Fail(owner + " 无法识别规则类型：" + text);
+  const type = lead[1].toUpperCase();
+  if (!["AND", "OR", "NOT", "SUB-RULE"].includes(type)) return atom(type, text, owner);
+  const start = text.indexOf("(", lead[0].length);
+  if (start < 0 || text.slice(lead[0].length, start).trim()) v14Fail(owner + " 逻辑规则缺少条件括号：" + text);
+  function close(s, pos) {
+    let depth = 0, escaped = false, bracket = false;
+    for (let i = pos; i < s.length; i++) {
+      const c = s[i];
+      if (escaped) { escaped = false; continue; }
+      if (c === "\\") { escaped = true; continue; }
+      if (c === "[" && !bracket) { bracket = true; continue; }
+      if (c === "]" && bracket) { bracket = false; continue; }
+      if (bracket) continue;
+      if (c === "(") depth++;
+      if (c === ")" && --depth === 0) return i;
+    }
+    v14Fail(owner + " 逻辑规则括号不平衡；不会近似改写：" + s);
+  }
+  const end = close(text, start);
+  const inside = text.slice(start + 1, end);
+  let replaced;
+  if (type === "SUB-RULE") replaced = v14WalkRule(inside, atom, owner);
+  else {
+    const parts = []; let pos = 0;
+    while (pos < inside.length) {
+      while (/\s/.test(inside[pos] || "") && pos < inside.length) pos++;
+      if (inside[pos] !== "(") v14Fail(owner + " 逻辑条件格式不支持：" + text);
+      const e = close(inside, pos);
+      parts.push("(" + v14WalkRule(inside.slice(pos + 1, e), atom, owner) + ")");
+      pos = e + 1;
+      while (pos < inside.length && /\s/.test(inside[pos])) pos++;
+      if (pos < inside.length) {
+        if (inside[pos] !== ",") v14Fail(owner + " 条件分隔符无效：" + text);
+        pos++;
+      }
+    }
+    if (!parts.length) v14Fail(owner + " 逻辑条件为空。");
+    replaced = parts.join(",");
+  }
+  return text.slice(0, start + 1) + replaced + text.slice(end);
+}

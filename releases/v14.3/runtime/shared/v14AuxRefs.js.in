@@ -1,0 +1,12 @@
+function v14AuxRefs(config) {
+  const out = [];
+  for (const key of ["force-domain", "skip-domain", "skip-src-address", "skip-dst-address"]) {
+    for (const value of v14Strings((config.sniffer || {})[key], "sniffer." + key)) {
+      if (/^rule-set:/i.test(value)) for (const name of value.slice(9).split(",")) out.push([name.trim(), "sniffer." + key]);
+    }
+  }
+  for (const key of ["route-address-set", "route-exclude-address-set"]) {
+    for (const name of v14Strings((config.tun || {})[key], "tun." + key)) out.push([name, "tun." + key]);
+  }
+  return out;
+}

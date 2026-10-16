@@ -1,0 +1,65 @@
+function v14KeepLegacy(config, retain, android) {
+  // Preserve the dependency closure of non-generated sub-rules and custom
+  // inbounds. Never preserve an object while discarding its dependencies.
+  const subs = config["sub-rules"] == null ? {} : config["sub-rules"];
+  const oldSets = config["rule-providers"] == null ? {} : config["rule-providers"];
+  if (!v14Object(subs) || !v14Object(oldSets)) v14Fail("sub-rules/rule-providers 必须是对象。");
+  const keptSets = {}, subState = new Map(), setState = new Map();
+  function geoCheck(text, owner) {
+    if (android && /(?:^|[,(])\s*(?:GEOSITE|GEOIP),/i.test(text))
+      v14Fail(owner + " 含 GeoSite/GeoIP；Android 无 Geo 数据合同不允许静默继承它。");
+  }
+  function setRef(name, owner) {
+    if (setState.get(name) === 1) v14Fail("rule-provider 引用成环：" + owner + " -> " + name);
+    if (setState.get(name) === 2) return;
+    const set = oldSets[name];
+    if (!v14Object(set)) v14Fail(owner + " 引用不存在的 rule-provider：" + name);
+    if (!["inline", "http", "file"].includes(set.type)) v14Fail("未知 rule-provider 类型：" + name);
+    if (!["domain", "ipcidr", "classical"].includes(set.behavior)) v14Fail("未知 rule-provider behavior：" + name);
+    if (android && set.behavior === "classical" && set.type !== "inline")
+      v14Fail("Android 无法静态排除外部 classical rule-provider 中的 Geo 依赖：" + name);
+    setState.set(name, 1); keptSets[name] = v14Copy(set);
+    // Our previous generated download selector is rebuilt later in main().
+    if (!v14ManagedSource(name, set)) retain(set.proxy, "rule-provider " + name);
+    if (set.type === "inline") {
+      for (const item of v14Strings(set.payload, "rule-provider " + name + ".payload")) {
+        if (set.behavior !== "classical") continue;
+        geoCheck(item, "rule-provider " + name);
+        for (const m of item.matchAll(/(?:^|[,(])\s*RULE-SET,([^,)]+)/g)) setRef(m[1].trim(), name);
+      }
+    }
+    setState.set(name, 2);
+  }
+  function subRef(name, owner) {
+    if (subState.get(name) === 1) v14Fail("sub-rule 引用成环：" + owner + " -> " + name);
+    if (subState.get(name) === 2) return;
+    if (!Object.prototype.hasOwnProperty.call(subs, name)) v14Fail(owner + " 引用不存在的 sub-rule：" + name);
+    subState.set(name, 1);
+    for (const rule of v14Strings(subs[name], "sub-rule " + name)) {
+      geoCheck(rule, "sub-rule " + name);
+      for (const m of rule.matchAll(/(?:^|[,(])\s*RULE-SET,([^,)]+)/g)) setRef(m[1].trim(), name);
+      if (rule.startsWith("SUB-RULE,")) subRef(v14Target(rule), name);
+      else retain(v14Target(rule), "sub-rule " + name);
+    }
+    subState.set(name, 2);
+  }
+  for (const name of Object.keys(subs)) subRef(name, "sub-rules");
+  if (config.listeners != null && !Array.isArray(config.listeners)) v14Fail("listeners 必须是数组。");
+  for (const l of (config.listeners || [])) {
+    if (!v14Object(l)) v14Fail("存在无效 listener。");
+    retain(l.proxy, "listener " + l.name + ".proxy");
+    if (l.rule) subRef(l.rule, "listener " + l.name + ".rule");
+  }
+  if (config.tunnels != null && !Array.isArray(config.tunnels)) v14Fail("tunnels 必须是数组。");
+  for (const [i, t] of (config.tunnels || []).entries()) {
+    if (v14Object(t)) retain(t.proxy, "tunnels[" + i + "].proxy");
+    else if (typeof t === "string") {
+      const fields = t.split(",");
+      if (fields.length !== 3 && fields.length !== 4) v14Fail("tunnels[" + i + "] 格式不支持。");
+      if (fields.length === 4) retain(fields[3].trim(), "tunnels[" + i + "]");
+    } else v14Fail("tunnels[" + i + "] 必须是字符串或对象。");
+  }
+  for (const p of (config.proxies || [])) if (p.type === "rematch") subRef(p["target-sub-rule"], p.name);
+  for (const [name, owner] of v14AuxRefs(config)) setRef(name, owner);
+  return keptSets;
+}

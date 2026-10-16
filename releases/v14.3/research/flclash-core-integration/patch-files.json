@@ -1,0 +1,65 @@
+{
+  "scope": "Two runtime changes only: narrow native DIRECT IPv6 network-unreachable retry classification and impossible TLS-prefix rejection. One wrapper test normalizes Windows path separators; other added files are tests/types.",
+  "files": [
+    {
+      "file": "Clash.Meta/adapter/outbound/direct.go",
+      "beforeSHA256": "c42b0338075fec1ae796b4fd5906bc6fef70f613c1ade3a3cc0a7f22f95ce211",
+      "afterSHA256": "7b81ce2c806c9e5606934c6f4c954dcba15530c2fca6dedb218ce955d5c14458"
+    },
+    {
+      "file": "Clash.Meta/adapter/outbound/direct_ipv6_error.go",
+      "beforeSHA256": null,
+      "afterSHA256": "307809142f95cd5aa236e38d12634c92825ab45d3682bdf0f9b4ce2b1641cd72"
+    },
+    {
+      "file": "Clash.Meta/adapter/outbound/direct_ipv6_error_notwindows.go",
+      "beforeSHA256": null,
+      "afterSHA256": "95d775a75bde65e959353ddb70c7beaa338a8bae6c1bf9c3eb1905397082dcaa"
+    },
+    {
+      "file": "Clash.Meta/adapter/outbound/direct_ipv6_error_test.go",
+      "beforeSHA256": null,
+      "afterSHA256": "600a67eab5933f985e012cce0d6f7725de7a2e8690e438d69bbaaf83b94468d8"
+    },
+    {
+      "file": "Clash.Meta/adapter/outbound/direct_ipv6_error_windows.go",
+      "beforeSHA256": null,
+      "afterSHA256": "f588db304b1c1d78411762950ce660bbe239f92017ae6979cc29ee74ca3962ce"
+    },
+    {
+      "file": "Clash.Meta/adapter/outbound/direct_ipv6_error_windows_test.go",
+      "beforeSHA256": null,
+      "afterSHA256": "4c4429dc0afef64337c7f5e68b7b76f7d4665b81067c7712dcb19894c83de273"
+    },
+    {
+      "file": "Clash.Meta/component/sniffer/routeweaver_prefix_test.go",
+      "beforeSHA256": null,
+      "afterSHA256": "2f5dec26a565cc993f7c0c1e999bb7dcd168cd233bfd78cd7c77a06da66685b5"
+    },
+    {
+      "file": "Clash.Meta/component/sniffer/tls_sniffer.go",
+      "beforeSHA256": "bfbe0a827978cc80fafe297854e25a54c60ca11d9e06572e9fdaf4f99ea133b4",
+      "afterSHA256": "ee32237a4c63257ab336bbda377f63be631e044ff46f10585d70a507e3fb2d23"
+    },
+    {
+      "file": "Clash.Meta/constant/direct_ipv6_error.go",
+      "beforeSHA256": null,
+      "afterSHA256": "6323c74b92a5e48ad34db3e2b1483502e79c90aed83ccc39281b480d58684988"
+    },
+    {
+      "file": "Clash.Meta/tunnel/direct_ipv6_retry_test.go",
+      "beforeSHA256": null,
+      "afterSHA256": "08b8a4a8f2bc4194e6887feab455c1fc0882b6c6b3f94cf0ba3aa5e5ea29b8d1"
+    },
+    {
+      "file": "Clash.Meta/tunnel/tunnel.go",
+      "beforeSHA256": "ca42847345337846cf5249f61678e42b3f9383a8bfe5ea8d3d93e1e796c54277",
+      "afterSHA256": "8f3b3b8c1d95300737db020934fa727a28c5794ca2302f36b7b3d812136def52"
+    },
+    {
+      "file": "hub_test.go",
+      "beforeSHA256": "758e23047b599260a51c883b8b040cc4ad9546bfe1dd366cc1011fbc7af8ad68",
+      "afterSHA256": "c729a1b10a92e1b1a1c9e294837e0630e70cc39d2ce8a5fbefe59e4f82a5e520"
+    }
+  ]
+}

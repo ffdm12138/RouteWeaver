@@ -32,6 +32,8 @@ async function main(){
       const config=stage==='before-fixed-direct'?f.generate(platform,{...input,listeners:input.listeners.map(({proxy,...listener})=>listener)}):f.generate(platform,input);
       if(stage==='before-fixed-direct')config.listeners[0].proxy='DIRECT'; // Controlled negative injection, never a deployed config.
       if(stage==='before-fixed-direct')assert.throws(()=>f.generate(platform,input),/自定义入站会绕过主规则/);
+      // Execution-only: a foreign client's generated TUN must never start on this host.
+      config.tun={...config.tun,enable:false,'auto-route':false};
       const originalRules=config.rules.slice();assert.equal(originalRules[0],'DOMAIN,v14-runtime-check.invalid,REJECT');
       const controller=await port();config['mixed-port']=0;config['external-controller']='127.0.0.1:'+controller;config['allow-lan']=false;config['log-level']='debug';config.profile={'store-selected':false,'store-fake-ip':false};
       config.hosts={'v14-runtime-check.invalid':'127.0.0.1'};config.dns={enable:true,listen:'127.0.0.1:'+await port(),ipv6:false,'enhanced-mode':'redir-host','use-hosts':true,'use-system-hosts':false,'default-nameserver':['127.0.0.1:'+dnsPort],nameserver:['127.0.0.1:'+dnsPort],'direct-nameserver':['127.0.0.1:'+dnsPort],'proxy-server-nameserver':['127.0.0.1:'+dnsPort]};

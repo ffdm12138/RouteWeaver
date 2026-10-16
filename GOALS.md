@@ -15,3 +15,5 @@
 
 
 2026-10-16 新增目标：不能假定物理网络具备 IPv6 出口。保留标准双栈与手动 IPv4-local 入口，分别处理本机到节点、节点到目标与直连；保留用户显式地址族和同一节点后备，不把连接失败改成 DIRECT。实现与设备边界以需求第 12 条及模式指南为准。
+
+Current authorized scope: one entry per client with both explicit network modes, shared runtime generation, real-engine comparison, allowlisted final-config diagnostics, and a separately verified optional Windows FlClash core pair. Strict routing, core/remote IPv6 and all existing policy boundaries remain. Limited maintainer TUN evidence is distinct from media/device acceptance.

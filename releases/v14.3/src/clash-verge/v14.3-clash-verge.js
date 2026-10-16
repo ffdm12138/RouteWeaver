@@ -1,6 +1,8 @@
-// IPv4-local compatibility entry; choose explicitly for a network without local IPv6 egress.
+// One current entry; set the default below, or use x-routeweaver.network-mode in the input.
+const ROUTEWEAVER_DEFAULT_NETWORK_MODE = "dual-stack";
+// Clash Verge Rev Windows adapter; main(config, profileName) returns a config object.
 // Small standalone overwrite: critical parents and safety guards inline; complete reviewed rules are remote.
-// Mihomo V14.3 macOS / FlClash — 2026-10-14; domestic-protocol-r1 / macos-r1.
+// Mihomo V14.3 desktop — 2026-10-12; balanced-r1.
 // Company rules precede geographic shortcuts; DNS uses the same group.
 // Unknown public UDP is proxied or rejected, including arbitrary WebRTC ports.
 // Private LAN and the explicit manual DIRECT list are intentional exceptions.
@@ -1914,7 +1916,7 @@ function v14ValidateDomainTables() {
   }
 }
 
-function v14MacOSBase(input) {
+function v14VergeBase(input) {
   v14ValidateDomainTables();
   if (!v14Object(input)) v14Fail("覆写入口需要配置对象。");
   const config = v14Copy(input);
@@ -1982,7 +1984,7 @@ function v14MacOSBase(input) {
   const suppliedTun = v14Object(config.tun) ? config.tun : {};
   const priorMarker = input["x-v14-generated"];
   const priorTunWarnings = v14Object(priorMarker) && priorMarker.version === V14.version &&
-    ["desktop", "macos-flclash"].includes(priorMarker.platform) && Array.isArray(priorMarker.validationWarnings)
+    priorMarker.platform === "desktop" && Array.isArray(priorMarker.validationWarnings)
     ? priorMarker.validationWarnings : [];
   for (const key of tunBypassKeys) {
     const warning = "V14.2 已移除 TUN 路由旁路字段 " + key + "；直连在业务规则之后由核心判断。";
@@ -2223,7 +2225,11 @@ function v14MacOSBase(input) {
   const hijack = Array.isArray(oldTun["dns-hijack"]) ? oldTun["dns-hijack"] : [];
   config.tun = Object.assign({}, oldTun, { // FlClash owns enable / auto-route
     "dns-hijack": v14Unique(hijack.concat(["any:53", "tcp://any:53"])) });
-  // Retain the desktop strict-route setting; Darwin capture requires device QA.
+  // FlClash 0.8.99 exposes no strict-route field in its Tun model/UI and does
+  // not patch it at runtime. On Windows, a missing value otherwise defaults
+  // to false in Mihomo, losing protection against multi-homed/LAN DNS leaks.
+  // This file is the Windows desktop entry; Android owns its VPN separately.
+  // V14.2 requires strict-route for its Windows DNS privacy contract.
   config.tun["strict-route"] = true; // V14.2 privacy contract
   config.tun["route-address"] = ["0.0.0.0/0", "::/0"];
   // Remove V11's obsolete interface address, keeping the current dual-stack
@@ -2289,33 +2295,36 @@ function v14MacOSBase(input) {
   return v14NetworkDefaults(config);
 }
 
-// FlClash macOS uses a core-created utun; the app owns enable / auto-route.
-function v14NetworkModeBase(input) {
-  if (!v14Object(input)) v14Fail("FlClash macOS 覆写输入必须是配置对象。");
+// Clash Verge Rev owns listeners, mode and selected GUI TUN/DNS keys after scripts.
+// This transform supplies the routing contract; inspect the final effective config.
+function v14NetworkModeBase(input, profileName) {
+  if (!v14Object(input)) v14Fail("Clash Verge 覆写输入必须是配置对象。");
   const prepared = v14Copy(input);
-  const tun = v14Object(prepared.tun) ? prepared.tun : {};
-  // An omitted device lets Mihomo choose a free utun index on Darwin.
-  // Keep an explicitly valid macOS name; discard Windows/Linux names and FDs.
-  if (typeof tun.device !== "string" || !/^utun[0-9]+$/.test(tun.device)) delete tun.device;
+  const prior = prepared["x-v14-generated"];
+  if (v14Object(prior) && prior.platform === "clash-verge") prior.platform = "desktop";
+  const config = v14VergeBase(prepared);
+  // The GUI/service controls activation. Preserve explicit activation choices.
+  for (const key of ["enable", "auto-route"]) {
+    if (v14Object(input.tun) && Object.prototype.hasOwnProperty.call(input.tun, key))
+      config.tun[key] = input.tun[key];
+  }
+  config.tun["strict-route"] = true;
+  config.tun["route-address"] = ["0.0.0.0/0", "::/0"];
+  // Never transfer a foreign platform's privileged TUN descriptor or redirect marks.
   for (const key of ["file-descriptor", "auto-redirect", "auto-redirect-input-mark", "auto-redirect-output-mark",
-    "iproute2-table-index", "iproute2-rule-index", "gso", "gso-max-size", "include-interface", "exclude-interface",
-    "include-uid", "include-uid-range", "exclude-uid", "exclude-uid-range", "include-android-user",
-    "include-package", "exclude-package", "include-mac-address", "exclude-mac-address"]) delete tun[key];
-  tun["auto-detect-interface"] = true;
-  prepared.tun = tun;
-  delete prepared.android;
-  delete prepared.extension;
-  delete prepared["routing-mark"];
-  // Preserve an explicit Mac physical interface, but remove migrated Windows names.
-  if (prepared["interface-name"] && !/^(?:en|bridge|bond|ppp)[0-9]+$/.test(prepared["interface-name"])) delete prepared["interface-name"];
-  const config = v14MacOSBase(prepared);
+    "iproute2-table-index", "iproute2-rule-index", "include-android-user", "include-package", "exclude-package"])
+    delete config.tun[key];
   const marker = config["x-v14-generated"];
-  marker.platform = "macos-flclash";
-  marker.platformRevision = "macos-r1";
-  marker.macOS = {client:"FlClash", bridgeResult:"config-object", tunOwner:"Mihomo-Darwin-utun",
-    switches:"app owns enable / auto-route", nativeAcceptance:"NOT_RUN"};
-  marker.acceptedBoundaries = ["remote-node-to-destination-ip-family", "FlClash final merge and macOS TUN/system DNS are outside JS", "per-flow DNS affinity"];
-  marker.openIssues = ["macOS app import, privileged TUN helper, LAN DNS, TCP/UDP/IPv6 capture and Wi-Fi/interface switching", "device DNS caches and application connection migration"];
+  marker.platform = "clash-verge";
+  marker.platformRevision = "clash-verge-r1";
+  marker.client = {name:"Clash Verge Rev", reviewedVersion:"2.5.8", scriptEngine:"Boa 0.22.0",
+    supportedPlatform:"Windows", nativeAcceptance:"NOT_RUN"};
+  marker.acceptedBoundaries = ["remote-node-to-destination-ip-family", "Verge restores app-owned mode, listeners and saved TUN/DNS keys after scripts", "per-flow DNS affinity"];
+  marker.openIssues = ["Verify final Rule mode, strict-route, dual-stack routes and DNS override ownership in the client", "native Windows TUN, DNS/UDP/IPv6 capture and application fallback"];
+  marker.validationWarnings = v14Unique(marker.validationWarnings.concat([
+    "Clash Verge Rev 请使用规则模式并在 TUN 设置开启严格路由；保存的 GUI 字段可能覆盖脚本，导入后核对最终运行配置。",
+    "让本覆写管理业务 DNS 时请关闭额外 DNS 覆盖；IPv4-local 仍须保留核心 IPv6 和双栈 TUN，脚本不能改变应用后置合并。"
+  ]));
   return config;
 }
 
@@ -2333,7 +2342,7 @@ function v14IPv4LocalResolver(value) {
   const kept = params.filter(p => p && !/^(disable-ipv6|disable-qtype-64|disable-qtype-65)(=|$)/.test(p));
   return address + "#" + kept.concat(["disable-ipv6=true", "disable-qtype-64=true", "disable-qtype-65=true"]).join("&");
 }
-function main(input) {
+function v14IPv4LocalMain(input) {
   const prepared = v14Copy(input);
   if (v14Object(prepared.dns)) prepared.dns.ipv6 = true;
   // This generated inline reference is restored below. Exclude it from the
@@ -2380,4 +2389,14 @@ function main(input) {
     "HTTP/TLS/QUIC 可读域名允许重新解析 IPv4；无域名的 IPv6 字面量继续按原组处理，DIRECT 仍需本地 IPv6，代理目标仍需节点 IPv6。应用私有 DNS/缓存和显式 hosts 不保证回退。"
   ]);
   return config;
+}
+
+function main(input, profileName) {
+  if (!v14Object(input)) v14Fail("覆写输入必须是配置对象。");
+  const options = v14Object(input["x-routeweaver"]) ? input["x-routeweaver"] : {};
+  const prior = v14Object(input["x-v14-generated"]) ? input["x-v14-generated"] : {};
+  const mode = options["network-mode"] ||
+    (prior.version === V14.version && prior.networkMode === "ipv4-local" ? "ipv4-local" : ROUTEWEAVER_DEFAULT_NETWORK_MODE);
+  if (mode !== "dual-stack" && mode !== "ipv4-local") v14Fail("network-mode 仅支持 dual-stack 或 ipv4-local。");
+  return mode === "ipv4-local" ? v14IPv4LocalMain(input, profileName) : v14NetworkModeBase(input, profileName);
 }

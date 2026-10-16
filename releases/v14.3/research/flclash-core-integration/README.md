@@ -1,0 +1,13 @@
+# Windows FlClash core integration
+
+The production binary uses the fixed FlClash 0.9.0 wrapper and its actual Mihomo fork, with the source changes in `core.patch`. `source-identity.json` binds the upstream archives, original installed build and candidate. The 12 changed files include tests and one Windows-only test-path normalization. The only core runtime changes are narrow DIRECT IPv6 network-unreachable retry termination and early rejection of impossible TLS prefixes. They do not change routing, DNS policy, UDP, proxy transport, TLS budgets or legitimate fragmentation.
+
+The release includes `v14.3-flclash-windows-core.zip` and `v14.3-flclash-corresponding-source.zip`. The latter contains patched core and Helper sources, Go/Rust dependency trees with their licenses and locked hashes, build/install scripts and a source member manifest. Use the source ZIP root with `python rebuild.py --source . --work .work/rebuild --go <go.exe> --cargo <cargo.exe>`; see `--help` for preparation and verification only. Go 1.27.2 and Rust/Cargo 1.99.1 were used; the Windows GNU linker must be supplied. Different dependency layouts/toolchains can change bytes; rebuild the Helper against the resulting core hash.
+
+`replay-main.go` is a test-only CLI transport, separate from the installed production core. It parses configuration once, starts the same inbounds normally started by the FlClash host, and refuses enabled TUN. To rebuild that test transport, run `python build-replay.py --source <fixed-patched-core/Clash.Meta> --go <go.exe> --output <replay.exe>` with the locked Go module cache or proxy available. This artifact is for owned loopback tests only.
+
+The Helper is unmodified upstream source, rebuilt with the candidate's exact `CORE_SHA256`; its original owner SID enforcement and binary validation remain enabled. The manifest and Helper must match the core. The installer is restricted to the original Windows core hash and backs up/replaces/restores only the three FlClash files. This is not a general core package for Verge, Clash Mi, mobile or other FlClash versions.
+
+The production pair was installed in a single maintainer Windows FlClash instance. The controlled TUN results and their limitations are in `validation/client-integration.json` and `docs/reports/v14.3/单入口优化与核心接入.md`. They do not certify WeChat media, application-level IPv4 retries, public IPv6 or other platforms. Arbitrary opaque IPv6 addresses cannot be mapped reliably to IPv4 without destination information.
+
+The core-derived material retains GPL-3.0 terms in `LICENSE`. Vendored dependencies retain their individual notices. No subscription, user nodes, passwords, controller credentials or user logs are included.

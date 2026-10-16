@@ -1,0 +1,307 @@
+{
+  "status": "LIMITED_WINDOWS_FLCLASH_TUN_INTEGRATION_PASS",
+  "date": "2026-10-16",
+  "revision": "client-integration-r1",
+  "scope": "One maintainer Windows FlClash 0.9.0 instance, actual matched production core/Helper deployment and controlled native TUN failure feedback. Not WeChat media, application IPv4 retry, bandwidth, other devices or public IPv6 acceptance.",
+  "productionPair": {
+    "coreSHA256": "9c06f5ec0cc36938eef27490253f9bf60ea72c71f89cfe4c5e1e261e2d3fa3f8",
+    "files": [
+      {
+        "file": "FlClashCore.exe",
+        "sha256": "9c06f5ec0cc36938eef27490253f9bf60ea72c71f89cfe4c5e1e261e2d3fa3f8",
+        "bytes": 70770176
+      },
+      {
+        "file": "FlClashHelperService.exe",
+        "sha256": "ea699237ed104a79ea27e0e92bbc12b7e0797ad80d342b9dea146c829c8048b1",
+        "bytes": 1445115
+      },
+      {
+        "file": "manifest.json",
+        "sha256": "3a7c3459bcc3878a19621ee1b3c4d828768ea2ef643c4fa6cbafc46f8db0524a",
+        "bytes": 84
+      }
+    ]
+  },
+  "sourceIdentity": {
+    "flclashCommit": "03f955382409a4a7ac1f3f92e46d9fcc6d39f106",
+    "flclashSourceZipSha256": "8cf43737dd5d74fa00c424be5d32cdae016f072de9ef5e5f410d1455ee6b1553",
+    "mihomoForkCommit": "8380d0e7462f061a964323e9bf3129a236fcc5d5",
+    "installedCoreSha256": "ff0bfb9172a8331da6c5dac38028f47d805b433e8b2796b61c1767d8fb6792d3",
+    "installedCoreToolchain": "go1.27.1",
+    "installedCoreVersion": "v1.19.32",
+    "mihomoForkSourceZipSha256": "1303658851575a9efe75f0f2222edc9f7215d408ae1c5e12b2d185120954b373",
+    "candidateCoreSha256": "9c06f5ec0cc36938eef27490253f9bf60ea72c71f89cfe4c5e1e261e2d3fa3f8"
+  },
+  "runtimeChanges": [
+    "Native opaque IPv6 TCP DIRECT + OS network unreachable only: preserve error, stop repeated backoff",
+    "Impossible TLS handshake prefix only: reject early; legitimate fragmentation and original budgets unchanged"
+  ],
+  "unmodifiedHelper": true,
+  "helperCoreHashValidationRetained": true,
+  "serviceOwnerSidRetained": true,
+  "rollbackBackupCreated": true,
+  "weChatMediaAcceptance": "NOT_RETESTED_USER_NORMAL_USE",
+  "userReportedBaseline": "About five seconds; subjective report, not timed per-send evidence",
+  "automaticPhysicalNetworkDetection": false,
+  "globalIPv6Disabled": false,
+  "routePolicyChanged": false,
+  "sourceExtraction": {
+    "initialByteIdentityFiles": 26,
+    "scope": "Before consolidating file modes and adding Verge, both editions retained their previous bytes"
+  },
+  "unitTests": [
+    {
+      "suite": "test-patch",
+      "status": "PASS",
+      "rawLogSHA256": "d00d1c11b83e60f74dd16da188181b3ae24a330a6c55e90752d5bd886a2720ab",
+      "passingGoRows": 29,
+      "rustPassed": null
+    },
+    {
+      "suite": "test-sniffer",
+      "status": "PASS",
+      "rawLogSHA256": "40ba22fa56eaab60d7534d8ee66cf3068804dd8b1fb4a4f5cbbdeb4b6f927011",
+      "passingGoRows": 144,
+      "rustPassed": null
+    },
+    {
+      "suite": "test-wrapper",
+      "status": "PASS",
+      "rawLogSHA256": "2894a1ed36d94b51e486cbc9656e906d5b2375b5349b3a5575c549aa91eca323",
+      "passingGoRows": 0,
+      "rustPassed": null
+    },
+    {
+      "suite": "helper-test",
+      "status": "PASS",
+      "rawLogSHA256": "a5b7953bc296bcb20a9dbb9b9288f9e4fbd7b471ffc5407e899a0379b15a4458",
+      "passingGoRows": 0,
+      "rustPassed": 43
+    }
+  ],
+  "nativeIpc": {
+    "scope": "Official IPC init/setup/startListener and owned sockets, no TUN",
+    "runs": [
+      {
+        "label": "installed-control",
+        "coreSHA256": "ff0bfb9172a8331da6c5dac38028f47d805b433e8b2796b61c1767d8fb6792d3",
+        "cases": [
+          {
+            "name": "literal6-unreachable-0",
+            "warnings": 10,
+            "milliseconds": 2110.000000015134,
+            "response": "closed",
+            "data": ""
+          },
+          {
+            "name": "literal6-unreachable-1",
+            "warnings": 10,
+            "milliseconds": 3437.000000005355,
+            "response": "closed",
+            "data": ""
+          },
+          {
+            "name": "literal6-unreachable-2",
+            "warnings": 10,
+            "milliseconds": 3531.0000000172295,
+            "response": "closed",
+            "data": ""
+          },
+          {
+            "name": "reachable-local-2",
+            "milliseconds": 16.00000000325963,
+            "response": "closed",
+            "data": "PONG"
+          },
+          {
+            "name": "reachable-local-23",
+            "milliseconds": 14.999999984866008,
+            "response": "closed",
+            "data": "PONG"
+          }
+        ],
+        "medianFailureMilliseconds": 3437.000000005355
+      },
+      {
+        "label": "candidate",
+        "coreSHA256": "9c06f5ec0cc36938eef27490253f9bf60ea72c71f89cfe4c5e1e261e2d3fa3f8",
+        "cases": [
+          {
+            "name": "literal6-unreachable-0",
+            "warnings": 1,
+            "milliseconds": 78.00000000861473,
+            "response": "closed",
+            "data": ""
+          },
+          {
+            "name": "literal6-unreachable-1",
+            "warnings": 1,
+            "milliseconds": 0.0,
+            "response": "closed",
+            "data": ""
+          },
+          {
+            "name": "literal6-unreachable-2",
+            "warnings": 1,
+            "milliseconds": 16.00000000325963,
+            "response": "closed",
+            "data": ""
+          },
+          {
+            "name": "reachable-local-2",
+            "milliseconds": 16.00000000325963,
+            "response": "closed",
+            "data": "PONG"
+          },
+          {
+            "name": "reachable-local-23",
+            "milliseconds": 0.0,
+            "response": "closed",
+            "data": "PONG"
+          }
+        ],
+        "medianFailureMilliseconds": 16.00000000325963
+      }
+    ]
+  },
+  "controlledTun": {
+    "configSHA256": "c905f223366d8d05c7cb0da9a7c90620b350bcafd89a8533ab143625bb2cdf66",
+    "beforeCoreSHA256": "ff0bfb9172a8331da6c5dac38028f47d805b433e8b2796b61c1767d8fb6792d3",
+    "afterCoreSHA256": "9c06f5ec0cc36938eef27490253f9bf60ea72c71f89cfe4c5e1e261e2d3fa3f8",
+    "cases": [
+      {
+        "port": 8000,
+        "firstByteSent": false,
+        "beforeMilliseconds": 2500.0,
+        "afterMilliseconds": 15.0,
+        "outcome": "EOF"
+      },
+      {
+        "port": 443,
+        "firstByteSent": true,
+        "beforeMilliseconds": 4656.0,
+        "afterMilliseconds": 31.0,
+        "outcome": "EOF"
+      },
+      {
+        "port": 443,
+        "firstByteSent": false,
+        "beforeMilliseconds": 3734.0,
+        "afterMilliseconds": 1000.0,
+        "outcome": "EOF"
+      }
+    ],
+    "helperWarningCorrelation": "NOT_AVAILABLE; helper stderr log had no correlated network lines",
+    "ipv6TunDefaultRouteObserved": true,
+    "coreIPv6": true,
+    "strictRoute": true
+  },
+  "finalConfig": {
+    "status": "ALLOWLISTED_CONFIG_CHECK_PASS",
+    "scope": "Exported config only; final app merge, OS capture and app fallback need independent evidence",
+    "networkMode": "ipv4-local",
+    "mode": "rule",
+    "coreIPv6": true,
+    "tun": {
+      "enable": true,
+      "stack": "mixed",
+      "auto-route": true,
+      "strict-route": true,
+      "auto-detect-interface": true,
+      "mtu": 9000
+    },
+    "dualStackRouteConfigured": false,
+    "dns": {
+      "enabled": true,
+      "ipv6": false,
+      "enhancedMode": "fake-ip",
+      "ipv6FakePoolPresent": false,
+      "policyCount": 483,
+      "upstreamCount": 960,
+      "filteredUpstreamCount": 960
+    },
+    "sniffer": {
+      "enabled": true,
+      "targetRecovery": {
+        "HTTP": true,
+        "TLS": true,
+        "QUIC": true
+      }
+    },
+    "counts": {
+      "rules": 1243,
+      "groups": 26,
+      "nodes": 63,
+      "providers": 0
+    },
+    "publicGroups": [
+      {
+        "logicalGroup": "高纯净度AI用",
+        "manualProxyOnly": true
+      },
+      {
+        "logicalGroup": "高网速视频用",
+        "manualProxyOnly": true
+      }
+    ],
+    "findings": [],
+    "privacy": "Allowlisted fields and counts only; credentials, URLs, node names, destinations and raw rules omitted",
+    "configSHA256": "c905f223366d8d05c7cb0da9a7c90620b350bcafd89a8533ab143625bb2cdf66",
+    "entrySHA256": "4abff01e58315bf6187592b18ec7dbc1a32dfa00f2575e4b217a94f4ceac34c5"
+  },
+  "testReplay": {
+    "binarySHA256": "da6569414016c3d2349ebd3610f17443bd67f835109d7e82c725d695f78b761b",
+    "scope": "One-parse CLI inbound startup transport only; production source unmodified; enabled TUN refused"
+  },
+  "sourceFiles": [
+    {
+      "file": "research/flclash-core-integration/build-replay.py",
+      "sha256": "6f40dcc7647b200aebeb1be3309bb01777faf6222f09ef4509dfad899154c555"
+    },
+    {
+      "file": "research/flclash-core-integration/candidate-binaries.json",
+      "sha256": "ba850feabaa102015873a22613038ae1a02d346c87594522e4773c71a6c161c7"
+    },
+    {
+      "file": "research/flclash-core-integration/core.patch",
+      "sha256": "157823326830d3122759d238c17f1ca59f75f7ab6b8eac169fb7ce0df59513f6"
+    },
+    {
+      "file": "research/flclash-core-integration/install-flclash-core.ps1",
+      "sha256": "5308f1979b0bf34badde66e5836a371c823b27e00ba1f6d032c12631bb1c0e56"
+    },
+    {
+      "file": "research/flclash-core-integration/LICENSE",
+      "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986"
+    },
+    {
+      "file": "research/flclash-core-integration/patch-files.json",
+      "sha256": "328974f37b98372363dc365ca65345fc944a677416f7716d1940cfa93069feea"
+    },
+    {
+      "file": "research/flclash-core-integration/README.md",
+      "sha256": "6696abb6bed6f85fc2ebe0c9fb977574fdc68cca497f8f54a49ac79ee9d1624e"
+    },
+    {
+      "file": "research/flclash-core-integration/rebuild.py",
+      "sha256": "98b1397efc0d5148bcd2ee92a0dc50709431d771540b42419b3e3d2432eefca8"
+    },
+    {
+      "file": "research/flclash-core-integration/replay-main.go",
+      "sha256": "4c0dc7704b9a96a2a23fa2f586bb1ea627d189de0e8871aeef9444384307efaa"
+    },
+    {
+      "file": "research/flclash-core-integration/replay-transport.json",
+      "sha256": "c362c55a165c03dd50466c698f6f3dd851176888e0071256a9fd729824684304"
+    },
+    {
+      "file": "research/flclash-core-integration/rust-toolchain.json",
+      "sha256": "0fd47a1d646647ddb293dc4b6389688cc7c5a351807297eca03c524f62dcbec1"
+    },
+    {
+      "file": "research/flclash-core-integration/source-identity.json",
+      "sha256": "affa9ca4e5e44a040bc7d825f4f23cc5534ba4898ea69b7c4e1e6d1c08cbd4ae"
+    }
+  ]
+}

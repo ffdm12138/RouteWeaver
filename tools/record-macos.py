@@ -29,8 +29,8 @@ delivery = {
     'entries': manifest['entries'], 'testEvidence': evidence,
     'metrics': {'staticChecks': len(static['checks']), 'platforms': static['platforms'],
                 'nativeObservations': {r['kind']: sum(p['cases'] for p in r['receipt']['platforms']) for r in core['runs']}},
-    'scope': 'Inherited business routing; IPv4-preferred default only for domain nodes without explicit family. Separate IPv4-local entries and evidence are in network-compat-delivery.json. Actual standard Mac entries executed on owned Windows Mihomo with TUN disabled; Mac apps/native capture NOT_RUN.',
-    'baseEntries': manifest['inputs'][4:],
+    'scope': 'Inherited business routing; IPv4-preferred default only for domain nodes without explicit family. Two explicit network modes are in the same entry; their evidence is in network-compat-delivery.json. Actual standard Mac entries executed on owned Windows Mihomo with TUN disabled; Mac apps/native capture NOT_RUN.',
+    'baseEntries': [{'file': e['file'], 'sha256': e['sha256']} for e in read(root/'metadata/balanced-sources.json')['entries'] if e['platform'] in ('windows','clashmi')],
     'settings': {
         'FlClash': {'mode': 'rule', 'ipv6': True, 'tunEnableAndAutoRoute': 'APP_OWNED; enable in app for full-system capture', 'tunDevice': 'Valid utunN retained; missing/foreign name lets core pick a free utun index'},
         'Clash Mi': {'appendBuiltin': 'noOverwrite', 'mode': 'rule', 'ipv6': True, 'tunOverwrite': False,

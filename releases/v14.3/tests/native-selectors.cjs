@@ -27,8 +27,8 @@ async function run(platform,mode){
   fs.writeFileSync(file,JSON.stringify(configFor(['RemovedNode','RemainingNode']),null,2));let logs='';
   let child;const start=()=>{child=cp.spawn(core,['-d',home,'-f',file],{windowsHide:true,stdio:['ignore','pipe','pipe']});child.stdout.on('data',b=>logs+=b);child.stderr.on('data',b=>logs+=b);};start();
   const api=(method,resource,value)=>new Promise((resolve,reject)=>{const body=value?JSON.stringify(value):'',q=http.request({host:'127.0.0.1',port:apiPort,path:resource,method,headers:{Authorization:'Bearer '+secret,'Content-Type':'application/json','Content-Length':Buffer.byteLength(body)}},r=>{let data='';r.on('data',x=>data+=x);r.on('end',()=>r.statusCode>=400?reject(Error(data)):resolve(data?JSON.parse(data):{}));});q.on('error',reject);q.end(body);});
-  const state=g=>api('GET','/proxies/'+encodeURIComponent(g)),select=(g,n)=>api('PUT','/proxies/'+encodeURIComponent(g),{name:n});
-  async function ready(){let ok=false;for(let i=0;i<100;i++){try{const s=await state('国内网站');if(s.all.includes('RemainingNode')){ok=true;break;}}catch{}await sleep(40);}assert.ok(ok,'Core not ready: '+logs);}
+  const state=g=>api('GET','/proxies/'+encodeURIComponent(g)),select=(g,n)=>api('PUT','/proxies/'+encodeURIComponent(g),{name:n}).catch(error=>{error.message+=' [platform='+platform+', mode='+mode+', group='+g+', selected='+n+']';throw error;});
+  async function ready(){let ok=false;for(let i=0;i<100;i++){try{const states=await Promise.all(['高纯净度AI用','高网速视频用','国内网站','Steam'].map(state));if(states.every(s=>s.all.includes('RemainingNode'))){ok=true;break;}}catch{}await sleep(40);}assert.ok(ok,'Core not ready: '+logs);}
   const outcomes=[];const record=(name,value)=>outcomes.push({name,...value});
   try{
     await ready();const all=await api('GET','/proxies');
@@ -48,13 +48,13 @@ async function run(platform,mode){
     }
     const names=['高纯净度AI用','高网速视频用','国内网站','Steam'];
     for(const g of names){await select(g,'RemovedNode');assert.equal((await state(g)).now,'RemovedNode');}
-    if(mode!=='raw'){writeMembers(['RemainingNode']);await api('PUT','/providers/proxies/AuditProvider');}
-    else {fs.writeFileSync(file,JSON.stringify(configFor(['RemainingNode']),null,2));await api('PUT','/configs?force=true',{path:file});}
+    if(mode!=='raw'){writeMembers(['RemainingNode']);await api('PUT','/providers/proxies/AuditProvider');await ready();}
+    else {fs.writeFileSync(file,JSON.stringify(configFor(['RemainingNode']),null,2));await api('PUT','/configs?force=true',{path:file});await ready();}
     for(const g of names){const s=await state(g);assert.ok(!s.all.includes('RemovedNode'));assert.equal(s.now,g==='Steam'?'高纯净度AI用':'REJECT');record('removed-selected-'+g,{now:s.now,choices:s.all});}
     for(const g of ['国内网站','Steam']){await select(g,'DIRECT');assert.equal((await state(g)).now,'DIRECT');record('explicit-direct-after-refresh-'+g,{now:'DIRECT'});}
     // Reload must preserve an intentional DIRECT selection; the guard rejects
     // missing nodes, rather than disabling the user's allowed DIRECT policy.
-    await api('PUT','/configs?force=true',{path:file});assert.equal((await state('国内网站')).now,'DIRECT');record('intentional-direct-survives-reload',{now:'DIRECT'});
+    await api('PUT','/configs?force=true',{path:file});await ready();assert.equal((await state('国内网站')).now,'DIRECT');record('intentional-direct-survives-reload',{now:'DIRECT'});
     for(const g of ['高纯净度AI用','高网速视频用']){await select(g,'RemainingNode');assert.equal((await state(g)).now,'RemainingNode');record('manual-recovery-'+g,{now:'RemainingNode'});}
     report.platforms.push({platform,mode,status:'CORE_MANUAL_SELECTORS_PASS',cases:outcomes.length,results:outcomes});
     console.log('PASS '+platform+' '+mode+': '+outcomes.length+' actual selector observations');

@@ -1,0 +1,17 @@
+function v14Source(kind, rawTag, lookupOnly = false) {
+  const tag = String(rawTag).trim().toLowerCase();
+  if (!(kind === "domain" ? V14_DOMAIN_TAGS : V14_IP_TAGS).has(tag))
+    v14Fail("无 Geo 迁移未收录分类 " + kind + ":" + tag + "；请为自定义分类提供显式 domain/ipcidr rule-provider，不会猜测下载地址或静默丢弃规则。");
+  const mrs = kind === "ip" || ["cn", "google", "microsoft"].includes(tag);
+  const relative = (kind === "ip" ? "geoip/" : "geosite/" + (mrs ? "" : "classical/")) + tag + (mrs ? ".mrs" : ".yaml");
+  const url = V14_RULE_ROOT + relative;
+  const pinned = V14_DIRECT_RULE_PINS[url];
+  if (!pinned && lookupOnly) return null; // Recognition must not create an unreviewed source.
+  const prefix = "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/";
+  const suffix = "/geo/" + relative;
+  const commit = typeof pinned === "string" ? pinned.slice(prefix.length, -suffix.length) : "";
+  if (!/^[a-f0-9]{40}$/.test(commit) || pinned !== prefix + commit + suffix)
+    v14Fail("规则来源未固定到已审核提交：" + kind + ":" + tag + "；拒绝退回浮动分支，请先审核来源并补齐固定映射。");
+  return {kind, tag, url: pinned,
+    behavior: kind === "ip" ? "ipcidr" : mrs ? "domain" : "classical", format: mrs ? "mrs" : "yaml"};
+}

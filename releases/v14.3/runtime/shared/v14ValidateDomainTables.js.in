@@ -1,0 +1,25 @@
+function v14ValidateDomainTables() {
+  for (const [tag, snapshot] of Object.entries(V14_REVIEWED_DOMAINS)) {
+    if (!V14_DOMAIN_TAGS.has(tag) || !v14Object(snapshot) ||
+        snapshot.behavior !== (tag === "cn" ? "domain" : "classical") ||
+        typeof snapshot.payloadText !== "string" || !snapshot.payloadText)
+      v14Fail("无效内嵌分类器：" + tag);
+    for (const row of snapshot.payloadText.split("\n")) {
+      if (snapshot.behavior === "domain" ? !/^\+\.[a-z0-9._-]+$/.test(row) :
+          !/^(?:DOMAIN|DOMAIN-SUFFIX),[^,\s]+$/.test(row) && !row.startsWith("DOMAIN-REGEX,"))
+        v14Fail("无效内嵌域名规则：" + tag);
+    }
+  }
+  const domain = /^(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?$/;
+  for (const service of [V14_SHARED_INFRA, ...V14_SERVICES, {name: "domestic", seeds: V14_DOMESTIC_SEEDS}]) {
+    for (const field of ["seeds", "exact"]) {
+      const values = service[field] === undefined && field === "exact" ? [] : service[field];
+      if (!Array.isArray(values)) v14Fail("域名表必须是数组：" + service.name + "." + field);
+      for (let i = 0; i < values.length; i++) {
+        if (!Object.prototype.hasOwnProperty.call(values, i) || typeof values[i] !== "string" ||
+            values[i].length > 253 || !domain.test(values[i]))
+          v14Fail("无效域名：" + service.name + "." + field + "[" + i + "]");
+      }
+    }
+  }
+}

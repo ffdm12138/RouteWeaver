@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "releaseTag": "v14.3.0-rc.4",
-  "correspondingSource": "https://github.com/ffdm12138/RouteWeaver/tree/v14.3.0-rc.4",
+  "releaseTag": "v14.3.0-rc.5",
+  "correspondingSource": "https://github.com/ffdm12138/RouteWeaver/tree/v14.3.0-rc.5",
   "rootLicenseScope": "Original RouteWeaver contributions only; upstream data and excerpts retain their own terms.",
   "licenses": [
     {
@@ -31,6 +31,13 @@
       "file": "releases/v14.3/validation/inputs/clashmi-upstream-1.0.30.1605/LICENSE",
       "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
       "sourceURL": "https://github.com/KaringX/clashmi/blob/f897cbddffb59a4d7f4b667c3659e5d77a15fea7/LICENSE"
+    },
+    {
+      "repository": "https://github.com/chen08209/FlClash",
+      "file": "releases/v14.3/research/flclash-core-integration/LICENSE",
+      "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+      "sourceURL": "https://github.com/chen08209/FlClash/blob/03f955382409a4a7ac1f3f92e46d9fcc6d39f106/LICENSE",
+      "scope": "FlClash/Mihomo derived core patch and optional core; dependency trees retain their licenses"
     }
   ],
   "sourceManifests": [
@@ -176,6 +183,16 @@
           "url": "https://github.com/KaringX/clashmi/blob/f897cbddffb59a4d7f4b667c3659e5d77a15fea7/bind/apple/LibVpnCore/ExtensionPlatformInterface.swift"
         }
       ]
+    },
+    {
+      "file": "releases/v14.3/research/flclash-core-integration/source-identity.json",
+      "sha256": "affa9ca4e5e44a040bc7d825f4f23cc5534ba4898ea69b7c4e1e6d1c08cbd4ae",
+      "scope": "Actual FlClash 0.9.0/Mihomo branch and exact modifications; complete source and locked dependencies accompany optional binary assets"
+    },
+    {
+      "file": "releases/v14.3/research/flclash-core-integration/patch-files.json",
+      "sha256": "328974f37b98372363dc365ca65345fc944a677416f7716d1940cfa93069feea",
+      "scope": "Actual FlClash 0.9.0/Mihomo branch and exact modifications; complete source and locked dependencies accompany optional binary assets"
     }
   ],
   "transformations": [

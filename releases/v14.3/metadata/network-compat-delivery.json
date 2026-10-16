@@ -1,85 +1,120 @@
 {
   "revision": "ipv6-fallback-r2",
   "repairRevision": "http-recovery-r1",
+  "entryRevision": "single-entry-r1",
   "date": "2026-10-16",
-  "status": "NETWORK_COMPAT_SOURCE_LOCAL_CORE_PASS_DEVICE_PENDING",
+  "status": "SINGLE_ENTRY_SHARED_RUNTIME_CORE_INTEGRATED_DEVICE_PENDING",
   "defaultMode": "dual-stack",
   "compatibilityMode": "ipv4-local",
   "automaticPhysicalNetworkDetection": false,
   "guide": "docs/guides/IPv4兼容模式.md",
-  "report": "docs/reports/v14.3/IPv6回退与兼容入口.md",
+  "report": "docs/reports/v14.3/单入口优化与核心接入.md",
   "sourceManifest": {
     "file": "metadata/network-compat.json",
-    "sha256": "40d5d56a78afb4257995f39dc74a7060b415117b1f82f96cd7f4ab9f56cb52b3"
+    "sha256": "213327d7e39722f67fdc5bdbaffa0db3c8aae0541bec65fa92b3dc150620b810"
   },
   "entries": [
     {
       "platform": "windows",
       "source": "src/windows/v14.3.js",
-      "file": "src/windows/v14.3-ipv4-local.js",
-      "sha256": "916473da5e39ddfcc4b1bedc307ca1ce883ff9019afab6cb2b333beaeba2869b",
-      "bytes": 122078
+      "file": "src/windows/v14.3.js",
+      "sha256": "8a151f980c5291cedf30d70b76aaa414fd1378540b4e8001dc11ba547ac5539e",
+      "bytes": 122822,
+      "modes": [
+        "dual-stack",
+        "ipv4-local"
+      ]
     },
     {
       "platform": "android",
       "source": "src/android/v14.3-android.js",
-      "file": "src/android/v14.3-android-ipv4-local.js",
-      "sha256": "f765c51aedc8a234b2c1cc5f7361767c31e5fdeae7569e6f9877aaad118f963b",
-      "bytes": 121964
+      "file": "src/android/v14.3-android.js",
+      "sha256": "33b55bccbb40024424db37eed946711bd52161c580687dde6f5c448d2de474c1",
+      "bytes": 122708,
+      "modes": [
+        "dual-stack",
+        "ipv4-local"
+      ]
     },
     {
       "platform": "clashmi",
       "source": "src/ios/v14.3-clashmi-domestic-protocol-r1.js",
-      "file": "src/ios/v14.3-clashmi-ipv4-local.js",
-      "sha256": "93905066b6ba6542eca6e379d4d8ffeab25cf05ccf16f4673e98997f1dc58bb1",
-      "bytes": 124858
+      "file": "src/ios/v14.3-clashmi-domestic-protocol-r1.js",
+      "sha256": "7cd08073bceb572b8c8e95558c82a1f1d2a5398d99176bcb2d30a06ad55bfdaf",
+      "bytes": 125730,
+      "modes": [
+        "dual-stack",
+        "ipv4-local"
+      ]
     },
     {
       "platform": "macosFlClash",
       "source": "src/macos/v14.3-macos-flclash.js",
-      "file": "src/macos/v14.3-macos-flclash-ipv4-local.js",
-      "sha256": "b6abb353ffbfe99cd430217f490643b0a3c60e7258bda37b363300324574f3e0",
-      "bytes": 123873
+      "file": "src/macos/v14.3-macos-flclash.js",
+      "sha256": "3e0160e34391803ad728f11e7a14e4b7b074a81d181744bfb50889dd8e0f8854",
+      "bytes": 124617,
+      "modes": [
+        "dual-stack",
+        "ipv4-local"
+      ]
     },
     {
       "platform": "macosClashMi",
       "source": "src/macos/v14.3-macos-clashmi.js",
-      "file": "src/macos/v14.3-macos-clashmi-ipv4-local.js",
-      "sha256": "bcedc0bc6a630b1ba117c0934e39d5b4bdcca7d3a5bd3d47dd042ed9c2d82cc4",
-      "bytes": 124860
+      "file": "src/macos/v14.3-macos-clashmi.js",
+      "sha256": "cbc1342c6655704c6a546842c1ea36dfdf5ae55cfd2cdd2ba4b8b508e4880bb8",
+      "bytes": 125732,
+      "modes": [
+        "dual-stack",
+        "ipv4-local"
+      ]
+    },
+    {
+      "platform": "clashVerge",
+      "source": "src/clash-verge/v14.3-clash-verge.js",
+      "file": "src/clash-verge/v14.3-clash-verge.js",
+      "sha256": "5535812b44ee65b399d1a977ea7d7e9326c287efaba5c21d599e8aca9528ca2c",
+      "bytes": 125183,
+      "modes": [
+        "dual-stack",
+        "ipv4-local"
+      ]
     },
     {
       "platform": "shadowrocket",
       "source": "src/ios/v14.3-shadowrocket.conf",
-      "file": "src/ios/v14.3-shadowrocket-ipv4-local.conf",
-      "sha256": "8603cd469cdf107feca9b14468fe34483c2d61dba7ae68579467863d1ef28f89",
-      "bytes": 1746759
+      "file": "src/ios/v14.3-shadowrocket.conf",
+      "sha256": "9829d7e7c74f949cfe5168c3b3f3359b0e41aeb3c81bd3b8e2420bf721f277ec",
+      "bytes": 1746654,
+      "modes": [
+        "native-ipv4-prefer"
+      ]
     }
   ],
   "testEvidence": {
     "network-compat-static": {
       "file": "validation/network-compat-static.json",
-      "sha256": "4557d86555eeca73d9848adce80b8f71982e61d813f5636d1acc7725b9ccb82d",
+      "sha256": "60923c26c0cb6a0071d69ea7c855710849df242240665702f5c2a7241deff891",
       "status": "NETWORK_COMPAT_STATIC_PASS"
     },
     "network-compat-core": {
       "file": "validation/network-compat-core.json",
-      "sha256": "e7b74f366d541bdb7bad630a7e1db01833c2ee65eb16933fc3dde5a7f1c6beb7",
+      "sha256": "a9b66d3605f7c3241ab3291a9f8a93000246757ce0534871bd4656f776346462",
       "status": "NETWORK_COMPAT_LOCAL_CORE_PASS_DEVICE_PENDING"
     }
   },
-  "nodeDefault": "Mihomo domain nodes without an explicit family: ipv4-prefer; literal and explicit values preserved",
-  "localFallback": "Empty client AAAA and business upstream AAAA/SVCB/HTTPS filtering; HTTP/TLS/QUIC hostname recovery; no Fake-IP IPv6 pool; core IPv6 and both TUN routes retained; original egress policy preserved",
-  "shadowrocket": "Native IPv4 preference only; no claim of equivalent Mihomo upstream filters, HTTP/TLS/QUIC recovery or node ip-version defaults; no added IPv6 reject rules",
-  "scope": "Source contracts and isolated Windows Mihomo with original routing rules; owned DNS and TCP/UDP, HTTP/TLS/QUIC recovery, IPv4 proxy to IPv6 target; native TUN, app retry, public IPv6 and Shadowrocket NOT_RUN",
-  "priorUserCase": "rc.2 and rc.3 Windows media failed with compatibility active. rc.3 retained literal HTTP IPv6 destinations; private/unsniffable IPv6 remains unresolved",
-  "currentUserCase": "RC4_MEDIA_SENDS_WITH_SPINNING_DELAY_OPAQUE_IPV6_UNRESOLVED_CORE_PROTOTYPE_NOT_DEPLOYED",
-  "clientDeployment": false,
-  "deviceAcceptance": "NOT_RUN",
+  "nodeDefault": "Domain nodes without an explicit family use ipv4-prefer; explicit and literal families preserved",
+  "localFallback": "Business A-only resolution, AAAA/SVCB/HTTPS filtering and HTTP/TLS/QUIC destination recovery; core IPv6, dual TUN capture and original egress policy preserved",
+  "shadowrocket": "One native conf with IPv4 preference and IPv6 retained; no equivalent Mihomo upstream filters, hostname recovery or custom core patch",
+  "scope": "Six JS configurations over owned Windows loopback plus a separately bound, limited maintainer FlClash TUN integration. Other client devices, WeChat media and public IPv6 remain unaccepted.",
+  "priorUserCase": "rc.2 and rc.3 media failed; rc.4 sent media with subjective delay around five seconds",
+  "currentUserCase": "USER_REPORTED_ABOUT_5_SECONDS_BASELINE; CONTROLLED_WINDOWS_TUN_FAST_FAILURE_PASS; WECHAT_RETEST_BY_NORMAL_USE",
+  "researchReport": "docs/reports/v14.3/无域名IPv6与转圈等待研究.md",
+  "corePrototype": "releases/v14.3/research/ipv6-direct-fast-fail/proof.json",
+  "clientDeployment": "MAINTAINER_WINDOWS_FLCLASH_ONLY",
+  "deviceAcceptance": "LIMITED_WINDOWS_TUN_ONLY",
   "recordingModule": {
     "file": "tools/network_release.py",
-    "sha256": "77553f648fee3ab33d18de1d5a786c79d3c5482034ef78a4ad8f1d46af110d63"
-  },
-  "researchReport": "docs/reports/v14.3/无域名IPv6与转圈等待研究.md",
-  "corePrototype": "releases/v14.3/research/ipv6-direct-fast-fail/proof.json"
+    "sha256": "455ef9e9103e962573d4ca1f264feea6f552cc081741ec54142e43a99f0f44a7"
+  }
 }

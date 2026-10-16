@@ -1,0 +1,20 @@
+{
+  "coreSHA256": "9c06f5ec0cc36938eef27490253f9bf60ea72c71f89cfe4c5e1e261e2d3fa3f8",
+  "files": [
+    {
+      "file": "FlClashCore.exe",
+      "sha256": "9c06f5ec0cc36938eef27490253f9bf60ea72c71f89cfe4c5e1e261e2d3fa3f8",
+      "bytes": 70770176
+    },
+    {
+      "file": "FlClashHelperService.exe",
+      "sha256": "ea699237ed104a79ea27e0e92bbc12b7e0797ad80d342b9dea146c829c8048b1",
+      "bytes": 1445115
+    },
+    {
+      "file": "manifest.json",
+      "sha256": "3a7c3459bcc3878a19621ee1b3c4d828768ea2ef643c4fa6cbafc46f8db0524a",
+      "bytes": 84
+    }
+  ]
+}

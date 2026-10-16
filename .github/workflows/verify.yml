@@ -44,3 +44,27 @@ jobs:
           python tools/audit-publication.py --strict --archive dist/v14.3/v14.3-deployable.zip --archive dist/v14.3/v14.3-audit-evidence.zip --archive dist/v14.3/v14.3-macos.zip
       - name: Ensure tracked inputs were not rewritten
         run: git diff --exit-code
+
+  javascript-engines:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            executable: routeweaver-engine-check
+          - os: windows-latest
+            executable: routeweaver-engine-check.exe
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24.19.0'
+      - name: Install pinned Rust toolchain
+        run: rustup toolchain install 1.99.1 --profile minimal
+      - name: Build the locked real-engine harness
+        run: cargo +1.99.1 build --locked --release --manifest-path releases/v14.3/tests/engines/Cargo.toml --target-dir .work/js-engines
+      - name: Compare Node, QuickJS and Boa on the current entries
+        run: node releases/v14.3/tests/engine-parity.cjs .work/js-engines/release/${{ matrix.executable }}

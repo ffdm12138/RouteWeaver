@@ -39,3 +39,6 @@ Mac Clash Mi 沿用已核对的 Apple NetworkExtension 路径：gVisor、MTU 128
 Mac 源码合同、完整有限域名对照、幂等与隔离 Windows Mihomo 核心回放分开记录。Mac 上的 JS 引擎、最终合并、TUN/NetworkExtension、公网 IPv6 和网络切换尚未实机验收。详细证据见 [MacBook 适配报告](../reports/v14.3/MacBook适配.md)。
 
 2026-10-16 后续状态：rc.2 与 rc.3 的 Windows 媒体实测均失败；rc.4 补齐可读 HTTP Host 的目标重解析，仍不保证无域名 IPv6 DIRECT 可用。核对兼容标记 `networkCompatibilityRepair=http-recovery-r1` 和最终 HTTP 目标覆盖；[本轮报告](../reports/v14.3/HTTP域名重解析修复.md)区分核心修复与媒体未验收。
+
+
+2026-10-16 当前整理：每个客户端仅一个当前入口，JS 内含双栈/IPv4 兼容模式；生产源码在 `runtime/` 共用函数中维护，统一 `build-all.cjs` 生成。新增 Clash Verge、真实 QuickJS/Boa 对照和只读脱敏诊断。Windows FlClash 可选核心的受限 TUN 实测、对应源码与回滚范围见 `docs/reports/v14.3/单入口优化与核心接入.md`；历史命令或结论不替代当前验收。

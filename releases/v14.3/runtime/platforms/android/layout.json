@@ -1,0 +1,116 @@
+{
+  "preamble": "runtime/platforms/android/preamble.js.in",
+  "functions": [
+    {
+      "name": "v14Fail",
+      "file": "runtime/shared/v14Fail.js.in",
+      "before": ""
+    },
+    {
+      "name": "v14Object",
+      "file": "runtime/shared/v14Object.js.in",
+      "before": "\n"
+    },
+    {
+      "name": "v14Copy",
+      "file": "runtime/shared/v14Copy.js.in",
+      "before": "\n"
+    },
+    {
+      "name": "v14Unique",
+      "file": "runtime/shared/v14Unique.js.in",
+      "before": "\n"
+    },
+    {
+      "name": "v14Hash",
+      "file": "runtime/shared/v14Hash.js.in",
+      "before": "\n"
+    },
+    {
+      "name": "v14Ipv6Literal",
+      "file": "runtime/shared/v14Ipv6Literal.js.in",
+      "before": "\n"
+    },
+    {
+      "name": "v14Transport",
+      "file": "runtime/shared/v14Transport.js.in",
+      "before": "\n"
+    },
+    {
+      "name": "v14DnsFor",
+      "file": "runtime/shared/v14DnsFor.js.in",
+      "before": "\n"
+    },
+    {
+      "name": "v14Strings",
+      "file": "runtime/shared/v14Strings.js.in",
+      "before": "\n\n// Shared V14 candidate validation. No network I/O and no node wrappers.\n"
+    },
+    {
+      "name": "v14Target",
+      "file": "runtime/shared/v14Target.js.in",
+      "before": "\n"
+    },
+    {
+      "name": "v14InboundGuard",
+      "file": "runtime/shared/v14InboundGuard.js.in",
+      "before": "\n"
+    },
+    {
+      "name": "v14KeepLegacy",
+      "file": "runtime/shared/v14KeepLegacy.js.in",
+      "before": "\n\n"
+    },
+    {
+      "name": "v14NetworkDefaults",
+      "file": "runtime/shared/v14NetworkDefaults.js.in",
+      "before": "\n// Address-family defaults affect the connection to a node, not its remote exit.\nconst V14_NODE_FAMILY_DEFAULT = '(select(.[\"ip-version\"] == null and ((.server // \"\") | contains(\":\")) == false and ((.server // \"\") | test(\"^[0-9.]+$\")) == false) | .[\"ip-version\"]) = \"ipv4-prefer\"';\n"
+    },
+    {
+      "name": "v14ProviderGuard",
+      "file": "runtime/shared/v14ProviderGuard.js.in",
+      "before": "\n\n"
+    },
+    {
+      "name": "v14GraphCheck",
+      "file": "runtime/shared/v14GraphCheck.js.in",
+      "before": "\n"
+    },
+    {
+      "name": "v14Source",
+      "file": "runtime/shared/v14Source.js.in",
+      "before": "\n\n// V14 Android managed rule sources (shared V14 data format). This is a compiler, not a runtime network client.\n// Full classical domain sets preserve DOMAIN-REGEX/DOMAIN-KEYWORD. The large\n// CN domain set (domain/full entries in the checked upstream) and IP sets use MRS.\n// No generated matcher needs a local GEOSITE.dat/GEOIP.dat/Country.mmdb file.\nconst V14_RULE_ROOT = \"https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/\";\n// DIRECT boundaries change only with an explicitly reviewed release.\nconst V14_DIRECT_RULE_PINS = {{PINS}};\nconst V14_DOMAIN_TAGS = new Set([\"private\", \"category-doh\", \"cn\"].concat(\n  V14_DOMESTIC_SETS, ...V14_SERVICES.map(s => s.sets)));\nconst V14_IP_TAGS = new Set([\"cn\"].concat(...V14_SERVICES.map(s => s.ips || [])));\n"
+    },
+    {
+      "name": "v14ManagedSource",
+      "file": "runtime/shared/v14ManagedSource.js.in",
+      "before": "\n"
+    },
+    {
+      "name": "v14AuxRefs",
+      "file": "runtime/shared/v14AuxRefs.js.in",
+      "before": "\n// Auxiliary rule-set dependencies must not disappear when old top-level rules\n// are replaced. These fields are native Mihomo matchers / TUN address sets.\n"
+    },
+    {
+      "name": "v14WalkRule",
+      "file": "runtime/shared/v14WalkRule.js.in",
+      "before": "\n// Parenthesis-aware rule walker. Plain DOMAIN-REGEX payloads are left byte-for-\n// byte unchanged; a regex containing the word \"GEOSITE\" is not a Geo matcher.\n"
+    },
+    {
+      "name": "v14RuleRegistry",
+      "file": "runtime/platforms/android/v14RuleRegistry.js.in",
+      "before": "\n"
+    },
+    {
+      "name": "v14ValidateDomainTables",
+      "file": "runtime/shared/v14ValidateDomainTables.js.in",
+      "before": "\n\n"
+    },
+    {
+      "name": "main",
+      "file": "runtime/platforms/android/main.js.in",
+      "before": "\n\n"
+    }
+  ],
+  "trailing": "\n"
+}

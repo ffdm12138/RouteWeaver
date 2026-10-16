@@ -1,0 +1,386 @@
+diff --git a/Clash.Meta/adapter/outbound/direct.go b/Clash.Meta/adapter/outbound/direct.go
+--- a/Clash.Meta/adapter/outbound/direct.go
++++ b/Clash.Meta/adapter/outbound/direct.go
+@@ -29,7 +29,7 @@
+ 	opts = append(opts, dialer.WithResolver(resolver.DirectHostResolver))
+ 	c, err := dialer.DialContext(resolver.WithInitiator(ctx, resolver.InitiatorDirect), "tcp", metadata.RemoteAddress(), opts...)
+ 	if err != nil {
+-		return nil, err
++		return nil, d.directIPv6DialError(metadata, err)
+ 	}
+ 	return d.loopBack.NewConn(NewConn(c, d)), nil
+ }
+diff --git a/Clash.Meta/adapter/outbound/direct_ipv6_error.go b/Clash.Meta/adapter/outbound/direct_ipv6_error.go
+new file mode 100644
+--- /dev/null
++++ b/Clash.Meta/adapter/outbound/direct_ipv6_error.go
+@@ -0,0 +1,19 @@
++package outbound
++
++import (
++	"fmt"
++
++	C "github.com/metacubex/mihomo/constant"
++)
++
++// Only mark literal TCP destinations actually used by native DIRECT. A Host
++// takes precedence over DstIP in RemoteAddress, so a cached DstIP alone cannot
++// establish the family dialed for a hostname. No failures are cached across
++// connections; the next connection can succeed after a route change.
++func (d *Direct) directIPv6DialError(metadata *C.Metadata, err error) error {
++	if err == nil || d.Type() != C.Direct || metadata == nil || metadata.NetWork != C.TCP || metadata.Type == C.INNER || metadata.Host != "" ||
++		!metadata.DstIP.Unmap().Is6() || !isDirectNetworkUnreachable(err) {
++		return err
++	}
++	return fmt.Errorf("%w: %w", C.ErrDirectIPv6NetworkUnreachable, err)
++}
+diff --git a/Clash.Meta/adapter/outbound/direct_ipv6_error_notwindows.go b/Clash.Meta/adapter/outbound/direct_ipv6_error_notwindows.go
+new file mode 100644
+--- /dev/null
++++ b/Clash.Meta/adapter/outbound/direct_ipv6_error_notwindows.go
+@@ -0,0 +1,12 @@
++//go:build !windows
++
++package outbound
++
++import (
++	"errors"
++	"syscall"
++)
++
++func isDirectNetworkUnreachable(err error) bool {
++	return errors.Is(err, syscall.ENETUNREACH)
++}
+diff --git a/Clash.Meta/adapter/outbound/direct_ipv6_error_test.go b/Clash.Meta/adapter/outbound/direct_ipv6_error_test.go
+new file mode 100644
+--- /dev/null
++++ b/Clash.Meta/adapter/outbound/direct_ipv6_error_test.go
+@@ -0,0 +1,75 @@
++package outbound
++
++import (
++	"context"
++	"errors"
++	"net"
++	"net/netip"
++	"os"
++	"syscall"
++	"testing"
++
++	C "github.com/metacubex/mihomo/constant"
++)
++
++func TestRouteWeaverDirectIPv6Error(t *testing.T) {
++	makeMeta := func(ip string) *C.Metadata {
++		return &C.Metadata{NetWork: C.TCP, DstIP: netip.MustParseAddr(ip), DstPort: 443}
++	}
++	wrapped := &net.OpError{Op: "dial", Net: "tcp", Err: &os.SyscallError{Syscall: "connect", Err: syscall.ENETUNREACH}}
++	direct := NewDirect()
++	hostname := makeMeta("2001:db8::42")
++	hostname.Host = "both-families.invalid"
++	udp := makeMeta("2001:db8::42")
++	udp.NetWork = C.UDP
++	inner := makeMeta("2001:db8::42")
++	inner.Type = C.INNER
++	tests := []struct {
++		name     string
++		metadata *C.Metadata
++		err      error
++		marked   bool
++	}{
++		{"ipv6 literal", makeMeta("2001:db8::42"), syscall.ENETUNREACH, true},
++		{"wrapped OS error", makeMeta("2001:db8::42"), wrapped, true},
++		{"IPv6 LAN route absent", makeMeta("fd00::42"), wrapped, true},
++		{"IPv4", makeMeta("192.0.2.42"), wrapped, false},
++		{"IPv4 mapped", makeMeta("::ffff:192.0.2.42"), wrapped, false},
++		{"hostname has precedence over cached IP", hostname, wrapped, false},
++		{"UDP excluded", udp, wrapped, false},
++		{"proxy transport through DIRECT excluded", inner, wrapped, false},
++		{"nil metadata", nil, wrapped, false},
++		{"unresolved", &C.Metadata{NetWork: C.TCP}, wrapped, false},
++		{"host unreachable", makeMeta("2001:db8::42"), syscall.EHOSTUNREACH, false},
++		{"connection refused", makeMeta("2001:db8::42"), syscall.ECONNREFUSED, false},
++		{"timeout", makeMeta("2001:db8::42"), context.DeadlineExceeded, false},
++		{"message text is insufficient", makeMeta("2001:db8::42"), errors.New("unreachable network"), false},
++		{"success", makeMeta("2001:db8::42"), nil, false},
++	}
++	for _, test := range tests {
++		t.Run(test.name, func(t *testing.T) {
++			got := direct.directIPv6DialError(test.metadata, test.err)
++			if errors.Is(got, C.ErrDirectIPv6NetworkUnreachable) != test.marked {
++				t.Fatalf("marked=%v, want %v: %v", errors.Is(got, C.ErrDirectIPv6NetworkUnreachable), test.marked, got)
++			}
++			if test.err != nil && !errors.Is(got, test.err) {
++				t.Fatalf("original OS error lost: %v", got)
++			}
++			if !test.marked && got != test.err {
++				t.Fatalf("unrelated error changed: %v", got)
++			}
++		})
++	}
++	// An earlier failure must not leave any state that suppresses a new dial.
++	_ = direct.directIPv6DialError(makeMeta("2001:db8::42"), wrapped)
++	if got := direct.directIPv6DialError(makeMeta("2001:db8::42"), nil); got != nil {
++		t.Fatalf("success after route change affected: %v", got)
++	}
++}
++
++func TestRouteWeaverCompatibleUnchanged(t *testing.T) {
++	metadata := &C.Metadata{NetWork: C.TCP, DstIP: netip.MustParseAddr("2001:db8::42"), DstPort: 443}
++	if got := NewCompatible().directIPv6DialError(metadata, syscall.ENETUNREACH); got != syscall.ENETUNREACH {
++		t.Fatalf("COMPATIBLE adapter changed: %v", got)
++	}
++}
+diff --git a/Clash.Meta/adapter/outbound/direct_ipv6_error_windows.go b/Clash.Meta/adapter/outbound/direct_ipv6_error_windows.go
+new file mode 100644
+--- /dev/null
++++ b/Clash.Meta/adapter/outbound/direct_ipv6_error_windows.go
+@@ -0,0 +1,14 @@
++package outbound
++
++import (
++	"errors"
++	"syscall"
++
++	"golang.org/x/sys/windows"
++)
++
++func isDirectNetworkUnreachable(err error) bool {
++	// Winsock errors use WSAENETUNREACH (10051), distinct from Go's portable
++	// syscall.ENETUNREACH pseudo-errno on Windows.
++	return errors.Is(err, windows.WSAENETUNREACH) || errors.Is(err, syscall.ENETUNREACH)
++}
+diff --git a/Clash.Meta/adapter/outbound/direct_ipv6_error_windows_test.go b/Clash.Meta/adapter/outbound/direct_ipv6_error_windows_test.go
+new file mode 100644
+--- /dev/null
++++ b/Clash.Meta/adapter/outbound/direct_ipv6_error_windows_test.go
+@@ -0,0 +1,24 @@
++package outbound
++
++import (
++	"errors"
++	"net"
++	"net/netip"
++	"os"
++	"testing"
++
++	C "github.com/metacubex/mihomo/constant"
++	"golang.org/x/sys/windows"
++)
++
++func TestRouteWeaverWindowsWinsock(t *testing.T) {
++	metadata := &C.Metadata{NetWork: C.TCP, DstIP: netip.MustParseAddr("2001:db8::42"), DstPort: 443}
++	err := &net.OpError{Op: "dial", Net: "tcp", Err: &os.SyscallError{Syscall: "connectex", Err: windows.WSAENETUNREACH}}
++	got := NewDirect().directIPv6DialError(metadata, err)
++	if !errors.Is(got, C.ErrDirectIPv6NetworkUnreachable) || !errors.Is(got, windows.WSAENETUNREACH) {
++		t.Fatalf("Winsock network-unreachable not preserved and marked: %v", got)
++	}
++	if got := NewDirect().directIPv6DialError(metadata, windows.WSAEHOSTUNREACH); errors.Is(got, C.ErrDirectIPv6NetworkUnreachable) {
++		t.Fatalf("host-unreachable incorrectly classified: %v", got)
++	}
++}
+diff --git a/Clash.Meta/component/sniffer/routeweaver_prefix_test.go b/Clash.Meta/component/sniffer/routeweaver_prefix_test.go
+new file mode 100644
+--- /dev/null
++++ b/Clash.Meta/component/sniffer/routeweaver_prefix_test.go
+@@ -0,0 +1,69 @@
++package sniffer
++
++import (
++	"errors"
++	"net"
++	"net/netip"
++	"testing"
++	"time"
++
++	N "github.com/metacubex/mihomo/common/net"
++	C "github.com/metacubex/mihomo/constant"
++)
++
++func TestRouteWeaverRejectsImpossibleTLSPrefixWithoutMoreBytes(t *testing.T) {
++	for _, data := range [][]byte{{0}, {'G'}, {0x17}, {0x16, 0}, {0x16, 4, 1}} {
++		if _, err := SniffTLS(data); !errors.Is(err, errNotTLS) {
++			t.Fatalf("impossible prefix %x was treated as incomplete: %v", data, err)
++		}
++	}
++}
++
++func TestRouteWeaverValidTLSPrefixesRemainIncompleteOrRecognized(t *testing.T) {
++	wire := makeTestTLSRecords(makeTestClientHello("fragmented.example.test", 12), 2, 19)
++	for cut := 0; cut <= len(wire); cut++ {
++		host, err := SniffTLS(wire[:cut])
++		if err != nil && !errors.Is(err, ErrNoClue) {
++			t.Fatalf("valid fragmented prefix %d rejected: %v", cut, err)
++		}
++		if host != nil && *host != "fragmented.example.test" {
++			t.Fatalf("domain changed: %q", *host)
++		}
++	}
++}
++
++func TestRouteWeaverFragmentedTLSKeepsOriginalReadBudget(t *testing.T) {
++	server, client := net.Pipe()
++	defer server.Close()
++	defer client.Close()
++	s, err := NewTLSSniffer(SnifferConfig{})
++	if err != nil {
++		t.Fatal(err)
++	}
++	dispatcher := &Dispatcher{sniffers: []configuredSniffer{{Sniffer: s}}}
++	type result struct {
++		host string
++		err  error
++	}
++	finished := make(chan result, 1)
++	go func() {
++		host, _, err := dispatcher.sniffDomain(N.NewBufferedConn(server), &C.Metadata{DstIP: netip.MustParseAddr("2001:db8::42"), DstPort: 443})
++		finished <- result{host, err}
++	}()
++	wire := makeTestTLSRecords(makeTestClientHello("delayed.example.test", 0))
++	if _, err := client.Write(wire[:1]); err != nil {
++		t.Fatal(err)
++	}
++	time.Sleep(250 * time.Millisecond)
++	if _, err := client.Write(wire[1:]); err != nil {
++		t.Fatal(err)
++	}
++	select {
++	case got := <-finished:
++		if got.err != nil || got.host != "delayed.example.test" {
++			t.Fatalf("fragmented domain lost: %q %v", got.host, got.err)
++		}
++	case <-time.After(2 * time.Second):
++		t.Fatal("sniffer failed to finish")
++	}
++}
+diff --git a/Clash.Meta/component/sniffer/tls_sniffer.go b/Clash.Meta/component/sniffer/tls_sniffer.go
+--- a/Clash.Meta/component/sniffer/tls_sniffer.go
++++ b/Clash.Meta/component/sniffer/tls_sniffer.go
+@@ -243,6 +243,17 @@
+ 	wireOffset := 0
+ 
+ 	for {
++		// Reject impossible prefixes as soon as they arrive. Waiting for five
++		// bytes when byte one is already not a handshake adds a full sniff
++		// budget to short private protocols. Valid fragmented TLS keeps the
++		// existing time and memory budgets; no address or policy is guessed.
++		available := b[wireOffset:]
++		if len(available) > 0 && available[0] != tlsRecordTypeHandshake {
++			return nil, errNotTLS
++		}
++		if len(available) > 1 && available[1] != 3 {
++			return nil, errNotTLS
++		}
+ 		if len(b)-wireOffset < tlsRecordHeaderLen {
+ 			return nil, &errNeedAtLeastData{
+ 				length: wireOffset + tlsRecordHeaderLen,
+diff --git a/Clash.Meta/constant/direct_ipv6_error.go b/Clash.Meta/constant/direct_ipv6_error.go
+new file mode 100644
+--- /dev/null
++++ b/Clash.Meta/constant/direct_ipv6_error.go
+@@ -0,0 +1,8 @@
++package constant
++
++import "errors"
++
++// ErrDirectIPv6NetworkUnreachable marks an OS network-unreachable error for a
++// literal IPv6 TCP dial by the native DIRECT adapter. It does not change policy
++// or imply that an equivalent IPv4 destination exists.
++var ErrDirectIPv6NetworkUnreachable = errors.New("direct IPv6 network unreachable")
+diff --git a/Clash.Meta/tunnel/direct_ipv6_retry_test.go b/Clash.Meta/tunnel/direct_ipv6_retry_test.go
+new file mode 100644
+--- /dev/null
++++ b/Clash.Meta/tunnel/direct_ipv6_retry_test.go
+@@ -0,0 +1,67 @@
++package tunnel
++
++import (
++	"context"
++	"errors"
++	"fmt"
++	"syscall"
++	"testing"
++
++	"github.com/metacubex/mihomo/component/loopback"
++	"github.com/metacubex/mihomo/component/resolver"
++	C "github.com/metacubex/mihomo/constant"
++)
++
++func TestRouteWeaverRetryClassification(t *testing.T) {
++	tests := []struct {
++		name string
++		err  error
++		stop bool
++	}{
++		{"marked direct IPv6", fmt.Errorf("%w: %w", C.ErrDirectIPv6NetworkUnreachable, syscall.ENETUNREACH), true},
++		{"unmarked proxy network error", syscall.ENETUNREACH, false},
++		{"timeout unchanged", context.DeadlineExceeded, false},
++		{"IP missing", resolver.ErrIPNotFound, true},
++		{"IP version", resolver.ErrIPVersion, true},
++		{"IPv6 disabled", resolver.ErrIPv6Disabled, true},
++		{"loopback reject", loopback.ErrReject, true},
++	}
++	for _, test := range tests {
++		t.Run(test.name, func(t *testing.T) {
++			if got := shouldStopRetry(test.err); got != test.stop {
++				t.Fatalf("shouldStopRetry=%v, want %v", got, test.stop)
++			}
++		})
++	}
++}
++
++func TestRouteWeaverRetryCounts(t *testing.T) {
++	for _, marked := range []bool{true, false} {
++		name := "unmarked proxy error keeps ten attempts"
++		want := 10
++		err := error(syscall.ENETUNREACH)
++		if marked {
++			name = "marked direct error stops after one attempt"
++			want = 1
++			err = fmt.Errorf("%w: %w", C.ErrDirectIPv6NetworkUnreachable, err)
++		}
++		t.Run(name, func(t *testing.T) {
++			attempts, warnings := 0, 0
++			_, got := retry(context.Background(), func(context.Context) (int, error) {
++				attempts++
++				return 0, err
++			}, func(error) { warnings++ })
++			if attempts != want || warnings != want || !errors.Is(got, syscall.ENETUNREACH) {
++				t.Fatalf("attempts=%d warnings=%d error=%v; want %d", attempts, warnings, got, want)
++			}
++		})
++	}
++	attempts := 0
++	got, err := retry(context.Background(), func(context.Context) (int, error) {
++		attempts++
++		return 42, nil
++	}, nil)
++	if attempts != 1 || got != 42 || err != nil {
++		t.Fatalf("successful new connection affected: %d %d %v", attempts, got, err)
++	}
++}
+diff --git a/Clash.Meta/tunnel/tunnel.go b/Clash.Meta/tunnel/tunnel.go
+--- a/Clash.Meta/tunnel/tunnel.go
++++ b/Clash.Meta/tunnel/tunnel.go
+@@ -722,6 +722,9 @@
+ }
+ 
+ func shouldStopRetry(err error) bool {
++	if errors.Is(err, C.ErrDirectIPv6NetworkUnreachable) {
++		return true
++	}
+ 	if errors.Is(err, resolver.ErrIPNotFound) {
+ 		return true
+ 	}
+diff --git a/hub_test.go b/hub_test.go
+--- a/hub_test.go
++++ b/hub_test.go
+@@ -419,7 +419,7 @@
+ 	if got[0] != "" {
+ 		t.Fatalf("easytier proxy reported %q", got[0])
+ 	}
+-	if !strings.Contains(got[1], "/outside") || strings.Contains(got[1], "\x00") {
++	if !strings.Contains(filepath.ToSlash(got[1]), "/outside") || strings.Contains(got[1], "\x00") {
+ 		t.Errorf("unsafe state dir reported %q, want the proxy's own name", got[1])
+ 	}
+ 	resolvers := dns.NewResolver(dns.Config{

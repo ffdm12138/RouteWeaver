@@ -1,0 +1,27 @@
+{
+  "version": "1.99.1 (58cf8f9c3 2026-10-13)",
+  "catalogDate": "2026-10-15",
+  "catalogSHA256": "fb152be80975c194aa5fc684b2aec3a6e14e2b855efe2faa4e5f8ae6e590f463",
+  "target": "x86_64-pc-windows-gnu",
+  "packages": [
+    {
+      "package": "rustc",
+      "url": "https://static.rust-lang.org/dist/2026-10-15/rustc-1.99.1-x86_64-pc-windows-gnu.tar.xz",
+      "sha256": "a48f186defb3d57538b34e14a24a94f6e29906f191630b627dcb091198bae438",
+      "files": 25
+    },
+    {
+      "package": "cargo",
+      "url": "https://static.rust-lang.org/dist/2026-10-15/cargo-1.99.1-x86_64-pc-windows-gnu.tar.xz",
+      "sha256": "e4b9107e9f655d37200c884294e74930829f236a3e81982fc678e9fc56ae9a6b",
+      "files": 1
+    },
+    {
+      "package": "rust-std",
+      "url": "https://static.rust-lang.org/dist/2026-10-15/rust-std-1.99.1-x86_64-pc-windows-gnu.tar.xz",
+      "sha256": "b17e3bc962ff24b3bc47a750d838defed85b280746250e3a3ad029e6c1a29dd7",
+      "files": 60
+    }
+  ],
+  "systemInstallation": false
+}

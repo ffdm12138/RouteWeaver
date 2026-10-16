@@ -1,0 +1,364 @@
+function main(input) {
+  v14ValidateDomainTables();
+  if (!v14Object(input)) v14Fail("覆写入口需要配置对象。");
+  const config = v14Copy(input);
+  const upgradingFromV13 = v14Object(config["x-v13-generated"]);
+  const warnings = [];
+  if (config.proxies != null && !Array.isArray(config.proxies)) v14Fail("proxies 必须是数组。");
+  if (config["proxy-groups"] != null && !Array.isArray(config["proxy-groups"])) v14Fail("proxy-groups 必须是数组。");
+  const previous = ["x-v14-generated", "x-v13-generated", "x-v12-generated", "x-v11-generated", "x-v10-generated", "x-v91-generated", "x-v9-generated"];
+  const generatedGroups = new Set(), generatedProxies = new Set(), generatedSubRules = new Set();
+  for (const key of previous) {
+    const mark = config[key];
+    if (!v14Object(mark)) continue;
+    for (const name of (mark.groups || [])) generatedGroups.add(name);
+    for (const name of (mark.proxies || [])) generatedProxies.add(name);
+    for (const name of (mark.subRules || [])) generatedSubRules.add(name);
+  }
+  if (config["sub-rules"] != null && !v14Object(config["sub-rules"])) v14Fail("sub-rules 必须是对象。");
+  if (v14Object(config["sub-rules"])) {
+    const kept = {};
+    for (const [name, rules] of Object.entries(config["sub-rules"])) if (!generatedSubRules.has(name)) kept[name] = rules;
+    config["sub-rules"] = kept;
+  }
+  const rawProxies = Array.isArray(config.proxies) ? config.proxies : [];
+  const originalGroups = Array.isArray(config["proxy-groups"]) ? config["proxy-groups"] : [];
+  const providers = config["proxy-providers"] == null ? {} : config["proxy-providers"];
+  if (!v14Object(providers)) v14Fail("proxy-providers 必须是对象。");
+  const providerNames = Object.keys(providers);
+  const allNodes = [];
+  const nodeNames = new Set();
+  const infoRe = new RegExp(V14.infoPattern, "i");
+  for (const original of rawProxies) {
+    if (!v14Object(original) || typeof original.name !== "string" || !original.type) v14Fail("存在无效节点。");
+    if (generatedProxies.has(original.name) || original.type === "rematch") continue;
+    if (nodeNames.has(original.name) || V14_BUILTINS.has(original.name)) v14Fail("节点名称重复或保留：" + original.name);
+    const node = v14Copy(original);
+    if (upgradingFromV13 && v14Transport(node) && node["ip-version"] === "ipv4")
+      delete node["ip-version"]; // remove V13-injected preference; keep fresh subscriptions untouched
+    nodeNames.add(node.name);
+    allNodes.push(node);
+  }
+  const selectable = allNodes.filter(p => v14Transport(p) && !infoRe.test(p.name));
+  if (!selectable.length && !providerNames.length) v14Fail("没有可拨号的节点或代理 provider。");
+  config.proxies = allNodes;
+
+  const oldGroupMap = new Map();
+  for (const g of originalGroups) {
+    if (!v14Object(g) || typeof g.name !== "string" || !g.type) v14Fail("原配置存在无效代理组。");
+    if (generatedGroups.has(g.name) || /^@v(?:10[1-6]|11)-(?:node|provider|infra)/.test(g.name)) continue;
+    if (oldGroupMap.has(g.name) || nodeNames.has(g.name) || V14_BUILTINS.has(g.name)) v14Fail("原代理组重名或名称冲突：" + g.name);
+    oldGroupMap.set(g.name, v14Copy(g));
+  }
+  const retained = new Set();
+  function retain(ref, owner) {
+    if (!ref || V14_BUILTINS.has(ref) || nodeNames.has(ref)) return;
+    const g = oldGroupMap.get(ref);
+    if (!g) v14Fail(owner + " 引用了已删除或未知代理组：" + ref);
+    if (retained.has(ref)) return;
+    retained.add(ref);
+    for (const child of v14Strings(g.proxies, g.name + ".proxies")) retain(child, g.name);
+    if (g["empty-fallback"]) retain(g["empty-fallback"], g.name + ".empty-fallback");
+    if (!g["include-all"] && !g["include-all-providers"]) for (const source of v14Strings(g.use, g.name + ".use")) if (!providers[source]) v14Fail(g.name + " 引用未知 provider：" + source);
+  }
+  v14InboundGuard(config);
+  const legacyRuleProviders = v14KeepLegacy(config, retain, false); // explicit Geo references are migrated/checked below
+  for (const node of allNodes) retain(node["dialer-proxy"], "节点 " + node.name);
+  for (const [name, provider] of Object.entries(providers)) {
+    if (!v14Object(provider)) v14Fail("provider 无效：" + name);
+    if (nodeNames.has(name)) v14Fail("provider 与节点同名：" + name);
+    if (!["http", "file", "inline"].includes(provider.type)) v14Fail("不支持的 provider 类型：" + name);
+    if (provider.type === "http" && (typeof provider.url !== "string" || !/^https?:\/\//i.test(provider.url))) v14Fail("HTTP provider 缺少有效 URL：" + name);
+    if (provider.type === "file" && !provider.path) v14Fail("file provider 缺少 path：" + name);
+    if (provider.type === "inline" && (!Array.isArray(provider.payload) || !provider.payload.length)) v14Fail("inline provider 缺少 payload：" + name);
+    // A missing or retired bootstrap policy is not permission to use DIRECT.
+    // Explicit provider.proxy=DIRECT remains an intentional control-plane choice.
+    // Cached providers remain usable; a first download needs an explicit route.
+    if (!provider.proxy || generatedGroups.has(provider.proxy) || generatedProxies.has(provider.proxy)) provider.proxy = "REJECT";
+    if (provider.type === "http" && provider.proxy === "REJECT")
+      warnings.push("provider " + name + " 的引导出口为 REJECT；需要首次下载时明确设置 provider.proxy，绝不静默直连。");
+    retain(provider.proxy, "provider " + name);
+    provider.override = Object.assign({}, v14Object(provider.override) ? provider.override : {});
+    if (upgradingFromV13 && provider.override["ip-version"] === "ipv4") delete provider.override["ip-version"];
+    retain(provider.override["dialer-proxy"], "provider override " + name);
+    // Filter provider members before explicit selector sentinels are added.
+    // Group-level exclusion would also remove business DIRECT and public REJECT.
+    provider["exclude-type"] = v14Unique(String(provider["exclude-type"] || "").split("|").filter(Boolean).concat(
+      ["Direct", "Compatible", "Pass", "PassRule", "pass-rule", "Dns", "Rematch", "Reject", "RejectDrop", "reject-drop", "RejectNoDrop", "reject-no-drop"])).join("|");
+    v14ProviderGuard(provider, name, retain, warnings, upgradingFromV13);
+    if (provider.type === "http") {
+      if (!provider.interval) provider.interval = V14.providerInterval;
+      if (!provider.path) provider.path = "./providers/v12/" + v14Hash(name + "\n" + provider.url) + ".yaml";
+    }
+    provider["health-check"] = Object.assign({}, provider["health-check"] || {}, {
+      enable: true, url: V14.testUrl, interval: V14.testInterval,
+    });
+  }
+  const keptGroups = Array.from(retained, name => oldGroupMap.get(name));
+  for (const g of keptGroups) {
+    // Keep native include/filter semantics. Do not expand into explicit proxies.
+    g.hidden = true;
+  }
+
+  const occupied = new Set([...V14_BUILTINS, ...nodeNames, ...providerNames, ...retained]);
+  const logicalGroups = V14_GROUP_ORDER;
+  // Preserve previously generated names so stored selector choices survive upgrades.
+  const previousGroupNames = new Map();
+  for (const actual of generatedGroups) {
+    const logical = actual.replace(/ \[V(?:12|13|14)(?:-\d+)?\]$/, "");
+    if (logicalGroups.includes(logical) && !occupied.has(actual) && !previousGroupNames.has(logical))
+      previousGroupNames.set(logical, actual);
+  }
+  const groupNames = new Map();
+  function groupName(logical) {
+    if (groupNames.has(logical)) return groupNames.get(logical);
+    let name = previousGroupNames.get(logical) || logical, i = 0;
+    while (occupied.has(name)) name = logical + " [V14" + (++i > 1 ? "-" + i : "") + "]";
+    occupied.add(name); groupNames.set(logical, name); return name;
+  }
+  for (const logical of logicalGroups) groupName(logical);
+  const rawNodeNames = selectable.map(p => p.name);
+  const providerGroupFields = providerNames.length ? { use: providerNames.slice(), "exclude-filter": "(?i)^@v14-nontransport:|" + V14.infoPattern } : {};
+  const groups = [];
+  groups.push({ name: groupName("高纯净度AI用"), type: "select", proxies: ["REJECT"].concat(rawNodeNames),
+    ...providerGroupFields, "default-selected": "REJECT", "empty-fallback": "REJECT" });
+  groups.push({ name: groupName("自动选择"), type: "url-test", proxies: rawNodeNames.slice(), ...providerGroupFields,
+    url: V14.testUrl, interval: V14.testInterval, lazy: true, "empty-fallback": "REJECT" });
+  groups.push({name: groupName("高网速视频用"), type: "select", proxies: ["REJECT"].concat(rawNodeNames),
+    ...providerGroupFields, "default-selected": "REJECT", "empty-fallback": "REJECT"});
+  groups.sort((a,b) => logicalGroups.indexOf(Array.from(groupNames).find(([,name])=>name===a.name)[0]) - logicalGroups.indexOf(Array.from(groupNames).find(([,name])=>name===b.name)[0]));
+  const business = logicalGroups.filter(name => !["高纯净度AI用", "高网速视频用", "自动选择"].includes(name));
+  for (const logical of business) {
+    const choices = [groupName("高纯净度AI用"), groupName("高网速视频用")].concat(logical === "漏网之鱼" ? [] : ["DIRECT"]);
+    if (logical === "国内网站") choices.unshift("REJECT"); // Missing stored node must reject; first install still defaults to DIRECT.
+    if (["Netflix", "Disney+", "Spotify", "哔哩国际"].includes(logical)) [choices[0],choices[1]] = [choices[1],choices[0]];
+    groups.push({ name: groupName(logical), type: "select", proxies: choices.concat(rawNodeNames), ...providerGroupFields,
+      "default-selected": logical === "国内网站" ? "DIRECT" : choices[0], "empty-fallback": "REJECT" });
+  }
+  config["proxy-groups"] = groups.concat(keptGroups);
+  config["proxy-providers"] = providers;
+  config["rule-providers"] = legacyRuleProviders;
+  const managedRules = v14RuleRegistry(config, groupName("高纯净度AI用"));
+  const ruleSet = (kind, tag) => managedRules.ref(kind, tag);
+
+  const embeddedNames = new Map();
+  function embeddedDomainSet(tag) {
+    if (embeddedNames.has(tag)) return embeddedNames.get(tag);
+    const snapshot = V14_REVIEWED_DOMAINS[tag];
+    if (!snapshot) v14Fail("缺少已审核内嵌分类器：" + tag);
+    const base = "v14-domains-" + tag.replace(/@/g, "_at_"), sets = config["rule-providers"];
+    let name = base, n = 1;
+    while (Object.prototype.hasOwnProperty.call(sets, name)) name = base + "-" + (++n);
+    sets[name] = {type: "inline", behavior: snapshot.behavior, payload: snapshot.payloadText.split("\n")};
+    embeddedNames.set(tag, name); return name;
+  }
+  function addDomainSet(tag, policy) {
+    // Keep the old priority. Reviewed baseline first, remote additions next.
+    if (V14_REVIEWED_DOMAINS[tag]) add("RULE-SET," + embeddedDomainSet(tag), policy);
+    add("RULE-SET," + ruleSet("domain", tag), policy);
+  }
+
+  // Inline providers are immutable, require no download, and also drive DNS.
+  const coreNames = new Map();
+  for (const [logical, payload] of Object.entries(V14_COMPANY_CORE)) {
+    const base = "v14-core-" + v14Hash(logical), sets = config["rule-providers"];
+    let name = base, n = 1;
+    while (Object.prototype.hasOwnProperty.call(sets, name)) name = base + "-" + (++n);
+    sets[name] = {type: "inline", behavior: "classical", payload: payload.slice()};
+    coreNames.set(logical, name);
+  }
+  const cdnGuardBase = "v14-cdn-shared-guard", cdnSets = config["rule-providers"];
+  let cdnGuardName = cdnGuardBase, cdnGuardIndex = 1;
+  while (Object.prototype.hasOwnProperty.call(cdnSets, cdnGuardName)) cdnGuardName = cdnGuardBase + "-" + (++cdnGuardIndex);
+  cdnSets[cdnGuardName] = {type:"inline", behavior:"classical", payload:V14_CDN_SHARED_GUARDS.slice()};
+{{DIRECT_RULE_INITIALIZER}}
+  function add(match, policy, noResolve) {
+    const suffix = noResolve ? ",no-resolve" : "", key = match + suffix;
+    if (emitted.has(key)) return;
+    emitted.add(key); rules.push(match + "," + policy + suffix);
+    if (policy !== "DIRECT" && policy !== "REJECT") rules.push(match + ",REJECT" + suffix);
+  }
+  for (const d of V14.privateNames) add("DOMAIN-SUFFIX," + d, "DIRECT");
+  for (const d of V14.manualDirect) add("DOMAIN-SUFFIX," + d, "DIRECT");
+  for (const d of V14.manualProxy) add("DOMAIN-SUFFIX," + d, groupName("高纯净度AI用"));
+  add("DST-PORT,853", "REJECT");
+  for (const match of V14_EXTERNAL_DNS_RULES) add(match, "REJECT");
+  for (const d of V14_GOOGLE_PLAY_DELIVERY_SEEDS) add("DOMAIN-SUFFIX," + d, groupName("谷歌服务"));
+  for (const host of V14_OPENAI_VOICE_HOSTS) add("DOMAIN," + host, groupName("OpenAI 服务"));
+  // Reviewed exact Azure tenants below precede the generic shared suffix.
+  // Dedicated company hosts on third-party infrastructure remain precise.
+  for (const service of V14_SERVICES) for (const d of service.exact || []) add("DOMAIN," + d, groupName(service.name));
+  add("RULE-SET," + cdnGuardName, groupName("公共基础服务"));
+  for (const suffix of V14_UNIDENTIFIED_VOICE_SUFFIXES) add("DOMAIN-SUFFIX," + suffix, groupName("公共基础服务"));
+  function emitService(service) {
+    const policy = groupName(service.name);
+    for (const d of service.exact || []) add("DOMAIN," + d, policy);
+    for (const d of service.seeds) add("DOMAIN-SUFFIX," + d, policy);
+    if (coreNames.has(service.name)) add("RULE-SET," + coreNames.get(service.name), policy);
+    for (const tag of service.sets) addDomainSet(tag, policy);
+  }
+  // Shared infrastructure must win over broad cloud-provider ownership lists.
+  emitService(V14_SHARED_INFRA);
+  for (const service of V14_SERVICES) emitService(service);
+  for (const ip of V14_OPENAI_VOICE_IPV4) add("IP-CIDR," + ip, groupName("OpenAI 服务"), true);
+  for (const ip of V14_TELEGRAM_CIDRS) add((ip.includes(":") ? "IP-CIDR6," : "IP-CIDR,") + ip, groupName("Telegram"), true);
+  for (const service of V14_SERVICES) for (const tag of service.ips || [])
+    add("RULE-SET," + ruleSet("ip", tag), groupName(service.name), true);
+  // Known corporate domains win even with private/ULA destination metadata.
+  for (const ip of V14_PRIVATE_IPS) add((ip.includes(":") ? "IP-CIDR6," : "IP-CIDR,") + ip, "DIRECT", true);
+  addDomainSet("private", "DIRECT");
+  // Unknown domestic STUN servers are protected, without stealing Google's.
+  for (const host of V14.domesticStunDns)
+    if (!V14_SERVICES.some(s => s.seeds.some(d => host === d || host.endsWith("."+d))))
+      add("DOMAIN," + host, groupName("漏网之鱼"));
+  // Corporate/LAN/manual rules above retain priority. Recognisable generic
+  // STUN stays protected before domestic domain classifications.
+  for (const network of ["TCP", "UDP"]) {
+    for (const port of V14.stunPorts) add("AND,((NETWORK," + network + "),(DST-PORT," + port + "),(NOT,((IN-TYPE,INNER))))", groupName("漏网之鱼"));
+    for (const host of V14.stunHostPatterns) add("AND,((NETWORK," + network + "),(DOMAIN-WILDCARD," + host + "),(NOT,((IN-TYPE,INNER))))", groupName("漏网之鱼"));
+  }
+  const domesticPolicy = groupName("国内网站");
+  for (const d of V14_DOMESTIC_SEEDS) add("DOMAIN-SUFFIX," + d, domesticPolicy);
+  for (const tag of V14_DOMESTIC_SETS) addDomainSet(tag, domesticPolicy);
+  addDomainSet("cn", domesticPolicy);
+  add("DOMAIN-SUFFIX,cn", domesticPolicy);
+  // Unclassified IP-only public UDP cannot reach geographic TCP shortcuts.
+  add("AND,((NETWORK,UDP),(NOT,((IN-TYPE,INNER))))", groupName("漏网之鱼"));
+  add("RULE-SET," + ruleSet("ip", "cn"), domesticPolicy, true);
+  add("MATCH", groupName("漏网之鱼")); config.rules = rules; config.mode = "rule";
+
+  const dnsPolicy = {};
+  for (const d of V14.privateNames) dnsPolicy["+." + d] = ["system"];
+  for (const d of V14.manualDirect) dnsPolicy["+." + d] = V14.directDns.slice();
+  for (const d of V14.manualProxy) dnsPolicy["+." + d] = v14DnsFor(groupName("高纯净度AI用"));
+  for (const host of V14.domesticStunDns)
+    if (!V14_SERVICES.some(s => s.seeds.some(d => host === d || host.endsWith("."+d))))
+      dnsPolicy[host] = v14DnsFor(groupName("漏网之鱼"));
+  for (const suffix of V14_UNIDENTIFIED_VOICE_SUFFIXES) dnsPolicy["." + suffix] = v14DnsFor(groupName("公共基础服务"));
+  for (const d of V14_GOOGLE_PLAY_DELIVERY_SEEDS) dnsPolicy["+." + d] = v14DnsFor(groupName("谷歌服务"));
+  for (const service of [V14_SHARED_INFRA].concat(V14_SERVICES)) {
+    const servers = v14DnsFor(groupName(service.name));
+    for (const d of service.exact || []) dnsPolicy[d] = servers;
+    // Specific shared Storage names must beat broad google.com/googleapis.com
+    // literals. Exact WebPubSub exceptions override the shared namespace policy.
+    for (const d of service.seeds) if (service.name !== V14_SHARED_INFRA.name || d !== "webpubsub.azure.com")
+      if (dnsPolicy["+." + d] === undefined) dnsPolicy["+." + d] = servers;
+  }
+  dnsPolicy["rule-set:" + cdnGuardName] = v14DnsFor(groupName("公共基础服务"));
+  for (const logical of ["OpenAI 服务", "Anthropic 服务", "公共基础服务", "谷歌服务", "微软生态"])
+    dnsPolicy["rule-set:" + coreNames.get(logical)] = v14DnsFor(groupName(logical));
+  for (const service of V14_SERVICES)
+    for (const tag of service.sets) {
+      if (V14_REVIEWED_DOMAINS[tag]) dnsPolicy["rule-set:" + embeddedDomainSet(tag)] = v14DnsFor(groupName(service.name));
+      dnsPolicy["rule-set:" + ruleSet("domain", tag)] = v14DnsFor(groupName(service.name));
+    }
+  // Existing corporate literals and rule-set policies above win. The
+  // reviewed domestic domain inventories now use the same selectable egress.
+  // Name-only STUN protection cannot identify a hidden protocol on an ordinary host.
+  let stunDNSSet = "v14-generic-stun-domain-guard", stunDNSIndex = 1;
+  while (config["rule-providers"][stunDNSSet]) stunDNSSet = "v14-generic-stun-domain-guard-" + (++stunDNSIndex);
+  config["rule-providers"][stunDNSSet] = {type:"inline", behavior:"classical", payload:V14.stunHostPatterns.map(d=>"DOMAIN-WILDCARD,"+d)};
+  dnsPolicy["rule-set:" + stunDNSSet] = v14DnsFor(groupName("漏网之鱼"));
+  // Preserve existing local/private-name fallback unless an earlier corporate
+  // policy or explicit system/manual literal already identifies it.
+  dnsPolicy["rule-set:" + embeddedDomainSet("private")] = v14DnsFor(groupName("漏网之鱼"));
+  dnsPolicy["rule-set:" + embeddedDomainSet("category-doh")] = v14DnsFor(groupName("漏网之鱼"));
+  let domesticSeedsSet = "v14-domestic-protocol-seeds", domesticSetIndex = 1;
+  while (config["rule-providers"][domesticSeedsSet]) domesticSeedsSet = "v14-domestic-protocol-seeds-" + (++domesticSetIndex);
+  config["rule-providers"][domesticSeedsSet] = {type:"inline", behavior:"classical", payload:V14_DOMESTIC_SEEDS.concat(["cn"]).map(d=>"DOMAIN-SUFFIX,"+d)};
+  dnsPolicy["rule-set:" + domesticSeedsSet] = v14DnsFor(domesticPolicy);
+  for (const tag of V14_DOMESTIC_SETS.concat(["cn"])) {
+    if (V14_REVIEWED_DOMAINS[tag]) dnsPolicy["rule-set:" + embeddedDomainSet(tag)] = v14DnsFor(domesticPolicy);
+    dnsPolicy["rule-set:" + ruleSet("domain", tag)] = v14DnsFor(domesticPolicy);
+  }
+  const oldDns = v14Object(config.dns) ? config.dns : {};
+  config.dns = Object.assign({}, oldDns, {
+    enable: true, ipv6: true, "fake-ip-range6": oldDns["fake-ip-range6"] || "fdfe:dcba:9876::1/64", "enhanced-mode": "fake-ip", "fake-ip-range": "198.18.0.1/16",
+    "fake-ip-filter-mode": "blacklist",
+    // Chromium treats the IPv6 Fake-IP ULA as local network access. Return
+    // real A/AAAA for this public API; nameserver-policy still uses OpenAI's
+    // chosen group, and the existing company rules retain fail-closed routing.
+    "fake-ip-filter": V14.privateNames.map(d => "+." + d).concat(["api.openai.com"]), "use-hosts": true,
+    "use-system-hosts": true, "respect-rules": false, "prefer-h3": false,
+    "default-nameserver": V14.bootstrapDns.slice(), "proxy-server-nameserver": V14.nodeDns.slice(),
+    nameserver: v14DnsFor(groupName("漏网之鱼")), fallback: [], "nameserver-policy": dnsPolicy,
+    "direct-nameserver": V14.directDns.slice(), "direct-nameserver-follow-policy": true,
+  });
+  delete config.dns["fallback-filter"];
+  delete config.dns["proxy-server-nameserver-policy"];
+  if (config["x-v11-generated"] && config.dns.listen === "127.0.0.1:1053") delete config.dns.listen;
+
+  config.ipv6 = true;
+  config.profile = Object.assign({}, v14Object(config.profile) ? config.profile : {}, { "store-selected": true, "store-fake-ip": true });
+  // Android FlClash/VpnService owns the actual TUN file descriptor, routes,
+  // DNS hijack and IPv6 OS routes. Preserve the client-managed TUN object; core DNS/IPv6 are enabled above.
+  const oldSniffer = v14Object(config.sniffer) ? config.sniffer : {};
+  config.sniffer = Object.assign({}, oldSniffer, { enable: true, "force-dns-mapping": true,
+    "parse-pure-ip": true, "override-destination": false,
+    sniff: Object.assign({}, v14Object(oldSniffer.sniff) ? oldSniffer.sniff : {}, {
+      HTTP: { ports: [80, "8080-8880"], "override-destination": false },
+      TLS: { ports: [443, 8443] }, QUIC: { ports: [443, 8443] },
+    }),
+  });
+
+  const ruleSources = managedRules.finish();
+  // Guard against regressions when sharing code with the desktop build.
+  for (const key of ["tun", "allow-lan", "bind-address", "mixed-port", "external-controller", "secret", "authentication"]) {
+    if (JSON.stringify(config[key]) !== JSON.stringify(input[key]))
+      v14Fail("Android 平台字段不应由覆写改动：" + key);
+  }
+  const ipv6DeviceWarning = "V14.2 已开启核心双栈；请同时在 FlClash Android 开启 IPv6，确保 VpnService 接管 IPv6 路由。";
+  const priorMarker = input["x-v14-generated"];
+  // Keep this device reminder on replay; generated core flags cannot certify VpnService.
+  if (input.ipv6 === false || (input.dns || {}).ipv6 === false ||
+      (v14Object(priorMarker) && priorMarker.version === V14.version &&
+       Array.isArray(priorMarker.validationWarnings) && priorMarker.validationWarnings.includes(ipv6DeviceWarning)))
+    warnings.push(ipv6DeviceWarning);
+  // Check the relationships that caused V11 to fail at runtime.
+  const allGroups = new Map(config["proxy-groups"].map(g => [g.name, g]));
+  if (allGroups.size !== config["proxy-groups"].length) v14Fail("代理组名称冲突。");
+  const known = new Set([...V14_BUILTINS, ...nodeNames, ...allGroups.keys()]);
+  for (const g of config["proxy-groups"]) {
+    for (const ref of (g.proxies || [])) if (!known.has(ref)) v14Fail("未知代理引用：" + g.name + " -> " + ref);
+    if (!g["include-all"] && !g["include-all-providers"]) for (const ref of v14Strings(g.use, g.name + ".use")) if (!providers[ref]) v14Fail("未知 provider 引用：" + g.name + " -> " + ref);
+  }
+  for (const logical of business) {
+    const g = allGroups.get(groupName(logical));
+    if (!g.proxies.includes(groupName("高纯净度AI用")) ||
+        (logical === "漏网之鱼" ? g.proxies.includes("DIRECT") : !g.proxies.includes("DIRECT")))
+      v14Fail("业务组的 DIRECT 边界不正确：" + logical);
+    for (const ref of rawNodeNames) if (!g.proxies.includes(ref)) v14Fail("业务组缺少节点：" + logical + " -> " + ref);
+    for (const ref of providerNames) if (!(g.use || []).includes(ref)) v14Fail("业务组缺少 provider：" + logical + " -> " + ref);
+  }
+  for (let i = 0; i < rules.length; i++) {
+    const r = rules[i];
+    const parts = r.split(",");
+    const target = parts[parts.length - 1] === "no-resolve" ? parts[parts.length - 2] : parts[parts.length - 1];
+    if (!known.has(target)) v14Fail("未知规则目标：" + r);
+    if (target !== "DIRECT" && target !== "REJECT" && rules[i + 1] !== r.replace("," + target + (r.endsWith(",no-resolve") ? ",no-resolve" : ""), ",REJECT" + (r.endsWith(",no-resolve") ? ",no-resolve" : ""))) {
+      v14Fail("UDP 防回落规则不相邻：" + r);
+    }
+  }
+  if (rules[rules.length - 2] !== "MATCH," + groupName("漏网之鱼") || rules[rules.length - 1] !== "MATCH,REJECT") v14Fail("末尾 UDP 防回落缺失。");
+  v14GraphCheck(config, warnings);
+  for (const key of previous) delete config[key];
+  config["x-v14-generated"] = { version: V14.version, revision: "domestic-selector-r1-20261010", routingRevision: "domestic-selector-r1-20261010", compatibilityRevision: "api-real-ip-r1-20261010", groups: groups.map(g => g.name), proxies: [],
+    platform: "android",
+    ruleDataMode: "critical-inline-pinned-full-remote-no-local-geo",
+    ruleProviders: ruleSources.map(s => s.name), ruleSources,
+    auditRepairRevision: "balanced-r1", domesticProtocolRevision: "domestic-protocol-r1"{{DIRECT_RULE_MARKER}},
+    embeddedDomainClassifiers: Array.from(embeddedNames, ([tag, provider]) => ({tag, provider, records: V14_REVIEWED_DOMAINS[tag].payloadText.split("\n").length})),
+    immutableCompanyCore: Array.from(coreNames, ([group, provider]) => ({group, provider, records: V14_COMPANY_CORE[group].length})),
+    ruleDownloadProxy: groupName("高纯净度AI用"), ruleInterval: V14.ruleInterval,
+    ruleReadiness: "not-observable-in-JS-check-core-providers",
+    dnsMode: "company-core-group-affine-dot-no-reuse-safe-default", udpMode: "company-first-unknown-public-udp-proxy-or-reject",
+    notes: "Dual-stack proxy dialing enabled; remote exit IP family remains node-controlled; domain-to-group DNS affinity; live connections and caches survive selection changes",
+    acceptedBoundaries: ["remote-node-to-destination-ip-family", "TUN and browser WebRTC enforcement outside JS", "per-flow DNS affinity"],
+    openIssues: ["device/browser DNS caches and application connection migration", "Windows/Android device TUN and IPv6 leak acceptance"],
+    validationWarnings: v14Unique(warnings),
+    releaseStatus: "offline-regression-tested-device-acceptance-pending" };
+  if (typeof console !== "undefined" && console.log) console.log("[V14 Android] " + selectable.length + " 个可用节点、" + providerNames.length + " 个 provider、" + business.length + " 个可选业务组；公司规则优先；未分类公网 UDP 不直连，国内 TCP 由国内网站组选择，默认 DIRECT。");
+  if (typeof console !== "undefined" && console.log) console.log("[V14 Android] " + ruleSources.length + " 个远程分类按 24h 更新；首次无缓存须可用节点。检查规则已加载，不要把生成成功当成下载成功。");
+  if (typeof console !== "undefined" && console.log) for (const w of v14Unique(warnings)) console.log("[V14 检查范围] " + w);
+  return v14NetworkDefaults(config);
+}

@@ -1,0 +1,33 @@
+function v14ProviderGuard(provider, name, retain, warnings, upgradingFromV13) {
+  // V13 appended two commands to every provider. Remove that exact suffix on
+  // upgrade; never erase user-defined custom expressions or dialer references.
+  const formerBlock6 = '(select((.server // "") | contains(":")) | .type) = "reject"';
+  const formerForce4 = '.["ip-version"] = "ipv4"';
+  const o = provider.override;
+  // Provider exclude-type acts on raw mappings, before override-expr.
+  // Hide and reject a mapping that a custom expression turns into a bypass.
+  const guardName = '(select(.type == "direct" or .type == "compatible" or .type == "pass" or .type == "pass-rule" or .type == "dns" or .type == "rematch" or .type == "reject" or .type == "reject-drop" or .type == "reject-no-drop") | .name) = "@v14-nontransport:" + .name';
+  const guardType = '(select((.name // "") | contains("@v14-nontransport:")) | .type) = "reject"';
+  const expressions = v14Strings(o["override-expr"], "provider " + name + ".override.override-expr").filter(e => e !== guardName && e !== guardType && e !== V14_NODE_FAMILY_DEFAULT);
+  if (upgradingFromV13 && expressions.length >= 2 &&
+      expressions[expressions.length - 2] === formerBlock6 &&
+      expressions[expressions.length - 1] === formerForce4) expressions.splice(-2);
+  for (const expr of expressions) {
+    if (/dialer-proxy/i.test(expr))
+      v14Fail("provider " + name + " 的 override-expr 动态修改 dialer-proxy；请使用可检查的 override.dialer-proxy。");
+  }
+  if (expressions.length) o["override-expr"] = expressions.concat(guardName, guardType);
+  else delete o["override-expr"];
+  const names = new Set();
+  for (const p of (provider.payload || [])) {
+    if (!v14Object(p) || typeof p.name !== "string" || !p.name || !p.type)
+      v14Fail("provider " + name + " 含无效 payload 节点。");
+    if (names.has(p.name)) v14Fail("provider " + name + " 的 payload 节点重名：" + p.name);
+    names.add(p.name);
+    retain(o["dialer-proxy"] || p["dialer-proxy"], "provider " + name + " payload " + p.name);
+    if (upgradingFromV13 && v14Transport(p) && p["ip-version"] === "ipv4")
+      delete p["ip-version"];
+  }
+  if (expressions.length)
+    warnings.push("provider " + name + " 保留自定义表达式；动态更新后的成员需在内核复核。");
+}

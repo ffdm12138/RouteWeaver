@@ -20,11 +20,11 @@
     },
     "sourceManifest": {
       "file": "metadata/shadowrocket-lean.json",
-      "sha256": "6d65d53934c11f90779fb87e69da94182c88c004370b24de21a4cd14f229e434"
+      "sha256": "b67362f9f0c244a3ad1d72c28d22626140e9c5518064a41367bfca0bd487561f"
     },
     "staticEvidence": {
       "file": "validation/shadowrocket-lean.json",
-      "sha256": "8f83903e2ab397112d6abfcc57b7cbdfb024b16842e687876a5040f926cb712f",
+      "sha256": "4d690b2f3b0888454c574e212a6c927376d88800fdd1531acccc94c05c88f4e8",
       "status": "SHADOWROCKET_LEAN_STATIC_PASS_NATIVE_PENDING"
     },
     "fullBusinessDNS": "SELF_CONTAINED",
@@ -35,23 +35,18 @@
   "jsEntries": [
     {
       "file": "src/windows/v14.3.js",
-      "sha256": "b2ac9021a498ebd8e2b0b53d7bbd3db92ef99e918b9f49eec046c5c4210cf054",
-      "bytes": 117455
+      "sha256": "8a151f980c5291cedf30d70b76aaa414fd1378540b4e8001dc11ba547ac5539e",
+      "bytes": 122822
     },
     {
       "file": "src/android/v14.3-android.js",
-      "sha256": "cfdc2eba7e3552bb067bca46a638596409510dde03f7558f31cebe6feab71d57",
-      "bytes": 117341
-    },
-    {
-      "file": "src/ios/v14.3-clashmi.js",
-      "sha256": "9ded4aef098b1b5b0334597eda4a07996f6f7e8d3c8a24cdc0bfad457e705903",
-      "bytes": 120235
+      "sha256": "33b55bccbb40024424db37eed946711bd52161c580687dde6f5c448d2de474c1",
+      "bytes": 122708
     },
     {
       "file": "src/ios/v14.3-clashmi-domestic-protocol-r1.js",
-      "sha256": "9ded4aef098b1b5b0334597eda4a07996f6f7e8d3c8a24cdc0bfad457e705903",
-      "bytes": 120235
+      "sha256": "7cd08073bceb572b8c8e95558c82a1f1d2a5398d99176bcb2d30a06ad55bfdaf",
+      "bytes": 125730
     }
   ],
   "clashmiSourceInspection": {
@@ -137,7 +132,7 @@
   },
   "localCoreEvidence": {
     "file": "validation/native-core.json",
-    "sha256": "bcc2e0577107853004e3fbd3f38910b056e59f701145ec83b3c10cc0c7986fbd",
+    "sha256": "625814a09be7d7b6228b6f94a6829e728795f2825ab7d92db082666d4bf9c5f5",
     "status": "BALANCED_LOCAL_CORE_PASS"
   },
   "historicalFailedInvestigation": {

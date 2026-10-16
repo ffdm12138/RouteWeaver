@@ -1,0 +1,79 @@
+{
+  "status": "OFFLINE_CORRESPONDING_SOURCE_BUILD_PASS",
+  "date": "2026-10-16",
+  "scope": "Both core and matched Helper rebuilt with network access off from delivered vendor dependency trees. Rebuilt core checked through original FlClash IPC and IPv4/IPv6 loopback; these independently rebuilt binaries were not installed.",
+  "core": {
+    "status": "VENDORED_CORE_REBUILD_IPC_PASS",
+    "scope": "Rebuilt offline from delivered patched source and vendored Go dependencies; official IPC, one unreachable attempt and reachable IPv4/IPv6 loopback. Separate from production binary and not installed.",
+    "run": {
+      "label": "offline-vendored-source",
+      "coreSHA256": "c8571b496ad97d758ff6715a3f9986d14476a363488a7908265f0229d50d5224",
+      "cases": [
+        {
+          "name": "literal6-unreachable-0",
+          "warnings": 1,
+          "milliseconds": 109.99999998603016,
+          "response": "closed",
+          "data": ""
+        },
+        {
+          "name": "literal6-unreachable-1",
+          "warnings": 1,
+          "milliseconds": 0.0,
+          "response": "closed",
+          "data": ""
+        },
+        {
+          "name": "literal6-unreachable-2",
+          "warnings": 1,
+          "milliseconds": 0.0,
+          "response": "closed",
+          "data": ""
+        },
+        {
+          "name": "reachable-local-2",
+          "milliseconds": 0.0,
+          "response": "closed",
+          "data": "PONG"
+        },
+        {
+          "name": "reachable-local-23",
+          "milliseconds": 16.00000000325963,
+          "response": "closed",
+          "data": "PONG"
+        }
+      ],
+      "failureMedianMilliseconds": 0.0
+    },
+    "goVersion": "1.27.2",
+    "moduleNetworkAccess": "OFF"
+  },
+  "helper": {
+    "status": "VENDORED_HELPER_MATCHED_REBUILD_PASS",
+    "seconds": 158.83,
+    "scope": "Original locked Helper sources rebuilt entirely offline from delivered vendor tree; matches independently rebuilt core hash. Test build not installed.",
+    "coreSHA256": "c8571b496ad97d758ff6715a3f9986d14476a363488a7908265f0229d50d5224",
+    "helperSHA256": "b6df0454cc53b7930fcd30a69a2db2167f618474ac457cde771547a6efc4dd37",
+    "networkAccess": "OFF",
+    "rawLogSHA256": "cf5dd9c971480e8a06025d7854ff17a53971237387109d83f246293dc8be2e49"
+  },
+  "binaryByteIdentity": "NOT_EQUAL_TO_MODULE_CACHE_BUILD; VENDOR_LAYOUT_DIFFERENCE_DOCUMENTED",
+  "sourceFiles": [
+    {
+      "file": "research/flclash-core-integration/core.patch",
+      "sha256": "157823326830d3122759d238c17f1ca59f75f7ab6b8eac169fb7ce0df59513f6"
+    },
+    {
+      "file": "research/flclash-core-integration/rebuild.py",
+      "sha256": "98b1397efc0d5148bcd2ee92a0dc50709431d771540b42419b3e3d2432eefca8"
+    },
+    {
+      "file": "research/flclash-core-integration/candidate-binaries.json",
+      "sha256": "ba850feabaa102015873a22613038ae1a02d346c87594522e4773c71a6c161c7"
+    },
+    {
+      "file": "validation/core-package.json",
+      "sha256": "5e8091ee28cc96daa6d8b68a461b52fa72bfb64d52cc309ad28080daefe4ef09"
+    }
+  ]
+}

@@ -1,8 +1,10 @@
 # RouteWeaver 工作约定
 
-2026-10-16 当前追加 `ipv6-fallback-r2` + `http-recovery-r1` / rc.4：保留双栈和六份可选文件。五种兼容 JS 补齐内部业务 DNS 的 AAAA/SVCB/HTTPS 过滤和 HTTP/TLS/QUIC 域名目标重解析，撤掉 rc.2 宽泛 IPv6 拒绝，保持原分流及代理远端 IPv6。节点引导和显式地址族保留。Shadowrocket 仅提供原生 IPv4 偏好，不宣称等效回退。51 项静态、123 项隔离核心分别绑定；rc.2 与 rc.3 媒体均失败，rc.4 仅修复已复现的 HTTP 缺口，媒体与无域名 IPv6 仍未解决，无自动物理网络探测。
+当前 rc.5：七个单入口，六 JS 内含双模式；shared-runtime-r1 / client-integration-r1。Windows FlClash 已由用户明确授权接入匹配核心和 Helper，有限 TUN 快速失败通过；真实微信及跨端设备不可据此宣称验收。后续更换运行客户端仍须相应用户授权。当前范围见 docs/status/当前验收.md，稳定合同见 docs/需求.md。
 
-当前用户请求优先。根 README 是使用入口，`docs/需求.md` 是公开业务设计合同，`CURRENT_RELEASE.json` 指定六个当前入口。
+
+
+当前用户请求优先。根 README 是使用入口，`docs/需求.md` 是公开业务设计合同，`CURRENT_RELEASE.json` 指定七个当前入口。
 
 - 此目录是独立公开源；只提交本目录的文件，不引用或上传外层个人工作区。公开版不包含个人目标地址例外或相关历史。
 - 用户设计目标保留在 `docs/需求.md`，不要为整理目录改写合同；共同目标不等于所有平台已通过设备验收。
@@ -18,5 +20,3 @@
 - `dist/<version>/` 为本地构建输出，`.work/` 为实验和解压复验；均不进 Git。上游许可和来源随每个发布包附带。
 
 开发阶段在 `harness/build/`，执行结果记入 `harness/build-log.md`，上下文与审阅分别在 `harness/context/`、`harness/code_review/`。
-
-- 2026-10-16 后续 `opaque-ipv6-research`：rc.4 用户可以发图但仍转圈；不据此认定带宽慢或完整回退通过。核心 DIRECT IPv6 TCP 网络不可达快速失败原型及 123 项原规则回放通过，位于 `releases/v14.3/research/ipv6-direct-fast-fail/`，未接入客户端。十二个入口、rc.4 标签/附件保持；当前结论见 `docs/reports/v14.3/无域名IPv6与转圈等待研究.md`。

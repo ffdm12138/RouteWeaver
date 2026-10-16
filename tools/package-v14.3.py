@@ -42,6 +42,7 @@ def docs():
     names.append('docs/maintenance/开源与发布.md')
     if mac:
         names.extend([mac['guide'],mac['report']])
+    names=sorted({p.relative_to(project).as_posix() for p in (project/'docs').rglob('*.md')})
     result={n:(project/n).read_bytes() if n=='docs/需求.md' else links((project/n).read_bytes()) for n in names}
     result['docs/README.md']='# 当前包文档\n\n- [最终需求](需求.md)\n- [使用说明](guides/使用说明.md)\n- [Clash Mi 导入](guides/ClashMi使用说明.md)\n- [V14.3 可靠精简与来源审核](reports/v14.3/可靠精简与远程来源审核.md)\n- [维护方法](maintenance/维护与更新.md)\n\n历史版本正文仅在项目 docs/reports/ 和 archive/ 中保留，本包不把旧结论作为本版认证。\n'.encode('utf-8')
     result['docs/README.md']+='\n- [IPv4 兼容模式](guides/IPv4兼容模式.md)\n- [IPv6 回退修订](reports/v14.3/IPv6回退与兼容入口.md)\n'.encode('utf-8')
@@ -57,6 +58,7 @@ def docs():
         if file.is_file():
             result[file.relative_to(project).as_posix()]=file.read_bytes()
     result['docs/maintenance/维护与更新.md']=result['docs/maintenance/维护与更新.md'].replace('根目录执行：'.encode('utf-8'),'下面的 Python 命令仅适用于完整项目工作区。独立审核 ZIP 从根目录运行前述 Node 命令；project-tools 中的 Python 文件只供源码审查。\n\n项目根目录执行：'.encode('utf-8'))
+    result['docs/README.md']=links((project/'docs/README.md').read_bytes())
     return result
 
 def credential_check(files,deploy=False):
@@ -114,6 +116,9 @@ if mac:
         deploy[name]=(release/name).read_bytes()
 for name in [e['file'] for e in network['entries']]+['metadata/network-compat.json','metadata/network-compat-delivery.json']+[e['file'] for e in network['testEvidence'].values()]:
     deploy[name]=(release/name).read_bytes()
+for name in ['metadata/clash-verge-sources.json','data/client-capabilities.json','validation/client-integration.json','validation/engine-parity.json','validation/clash-verge-static.json','validation/clash-verge-core.json']:
+    deploy[name]=(release/name).read_bytes()
+deploy['tools/diagnose-client.py']=(project/'tools/diagnose-client.py').read_bytes()
 deploy.update(docs())
 deploy['README.md']=links((release/'README.md').read_bytes())
 deploy_target,deploy_result=write_zip('deployable',deploy)
@@ -130,7 +135,7 @@ for file in release.rglob('*'):
     audit[rel.as_posix()]=file.read_bytes()
 audit.update(docs())
 audit['README.md']=links((release/'README.md').read_bytes())
-for name in ['record-v14.3.py','verify-v14.3.py','package-v14.3.py','verify-layout.py','network_release.py']:
+for name in ['record-v14.3.py','verify-v14.3.py','package-v14.3.py','verify-layout.py','network_release.py','release_enhancements.py','diagnose-client.py']:
     audit['project-tools/'+name]=(project/'tools'/name).read_bytes()
 if delivery:
     audit['project-tools/restore-ios-delivery.py']=(project/'tools/restore-ios-delivery.py').read_bytes()
@@ -157,7 +162,8 @@ if mac:
         '- Clash Mi：导入 src/macos/v14.3-macos-clashmi.js 并绑定正在使用的订阅；追加内置-不覆写、规则模式、IPv6 开启、TUN 覆写关闭。\n\n'
         '两个公共组先手动选节点，确认完整规则已下载。详见 [导入说明](docs/guides/MacBook使用说明.md)。\n\n'
         '源码与本机 Windows Mihomo 回放通过；Mac App、TUN/NetworkExtension 实机接管未验收。包不含实际节点或订阅。\n').encode('utf-8')
-    mac_files['README.md']+='\n本地没有 IPv6 出口时手动选对应的 -ipv4-local.js；保持核心 IPv6 与完整 TUN 接管。详见 [IPv4 兼容模式](docs/guides/IPv4兼容模式.md)。\n'.encode('utf-8')
+    mac_files['README.md']+='\n每个客户端只有一份 JS；本地无 IPv6 出口时，将该文件顶部默认模式改为 ipv4-local，保持核心 IPv6、严格路由与完整 TUN 接管。详见 [IPv4 兼容模式](docs/guides/IPv4兼容模式.md)。\n'.encode('utf-8')
+    mac_files.update(docs())
     _,mac_result=write_zip('macos',mac_files)
 
 fresh=Path(tempfile.mkdtemp(prefix='v14.3-audit-',dir=work))
@@ -166,7 +172,7 @@ with zipfile.ZipFile(audit_target) as z:
 commands=['tools/build-balanced.cjs','tools/build-shadowrocket-lean.cjs','tests/static.cjs','tests/shadowrocket-lean.cjs']
 if mac:
     commands.extend(['tools/build-macos.cjs','tests/macos-static.cjs'])
-commands.extend(['tools/build-network-compat.cjs','tests/network-compat.cjs'])
+commands.extend(['tools/build-network-compat.cjs','tests/network-compat.cjs','tests/clash-verge.cjs'])
 for name in commands:
     command=[args.node,str(fresh/name),*(['--check'] if name.startswith('tools/') else [])]
     run=subprocess.run(command,cwd=fresh,capture_output=True,text=True,encoding='utf-8',timeout=600,creationflags=process_flags)

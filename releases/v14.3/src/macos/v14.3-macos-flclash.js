@@ -1,3 +1,5 @@
+// One current entry; set the default below, or use x-routeweaver.network-mode in the input.
+const ROUTEWEAVER_DEFAULT_NETWORK_MODE = "dual-stack";
 // Small standalone overwrite: critical parents and safety guards inline; complete reviewed rules are remote.
 // Mihomo V14.3 macOS / FlClash — 2026-10-14; domestic-protocol-r1 / macos-r1.
 // Company rules precede geographic shortcuts; DNS uses the same group.
@@ -2289,7 +2291,7 @@ function v14MacOSBase(input) {
 }
 
 // FlClash macOS uses a core-created utun; the app owns enable / auto-route.
-function main(input) {
+function v14NetworkModeBase(input) {
   if (!v14Object(input)) v14Fail("FlClash macOS 覆写输入必须是配置对象。");
   const prepared = v14Copy(input);
   const tun = v14Object(prepared.tun) ? prepared.tun : {};
@@ -2316,4 +2318,77 @@ function main(input) {
   marker.acceptedBoundaries = ["remote-node-to-destination-ip-family", "FlClash final merge and macOS TUN/system DNS are outside JS", "per-flow DNS affinity"];
   marker.openIssues = ["macOS app import, privileged TUN helper, LAN DNS, TCP/UDP/IPv6 capture and Wi-Fi/interface switching", "device DNS caches and application connection migration"];
   return config;
+}
+
+// Explicit IPv4-local ingress mode. No system reachability probe is performed.
+// Keep core IPv6 and TUN capture so IPv6 cannot escape when networks change.
+// dns.ipv6 only filters client AAAA; apply the same family restriction to
+// business/direct upstreams used internally by the core. Node bootstrap and
+// LAN/system resolvers remain independent. Keep every existing #policy.
+function v14IPv4LocalResolver(value) {
+  if (Array.isArray(value)) return value.map(v14IPv4LocalResolver);
+  if (typeof value !== "string" || value === "system" || /^dhcp:\/\//.test(value)) return value;
+  const at = value.indexOf("#");
+  const address = at < 0 ? value : value.slice(0, at);
+  const params = at < 0 ? [] : value.slice(at + 1).split("&");
+  const kept = params.filter(p => p && !/^(disable-ipv6|disable-qtype-64|disable-qtype-65)(=|$)/.test(p));
+  return address + "#" + kept.concat(["disable-ipv6=true", "disable-qtype-64=true", "disable-qtype-65=true"]).join("&");
+}
+function v14IPv4LocalMain(input) {
+  const prepared = v14Copy(input);
+  if (v14Object(prepared.dns)) prepared.dns.ipv6 = true;
+  // This generated inline reference is restored below. Exclude it from the
+  // base adapter's inherited auxiliary dependency migration on later runs.
+  if (v14Object(prepared.sniffer) && prepared.sniffer["skip-domain"] != null)
+    prepared.sniffer["skip-domain"] = v14Strings(prepared.sniffer["skip-domain"], "sniffer.skip-domain").filter(value => value !== "rule-set:v14-domains-private");
+  const config = v14NetworkModeBase(prepared);
+  config.ipv6 = true;
+  config.dns.ipv6 = false;
+  delete config.dns["fake-ip-range6"];
+  for (const key of ["nameserver", "fallback", "direct-nameserver"])
+    if (config.dns[key] != null) config.dns[key] = v14IPv4LocalResolver(config.dns[key]);
+  for (const key of Object.keys(config.dns["nameserver-policy"] || {}))
+    config.dns["nameserver-policy"][key] = v14IPv4LocalResolver(config.dns["nameserver-policy"][key]);
+  config.tun["inet6-address"] = ["fdfe:dcba:9876::1/126"];
+  config.tun["route-address"] = ["0.0.0.0/0", "::/0"];
+  // With a readable HTTP/TLS/QUIC hostname, replace a cached literal destination
+  // with that hostname. DIRECT then resolves an A record; a selected proxy
+  // retains remote DNS/IPv6 ability. This includes HTTP Host: identifying it
+  // for routing alone leaves a stale IPv6 destination unusable on IPv4-only LANs.
+  // Without a hostname a literal IPv6 cannot be converted to an IPv4 target.
+  for (const protocol of ["HTTP", "TLS", "QUIC"])
+    config.sniffer.sniff[protocol]["override-destination"] = true;
+  // Preserve the destination identity needed by leading explicit IP rules.
+  // A hostname rewrite happens before rule evaluation in Mihomo. Without
+  // this exclusion it could erase a highest-priority manual IP exception.
+  const anchor = config.rules.indexOf("DOMAIN,v14-runtime-check.invalid,REJECT");
+  if (anchor < 0) v14Fail("Missing compatibility rule anchor");
+  const explicitIPs = config.rules.slice(0, anchor).flatMap(rule => {
+    const match = /^IP-CIDR6?,([^,]+),DIRECT(?:,no-resolve)?$/.exec(rule);
+    return match ? [match[1]] : [];
+  });
+  config.sniffer["skip-dst-address"] = [...new Set(v14Strings(config.sniffer["skip-dst-address"], "sniffer.skip-dst-address").concat(explicitIPs))];
+  // Keep LAN names at their original addresses. Do not skip every private
+  // address: known company domains must retain their existing priority.
+  if (!config["rule-providers"]["v14-domains-private"]) v14Fail("Missing inline private domain classifier");
+  config.sniffer["skip-domain"] = [...new Set(v14Strings(config.sniffer["skip-domain"], "sniffer.skip-domain").concat(V14.privateNames.map(name => "+." + name), ["rule-set:v14-domains-private"]))];
+  const marker = config["x-v14-generated"];
+  marker.networkMode = "ipv4-local";
+  marker.networkCompatibilityRepair = "http-recovery-r1";
+  marker.localIPv6Fallback = "IPv4-business-resolution-and-HTTP-TLS-QUIC-hostname-recovery; original-egress-policy-preserved";
+  marker.validationWarnings = marker.validationWarnings.concat([
+    "IPv4-local 是手动网络模式，不探测物理出口。保持应用核心 IPv6、完整 TUN 接管和严格路由；业务 DNS 过滤 AAAA/SVCB/HTTPS，节点引导 DNS 保留双栈。",
+    "HTTP/TLS/QUIC 可读域名允许重新解析 IPv4；无域名的 IPv6 字面量继续按原组处理，DIRECT 仍需本地 IPv6，代理目标仍需节点 IPv6。应用私有 DNS/缓存和显式 hosts 不保证回退。"
+  ]);
+  return config;
+}
+
+function main(input, profileName) {
+  if (!v14Object(input)) v14Fail("覆写输入必须是配置对象。");
+  const options = v14Object(input["x-routeweaver"]) ? input["x-routeweaver"] : {};
+  const prior = v14Object(input["x-v14-generated"]) ? input["x-v14-generated"] : {};
+  const mode = options["network-mode"] ||
+    (prior.version === V14.version && prior.networkMode === "ipv4-local" ? "ipv4-local" : ROUTEWEAVER_DEFAULT_NETWORK_MODE);
+  if (mode !== "dual-stack" && mode !== "ipv4-local") v14Fail("network-mode 仅支持 dual-stack 或 ipv4-local。");
+  return mode === "ipv4-local" ? v14IPv4LocalMain(input, profileName) : v14NetworkModeBase(input, profileName);
 }

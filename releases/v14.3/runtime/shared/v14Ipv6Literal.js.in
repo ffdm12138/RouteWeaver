@@ -1,0 +1,4 @@
+function v14Ipv6Literal(s) {
+  if (typeof s !== "string") return false;
+  return /^[0-9a-fA-F:.%]+$/.test(s.replace(/^\[/, "").replace(/\]$/, "")) && s.includes(":");
+}

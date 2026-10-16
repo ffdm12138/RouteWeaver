@@ -1,0 +1,8 @@
+function v14ManagedSource(name, provider) {
+  if (!/^v12r-(?:domain|ip)-/.test(name) || !v14Object(provider) || provider.type !== "http") return null;
+  for (const kind of ["domain", "ip"]) for (const tag of (kind === "domain" ? V14_DOMAIN_TAGS : V14_IP_TAGS)) {
+    const s = v14Source(kind, tag, true);
+    if (s && (provider.url === s.url || V14_DIRECT_RULE_PINS[provider.url] === s.url) && provider.behavior === s.behavior && provider.format === s.format) return s;
+  }
+  return null;
+}

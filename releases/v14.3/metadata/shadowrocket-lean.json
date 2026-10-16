@@ -4637,7 +4637,7 @@
   ],
   "sourceContract": {
     "file": "docs/需求.md",
-    "sha256": "41120cd7be531df4a34369a67289733c1d2b8659bc3f0949c96186a09899d79a"
+    "sha256": "9bb8e0ed45c6df62592c052c131876d6c6473f2443581782cdcdd4abb3a6bc0a"
   },
   "inputs": [
     {
@@ -4646,7 +4646,7 @@
     },
     {
       "file": "src/android/v14.3-android.js",
-      "sha256": "cfdc2eba7e3552bb067bca46a638596409510dde03f7558f31cebe6feab71d57"
+      "sha256": "33b55bccbb40024424db37eed946711bd52161c580687dde6f5c448d2de474c1"
     },
     {
       "file": "data/rules/embedded-policy.json",

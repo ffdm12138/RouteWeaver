@@ -1,0 +1,1 @@
+function v14Object(x) { return x !== null && typeof x === "object" && !Array.isArray(x); }

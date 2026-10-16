@@ -1,0 +1,5 @@
+{
+  "purpose": "Test-only one-parse CLI transport starts owned loopback inbounds normally started by the FlClash host; rejects enabled TUN. Installed production core does not contain this overlay.",
+  "originalMainSHA256": "3ea4798bd885586fd976b8865b28f0250d40f2d97c0850beb90d0c9646f53d17",
+  "overlaySHA256": "4c0dc7704b9a96a2a23fa2f586bb1ea627d189de0e8871aeef9444384307efaa"
+}

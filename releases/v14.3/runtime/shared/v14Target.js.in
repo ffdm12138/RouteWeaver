@@ -1,0 +1,5 @@
+function v14Target(rule) {
+  if (typeof rule !== "string" || !rule.trim()) v14Fail("存在空的或非字符串规则。");
+  const fields = rule.split(",");
+  return fields[fields.length - (fields[fields.length - 1] === "no-resolve" ? 2 : 1)].trim();
+}

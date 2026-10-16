@@ -1,0 +1,14 @@
+{
+  "revision": "client-capabilities-r1",
+  "contract": "docs/需求.md",
+  "requirements": {"mode":"rule","coreIPv6":true,"strictRoutingWhenClientSupportsIt":true,"proxyFailureToDirect":false,"automaticNodeSwitching":false},
+  "clients": {
+    "windows":{"client":"FlClash","reviewedVersion":"0.9.0","engine":"QuickJS via rquickjs 0.12","tunOwner":"App and privileged core","postScriptMerge":true},
+    "android":{"client":"FlClash / Mihomo","engine":"Client-specific; FlClash 0.9.0 uses rquickjs 0.12","tunOwner":"VpnService","postScriptMerge":true},
+    "clashmi":{"client":"Clash Mi iOS","engine":"JavaScriptCore/object bridge; device pending","tunOwner":"NetworkExtension","postScriptMerge":true},
+    "shadowrocket":{"client":"Shadowrocket","engine":"Native conf; no JavaScript","tunOwner":"NetworkExtension","compatibilityLimit":"IPv4 preference only, not equivalent to Mihomo hostname recovery"},
+    "macosFlClash":{"client":"FlClash macOS","engine":"Client version dependent","tunOwner":"App and Darwin utun","postScriptMerge":true},
+    "macosClashMi":{"client":"Clash Mi macOS","engine":"JavaScriptCore/object bridge; device pending","tunOwner":"NetworkExtension","postScriptMerge":true},
+    "clashVerge":{"client":"Clash Verge Rev Windows","reviewedVersion":"2.5.8","engine":"Boa 0.22.0","tunOwner":"App and service","postScriptMerge":true}
+  }
+}

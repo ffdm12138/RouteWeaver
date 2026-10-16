@@ -1,0 +1,5 @@
+function v14Strings(xs, owner) {
+  if (xs == null) return [];
+  if (!Array.isArray(xs) || xs.some(x => typeof x !== "string")) v14Fail(owner + " 必须是字符串数组。");
+  return xs;
+}

@@ -47,7 +47,7 @@
     },
     {
       "file": "tests/fixture.cjs",
-      "sha256": "328defa554087c36412fa6c7119c6b25e6d20938ef1af41463622866f7a3ec4c"
+      "sha256": "238de968f94b2bc40070a053a47969dddfc4541ff841b555a0ecf5924869d39e"
     },
     {
       "file": "tests/domain-index.cjs",
@@ -59,7 +59,7 @@
     },
     {
       "file": "metadata/shadowrocket-lean.json",
-      "sha256": "6d65d53934c11f90779fb87e69da94182c88c004370b24de21a4cd14f229e434"
+      "sha256": "b67362f9f0c244a3ad1d72c28d22626140e9c5518064a41367bfca0bd487561f"
     },
     {
       "file": "src/ios/v14.3-shadowrocket.conf",
@@ -67,7 +67,7 @@
     },
     {
       "file": "src/android/v14.3-android.js",
-      "sha256": "cfdc2eba7e3552bb067bca46a638596409510dde03f7558f31cebe6feab71d57"
+      "sha256": "33b55bccbb40024424db37eed946711bd52161c580687dde6f5c448d2de474c1"
     },
     {
       "file": "data/rules/embedded-policy.json",

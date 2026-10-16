@@ -12,7 +12,7 @@ function captureExperiment(home,kind){
   return path.relative(root,target).replaceAll('\\','/');
 }
 function generate(platform,input) {
-  const file=local(platform==='desktop'?'src/windows/v14.3.js':platform==='clashmi'?'src/ios/v14.3-clashmi.js':'src/android/v14.3-android.js');
+  const file=local(platform==='desktop'?'src/windows/v14.3.js':platform==='clash-verge'?'src/clash-verge/v14.3-clash-verge.js':platform==='clashmi'?'src/ios/v14.3-clashmi-domestic-protocol-r1.js':'src/android/v14.3-android.js');
   const context=vm.createContext({console:{log(){}}});vm.runInContext(fs.readFileSync(file,'utf8'),context,{filename:file,timeout:3000});
   return JSON.parse(JSON.stringify(context.main(input||{proxies:[{name:'Audit node',type:'ss',server:'2001:db8::10',port:443,cipher:'aes-128-gcm',password:'test-only',udp:true}],
     tun:{enable:false,'auto-route':false},ipv6:true,dns:{ipv6:true,'fake-ip-range6':'fdfe:dcba:9876::1/64'}})));

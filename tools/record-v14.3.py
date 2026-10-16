@@ -79,4 +79,4 @@ from network_release import record
 record(project,root,current,review,sha,read)
 (root/'metadata/balanced-review.json').write_text(json.dumps(review,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
 (project/'CURRENT_RELEASE.json').write_text(json.dumps(current,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
-print(json.dumps({'status':review['status'],'metrics':review['metrics'],'shadowrocketNative':'NOT_RUN','clientDeployment':False}))
+print(json.dumps({'status':review['status'],'metrics':review['metrics'],'shadowrocketNative':'NOT_RUN','clientDeployment':current['clientDeployment']}))

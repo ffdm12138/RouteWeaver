@@ -1,5 +1,15 @@
 # Changelog
 
+## v14.3.0-rc.5 — 2026-10-16
+
+- 各客户端只保留一个入口；六份 JS 内含双栈/IPv4 兼容模式，Shadowrocket 保留一份原生配置。
+- 抽取共用运行函数与审核数据生成阶段，新增 Windows Clash Verge Rev 适配、能力表和脱敏最终配置诊断。
+- 真实 QuickJS/Boa 对照 432 项；保留 Clash Mi 对象返回和序列化输入。
+- Windows FlClash 专用可选核心：限定 DIRECT IPv6 网络不可达停止重复退避，明确非 TLS 短首包提前结束识别；严格路由、双栈和原分流保留。
+- 已接入维护者 FlClash；有限 TUN 失败反馈显著缩短，微信真实媒体及其它设备仍独立待验收。附匹配 Helper、完整对应源码/依赖、许可及回滚。
+- 稳定需求与动态验收分离；rc.1～rc.4 标签及失败证据保持。
+
+
 ## v14.3.0-rc.4 · 2026-10-16
 
 - `http-recovery-r1`：IPv4-local JS 对既有 HTTP 端口使用 Host 重解析，补齐 rc.3 识别域名却仍拨原 IPv6 的缺口；原公司出口、手动 IP、LAN 与用户排除保留。标准入口和 Shadowrocket 保持原字节。

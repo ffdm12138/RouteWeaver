@@ -8,23 +8,25 @@
   "guide": "docs/guides/MacBook使用说明.md",
   "sourceManifest": {
     "file": "metadata/macos-sources.json",
-    "sha256": "472cf658d21cf7d6b51113bb4a40ec171257a94b39d8909d8ce851ba36be876f"
+    "sha256": "66acaab519a9336176d729343ed777093f6a419236cf54a568b53af034002baa"
   },
   "entries": [
     {
+      "platform": "macosFlClash",
       "client": "FlClash",
       "file": "src/macos/v14.3-macos-flclash.js",
-      "sha256": "0ab7a41c2fe746e17d258952942bed72ad64709edb4e9a735a81b2947ac7d199",
-      "bytes": 119250,
+      "sha256": "3e0160e34391803ad728f11e7a14e4b7b074a81d181744bfb50889dd8e0f8854",
+      "bytes": 124617,
       "generatedConfigBytes": 176576,
       "inlineRows": 819,
       "remoteSources": 30
     },
     {
+      "platform": "macosClashMi",
       "client": "Clash Mi",
       "file": "src/macos/v14.3-macos-clashmi.js",
-      "sha256": "2a65d9cb1240068586f0a733797616cd47786eb13d27bbdf25e52d2e87fcf0ee",
-      "bytes": 120237,
+      "sha256": "cbc1342c6655704c6a546842c1ea36dfdf5ae55cfd2cdd2ba4b8b508e4880bb8",
+      "bytes": 125732,
       "generatedConfigBytes": 177189,
       "inlineRows": 819,
       "remoteSources": 29
@@ -33,12 +35,12 @@
   "testEvidence": {
     "macos-static": {
       "file": "validation/macos-static.json",
-      "sha256": "8699e61d47d2cb68194b69d624561d2e01567227daeebe9217231bb72eec54db",
+      "sha256": "4d3efb1e1c4cd64459a8c62f03ac10a4fa70e4e811fa2f96352d6a1d83ed07e3",
       "status": "MACOS_STATIC_PASS"
     },
     "macos-core": {
       "file": "validation/macos-core.json",
-      "sha256": "89038c458770d3ee83f20cb41fbb5feda36b239b61facc18ceb9714291a2d070",
+      "sha256": "3ca9dbd4e00fba450bde802573b151ef3950e8aa77c93e5460715075a6575e54",
       "status": "MACOS_LOCAL_CORE_PASS_DEVICE_PENDING"
     }
   },
@@ -67,15 +69,15 @@
       "inbound-guard": 4
     }
   },
-  "scope": "Inherited business routing; IPv4-preferred default only for domain nodes without explicit family. Separate IPv4-local entries and evidence are in network-compat-delivery.json. Actual standard Mac entries executed on owned Windows Mihomo with TUN disabled; Mac apps/native capture NOT_RUN.",
+  "scope": "Inherited business routing; IPv4-preferred default only for domain nodes without explicit family. Two explicit network modes are in the same entry; their evidence is in network-compat-delivery.json. Actual standard Mac entries executed on owned Windows Mihomo with TUN disabled; Mac apps/native capture NOT_RUN.",
   "baseEntries": [
     {
       "file": "src/windows/v14.3.js",
-      "sha256": "b2ac9021a498ebd8e2b0b53d7bbd3db92ef99e918b9f49eec046c5c4210cf054"
+      "sha256": "8a151f980c5291cedf30d70b76aaa414fd1378540b4e8001dc11ba547ac5539e"
     },
     {
-      "file": "src/ios/v14.3-clashmi.js",
-      "sha256": "9ded4aef098b1b5b0334597eda4a07996f6f7e8d3c8a24cdc0bfad457e705903"
+      "file": "src/ios/v14.3-clashmi-domestic-protocol-r1.js",
+      "sha256": "7cd08073bceb572b8c8e95558c82a1f1d2a5398d99176bcb2d30a06ad55bfdaf"
     }
   ],
   "settings": {
@@ -108,6 +110,6 @@
   "deviceAcceptance": "NOT_RUN",
   "recordingTool": {
     "file": "tools/record-macos.py",
-    "sha256": "36058c1f0ebd01f1153c882469c508ca621614d72fd83c0fdc65caee7d759a03"
+    "sha256": "ba4d8cad1e31f1a0b92cdd5ffac550204d61f1b22cfcdbf0c1af78f8592b7698"
   }
 }

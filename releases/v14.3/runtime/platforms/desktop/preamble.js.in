@@ -1,0 +1,324 @@
+// Small standalone overwrite: critical parents and safety guards inline; complete reviewed rules are remote.
+// Mihomo V14.3 desktop — 2026-10-12; balanced-r1.
+// Company rules precede geographic shortcuts; DNS uses the same group.
+// Unknown public UDP is proxied or rejected, including arbitrary WebRTC ports.
+// Private LAN and the explicit manual DIRECT list are intentional exceptions.
+// TUN/VPN capture still requires client settings and device verification.
+const V14 = Object.freeze({
+  version: "14.3",
+  ruleInterval: 86400,
+  testUrl: "https://www.gstatic.com/generate_204",
+  testInterval: 600,
+  providerInterval: 3600,
+  // WebRTC STUN is a separate destination; route known generic STUN through fallback.
+  // This cannot identify the site that initiated the WebRTC request.
+  stunPorts: ["3478", "5349", "19302-19309"],
+  // Whole STUN/TURN labels avoid matching unrelated names such as stunning.cn.
+  stunHostPatterns: ["stun.*", "*.stun.*", "turn.*", "*.turn.*"],
+  domesticStunDns: ["stun.chat.bilibili.com", "stun.hitv.com"],
+  stunDns: ["stun.l.google.com", "stun.services.mozilla.com", "stun.cloudflare.com"],
+  infoPattern: "剩余流量|距离下次|套餐到期|建议.*更新|超时.*重启|官网|公告|客服|订阅|流量[:：]|到期[:：]",
+  manualDirect: ["shiyi.click"],
+  manualProxy: ["net.coffee", "browserleaks.com", "browserleaks.org", "dnsleaktest.com", "dnscheck.tools", "ipleak.net"],
+  privateNames: ["localhost", "lan", "local", "localdomain", "home.arpa"],
+  directDns: ["https://dns.alidns.com/dns-query#DIRECT", "https://doh.pub/dns-query#DIRECT"],
+  nodeDns: [
+    "https://223.5.5.5/dns-query#DIRECT",
+    "https://223.6.6.6/dns-query#DIRECT",
+  ],
+  bootstrapDns: ["https://223.5.5.5/dns-query", "https://223.6.6.6/dns-query"],
+  // An upstream reachable directly in China and through ordinary proxy nodes.
+  groupDnsUrls: ["tls://dns.alidns.com:853", "tls://dot.pub:853"],
+});
+
+const V14_BUILTINS = new Set(["DIRECT", "REJECT", "REJECT-DROP", "REJECT-NO-DROP", "PASS", "PASS-RULE", "COMPATIBLE", "GLOBAL"]);
+const V14_NOT_NODES = new Set(["direct", "reject", "reject-drop", "reject-no-drop", "pass", "pass-rule", "compatible", "dns", "rematch"]);
+const V14_PRIVATE_IPS = [
+  "127.0.0.0/8", "10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16", "169.254.0.0/16", "100.64.0.0/10",
+  "::1/128", "fc00::/7", "fe80::/10",
+];
+// Domestic TCP shortcuts follow company rules. TikTok stays separate;
+// the broad bytedance set is deliberately absent.
+const V14_EXTERNAL_DNS_RULES = [
+  "DOMAIN,dns.adguard.com",
+  "DOMAIN,dns.adguard-dns.com",
+  "DOMAIN,family.adguard-dns.com",
+  "DOMAIN,unfiltered.adguard-dns.com",
+  "DOMAIN,dns.alidns.com",
+  "DOMAIN,doh.dns.apple.com",
+  "DOMAIN,dns.caliph.dev",
+  "DOMAIN,dns.bebasid.com",
+  "DOMAIN,antivirus.bebasid.com",
+  "DOMAIN,internetsehat.bebasid.com",
+  "DOMAIN,dns.cfiec.net",
+  "DOMAIN,doh.cleanbrowsing.org",
+  "DOMAIN,one.one.one.one",
+  "DOMAIN,dns.cloudflare.com",
+  "DOMAIN,freedns.controld.com",
+  "DOMAIN,dns.decloudus.com",
+  "DOMAIN,futuredns.eu.org",
+  "DOMAIN,dns.de.futuredns.eu.org",
+  "DOMAIN,dns.us.futuredns.eu.org",
+  "DOMAIN,doh.dns.sb",
+  "DOMAIN,doh.sb",
+  "DOMAIN,dns.sb",
+  "DOMAIN,de-dus.doh.sb",
+  "DOMAIN,de-fra.doh.sb",
+  "DOMAIN,nl-ams.doh.sb",
+  "DOMAIN,uk-lon.doh.sb",
+  "DOMAIN,ee-tll.doh.sb",
+  "DOMAIN,jp-kix.doh.sb",
+  "DOMAIN,jp-nrt.doh.sb",
+  "DOMAIN,hk-hkg.doh.sb",
+  "DOMAIN,au-syd.doh.sb",
+  "DOMAIN,us-chi.doh.sb",
+  "DOMAIN,us-nyc.doh.sb",
+  "DOMAIN,us-sjc.doh.sb",
+  "DOMAIN,in-blr.doh.sb",
+  "DOMAIN,sg-sin.doh.sb",
+  "DOMAIN,kr-sel.doh.sb",
+  "DOMAIN,ru-mow.doh.sb",
+  "DOMAIN,ca-yyz.doh.sb",
+  "DOMAIN,de-ber.doh.sb",
+  "DOMAIN,doh.pub",
+  "DOMAIN,dns.pub",
+  "DOMAIN,sm2.doh.pub",
+  "DOMAIN,zero.dns0.eu",
+  "DOMAIN,dns.google",
+  "DOMAIN,ordns.he.net",
+  "DOMAIN,dns.mullvad.net",
+  "DOMAIN,adblock.dns.mullvad.net",
+  "DOMAIN,base.dns.mullvad.net",
+  "DOMAIN,extended.dns.mullvad.net",
+  "DOMAIN,family.dns.mullvad.net",
+  "DOMAIN,all.dns.mullvad.net",
+  "DOMAIN,ada.openbld.net",
+  "DOMAIN,ric.openbld.net",
+  "DOMAIN,dns.quad9.net",
+  "DOMAIN,dns10.quad9.net",
+  "DOMAIN,dns11.quad9.net",
+  "DOMAIN,doh.qis.io",
+  "DOMAIN,dns.rabbitdns.org",
+  "DOMAIN,security.rabbitdns.org",
+  "DOMAIN,family.rabbitdns.org",
+  "DOMAIN,basic.rethinkdns.com",
+  "DOMAIN,doh.360.cn",
+  "DOMAIN,dns.surfsharkdns.com",
+  "DOMAIN,v.recipes",
+  "DOMAIN,wikimedia-dns.org",
+  "DOMAIN,doh.applied-privacy.net",
+  "DOMAIN,private.canadianshield.cira.ca",
+  "DOMAIN,protected.canadianshield.cira.ca",
+  "DOMAIN,family.canadianshield.cira.ca",
+  "DOMAIN,dns.comss.one",
+  "DOMAIN,router.comss.one",
+  "DOMAIN,odvr.nic.cz",
+  "DOMAIN,dns.digitale-gesellschaft.ch",
+  "DOMAIN,dns-doh.dnsforfamily.com",
+  "DOMAIN,protective.joindns4.eu",
+  "DOMAIN,child.joindns4.eu",
+  "DOMAIN,noads.joindns4.eu",
+  "DOMAIN,child-noads.joindns4.eu",
+  "DOMAIN,unfiltered.joindns4.eu",
+  "DOMAIN,kaitain.restena.lu",
+  "DOMAIN,public.dns.iij.jp",
+  "DOMAIN,dns.jupitrdns.com",
+  "DOMAIN,doh.libredns.gr",
+  "DOMAIN,doh-pure.onedns.net",
+  "DOMAIN,doh.onedns.net",
+  "DOMAIN,dns.switch.ch",
+  "DOMAIN,dns.twnic.tw",
+  "DOMAIN,resolver.dnsprivacy.org.uk",
+  "DOMAIN,dns.seia.io",
+  "DOMAIN,secondary.dns.seia.io",
+  "DOMAIN,common.dot.dns.yandex.net",
+  "DOMAIN,safe.dot.dns.yandex.net",
+  "DOMAIN,family.dot.dns.yandex.net",
+  "DOMAIN,dns.shaw.ca",
+  "DOMAIN,doh.xfinity.com",
+  "DOMAIN,doh.nl.ahadns.net",
+  "DOMAIN,doh.la.ahadns.net",
+  "DOMAIN,dns.arapurayil.com",
+  "DOMAIN,dandelionsprout.asuscomm.com",
+  "DOMAIN,dnsforge.de",
+  "DOMAIN,dns.dnswarden.com",
+  "DOMAIN,doh.ffmuc.net",
+  "DOMAIN,ibksturm.synology.me",
+  "DOMAIN,resolver-eu.lelux.fi",
+  "DOMAIN,dns.marbledfennec.net",
+  "DOMAIN,dns.oszx.co",
+  "DOMAIN,dns.pumplex.com",
+  "DOMAIN,doh.tiarap.org",
+  "DOMAIN,doh.tiar.app",
+  "DOMAIN,jp.tiarap.org",
+  "DOMAIN,jp.tiar.app",
+  "DOMAIN,rx.techomespace.com",
+  "DOMAIN,public.ns.nwps.fi",
+  "DOMAIN,kids.ns.nwps.fi",
+  "DOMAIN,dns.astracat.ru",
+  "DOMAIN,frd4wvnobp.cloudflare-gateway.com",
+  "DOMAIN,dnsguard.pub",
+  "DOMAIN,doh.18bit.cn",
+  "DOMAIN,5u35p8m9i7.cloudflare-gateway.com",
+  "DOMAIN,dns.malw.link",
+  "DOMAIN,dns.mafioznik.xyz",
+  "DOMAIN,dns.geohide.ru",
+  "DOMAIN,xbox-dns.ru",
+  "DOMAIN-SUFFIX,opendns.com",
+  "DOMAIN-SUFFIX,cloudflare-dns.com",
+  "DOMAIN-SUFFIX,nextdns.io"
+];
+const V14_DOMESTIC_SETS = ["douyin", "apple@cn", "google@cn", "microsoft@cn", "steam@cn"];
+const V14_DOMESTIC_SEEDS = [
+  "douyin.com",
+  "douyincdn.com",
+  "jianying.com",
+  "jimeng.com",
+  "toutiao.com",
+  "ixigua.com",
+  "feishu.cn",
+  "volcengine.com",
+  "bilibili.com",
+  "bilivideo.com",
+  "hdslb.com",
+  "dl.steam.clngaa.com",
+  "st.dl.bscstorage.net",
+  "st.dl.eccdnx.com",
+  "st.dl.pinyuncloud.com",
+  "prts.plus",
+  "cnbeta.com",
+  "cnbetacdn.com",
+  "easou.com",
+  "mob.com",
+  "baidustatic.com",
+  "didi-labs.com"
+];
+
+// OpenAI's published ChatGPT Voice IPv4 list (created 2026-03-26).
+// Downloaded and compared on 2026-10-10: all 23 prefixes unchanged.
+// Refresh from the official list when it changes; unknown UDP uses
+// the no-DIRECT 漏网之鱼 group rather than falling through to DIRECT.
+const V14_OPENAI_VOICE_HOSTS = ["chatgpt.livekit.cloud", "host.livekit.cloud", "turn.livekit.cloud"];
+// Dynamic LiveKit names do not identify the tenant. Keep known exact hosts
+// and official Voice IPs above this safe fallback, across TCP and UDP.
+const V14_UNIDENTIFIED_VOICE_SUFFIXES = ["chatgpt.livekit.cloud", "host.livekit.cloud", "turn.livekit.cloud"];
+const V14_OPENAI_VOICE_IPV4 = [
+  "102.37.57.54/32", "13.71.25.29/32", "135.220.40.201/32", "172.203.39.49/32",
+  "172.207.173.200/32", "172.214.226.198/32", "191.233.251.27/32", "20.162.96.163/32",
+  "20.168.48.117/32", "20.184.36.134/32", "20.203.144.245/32", "20.74.221.21/32",
+  "4.151.200.38/32", "4.155.146.196/32", "4.197.172.116/32", "4.217.235.100/32",
+  "4.245.198.13/32", "40.118.236.137/32", "51.4.112.173/32", "52.143.181.161/32",
+  "68.155.152.41/32", "72.146.20.246/32", "74.248.148.7/32",
+];
+
+// One selectable group per company. Earlier entries win over broad sets below.
+const V14_SERVICES = {{SERVICES}};
+
+// Shared web dependencies have their own selector. Domain rules cannot infer
+// which top-level site requested them, so keep these out of company groups.
+const V14_SHARED_INFRA = {
+  "name": "公共基础服务",
+  "sets": [],
+  "seeds": [
+    "workos.com",
+    "workoscdn.com",
+    "stripe.com",
+    "stripe.network",
+    "browser-intake-datadoghq.com",
+    "sentry.io",
+    "intercom.io",
+    "intercomcdn.com",
+    "ct.sendgrid.net",
+    "auth0.com",
+    "livekit.cloud",
+    "cdn.cloudflare.net",
+    "cloudflare.com",
+    "webpubsub.azure.com",
+    "blob.core.windows.net",
+    "azurewebsites.net",
+    "azurestaticapps.net",
+    "azureedge.net",
+    "azurefd.net",
+    "appspot.com",
+    "firebaseio.com",
+    "firebaseapp.com",
+    "run.app",
+    "pages.dev",
+    "workers.dev",
+    "r2.dev",
+    "cloudfront.net",
+    "amazonaws.com",
+    "cloudinary.com",
+    "imgix.net",
+    "arkoselabs.com",
+    "usefathom.com",
+    "sendgrid.net",
+    "qualtrics.com",
+    "github.io",
+    "githubpreview.dev",
+    "cloudapp.net",
+    "cloudapp.azure.com",
+    "azure-api.net",
+    "azurecontainer.io",
+    "trafficmanager.net",
+    "azurecr.io",
+    "cosmos.azure.com",
+    "documents.azure.com",
+    "vault.azure.net",
+    "azmk8s.io",
+    "servicebus.windows.net",
+    "database.windows.net",
+    "file.core.windows.net",
+    "queue.core.windows.net",
+    "table.core.windows.net",
+    "web.core.windows.net",
+    "dfs.core.windows.net",
+    "chinacloudapp.cn",
+    "blob.core.chinacloudapi.cn",
+    "queue.core.chinacloudapi.cn",
+    "table.core.chinacloudapi.cn",
+    "dfs.core.chinacloudapi.cn",
+    "database.chinacloudapi.cn",
+    "servicebus.chinacloudapi.cn",
+    "vault.azure.cn",
+    "azure-api.cn",
+    "cloudfunctions.net",
+    "storage.googleapis.com",
+    "content-storage.googleapis.com",
+    "storage.cloud.google.com",
+    "storage.mtls.googleapis.com",
+    "storage.mtls.cloud.google.com"
+  ],
+  "exact": [
+    "challenges.cloudflare.com",
+    "workos.imgix.net"
+  ]
+};
+
+
+// Immutable company classifiers, generated from data/rules/company-core.json.
+const V14_CDN_SHARED_GUARDS = [
+  "DOMAIN-REGEX,^cdn.*-epicgames-.*\\.file\\.myqcloud\\.com$",
+  "DOMAIN-REGEX,^epicgames-download.*-.*\\.file\\.myqcloud\\.com$"
+];
+
+// Generated reviewed domain snapshots; standalone clients need no local files.
+const V14_REVIEWED_DOMAINS = {{EMBEDDED}};
+
+const V14_COMPANY_CORE = {{CORE}};
+
+// Display order is independent of V14_SERVICES' routing precedence.
+// Unlisted services keep their relative order after these pinned groups.
+const V14_PINNED_GROUPS = [
+  "高纯净度AI用", "高网速视频用", "自动选择", "公共基础服务", "漏网之鱼", "国内网站",
+  "OpenAI 服务", "Anthropic 服务", "谷歌服务", "微软生态",
+  "Steam", "Epic Games", "Telegram", "TikTok", "Twitter", "Discord",
+];
+const V14_GROUP_ORDER = V14_PINNED_GROUPS.concat(
+  V14_SERVICES.map(s => s.name).filter(name => !V14_PINNED_GROUPS.includes(name)));
+
+// Telegram official CIDR snapshot, retrieved 2026-09-24 via the web reader.
+// Source: https://core.telegram.org/resources/cidr.txt
+const V14_TELEGRAM_CIDRS = ["91.108.56.0/22", "91.108.4.0/22", "91.108.8.0/22", "91.108.16.0/22", "91.108.12.0/22", "149.154.160.0/20", "91.105.192.0/23", "91.108.20.0/22", "185.76.151.0/24", "2001:b28:f23d::/48", "2001:b28:f23f::/48", "2001:67c:4e8::/48", "2001:b28:f23c::/48", "2a0a:f280::/32"];
+const V14_GOOGLE_PLAY_DELIVERY_SEEDS = ["googleapis.cn", "xn--ngstr-lra8j.com", "gvt1.com", "gvt2.com", "gvt3.com"];
+

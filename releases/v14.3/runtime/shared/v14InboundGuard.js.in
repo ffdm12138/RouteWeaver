@@ -1,0 +1,16 @@
+function v14InboundGuard(config) {
+  // A retained inbound with its own policy skips the company/DNS/UDP rules.
+  // Reject incompatible inputs before returning any generated configuration.
+  if (config.listeners != null && !Array.isArray(config.listeners)) v14Fail("listeners 必须是数组。");
+  for (const l of (config.listeners || [])) {
+    if (!v14Object(l)) v14Fail("存在无效 listener。");
+    if (l.proxy || l.rule || String(l.type || "").toLowerCase() === "tun")
+      v14Fail("自定义入站会绕过主规则：listener " + (l.name || "未命名") + "；移除 proxy/rule，独立 TUN 入站需单独审核，不能继承旁路。");
+  }
+  if (config.tunnels != null && !Array.isArray(config.tunnels)) v14Fail("tunnels 必须是数组。");
+  for (const [i, tunnel] of (config.tunnels || []).entries()) {
+    if ((v14Object(tunnel) && tunnel.proxy) ||
+        (typeof tunnel === "string" && tunnel.split(",").length === 4 && tunnel.split(",")[3].trim()))
+      v14Fail("自定义入站会绕过主规则：tunnels[" + i + "] 的固定出口需移除或单独审核。");
+  }
+}

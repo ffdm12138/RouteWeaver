@@ -1,0 +1,108 @@
+function v14GraphCheck(config, warnings) {
+  const groups = new Map(config["proxy-groups"].map(g => [g.name, g]));
+  const nodes = new Map(config.proxies.map(p => [p.name, p]));
+  const providers = config["proxy-providers"] || {};
+  const edges = new Map(), state = new Map();
+  const providerId = n => "\u0000provider:" + n;
+  // Only use the portable regexp subset for supplementary static checks.
+  // Native fields remain untouched. Nonportable patterns are explicitly
+  // recorded as unverified, not approximated as a successful runtime check.
+  function match(pattern, text, owner) {
+    if (!pattern) return true;
+    if (typeof pattern !== "string") v14Fail(owner + " 正则必须是字符串。");
+    let src = pattern, flags = "";
+    const prefix = /^\(\?([ims]+)\)/.exec(src);
+    if (prefix) { flags = prefix[1]; src = src.slice(prefix[0].length); }
+    if (src.includes("(?") || /\\[pPkK]|\\[1-9]|\[[^\]]*&&/.test(src)) {
+      warnings.push(owner + " 使用非便携正则；原生过滤保持，额外静态动态成员检查未覆盖。");
+      return null;
+    }
+    try { return new RegExp(src, flags).test(text); }
+    catch (_) { warnings.push(owner + " 的正则交由 Mihomo 检查；脚本没有改写其语义。"); return null; }
+  }
+  const enumTypes = { ss: "Shadowsocks", ssr: "ShadowsocksR", socks5: "Socks5", http: "Http", vmess: "Vmess", vless: "Vless", tuic: "Tuic", hysteria: "Hysteria", hysteria2: "Hysteria2", "reject-no-drop": "RejectNoDrop", "reject-drop": "RejectDrop", "pass-rule": "PassRule" };
+  function excluded(g, p) {
+    if (g["exclude-filter"]) {
+      const x = match(g["exclude-filter"], p.name, g.name + ".exclude-filter");
+      if (x === true) return true;
+      if (x === null) return null;
+    }
+    const typ = (enumTypes[p.type] || p.type || "").toLowerCase();
+    return String(g["exclude-type"] || "").toLowerCase().split("|").includes(typ);
+  }
+  for (const [name, p] of nodes) edges.set(name, p["dialer-proxy"] ? [p["dialer-proxy"]] : []);
+  for (const [name, g] of groups) {
+    const refs = [];
+    for (const r of v14Strings(g.proxies, g.name + ".proxies")) {
+      if (excluded(g, nodes.get(r) || { name: r, type: "" }) === false) refs.push(r);
+    }
+    if (g["include-all"] || g["include-all-proxies"]) {
+      for (const p of nodes.values())
+        if (match(g.filter, p.name, name + ".filter") === true && excluded(g, p) === false) refs.push(p.name);
+    }
+    const sources = g["include-all"] || g["include-all-providers"] ? Object.keys(providers) : v14Strings(g.use, name + ".use");
+    for (const source of sources) {
+      if (!providers[source]) v14Fail(name + " 引用未知 provider：" + source);
+      refs.push(providerId(source));
+      const pd = providers[source], o = pd.override || {};
+      const customExprs = (o["override-expr"] || []).slice();
+      const transformsNames = o["additional-prefix"] || o["additional-suffix"] || o["proxy-name"];
+      if (pd.type !== "inline" || customExprs.length || transformsNames) {
+        if (o["dialer-proxy"] || (pd.payload || []).some(p => p["dialer-proxy"]))
+          warnings.push("provider " + source + " 的动态/改名后链式成员需内核检查；未把未经证实的循环候选当作确定错误。");
+        continue;
+      }
+      for (const [index, raw] of (pd.payload || []).entries()) {
+        // With no custom expressions or name transforms, provider/group name
+        // filters can be checked without approximating the effective names.
+        if (match(pd.filter, raw.name, source + ".filter") !== true) continue;
+        if (pd["exclude-filter"] && match(pd["exclude-filter"], raw.name, source + ".exclude-filter") !== false) continue;
+        if (String(pd["exclude-type"] || "").toLowerCase().split("|").includes(String(raw.type).toLowerCase())) continue;
+        const effective = Object.assign({}, raw);
+        if (match(g.filter, effective.name, name + ".filter") !== true || excluded(g, effective) !== false) continue;
+        const id = providerId(source) + ":node:" + index;
+        const dialer = o["dialer-proxy"] || raw["dialer-proxy"];
+        edges.set(id, dialer ? [dialer] : []);
+        refs.push(id);
+      }
+    }
+    if (g["empty-fallback"]) {
+      if (groups.has(g["empty-fallback"])) v14Fail(name + ".empty-fallback 只能引用代理节点或内置策略，不能引用组。");
+      refs.push(g["empty-fallback"]);
+    }
+    edges.set(name, v14Unique(refs));
+  }
+  // A provider marker records membership for bootstrap-cycle detection.
+  // Concrete inline node edges above respect each referencing group's filter.
+  // Do not conflate all provider payload nodes into every filtered group.
+  for (const name of Object.keys(providers)) edges.set(providerId(name), []);
+  function walk(n, path) {
+    if (V14_BUILTINS.has(n)) return;
+    if (!edges.has(n)) v14Fail("依赖图含未知引用：" + path.concat(n).join(" -> "));
+    if (state.get(n) === 1) v14Fail("节点/组/provider 链路成环：" + path.concat(n).join(" -> "));
+    if (state.get(n) === 2) return;
+    state.set(n, 1);
+    for (const child of edges.get(n)) walk(child, path.concat(n));
+    state.set(n, 2);
+  }
+  for (const n of edges.keys()) walk(n, []);
+  function reaches(ref, target, seen) {
+    if (ref === target) return true;
+    if (seen.has(ref)) return false;
+    seen.add(ref);
+    return (edges.get(ref) || []).some(r => reaches(r, target, seen));
+  }
+  for (const [name, p] of Object.entries(providers))
+    if (p.type === "http" && reaches(p.proxy, providerId(name), new Set()))
+      v14Fail("provider 冷启动依赖自身：" + name + " -> " + p.proxy);
+  function dialable(ref, owner, seen) {
+    if (!ref || V14_BUILTINS.has(ref) || seen.has(ref)) return;
+    seen.add(ref);
+    const p = nodes.get(ref);
+    if (p && p.type === "rematch") v14Fail(owner + " 不可直接拨号 rematch：" + ref);
+    for (const child of (edges.get(ref) || [])) dialable(child, owner, seen);
+  }
+  for (const p of nodes.values()) dialable(p["dialer-proxy"], p.name + ".dialer-proxy", new Set());
+  for (const [name, p] of Object.entries(providers)) dialable(p.proxy, "provider " + name + ".proxy", new Set());
+  for (const [name, p] of Object.entries(config["rule-providers"] || {})) dialable(p.proxy, "rule-provider " + name + ".proxy", new Set());
+}

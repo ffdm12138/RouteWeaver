@@ -1,0 +1,118 @@
+function v14RuleRegistry(config, downloadProxy) {
+  const sets = config["rule-providers"];
+  const byKey = new Map(), generated = new Map();
+  // Only recognize our canonical sources. A user provider with the same name
+  // but different content is never overwritten.
+  for (const [name, p] of Object.entries(sets)) {
+    const s = v14ManagedSource(name, p);
+    if (s && !byKey.has(s.kind + ":" + s.tag)) byKey.set(s.kind + ":" + s.tag, name);
+  }
+  function ref(kind, tag) {
+    const s = v14Source(kind, tag), key = s.kind + ":" + s.tag;
+    let name = byKey.get(key);
+    if (!name) {
+      const base = "v12r-" + s.kind + "-" + s.tag.replace(/@/g, "_at_");
+      name = base; let i = 1;
+      while (Object.prototype.hasOwnProperty.call(sets, name)) name = base + "-" + (++i);
+      byKey.set(key, name);
+    }
+    if (!generated.has(name)) {
+      // URL + kind identify the cache, NOT patch version or runtime group name.
+      // Naming collisions do not cause two distinct sources to share a file.
+      const path = "./ruleset/v12-managed/" + s.kind + "-" + s.tag.replace(/@/g, "_at_") + "-" + v14Hash(s.url) + "." + s.format;
+      sets[name] = { type: "http", behavior: s.behavior, format: s.format, url: s.url,
+        path, interval: V14.ruleInterval, proxy: downloadProxy, "size-limit": V14.ruleSizeLimit };
+      generated.set(name, {...s, name, path, proxy: downloadProxy});
+    }
+    return name;
+  }
+  function convertAtom(type, text, owner) {
+    if (["SRC-GEOIP", "IP-ASN", "SRC-IP-ASN"].includes(type))
+      v14Fail(owner + " 使用 " + type + "；不能保证去除其本地数据库依赖，请改为已核实的显式地址规则。本次不悄悄改变来源/目标语义。");
+    if (type !== "GEOSITE" && type !== "GEOIP") return text;
+    const m = /^\s*[^,]+,\s*([^,]+)(.*)$/.exec(text);
+    if (!m) v14Fail(owner + " Geo 规则格式无效：" + text);
+    return "RULE-SET," + ref(type === "GEOSITE" ? "domain" : "ip", m[1]) + m[2];
+  }
+  function convertValue(value, domain, owner) {
+    if (typeof value !== "string") v14Fail(owner + " 必须为字符串。");
+    if (/^(?:geosite|geoip):/i.test(value)) {
+      const type = value.slice(0, value.indexOf(":" )).toLowerCase();
+      if ((type === "geosite") !== domain) v14Fail(owner + " Geo 类型与字段不匹配。");
+      const tags = value.slice(value.indexOf(":") + 1).split(",");
+      return "rule-set:" + tags.map(t => ref(domain ? "domain" : "ip", t)).join(",");
+    }
+    return value;
+  }
+  function assertRef(name, owner, domain) {
+    if (!sets[name]) v14Fail(owner + " 缺失 rule-provider：" + name);
+    const b = sets[name].behavior;
+    if (domain === true && b === "ipcidr") v14Fail(owner + " 不能使用 IP-only 规则集：" + name);
+    if (domain === false && b === "domain") v14Fail(owner + " 不能使用 domain-only 规则集：" + name);
+  }
+  function verifyAtom(type, text, owner) {
+    if (["GEOSITE", "GEOIP", "SRC-GEOIP", "IP-ASN", "SRC-IP-ASN"].includes(type)) v14Fail(owner + " 仍有本地 Geo/ASN 数据依赖。");
+    if (type === "RULE-SET") assertRef(text.split(",")[1].trim(), owner);
+    return text;
+  }
+  function finish() {
+    // Main rules were emitted directly as RULE-SET; this also migrates retained
+    // legacy sub-rules, including nested logical conditions, in their old order.
+    config.rules = config.rules.map(r => v14WalkRule(r, convertAtom, "rules"));
+    for (const [name, rules] of Object.entries(config["sub-rules"] || {}))
+      config["sub-rules"][name] = rules.map(r => v14WalkRule(r, convertAtom, "sub-rules." + name));
+    const s = config.sniffer || {};
+    for (const key of ["force-domain", "skip-domain", "skip-src-address", "skip-dst-address"])
+      if (s[key] != null) s[key] = v14Strings(s[key], "sniffer." + key).map(x => convertValue(x, key.endsWith("domain"), "sniffer." + key));
+    for (const field of ["nameserver-policy", "proxy-server-nameserver-policy"]) if (config.dns[field]) {
+      const result = {};
+      for (const [key, value] of Object.entries(config.dns[field])) {
+        const newKey = convertValue(key, true, "dns." + field);
+        if (Object.prototype.hasOwnProperty.call(result, newKey)) v14Fail("DNS policy 迁移后键冲突：" + newKey);
+        result[newKey] = value;
+      }
+      config.dns[field] = result;
+    }
+    // Providers retained by an old sub-rule or sniffer may already be ours.
+    for (const [name, p] of Object.entries(sets)) {
+      const src = v14ManagedSource(name, p);
+      if (src) {
+        const selected = ref(src.kind, src.tag);
+        if (selected !== name) {
+          // Alias required by a preserved external reference: own cache filename.
+          sets[name] = {...sets[selected], path: "./ruleset/v12-managed/alias-" + v14Hash(name) + "-" + v14Hash(src.url) + "." + src.format};
+          generated.set(name, {...src, name, path: sets[name].path, proxy: downloadProxy});
+        }
+        continue;
+      }
+      if (p.behavior === "classical") {
+        if (p.type !== "inline") v14Fail("继承的外部 classical rule-provider " + name + " 内容在脚本执行时不可见，无法排除其中的 Geo/ASN 依赖。请先改为可检查的 inline 规则或 domain/ipcidr 规则源；原对象未静默删除。");
+        for (const item of v14Strings(p.payload, "rule-provider " + name + ".payload"))
+          v14WalkRule(item, (type, text, owner) => {
+            if (["GEOSITE", "GEOIP", "SRC-GEOIP", "IP-ASN", "SRC-IP-ASN", "RULE-SET", "SUB-RULE", "MATCH"].includes(type))
+              v14Fail(owner + " 含不能保真放入 classical provider 的 " + type + "；请移到 sub-rules 后再迁移，不能在 classical 内嵌 RULE-SET。");
+            return text;
+          }, "rule-provider " + name);
+      }
+    }
+    // DNS bootstrap and DIRECT remain untouched. Stop automatic local Geo file
+    // updates in the produced core configuration; this does not control UI geo
+    // downloads a client application might independently choose to perform.
+    config["geo-auto-update"] = false;
+    for (const k of ["geox-url", "geo-update-interval", "geodata-mode", "geodata-loader", "geosite-matcher"]) delete config[k];
+    for (const r of config.rules) v14WalkRule(r, verifyAtom, "rules");
+    for (const [name, rs] of Object.entries(config["sub-rules"] || {})) for (const r of rs) v14WalkRule(r, verifyAtom, "sub-rules." + name);
+    for (const [name, owner] of v14AuxRefs(config)) assertRef(name, owner, owner.includes("domain") ? true : false);
+    for (const field of ["nameserver-policy", "proxy-server-nameserver-policy"]) for (const key of Object.keys(config.dns[field] || {})) {
+      if (/^geosite:|^geoip:/i.test(key)) v14Fail("DNS 仍依赖 Geo 数据。");
+      if (/^rule-set:/i.test(key)) for (const name of key.slice(9).split(",")) assertRef(name.trim(), "dns." + field, true);
+    }
+    const paths = new Map();
+    for (const [name, p] of Object.entries(sets)) if (p.path) {
+      if (paths.has(p.path)) v14Fail("两个 rule-provider 共用缓存文件：" + paths.get(p.path) + " / " + name);
+      paths.set(p.path, name);
+    }
+    return Array.from(generated.values());
+  }
+  return {ref, finish};
+}

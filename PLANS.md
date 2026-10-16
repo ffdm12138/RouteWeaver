@@ -41,3 +41,7 @@ rc.3 已在用户客户端生效，但新的 Windows 媒体实测失败，取代
 ## 2026-10-16 · 公开覆写方案比较
 
 四套候选已固定提交和文件哈希并完成阅读，未执行/复制实现或改托管规则。比较报告在 `docs/reports/v14.3/公开覆写方案比较与改进取舍.md`。已补字段归属文档；后续按字节等价的共享模块抽取、真实 JS 引擎对照、最终配置诊断、观察记录分离顺序整理。生产 JS 尚未重构，核心集成/设备回退继续待做。
+
+## 2026-10-16 · rc.5 implementation
+
+Shared runtime extraction, seven single entries, both in-file modes, Windows Clash Verge adapter, capability table, allowlisted diagnostics, 432 real-engine comparisons and complete owned-core regression are implemented. The matched FlClash core/Helper was installed with explicit user authorization; narrow Windows TUN failure probes passed. Complete corresponding source, vendored dependencies and rollback materials accompany optional binary assets. Package/CI/release completion is recorded in the execution log; media/other-device/public-IPv6 acceptance remains separate.

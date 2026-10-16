@@ -16,9 +16,9 @@ current=read(project/'CURRENT_RELEASE.json')
 review=read(root/'metadata/balanced-review.json')
 assert current['version']==review['version']=='14.3'
 assert current['repairRevision']==review['revision']=='balanced-r1'
-assert current['status']==review['status']=='NETWORK_COMPAT_SOURCE_LOCAL_CORE_PASS_DEVICE_PENDING'
+assert current['status']==review['status']=='SINGLE_ENTRY_SHARED_RUNTIME_CORE_INTEGRATED_DEVICE_PENDING'
 assert current['domesticProtocolRevision']==review['domesticProtocolRevision']=='domestic-protocol-r1'
-assert current['clientDeployment'] is False
+assert current['clientDeployment']=='MAINTAINER_WINDOWS_FLCLASH_ONLY'
 assert sha(project/review['contract']['file'])==review['contract']['sha256']
 if not args.skip_history:
     assert sha(project/review['contract']['previousFile'])==review['contract']['previousSHA256']
@@ -152,4 +152,4 @@ if args.with_packages:
                 if package_manifest['kind']=='audit-evidence':
                     for evidence in mac['testEvidence'].values():
                         assert hashlib.sha256(z.read(evidence['file'])).hexdigest()==evidence['sha256']
-print(json.dumps({'status':'V14_3_LAYOUT_SOURCE_CORE_BINDINGS_PASS','history':'SKIPPED_HISTORY' if args.skip_history else 'PASS','historyFiles':history_files,'sourceContract':sha(project/'docs/需求.md'),'packagesChecked':args.with_packages,'deviceAcceptance':'NOT_RUN'}))
+print(json.dumps({'status':'V14_3_LAYOUT_SOURCE_CORE_BINDINGS_PASS','history':'SKIPPED_HISTORY' if args.skip_history else 'PASS','historyFiles':history_files,'sourceContract':sha(project/'docs/需求.md'),'packagesChecked':args.with_packages,'deviceAcceptance':'LIMITED_WINDOWS_TUN_ONLY'}))
