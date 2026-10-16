@@ -560,7 +560,7 @@
     },
     {
       "file": "tools/ipv4-local-adapter.js",
-      "sha256": "a242183927c036d8582fac7224e12a7a5e4debb9d7e5c7dba872c4b7bec89c69"
+      "sha256": "0dbcdd94e48af5b9b6dbd32207eb81fc98e77943e6788f9aeae110ad592e86d9"
     },
     {
       "file": "src/windows/v14.3.js",
@@ -588,23 +588,23 @@
     },
     {
       "file": "src/windows/v14.3-ipv4-local.js",
-      "sha256": "f5feaffcc84a6684392b4d6300412c2f0e708b6d663b837bf26a2fb25cdc0b2c"
+      "sha256": "14bc49fae89b1a12c25d67d5c2e3061657d2302affa12dcb41a7479c7ebe8e10"
     },
     {
       "file": "src/android/v14.3-android-ipv4-local.js",
-      "sha256": "a2844fbc96d8564baca13b248b75de5d60931b1d7088cbe02fd20c8327dbc081"
+      "sha256": "bb5d3d7d38369db5bfbc0409c52b3a45d2a312f2d4d677a28095cd5cf251e069"
     },
     {
       "file": "src/ios/v14.3-clashmi-ipv4-local.js",
-      "sha256": "e58b320ba7eb5f674dc6fc5c2f76aa0d161d65e1060765db107e423e8defbdaf"
+      "sha256": "221f6fad2c3f882845fff16f209dcb83c5cc735c0737b91a8c817babcc9ae6a4"
     },
     {
       "file": "src/macos/v14.3-macos-flclash-ipv4-local.js",
-      "sha256": "58f6e0ce10035e8fc223449b44b3bb74ce94bd9a10b6cc0db760479c473db96e"
+      "sha256": "560d4250a5ac6449cc27ab672e27a8c2e639a656e5106a5e9e928ba27f0947e7"
     },
     {
       "file": "src/macos/v14.3-macos-clashmi-ipv4-local.js",
-      "sha256": "ddf4a3b96a2bfe8f337a12bcb22c8fc69f441044b05f4c84cd990f1df516e7c4"
+      "sha256": "1add047e68fef0c33153865f8836de1d31c937fe2163882c11f8d88e405f414f"
     },
     {
       "file": "src/ios/v14.3-shadowrocket-ipv4-local.conf",
@@ -624,7 +624,7 @@
     },
     {
       "file": "tests/native-ipv4-recovery.cjs",
-      "sha256": "a04ef95c1132a475fcd5b04bf268ba733d0e6a5795ba818bd0e8279ad3a71f16"
+      "sha256": "880672c46476e933ee60add5aefc87dfe29cfca60e3bd2c37e0ffab94d034d57"
     },
     {
       "file": "tests/fixture.cjs",

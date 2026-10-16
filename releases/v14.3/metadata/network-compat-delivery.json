@@ -9,43 +9,43 @@
   "report": "docs/reports/v14.3/IPv6回退与兼容入口.md",
   "sourceManifest": {
     "file": "metadata/network-compat.json",
-    "sha256": "45f74b250b813550645d11cf0cd22c89820f1c5e71f0d243ca4b91bad4fb8e42"
+    "sha256": "9973da8887e66b7a5f2c8f37984fb1f202794821a55b8aa74ff31dab40ea302b"
   },
   "entries": [
     {
       "platform": "windows",
       "source": "src/windows/v14.3.js",
       "file": "src/windows/v14.3-ipv4-local.js",
-      "sha256": "f5feaffcc84a6684392b4d6300412c2f0e708b6d663b837bf26a2fb25cdc0b2c",
-      "bytes": 121376
+      "sha256": "14bc49fae89b1a12c25d67d5c2e3061657d2302affa12dcb41a7479c7ebe8e10",
+      "bytes": 121913
     },
     {
       "platform": "android",
       "source": "src/android/v14.3-android.js",
       "file": "src/android/v14.3-android-ipv4-local.js",
-      "sha256": "a2844fbc96d8564baca13b248b75de5d60931b1d7088cbe02fd20c8327dbc081",
-      "bytes": 121262
+      "sha256": "bb5d3d7d38369db5bfbc0409c52b3a45d2a312f2d4d677a28095cd5cf251e069",
+      "bytes": 121799
     },
     {
       "platform": "clashmi",
       "source": "src/ios/v14.3-clashmi-domestic-protocol-r1.js",
       "file": "src/ios/v14.3-clashmi-ipv4-local.js",
-      "sha256": "e58b320ba7eb5f674dc6fc5c2f76aa0d161d65e1060765db107e423e8defbdaf",
-      "bytes": 124156
+      "sha256": "221f6fad2c3f882845fff16f209dcb83c5cc735c0737b91a8c817babcc9ae6a4",
+      "bytes": 124693
     },
     {
       "platform": "macosFlClash",
       "source": "src/macos/v14.3-macos-flclash.js",
       "file": "src/macos/v14.3-macos-flclash-ipv4-local.js",
-      "sha256": "58f6e0ce10035e8fc223449b44b3bb74ce94bd9a10b6cc0db760479c473db96e",
-      "bytes": 123171
+      "sha256": "560d4250a5ac6449cc27ab672e27a8c2e639a656e5106a5e9e928ba27f0947e7",
+      "bytes": 123708
     },
     {
       "platform": "macosClashMi",
       "source": "src/macos/v14.3-macos-clashmi.js",
       "file": "src/macos/v14.3-macos-clashmi-ipv4-local.js",
-      "sha256": "ddf4a3b96a2bfe8f337a12bcb22c8fc69f441044b05f4c84cd990f1df516e7c4",
-      "bytes": 124158
+      "sha256": "1add047e68fef0c33153865f8836de1d31c937fe2163882c11f8d88e405f414f",
+      "bytes": 124695
     },
     {
       "platform": "shadowrocket",
@@ -58,12 +58,12 @@
   "testEvidence": {
     "network-compat-static": {
       "file": "validation/network-compat-static.json",
-      "sha256": "f570fc118c62dea8e07a51a04c6ca92d13e5c780b02ecbf39593271b993ae251",
+      "sha256": "0f9a3ba7d16b3725227ae476f7f23ba420da598fe51697bc99747c5fbf74b279",
       "status": "NETWORK_COMPAT_STATIC_PASS"
     },
     "network-compat-core": {
       "file": "validation/network-compat-core.json",
-      "sha256": "9d25993a848ee5c7bd73c7af96648ff1819fc2a3ee75f40e88ff1ff7c02e7a00",
+      "sha256": "fea95bf792ef7a8d038dcc08fef8eab4590a77660020d9b68911630ee7551825",
       "status": "NETWORK_COMPAT_LOCAL_CORE_PASS_DEVICE_PENDING"
     }
   },

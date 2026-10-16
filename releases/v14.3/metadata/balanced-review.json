@@ -223,7 +223,7 @@
   },
   "networkCompatibility": {
     "file": "metadata/network-compat-delivery.json",
-    "sha256": "d87ad584a1539a8f5bf550123b7fb6f65b5a3d896501d2139eb9ed162e138f0c",
+    "sha256": "145d52168687f02871b4702c7e29a4a66057aaa9cdb6ccd0b8d4d4e1f9e564f6",
     "revision": "ipv6-fallback-r2"
   }
 }

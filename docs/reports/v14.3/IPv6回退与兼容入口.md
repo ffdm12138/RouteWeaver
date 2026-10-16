@@ -25,7 +25,7 @@
 
 `validation/network-compat-core.json`：Mihomo v1.19.31、SHA256 `1fa8055e03596fc35167f70e9ecd1890517d38d960a39177445746a1b0defc2b`，101 项真实核心隔离检查。保留节点/provider、刷新、同节点地址族后备、远端拒绝无 DIRECT 等既有检查；对五种兼容输出解析、A/AAAA、SVCB/HTTPS/TXT、内部 DIRECT TCP/UDP IPv4、TLS/QUIC 域名恢复、原规则代理 IPv6 TCP/UDP、AAAA-only DIRECT 失败分别验证。
 
-两个受控反例只移除候选配置的上游过滤，仍保持 `dns.ipv6=false`：真实 IP DNS 例外返回 HTTPS IPv6 提示、核心内部 DIRECT 使用 AAAA。候选过滤后两个现象不再发生。另验证独立节点 DNS 仍支持显式 IPv6 节点、嗅探 skip-domain、生效的局域网名称排除，以及显式 IP 与公司 TLS 名称碰撞。显式 IP 对照在基础策略生成后、兼容适配之前注入 `127.0.0.1/32,DIRECT`，仅用于回环测试，不是新增生产直连范围。这些是隔离配置对照，不是旧设备重放。
+两个受控反例只移除候选配置的上游过滤，仍保持 `dns.ipv6=false`：真实 IP DNS 例外返回 HTTPS IPv6 提示、核心内部 DIRECT 使用 AAAA。候选过滤后两个现象不再发生。另验证独立节点 DNS 仍支持显式 IPv6 节点、嗅探 skip-domain、生效的局域网名称排除，完整 private 表中的 .internal 名称，以及显式 IP 与公司 TLS 名称碰撞。显式 IP 对照在基础策略生成后、兼容适配之前注入 `127.0.0.1/32,DIRECT`，仅用于回环测试，不是新增生产直连范围。这些是隔离配置对照，不是旧设备重放。
 
 实验所有拨号绑定回环；DNS 端点换为自有回环并固定实验 DNS 传输 DIRECT，保留生产过滤；保留生产主规则，关闭后台测速，向嗅探白名单追加自有临时端口。TLS ClientHello / QUIC Initial 到达 IPv4 回环服务后返回合成回执，未完成完整加密会话。无系统 TUN、真实订阅、公开 IPv6 或客户端合并验收。脚本和测试模块按哈希绑定，失败尝试留在本地实验目录，不计为通过。
 

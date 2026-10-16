@@ -2336,6 +2336,10 @@ function v14IPv4LocalResolver(value) {
 function main(input) {
   const prepared = v14Copy(input);
   if (v14Object(prepared.dns)) prepared.dns.ipv6 = true;
+  // This generated inline reference is restored below. Exclude it from the
+  // base adapter's inherited auxiliary dependency migration on later runs.
+  if (v14Object(prepared.sniffer) && prepared.sniffer["skip-domain"] != null)
+    prepared.sniffer["skip-domain"] = v14Strings(prepared.sniffer["skip-domain"], "sniffer.skip-domain").filter(value => value !== "rule-set:v14-domains-private");
   const config = v14NetworkModeBase(prepared);
   config.ipv6 = true;
   config.dns.ipv6 = false;
@@ -2364,7 +2368,8 @@ function main(input) {
   config.sniffer["skip-dst-address"] = [...new Set(v14Strings(config.sniffer["skip-dst-address"], "sniffer.skip-dst-address").concat(explicitIPs))];
   // Keep LAN names at their original addresses. Do not skip every private
   // address: known company domains must retain their existing priority.
-  config.sniffer["skip-domain"] = [...new Set(v14Strings(config.sniffer["skip-domain"], "sniffer.skip-domain").concat(V14.privateNames.map(name => "+." + name)))];
+  if (!config["rule-providers"]["v14-domains-private"]) v14Fail("Missing inline private domain classifier");
+  config.sniffer["skip-domain"] = [...new Set(v14Strings(config.sniffer["skip-domain"], "sniffer.skip-domain").concat(V14.privateNames.map(name => "+." + name), ["rule-set:v14-domains-private"]))];
   const marker = config["x-v14-generated"];
   marker.networkMode = "ipv4-local";
   marker.localIPv6Fallback = "IPv4-business-resolution-and-TLS-QUIC-hostname-recovery; original-egress-policy-preserved";
