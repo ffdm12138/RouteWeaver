@@ -5,7 +5,7 @@ const {once}=require('node:events'),vm=require('node:vm'),f=require('./fixture.c
 assert.ok(process.argv[2],'Provide Mihomo');
 const home=f.newExperiment('network-compat'),core=path.resolve(process.argv[2]);
 const manifest=JSON.parse(fs.readFileSync(f.local('metadata/network-compat.json'),'utf8'));
-function generate(file,input){const c=vm.createContext({console:{log(){}}});vm.runInContext(fs.readFileSync(f.local(file),'utf8'),c);return JSON.parse(JSON.stringify(c.main(input)));}
+function generate(file,input,explicitTestRule){const c=vm.createContext({console:{log(){}}});vm.runInContext(fs.readFileSync(f.local(file),'utf8'),c);if(explicitTestRule){const base=c.v14NetworkModeBase;assert.equal(typeof base,'function');c.v14NetworkModeBase=value=>{const config=base(value);config.rules.unshift(explicitTestRule);return config;};}return JSON.parse(JSON.stringify(c.main(input)));}
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 const secret=crypto.randomBytes(16).toString('hex');
 const report={status:'RUNNING',scope:'Actual generated node/provider defaults and five compatibility configs over owned TCP/UDP/DNS loopback. Business IPv4 resolution, DNS hint filtering, TLS/QUIC hostname recovery and original proxy IPv6 semantics. No native TUN, app retry, Shadowrocket or public IPv6 acceptance; no running client changes',coreVersion:cp.execFileSync(core,['-v'],{encoding:'utf8',windowsHide:true}).trim(),coreSHA256:crypto.createHash('sha256').update(fs.readFileSync(core)).digest('hex'),cases:[]};

@@ -2352,6 +2352,19 @@ function main(input) {
   // Without a hostname a literal IPv6 cannot be converted to an IPv4 target.
   for (const protocol of ["TLS", "QUIC"])
     config.sniffer.sniff[protocol]["override-destination"] = true;
+  // Preserve the destination identity needed by leading explicit IP rules.
+  // A hostname rewrite happens before rule evaluation in Mihomo. Without
+  // this exclusion it could erase a highest-priority manual IP exception.
+  const anchor = config.rules.indexOf("DOMAIN,v14-runtime-check.invalid,REJECT");
+  if (anchor < 0) v14Fail("Missing compatibility rule anchor");
+  const explicitIPs = config.rules.slice(0, anchor).flatMap(rule => {
+    const match = /^IP-CIDR6?,([^,]+),DIRECT(?:,no-resolve)?$/.exec(rule);
+    return match ? [match[1]] : [];
+  });
+  config.sniffer["skip-dst-address"] = [...new Set(v14Strings(config.sniffer["skip-dst-address"], "sniffer.skip-dst-address").concat(explicitIPs))];
+  // Keep LAN names at their original addresses. Do not skip every private
+  // address: known company domains must retain their existing priority.
+  config.sniffer["skip-domain"] = [...new Set(v14Strings(config.sniffer["skip-domain"], "sniffer.skip-domain").concat(V14.privateNames.map(name => "+." + name)))];
   const marker = config["x-v14-generated"];
   marker.networkMode = "ipv4-local";
   marker.localIPv6Fallback = "IPv4-business-resolution-and-TLS-QUIC-hostname-recovery; original-egress-policy-preserved";

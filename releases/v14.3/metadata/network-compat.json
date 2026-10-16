@@ -12,7 +12,7 @@
     },
     {
       "file": "tools/ipv4-local-adapter.js",
-      "sha256": "88796c4650f7ec18c6b2f55684bdec466b46972106d1c8ab845b20f55b9fe6f0"
+      "sha256": "a242183927c036d8582fac7224e12a7a5e4debb9d7e5c7dba872c4b7bec89c69"
     },
     {
       "file": "src/windows/v14.3.js",
@@ -44,36 +44,36 @@
       "platform": "windows",
       "source": "src/windows/v14.3.js",
       "file": "src/windows/v14.3-ipv4-local.js",
-      "sha256": "38228103d799670fe3e3c98fb002828a16225ad574a4fe97f4561c64b234a147",
-      "bytes": 120357
+      "sha256": "f5feaffcc84a6684392b4d6300412c2f0e708b6d663b837bf26a2fb25cdc0b2c",
+      "bytes": 121376
     },
     {
       "platform": "android",
       "source": "src/android/v14.3-android.js",
       "file": "src/android/v14.3-android-ipv4-local.js",
-      "sha256": "935af0a11636343c4353c41236529ca0e58297b7328a720a2f11994376690728",
-      "bytes": 120243
+      "sha256": "a2844fbc96d8564baca13b248b75de5d60931b1d7088cbe02fd20c8327dbc081",
+      "bytes": 121262
     },
     {
       "platform": "clashmi",
       "source": "src/ios/v14.3-clashmi-domestic-protocol-r1.js",
       "file": "src/ios/v14.3-clashmi-ipv4-local.js",
-      "sha256": "dcfb70d4ac811b20b13e7c6e08ab95c58c059e52dbde8c49b849c6f738555b50",
-      "bytes": 123137
+      "sha256": "e58b320ba7eb5f674dc6fc5c2f76aa0d161d65e1060765db107e423e8defbdaf",
+      "bytes": 124156
     },
     {
       "platform": "macosFlClash",
       "source": "src/macos/v14.3-macos-flclash.js",
       "file": "src/macos/v14.3-macos-flclash-ipv4-local.js",
-      "sha256": "c5febc2c4f80de13ef74b933aa95a0825f3b9fd6be4153b075dd110a8da56947",
-      "bytes": 122152
+      "sha256": "58f6e0ce10035e8fc223449b44b3bb74ce94bd9a10b6cc0db760479c473db96e",
+      "bytes": 123171
     },
     {
       "platform": "macosClashMi",
       "source": "src/macos/v14.3-macos-clashmi.js",
       "file": "src/macos/v14.3-macos-clashmi-ipv4-local.js",
-      "sha256": "63b200ba22ea3297aefffd0d7e883fcf74af836e2a46c7d8ce9f64c8b34710ca",
-      "bytes": 123139
+      "sha256": "ddf4a3b96a2bfe8f337a12bcb22c8fc69f441044b05f4c84cd990f1df516e7c4",
+      "bytes": 124158
     },
     {
       "platform": "shadowrocket",

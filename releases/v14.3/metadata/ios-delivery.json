@@ -20,11 +20,11 @@
     },
     "sourceManifest": {
       "file": "metadata/shadowrocket-lean.json",
-      "sha256": "98dd7dfba630df9e41b3f1e64d7e3a3e594095c4fef1d6adb0d327bfb0d43241"
+      "sha256": "874665e2c3bc5c5e481e966037664674451ffc0a23bd2f28420a6a34cd28be64"
     },
     "staticEvidence": {
       "file": "validation/shadowrocket-lean.json",
-      "sha256": "b21b043e5d3928aabc7058d02d15c6f36f90ba040fa1dc55d8775eda52695231",
+      "sha256": "28a5a7b1e9e08aec2dd72617a9e96f868497b31991c79c66d8be68aa635092f2",
       "status": "SHADOWROCKET_LEAN_STATIC_PASS_NATIVE_PENDING"
     },
     "fullBusinessDNS": "SELF_CONTAINED",

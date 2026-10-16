@@ -1,6 +1,6 @@
 # RouteWeaver 工作约定
 
-2026-10-16 当前追加 `ipv6-fallback-r2` / rc.3：保留双栈和六份可选文件。五种兼容 JS 补齐内部业务 DNS 的 AAAA/SVCB/HTTPS 过滤和 TLS/QUIC 域名目标重解析，撤掉 rc.2 宽泛 IPv6 拒绝，保持原分流及代理远端 IPv6。节点引导和显式地址族保留。Shadowrocket 仅提供原生 IPv4 偏好，不宣称等效回退。41 项静态、91 项隔离核心分别绑定；rc.2 媒体失败，rc.3 实机待复测，无自动物理网络探测。
+2026-10-16 当前追加 `ipv6-fallback-r2` / rc.3：保留双栈和六份可选文件。五种兼容 JS 补齐内部业务 DNS 的 AAAA/SVCB/HTTPS 过滤和 TLS/QUIC 域名目标重解析，撤掉 rc.2 宽泛 IPv6 拒绝，保持原分流及代理远端 IPv6。节点引导和显式地址族保留。Shadowrocket 仅提供原生 IPv4 偏好，不宣称等效回退。46 项静态、101 项隔离核心分别绑定；rc.2 媒体失败，rc.3 实机待复测，无自动物理网络探测。
 
 当前用户请求优先。根 README 是使用入口，`docs/需求.md` 是公开业务设计合同，`CURRENT_RELEASE.json` 指定六个当前入口。
 

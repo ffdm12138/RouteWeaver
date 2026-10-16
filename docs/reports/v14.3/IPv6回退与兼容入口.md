@@ -13,6 +13,7 @@
 - 撤掉所有兼容入口中新增的宽泛公网 IPv6 拒绝，恢复原规则优先级和手动选择。IPv4 节点传输可以继续承载 IPv6 TCP/UDP 目标。
 - 五种 JS 兼容入口在客户端 AAAA 过滤以外，为业务/直连上游增加 `disable-ipv6=true`、`disable-qtype-64=true`、`disable-qtype-65=true`。保留 DNS 策略组、节点引导解析、LAN/system 和显式 hosts。节点引导的显式 IPv6 选择仍可用。
 - 仅在兼容 JS 的既有 TLS/QUIC 嗅探端口启用目标域名重解析，让带可读域名的缓存/字面量连接能重新走 A 记录。HTTP 目标替换保持关闭，排除项保留。IPv4 字面量也可能按协议域名重新解析，模式影响已明示。
+- 协议重解析前排除最高优先级显式 IP 直连前缀及局域网名称，防止先清除目的 IP 而吞掉手动例外；保留用户排除项与公司域名优先，不对全部私网 IP 关闭识别。
 - 保留核心 IPv6、双栈 TUN 地址/路由和严格路由；不改变公共组手动选节点、公司优先、未知 UDP/STUN 保护、失败不回落 DIRECT 或固定规则源。
 - Shadowrocket 撤掉宽泛拒绝，只保留其原生 IPv4 偏好；明确它没有与 JS 等效的回退能力，原生仍未验收。
 
@@ -20,11 +21,11 @@
 
 ## 证据与范围
 
-`validation/network-compat-static.json`：41 项检查，包括五种 JS 三次幂等、节点/provider 默认与显式族、过滤前后 DNS 出口一致、节点引导保持、TLS/QUIC/HTTP 设置、兼容规则与标准规则逐字相同、TUN/代理/LAN 路由、Shadowrocket 能力限制。标准 JS 上限 128 KiB、标准生成 JSON 上限 192 KiB 保持；兼容 JSON 由于每个 DNS 上游显式过滤，单独采用 256 KiB 上限并检查。
+`validation/network-compat-static.json`：46 项检查，包括五种 JS 三次幂等、节点/provider 默认与显式族、过滤前后 DNS 出口一致、节点引导保持、TLS/QUIC/HTTP 设置、兼容规则与标准规则逐字相同、TUN/代理/LAN 路由、Shadowrocket 能力限制。标准 JS 上限 128 KiB、标准生成 JSON 上限 192 KiB 保持；兼容 JSON 由于每个 DNS 上游显式过滤，单独采用 256 KiB 上限并检查。
 
-`validation/network-compat-core.json`：Mihomo v1.19.31、SHA256 `1fa8055e03596fc35167f70e9ecd1890517d38d960a39177445746a1b0defc2b`，91 项真实核心隔离检查。保留节点/provider、刷新、同节点地址族后备、远端拒绝无 DIRECT 等既有检查；对五种兼容输出解析、A/AAAA、SVCB/HTTPS/TXT、内部 DIRECT TCP/UDP IPv4、TLS/QUIC 域名恢复、原规则代理 IPv6 TCP/UDP、AAAA-only DIRECT 失败分别验证。
+`validation/network-compat-core.json`：Mihomo v1.19.31、SHA256 `1fa8055e03596fc35167f70e9ecd1890517d38d960a39177445746a1b0defc2b`，101 项真实核心隔离检查。保留节点/provider、刷新、同节点地址族后备、远端拒绝无 DIRECT 等既有检查；对五种兼容输出解析、A/AAAA、SVCB/HTTPS/TXT、内部 DIRECT TCP/UDP IPv4、TLS/QUIC 域名恢复、原规则代理 IPv6 TCP/UDP、AAAA-only DIRECT 失败分别验证。
 
-两个受控反例只移除候选配置的上游过滤，仍保持 `dns.ipv6=false`：真实 IP DNS 例外返回 HTTPS IPv6 提示、核心内部 DIRECT 使用 AAAA。候选过滤后两个现象不再发生。另验证独立节点 DNS 仍支持显式 IPv6 节点，以及嗅探 skip-domain 生效。这些是隔离配置对照，不是旧设备重放。
+两个受控反例只移除候选配置的上游过滤，仍保持 `dns.ipv6=false`：真实 IP DNS 例外返回 HTTPS IPv6 提示、核心内部 DIRECT 使用 AAAA。候选过滤后两个现象不再发生。另验证独立节点 DNS 仍支持显式 IPv6 节点、嗅探 skip-domain、生效的局域网名称排除，以及显式 IP 与公司 TLS 名称碰撞。显式 IP 对照在基础策略生成后、兼容适配之前注入 `127.0.0.1/32,DIRECT`，仅用于回环测试，不是新增生产直连范围。这些是隔离配置对照，不是旧设备重放。
 
 实验所有拨号绑定回环；DNS 端点换为自有回环并固定实验 DNS 传输 DIRECT，保留生产过滤；保留生产主规则，关闭后台测速，向嗅探白名单追加自有临时端口。TLS ClientHello / QUIC Initial 到达 IPv4 回环服务后返回合成回执，未完成完整加密会话。无系统 TUN、真实订阅、公开 IPv6 或客户端合并验收。脚本和测试模块按哈希绑定，失败尝试留在本地实验目录，不计为通过。
 
