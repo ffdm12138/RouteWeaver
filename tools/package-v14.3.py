@@ -6,9 +6,10 @@ project=Path(__file__).resolve().parents[1]
 release=project/'releases/v14.3'
 dist=project/'dist/v14.3'
 work=project/'.work/packaging'
+HTTP_REPORT='docs/reports/v14.3/HTTP域名重解析修复.md'
 parser=argparse.ArgumentParser()
 parser.add_argument('--node',default='node')
-parser.add_argument('--skip-history',action='store_true',default=True,help='Build from a public clone without local historical archives.')
+parser.add_argument('--skip-history',action='store_true',help='Build from a public clone without local historical archives.')
 args=parser.parse_args()
 process_flags=getattr(subprocess,'CREATE_NO_WINDOW',0)
 sha=lambda b:hashlib.sha256(b).hexdigest()
@@ -31,16 +32,16 @@ def links(raw):
 
 def docs():
     names=['docs/需求.md','docs/README.md','docs/guides/ClashMi使用说明.md','docs/guides/使用说明.md','docs/maintenance/维护与更新.md','docs/reference/项目结构.md','docs/reports/v14.3/可靠精简与远程来源审核.md','docs/reports/v14.3/国内协议跟组与小火箭精简.md']
-    names.extend([network['guide'],network['report']])
+    names.extend([network['guide'],network['report'],HTTP_REPORT])
     if delivery:
         names.append('docs/reports/v14.3/iOS交付与覆写排查.md')
         names.append(delivery['report'])
-    names.append('docs/maintenance/开源与发布.md')
     if mac:
         names.extend([mac['guide'],mac['report']])
     result={n:(project/n).read_bytes() if n=='docs/需求.md' else links((project/n).read_bytes()) for n in names}
     result['docs/README.md']='# 当前包文档\n\n- [最终需求](需求.md)\n- [使用说明](guides/使用说明.md)\n- [Clash Mi 导入](guides/ClashMi使用说明.md)\n- [V14.3 可靠精简与来源审核](reports/v14.3/可靠精简与远程来源审核.md)\n- [维护方法](maintenance/维护与更新.md)\n\n历史版本正文仅在项目 docs/reports/ 和 archive/ 中保留，本包不把旧结论作为本版认证。\n'.encode('utf-8')
     result['docs/README.md']+='\n- [IPv4 兼容模式](guides/IPv4兼容模式.md)\n- [IPv6 回退修订](reports/v14.3/IPv6回退与兼容入口.md)\n'.encode('utf-8')
+    result['docs/README.md']+='\n- [HTTP 域名重解析修复与实机失败](reports/v14.3/HTTP域名重解析修复.md)\n'.encode('utf-8')
     if delivery:
         result['docs/README.md']+='\n- [iOS 入口恢复与覆写排查](reports/v14.3/iOS交付与覆写排查.md)\n'.encode('utf-8')
         result['docs/README.md']+='\n- [当前国内协议与小火箭精简](reports/v14.3/国内协议跟组与小火箭精简.md)\n'.encode('utf-8')
@@ -69,14 +70,17 @@ def credential_check(files,deploy=False):
     return {'status':'PASS','scope':'No private keys, executable/cache/nested ZIP, credential URLs or hard-coded credential literals in deployed entry source; audit uses public rules and synthetic fixtures only'}
 
 def write_zip(label,files):
+    assert HTTP_REPORT in files, 'Current HTTP repair report missing from '+label
     checks=credential_check(files,label=='deployable')
     package_manifest={'version':'14.3','revision':'balanced-r1','kind':label,'files':{n:sha(raw) for n,raw in sorted(files.items())},'credentials':checks,'deviceAcceptance':'NOT_RUN'}
+    package_manifest['vpsDirectRevision']=review['vpsDirect']['revision']
     if delivery:
         package_manifest['deliveryRevision']=delivery['revision']
         package_manifest['domesticProtocolRevision']=delivery['domesticProtocolRevision']
     if mac:
         package_manifest['macosRevision']=mac['revision']
     package_manifest['networkCompatibilityRevision']=network['revision']
+    package_manifest['networkCompatibilityRepair']=network['repairRevision']
     files=dict(files)
     files['PACKAGE_MANIFEST.json']=(json.dumps(package_manifest,ensure_ascii=False,indent=2)+'\n').encode('utf-8')
     target=dist/('v14.3-'+label+'.zip')
@@ -97,7 +101,7 @@ def write_zip(label,files):
     return target,result
 
 deploy={e['file']:(release/e['file']).read_bytes() for e in manifest['entries']}
-deploy.update({n:(release/n).read_bytes() for n in ['metadata/balanced-sources.json','metadata/balanced-review.json','metadata/source-comparison.json','data/rule-sources.lock.json','data/rules/embedded-policy.json']})
+deploy.update({n:(release/n).read_bytes() for n in ['metadata/balanced-sources.json','metadata/balanced-review.json','metadata/source-comparison.json','data/rule-sources.lock.json','data/rules/embedded-policy.json','data/rules/manual-direct-ip.json']})
 if delivery:
     sr=delivery['shadowrocket']
     for name in [sr['file'],sr['provenance']['file'],sr['sourceManifest']['file'],sr['staticEvidence']['file'],'metadata/ios-delivery.json']:
@@ -140,7 +144,7 @@ if mac:
         mac_files[name]=(release/name).read_bytes()
     for name in [mac['guide'],mac['report'],'docs/需求.md']:
         mac_files[name]=docs()[name]
-    for name in [network['guide'],network['report']]:
+    for name in [network['guide'],network['report'],HTTP_REPORT]:
         mac_files[name]=docs()[name]
     for name,raw in docs().items():
         if name in {'LICENSE','THIRD_PARTY_NOTICES.md'} or name.startswith('third_party/'):
