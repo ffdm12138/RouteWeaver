@@ -9,7 +9,7 @@ work=project/'.work/packaging'
 HTTP_REPORT='docs/reports/v14.3/HTTP域名重解析修复.md'
 parser=argparse.ArgumentParser()
 parser.add_argument('--node',default='node')
-parser.add_argument('--skip-history',action='store_true',help='Build from a public clone without local historical archives.')
+parser.add_argument('--skip-history',action='store_true',default=True,help='Build from a public clone without local historical archives.')
 args=parser.parse_args()
 process_flags=getattr(subprocess,'CREATE_NO_WINDOW',0)
 sha=lambda b:hashlib.sha256(b).hexdigest()
@@ -36,6 +36,7 @@ def docs():
     if delivery:
         names.append('docs/reports/v14.3/iOS交付与覆写排查.md')
         names.append(delivery['report'])
+    names.append('docs/maintenance/开源与发布.md')
     if mac:
         names.extend([mac['guide'],mac['report']])
     result={n:(project/n).read_bytes() if n=='docs/需求.md' else links((project/n).read_bytes()) for n in names}
@@ -73,7 +74,6 @@ def write_zip(label,files):
     assert HTTP_REPORT in files, 'Current HTTP repair report missing from '+label
     checks=credential_check(files,label=='deployable')
     package_manifest={'version':'14.3','revision':'balanced-r1','kind':label,'files':{n:sha(raw) for n,raw in sorted(files.items())},'credentials':checks,'deviceAcceptance':'NOT_RUN'}
-    package_manifest['vpsDirectRevision']=review['vpsDirect']['revision']
     if delivery:
         package_manifest['deliveryRevision']=delivery['revision']
         package_manifest['domesticProtocolRevision']=delivery['domesticProtocolRevision']
@@ -101,7 +101,7 @@ def write_zip(label,files):
     return target,result
 
 deploy={e['file']:(release/e['file']).read_bytes() for e in manifest['entries']}
-deploy.update({n:(release/n).read_bytes() for n in ['metadata/balanced-sources.json','metadata/balanced-review.json','metadata/source-comparison.json','data/rule-sources.lock.json','data/rules/embedded-policy.json','data/rules/manual-direct-ip.json']})
+deploy.update({n:(release/n).read_bytes() for n in ['metadata/balanced-sources.json','metadata/balanced-review.json','metadata/source-comparison.json','data/rule-sources.lock.json','data/rules/embedded-policy.json']})
 if delivery:
     sr=delivery['shadowrocket']
     for name in [sr['file'],sr['provenance']['file'],sr['sourceManifest']['file'],sr['staticEvidence']['file'],'metadata/ios-delivery.json']:
