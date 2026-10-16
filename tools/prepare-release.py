@@ -13,7 +13,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--tag', default='v14.3.0-rc.1')
+    parser.add_argument('--tag', default='v14.3.0-rc.2')
     args = parser.parse_args()
     if not re.fullmatch(r'v14\.3\.\d+(?:-rc\.\d+)?', args.tag):
         parser.error('Expected a v14.3.x or v14.3.x-rc.n tag.')
@@ -24,7 +24,7 @@ def main():
     current = read('CURRENT_RELEASE.json')
     receipt = read('dist/v14.3/package-verification.json')
     assert receipt['packageToolSHA256'] == digest(ROOT / 'tools/package-v14.3.py')
-    assets = [ROOT / name for name in current['entries'].values()]
+    assets = [ROOT / name for name in [*current['entries'].values(), *current['compatibilityEntries'].values()]]
     for package in receipt['packages']:
         path = ROOT / package['file']
         assert digest(path) == package['sha256']

@@ -62,7 +62,7 @@
     },
     {
       "file": "metadata/macos-sources.json",
-      "sha256": "8e4288576f6e70d221aae79edafe5c0d335340f08da8da3244e1d953303848d4"
+      "sha256": "e79f091e7fed9ab28c201c8cc7385df4a14b76570dcf4ebb8f25d22949870c4d"
     },
     {
       "file": "tools/build-macos.cjs",
@@ -74,7 +74,7 @@
     },
     {
       "file": "metadata/balanced-sources.json",
-      "sha256": "af5700a2b39d1013ec0086e41965a8d7a6455a1490fe378adb48002e5f5ec74b"
+      "sha256": "9f09113c843b7650af71513e532ac694b9e37321e36c1a380f6cabbdaeb37e9d"
     },
     {
       "file": "metadata/clashmi-compatibility.json",
@@ -82,19 +82,19 @@
     },
     {
       "file": "src/windows/v14.3.js",
-      "sha256": "7498c2044cbec1223a04be81b39d4a224f0e6c01249b19abfa81cb11786f28ea"
+      "sha256": "9a93c71ae3dbdd3dcb7e9bf45ef86e60d7ffdaac81cc17005ffc540d7f4fb02f"
     },
     {
       "file": "src/ios/v14.3-clashmi.js",
-      "sha256": "80e4168bfeba2ab7e9c278811abb7263761ba04c33a1d1f243d72211b8d84f3c"
+      "sha256": "09014cec334f287506e0f0afba590e143a526784954016244cf87042cda682ff"
     },
     {
       "file": "src/macos/v14.3-macos-flclash.js",
-      "sha256": "33228beb8181846059a1764da338c3ab1daadfec1c48a47faccf95bf002b165a"
+      "sha256": "c5eb299d23010f3dc2879968025fd6cd89f98e2ee9ba08332436a5f19398007e"
     },
     {
       "file": "src/macos/v14.3-macos-clashmi.js",
-      "sha256": "5cb0eaad24cf2d5e567aa91924a7736d6ee4a4a2c716fcee980b37efbb7f21bf"
+      "sha256": "59431f8e9255ec2c60e5fad684df29ab8e11c729bf7a5915322d598c550c664d"
     }
   ],
   "clientDeployment": false,

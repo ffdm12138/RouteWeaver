@@ -1489,6 +1489,28 @@ function v14KeepLegacy(config, retain, android) {
   for (const [name, owner] of v14AuxRefs(config)) setRef(name, owner);
   return keptSets;
 }
+// Address-family defaults affect the connection to a node, not its remote exit.
+const V14_NODE_FAMILY_DEFAULT = '(select(.["ip-version"] == null and ((.server // "") | contains(":")) == false and ((.server // "") | test("^[0-9.]+$")) == false) | .["ip-version"]) = "ipv4-prefer"';
+function v14NetworkDefaults(config) {
+  for (const node of config.proxies || []) {
+    if (v14Transport(node) && node["ip-version"] == null && typeof node.server === "string" &&
+        node.server && !node.server.includes(":") && !/^[0-9.]+$/.test(node.server)) node["ip-version"] = "ipv4-prefer";
+  }
+  for (const provider of Object.values(config["proxy-providers"] || {})) {
+    const override = provider.override;
+    const expressions = (override["override-expr"] || []).filter(x => x !== V14_NODE_FAMILY_DEFAULT);
+    // A user expression which removes or assigns the field is an explicit choice.
+    if (!expressions.some(x => /ip-version/i.test(x))) expressions.push(V14_NODE_FAMILY_DEFAULT);
+    if (expressions.length) override["override-expr"] = expressions;
+    else delete override["override-expr"];
+  }
+  const marker = config["x-v14-generated"];
+  marker.networkCompatibilityRevision = "ipv6-fallback-r1";
+  marker.networkMode = "dual-stack";
+  marker.nodeAddressFamilyDefault = "ipv4-prefer-unless-explicit-domain-nodes-only";
+  return config;
+}
+
 function v14ProviderGuard(provider, name, retain, warnings, upgradingFromV13) {
   // V13 appended two commands to every provider. Remove that exact suffix on
   // upgrade; never erase user-defined custom expressions or dialer references.
@@ -1499,7 +1521,7 @@ function v14ProviderGuard(provider, name, retain, warnings, upgradingFromV13) {
   // Hide and reject a mapping that a custom expression turns into a bypass.
   const guardName = '(select(.type == "direct" or .type == "compatible" or .type == "pass" or .type == "pass-rule" or .type == "dns" or .type == "rematch" or .type == "reject" or .type == "reject-drop" or .type == "reject-no-drop") | .name) = "@v14-nontransport:" + .name';
   const guardType = '(select((.name // "") | contains("@v14-nontransport:")) | .type) = "reject"';
-  const expressions = v14Strings(o["override-expr"], "provider " + name + ".override.override-expr").filter(e => e !== guardName && e !== guardType);
+  const expressions = v14Strings(o["override-expr"], "provider " + name + ".override.override-expr").filter(e => e !== guardName && e !== guardType && e !== V14_NODE_FAMILY_DEFAULT);
   if (upgradingFromV13 && expressions.length >= 2 &&
       expressions[expressions.length - 2] === formerBlock6 &&
       expressions[expressions.length - 1] === formerForce4) expressions.splice(-2);
@@ -2265,5 +2287,5 @@ function main(input) {
   if (typeof console !== "undefined" && console.log) console.log("[V14 Android] " + selectable.length + " 个可用节点、" + providerNames.length + " 个 provider、" + business.length + " 个可选业务组；公司规则优先；未分类公网 UDP 不直连，国内 TCP 由国内网站组选择，默认 DIRECT。");
   if (typeof console !== "undefined" && console.log) console.log("[V14 Android] " + ruleSources.length + " 个远程分类按 24h 更新；首次无缓存须可用节点。检查规则已加载，不要把生成成功当成下载成功。");
   if (typeof console !== "undefined" && console.log) for (const w of v14Unique(warnings)) console.log("[V14 检查范围] " + w);
-  return config;
+  return v14NetworkDefaults(config);
 }

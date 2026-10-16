@@ -16,8 +16,8 @@
     },
     {
       "file": "fixture.cjs",
-      "sha256": "6ae2802148f5035142861edf1c87bd1b153e8a6f1725d5f745de3156d6521045",
-      "source": "'use strict';\nconst fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto'),assert=require('node:assert/strict'),base=require(\"E:\\\\2\\\\覆写脚本\\\\releases\\\\v14.3\\\\tests\\\\fixture.cjs\");\nmodule.exports={...base,load:platform=>{const result=base.load(platform);for(const name of result.sources.keys())if(name.startsWith('v12r-domain-'))result.sources.set(name,[]);return result;},\nlocal:n=>n.startsWith('validation')?path.join(__dirname,n):base.local(n),newExperiment:kind=>fs.mkdtempSync(path.join(__dirname,kind+'-')),captureExperiment:(p,kind)=>base.captureExperiment(p,\"embedded-cold-\"+kind),\ninstallReviewedProviders:(config,dest)=>{const inputs=base.installReviewedProviders(config,dest),changed=[];for(const [name,p]of Object.entries(config['rule-providers']))if(name.startsWith('v12r-domain-')){const original=path.resolve(dest,p.path);assert.ok(original.startsWith(dest+path.sep));if(true)fs.unlinkSync(original);p.format='yaml';p.path+='-empty.yaml';const target=path.resolve(dest,p.path);assert.ok(target.startsWith(dest+path.sep));if(true){p.url='http://127.0.0.1:9/unreachable-domain-table.yaml';p.proxy='REJECT';}else fs.writeFileSync(target,'payload: []\\n');changed.push({name,condition:\"cold HTTP provider with missing cache and blocked loopback download\",cacheFilePresent:fs.existsSync(target)});}return inputs.filter(e=>!e.name.startsWith('v12r-domain-')).concat(changed);}};\n"
+      "sha256": "7bf3fb289a5bf6975c0a298e0a199bc6cb4edf40976022a0046e1d590f11940f",
+      "source": "'use strict';\nconst fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto'),assert=require('node:assert/strict'),base=require(\"E:\\\\2\\\\覆写脚本\\\\opensource\\\\RouteWeaver\\\\releases\\\\v14.3\\\\tests\\\\fixture.cjs\");\nmodule.exports={...base,load:platform=>{const result=base.load(platform);for(const name of result.sources.keys())if(name.startsWith('v12r-domain-'))result.sources.set(name,[]);return result;},\nlocal:n=>n.startsWith('validation')?path.join(__dirname,n):base.local(n),newExperiment:kind=>fs.mkdtempSync(path.join(__dirname,kind+'-')),captureExperiment:(p,kind)=>base.captureExperiment(p,\"embedded-cold-\"+kind),\ninstallReviewedProviders:(config,dest)=>{const inputs=base.installReviewedProviders(config,dest),changed=[];for(const [name,p]of Object.entries(config['rule-providers']))if(name.startsWith('v12r-domain-')){const original=path.resolve(dest,p.path);assert.ok(original.startsWith(dest+path.sep));if(true)fs.unlinkSync(original);p.format='yaml';p.path+='-empty.yaml';const target=path.resolve(dest,p.path);assert.ok(target.startsWith(dest+path.sep));if(true){p.url='http://127.0.0.1:9/unreachable-domain-table.yaml';p.proxy='REJECT';}else fs.writeFileSync(target,'payload: []\\n');changed.push({name,condition:\"cold HTTP provider with missing cache and blocked loopback download\",cacheFilePresent:fs.existsSync(target)});}return inputs.filter(e=>!e.name.startsWith('v12r-domain-')).concat(changed);}};\n"
     },
     {
       "file": "dns-relay-labels.cjs",
@@ -3667,11 +3667,11 @@
         "sourceFiles": [
           {
             "file": "src/windows/v14.3.js",
-            "sha256": "7498c2044cbec1223a04be81b39d4a224f0e6c01249b19abfa81cb11786f28ea"
+            "sha256": "9a93c71ae3dbdd3dcb7e9bf45ef86e60d7ffdaac81cc17005ffc540d7f4fb02f"
           },
           {
             "file": "src/android/v14.3-android.js",
-            "sha256": "2128a1019d0c6f719a9e9533a8bc6b1e61bb47277e96190c8fc22218a52d4f3f"
+            "sha256": "1b9b03160e11dd0196dd6ad9de649c7436b84991f30fcf7ad1beeacde88e8c14"
           },
           {
             "file": "tests/native-routing.cjs",
@@ -3869,7 +3869,7 @@
                     "host": "nflxext.com",
                     "type": 1,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55195,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55014,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -3887,7 +3887,7 @@
                     "host": "nflxext.com",
                     "type": 28,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55197,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55018,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -3899,13 +3899,13 @@
                 "group": "Netflix",
                 "selection": "高网速视频用",
                 "type": "A",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "nflxext.com",
                     "type": 1,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55199,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",55020,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -3917,13 +3917,13 @@
                 "group": "Netflix",
                 "selection": "高网速视频用",
                 "type": "AAAA",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "nflxext.com",
                     "type": 28,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55201,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",55022,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -3941,7 +3941,7 @@
                     "host": "nflxext.com",
                     "type": 1,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55202,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55025,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -3959,7 +3959,7 @@
                     "host": "nflxext.com",
                     "type": 28,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55203,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55026,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -3977,7 +3977,7 @@
                     "host": "disneyplus.com",
                     "type": 1,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55205,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55028,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -3995,7 +3995,7 @@
                     "host": "disneyplus.com",
                     "type": 28,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55207,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55030,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -4007,13 +4007,13 @@
                 "group": "Disney+",
                 "selection": "高网速视频用",
                 "type": "A",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "disneyplus.com",
                     "type": 1,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55209,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",55034,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -4025,13 +4025,13 @@
                 "group": "Disney+",
                 "selection": "高网速视频用",
                 "type": "AAAA",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "disneyplus.com",
                     "type": 28,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55211,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",55036,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -4049,7 +4049,7 @@
                     "host": "disneyplus.com",
                     "type": 1,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55212,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55037,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -4067,7 +4067,7 @@
                     "host": "disneyplus.com",
                     "type": 28,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55213,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55038,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -4085,7 +4085,7 @@
                     "host": "spotifycdn.com",
                     "type": 1,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55215,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55040,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -4103,7 +4103,7 @@
                     "host": "spotifycdn.com",
                     "type": 28,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55217,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55044,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -4115,13 +4115,13 @@
                 "group": "Spotify",
                 "selection": "高网速视频用",
                 "type": "A",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "spotifycdn.com",
                     "type": 1,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55219,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",55046,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -4133,13 +4133,13 @@
                 "group": "Spotify",
                 "selection": "高网速视频用",
                 "type": "AAAA",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "spotifycdn.com",
                     "type": 28,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55221,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",55048,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -4157,7 +4157,7 @@
                     "host": "spotifycdn.com",
                     "type": 1,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55222,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55049,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -4175,7 +4175,7 @@
                     "host": "spotifycdn.com",
                     "type": 28,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55223,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55051,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -4193,7 +4193,7 @@
                     "host": "cdn-telegram.org",
                     "type": 1,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55225,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55053,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -4211,7 +4211,7 @@
                     "host": "cdn-telegram.org",
                     "type": 28,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55227,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55055,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -4223,13 +4223,13 @@
                 "group": "Telegram",
                 "selection": "高网速视频用",
                 "type": "A",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "cdn-telegram.org",
                     "type": 1,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55229,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",55057,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -4241,13 +4241,13 @@
                 "group": "Telegram",
                 "selection": "高网速视频用",
                 "type": "AAAA",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "cdn-telegram.org",
                     "type": 28,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55231,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",55059,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -4265,7 +4265,7 @@
                     "host": "cdn-telegram.org",
                     "type": 1,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55232,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55060,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -4283,7 +4283,7 @@
                     "host": "cdn-telegram.org",
                     "type": 28,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55233,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55061,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -4301,7 +4301,7 @@
                     "host": "discord.media",
                     "type": 1,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55235,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55063,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -4319,7 +4319,7 @@
                     "host": "discord.media",
                     "type": 28,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55237,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55065,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -4331,13 +4331,13 @@
                 "group": "Discord",
                 "selection": "高网速视频用",
                 "type": "A",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "discord.media",
                     "type": 1,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55239,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",55067,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -4349,13 +4349,13 @@
                 "group": "Discord",
                 "selection": "高网速视频用",
                 "type": "AAAA",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "discord.media",
                     "type": 28,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55241,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",55069,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -4373,7 +4373,7 @@
                     "host": "discord.media",
                     "type": 1,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55242,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55070,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -4391,7 +4391,7 @@
                     "host": "discord.media",
                     "type": 28,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55243,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55071,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -4409,7 +4409,7 @@
                     "host": "tiktokd.net",
                     "type": 1,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55245,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55073,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -4427,7 +4427,7 @@
                     "host": "tiktokd.net",
                     "type": 28,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55247,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55075,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -4439,13 +4439,13 @@
                 "group": "TikTok",
                 "selection": "高网速视频用",
                 "type": "A",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "tiktokd.net",
                     "type": 1,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55249,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",55077,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -4457,13 +4457,13 @@
                 "group": "TikTok",
                 "selection": "高网速视频用",
                 "type": "AAAA",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "tiktokd.net",
                     "type": 28,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55251,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",55079,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -4481,7 +4481,7 @@
                     "host": "tiktokd.net",
                     "type": 1,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55252,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55080,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -4499,7 +4499,7 @@
                     "host": "tiktokd.net",
                     "type": 28,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55253,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55081,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -4517,7 +4517,7 @@
                     "host": "tweetdeck.com",
                     "type": 1,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55255,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55083,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -4535,7 +4535,7 @@
                     "host": "tweetdeck.com",
                     "type": 28,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55257,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55085,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -4547,13 +4547,13 @@
                 "group": "Twitter",
                 "selection": "高网速视频用",
                 "type": "A",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "tweetdeck.com",
                     "type": 1,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55259,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",55087,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -4565,13 +4565,13 @@
                 "group": "Twitter",
                 "selection": "高网速视频用",
                 "type": "AAAA",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "tweetdeck.com",
                     "type": 28,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55261,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",55089,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -4589,7 +4589,7 @@
                     "host": "tweetdeck.com",
                     "type": 1,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55262,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55090,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -4607,7 +4607,7 @@
                     "host": "tweetdeck.com",
                     "type": 28,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55263,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55091,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -4625,7 +4625,7 @@
                     "host": "wa.me",
                     "type": 1,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55265,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55094,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -4643,7 +4643,7 @@
                     "host": "wa.me",
                     "type": 28,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55267,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55097,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -4655,13 +4655,13 @@
                 "group": "Meta 服务",
                 "selection": "高网速视频用",
                 "type": "A",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "wa.me",
                     "type": 1,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55269,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",55099,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -4673,13 +4673,13 @@
                 "group": "Meta 服务",
                 "selection": "高网速视频用",
                 "type": "AAAA",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "wa.me",
                     "type": 28,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55271,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",55101,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -4697,7 +4697,7 @@
                     "host": "wa.me",
                     "type": 1,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55272,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55102,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -4715,7 +4715,7 @@
                     "host": "wa.me",
                     "type": 28,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55273,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55103,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -4733,7 +4733,7 @@
                     "host": "steam-chat.com",
                     "type": 1,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55275,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55107,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -4751,7 +4751,7 @@
                     "host": "steam-chat.com",
                     "type": 28,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55277,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55109,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -4763,13 +4763,13 @@
                 "group": "Steam",
                 "selection": "高网速视频用",
                 "type": "A",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "steam-chat.com",
                     "type": 1,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55279,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",55111,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -4781,13 +4781,13 @@
                 "group": "Steam",
                 "selection": "高网速视频用",
                 "type": "AAAA",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "steam-chat.com",
                     "type": 28,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55281,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",55113,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -4805,7 +4805,7 @@
                     "host": "steam-chat.com",
                     "type": 1,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55282,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55114,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -4823,7 +4823,7 @@
                     "host": "steam-chat.com",
                     "type": 28,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55283,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55117,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -4841,7 +4841,7 @@
                     "host": "fortnite.com",
                     "type": 1,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55285,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55119,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -4859,7 +4859,7 @@
                     "host": "fortnite.com",
                     "type": 28,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55287,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55121,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -4871,13 +4871,13 @@
                 "group": "Epic Games",
                 "selection": "高网速视频用",
                 "type": "A",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "fortnite.com",
                     "type": 1,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55289,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",55123,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -4889,13 +4889,13 @@
                 "group": "Epic Games",
                 "selection": "高网速视频用",
                 "type": "AAAA",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "fortnite.com",
                     "type": 28,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55291,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",55125,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -4913,7 +4913,7 @@
                     "host": "fortnite.com",
                     "type": 1,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55292,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55128,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -4931,7 +4931,7 @@
                     "host": "fortnite.com",
                     "type": 28,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55293,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55129,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -4949,7 +4949,7 @@
                     "host": "apple-dns.cn",
                     "type": 1,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55295,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55131,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -4967,7 +4967,7 @@
                     "host": "apple-dns.cn",
                     "type": 28,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55297,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55133,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -4979,13 +4979,13 @@
                 "group": "苹果国际",
                 "selection": "高网速视频用",
                 "type": "A",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "apple-dns.cn",
                     "type": 1,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55299,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",55135,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -4997,13 +4997,13 @@
                 "group": "苹果国际",
                 "selection": "高网速视频用",
                 "type": "AAAA",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "apple-dns.cn",
                     "type": 28,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55301,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",55139,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -5021,7 +5021,7 @@
                     "host": "apple-dns.cn",
                     "type": 1,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55302,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55140,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -5039,7 +5039,7 @@
                     "host": "apple-dns.cn",
                     "type": 28,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55303,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55141,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -5057,7 +5057,7 @@
                     "host": "b23.tv",
                     "type": 1,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55305,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55143,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -5075,7 +5075,7 @@
                     "host": "b23.tv",
                     "type": 28,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55307,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55145,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -5087,13 +5087,13 @@
                 "group": "哔哩国际",
                 "selection": "高网速视频用",
                 "type": "A",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "b23.tv",
                     "type": 1,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55309,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",55147,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -5105,13 +5105,13 @@
                 "group": "哔哩国际",
                 "selection": "高网速视频用",
                 "type": "AAAA",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "b23.tv",
                     "type": 28,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55311,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",55150,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -5129,7 +5129,7 @@
                     "host": "b23.tv",
                     "type": 1,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55312,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55151,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -5147,7 +5147,7 @@
                     "host": "b23.tv",
                     "type": 28,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55313,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55152,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -5165,7 +5165,7 @@
                     "host": "api.openai.com",
                     "type": 1,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55315,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55154,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -5183,7 +5183,7 @@
                     "host": "api.openai.com",
                     "type": 28,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55317,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55156,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -5195,13 +5195,13 @@
                 "group": "OpenAI 服务",
                 "selection": "高网速视频用",
                 "type": "A",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "api.openai.com",
                     "type": 1,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55319,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",55158,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -5213,13 +5213,13 @@
                 "group": "OpenAI 服务",
                 "selection": "高网速视频用",
                 "type": "AAAA",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "api.openai.com",
                     "type": 28,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55321,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",55160,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -5237,7 +5237,7 @@
                     "host": "api.openai.com",
                     "type": 1,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55322,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55161,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -5255,7 +5255,7 @@
                     "host": "api.openai.com",
                     "type": 28,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55323,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55162,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -5273,7 +5273,7 @@
                     "host": "cafe.github.com",
                     "type": 1,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55325,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55164,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -5291,7 +5291,7 @@
                     "host": "cafe.github.com",
                     "type": 28,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55327,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55166,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -5303,13 +5303,13 @@
                 "group": "微软生态",
                 "selection": "高网速视频用",
                 "type": "A",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "cafe.github.com",
                     "type": 1,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55329,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",55168,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -5321,13 +5321,13 @@
                 "group": "微软生态",
                 "selection": "高网速视频用",
                 "type": "AAAA",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "cafe.github.com",
                     "type": 28,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55331,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",55170,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -5345,7 +5345,7 @@
                     "host": "cafe.github.com",
                     "type": 1,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55332,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55171,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -5363,7 +5363,7 @@
                     "host": "cafe.github.com",
                     "type": 28,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55333,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55172,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -5381,7 +5381,7 @@
                     "host": "10010.com",
                     "type": 1,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55335,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55174,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -5399,7 +5399,7 @@
                     "host": "10010.com",
                     "type": 28,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55337,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55176,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -5411,13 +5411,13 @@
                 "group": "国内网站",
                 "selection": "高网速视频用",
                 "type": "A",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "10010.com",
                     "type": 1,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55339,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",55178,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -5429,13 +5429,13 @@
                 "group": "国内网站",
                 "selection": "高网速视频用",
                 "type": "AAAA",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "10010.com",
                     "type": 28,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55341,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",55180,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -5453,7 +5453,7 @@
                     "host": "10010.com",
                     "type": 1,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55342,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55181,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -5471,7 +5471,7 @@
                     "host": "10010.com",
                     "type": 28,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55343,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55182,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -5550,8 +5550,8 @@
               "status": "NOT_RUN_DOMAIN_DNS_FOCUS"
             },
             "ipv4NodeDial": "PASS",
-            "ipv6NodeDial": "NOT_RUN_ENVIRONMENT",
-            "directIPv6ResolverDial": "NOT_RUN_ENVIRONMENT"
+            "ipv6NodeDial": "PASS",
+            "directIPv6ResolverDial": "PASS"
           },
           {
             "platform": "android",
@@ -5716,7 +5716,7 @@
                     "host": "nflxext.com",
                     "type": 1,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55368,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55219,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -5734,7 +5734,7 @@
                     "host": "nflxext.com",
                     "type": 28,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55370,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55221,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -5746,13 +5746,13 @@
                 "group": "Netflix",
                 "selection": "高网速视频用",
                 "type": "A",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "nflxext.com",
                     "type": 1,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55372,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",55223,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -5764,13 +5764,13 @@
                 "group": "Netflix",
                 "selection": "高网速视频用",
                 "type": "AAAA",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "nflxext.com",
                     "type": 28,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55374,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",55225,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -5788,7 +5788,7 @@
                     "host": "nflxext.com",
                     "type": 1,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55375,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55226,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -5806,7 +5806,7 @@
                     "host": "nflxext.com",
                     "type": 28,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55376,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55227,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -5824,7 +5824,7 @@
                     "host": "disneyplus.com",
                     "type": 1,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55378,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55229,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -5842,7 +5842,7 @@
                     "host": "disneyplus.com",
                     "type": 28,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55380,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55231,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -5854,13 +5854,13 @@
                 "group": "Disney+",
                 "selection": "高网速视频用",
                 "type": "A",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "disneyplus.com",
                     "type": 1,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55382,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",55233,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -5872,13 +5872,13 @@
                 "group": "Disney+",
                 "selection": "高网速视频用",
                 "type": "AAAA",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "disneyplus.com",
                     "type": 28,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55384,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",55237,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -5896,7 +5896,7 @@
                     "host": "disneyplus.com",
                     "type": 1,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55385,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55238,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -5914,7 +5914,7 @@
                     "host": "disneyplus.com",
                     "type": 28,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55386,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55239,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -5932,7 +5932,7 @@
                     "host": "spotifycdn.com",
                     "type": 1,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55388,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55241,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -5950,7 +5950,7 @@
                     "host": "spotifycdn.com",
                     "type": 28,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55390,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55243,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -5962,13 +5962,13 @@
                 "group": "Spotify",
                 "selection": "高网速视频用",
                 "type": "A",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "spotifycdn.com",
                     "type": 1,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55392,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",55246,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -5980,13 +5980,13 @@
                 "group": "Spotify",
                 "selection": "高网速视频用",
                 "type": "AAAA",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "spotifycdn.com",
                     "type": 28,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55394,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",55249,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -6004,7 +6004,7 @@
                     "host": "spotifycdn.com",
                     "type": 1,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55395,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55250,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -6022,7 +6022,7 @@
                     "host": "spotifycdn.com",
                     "type": 28,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55396,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55251,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -6040,7 +6040,7 @@
                     "host": "cdn-telegram.org",
                     "type": 1,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55398,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55253,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -6058,7 +6058,7 @@
                     "host": "cdn-telegram.org",
                     "type": 28,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55400,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55255,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -6070,13 +6070,13 @@
                 "group": "Telegram",
                 "selection": "高网速视频用",
                 "type": "A",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "cdn-telegram.org",
                     "type": 1,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55402,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",55258,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -6088,13 +6088,13 @@
                 "group": "Telegram",
                 "selection": "高网速视频用",
                 "type": "AAAA",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "cdn-telegram.org",
                     "type": 28,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55404,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",55261,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -6112,7 +6112,7 @@
                     "host": "cdn-telegram.org",
                     "type": 1,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55405,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55262,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -6130,7 +6130,7 @@
                     "host": "cdn-telegram.org",
                     "type": 28,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55406,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55263,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -6148,7 +6148,7 @@
                     "host": "discord.media",
                     "type": 1,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55408,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55265,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -6166,7 +6166,7 @@
                     "host": "discord.media",
                     "type": 28,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55410,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55269,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -6178,13 +6178,13 @@
                 "group": "Discord",
                 "selection": "高网速视频用",
                 "type": "A",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "discord.media",
                     "type": 1,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55412,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",55271,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -6196,13 +6196,13 @@
                 "group": "Discord",
                 "selection": "高网速视频用",
                 "type": "AAAA",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "discord.media",
                     "type": 28,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55414,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",55273,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -6220,7 +6220,7 @@
                     "host": "discord.media",
                     "type": 1,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55415,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55278,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -6238,7 +6238,7 @@
                     "host": "discord.media",
                     "type": 28,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55416,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55351,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -6256,7 +6256,7 @@
                     "host": "tiktokd.net",
                     "type": 1,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55418,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55356,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -6274,7 +6274,7 @@
                     "host": "tiktokd.net",
                     "type": 28,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55420,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55358,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -6286,13 +6286,13 @@
                 "group": "TikTok",
                 "selection": "高网速视频用",
                 "type": "A",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "tiktokd.net",
                     "type": 1,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55422,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",55362,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -6304,13 +6304,13 @@
                 "group": "TikTok",
                 "selection": "高网速视频用",
                 "type": "AAAA",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "tiktokd.net",
                     "type": 28,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55424,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",55365,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -6328,7 +6328,7 @@
                     "host": "tiktokd.net",
                     "type": 1,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55425,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55366,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -6346,7 +6346,7 @@
                     "host": "tiktokd.net",
                     "type": 28,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55426,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55369,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -6364,7 +6364,7 @@
                     "host": "tweetdeck.com",
                     "type": 1,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55428,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55372,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -6382,7 +6382,7 @@
                     "host": "tweetdeck.com",
                     "type": 28,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55430,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55376,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -6394,13 +6394,13 @@
                 "group": "Twitter",
                 "selection": "高网速视频用",
                 "type": "A",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "tweetdeck.com",
                     "type": 1,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55432,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",55380,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -6412,13 +6412,13 @@
                 "group": "Twitter",
                 "selection": "高网速视频用",
                 "type": "AAAA",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "tweetdeck.com",
                     "type": 28,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55434,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",55384,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -6436,7 +6436,7 @@
                     "host": "tweetdeck.com",
                     "type": 1,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55435,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55387,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -6454,7 +6454,7 @@
                     "host": "tweetdeck.com",
                     "type": 28,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55436,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55388,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -6472,7 +6472,7 @@
                     "host": "wa.me",
                     "type": 1,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55438,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55392,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -6490,7 +6490,7 @@
                     "host": "wa.me",
                     "type": 28,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55440,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55396,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -6502,13 +6502,13 @@
                 "group": "Meta 服务",
                 "selection": "高网速视频用",
                 "type": "A",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "wa.me",
                     "type": 1,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55442,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",55398,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -6520,13 +6520,13 @@
                 "group": "Meta 服务",
                 "selection": "高网速视频用",
                 "type": "AAAA",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "wa.me",
                     "type": 28,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55444,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",55404,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -6544,7 +6544,7 @@
                     "host": "wa.me",
                     "type": 1,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55445,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55405,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -6562,7 +6562,7 @@
                     "host": "wa.me",
                     "type": 28,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55446,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55407,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -6580,7 +6580,7 @@
                     "host": "steam-chat.com",
                     "type": 1,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55448,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55412,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -6598,7 +6598,7 @@
                     "host": "steam-chat.com",
                     "type": 28,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55450,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55417,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -6610,13 +6610,13 @@
                 "group": "Steam",
                 "selection": "高网速视频用",
                 "type": "A",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "steam-chat.com",
                     "type": 1,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55452,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",55426,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -6628,13 +6628,13 @@
                 "group": "Steam",
                 "selection": "高网速视频用",
                 "type": "AAAA",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "steam-chat.com",
                     "type": 28,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55454,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",55428,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -6652,7 +6652,7 @@
                     "host": "steam-chat.com",
                     "type": 1,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55455,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55429,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -6670,7 +6670,7 @@
                     "host": "steam-chat.com",
                     "type": 28,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55456,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55432,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -6688,7 +6688,7 @@
                     "host": "fortnite.com",
                     "type": 1,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55458,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55638,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -6706,7 +6706,7 @@
                     "host": "fortnite.com",
                     "type": 28,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55460,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55895,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -6718,13 +6718,13 @@
                 "group": "Epic Games",
                 "selection": "高网速视频用",
                 "type": "A",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "fortnite.com",
                     "type": 1,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55462,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",55898,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -6736,13 +6736,13 @@
                 "group": "Epic Games",
                 "selection": "高网速视频用",
                 "type": "AAAA",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "fortnite.com",
                     "type": 28,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55464,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",55900,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -6760,7 +6760,7 @@
                     "host": "fortnite.com",
                     "type": 1,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55465,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55901,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -6778,7 +6778,7 @@
                     "host": "fortnite.com",
                     "type": 28,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55466,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55907,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -6796,7 +6796,7 @@
                     "host": "apple-dns.cn",
                     "type": 1,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55468,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55910,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -6814,7 +6814,7 @@
                     "host": "apple-dns.cn",
                     "type": 28,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55470,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55934,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -6826,13 +6826,13 @@
                 "group": "苹果国际",
                 "selection": "高网速视频用",
                 "type": "A",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "apple-dns.cn",
                     "type": 1,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55472,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",55937,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -6844,13 +6844,13 @@
                 "group": "苹果国际",
                 "selection": "高网速视频用",
                 "type": "AAAA",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "apple-dns.cn",
                     "type": 28,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55474,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",55952,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -6868,7 +6868,7 @@
                     "host": "apple-dns.cn",
                     "type": 1,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55475,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55953,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -6886,7 +6886,7 @@
                     "host": "apple-dns.cn",
                     "type": 28,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55476,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55954,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -6904,7 +6904,7 @@
                     "host": "b23.tv",
                     "type": 1,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55478,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55959,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -6922,7 +6922,7 @@
                     "host": "b23.tv",
                     "type": 28,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55480,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55966,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -6934,13 +6934,13 @@
                 "group": "哔哩国际",
                 "selection": "高网速视频用",
                 "type": "A",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "b23.tv",
                     "type": 1,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55482,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",55971,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -6952,13 +6952,13 @@
                 "group": "哔哩国际",
                 "selection": "高网速视频用",
                 "type": "AAAA",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "b23.tv",
                     "type": 28,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55484,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",55975,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -6976,7 +6976,7 @@
                     "host": "b23.tv",
                     "type": 1,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55485,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55978,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -6994,7 +6994,7 @@
                     "host": "b23.tv",
                     "type": 28,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55486,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55980,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -7012,7 +7012,7 @@
                     "host": "api.openai.com",
                     "type": 1,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55488,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55988,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -7030,7 +7030,7 @@
                     "host": "api.openai.com",
                     "type": 28,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55490,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55992,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -7042,13 +7042,13 @@
                 "group": "OpenAI 服务",
                 "selection": "高网速视频用",
                 "type": "A",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "api.openai.com",
                     "type": 1,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55492,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",55995,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -7060,13 +7060,13 @@
                 "group": "OpenAI 服务",
                 "selection": "高网速视频用",
                 "type": "AAAA",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "api.openai.com",
                     "type": 28,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55494,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",55997,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -7084,7 +7084,7 @@
                     "host": "api.openai.com",
                     "type": 1,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55495,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",55998,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -7102,7 +7102,7 @@
                     "host": "api.openai.com",
                     "type": 28,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55496,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",56001,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -7120,7 +7120,7 @@
                     "host": "cafe.github.com",
                     "type": 1,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55498,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",56005,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -7138,7 +7138,7 @@
                     "host": "cafe.github.com",
                     "type": 28,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55500,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",56008,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -7150,13 +7150,13 @@
                 "group": "微软生态",
                 "selection": "高网速视频用",
                 "type": "A",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "cafe.github.com",
                     "type": 1,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55502,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",56012,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -7168,13 +7168,13 @@
                 "group": "微软生态",
                 "selection": "高网速视频用",
                 "type": "AAAA",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "cafe.github.com",
                     "type": 28,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55504,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",56015,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -7192,7 +7192,7 @@
                     "host": "cafe.github.com",
                     "type": 1,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55505,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",56016,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -7210,7 +7210,7 @@
                     "host": "cafe.github.com",
                     "type": 28,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55506,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",56017,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -7228,7 +7228,7 @@
                     "host": "10010.com",
                     "type": 1,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55508,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",56019,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -7246,7 +7246,7 @@
                     "host": "10010.com",
                     "type": 28,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55510,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",56021,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -7258,13 +7258,13 @@
                 "group": "国内网站",
                 "selection": "高网速视频用",
                 "type": "A",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "10010.com",
                     "type": 1,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55512,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",56024,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -7276,13 +7276,13 @@
                 "group": "国内网站",
                 "selection": "高网速视频用",
                 "type": "AAAA",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "10010.com",
                     "type": 28,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55514,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",56027,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -7300,7 +7300,7 @@
                     "host": "10010.com",
                     "type": 1,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55515,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",56029,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -7318,7 +7318,7 @@
                     "host": "10010.com",
                     "type": 28,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55516,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",56031,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -7397,8 +7397,8 @@
               "status": "NOT_RUN_DOMAIN_DNS_FOCUS"
             },
             "ipv4NodeDial": "PASS",
-            "ipv6NodeDial": "NOT_RUN_ENVIRONMENT",
-            "directIPv6ResolverDial": "NOT_RUN_ENVIRONMENT"
+            "ipv6NodeDial": "PASS",
+            "directIPv6ResolverDial": "PASS"
           },
           {
             "platform": "clashmi",
@@ -7563,7 +7563,7 @@
                     "host": "nflxext.com",
                     "type": 1,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55541,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",56093,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -7581,7 +7581,7 @@
                     "host": "nflxext.com",
                     "type": 28,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55543,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",56095,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -7593,13 +7593,13 @@
                 "group": "Netflix",
                 "selection": "高网速视频用",
                 "type": "A",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "nflxext.com",
                     "type": 1,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55545,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",56099,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -7611,13 +7611,13 @@
                 "group": "Netflix",
                 "selection": "高网速视频用",
                 "type": "AAAA",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "nflxext.com",
                     "type": 28,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55547,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",56103,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -7635,7 +7635,7 @@
                     "host": "nflxext.com",
                     "type": 1,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55548,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",56104,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -7653,7 +7653,7 @@
                     "host": "nflxext.com",
                     "type": 28,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55549,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",56105,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -7671,7 +7671,7 @@
                     "host": "disneyplus.com",
                     "type": 1,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55551,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",56109,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -7689,7 +7689,7 @@
                     "host": "disneyplus.com",
                     "type": 28,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55553,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",56113,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -7701,13 +7701,13 @@
                 "group": "Disney+",
                 "selection": "高网速视频用",
                 "type": "A",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "disneyplus.com",
                     "type": 1,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55555,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",56115,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -7719,13 +7719,13 @@
                 "group": "Disney+",
                 "selection": "高网速视频用",
                 "type": "AAAA",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "disneyplus.com",
                     "type": 28,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55557,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",56117,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -7743,7 +7743,7 @@
                     "host": "disneyplus.com",
                     "type": 1,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55558,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",56118,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -7761,7 +7761,7 @@
                     "host": "disneyplus.com",
                     "type": 28,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55559,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",56119,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -7779,7 +7779,7 @@
                     "host": "spotifycdn.com",
                     "type": 1,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55561,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",56123,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -7797,7 +7797,7 @@
                     "host": "spotifycdn.com",
                     "type": 28,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55563,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",56125,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -7809,13 +7809,13 @@
                 "group": "Spotify",
                 "selection": "高网速视频用",
                 "type": "A",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "spotifycdn.com",
                     "type": 1,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55565,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",56127,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -7827,13 +7827,13 @@
                 "group": "Spotify",
                 "selection": "高网速视频用",
                 "type": "AAAA",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "spotifycdn.com",
                     "type": 28,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55567,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",56131,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -7851,7 +7851,7 @@
                     "host": "spotifycdn.com",
                     "type": 1,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55568,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",56136,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -7869,7 +7869,7 @@
                     "host": "spotifycdn.com",
                     "type": 28,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55569,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",56137,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -7887,7 +7887,7 @@
                     "host": "cdn-telegram.org",
                     "type": 1,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55571,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",56141,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -7905,7 +7905,7 @@
                     "host": "cdn-telegram.org",
                     "type": 28,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55573,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",56145,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -7917,13 +7917,13 @@
                 "group": "Telegram",
                 "selection": "高网速视频用",
                 "type": "A",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "cdn-telegram.org",
                     "type": 1,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55575,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",56149,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -7935,13 +7935,13 @@
                 "group": "Telegram",
                 "selection": "高网速视频用",
                 "type": "AAAA",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "cdn-telegram.org",
                     "type": 28,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55577,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",56155,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -7959,7 +7959,7 @@
                     "host": "cdn-telegram.org",
                     "type": 1,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55578,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",56156,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -7977,7 +7977,7 @@
                     "host": "cdn-telegram.org",
                     "type": 28,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55579,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",56157,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -7995,7 +7995,7 @@
                     "host": "discord.media",
                     "type": 1,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55581,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",56161,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -8013,7 +8013,7 @@
                     "host": "discord.media",
                     "type": 28,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55583,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",56167,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -8025,13 +8025,13 @@
                 "group": "Discord",
                 "selection": "高网速视频用",
                 "type": "A",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "discord.media",
                     "type": 1,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55585,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",56171,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -8043,13 +8043,13 @@
                 "group": "Discord",
                 "selection": "高网速视频用",
                 "type": "AAAA",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "discord.media",
                     "type": 28,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55587,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",56208,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -8067,7 +8067,7 @@
                     "host": "discord.media",
                     "type": 1,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55588,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",56209,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -8085,7 +8085,7 @@
                     "host": "discord.media",
                     "type": 28,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55589,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",56213,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -8103,7 +8103,7 @@
                     "host": "tiktokd.net",
                     "type": 1,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55591,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",56220,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -8121,7 +8121,7 @@
                     "host": "tiktokd.net",
                     "type": 28,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55593,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",56233,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -8133,13 +8133,13 @@
                 "group": "TikTok",
                 "selection": "高网速视频用",
                 "type": "A",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "tiktokd.net",
                     "type": 1,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55595,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",56236,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -8151,13 +8151,13 @@
                 "group": "TikTok",
                 "selection": "高网速视频用",
                 "type": "AAAA",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "tiktokd.net",
                     "type": 28,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55597,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",56239,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -8175,7 +8175,7 @@
                     "host": "tiktokd.net",
                     "type": 1,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55598,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",56241,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -8193,7 +8193,7 @@
                     "host": "tiktokd.net",
                     "type": 28,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55599,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",56245,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -8211,7 +8211,7 @@
                     "host": "tweetdeck.com",
                     "type": 1,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55601,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",56247,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -8229,7 +8229,7 @@
                     "host": "tweetdeck.com",
                     "type": 28,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55603,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",56249,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -8241,13 +8241,13 @@
                 "group": "Twitter",
                 "selection": "高网速视频用",
                 "type": "A",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "tweetdeck.com",
                     "type": 1,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55605,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",56251,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -8259,13 +8259,13 @@
                 "group": "Twitter",
                 "selection": "高网速视频用",
                 "type": "AAAA",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "tweetdeck.com",
                     "type": 28,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55607,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",56253,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -8283,7 +8283,7 @@
                     "host": "tweetdeck.com",
                     "type": 1,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55608,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",56255,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -8301,7 +8301,7 @@
                     "host": "tweetdeck.com",
                     "type": 28,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55609,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",56273,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -8319,7 +8319,7 @@
                     "host": "wa.me",
                     "type": 1,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55611,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",56299,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -8337,7 +8337,7 @@
                     "host": "wa.me",
                     "type": 28,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55613,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",56306,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -8349,13 +8349,13 @@
                 "group": "Meta 服务",
                 "selection": "高网速视频用",
                 "type": "A",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "wa.me",
                     "type": 1,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55615,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",56318,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -8367,13 +8367,13 @@
                 "group": "Meta 服务",
                 "selection": "高网速视频用",
                 "type": "AAAA",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "wa.me",
                     "type": 28,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55617,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",56340,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -8391,7 +8391,7 @@
                     "host": "wa.me",
                     "type": 1,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55618,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",56344,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -8409,7 +8409,7 @@
                     "host": "wa.me",
                     "type": 28,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55619,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",56346,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -8427,7 +8427,7 @@
                     "host": "steam-chat.com",
                     "type": 1,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55621,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",56355,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -8445,7 +8445,7 @@
                     "host": "steam-chat.com",
                     "type": 28,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55623,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",56364,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -8457,13 +8457,13 @@
                 "group": "Steam",
                 "selection": "高网速视频用",
                 "type": "A",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "steam-chat.com",
                     "type": 1,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55625,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",56372,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -8475,13 +8475,13 @@
                 "group": "Steam",
                 "selection": "高网速视频用",
                 "type": "AAAA",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "steam-chat.com",
                     "type": 28,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55627,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",56377,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -8499,7 +8499,7 @@
                     "host": "steam-chat.com",
                     "type": 1,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55628,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",56382,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -8517,7 +8517,7 @@
                     "host": "steam-chat.com",
                     "type": 28,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55629,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",56401,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -8535,7 +8535,7 @@
                     "host": "fortnite.com",
                     "type": 1,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55631,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",56409,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -8553,7 +8553,7 @@
                     "host": "fortnite.com",
                     "type": 28,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55633,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",56413,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -8565,13 +8565,13 @@
                 "group": "Epic Games",
                 "selection": "高网速视频用",
                 "type": "A",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "fortnite.com",
                     "type": 1,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55635,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",56425,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -8583,13 +8583,13 @@
                 "group": "Epic Games",
                 "selection": "高网速视频用",
                 "type": "AAAA",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "fortnite.com",
                     "type": 28,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55637,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",56432,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -8607,7 +8607,7 @@
                     "host": "fortnite.com",
                     "type": 1,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55638,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",56441,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -8625,7 +8625,7 @@
                     "host": "fortnite.com",
                     "type": 28,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55639,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",56442,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -8643,7 +8643,7 @@
                     "host": "apple-dns.cn",
                     "type": 1,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55641,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",56451,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -8661,7 +8661,7 @@
                     "host": "apple-dns.cn",
                     "type": 28,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55643,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",56465,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -8673,13 +8673,13 @@
                 "group": "苹果国际",
                 "selection": "高网速视频用",
                 "type": "A",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "apple-dns.cn",
                     "type": 1,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55645,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",56471,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -8691,13 +8691,13 @@
                 "group": "苹果国际",
                 "selection": "高网速视频用",
                 "type": "AAAA",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "apple-dns.cn",
                     "type": 28,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55647,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",56476,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -8715,7 +8715,7 @@
                     "host": "apple-dns.cn",
                     "type": 1,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55648,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",56479,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -8733,7 +8733,7 @@
                     "host": "apple-dns.cn",
                     "type": 28,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55649,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",56480,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -8751,7 +8751,7 @@
                     "host": "b23.tv",
                     "type": 1,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55651,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",56494,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -8769,7 +8769,7 @@
                     "host": "b23.tv",
                     "type": 28,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55653,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",56513,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -8781,13 +8781,13 @@
                 "group": "哔哩国际",
                 "selection": "高网速视频用",
                 "type": "A",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "b23.tv",
                     "type": 1,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55655,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",56518,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -8799,13 +8799,13 @@
                 "group": "哔哩国际",
                 "selection": "高网速视频用",
                 "type": "AAAA",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "b23.tv",
                     "type": 28,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55657,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",56523,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -8823,7 +8823,7 @@
                     "host": "b23.tv",
                     "type": 1,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55658,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",56527,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -8841,7 +8841,7 @@
                     "host": "b23.tv",
                     "type": 28,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55659,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",56535,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -8859,7 +8859,7 @@
                     "host": "api.openai.com",
                     "type": 1,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55661,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",56539,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -8877,7 +8877,7 @@
                     "host": "api.openai.com",
                     "type": 28,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55663,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",56906,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -8889,13 +8889,13 @@
                 "group": "OpenAI 服务",
                 "selection": "高网速视频用",
                 "type": "A",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "api.openai.com",
                     "type": 1,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55665,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",56933,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -8907,13 +8907,13 @@
                 "group": "OpenAI 服务",
                 "selection": "高网速视频用",
                 "type": "AAAA",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "api.openai.com",
                     "type": 28,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55667,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",56962,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -8931,7 +8931,7 @@
                     "host": "api.openai.com",
                     "type": 1,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55668,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",57179,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -8949,7 +8949,7 @@
                     "host": "api.openai.com",
                     "type": 28,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55669,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",57235,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -8967,7 +8967,7 @@
                     "host": "cafe.github.com",
                     "type": 1,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55671,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",57314,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -8985,7 +8985,7 @@
                     "host": "cafe.github.com",
                     "type": 28,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55673,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",57342,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -8997,13 +8997,13 @@
                 "group": "微软生态",
                 "selection": "高网速视频用",
                 "type": "A",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "cafe.github.com",
                     "type": 1,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55675,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",57438,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -9015,13 +9015,13 @@
                 "group": "微软生态",
                 "selection": "高网速视频用",
                 "type": "AAAA",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "cafe.github.com",
                     "type": 28,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55677,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",57624,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -9039,7 +9039,7 @@
                     "host": "cafe.github.com",
                     "type": 1,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55678,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",57628,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -9057,7 +9057,7 @@
                     "host": "cafe.github.com",
                     "type": 28,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55679,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",57632,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -9075,7 +9075,7 @@
                     "host": "10010.com",
                     "type": 1,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55681,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",57635,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -9093,7 +9093,7 @@
                     "host": "10010.com",
                     "type": 28,
                     "via": "AI-v4",
-                    "tuple": "[\"127.0.0.1\",55683,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",57645,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -9105,13 +9105,13 @@
                 "group": "国内网站",
                 "selection": "高网速视频用",
                 "type": "A",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "10010.com",
                     "type": 1,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55685,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",57648,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -9123,13 +9123,13 @@
                 "group": "国内网站",
                 "selection": "高网速视频用",
                 "type": "AAAA",
-                "expected": "Video-v4",
+                "expected": "Video-v6",
                 "observed": [
                   {
                     "host": "10010.com",
                     "type": 28,
-                    "via": "Video-v4",
-                    "tuple": "[\"127.0.0.1\",55687,\"127.0.0.1\",55179]",
+                    "via": "Video-v6",
+                    "tuple": "[\"127.0.0.1\",57651,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -9147,7 +9147,7 @@
                     "host": "10010.com",
                     "type": 1,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55688,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",57657,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -9165,7 +9165,7 @@
                     "host": "10010.com",
                     "type": 28,
                     "via": "DIRECT",
-                    "tuple": "[\"127.0.0.1\",55689,\"127.0.0.1\",55179]",
+                    "tuple": "[\"127.0.0.1\",57658,\"127.0.0.1\",54992]",
                     "resolverAddress": "127.0.0.1",
                     "protocol": "DoT"
                   }
@@ -9244,15 +9244,13 @@
               "status": "NOT_RUN_DOMAIN_DNS_FOCUS"
             },
             "ipv4NodeDial": "PASS",
-            "ipv6NodeDial": "NOT_RUN_ENVIRONMENT",
-            "directIPv6ResolverDial": "NOT_RUN_ENVIRONMENT"
+            "ipv6NodeDial": "PASS",
+            "directIPv6ResolverDial": "PASS"
           }
         ],
         "coreVersion": "Mihomo Meta v1.19.31 windows amd64 with go1.26.8 Mon Sep 14 13:20:49 UTC 2026\nUse tags: with_gvisor",
         "ipv6Preflight": {
-          "status": "NOT_RUN_ENVIRONMENT",
-          "code": "EACCES",
-          "message": "connect EACCES ::1:55174"
+          "status": "PASS"
         },
         "providerCondition": {
           "kind": "COLD_HTTP_DOWNLOAD_FAILURE",
@@ -9316,11 +9314,11 @@
         "sourceFiles": [
           {
             "file": "src/windows/v14.3.js",
-            "sha256": "7498c2044cbec1223a04be81b39d4a224f0e6c01249b19abfa81cb11786f28ea"
+            "sha256": "9a93c71ae3dbdd3dcb7e9bf45ef86e60d7ffdaac81cc17005ffc540d7f4fb02f"
           },
           {
             "file": "src/android/v14.3-android.js",
-            "sha256": "2128a1019d0c6f719a9e9533a8bc6b1e61bb47277e96190c8fc22218a52d4f3f"
+            "sha256": "1b9b03160e11dd0196dd6ad9de649c7436b84991f30fcf7ad1beeacde88e8c14"
           },
           {
             "file": "tests/native-dns-egress.cjs",
@@ -9377,64 +9375,64 @@
     },
     {
       "file": "src/windows/v14.3.js",
-      "sha256": "7498c2044cbec1223a04be81b39d4a224f0e6c01249b19abfa81cb11786f28ea"
+      "sha256": "9a93c71ae3dbdd3dcb7e9bf45ef86e60d7ffdaac81cc17005ffc540d7f4fb02f"
     },
     {
       "file": "src/android/v14.3-android.js",
-      "sha256": "2128a1019d0c6f719a9e9533a8bc6b1e61bb47277e96190c8fc22218a52d4f3f"
+      "sha256": "1b9b03160e11dd0196dd6ad9de649c7436b84991f30fcf7ad1beeacde88e8c14"
     },
     {
       "file": "src/ios/v14.3-clashmi.js",
-      "sha256": "80e4168bfeba2ab7e9c278811abb7263761ba04c33a1d1f243d72211b8d84f3c"
+      "sha256": "09014cec334f287506e0f0afba590e143a526784954016244cf87042cda682ff"
     }
   ],
   "downloadErrorEvidence": [
     {
-      "file": "native-dns-2VMFSY/android-runtime.log",
+      "file": "native-dns-DRowTn/android-runtime.log",
       "lines": [
-        "time=\"2026-10-13T23:38:10.060330000+08:00\" level=info msg=\"[TCP] mihomo --> 127.0.0.1:9 using REJECT\"",
-        "time=\"2026-10-13T23:38:10.060860000+08:00\" level=info msg=\"[TCP] mihomo --> 127.0.0.1:9 using REJECT\"",
-        "time=\"2026-10-13T23:38:10.061377900+08:00\" level=info msg=\"[TCP] mihomo --> 127.0.0.1:9 using REJECT\""
+        "time=\"2026-10-16T15:02:44.678865300+08:00\" level=info msg=\"[TCP] mihomo --> 127.0.0.1:9 using REJECT\"",
+        "time=\"2026-10-16T15:02:44.679394900+08:00\" level=error msg=\"initial rule provider v12r-domain-steam error: Get \\\"http://127.0.0.1:9/unreachable-domain-table.yaml\\\": EOF\"",
+        "time=\"2026-10-16T15:02:44.679930200+08:00\" level=info msg=\"[TCP] mihomo --> 127.0.0.1:9 using REJECT\""
       ]
     },
     {
-      "file": "native-dns-2VMFSY/clashmi-runtime.log",
+      "file": "native-dns-DRowTn/clashmi-runtime.log",
       "lines": [
-        "time=\"2026-10-13T23:38:10.609213000+08:00\" level=info msg=\"[TCP] mihomo --> 127.0.0.1:9 using REJECT\"",
-        "time=\"2026-10-13T23:38:10.608645900+08:00\" level=info msg=\"[TCP] mihomo --> 127.0.0.1:9 using REJECT\"",
-        "time=\"2026-10-13T23:38:10.609744600+08:00\" level=info msg=\"[TCP] mihomo --> 127.0.0.1:9 using REJECT\""
+        "time=\"2026-10-16T15:02:45.566688300+08:00\" level=info msg=\"[TCP] mihomo --> 127.0.0.1:9 using REJECT\"",
+        "time=\"2026-10-16T15:02:45.567223400+08:00\" level=info msg=\"[TCP] mihomo --> 127.0.0.1:9 using REJECT\"",
+        "time=\"2026-10-16T15:02:45.567987200+08:00\" level=info msg=\"[TCP] mihomo --> 127.0.0.1:9 using REJECT\""
       ]
     },
     {
-      "file": "native-dns-2VMFSY/desktop-runtime.log",
+      "file": "native-dns-DRowTn/desktop-runtime.log",
       "lines": [
-        "time=\"2026-10-13T23:38:09.465116900+08:00\" level=info msg=\"[TCP] mihomo --> 127.0.0.1:9 using REJECT\"",
-        "time=\"2026-10-13T23:38:09.465116900+08:00\" level=info msg=\"[TCP] mihomo --> 127.0.0.1:9 using REJECT\"",
-        "time=\"2026-10-13T23:38:09.465116900+08:00\" level=info msg=\"[TCP] mihomo --> 127.0.0.1:9 using REJECT\""
+        "time=\"2026-10-16T15:02:43.820996700+08:00\" level=info msg=\"[TCP] mihomo --> 127.0.0.1:9 using REJECT\"",
+        "time=\"2026-10-16T15:02:43.820996700+08:00\" level=info msg=\"[TCP] mihomo --> 127.0.0.1:9 using REJECT\"",
+        "time=\"2026-10-16T15:02:43.821562100+08:00\" level=error msg=\"initial rule provider v12r-domain-apple_at_cn error: Get \\\"http://127.0.0.1:9/unreachable-domain-table.yaml\\\": EOF\""
       ]
     },
     {
-      "file": "native-routing-qn1dyu/android-runtime.log",
+      "file": "native-routing-Hwkx3e/android-runtime.log",
       "lines": [
-        "time=\"2026-10-13T23:37:59.346761600+08:00\" level=info msg=\"[TCP] mihomo --> 127.0.0.1:9 using REJECT\"",
-        "time=\"2026-10-13T23:37:59.346761600+08:00\" level=info msg=\"[TCP] mihomo --> 127.0.0.1:9 using REJECT\"",
-        "time=\"2026-10-13T23:37:59.346761600+08:00\" level=info msg=\"[TCP] mihomo --> 127.0.0.1:9 using REJECT\""
+        "time=\"2026-10-16T15:02:32.309864200+08:00\" level=info msg=\"[TCP] mihomo --> 127.0.0.1:9 using REJECT\"",
+        "time=\"2026-10-16T15:02:32.309864200+08:00\" level=info msg=\"[TCP] mihomo --> 127.0.0.1:9 using REJECT\"",
+        "time=\"2026-10-16T15:02:32.309864200+08:00\" level=info msg=\"[TCP] mihomo --> 127.0.0.1:9 using REJECT\""
       ]
     },
     {
-      "file": "native-routing-qn1dyu/clashmi-runtime.log",
+      "file": "native-routing-Hwkx3e/clashmi-runtime.log",
       "lines": [
-        "time=\"2026-10-13T23:38:04.310968700+08:00\" level=info msg=\"[TCP] mihomo --> 127.0.0.1:9 using REJECT\"",
-        "time=\"2026-10-13T23:38:04.310968700+08:00\" level=info msg=\"[TCP] mihomo --> 127.0.0.1:9 using REJECT\"",
-        "time=\"2026-10-13T23:38:04.310968700+08:00\" level=error msg=\"initial rule provider v12r-domain-disney error: Get \\\"http://127.0.0.1:9/unreachable-domain-table.yaml\\\": EOF\""
+        "time=\"2026-10-16T15:02:37.820208700+08:00\" level=info msg=\"[TCP] mihomo --> 127.0.0.1:9 using REJECT\"",
+        "time=\"2026-10-16T15:02:37.821267400+08:00\" level=info msg=\"[TCP] mihomo --> 127.0.0.1:9 using REJECT\"",
+        "time=\"2026-10-16T15:02:37.821267400+08:00\" level=info msg=\"[TCP] mihomo --> 127.0.0.1:9 using REJECT\""
       ]
     },
     {
-      "file": "native-routing-qn1dyu/desktop-runtime.log",
+      "file": "native-routing-Hwkx3e/desktop-runtime.log",
       "lines": [
-        "time=\"2026-10-13T23:37:54.304824800+08:00\" level=info msg=\"[TCP] mihomo --> 127.0.0.1:9 using REJECT\"",
-        "time=\"2026-10-13T23:37:54.304824800+08:00\" level=info msg=\"[TCP] mihomo --> 127.0.0.1:9 using REJECT\"",
-        "time=\"2026-10-13T23:37:54.305833100+08:00\" level=error msg=\"initial rule provider v12r-domain-netflix error: Get \\\"http://127.0.0.1:9/unreachable-domain-table.yaml\\\": EOF\""
+        "time=\"2026-10-16T15:02:26.151689700+08:00\" level=info msg=\"[TCP] mihomo --> 127.0.0.1:9 using REJECT\"",
+        "time=\"2026-10-16T15:02:26.151689700+08:00\" level=info msg=\"[TCP] mihomo --> 127.0.0.1:9 using REJECT\"",
+        "time=\"2026-10-16T15:02:26.152211500+08:00\" level=info msg=\"[TCP] mihomo --> 127.0.0.1:9 using REJECT\""
       ]
     }
   ],

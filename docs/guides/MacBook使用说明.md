@@ -1,11 +1,13 @@
 # V14.3 MacBook 使用说明
 
+当前 `ipv6-fallback-r1` 同时提供标准双栈与独立 [IPv4 兼容模式](IPv4兼容模式.md)。本页原有 `dns.ipv6: true` 步骤适用于标准入口；兼容入口应为核心 IPv6 开启、`dns.ipv6: false`、无 IPv6 Fake-IP 池，并保持完整 TUN/VPN 接管。不要把两份覆写叠加使用。
+
 Mac 适配修订 **macos-r1**，业务合同仍为 **domestic-protocol-r1**。Apple Silicon 和 Intel 使用同一份 JS，区别由客户端及其核心二进制处理。
 
 | 客户端 | 导入文件 | 字节 |
 |---|---|---:|
-| FlClash macOS | [v14.3-macos-flclash.js](../../releases/v14.3/src/macos/v14.3-macos-flclash.js) | 117,852 |
-| Clash Mi macOS | [v14.3-macos-clashmi.js](../../releases/v14.3/src/macos/v14.3-macos-clashmi.js) | 118,839 |
+| FlClash macOS | [v14.3-macos-flclash.js](../../releases/v14.3/src/macos/v14.3-macos-flclash.js) | 119,250 |
+| Clash Mi macOS | [v14.3-macos-clashmi.js](../../releases/v14.3/src/macos/v14.3-macos-clashmi.js) | 120,237 |
 
 两份文件独立运行，不读取项目目录；保留自己的节点订阅，将对应 JS 用作该订阅的覆写。标准合成输入生成 26 个项目策略组。公司、共享服务、国内网站、DNS/UDP 跟组、API 真实地址解析、IPv6、手动节点选择及固定远程来源均与现版一致。
 

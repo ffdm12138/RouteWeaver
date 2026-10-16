@@ -1,52 +1,52 @@
 {
   "version": "14.3",
-  "date": "2026-10-14",
+  "date": "2026-10-16",
   "revision": "balanced-r1",
   "domesticProtocolRevision": "domestic-protocol-r1",
-  "status": "DOMESTIC_PROTOCOL_SOURCE_LOCAL_CORE_PASS_DEVICE_PENDING",
+  "status": "NETWORK_COMPAT_SOURCE_LOCAL_CORE_PASS_DEVICE_PENDING",
   "authorization": "User selected reviewed domestic TCP/UDP/DNS following 国内网站 and self-contained Shadowrocket business DNS; unknown IP-only UDP and generic STUN remain protected.",
   "contract": {
     "file": "docs/需求.md",
-    "sha256": "59d0b918703246646286d17123d6689689471163fa0bf61f088ebe2a0cb09ee6",
+    "sha256": "0807af272aeab1b4d223ced5c0442f0593629f725420146974715bc5c2e4763f",
     "originalBytesPreserved": false,
     "previousFile": "archive/v14.3-before-domestic-protocol-r1-20261013/docs/需求.md",
     "previousSHA256": "5f0086ba18755d8c10c96e2b255e3d7e456afdf4f9c0e6e7f36b7926110859f0",
-    "change": "User-authorized requirement 11 domestic domain protocol and DNS affinity; earlier contract preserved in archive. Additive Mac adapters retain this business contract and have separate delivery evidence."
+    "change": "User-authorized requirement 11 domestic domain protocol and DNS affinity; earlier contract preserved in archive. Additive Mac adapters retain this business contract and have separate delivery evidence. User-authorized requirement 12: separate local/node/target address families; dual-stack plus explicit IPv4-local mode, no automatic physical-network probe."
   },
   "sourceManifest": {
     "file": "metadata/balanced-sources.json",
-    "sha256": "af5700a2b39d1013ec0086e41965a8d7a6455a1490fe378adb48002e5f5ec74b"
+    "sha256": "9f09113c843b7650af71513e532ac694b9e37321e36c1a380f6cabbdaeb37e9d"
   },
   "entries": [
     {
       "file": "src/windows/v14.3.js",
-      "sha256": "7498c2044cbec1223a04be81b39d4a224f0e6c01249b19abfa81cb11786f28ea",
-      "bytes": 116057,
-      "generatedConfigBytes": 176141,
+      "sha256": "9a93c71ae3dbdd3dcb7e9bf45ef86e60d7ffdaac81cc17005ffc540d7f4fb02f",
+      "bytes": 117455,
+      "generatedConfigBytes": 176293,
       "inlineRows": 819,
       "remoteSources": 30
     },
     {
       "file": "src/android/v14.3-android.js",
-      "sha256": "2128a1019d0c6f719a9e9533a8bc6b1e61bb47277e96190c8fc22218a52d4f3f",
-      "bytes": 115943,
-      "generatedConfigBytes": 175952,
+      "sha256": "1b9b03160e11dd0196dd6ad9de649c7436b84991f30fcf7ad1beeacde88e8c14",
+      "bytes": 117341,
+      "generatedConfigBytes": 176104,
       "inlineRows": 819,
       "remoteSources": 29
     },
     {
       "file": "src/ios/v14.3-clashmi.js",
-      "sha256": "80e4168bfeba2ab7e9c278811abb7263761ba04c33a1d1f243d72211b8d84f3c",
-      "bytes": 118837,
-      "generatedConfigBytes": 177039,
+      "sha256": "09014cec334f287506e0f0afba590e143a526784954016244cf87042cda682ff",
+      "bytes": 120235,
+      "generatedConfigBytes": 177191,
       "inlineRows": 819,
       "remoteSources": 29
     },
     {
       "file": "src/ios/v14.3-clashmi-domestic-protocol-r1.js",
-      "sha256": "80e4168bfeba2ab7e9c278811abb7263761ba04c33a1d1f243d72211b8d84f3c",
-      "bytes": 118837,
-      "generatedConfigBytes": 177039,
+      "sha256": "09014cec334f287506e0f0afba590e143a526784954016244cf87042cda682ff",
+      "bytes": 120235,
+      "generatedConfigBytes": 177191,
       "inlineRows": 819,
       "remoteSources": 29
     }
@@ -54,27 +54,27 @@
   "testEvidence": {
     "static": {
       "file": "validation/static.json",
-      "sha256": "b8fd13d88c9bb062b4ef71554bff2bc7adaf9fe8ca88ff5238709d8b0132ed54",
+      "sha256": "15d9a4f1788c6f1f2a3690cf49d75a67bb01d721cd3a33da182cdf5e9eb4a5bd",
       "status": "BALANCED_STATIC_PASS"
     },
     "native-core": {
       "file": "validation/native-core.json",
-      "sha256": "e06b81af1741d92ceeb3912e75e3cd375737d154524b3d846075bd3180097573",
+      "sha256": "4ba8ae232148d5171fbe9c7c377430a18b753f974d968ee69d32b5ad648f74b2",
       "status": "BALANCED_LOCAL_CORE_PASS"
     },
     "balanced-empty-core": {
       "file": "validation/balanced-empty-core.json",
-      "sha256": "27acaf39366473254fea0bf2e2f2c85842dbc54df5a2b8fa0aa45ee2365e9bf6",
+      "sha256": "92d98ebcd48e5174a0dbae4f968380b70474973f6e52ffe0e7bfd40090ab1823",
       "status": "BALANCED_LOCAL_CORE_PASS"
     },
     "balanced-download-failure": {
       "file": "validation/balanced-download-failure.json",
-      "sha256": "63ee50c8cc78915446c881f439b95185cf1d537ff1693d3bbf23bf8ba45e6086",
+      "sha256": "f5d9b4cca05b37635383f3361593abc9e588458557f4b2b10f25e4156f62f378",
       "status": "BALANCED_COLD_DOWNLOAD_CORE_PASS"
     },
     "shadowrocket-lean": {
       "file": "validation/shadowrocket-lean.json",
-      "sha256": "5bed12d19c669db8e2966fa1fa53af301af885da30568934a02b3903e6589a27",
+      "sha256": "c3e07294488909fddcc0a92943391d755f1a5cad6c44fe90348a1f53ad4c86f9",
       "status": "SHADOWROCKET_LEAN_STATIC_PASS_NATIVE_PENDING"
     }
   },
@@ -97,7 +97,7 @@
   },
   "iosDelivery": {
     "file": "metadata/ios-delivery.json",
-    "sha256": "657debf193abbee48cda9502ee53972fd8ee478a5e32ce49d704f7c928ecc687",
+    "sha256": "5b64325ac2de221733a1ace6bc47289300f751e89703a3fa0ec38d8b142e9556",
     "revision": "ios-delivery-r2",
     "status": "IOS_SOURCE_STATIC_LOCAL_CORE_PASS_NATIVE_DEVICE_PENDING"
   },
@@ -195,6 +195,13 @@
       "localCore": "PASS_JS_WITH_DECLARED_SCOPE",
       "shadowrocketNative": "NOT_RUN",
       "deviceAcceptance": "NOT_RUN"
+    },
+    {
+      "number": 12,
+      "sourceContract": "PASS_JS_AND_LIMITED_SHADOWROCKET_MODEL",
+      "localCore": "PASS_ISOLATED_WINDOWS_MIHOMO_WITH_SYNTHETIC_GUARD_INGRESS",
+      "shadowrocketNative": "NOT_RUN",
+      "deviceAcceptance": "NOT_RUN"
     }
   ],
   "scope": "Three standalone JS entries, finite domain models and owned Mihomo loopback. Shadowrocket finite source model only; full domestic DNS relies on native direct/selected-node resolution and is not native verified.",
@@ -206,12 +213,17 @@
   "clientDeployment": false,
   "recordingTool": {
     "file": "tools/record-v14.3.py",
-    "sha256": "472a9db8fd319618bcc6c496f3330ee4be9b187506df79bf95162d7664174934"
+    "sha256": "84335b5e728cdf758cb05283cc0f81450e7993d7436b69b7266b04361ed3a015"
   },
   "macosDelivery": {
     "file": "metadata/macos-delivery.json",
-    "sha256": "90bd8a1de1c7d4a319f4a7008920caade63360a08cd9a67fc29fe66d76f68d0e",
+    "sha256": "459db16616809ae4b5849b759106d4ca07383f59487f43672e81f686bbfced58",
     "revision": "macos-r1",
     "status": "MACOS_SOURCE_LOCAL_CORE_PASS_DEVICE_PENDING"
+  },
+  "networkCompatibility": {
+    "file": "metadata/network-compat-delivery.json",
+    "sha256": "4655f9666fda34b682c5796550a6750b2b56ae86225ece0e1fd4debc84a0447d",
+    "revision": "ipv6-fallback-r1"
   }
 }

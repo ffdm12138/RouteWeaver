@@ -1,6 +1,6 @@
 {
   "version": "14.3",
-  "date": "2026-10-14",
+  "date": "2026-10-16",
   "revision": "ios-delivery-r2",
   "domesticProtocolRevision": "domestic-protocol-r1",
   "status": "IOS_SOURCE_STATIC_LOCAL_CORE_PASS_NATIVE_DEVICE_PENDING",
@@ -20,11 +20,11 @@
     },
     "sourceManifest": {
       "file": "metadata/shadowrocket-lean.json",
-      "sha256": "d37b37cda2a9a4100cca78e50f016785e2b7bce9e6c4c1f602eb992718b154b3"
+      "sha256": "c2e25e72d6f80f910ba56270f1761638450cd9e23444a0b9cc20a16ee78d7ff5"
     },
     "staticEvidence": {
       "file": "validation/shadowrocket-lean.json",
-      "sha256": "5bed12d19c669db8e2966fa1fa53af301af885da30568934a02b3903e6589a27",
+      "sha256": "c3e07294488909fddcc0a92943391d755f1a5cad6c44fe90348a1f53ad4c86f9",
       "status": "SHADOWROCKET_LEAN_STATIC_PASS_NATIVE_PENDING"
     },
     "fullBusinessDNS": "SELF_CONTAINED",
@@ -35,23 +35,23 @@
   "jsEntries": [
     {
       "file": "src/windows/v14.3.js",
-      "sha256": "7498c2044cbec1223a04be81b39d4a224f0e6c01249b19abfa81cb11786f28ea",
-      "bytes": 116057
+      "sha256": "9a93c71ae3dbdd3dcb7e9bf45ef86e60d7ffdaac81cc17005ffc540d7f4fb02f",
+      "bytes": 117455
     },
     {
       "file": "src/android/v14.3-android.js",
-      "sha256": "2128a1019d0c6f719a9e9533a8bc6b1e61bb47277e96190c8fc22218a52d4f3f",
-      "bytes": 115943
+      "sha256": "1b9b03160e11dd0196dd6ad9de649c7436b84991f30fcf7ad1beeacde88e8c14",
+      "bytes": 117341
     },
     {
       "file": "src/ios/v14.3-clashmi.js",
-      "sha256": "80e4168bfeba2ab7e9c278811abb7263761ba04c33a1d1f243d72211b8d84f3c",
-      "bytes": 118837
+      "sha256": "09014cec334f287506e0f0afba590e143a526784954016244cf87042cda682ff",
+      "bytes": 120235
     },
     {
       "file": "src/ios/v14.3-clashmi-domestic-protocol-r1.js",
-      "sha256": "80e4168bfeba2ab7e9c278811abb7263761ba04c33a1d1f243d72211b8d84f3c",
-      "bytes": 118837
+      "sha256": "09014cec334f287506e0f0afba590e143a526784954016244cf87042cda682ff",
+      "bytes": 120235
     }
   ],
   "clashmiSourceInspection": {
@@ -137,7 +137,7 @@
   },
   "localCoreEvidence": {
     "file": "validation/native-core.json",
-    "sha256": "e06b81af1741d92ceeb3912e75e3cd375737d154524b3d846075bd3180097573",
+    "sha256": "4ba8ae232148d5171fbe9c7c377430a18b753f974d968ee69d32b5ad648f74b2",
     "status": "BALANCED_LOCAL_CORE_PASS"
   },
   "historicalFailedInvestigation": {
@@ -146,11 +146,11 @@
     "status": "FAIL",
     "currentAcceptance": false
   },
-  "wechatUploadRootCause": "UNRESOLVED_DEVICE_LOG_AND_VPN_OFF_COMPARISON_NOT_PROVIDED",
-  "report": "docs/reports/v14.3/国内协议跟组与小火箭精简.md",
+  "wechatUploadRootCause": "Windows logs show local DIRECT IPv6 unreachable; iOS and macOS root cause and new compatibility mode device retry NOT_RETESTED",
+  "report": "docs/reports/v14.3/IPv6回退与兼容入口.md",
   "restorationTool": {
     "file": "tools/restore-ios-delivery.py",
-    "sha256": "1174a560846f8fe6d370e5426b1d0d565f6c605188495e576745d443d7714dc6"
+    "sha256": "83bd6229eba46e5835c230f104241c5bce18d44f12fb9718a7245f33f3a97a9b"
   },
   "clientDeployment": false,
   "deviceAcceptance": "NOT_RUN"

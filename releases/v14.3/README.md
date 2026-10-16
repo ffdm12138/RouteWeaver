@@ -1,5 +1,7 @@
 # V14.3 国内协议跟组与自包含小火箭配置
 
+当前追加 `ipv6-fallback-r1`（公开 rc.2）：标准双栈与六份手动 IPv4 兼容入口。完整导入、核心 IPv6/DNS/TUN 联动和 Shadowrocket 限制见 [IPv4 兼容模式](../../docs/guides/IPv4兼容模式.md)；当前验收见 [修订报告](../../docs/reports/v14.3/IPv6回退与兼容入口.md)。较早微信结论保留在历史报告，不能代替新模式设备复测。
+
 当前修订 domestic-protocol-r1 / ios-delivery-r2。已审核国内域名的普通 TCP、UDP、DNS 跟随「国内网站」，默认 DIRECT；公司/共享服务优先，未知公网 IP UDP 和通用 STUN 保持代理或拒绝。业务选择代理后，失败节点或 UDP 不支持不得自动直连。
 
 | 客户端 | 直接导入 | 字节 |
@@ -17,7 +19,7 @@ Windows FlClash 0.9.0 需要在应用「设置 → 网络 → TUN」开启**严�
 
 小火箭保留 9,149 行 Host 表，使用 15 份固定提交远程规则，移除 111,464 行重复国内域名规则。业务与关键国内 DNS 显式声明跟组；其余国内域名采用原生直连 DNS/所选代理节点远端解析，需要在设备验证。配置不含真实节点，先保留自己的订阅，再导入 .conf，路由选择「配置」。
 
-三份 JS 的源码静态和隔离本机核心实验通过；小火箭只有有限源码模型检查。原生 DNS/JS、iOS VPN、Android VPN、公网 IPv6 和长时内存未验收。微信发图慢的根因未确定。本轮未更换运行客户端。结果见 [当前报告](../../docs/reports/v14.3/国内协议跟组与小火箭精简.md)和 [需求](../../docs/需求.md)。
+三份 JS 的源码静态和隔离本机核心实验通过；小火箭只有有限源码模型检查。原生 DNS/JS、iOS VPN、Android VPN、公网 IPv6 和长时内存未验收。Windows 日志已发现本地 DIRECT IPv6 不可达；其它平台和新版应用回退仍待实测。本轮未更换运行客户端。结果见 [当前报告](../../docs/reports/v14.3/国内协议跟组与小火箭精简.md)和 [需求](../../docs/需求.md)。
 
 Mac 适配 `macos-r1` 继承相同业务行为，FlClash 使用 Darwin utun，Clash Mi 使用 Apple NetworkExtension。两入口的源码/幂等和 Windows Mihomo 回放单独绑定；Mac App 与实际接管仍待设备验收。见 [MacBook 导入](../../docs/guides/MacBook使用说明.md)和 [适配报告](../../docs/reports/v14.3/MacBook适配.md)。
 
@@ -27,9 +29,12 @@ Mac 适配 `macos-r1` 继承相同业务行为，FlClash 使用 Darwin utun，Cl
 node tools/build-balanced.cjs --check
 node tools/build-macos.cjs --check
 node tools/build-shadowrocket-lean.cjs --check
+node tools/build-network-compat.cjs --check
 node tests/static.cjs
 node tests/macos-static.cjs
 node tests/shadowrocket-lean.cjs
+node tests/network-compat.cjs
+node tests/native-network-compat.cjs <mihomo.exe>
 node tests/native-core.cjs <mihomo.exe> <openssl.exe> --current-contract
 node tests/native-macos.cjs <mihomo.exe> <openssl.exe>
 node tests/native-boundaries.cjs <mihomo.exe> <openssl.exe>

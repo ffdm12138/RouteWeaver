@@ -1,5 +1,13 @@
 # Changelog
 
+## v14.3.0-rc.2 · 2026-10-16
+
+- 新增通用本地无 IPv6 出口兼容入口，保留六个标准双栈文件；所有应用共享 DNS/公网字面量快速失败机制，不添加微信特例。
+- Mihomo 域名节点未显式指定地址族时默认 IPv4 优先，保留同一节点 IPv6 后备；provider 刷新和用户设置保持。
+- IPv4 节点传输仍可承载 IPv6 目标；代理失败不回落 DIRECT。Shadowrocket 原生能力和验收单列。
+- 新增第 12 条需求、模式指南、来源绑定、31 项静态与 37 项隔离核心检查；重新执行既有回归并纳入三种发布包。各设备实际接管和应用重试待验收。
+
+
 ## v14.3.0-rc.1 · 2026-10-15
 
 - 首次公开预发布：Windows、Android、iOS Clash Mi、iOS Shadowrocket、macOS FlClash 与 macOS Clash Mi 六个独立入口。

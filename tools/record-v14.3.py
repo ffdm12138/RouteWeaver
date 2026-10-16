@@ -19,8 +19,10 @@ for e in manifest['entries']:
     assert sha(root/e['file'])==e['sha256']
 archive='archive/v14.2-before-balanced-r1-20261012'
 protocol_archive='archive/v14.3-before-domestic-protocol-r1-20261013'
-old=read(project/protocol_archive/'CURRENT_RELEASE.json')
-assert sha(project/'docs/需求.md')!=sha(project/protocol_archive/'docs/需求.md')
+prior=read(root/'metadata/balanced-review.json')
+old=read(project/'CURRENT_RELEASE.json')
+previous_contract_sha=prior['contract']['previousSHA256']
+assert sha(project/'docs/需求.md')!=previous_contract_sha
 static=read(root/'validation/static.json')
 core=read(root/'validation/native-core.json')
 policy=read(root/'data/rules/embedded-policy.json')
@@ -32,12 +34,12 @@ review={'version':'14.3','date':'2026-10-14','revision':'balanced-r1','domesticP
  'status':'DOMESTIC_PROTOCOL_SOURCE_LOCAL_CORE_PASS_DEVICE_PENDING',
  'authorization':'User selected reviewed domestic TCP/UDP/DNS following 国内网站 and self-contained Shadowrocket business DNS; unknown IP-only UDP and generic STUN remain protected.',
  'contract':{'file':'docs/需求.md','sha256':sha(project/'docs/需求.md'),'originalBytesPreserved':False,
-  'previousFile':protocol_archive+'/docs/需求.md','previousSHA256':sha(project/protocol_archive/'docs/需求.md'),
+  'previousFile':protocol_archive+'/docs/需求.md','previousSHA256':previous_contract_sha,
   'change':'User-authorized requirement 11 domestic domain protocol and DNS affinity; earlier contract preserved in archive. Additive Mac adapters retain this business contract and have separate delivery evidence.'},
  'sourceManifest':item('metadata/balanced-sources.json'),'entries':manifest['entries'],'testEvidence':evidence,
  'sourceComparison':item('metadata/source-comparison.json'),'latestCandidates':item('validation/inputs/latest-candidate/manifest.json'),
- 'preservedArchive':{'directory':archive,'manifestSHA256':sha(project/archive/'manifest.json'),'releaseManifestSHA256':sha(project/archive/'release-byte-manifest.json')},
- 'protocolBeforeArchive':{'directory':protocol_archive,'manifestSHA256':sha(project/protocol_archive/'manifest.json')},
+ 'preservedArchive':{'directory':archive,'manifestSHA256':prior['preservedArchive']['manifestSHA256'],'releaseManifestSHA256':prior['preservedArchive']['releaseManifestSHA256']},
+ 'protocolBeforeArchive':{'directory':protocol_archive,'manifestSHA256':prior['protocolBeforeArchive']['manifestSHA256']},
  'iosDelivery':{**item('metadata/ios-delivery.json'),'revision':delivery['revision'],'status':delivery['status']},
  'metrics':{'fullInventoryHostsPerPlatform':static['platforms'][0]['fullInventoryHosts'],'criticalEmptyHostsPerPlatform':static['platforms'][0]['criticalColdDNS'],
   'staticChecks':len(static['checks']),'nativeObservations':{r['kind']:sum(p['cases'] for p in r['receipt']['platforms']) for r in core['runs']},
@@ -73,6 +75,8 @@ if (root/'metadata/macos-delivery.json').exists():
     for key,e in zip(['macosFlClash','macosClashMi'],mac['entries']):
         current['entries'][key]='releases/v14.3/'+e['file']
         current['inlineProviderRows'][key]=e['inlineRows']
+from network_release import record
+record(project,root,current,review,sha,read)
 (root/'metadata/balanced-review.json').write_text(json.dumps(review,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
 (project/'CURRENT_RELEASE.json').write_text(json.dumps(current,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
 print(json.dumps({'status':review['status'],'metrics':review['metrics'],'shadowrocketNative':'NOT_RUN','clientDeployment':False}))

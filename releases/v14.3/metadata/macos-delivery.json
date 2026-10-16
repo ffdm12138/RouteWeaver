@@ -1,6 +1,6 @@
 {
   "version": "14.3",
-  "date": "2026-10-14",
+  "date": "2026-10-16",
   "revision": "macos-r1",
   "domesticProtocolRevision": "domestic-protocol-r1",
   "status": "MACOS_SOURCE_LOCAL_CORE_PASS_DEVICE_PENDING",
@@ -8,24 +8,24 @@
   "guide": "docs/guides/MacBook使用说明.md",
   "sourceManifest": {
     "file": "metadata/macos-sources.json",
-    "sha256": "8e4288576f6e70d221aae79edafe5c0d335340f08da8da3244e1d953303848d4"
+    "sha256": "e79f091e7fed9ab28c201c8cc7385df4a14b76570dcf4ebb8f25d22949870c4d"
   },
   "entries": [
     {
       "client": "FlClash",
       "file": "src/macos/v14.3-macos-flclash.js",
-      "sha256": "33228beb8181846059a1764da338c3ab1daadfec1c48a47faccf95bf002b165a",
-      "bytes": 117852,
-      "generatedConfigBytes": 176424,
+      "sha256": "c5eb299d23010f3dc2879968025fd6cd89f98e2ee9ba08332436a5f19398007e",
+      "bytes": 119250,
+      "generatedConfigBytes": 176576,
       "inlineRows": 819,
       "remoteSources": 30
     },
     {
       "client": "Clash Mi",
       "file": "src/macos/v14.3-macos-clashmi.js",
-      "sha256": "5cb0eaad24cf2d5e567aa91924a7736d6ee4a4a2c716fcee980b37efbb7f21bf",
-      "bytes": 118839,
-      "generatedConfigBytes": 177037,
+      "sha256": "59431f8e9255ec2c60e5fad684df29ab8e11c729bf7a5915322d598c550c664d",
+      "bytes": 120237,
+      "generatedConfigBytes": 177189,
       "inlineRows": 819,
       "remoteSources": 29
     }
@@ -33,12 +33,12 @@
   "testEvidence": {
     "macos-static": {
       "file": "validation/macos-static.json",
-      "sha256": "966db0a540f62efe036aa7a9b5af1304ef4bc2a6b4ded47d2b59d2a2bbc2d792",
+      "sha256": "81c7c0cfdf0d94e8e46f719644d307fc70525918af34a1fda5eef30f277ff023",
       "status": "MACOS_STATIC_PASS"
     },
     "macos-core": {
       "file": "validation/macos-core.json",
-      "sha256": "c616e178cefd0091eb9741498c66a32474661223baaeb10ffe7cb7d3cf58846f",
+      "sha256": "103cf45a18bdaa5dcc1ed5b9b5f10c3d733d12f8754651ff6328a892f314d6e7",
       "status": "MACOS_LOCAL_CORE_PASS_DEVICE_PENDING"
     }
   },
@@ -67,15 +67,15 @@
       "inbound-guard": 4
     }
   },
-  "scope": "Business routing, selectors, DNS and reviewed sources unchanged; actual Mac entries validated on owned Windows Mihomo with TUN disabled. Mac apps and native capture NOT_RUN.",
+  "scope": "Inherited business routing; IPv4-preferred default only for domain nodes without explicit family. Separate IPv4-local entries and evidence are in network-compat-delivery.json. Actual standard Mac entries executed on owned Windows Mihomo with TUN disabled; Mac apps/native capture NOT_RUN.",
   "baseEntries": [
     {
       "file": "src/windows/v14.3.js",
-      "sha256": "7498c2044cbec1223a04be81b39d4a224f0e6c01249b19abfa81cb11786f28ea"
+      "sha256": "9a93c71ae3dbdd3dcb7e9bf45ef86e60d7ffdaac81cc17005ffc540d7f4fb02f"
     },
     {
       "file": "src/ios/v14.3-clashmi.js",
-      "sha256": "80e4168bfeba2ab7e9c278811abb7263761ba04c33a1d1f243d72211b8d84f3c"
+      "sha256": "09014cec334f287506e0f0afba590e143a526784954016244cf87042cda682ff"
     }
   ],
   "settings": {
@@ -99,7 +99,7 @@
       "tunOwner": "Apple NetworkExtension actual file descriptor supplied by app"
     }
   },
-  "iosWeChatFollowup": "User reports waiting also with VPN off and closed investigation; no iOS source changes; network root cause unconfirmed.",
+  "iosWeChatFollowup": "Earlier iOS investigation retained. Windows logs now show local DIRECT IPv6 unreachable; macOS/iOS and application IPv4 retry remain device NOT_RETESTED.",
   "clientDeployment": false,
   "flclashMacApp": "NOT_RUN",
   "clashmiMacApp": "NOT_RUN",
@@ -108,6 +108,6 @@
   "deviceAcceptance": "NOT_RUN",
   "recordingTool": {
     "file": "tools/record-macos.py",
-    "sha256": "d36c0d5d1886f309f24d2ea79c3605551f66e0ad635f4fa3803e2c005d7acd5b"
+    "sha256": "36058c1f0ebd01f1153c882469c508ca621614d72fd83c0fdc65caee7d759a03"
   }
 }

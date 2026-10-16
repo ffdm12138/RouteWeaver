@@ -20,6 +20,7 @@ review=read(release/'metadata/balanced-review.json')
 manifest=read(release/'metadata/balanced-sources.json')
 delivery=read(release/'metadata/ios-delivery.json') if (release/'metadata/ios-delivery.json').exists() else None
 mac=read(release/'metadata/macos-delivery.json') if (release/'metadata/macos-delivery.json').exists() else None
+network=read(release/review['networkCompatibility']['file'])
 
 def links(raw):
     # Only current prose links are projected to the independent ZIP layout.
@@ -30,6 +31,7 @@ def links(raw):
 
 def docs():
     names=['docs/需求.md','docs/README.md','docs/guides/ClashMi使用说明.md','docs/guides/使用说明.md','docs/maintenance/维护与更新.md','docs/reference/项目结构.md','docs/reports/v14.3/可靠精简与远程来源审核.md','docs/reports/v14.3/国内协议跟组与小火箭精简.md']
+    names.extend([network['guide'],network['report']])
     if delivery:
         names.append('docs/reports/v14.3/iOS交付与覆写排查.md')
         names.append(delivery['report'])
@@ -38,6 +40,7 @@ def docs():
         names.extend([mac['guide'],mac['report']])
     result={n:(project/n).read_bytes() if n=='docs/需求.md' else links((project/n).read_bytes()) for n in names}
     result['docs/README.md']='# 当前包文档\n\n- [最终需求](需求.md)\n- [使用说明](guides/使用说明.md)\n- [Clash Mi 导入](guides/ClashMi使用说明.md)\n- [V14.3 可靠精简与来源审核](reports/v14.3/可靠精简与远程来源审核.md)\n- [维护方法](maintenance/维护与更新.md)\n\n历史版本正文仅在项目 docs/reports/ 和 archive/ 中保留，本包不把旧结论作为本版认证。\n'.encode('utf-8')
+    result['docs/README.md']+='\n- [IPv4 兼容模式](guides/IPv4兼容模式.md)\n- [IPv6 回退修订](reports/v14.3/IPv6回退与兼容入口.md)\n'.encode('utf-8')
     if delivery:
         result['docs/README.md']+='\n- [iOS 入口恢复与覆写排查](reports/v14.3/iOS交付与覆写排查.md)\n'.encode('utf-8')
         result['docs/README.md']+='\n- [当前国内协议与小火箭精简](reports/v14.3/国内协议跟组与小火箭精简.md)\n'.encode('utf-8')
@@ -73,13 +76,14 @@ def write_zip(label,files):
         package_manifest['domesticProtocolRevision']=delivery['domesticProtocolRevision']
     if mac:
         package_manifest['macosRevision']=mac['revision']
+    package_manifest['networkCompatibilityRevision']=network['revision']
     files=dict(files)
     files['PACKAGE_MANIFEST.json']=(json.dumps(package_manifest,ensure_ascii=False,indent=2)+'\n').encode('utf-8')
     target=dist/('v14.3-'+label+'.zip')
     with zipfile.ZipFile(target,'w',compression=zipfile.ZIP_DEFLATED,compresslevel=9) as z:
         for name,raw in sorted(files.items()):
             assert not name.startswith('/') and '..' not in Path(name).parts
-            info=zipfile.ZipInfo(name,date_time=(2026,10,15,0,0,0))
+            info=zipfile.ZipInfo(name,date_time=(2026,10,16,0,0,0))
             info.compress_type=zipfile.ZIP_DEFLATED
             info.create_system=3
             info.external_attr=0o100644 << 16
@@ -101,6 +105,8 @@ if delivery:
 if mac:
     for name in [e['file'] for e in mac['entries']]+['metadata/macos-sources.json','metadata/macos-delivery.json']:
         deploy[name]=(release/name).read_bytes()
+for name in [e['file'] for e in network['entries']]+['metadata/network-compat.json','metadata/network-compat-delivery.json']+[e['file'] for e in network['testEvidence'].values()]:
+    deploy[name]=(release/name).read_bytes()
 deploy.update(docs())
 deploy['README.md']=links((release/'README.md').read_bytes())
 deploy_target,deploy_result=write_zip('deployable',deploy)
@@ -117,7 +123,7 @@ for file in release.rglob('*'):
     audit[rel.as_posix()]=file.read_bytes()
 audit.update(docs())
 audit['README.md']=links((release/'README.md').read_bytes())
-for name in ['record-v14.3.py','verify-v14.3.py','package-v14.3.py','verify-layout.py']:
+for name in ['record-v14.3.py','verify-v14.3.py','package-v14.3.py','verify-layout.py','network_release.py']:
     audit['project-tools/'+name]=(project/'tools'/name).read_bytes()
 if delivery:
     audit['project-tools/restore-ios-delivery.py']=(project/'tools/restore-ios-delivery.py').read_bytes()
@@ -127,9 +133,14 @@ audit_target,audit_result=write_zip('audit-evidence',audit)
 mac_result=None
 if mac:
     mac_files={e['file']:(release/e['file']).read_bytes() for e in mac['entries']}
-    for name in ['metadata/macos-sources.json','metadata/macos-delivery.json']:
+    for e in network['entries']:
+        if e['platform'].startswith('macos'):
+            mac_files[e['file']]=(release/e['file']).read_bytes()
+    for name in ['metadata/macos-sources.json','metadata/macos-delivery.json','metadata/network-compat.json','metadata/network-compat-delivery.json']:
         mac_files[name]=(release/name).read_bytes()
     for name in [mac['guide'],mac['report'],'docs/需求.md']:
+        mac_files[name]=docs()[name]
+    for name in [network['guide'],network['report']]:
         mac_files[name]=docs()[name]
     for name,raw in docs().items():
         if name in {'LICENSE','THIRD_PARTY_NOTICES.md'} or name.startswith('third_party/'):
@@ -139,6 +150,7 @@ if mac:
         '- Clash Mi：导入 src/macos/v14.3-macos-clashmi.js 并绑定正在使用的订阅；追加内置-不覆写、规则模式、IPv6 开启、TUN 覆写关闭。\n\n'
         '两个公共组先手动选节点，确认完整规则已下载。详见 [导入说明](docs/guides/MacBook使用说明.md)。\n\n'
         '源码与本机 Windows Mihomo 回放通过；Mac App、TUN/NetworkExtension 实机接管未验收。包不含实际节点或订阅。\n').encode('utf-8')
+    mac_files['README.md']+='\n本地没有 IPv6 出口时手动选对应的 -ipv4-local.js；保持核心 IPv6 与完整 TUN 接管。详见 [IPv4 兼容模式](docs/guides/IPv4兼容模式.md)。\n'.encode('utf-8')
     _,mac_result=write_zip('macos',mac_files)
 
 fresh=Path(tempfile.mkdtemp(prefix='v14.3-audit-',dir=work))
@@ -147,9 +159,10 @@ with zipfile.ZipFile(audit_target) as z:
 commands=['tools/build-balanced.cjs','tools/build-shadowrocket-lean.cjs','tests/static.cjs','tests/shadowrocket-lean.cjs']
 if mac:
     commands.extend(['tools/build-macos.cjs','tests/macos-static.cjs'])
+commands.extend(['tools/build-network-compat.cjs','tests/network-compat.cjs'])
 for name in commands:
     command=[args.node,str(fresh/name),*(['--check'] if name.startswith('tools/') else [])]
-    run=subprocess.run(command,cwd=fresh,capture_output=True,text=True,timeout=180,creationflags=process_flags)
+    run=subprocess.run(command,cwd=fresh,capture_output=True,text=True,encoding='utf-8',timeout=600,creationflags=process_flags)
     (fresh/(Path(name).stem+'-fresh.log')).write_text(run.stdout+run.stderr,encoding='utf-8')
     assert run.returncode==0,(name,run.stdout[-4000:],run.stderr[-2000:])
 static=read(fresh/'validation/static.json')
@@ -168,7 +181,7 @@ if mac:
     assert fresh_mac['status']=='MACOS_STATIC_PASS'
     for e in mac['entries']:
         assert sha((fresh/e['file']).read_bytes())==e['sha256']
-result={'version':'14.3','date':'2026-10-15','revision':'balanced-r1','status':'PACKAGE_CRC_SHA_FRESH_STATIC_PASS',
+result={'version':'14.3','date':'2026-10-16','revision':'balanced-r1','status':'PACKAGE_CRC_SHA_FRESH_STATIC_PASS',
         'packages':[deploy_result,audit_result]+([mac_result] if mac_result else []),'freshExtraction':fresh.relative_to(project).as_posix(),
         'freshGeneration':'PASS','freshStaticChecks':len(static['checks']),'freshStaticPlatforms':[{k:p[k] for k in ['platform','fullInventoryHosts','normalRouting','normalDNS','criticalColdRouting','criticalColdDNS','existingCases']} for p in static['platforms']],
         'nativeCore':'SOURCE_HASH_IDENTICAL_BOUND_LOCAL_RECEIPTS_INCLUDED','freshNativeCoreReplay':'NOT_RUN',
@@ -185,6 +198,10 @@ if mac:
     result.update(macosRevision=mac['revision'],freshMacGeneration='PASS',
                   freshMacStatic=fresh_mac['status'],freshMacStaticChecks=len(fresh_mac['checks']),
                   macosDeliverySHA256=sha((release/'metadata/macos-delivery.json').read_bytes()),macosDeviceAcceptance='NOT_RUN')
+result['networkCompatibilityRevision']=network['revision']
+result['freshNetworkCompatibilityStatic']=read(fresh/'validation/network-compat-static.json')['status']
+for entry in network['entries']:
+    assert sha((fresh/entry['file']).read_bytes())==entry['sha256']
 result['historyVerification']='SKIPPED_HISTORY' if args.skip_history else 'PASS'
 (dist/'package-verification.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
 print(json.dumps({'status':result['status'],'packages':result['packages'],'freshStaticChecks':result['freshStaticChecks'],'freshNativeCoreReplay':'NOT_RUN'},ensure_ascii=False))

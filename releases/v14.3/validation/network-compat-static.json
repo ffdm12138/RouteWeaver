@@ -1,0 +1,201 @@
+{
+  "status": "NETWORK_COMPAT_STATIC_PASS",
+  "revision": "ipv6-fallback-r1",
+  "checks": [
+    {
+      "name": "windows:defaults-and-explicit-family",
+      "status": "PASS"
+    },
+    {
+      "name": "windows:provider-explicit-expression-preserved",
+      "status": "PASS"
+    },
+    {
+      "name": "windows:idempotence",
+      "status": "PASS"
+    },
+    {
+      "name": "windows:compat-dns-and-capture",
+      "status": "PASS"
+    },
+    {
+      "name": "windows:all-app-public-literals-fast-reject",
+      "status": "PASS"
+    },
+    {
+      "name": "windows:proxy-ingress-and-LAN-unchanged",
+      "status": "PASS"
+    },
+    {
+      "name": "android:defaults-and-explicit-family",
+      "status": "PASS"
+    },
+    {
+      "name": "android:provider-explicit-expression-preserved",
+      "status": "PASS"
+    },
+    {
+      "name": "android:idempotence",
+      "status": "PASS"
+    },
+    {
+      "name": "android:compat-dns-and-capture",
+      "status": "PASS"
+    },
+    {
+      "name": "android:all-app-public-literals-fast-reject",
+      "status": "PASS"
+    },
+    {
+      "name": "android:proxy-ingress-and-LAN-unchanged",
+      "status": "PASS"
+    },
+    {
+      "name": "clashmi:defaults-and-explicit-family",
+      "status": "PASS"
+    },
+    {
+      "name": "clashmi:provider-explicit-expression-preserved",
+      "status": "PASS"
+    },
+    {
+      "name": "clashmi:idempotence",
+      "status": "PASS"
+    },
+    {
+      "name": "clashmi:compat-dns-and-capture",
+      "status": "PASS"
+    },
+    {
+      "name": "clashmi:all-app-public-literals-fast-reject",
+      "status": "PASS"
+    },
+    {
+      "name": "clashmi:proxy-ingress-and-LAN-unchanged",
+      "status": "PASS"
+    },
+    {
+      "name": "macosFlClash:defaults-and-explicit-family",
+      "status": "PASS"
+    },
+    {
+      "name": "macosFlClash:provider-explicit-expression-preserved",
+      "status": "PASS"
+    },
+    {
+      "name": "macosFlClash:idempotence",
+      "status": "PASS"
+    },
+    {
+      "name": "macosFlClash:compat-dns-and-capture",
+      "status": "PASS"
+    },
+    {
+      "name": "macosFlClash:all-app-public-literals-fast-reject",
+      "status": "PASS"
+    },
+    {
+      "name": "macosFlClash:proxy-ingress-and-LAN-unchanged",
+      "status": "PASS"
+    },
+    {
+      "name": "macosClashMi:defaults-and-explicit-family",
+      "status": "PASS"
+    },
+    {
+      "name": "macosClashMi:provider-explicit-expression-preserved",
+      "status": "PASS"
+    },
+    {
+      "name": "macosClashMi:idempotence",
+      "status": "PASS"
+    },
+    {
+      "name": "macosClashMi:compat-dns-and-capture",
+      "status": "PASS"
+    },
+    {
+      "name": "macosClashMi:all-app-public-literals-fast-reject",
+      "status": "PASS"
+    },
+    {
+      "name": "macosClashMi:proxy-ingress-and-LAN-unchanged",
+      "status": "PASS"
+    },
+    {
+      "name": "shadowrocket:declared-native-limit-and-preserved-capture",
+      "status": "PASS"
+    }
+  ],
+  "sourceFiles": [
+    {
+      "file": "tools/build-network-compat.cjs",
+      "sha256": "d4508d03405cb968cedb069bc1382f70ad57b83efe6b33afaf14a90585762523"
+    },
+    {
+      "file": "tools/ipv4-local-adapter.js",
+      "sha256": "92836284bb3d2639c1101599528ad9562622c2b47011d3144325faf846afa919"
+    },
+    {
+      "file": "src/windows/v14.3.js",
+      "sha256": "9a93c71ae3dbdd3dcb7e9bf45ef86e60d7ffdaac81cc17005ffc540d7f4fb02f"
+    },
+    {
+      "file": "src/android/v14.3-android.js",
+      "sha256": "1b9b03160e11dd0196dd6ad9de649c7436b84991f30fcf7ad1beeacde88e8c14"
+    },
+    {
+      "file": "src/ios/v14.3-clashmi-domestic-protocol-r1.js",
+      "sha256": "09014cec334f287506e0f0afba590e143a526784954016244cf87042cda682ff"
+    },
+    {
+      "file": "src/macos/v14.3-macos-flclash.js",
+      "sha256": "c5eb299d23010f3dc2879968025fd6cd89f98e2ee9ba08332436a5f19398007e"
+    },
+    {
+      "file": "src/macos/v14.3-macos-clashmi.js",
+      "sha256": "59431f8e9255ec2c60e5fad684df29ab8e11c729bf7a5915322d598c550c664d"
+    },
+    {
+      "file": "src/ios/v14.3-shadowrocket.conf",
+      "sha256": "9829d7e7c74f949cfe5168c3b3f3359b0e41aeb3c81bd3b8e2420bf721f277ec"
+    },
+    {
+      "file": "src/windows/v14.3-ipv4-local.js",
+      "sha256": "1a77bf1723137e6379a36866f69402af3ab06ad0b135ba206736b9c9def8936f"
+    },
+    {
+      "file": "src/android/v14.3-android-ipv4-local.js",
+      "sha256": "9bc95a3b110d4a04614acf3219a797d7cad96c4be6e3e8dbdac7067a39f76750"
+    },
+    {
+      "file": "src/ios/v14.3-clashmi-ipv4-local.js",
+      "sha256": "25b1d9f535be3a918cb51e1c1d454cb2a53c43623e000e89ca453f88b40107f5"
+    },
+    {
+      "file": "src/macos/v14.3-macos-flclash-ipv4-local.js",
+      "sha256": "537258ed81e119bfa58fd714da5da310bc056faa205557d24e8ea7195d9d4010"
+    },
+    {
+      "file": "src/macos/v14.3-macos-clashmi-ipv4-local.js",
+      "sha256": "c8b54058c5460a6fbee89d34721a75bec7965edc90d2a6711659edf88c3cb4ce"
+    },
+    {
+      "file": "src/ios/v14.3-shadowrocket-ipv4-local.conf",
+      "sha256": "c49e34cf5446bd8e0a4815f6a78b8c636947a9ea1a142acc37e6be671ff00685"
+    },
+    {
+      "file": "tests/network-compat.cjs",
+      "sha256": "14818f2d9178c03225dc0ebdf252ea2c2bd00a6c0ca1f080380d59f82b49c5a4"
+    },
+    {
+      "file": "tools/network-compat.cjs",
+      "sha256": "f6da6582d1dca8fb3ccc5147cad82af183887f9fc89b31bc2f8f2889feb0ba21"
+    },
+    {
+      "file": "tools/network-compat-runtime.js",
+      "sha256": "3568c435622a8f78d0becab18e99fccc52487e30642ff981cbcd0a542830bb5e"
+    }
+  ],
+  "deviceAcceptance": "NOT_RUN"
+}

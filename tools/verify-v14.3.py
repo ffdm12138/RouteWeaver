@@ -16,7 +16,7 @@ current=read(project/'CURRENT_RELEASE.json')
 review=read(root/'metadata/balanced-review.json')
 assert current['version']==review['version']=='14.3'
 assert current['repairRevision']==review['revision']=='balanced-r1'
-assert current['status']==review['status']=='DOMESTIC_PROTOCOL_SOURCE_LOCAL_CORE_PASS_DEVICE_PENDING'
+assert current['status']==review['status']=='NETWORK_COMPAT_SOURCE_LOCAL_CORE_PASS_DEVICE_PENDING'
 assert current['domesticProtocolRevision']==review['domesticProtocolRevision']=='domestic-protocol-r1'
 assert current['clientDeployment'] is False
 assert sha(project/review['contract']['file'])==review['contract']['sha256']
@@ -56,7 +56,10 @@ for e in read(root/'validation/inputs/v14.2-baseline/manifest.json')['files']:
     assert sha(root/'validation/inputs/v14.2-baseline'/e['file'])==e['sha256']
 subprocess.run([args.node,str(root/'tools/build-balanced.cjs'),'--check'],cwd=root,check=True,capture_output=True,creationflags=process_flags)
 subprocess.run([args.node,str(root/'tools/build-shadowrocket-lean.cjs'),'--check'],cwd=root,check=True,capture_output=True,creationflags=process_flags)
-assert len(review['requirements'])==11 and all(r['sourceContract']=='PASS_JS_AND_DECLARED_SHADOWROCKET_MODEL' for r in review['requirements'])
+assert len(review['requirements'])==12 and all(r['sourceContract']=='PASS_JS_AND_DECLARED_SHADOWROCKET_MODEL' for r in review['requirements'][:11])
+from network_release import verify
+network=verify(project,root,current,review,sha,read)
+subprocess.run([args.node,str(root/'tools/build-network-compat.cjs'),'--check'],cwd=root,check=True,capture_output=True,creationflags=process_flags)
 for kind,path in current['entries'].items():
     assert (project/path).is_file(),kind
 delivery=None
@@ -137,6 +140,10 @@ if args.with_packages:
                     assert hashlib.sha256(z.read(e['file'])).hexdigest()==e['sha256']
                 assert delivery['report'] in members
                 assert hashlib.sha256(z.read(sr['sourceManifest']['file'])).hexdigest()==sr['sourceManifest']['sha256']
+            expected_network=[s for s in network['entries'] if package_manifest['kind']!='macos' or s['platform'].startswith('macos')]
+            for source in expected_network:
+                assert hashlib.sha256(z.read(source['file'])).hexdigest()==source['sha256']
+            assert network['guide'] in members and network['report'] in members
             if mac:
                 for source in mac['entries']:
                     assert hashlib.sha256(z.read(source['file'])).hexdigest()==source['sha256']

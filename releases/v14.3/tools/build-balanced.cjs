@@ -77,6 +77,7 @@ for(const [platform,input,output]of [['desktop','src/windows/v14.2.js','src/wind
   code=replaceOnce(code,'dnsPolicy["rule-set:" + embeddedDomainSet(tag)] = v14DnsFor(groupName(service.name));','if (V14_REVIEWED_DOMAINS[tag]) dnsPolicy["rule-set:" + embeddedDomainSet(tag)] = v14DnsFor(groupName(service.name));');
   code=replaceOnce(code,'auditRepairRevision: "embedded-domain-r1"','auditRepairRevision: "balanced-r1"');
   code=require('./domestic-protocol.cjs')(code,replaceOnce);
+  code=require('./network-compat.cjs')(code,replaceOnce);
   code=code.replace('hybrid-live-meta-no-local-geo','critical-inline-pinned-full-remote-no-local-geo');
   code=code.replace('// FlClash / Mihomo V14.2 '+(platform==='desktop'?'desktop':'android')+' — 2026-10-10','// Mihomo V14.3 '+platform+' — 2026-10-12; balanced-r1.');
   code='// Small standalone overwrite: critical parents and safety guards inline; complete reviewed rules are remote.\n'+code;
@@ -103,7 +104,7 @@ for(const o of outputs){
 const manifest={version:'14.3',date:'2026-10-12',revision:'balanced-r1',status:'GENERATED_DEVICE_PENDING',limits:selected.limits,entries:generated,
   domesticProtocolRevision:'domestic-protocol-r1',
   baselineManifest:{file:baseline+'manifest.json',sha256:sha(baseline+'manifest.json')},policy:{file:'data/rules/embedded-policy.json',sha256:crypto.createHash('sha256').update(selectedText).digest('hex')},
-  inputs:['tools/build-balanced.cjs','tools/domestic-protocol.cjs','tools/clashmi-adapter.js','tools/validate-azure-async.cjs','tools/validate-cdn-regex.cjs','data/rule-sources.lock.json','data/rules/azure-async-review.json','data/rules/cdn-regex-review.json','metadata/clashmi-compatibility.json'].map(file=>({file,sha256:sha(file)})),
+  inputs:['tools/build-balanced.cjs','tools/domestic-protocol.cjs','tools/network-compat.cjs','tools/network-compat-runtime.js','tools/clashmi-adapter.js','tools/validate-azure-async.cjs','tools/validate-cdn-regex.cjs','data/rule-sources.lock.json','data/rules/azure-async-review.json','data/rules/cdn-regex-review.json','metadata/clashmi-compatibility.json'].map(file=>({file,sha256:sha(file)})),
   clientDeployment:false,appJavaScriptCore:'NOT_RUN',iOSMemory:'NOT_RUN',deviceAcceptance:'NOT_RUN'};
 if(process.argv.includes('--check')){assert.equal(fs.readFileSync(local('data/rules/embedded-policy.json'),'utf8'),selectedText);for(const o of outputs)assert.equal(fs.readFileSync(local(o.file),'utf8'),o.code);assert.equal(fs.readFileSync(local('metadata/balanced-sources.json'),'utf8'),JSON.stringify(manifest,null,2)+'\n');}
 else{fs.writeFileSync(local('data/rules/embedded-policy.json'),selectedText);for(const o of outputs)fs.writeFileSync(local(o.file),o.code);fs.writeFileSync(local('metadata/balanced-sources.json'),JSON.stringify(manifest,null,2)+'\n');}

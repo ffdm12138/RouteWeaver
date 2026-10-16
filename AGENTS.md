@@ -1,5 +1,7 @@
 # RouteWeaver 工作约定
 
+2026-10-16 用户授权 `ipv6-fallback-r1`：保留标准双栈，六份独立 `ipv4-local` 入口由 `tools/build-network-compat.cjs` 生成并登记在 `compatibilityEntries`。未指定族的域名节点补 IPv4 优先且保留后备；兼容 JS 保留核心 IPv6/TUN 全路由、空 AAAA/取消 fake6、前置公网 IPv6 TUN 拒绝。无自动物理网络探测。Shadowrocket 单列能力限制，设备重试与接管待验收。
+
 当前用户请求优先。根 README 是使用入口，`docs/需求.md` 是公开业务设计合同，`CURRENT_RELEASE.json` 指定六个当前入口。
 
 - 此目录是独立公开源；只提交本目录的文件，不引用或上传外层个人工作区。公开版不包含个人目标地址例外或相关历史。

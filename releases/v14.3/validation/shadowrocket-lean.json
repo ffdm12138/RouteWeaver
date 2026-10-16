@@ -59,7 +59,7 @@
     },
     {
       "file": "metadata/shadowrocket-lean.json",
-      "sha256": "d37b37cda2a9a4100cca78e50f016785e2b7bce9e6c4c1f602eb992718b154b3"
+      "sha256": "c2e25e72d6f80f910ba56270f1761638450cd9e23444a0b9cc20a16ee78d7ff5"
     },
     {
       "file": "src/ios/v14.3-shadowrocket.conf",
@@ -67,7 +67,7 @@
     },
     {
       "file": "src/android/v14.3-android.js",
-      "sha256": "2128a1019d0c6f719a9e9533a8bc6b1e61bb47277e96190c8fc22218a52d4f3f"
+      "sha256": "1b9b03160e11dd0196dd6ad9de649c7436b84991f30fcf7ad1beeacde88e8c14"
     },
     {
       "file": "data/rules/embedded-policy.json",

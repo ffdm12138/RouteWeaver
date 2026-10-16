@@ -18,3 +18,6 @@ Run `python tools/audit-publication.py --strict` on the *staged* Git file set be
 - A source contract pass or Windows isolated Mihomo replay does not establish Android, iOS or macOS native-client acceptance.
 
 Upstream rule data are not covered by our own code license. See [third-party notices](THIRD_PARTY_NOTICES.md).
+
+
+The optional IPv4-local mode does not probe physical network reachability. Keep core IPv6 and full TUN/VPN interception enabled: client AAAA suppression and public literal IPv6 rejection need the documented final client settings. Application IPv4 retry, real TUN behavior and network switching remain device-pending. This mode cannot translate IPv6-only services; Shadowrocket has a narrower rule model and can also block proxied IPv6 targets. See [IPv4-local guide](docs/guides/IPv4兼容模式.md).

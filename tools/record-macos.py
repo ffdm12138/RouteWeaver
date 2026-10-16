@@ -21,7 +21,7 @@ for name, expected in [('macos-static', 'MACOS_STATIC_PASS'), ('macos-core', 'MA
 core = read(root / 'validation/macos-core.json')
 static = read(root / 'validation/macos-static.json')
 delivery = {
-    'version': '14.3', 'date': '2026-10-14', 'revision': 'macos-r1',
+    'version': '14.3', 'date': '2026-10-16', 'revision': 'macos-r1',
     'domesticProtocolRevision': 'domestic-protocol-r1',
     'status': 'MACOS_SOURCE_LOCAL_CORE_PASS_DEVICE_PENDING',
     'report': 'docs/reports/v14.3/MacBook适配.md', 'guide': 'docs/guides/MacBook使用说明.md',
@@ -29,7 +29,7 @@ delivery = {
     'entries': manifest['entries'], 'testEvidence': evidence,
     'metrics': {'staticChecks': len(static['checks']), 'platforms': static['platforms'],
                 'nativeObservations': {r['kind']: sum(p['cases'] for p in r['receipt']['platforms']) for r in core['runs']}},
-    'scope': 'Business routing, selectors, DNS and reviewed sources unchanged; actual Mac entries validated on owned Windows Mihomo with TUN disabled. Mac apps and native capture NOT_RUN.',
+    'scope': 'Inherited business routing; IPv4-preferred default only for domain nodes without explicit family. Separate IPv4-local entries and evidence are in network-compat-delivery.json. Actual standard Mac entries executed on owned Windows Mihomo with TUN disabled; Mac apps/native capture NOT_RUN.',
     'baseEntries': manifest['inputs'][4:],
     'settings': {
         'FlClash': {'mode': 'rule', 'ipv6': True, 'tunEnableAndAutoRoute': 'APP_OWNED; enable in app for full-system capture', 'tunDevice': 'Valid utunN retained; missing/foreign name lets core pick a free utun index'},
@@ -37,7 +37,7 @@ delivery = {
                      'includeAllNetworks': True, 'enforceRoutes': True, 'excludeLocalNetworks': False,
                      'excludeApns': False, 'excludeCellularServices': False, 'excludeDeviceCommunication': False,
                      'tunOwner': 'Apple NetworkExtension actual file descriptor supplied by app'}},
-    'iosWeChatFollowup': 'User reports waiting also with VPN off and closed investigation; no iOS source changes; network root cause unconfirmed.',
+    'iosWeChatFollowup': 'Earlier iOS investigation retained. Windows logs now show local DIRECT IPv6 unreachable; macOS/iOS and application IPv4 retry remain device NOT_RETESTED.',
     'clientDeployment': False, 'flclashMacApp': 'NOT_RUN', 'clashmiMacApp': 'NOT_RUN',
     'tunCapture': 'NOT_RUN', 'publicIPv6': 'NOT_RUN', 'deviceAcceptance': 'NOT_RUN',
     'recordingTool': {'file': 'tools/record-macos.py', 'sha256': sha(Path(__file__))}}

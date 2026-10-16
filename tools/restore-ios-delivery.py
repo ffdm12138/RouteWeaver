@@ -10,7 +10,7 @@ original='metadata/shadowrocket-sources.json'
 expected=next(e for e in read(baseline/'manifest.json')['files'] if e['file']==original)
 assert sha(baseline/original)==expected['sha256']
 (root/'metadata/shadowrocket-v14.2-provenance.json').write_bytes((baseline/original).read_bytes())
-subprocess.run(['node',str(root/'tools/build-shadowrocket-lean.cjs'),'--check'],cwd=root,check=True,capture_output=True,creationflags=subprocess.CREATE_NO_WINDOW)
+subprocess.run(['node',str(root/'tools/build-shadowrocket-lean.cjs'),'--check'],cwd=root,check=True,capture_output=True,creationflags=getattr(subprocess,'CREATE_NO_WINDOW',0))
 manifest=read(root/'metadata/balanced-sources.json')
 lean=read(root/'metadata/shadowrocket-lean.json')
 receipt=read(root/'validation/shadowrocket-lean.json')
@@ -18,7 +18,7 @@ assert receipt['status']=='SHADOWROCKET_LEAN_STATIC_PASS_NATIVE_PENDING'
 for entry in [*manifest['entries'],*receipt['sourceFiles']]:
     assert sha(root/entry['file'])==entry['sha256'],entry['file']
 code="const f=require('./tests/fixture.cjs');const c=f.generate('clashmi');console.log(JSON.stringify({groups:c['proxy-groups'].map(g=>g.name),mode:c.mode,ipv6:c.ipv6,dnsIPv6:c.dns.ipv6,nameserver:c.dns.nameserver,fallback:c.dns.fallback,tun:c.tun}));"
-run=subprocess.run(['node','-e',code],cwd=root,check=True,capture_output=True,text=True,encoding='utf-8',creationflags=subprocess.CREATE_NO_WINDOW)
+run=subprocess.run(['node','-e',code],cwd=root,check=True,capture_output=True,text=True,encoding='utf-8',creationflags=getattr(subprocess,'CREATE_NO_WINDOW',0))
 inspection=json.loads(run.stdout)
 assert len(inspection['groups'])==26 and inspection['mode']=='rule'
 assert inspection['ipv6'] is True and inspection['fallback']==[]
@@ -29,10 +29,12 @@ assert core['status']=='BALANCED_LOCAL_CORE_PASS'
 for e in core['sourceFiles']:
     assert sha(root/e['file'])==e['sha256'],e['file']
 historical='archive/v14.3-before-domestic-protocol-r1-20261013/releases/v14.3/validation/clashmi-ios-investigation.json'
-history=read(project/historical)
+prior=read(root/'metadata/ios-delivery.json')
+history=read(project/historical) if (project/historical).exists() else {'status':prior['historicalFailedInvestigation']['status']}
 assert history['status']=='FAIL'
+history_sha=sha(project/historical) if (project/historical).exists() else prior['historicalFailedInvestigation']['sha256']
 delivery={
- 'version':'14.3','date':'2026-10-14','revision':'ios-delivery-r2','domesticProtocolRevision':'domestic-protocol-r1',
+ 'version':'14.3','date':'2026-10-16','revision':'ios-delivery-r2','domesticProtocolRevision':'domestic-protocol-r1',
  'status':'IOS_SOURCE_STATIC_LOCAL_CORE_PASS_NATIVE_DEVICE_PENDING',
  'authorization':'User selected self-contained business DNS plus remote complete rules, and reviewed domestic TCP/UDP/DNS following 国内网站.',
  'shadowrocket':{
@@ -48,9 +50,9 @@ delivery={
   'profileOverwriteRules':False,'profileOverwriteProxyGroups':False,'appendApplePushRules':False,'tunOverwrite':False,**compatibility['networkExtensionSettings']},
  'officialSourceEvidence':{'file':'metadata/clashmi-compatibility.json','sha256':sha(root/'metadata/clashmi-compatibility.json')},
  'localCoreEvidence':{'file':core_file,'sha256':sha(root/core_file),'status':core['status']},
- 'historicalFailedInvestigation':{'file':historical,'sha256':sha(project/historical),'status':history['status'],'currentAcceptance':False},
- 'wechatUploadRootCause':'UNRESOLVED_DEVICE_LOG_AND_VPN_OFF_COMPARISON_NOT_PROVIDED',
- 'report':'docs/reports/v14.3/国内协议跟组与小火箭精简.md',
+ 'historicalFailedInvestigation':{'file':historical,'sha256':history_sha,'status':history['status'],'currentAcceptance':False},
+ 'wechatUploadRootCause':'Windows logs show local DIRECT IPv6 unreachable; iOS and macOS root cause and new compatibility mode device retry NOT_RETESTED',
+ 'report':'docs/reports/v14.3/IPv6回退与兼容入口.md',
  'restorationTool':{'file':'tools/restore-ios-delivery.py','sha256':sha(Path(__file__))},
  'clientDeployment':False,'deviceAcceptance':'NOT_RUN'}
 (root/'metadata/ios-delivery.json').write_text(json.dumps(delivery,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')

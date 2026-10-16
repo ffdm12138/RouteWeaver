@@ -10,3 +10,6 @@ Thanks for helping improve cross-platform route-policy correctness. File an issu
 6. Explain code changes, scope, test commands, limitations, and which user requirements they address.
 
 **Do not change the user's authoritative `docs/需求.md` as a side effect of a pull request.** Propose amendments separately.
+
+
+For the IPv6 fallback revision, regenerate both standard and optional entries and run `tests/network-compat.cjs`; behavior changes also require the scoped `native-network-compat.cjs` replay and affected existing regressions. Preserve explicit node/provider settings. Record client AAAA, Fake-IP, core/TUN routing and application retry as separate observations; do not turn a synthetic inbound guard test into device acceptance.
