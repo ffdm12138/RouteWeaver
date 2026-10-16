@@ -27,13 +27,17 @@ def load(path):
     return value, hashlib.sha256(raw).hexdigest()
 
 
-def inspect(config, live=None):
+def inspect(config, live=None, expected_network_mode=None):
+    if expected_network_mode not in (None, 'auto', 'dual-stack', 'ipv4-local'):
+        raise ValueError('Unsupported expected network mode')
     marker = config.get('x-v14-generated') or {}
     tun = config.get('tun') or {}
     dns = config.get('dns') or {}
     sniff = config.get('sniffer') or {}
     findings = []
     mode = marker.get('networkMode', 'UNKNOWN')
+    if expected_network_mode is not None and mode != expected_network_mode:
+        findings.append('EXPECTED_NETWORK_MODE_MISMATCH')
     if not marker or marker.get('version') != '14.3':
         findings.append('CURRENT_ENTRY_NOT_IDENTIFIED')
     if config.get('mode') != 'rule':
@@ -42,6 +46,22 @@ def inspect(config, live=None):
         findings.append('CORE_IPV6_NOT_ENABLED')
     if tun.get('enable') is True and tun.get('strict-route') is not True:
         findings.append('STRICT_ROUTE_NOT_EFFECTIVE')
+    automatic = None
+    if mode == 'auto':
+        if config.get('routeweaver-local-family') != 'auto':
+            findings.append('AUTO_NATIVE_REQUEST_NOT_EFFECTIVE')
+        if dns.get('ipv6') is not True:
+            findings.append('AUTO_DNS_IPV6_STATICALLY_DISABLED')
+        actual = (live or {}).get('config') or {}
+        state = actual.get('routeweaver-local-state') or {}
+        verified = actual.get('routeweaver-local-family') == 'auto' and isinstance(state, dict) and state.get('state') in ('unknown', 'no-local-v6', 'local-v6-usable')
+        automatic = {'requested': True, 'nativeRuntimeVerified': verified,
+                     'state': state.get('state') if verified else 'NOT_OBSERVED',
+                     'reason': state.get('reason') if verified else 'JS_AND_SAVED_CONFIG_ARE_NOT_CAPABILITY_PROOF'}
+        if not verified:
+            findings.append('AUTO_NATIVE_RUNTIME_NOT_VERIFIED')
+        elif state.get('reason') == 'socket-hook-owned-egress-needs-host-capability':
+            findings.append('AUTO_HOST_EGRESS_CAPABILITY_NOT_INTEGRATED')
     if mode == 'ipv4-local':
         if dns.get('ipv6') is not False:
             findings.append('COMPAT_DNS_AAAA_FILTER_OVERRIDDEN')
@@ -73,7 +93,7 @@ def inspect(config, live=None):
     summary = {
         'status': 'CONFIG_CONTRACT_MISMATCH' if findings else 'ALLOWLISTED_CONFIG_CHECK_PASS',
         'scope': 'Exported config only; final app merge, OS capture and app fallback need independent evidence',
-        'networkMode': mode, 'mode': config.get('mode'), 'coreIPv6': config.get('ipv6'),
+        'networkMode': mode, 'expectedNetworkMode': expected_network_mode, 'mode': config.get('mode'), 'coreIPv6': config.get('ipv6'),
         'tun': {k: tun.get(k) for k in ('enable', 'stack', 'auto-route', 'strict-route', 'auto-detect-interface', 'mtu')},
         'dualStackRouteConfigured': '::/0' in tun.get('route-address', []),
         'dns': {'enabled': dns.get('enable'), 'ipv6': dns.get('ipv6'), 'enhancedMode': dns.get('enhanced-mode'),
@@ -84,6 +104,8 @@ def inspect(config, live=None):
         'publicGroups': public_groups, 'findings': sorted(set(findings)),
         'privacy': 'Allowlisted fields and counts only; credentials, URLs, node names, destinations and raw rules omitted',
     }
+    if automatic is not None:
+        summary['automaticNetwork'] = automatic
     if live is not None:
         actual = live.get('config') or {}
         actual_tun = actual.get('tun') or {}
@@ -118,6 +140,8 @@ def read_live(config):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--config', required=True)
+    parser.add_argument('--expected-network-mode', choices=('auto', 'dual-stack', 'ipv4-local'),
+                        help='Assert the intended device mode; a valid but unintended mode is a mismatch')
     parser.add_argument('--entry', help='Optional actually imported JS; only its SHA256 is reported')
     parser.add_argument('--live', action='store_true', help='Read only an explicitly configured loopback controller')
     parser.add_argument('--output')
@@ -125,7 +149,7 @@ def main():
     args = parser.parse_args()
     try:
         config, digest = load(args.config)
-        report = inspect(config, read_live(config) if args.live else None)
+        report = inspect(config, read_live(config) if args.live else None, args.expected_network_mode)
         report['configSHA256'] = digest
         if args.entry:
             report['entrySHA256'] = hashlib.sha256(Path(args.entry).read_bytes()).hexdigest()

@@ -8,6 +8,96 @@
       "version": "rquickjs 0.12.0",
       "cases": [
         {
+          "id": "windows:auto:minimal",
+          "status": "PASS",
+          "resultSHA256": "c1fb7fe3408eaabb0d83478fed235ff2e2fa79ebfd769bcfb1ebba130e3fb376"
+        },
+        {
+          "id": "windows:auto:serialized-object",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "7f1a0eed5c7363eca9ec2a3b86f8cd9f7ec6e118fdc7a154c11879561c6f0773"
+        },
+        {
+          "id": "windows:auto:provider-only",
+          "status": "PASS",
+          "resultSHA256": "d339c12dc32d75146149c75a4c380f8fc4820c188c07de2cf4f5d4e55e553b15"
+        },
+        {
+          "id": "windows:auto:mixed-and-inline-provider",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "ece7777037c9fdce281ac374dfc437f3e93b07d540311e8cc7e15c803d138f5e"
+        },
+        {
+          "id": "windows:auto:explicit-node-families",
+          "status": "PASS",
+          "resultSHA256": "c3459b3deb82dd80fb388de5f7ec3d27ef870e922ca696b63fa897f065718a61"
+        },
+        {
+          "id": "windows:auto:unicode-and-quoted-node",
+          "status": "PASS",
+          "resultSHA256": "d9a4597d9e47464b8d24628e18792bfe24b1998dc9a9adbd52f5e84eb96126c7"
+        },
+        {
+          "id": "windows:auto:preserve-input-fields",
+          "status": "PASS",
+          "resultSHA256": "a3b19932b72b9dd47235b9d5d445c344892ea7a63d84c8c33d47ea604421a3e2"
+        },
+        {
+          "id": "windows:auto:sniffer-and-LAN-exclusions",
+          "status": "PASS",
+          "resultSHA256": "6da6b206fbabdb45ad4f6ebcf2b18c124123e4d6d0feccfb721e5c359189ddc4"
+        },
+        {
+          "id": "windows:auto:inherited-TUN-foreign-fields",
+          "status": "PASS",
+          "resultSHA256": "31d70f60e406cc871dd6895c0a18f5306f1e63f09be628dfb572cea16e6af3ba"
+        },
+        {
+          "id": "windows:auto:provider-explicit-expression",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "ece7777037c9fdce281ac374dfc437f3e93b07d540311e8cc7e15c803d138f5e"
+        },
+        {
+          "id": "windows:auto:duplicate-node-rejected",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "49a1b322fb4ad7156017cae6b4236deecd8db4a75c1ed6715f47dc8f6bffe6bc"
+        },
+        {
+          "id": "windows:auto:reserved-node-rejected",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "498d88cba3d7803eb46aeaa0894fc3fb2262cc0868de5aeea6346688a72c08cb"
+        },
+        {
+          "id": "windows:auto:cyclic-dialer-rejected",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "b5fd1e9a8bb99ee8f724cb12a312a8f563c02ae529cdcf64f5e576bd29b9114f"
+        },
+        {
+          "id": "windows:auto:missing-provider-rejected",
+          "status": "PASS",
+          "resultSHA256": "5131c337f966a4216c45c26160038a2c148d09101b52d4624969bef1008025d5"
+        },
+        {
+          "id": "windows:auto:invalid-root-null",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "7f1a0eed5c7363eca9ec2a3b86f8cd9f7ec6e118fdc7a154c11879561c6f0773"
+        },
+        {
+          "id": "windows:auto:invalid-root-array",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "7f1a0eed5c7363eca9ec2a3b86f8cd9f7ec6e118fdc7a154c11879561c6f0773"
+        },
+        {
+          "id": "windows:auto:invalid-root-string",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "7f1a0eed5c7363eca9ec2a3b86f8cd9f7ec6e118fdc7a154c11879561c6f0773"
+        },
+        {
+          "id": "windows:auto:invalid-network-mode",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "90aac4e30629b6b259386cb53eeaa14224bd94922baf8910a8826599789a8082"
+        },
+        {
           "id": "windows:dual-stack:minimal",
           "status": "PASS",
           "resultSHA256": "6429c5a11e89ae5dc2e6fdf351e7bf6e076f5886b2782b95e6960d9bbba2ab3f"
@@ -95,7 +185,7 @@
         {
           "id": "windows:dual-stack:invalid-network-mode",
           "status": "EXPECTED_REJECTION_MATCH",
-          "resultSHA256": "ea0907fd9f57ef03377d8865aa6eb5e7e9b851ba451389b328d856bcd80fbc8d"
+          "resultSHA256": "90aac4e30629b6b259386cb53eeaa14224bd94922baf8910a8826599789a8082"
         },
         {
           "id": "windows:ipv4-local:minimal",
@@ -185,7 +275,97 @@
         {
           "id": "windows:ipv4-local:invalid-network-mode",
           "status": "EXPECTED_REJECTION_MATCH",
-          "resultSHA256": "ea0907fd9f57ef03377d8865aa6eb5e7e9b851ba451389b328d856bcd80fbc8d"
+          "resultSHA256": "90aac4e30629b6b259386cb53eeaa14224bd94922baf8910a8826599789a8082"
+        },
+        {
+          "id": "android:auto:minimal",
+          "status": "PASS",
+          "resultSHA256": "000978fe3174399a94c052743858d5a31487642c1b6623621c5f7d2b43495c36"
+        },
+        {
+          "id": "android:auto:serialized-object",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "7f1a0eed5c7363eca9ec2a3b86f8cd9f7ec6e118fdc7a154c11879561c6f0773"
+        },
+        {
+          "id": "android:auto:provider-only",
+          "status": "PASS",
+          "resultSHA256": "6ddf75e74d9f6d19ffc85554de5c7a38872c13c05cedba6058ce45bbd9e35f58"
+        },
+        {
+          "id": "android:auto:mixed-and-inline-provider",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "ece7777037c9fdce281ac374dfc437f3e93b07d540311e8cc7e15c803d138f5e"
+        },
+        {
+          "id": "android:auto:explicit-node-families",
+          "status": "PASS",
+          "resultSHA256": "2cb79f2207982e1043a8870727fb4f70058ae1c78cfc6957a7ef6f957c60e04c"
+        },
+        {
+          "id": "android:auto:unicode-and-quoted-node",
+          "status": "PASS",
+          "resultSHA256": "35d45f06f0e5f345dee463cbd59f7095b693e8576b2337d6ca95ce0497673d91"
+        },
+        {
+          "id": "android:auto:preserve-input-fields",
+          "status": "PASS",
+          "resultSHA256": "3c913d31bcb7a3fdf4f0898e5db69724de7a5ffa9334f37f3159cdad4a269293"
+        },
+        {
+          "id": "android:auto:sniffer-and-LAN-exclusions",
+          "status": "PASS",
+          "resultSHA256": "da61c1f3543026f95b34386e11563e487352c4be0e163c4ca1d80482e6ebdaac"
+        },
+        {
+          "id": "android:auto:inherited-TUN-foreign-fields",
+          "status": "PASS",
+          "resultSHA256": "ecdb264d314d20cc8f27ded2c7bc1146d8b6a6b62087fbb6c5102ac27156e3d0"
+        },
+        {
+          "id": "android:auto:provider-explicit-expression",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "ece7777037c9fdce281ac374dfc437f3e93b07d540311e8cc7e15c803d138f5e"
+        },
+        {
+          "id": "android:auto:duplicate-node-rejected",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "49a1b322fb4ad7156017cae6b4236deecd8db4a75c1ed6715f47dc8f6bffe6bc"
+        },
+        {
+          "id": "android:auto:reserved-node-rejected",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "498d88cba3d7803eb46aeaa0894fc3fb2262cc0868de5aeea6346688a72c08cb"
+        },
+        {
+          "id": "android:auto:cyclic-dialer-rejected",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "b5fd1e9a8bb99ee8f724cb12a312a8f563c02ae529cdcf64f5e576bd29b9114f"
+        },
+        {
+          "id": "android:auto:missing-provider-rejected",
+          "status": "PASS",
+          "resultSHA256": "faaabb23ebfccd563cf86d8fdd3c0512d6ff7c3bfa388f3a211f5a510948c799"
+        },
+        {
+          "id": "android:auto:invalid-root-null",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "7f1a0eed5c7363eca9ec2a3b86f8cd9f7ec6e118fdc7a154c11879561c6f0773"
+        },
+        {
+          "id": "android:auto:invalid-root-array",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "7f1a0eed5c7363eca9ec2a3b86f8cd9f7ec6e118fdc7a154c11879561c6f0773"
+        },
+        {
+          "id": "android:auto:invalid-root-string",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "7f1a0eed5c7363eca9ec2a3b86f8cd9f7ec6e118fdc7a154c11879561c6f0773"
+        },
+        {
+          "id": "android:auto:invalid-network-mode",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "90aac4e30629b6b259386cb53eeaa14224bd94922baf8910a8826599789a8082"
         },
         {
           "id": "android:dual-stack:minimal",
@@ -275,7 +455,7 @@
         {
           "id": "android:dual-stack:invalid-network-mode",
           "status": "EXPECTED_REJECTION_MATCH",
-          "resultSHA256": "ea0907fd9f57ef03377d8865aa6eb5e7e9b851ba451389b328d856bcd80fbc8d"
+          "resultSHA256": "90aac4e30629b6b259386cb53eeaa14224bd94922baf8910a8826599789a8082"
         },
         {
           "id": "android:ipv4-local:minimal",
@@ -365,7 +545,97 @@
         {
           "id": "android:ipv4-local:invalid-network-mode",
           "status": "EXPECTED_REJECTION_MATCH",
-          "resultSHA256": "ea0907fd9f57ef03377d8865aa6eb5e7e9b851ba451389b328d856bcd80fbc8d"
+          "resultSHA256": "90aac4e30629b6b259386cb53eeaa14224bd94922baf8910a8826599789a8082"
+        },
+        {
+          "id": "clashmi:auto:minimal",
+          "status": "PASS",
+          "resultSHA256": "035fde99af768281b5ef3169785ef89565d80f981ddfed426909c26c73800609"
+        },
+        {
+          "id": "clashmi:auto:serialized-object",
+          "status": "PASS",
+          "resultSHA256": "035fde99af768281b5ef3169785ef89565d80f981ddfed426909c26c73800609"
+        },
+        {
+          "id": "clashmi:auto:provider-only",
+          "status": "PASS",
+          "resultSHA256": "d95ccb17265732ff7a60171b990f5df4460ddf1b84c54fa8a6e2e43e1b0ea747"
+        },
+        {
+          "id": "clashmi:auto:mixed-and-inline-provider",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "ece7777037c9fdce281ac374dfc437f3e93b07d540311e8cc7e15c803d138f5e"
+        },
+        {
+          "id": "clashmi:auto:explicit-node-families",
+          "status": "PASS",
+          "resultSHA256": "5c75a81c797f095ded1b3b103fe11bc889cba404b98b58145d510011821cff9a"
+        },
+        {
+          "id": "clashmi:auto:unicode-and-quoted-node",
+          "status": "PASS",
+          "resultSHA256": "449f63403b42cd359236b671916cfa38670aa6b999108da2ac5b79367514084c"
+        },
+        {
+          "id": "clashmi:auto:preserve-input-fields",
+          "status": "PASS",
+          "resultSHA256": "df344e0b0b902d0b584fa5ce01c5ac940dde4dd5600ab59c6a911c60f95dd669"
+        },
+        {
+          "id": "clashmi:auto:sniffer-and-LAN-exclusions",
+          "status": "PASS",
+          "resultSHA256": "ef85092044269af13ba9c09e6d7502e515854f9164aaaf13642402fd10d6a45b"
+        },
+        {
+          "id": "clashmi:auto:inherited-TUN-foreign-fields",
+          "status": "PASS",
+          "resultSHA256": "035fde99af768281b5ef3169785ef89565d80f981ddfed426909c26c73800609"
+        },
+        {
+          "id": "clashmi:auto:provider-explicit-expression",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "ece7777037c9fdce281ac374dfc437f3e93b07d540311e8cc7e15c803d138f5e"
+        },
+        {
+          "id": "clashmi:auto:duplicate-node-rejected",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "49a1b322fb4ad7156017cae6b4236deecd8db4a75c1ed6715f47dc8f6bffe6bc"
+        },
+        {
+          "id": "clashmi:auto:reserved-node-rejected",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "498d88cba3d7803eb46aeaa0894fc3fb2262cc0868de5aeea6346688a72c08cb"
+        },
+        {
+          "id": "clashmi:auto:cyclic-dialer-rejected",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "b5fd1e9a8bb99ee8f724cb12a312a8f563c02ae529cdcf64f5e576bd29b9114f"
+        },
+        {
+          "id": "clashmi:auto:missing-provider-rejected",
+          "status": "PASS",
+          "resultSHA256": "035fde99af768281b5ef3169785ef89565d80f981ddfed426909c26c73800609"
+        },
+        {
+          "id": "clashmi:auto:invalid-root-null",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "7f1a0eed5c7363eca9ec2a3b86f8cd9f7ec6e118fdc7a154c11879561c6f0773"
+        },
+        {
+          "id": "clashmi:auto:invalid-root-array",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "7f1a0eed5c7363eca9ec2a3b86f8cd9f7ec6e118fdc7a154c11879561c6f0773"
+        },
+        {
+          "id": "clashmi:auto:invalid-root-string",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "f64c5d7b34b7d1ecd46fd3b8b57ca650060b96926eede815ab5c6c78a61688e7"
+        },
+        {
+          "id": "clashmi:auto:invalid-network-mode",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "90aac4e30629b6b259386cb53eeaa14224bd94922baf8910a8826599789a8082"
         },
         {
           "id": "clashmi:dual-stack:minimal",
@@ -455,7 +725,7 @@
         {
           "id": "clashmi:dual-stack:invalid-network-mode",
           "status": "EXPECTED_REJECTION_MATCH",
-          "resultSHA256": "ea0907fd9f57ef03377d8865aa6eb5e7e9b851ba451389b328d856bcd80fbc8d"
+          "resultSHA256": "90aac4e30629b6b259386cb53eeaa14224bd94922baf8910a8826599789a8082"
         },
         {
           "id": "clashmi:ipv4-local:minimal",
@@ -545,7 +815,97 @@
         {
           "id": "clashmi:ipv4-local:invalid-network-mode",
           "status": "EXPECTED_REJECTION_MATCH",
-          "resultSHA256": "ea0907fd9f57ef03377d8865aa6eb5e7e9b851ba451389b328d856bcd80fbc8d"
+          "resultSHA256": "90aac4e30629b6b259386cb53eeaa14224bd94922baf8910a8826599789a8082"
+        },
+        {
+          "id": "macosFlClash:auto:minimal",
+          "status": "PASS",
+          "resultSHA256": "e35b58da620ed5b56ac4286aac97fd5b153bec0235f028c665434d31e1bc9670"
+        },
+        {
+          "id": "macosFlClash:auto:serialized-object",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "7f1a0eed5c7363eca9ec2a3b86f8cd9f7ec6e118fdc7a154c11879561c6f0773"
+        },
+        {
+          "id": "macosFlClash:auto:provider-only",
+          "status": "PASS",
+          "resultSHA256": "632a2c073f89b6326bf84d76113a9154a2172513824f428667f0547a60d4e171"
+        },
+        {
+          "id": "macosFlClash:auto:mixed-and-inline-provider",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "ece7777037c9fdce281ac374dfc437f3e93b07d540311e8cc7e15c803d138f5e"
+        },
+        {
+          "id": "macosFlClash:auto:explicit-node-families",
+          "status": "PASS",
+          "resultSHA256": "8fe6f71844342ad86ffb5a4ddaa5a93f1a06af48afb4dd0b88a9f0288ac63a7e"
+        },
+        {
+          "id": "macosFlClash:auto:unicode-and-quoted-node",
+          "status": "PASS",
+          "resultSHA256": "6fc027165229b942470ddeedf5f8671031495a97cfd94715dea2121b164ad360"
+        },
+        {
+          "id": "macosFlClash:auto:preserve-input-fields",
+          "status": "PASS",
+          "resultSHA256": "a7c515809a490c05c99b4ab11215211960c8ce10a8237c697ea5dadd2bd3e26a"
+        },
+        {
+          "id": "macosFlClash:auto:sniffer-and-LAN-exclusions",
+          "status": "PASS",
+          "resultSHA256": "628f969b25fda128fb06728af5d521222b0ea9d1db5d6636b957f9a87d998f07"
+        },
+        {
+          "id": "macosFlClash:auto:inherited-TUN-foreign-fields",
+          "status": "PASS",
+          "resultSHA256": "7ed65cf8418a1368dbf12384aa33f578f178c75935585440ff965d27a7d911a5"
+        },
+        {
+          "id": "macosFlClash:auto:provider-explicit-expression",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "ece7777037c9fdce281ac374dfc437f3e93b07d540311e8cc7e15c803d138f5e"
+        },
+        {
+          "id": "macosFlClash:auto:duplicate-node-rejected",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "49a1b322fb4ad7156017cae6b4236deecd8db4a75c1ed6715f47dc8f6bffe6bc"
+        },
+        {
+          "id": "macosFlClash:auto:reserved-node-rejected",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "498d88cba3d7803eb46aeaa0894fc3fb2262cc0868de5aeea6346688a72c08cb"
+        },
+        {
+          "id": "macosFlClash:auto:cyclic-dialer-rejected",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "b5fd1e9a8bb99ee8f724cb12a312a8f563c02ae529cdcf64f5e576bd29b9114f"
+        },
+        {
+          "id": "macosFlClash:auto:missing-provider-rejected",
+          "status": "PASS",
+          "resultSHA256": "f0ea04e196eb606a424c1b5202442b61189705bff9a84fab4ae7a63bb95b1a21"
+        },
+        {
+          "id": "macosFlClash:auto:invalid-root-null",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "7f1a0eed5c7363eca9ec2a3b86f8cd9f7ec6e118fdc7a154c11879561c6f0773"
+        },
+        {
+          "id": "macosFlClash:auto:invalid-root-array",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "7f1a0eed5c7363eca9ec2a3b86f8cd9f7ec6e118fdc7a154c11879561c6f0773"
+        },
+        {
+          "id": "macosFlClash:auto:invalid-root-string",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "7f1a0eed5c7363eca9ec2a3b86f8cd9f7ec6e118fdc7a154c11879561c6f0773"
+        },
+        {
+          "id": "macosFlClash:auto:invalid-network-mode",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "90aac4e30629b6b259386cb53eeaa14224bd94922baf8910a8826599789a8082"
         },
         {
           "id": "macosFlClash:dual-stack:minimal",
@@ -635,7 +995,7 @@
         {
           "id": "macosFlClash:dual-stack:invalid-network-mode",
           "status": "EXPECTED_REJECTION_MATCH",
-          "resultSHA256": "ea0907fd9f57ef03377d8865aa6eb5e7e9b851ba451389b328d856bcd80fbc8d"
+          "resultSHA256": "90aac4e30629b6b259386cb53eeaa14224bd94922baf8910a8826599789a8082"
         },
         {
           "id": "macosFlClash:ipv4-local:minimal",
@@ -725,7 +1085,97 @@
         {
           "id": "macosFlClash:ipv4-local:invalid-network-mode",
           "status": "EXPECTED_REJECTION_MATCH",
-          "resultSHA256": "ea0907fd9f57ef03377d8865aa6eb5e7e9b851ba451389b328d856bcd80fbc8d"
+          "resultSHA256": "90aac4e30629b6b259386cb53eeaa14224bd94922baf8910a8826599789a8082"
+        },
+        {
+          "id": "macosClashMi:auto:minimal",
+          "status": "PASS",
+          "resultSHA256": "3cee6e54b749a881bc2e97fe856f756b9ee4c3715f23d3a95b91962ee8421b3e"
+        },
+        {
+          "id": "macosClashMi:auto:serialized-object",
+          "status": "PASS",
+          "resultSHA256": "3cee6e54b749a881bc2e97fe856f756b9ee4c3715f23d3a95b91962ee8421b3e"
+        },
+        {
+          "id": "macosClashMi:auto:provider-only",
+          "status": "PASS",
+          "resultSHA256": "8c31f6bc9440fc6ed3892d38c4f3cb9a83f42b3c7f9173ef62b3a0b2d956e82d"
+        },
+        {
+          "id": "macosClashMi:auto:mixed-and-inline-provider",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "ece7777037c9fdce281ac374dfc437f3e93b07d540311e8cc7e15c803d138f5e"
+        },
+        {
+          "id": "macosClashMi:auto:explicit-node-families",
+          "status": "PASS",
+          "resultSHA256": "7ed04de8b24f6f89139a068837400f27962e239e3c7ba4d982b12af1fada9935"
+        },
+        {
+          "id": "macosClashMi:auto:unicode-and-quoted-node",
+          "status": "PASS",
+          "resultSHA256": "94e5dc660c581c3416d90305b2c6cc5e43a775f99574894267f85cf93fef8dca"
+        },
+        {
+          "id": "macosClashMi:auto:preserve-input-fields",
+          "status": "PASS",
+          "resultSHA256": "06d21feb697cbbc21957e8b5370fa2634b39940227a25d1d90241d4d8d4fdf4e"
+        },
+        {
+          "id": "macosClashMi:auto:sniffer-and-LAN-exclusions",
+          "status": "PASS",
+          "resultSHA256": "23fbf24a415db916286392629330e80e9d2cb0f947a925bb1ea5fa5aac12f44a"
+        },
+        {
+          "id": "macosClashMi:auto:inherited-TUN-foreign-fields",
+          "status": "PASS",
+          "resultSHA256": "3cee6e54b749a881bc2e97fe856f756b9ee4c3715f23d3a95b91962ee8421b3e"
+        },
+        {
+          "id": "macosClashMi:auto:provider-explicit-expression",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "ece7777037c9fdce281ac374dfc437f3e93b07d540311e8cc7e15c803d138f5e"
+        },
+        {
+          "id": "macosClashMi:auto:duplicate-node-rejected",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "49a1b322fb4ad7156017cae6b4236deecd8db4a75c1ed6715f47dc8f6bffe6bc"
+        },
+        {
+          "id": "macosClashMi:auto:reserved-node-rejected",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "498d88cba3d7803eb46aeaa0894fc3fb2262cc0868de5aeea6346688a72c08cb"
+        },
+        {
+          "id": "macosClashMi:auto:cyclic-dialer-rejected",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "b5fd1e9a8bb99ee8f724cb12a312a8f563c02ae529cdcf64f5e576bd29b9114f"
+        },
+        {
+          "id": "macosClashMi:auto:missing-provider-rejected",
+          "status": "PASS",
+          "resultSHA256": "3cee6e54b749a881bc2e97fe856f756b9ee4c3715f23d3a95b91962ee8421b3e"
+        },
+        {
+          "id": "macosClashMi:auto:invalid-root-null",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "7f1a0eed5c7363eca9ec2a3b86f8cd9f7ec6e118fdc7a154c11879561c6f0773"
+        },
+        {
+          "id": "macosClashMi:auto:invalid-root-array",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "7f1a0eed5c7363eca9ec2a3b86f8cd9f7ec6e118fdc7a154c11879561c6f0773"
+        },
+        {
+          "id": "macosClashMi:auto:invalid-root-string",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "f64c5d7b34b7d1ecd46fd3b8b57ca650060b96926eede815ab5c6c78a61688e7"
+        },
+        {
+          "id": "macosClashMi:auto:invalid-network-mode",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "90aac4e30629b6b259386cb53eeaa14224bd94922baf8910a8826599789a8082"
         },
         {
           "id": "macosClashMi:dual-stack:minimal",
@@ -815,7 +1265,7 @@
         {
           "id": "macosClashMi:dual-stack:invalid-network-mode",
           "status": "EXPECTED_REJECTION_MATCH",
-          "resultSHA256": "ea0907fd9f57ef03377d8865aa6eb5e7e9b851ba451389b328d856bcd80fbc8d"
+          "resultSHA256": "90aac4e30629b6b259386cb53eeaa14224bd94922baf8910a8826599789a8082"
         },
         {
           "id": "macosClashMi:ipv4-local:minimal",
@@ -905,7 +1355,97 @@
         {
           "id": "macosClashMi:ipv4-local:invalid-network-mode",
           "status": "EXPECTED_REJECTION_MATCH",
-          "resultSHA256": "ea0907fd9f57ef03377d8865aa6eb5e7e9b851ba451389b328d856bcd80fbc8d"
+          "resultSHA256": "90aac4e30629b6b259386cb53eeaa14224bd94922baf8910a8826599789a8082"
+        },
+        {
+          "id": "clashVerge:auto:minimal",
+          "status": "PASS",
+          "resultSHA256": "62864d9cd0cf56ff713c547a82b0caf9248b75eb210a310ceb33a7547138cf9c"
+        },
+        {
+          "id": "clashVerge:auto:serialized-object",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "7f1a0eed5c7363eca9ec2a3b86f8cd9f7ec6e118fdc7a154c11879561c6f0773"
+        },
+        {
+          "id": "clashVerge:auto:provider-only",
+          "status": "PASS",
+          "resultSHA256": "edaee14d16f83e851e3647c094c2798cb625981abc25df296c0e65b377901424"
+        },
+        {
+          "id": "clashVerge:auto:mixed-and-inline-provider",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "ece7777037c9fdce281ac374dfc437f3e93b07d540311e8cc7e15c803d138f5e"
+        },
+        {
+          "id": "clashVerge:auto:explicit-node-families",
+          "status": "PASS",
+          "resultSHA256": "f4b9e534252239fec6d04084ace79b870dd1b55b378305e8bb398d9b089ec38c"
+        },
+        {
+          "id": "clashVerge:auto:unicode-and-quoted-node",
+          "status": "PASS",
+          "resultSHA256": "49e00a64441dbf26538da28dc15589ae4aa5bb55e03c32bca2b186e82382d5b8"
+        },
+        {
+          "id": "clashVerge:auto:preserve-input-fields",
+          "status": "PASS",
+          "resultSHA256": "7fbdff0f8d7bd9d913042ad024b4338bb521564069d0628b2ddd2f15d5d8d528"
+        },
+        {
+          "id": "clashVerge:auto:sniffer-and-LAN-exclusions",
+          "status": "PASS",
+          "resultSHA256": "a35c7ef967f4c76cae34a111956fa05bbebab0a4e6d83970b881c18b0d5f9dcc"
+        },
+        {
+          "id": "clashVerge:auto:inherited-TUN-foreign-fields",
+          "status": "PASS",
+          "resultSHA256": "d76282ec9d2ccd1021d6ac71fdb0a1838a513af3af6f34980a94465953af2505"
+        },
+        {
+          "id": "clashVerge:auto:provider-explicit-expression",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "ece7777037c9fdce281ac374dfc437f3e93b07d540311e8cc7e15c803d138f5e"
+        },
+        {
+          "id": "clashVerge:auto:duplicate-node-rejected",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "49a1b322fb4ad7156017cae6b4236deecd8db4a75c1ed6715f47dc8f6bffe6bc"
+        },
+        {
+          "id": "clashVerge:auto:reserved-node-rejected",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "498d88cba3d7803eb46aeaa0894fc3fb2262cc0868de5aeea6346688a72c08cb"
+        },
+        {
+          "id": "clashVerge:auto:cyclic-dialer-rejected",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "b5fd1e9a8bb99ee8f724cb12a312a8f563c02ae529cdcf64f5e576bd29b9114f"
+        },
+        {
+          "id": "clashVerge:auto:missing-provider-rejected",
+          "status": "PASS",
+          "resultSHA256": "551d6a62c35867675e65996a51052eb91c2a49f1321dd24e6f08a34f83309a1b"
+        },
+        {
+          "id": "clashVerge:auto:invalid-root-null",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "7f1a0eed5c7363eca9ec2a3b86f8cd9f7ec6e118fdc7a154c11879561c6f0773"
+        },
+        {
+          "id": "clashVerge:auto:invalid-root-array",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "7f1a0eed5c7363eca9ec2a3b86f8cd9f7ec6e118fdc7a154c11879561c6f0773"
+        },
+        {
+          "id": "clashVerge:auto:invalid-root-string",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "7f1a0eed5c7363eca9ec2a3b86f8cd9f7ec6e118fdc7a154c11879561c6f0773"
+        },
+        {
+          "id": "clashVerge:auto:invalid-network-mode",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "90aac4e30629b6b259386cb53eeaa14224bd94922baf8910a8826599789a8082"
         },
         {
           "id": "clashVerge:dual-stack:minimal",
@@ -995,7 +1535,7 @@
         {
           "id": "clashVerge:dual-stack:invalid-network-mode",
           "status": "EXPECTED_REJECTION_MATCH",
-          "resultSHA256": "ea0907fd9f57ef03377d8865aa6eb5e7e9b851ba451389b328d856bcd80fbc8d"
+          "resultSHA256": "90aac4e30629b6b259386cb53eeaa14224bd94922baf8910a8826599789a8082"
         },
         {
           "id": "clashVerge:ipv4-local:minimal",
@@ -1085,7 +1625,7 @@
         {
           "id": "clashVerge:ipv4-local:invalid-network-mode",
           "status": "EXPECTED_REJECTION_MATCH",
-          "resultSHA256": "ea0907fd9f57ef03377d8865aa6eb5e7e9b851ba451389b328d856bcd80fbc8d"
+          "resultSHA256": "90aac4e30629b6b259386cb53eeaa14224bd94922baf8910a8826599789a8082"
         }
       ]
     },
@@ -1094,6 +1634,96 @@
       "version": "Boa 0.22.0",
       "cases": [
         {
+          "id": "windows:auto:minimal",
+          "status": "PASS",
+          "resultSHA256": "c1fb7fe3408eaabb0d83478fed235ff2e2fa79ebfd769bcfb1ebba130e3fb376"
+        },
+        {
+          "id": "windows:auto:serialized-object",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "7f1a0eed5c7363eca9ec2a3b86f8cd9f7ec6e118fdc7a154c11879561c6f0773"
+        },
+        {
+          "id": "windows:auto:provider-only",
+          "status": "PASS",
+          "resultSHA256": "d339c12dc32d75146149c75a4c380f8fc4820c188c07de2cf4f5d4e55e553b15"
+        },
+        {
+          "id": "windows:auto:mixed-and-inline-provider",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "ece7777037c9fdce281ac374dfc437f3e93b07d540311e8cc7e15c803d138f5e"
+        },
+        {
+          "id": "windows:auto:explicit-node-families",
+          "status": "PASS",
+          "resultSHA256": "c3459b3deb82dd80fb388de5f7ec3d27ef870e922ca696b63fa897f065718a61"
+        },
+        {
+          "id": "windows:auto:unicode-and-quoted-node",
+          "status": "PASS",
+          "resultSHA256": "d9a4597d9e47464b8d24628e18792bfe24b1998dc9a9adbd52f5e84eb96126c7"
+        },
+        {
+          "id": "windows:auto:preserve-input-fields",
+          "status": "PASS",
+          "resultSHA256": "a3b19932b72b9dd47235b9d5d445c344892ea7a63d84c8c33d47ea604421a3e2"
+        },
+        {
+          "id": "windows:auto:sniffer-and-LAN-exclusions",
+          "status": "PASS",
+          "resultSHA256": "6da6b206fbabdb45ad4f6ebcf2b18c124123e4d6d0feccfb721e5c359189ddc4"
+        },
+        {
+          "id": "windows:auto:inherited-TUN-foreign-fields",
+          "status": "PASS",
+          "resultSHA256": "31d70f60e406cc871dd6895c0a18f5306f1e63f09be628dfb572cea16e6af3ba"
+        },
+        {
+          "id": "windows:auto:provider-explicit-expression",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "ece7777037c9fdce281ac374dfc437f3e93b07d540311e8cc7e15c803d138f5e"
+        },
+        {
+          "id": "windows:auto:duplicate-node-rejected",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "49a1b322fb4ad7156017cae6b4236deecd8db4a75c1ed6715f47dc8f6bffe6bc"
+        },
+        {
+          "id": "windows:auto:reserved-node-rejected",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "498d88cba3d7803eb46aeaa0894fc3fb2262cc0868de5aeea6346688a72c08cb"
+        },
+        {
+          "id": "windows:auto:cyclic-dialer-rejected",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "b5fd1e9a8bb99ee8f724cb12a312a8f563c02ae529cdcf64f5e576bd29b9114f"
+        },
+        {
+          "id": "windows:auto:missing-provider-rejected",
+          "status": "PASS",
+          "resultSHA256": "5131c337f966a4216c45c26160038a2c148d09101b52d4624969bef1008025d5"
+        },
+        {
+          "id": "windows:auto:invalid-root-null",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "7f1a0eed5c7363eca9ec2a3b86f8cd9f7ec6e118fdc7a154c11879561c6f0773"
+        },
+        {
+          "id": "windows:auto:invalid-root-array",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "7f1a0eed5c7363eca9ec2a3b86f8cd9f7ec6e118fdc7a154c11879561c6f0773"
+        },
+        {
+          "id": "windows:auto:invalid-root-string",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "7f1a0eed5c7363eca9ec2a3b86f8cd9f7ec6e118fdc7a154c11879561c6f0773"
+        },
+        {
+          "id": "windows:auto:invalid-network-mode",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "90aac4e30629b6b259386cb53eeaa14224bd94922baf8910a8826599789a8082"
+        },
+        {
           "id": "windows:dual-stack:minimal",
           "status": "PASS",
           "resultSHA256": "6429c5a11e89ae5dc2e6fdf351e7bf6e076f5886b2782b95e6960d9bbba2ab3f"
@@ -1181,7 +1811,7 @@
         {
           "id": "windows:dual-stack:invalid-network-mode",
           "status": "EXPECTED_REJECTION_MATCH",
-          "resultSHA256": "ea0907fd9f57ef03377d8865aa6eb5e7e9b851ba451389b328d856bcd80fbc8d"
+          "resultSHA256": "90aac4e30629b6b259386cb53eeaa14224bd94922baf8910a8826599789a8082"
         },
         {
           "id": "windows:ipv4-local:minimal",
@@ -1271,7 +1901,97 @@
         {
           "id": "windows:ipv4-local:invalid-network-mode",
           "status": "EXPECTED_REJECTION_MATCH",
-          "resultSHA256": "ea0907fd9f57ef03377d8865aa6eb5e7e9b851ba451389b328d856bcd80fbc8d"
+          "resultSHA256": "90aac4e30629b6b259386cb53eeaa14224bd94922baf8910a8826599789a8082"
+        },
+        {
+          "id": "android:auto:minimal",
+          "status": "PASS",
+          "resultSHA256": "000978fe3174399a94c052743858d5a31487642c1b6623621c5f7d2b43495c36"
+        },
+        {
+          "id": "android:auto:serialized-object",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "7f1a0eed5c7363eca9ec2a3b86f8cd9f7ec6e118fdc7a154c11879561c6f0773"
+        },
+        {
+          "id": "android:auto:provider-only",
+          "status": "PASS",
+          "resultSHA256": "6ddf75e74d9f6d19ffc85554de5c7a38872c13c05cedba6058ce45bbd9e35f58"
+        },
+        {
+          "id": "android:auto:mixed-and-inline-provider",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "ece7777037c9fdce281ac374dfc437f3e93b07d540311e8cc7e15c803d138f5e"
+        },
+        {
+          "id": "android:auto:explicit-node-families",
+          "status": "PASS",
+          "resultSHA256": "2cb79f2207982e1043a8870727fb4f70058ae1c78cfc6957a7ef6f957c60e04c"
+        },
+        {
+          "id": "android:auto:unicode-and-quoted-node",
+          "status": "PASS",
+          "resultSHA256": "35d45f06f0e5f345dee463cbd59f7095b693e8576b2337d6ca95ce0497673d91"
+        },
+        {
+          "id": "android:auto:preserve-input-fields",
+          "status": "PASS",
+          "resultSHA256": "3c913d31bcb7a3fdf4f0898e5db69724de7a5ffa9334f37f3159cdad4a269293"
+        },
+        {
+          "id": "android:auto:sniffer-and-LAN-exclusions",
+          "status": "PASS",
+          "resultSHA256": "da61c1f3543026f95b34386e11563e487352c4be0e163c4ca1d80482e6ebdaac"
+        },
+        {
+          "id": "android:auto:inherited-TUN-foreign-fields",
+          "status": "PASS",
+          "resultSHA256": "ecdb264d314d20cc8f27ded2c7bc1146d8b6a6b62087fbb6c5102ac27156e3d0"
+        },
+        {
+          "id": "android:auto:provider-explicit-expression",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "ece7777037c9fdce281ac374dfc437f3e93b07d540311e8cc7e15c803d138f5e"
+        },
+        {
+          "id": "android:auto:duplicate-node-rejected",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "49a1b322fb4ad7156017cae6b4236deecd8db4a75c1ed6715f47dc8f6bffe6bc"
+        },
+        {
+          "id": "android:auto:reserved-node-rejected",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "498d88cba3d7803eb46aeaa0894fc3fb2262cc0868de5aeea6346688a72c08cb"
+        },
+        {
+          "id": "android:auto:cyclic-dialer-rejected",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "b5fd1e9a8bb99ee8f724cb12a312a8f563c02ae529cdcf64f5e576bd29b9114f"
+        },
+        {
+          "id": "android:auto:missing-provider-rejected",
+          "status": "PASS",
+          "resultSHA256": "faaabb23ebfccd563cf86d8fdd3c0512d6ff7c3bfa388f3a211f5a510948c799"
+        },
+        {
+          "id": "android:auto:invalid-root-null",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "7f1a0eed5c7363eca9ec2a3b86f8cd9f7ec6e118fdc7a154c11879561c6f0773"
+        },
+        {
+          "id": "android:auto:invalid-root-array",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "7f1a0eed5c7363eca9ec2a3b86f8cd9f7ec6e118fdc7a154c11879561c6f0773"
+        },
+        {
+          "id": "android:auto:invalid-root-string",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "7f1a0eed5c7363eca9ec2a3b86f8cd9f7ec6e118fdc7a154c11879561c6f0773"
+        },
+        {
+          "id": "android:auto:invalid-network-mode",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "90aac4e30629b6b259386cb53eeaa14224bd94922baf8910a8826599789a8082"
         },
         {
           "id": "android:dual-stack:minimal",
@@ -1361,7 +2081,7 @@
         {
           "id": "android:dual-stack:invalid-network-mode",
           "status": "EXPECTED_REJECTION_MATCH",
-          "resultSHA256": "ea0907fd9f57ef03377d8865aa6eb5e7e9b851ba451389b328d856bcd80fbc8d"
+          "resultSHA256": "90aac4e30629b6b259386cb53eeaa14224bd94922baf8910a8826599789a8082"
         },
         {
           "id": "android:ipv4-local:minimal",
@@ -1451,7 +2171,97 @@
         {
           "id": "android:ipv4-local:invalid-network-mode",
           "status": "EXPECTED_REJECTION_MATCH",
-          "resultSHA256": "ea0907fd9f57ef03377d8865aa6eb5e7e9b851ba451389b328d856bcd80fbc8d"
+          "resultSHA256": "90aac4e30629b6b259386cb53eeaa14224bd94922baf8910a8826599789a8082"
+        },
+        {
+          "id": "clashmi:auto:minimal",
+          "status": "PASS",
+          "resultSHA256": "035fde99af768281b5ef3169785ef89565d80f981ddfed426909c26c73800609"
+        },
+        {
+          "id": "clashmi:auto:serialized-object",
+          "status": "PASS",
+          "resultSHA256": "035fde99af768281b5ef3169785ef89565d80f981ddfed426909c26c73800609"
+        },
+        {
+          "id": "clashmi:auto:provider-only",
+          "status": "PASS",
+          "resultSHA256": "d95ccb17265732ff7a60171b990f5df4460ddf1b84c54fa8a6e2e43e1b0ea747"
+        },
+        {
+          "id": "clashmi:auto:mixed-and-inline-provider",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "ece7777037c9fdce281ac374dfc437f3e93b07d540311e8cc7e15c803d138f5e"
+        },
+        {
+          "id": "clashmi:auto:explicit-node-families",
+          "status": "PASS",
+          "resultSHA256": "5c75a81c797f095ded1b3b103fe11bc889cba404b98b58145d510011821cff9a"
+        },
+        {
+          "id": "clashmi:auto:unicode-and-quoted-node",
+          "status": "PASS",
+          "resultSHA256": "449f63403b42cd359236b671916cfa38670aa6b999108da2ac5b79367514084c"
+        },
+        {
+          "id": "clashmi:auto:preserve-input-fields",
+          "status": "PASS",
+          "resultSHA256": "df344e0b0b902d0b584fa5ce01c5ac940dde4dd5600ab59c6a911c60f95dd669"
+        },
+        {
+          "id": "clashmi:auto:sniffer-and-LAN-exclusions",
+          "status": "PASS",
+          "resultSHA256": "ef85092044269af13ba9c09e6d7502e515854f9164aaaf13642402fd10d6a45b"
+        },
+        {
+          "id": "clashmi:auto:inherited-TUN-foreign-fields",
+          "status": "PASS",
+          "resultSHA256": "035fde99af768281b5ef3169785ef89565d80f981ddfed426909c26c73800609"
+        },
+        {
+          "id": "clashmi:auto:provider-explicit-expression",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "ece7777037c9fdce281ac374dfc437f3e93b07d540311e8cc7e15c803d138f5e"
+        },
+        {
+          "id": "clashmi:auto:duplicate-node-rejected",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "49a1b322fb4ad7156017cae6b4236deecd8db4a75c1ed6715f47dc8f6bffe6bc"
+        },
+        {
+          "id": "clashmi:auto:reserved-node-rejected",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "498d88cba3d7803eb46aeaa0894fc3fb2262cc0868de5aeea6346688a72c08cb"
+        },
+        {
+          "id": "clashmi:auto:cyclic-dialer-rejected",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "b5fd1e9a8bb99ee8f724cb12a312a8f563c02ae529cdcf64f5e576bd29b9114f"
+        },
+        {
+          "id": "clashmi:auto:missing-provider-rejected",
+          "status": "PASS",
+          "resultSHA256": "035fde99af768281b5ef3169785ef89565d80f981ddfed426909c26c73800609"
+        },
+        {
+          "id": "clashmi:auto:invalid-root-null",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "7f1a0eed5c7363eca9ec2a3b86f8cd9f7ec6e118fdc7a154c11879561c6f0773"
+        },
+        {
+          "id": "clashmi:auto:invalid-root-array",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "7f1a0eed5c7363eca9ec2a3b86f8cd9f7ec6e118fdc7a154c11879561c6f0773"
+        },
+        {
+          "id": "clashmi:auto:invalid-root-string",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "f64c5d7b34b7d1ecd46fd3b8b57ca650060b96926eede815ab5c6c78a61688e7"
+        },
+        {
+          "id": "clashmi:auto:invalid-network-mode",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "90aac4e30629b6b259386cb53eeaa14224bd94922baf8910a8826599789a8082"
         },
         {
           "id": "clashmi:dual-stack:minimal",
@@ -1541,7 +2351,7 @@
         {
           "id": "clashmi:dual-stack:invalid-network-mode",
           "status": "EXPECTED_REJECTION_MATCH",
-          "resultSHA256": "ea0907fd9f57ef03377d8865aa6eb5e7e9b851ba451389b328d856bcd80fbc8d"
+          "resultSHA256": "90aac4e30629b6b259386cb53eeaa14224bd94922baf8910a8826599789a8082"
         },
         {
           "id": "clashmi:ipv4-local:minimal",
@@ -1631,7 +2441,97 @@
         {
           "id": "clashmi:ipv4-local:invalid-network-mode",
           "status": "EXPECTED_REJECTION_MATCH",
-          "resultSHA256": "ea0907fd9f57ef03377d8865aa6eb5e7e9b851ba451389b328d856bcd80fbc8d"
+          "resultSHA256": "90aac4e30629b6b259386cb53eeaa14224bd94922baf8910a8826599789a8082"
+        },
+        {
+          "id": "macosFlClash:auto:minimal",
+          "status": "PASS",
+          "resultSHA256": "e35b58da620ed5b56ac4286aac97fd5b153bec0235f028c665434d31e1bc9670"
+        },
+        {
+          "id": "macosFlClash:auto:serialized-object",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "7f1a0eed5c7363eca9ec2a3b86f8cd9f7ec6e118fdc7a154c11879561c6f0773"
+        },
+        {
+          "id": "macosFlClash:auto:provider-only",
+          "status": "PASS",
+          "resultSHA256": "632a2c073f89b6326bf84d76113a9154a2172513824f428667f0547a60d4e171"
+        },
+        {
+          "id": "macosFlClash:auto:mixed-and-inline-provider",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "ece7777037c9fdce281ac374dfc437f3e93b07d540311e8cc7e15c803d138f5e"
+        },
+        {
+          "id": "macosFlClash:auto:explicit-node-families",
+          "status": "PASS",
+          "resultSHA256": "8fe6f71844342ad86ffb5a4ddaa5a93f1a06af48afb4dd0b88a9f0288ac63a7e"
+        },
+        {
+          "id": "macosFlClash:auto:unicode-and-quoted-node",
+          "status": "PASS",
+          "resultSHA256": "6fc027165229b942470ddeedf5f8671031495a97cfd94715dea2121b164ad360"
+        },
+        {
+          "id": "macosFlClash:auto:preserve-input-fields",
+          "status": "PASS",
+          "resultSHA256": "a7c515809a490c05c99b4ab11215211960c8ce10a8237c697ea5dadd2bd3e26a"
+        },
+        {
+          "id": "macosFlClash:auto:sniffer-and-LAN-exclusions",
+          "status": "PASS",
+          "resultSHA256": "628f969b25fda128fb06728af5d521222b0ea9d1db5d6636b957f9a87d998f07"
+        },
+        {
+          "id": "macosFlClash:auto:inherited-TUN-foreign-fields",
+          "status": "PASS",
+          "resultSHA256": "7ed65cf8418a1368dbf12384aa33f578f178c75935585440ff965d27a7d911a5"
+        },
+        {
+          "id": "macosFlClash:auto:provider-explicit-expression",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "ece7777037c9fdce281ac374dfc437f3e93b07d540311e8cc7e15c803d138f5e"
+        },
+        {
+          "id": "macosFlClash:auto:duplicate-node-rejected",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "49a1b322fb4ad7156017cae6b4236deecd8db4a75c1ed6715f47dc8f6bffe6bc"
+        },
+        {
+          "id": "macosFlClash:auto:reserved-node-rejected",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "498d88cba3d7803eb46aeaa0894fc3fb2262cc0868de5aeea6346688a72c08cb"
+        },
+        {
+          "id": "macosFlClash:auto:cyclic-dialer-rejected",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "b5fd1e9a8bb99ee8f724cb12a312a8f563c02ae529cdcf64f5e576bd29b9114f"
+        },
+        {
+          "id": "macosFlClash:auto:missing-provider-rejected",
+          "status": "PASS",
+          "resultSHA256": "f0ea04e196eb606a424c1b5202442b61189705bff9a84fab4ae7a63bb95b1a21"
+        },
+        {
+          "id": "macosFlClash:auto:invalid-root-null",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "7f1a0eed5c7363eca9ec2a3b86f8cd9f7ec6e118fdc7a154c11879561c6f0773"
+        },
+        {
+          "id": "macosFlClash:auto:invalid-root-array",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "7f1a0eed5c7363eca9ec2a3b86f8cd9f7ec6e118fdc7a154c11879561c6f0773"
+        },
+        {
+          "id": "macosFlClash:auto:invalid-root-string",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "7f1a0eed5c7363eca9ec2a3b86f8cd9f7ec6e118fdc7a154c11879561c6f0773"
+        },
+        {
+          "id": "macosFlClash:auto:invalid-network-mode",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "90aac4e30629b6b259386cb53eeaa14224bd94922baf8910a8826599789a8082"
         },
         {
           "id": "macosFlClash:dual-stack:minimal",
@@ -1721,7 +2621,7 @@
         {
           "id": "macosFlClash:dual-stack:invalid-network-mode",
           "status": "EXPECTED_REJECTION_MATCH",
-          "resultSHA256": "ea0907fd9f57ef03377d8865aa6eb5e7e9b851ba451389b328d856bcd80fbc8d"
+          "resultSHA256": "90aac4e30629b6b259386cb53eeaa14224bd94922baf8910a8826599789a8082"
         },
         {
           "id": "macosFlClash:ipv4-local:minimal",
@@ -1811,7 +2711,97 @@
         {
           "id": "macosFlClash:ipv4-local:invalid-network-mode",
           "status": "EXPECTED_REJECTION_MATCH",
-          "resultSHA256": "ea0907fd9f57ef03377d8865aa6eb5e7e9b851ba451389b328d856bcd80fbc8d"
+          "resultSHA256": "90aac4e30629b6b259386cb53eeaa14224bd94922baf8910a8826599789a8082"
+        },
+        {
+          "id": "macosClashMi:auto:minimal",
+          "status": "PASS",
+          "resultSHA256": "3cee6e54b749a881bc2e97fe856f756b9ee4c3715f23d3a95b91962ee8421b3e"
+        },
+        {
+          "id": "macosClashMi:auto:serialized-object",
+          "status": "PASS",
+          "resultSHA256": "3cee6e54b749a881bc2e97fe856f756b9ee4c3715f23d3a95b91962ee8421b3e"
+        },
+        {
+          "id": "macosClashMi:auto:provider-only",
+          "status": "PASS",
+          "resultSHA256": "8c31f6bc9440fc6ed3892d38c4f3cb9a83f42b3c7f9173ef62b3a0b2d956e82d"
+        },
+        {
+          "id": "macosClashMi:auto:mixed-and-inline-provider",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "ece7777037c9fdce281ac374dfc437f3e93b07d540311e8cc7e15c803d138f5e"
+        },
+        {
+          "id": "macosClashMi:auto:explicit-node-families",
+          "status": "PASS",
+          "resultSHA256": "7ed04de8b24f6f89139a068837400f27962e239e3c7ba4d982b12af1fada9935"
+        },
+        {
+          "id": "macosClashMi:auto:unicode-and-quoted-node",
+          "status": "PASS",
+          "resultSHA256": "94e5dc660c581c3416d90305b2c6cc5e43a775f99574894267f85cf93fef8dca"
+        },
+        {
+          "id": "macosClashMi:auto:preserve-input-fields",
+          "status": "PASS",
+          "resultSHA256": "06d21feb697cbbc21957e8b5370fa2634b39940227a25d1d90241d4d8d4fdf4e"
+        },
+        {
+          "id": "macosClashMi:auto:sniffer-and-LAN-exclusions",
+          "status": "PASS",
+          "resultSHA256": "23fbf24a415db916286392629330e80e9d2cb0f947a925bb1ea5fa5aac12f44a"
+        },
+        {
+          "id": "macosClashMi:auto:inherited-TUN-foreign-fields",
+          "status": "PASS",
+          "resultSHA256": "3cee6e54b749a881bc2e97fe856f756b9ee4c3715f23d3a95b91962ee8421b3e"
+        },
+        {
+          "id": "macosClashMi:auto:provider-explicit-expression",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "ece7777037c9fdce281ac374dfc437f3e93b07d540311e8cc7e15c803d138f5e"
+        },
+        {
+          "id": "macosClashMi:auto:duplicate-node-rejected",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "49a1b322fb4ad7156017cae6b4236deecd8db4a75c1ed6715f47dc8f6bffe6bc"
+        },
+        {
+          "id": "macosClashMi:auto:reserved-node-rejected",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "498d88cba3d7803eb46aeaa0894fc3fb2262cc0868de5aeea6346688a72c08cb"
+        },
+        {
+          "id": "macosClashMi:auto:cyclic-dialer-rejected",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "b5fd1e9a8bb99ee8f724cb12a312a8f563c02ae529cdcf64f5e576bd29b9114f"
+        },
+        {
+          "id": "macosClashMi:auto:missing-provider-rejected",
+          "status": "PASS",
+          "resultSHA256": "3cee6e54b749a881bc2e97fe856f756b9ee4c3715f23d3a95b91962ee8421b3e"
+        },
+        {
+          "id": "macosClashMi:auto:invalid-root-null",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "7f1a0eed5c7363eca9ec2a3b86f8cd9f7ec6e118fdc7a154c11879561c6f0773"
+        },
+        {
+          "id": "macosClashMi:auto:invalid-root-array",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "7f1a0eed5c7363eca9ec2a3b86f8cd9f7ec6e118fdc7a154c11879561c6f0773"
+        },
+        {
+          "id": "macosClashMi:auto:invalid-root-string",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "f64c5d7b34b7d1ecd46fd3b8b57ca650060b96926eede815ab5c6c78a61688e7"
+        },
+        {
+          "id": "macosClashMi:auto:invalid-network-mode",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "90aac4e30629b6b259386cb53eeaa14224bd94922baf8910a8826599789a8082"
         },
         {
           "id": "macosClashMi:dual-stack:minimal",
@@ -1901,7 +2891,7 @@
         {
           "id": "macosClashMi:dual-stack:invalid-network-mode",
           "status": "EXPECTED_REJECTION_MATCH",
-          "resultSHA256": "ea0907fd9f57ef03377d8865aa6eb5e7e9b851ba451389b328d856bcd80fbc8d"
+          "resultSHA256": "90aac4e30629b6b259386cb53eeaa14224bd94922baf8910a8826599789a8082"
         },
         {
           "id": "macosClashMi:ipv4-local:minimal",
@@ -1991,7 +2981,97 @@
         {
           "id": "macosClashMi:ipv4-local:invalid-network-mode",
           "status": "EXPECTED_REJECTION_MATCH",
-          "resultSHA256": "ea0907fd9f57ef03377d8865aa6eb5e7e9b851ba451389b328d856bcd80fbc8d"
+          "resultSHA256": "90aac4e30629b6b259386cb53eeaa14224bd94922baf8910a8826599789a8082"
+        },
+        {
+          "id": "clashVerge:auto:minimal",
+          "status": "PASS",
+          "resultSHA256": "62864d9cd0cf56ff713c547a82b0caf9248b75eb210a310ceb33a7547138cf9c"
+        },
+        {
+          "id": "clashVerge:auto:serialized-object",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "7f1a0eed5c7363eca9ec2a3b86f8cd9f7ec6e118fdc7a154c11879561c6f0773"
+        },
+        {
+          "id": "clashVerge:auto:provider-only",
+          "status": "PASS",
+          "resultSHA256": "edaee14d16f83e851e3647c094c2798cb625981abc25df296c0e65b377901424"
+        },
+        {
+          "id": "clashVerge:auto:mixed-and-inline-provider",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "ece7777037c9fdce281ac374dfc437f3e93b07d540311e8cc7e15c803d138f5e"
+        },
+        {
+          "id": "clashVerge:auto:explicit-node-families",
+          "status": "PASS",
+          "resultSHA256": "f4b9e534252239fec6d04084ace79b870dd1b55b378305e8bb398d9b089ec38c"
+        },
+        {
+          "id": "clashVerge:auto:unicode-and-quoted-node",
+          "status": "PASS",
+          "resultSHA256": "49e00a64441dbf26538da28dc15589ae4aa5bb55e03c32bca2b186e82382d5b8"
+        },
+        {
+          "id": "clashVerge:auto:preserve-input-fields",
+          "status": "PASS",
+          "resultSHA256": "7fbdff0f8d7bd9d913042ad024b4338bb521564069d0628b2ddd2f15d5d8d528"
+        },
+        {
+          "id": "clashVerge:auto:sniffer-and-LAN-exclusions",
+          "status": "PASS",
+          "resultSHA256": "a35c7ef967f4c76cae34a111956fa05bbebab0a4e6d83970b881c18b0d5f9dcc"
+        },
+        {
+          "id": "clashVerge:auto:inherited-TUN-foreign-fields",
+          "status": "PASS",
+          "resultSHA256": "d76282ec9d2ccd1021d6ac71fdb0a1838a513af3af6f34980a94465953af2505"
+        },
+        {
+          "id": "clashVerge:auto:provider-explicit-expression",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "ece7777037c9fdce281ac374dfc437f3e93b07d540311e8cc7e15c803d138f5e"
+        },
+        {
+          "id": "clashVerge:auto:duplicate-node-rejected",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "49a1b322fb4ad7156017cae6b4236deecd8db4a75c1ed6715f47dc8f6bffe6bc"
+        },
+        {
+          "id": "clashVerge:auto:reserved-node-rejected",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "498d88cba3d7803eb46aeaa0894fc3fb2262cc0868de5aeea6346688a72c08cb"
+        },
+        {
+          "id": "clashVerge:auto:cyclic-dialer-rejected",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "b5fd1e9a8bb99ee8f724cb12a312a8f563c02ae529cdcf64f5e576bd29b9114f"
+        },
+        {
+          "id": "clashVerge:auto:missing-provider-rejected",
+          "status": "PASS",
+          "resultSHA256": "551d6a62c35867675e65996a51052eb91c2a49f1321dd24e6f08a34f83309a1b"
+        },
+        {
+          "id": "clashVerge:auto:invalid-root-null",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "7f1a0eed5c7363eca9ec2a3b86f8cd9f7ec6e118fdc7a154c11879561c6f0773"
+        },
+        {
+          "id": "clashVerge:auto:invalid-root-array",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "7f1a0eed5c7363eca9ec2a3b86f8cd9f7ec6e118fdc7a154c11879561c6f0773"
+        },
+        {
+          "id": "clashVerge:auto:invalid-root-string",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "7f1a0eed5c7363eca9ec2a3b86f8cd9f7ec6e118fdc7a154c11879561c6f0773"
+        },
+        {
+          "id": "clashVerge:auto:invalid-network-mode",
+          "status": "EXPECTED_REJECTION_MATCH",
+          "resultSHA256": "90aac4e30629b6b259386cb53eeaa14224bd94922baf8910a8826599789a8082"
         },
         {
           "id": "clashVerge:dual-stack:minimal",
@@ -2081,7 +3161,7 @@
         {
           "id": "clashVerge:dual-stack:invalid-network-mode",
           "status": "EXPECTED_REJECTION_MATCH",
-          "resultSHA256": "ea0907fd9f57ef03377d8865aa6eb5e7e9b851ba451389b328d856bcd80fbc8d"
+          "resultSHA256": "90aac4e30629b6b259386cb53eeaa14224bd94922baf8910a8826599789a8082"
         },
         {
           "id": "clashVerge:ipv4-local:minimal",
@@ -2171,44 +3251,44 @@
         {
           "id": "clashVerge:ipv4-local:invalid-network-mode",
           "status": "EXPECTED_REJECTION_MATCH",
-          "resultSHA256": "ea0907fd9f57ef03377d8865aa6eb5e7e9b851ba451389b328d856bcd80fbc8d"
+          "resultSHA256": "90aac4e30629b6b259386cb53eeaa14224bd94922baf8910a8826599789a8082"
         }
       ]
     }
   ],
   "entryFiles": 6,
   "inputCases": 18,
-  "networkModes": 2,
-  "observations": 432,
+  "networkModes": 3,
+  "observations": 648,
   "runnerSHA256": "858a76aee45fdb2052051885e249eb9dac8c8c1ad4d5d736650ad040ebe34740",
   "sourceFiles": [
     {
       "file": "src/windows/v14.3.js",
-      "sha256": "8a151f980c5291cedf30d70b76aaa414fd1378540b4e8001dc11ba547ac5539e"
+      "sha256": "2cc432caf839892f24f4fd485f20a1efc3c4d8824adaf54f46a45e60f776b4df"
     },
     {
       "file": "src/android/v14.3-android.js",
-      "sha256": "33b55bccbb40024424db37eed946711bd52161c580687dde6f5c448d2de474c1"
+      "sha256": "46d95fde07dbd229595428860db9da96f72569c830890e31d0020cb7181c2912"
     },
     {
       "file": "src/ios/v14.3-clashmi-domestic-protocol-r1.js",
-      "sha256": "7cd08073bceb572b8c8e95558c82a1f1d2a5398d99176bcb2d30a06ad55bfdaf"
+      "sha256": "da22e70e017a5cf906ddd58ca94dcf988417953e17d1b2834fddc0b428b08eda"
     },
     {
       "file": "src/macos/v14.3-macos-flclash.js",
-      "sha256": "3e0160e34391803ad728f11e7a14e4b7b074a81d181744bfb50889dd8e0f8854"
+      "sha256": "0026fb6a58d8741a737cd18f371bfe969d9b2ee8811e752d6fb83778b55d4c5c"
     },
     {
       "file": "src/macos/v14.3-macos-clashmi.js",
-      "sha256": "cbc1342c6655704c6a546842c1ea36dfdf5ae55cfd2cdd2ba4b8b508e4880bb8"
+      "sha256": "baeda7cfd627541b630c87a982f02c78b31f6b3ed09727af2ef130ad70f3afde"
     },
     {
       "file": "src/clash-verge/v14.3-clash-verge.js",
-      "sha256": "5535812b44ee65b399d1a977ea7d7e9326c287efaba5c21d599e8aca9528ca2c"
+      "sha256": "4e049bf79ac0e468449fa2a85ebe499b1bad5c86473656a6a3872d017d2d7964"
     },
     {
       "file": "tests/engine-parity.cjs",
-      "sha256": "fbf3293982425c66247fd281e6d0b58fb18b1c6acd88fada357828cd0772b61e"
+      "sha256": "8021c57c498e9ef942a1c0f3734a13c1e463fb2541de5769cb5f2687cc5f3efc"
     },
     {
       "file": "tests/engines/Cargo.toml",

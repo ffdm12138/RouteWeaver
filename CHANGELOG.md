@@ -1,5 +1,14 @@
 # Changelog
 
+## v14.3.0-rc.6 — auto-local-family-r1
+
+- **rc.6 公开版已知回归（PRE-RELEASE）**：native-core 本地 API timeout；balanced-empty-core provider API ECONNREFUSED。两项保留 FAIL，不计通过；用户明确授权先发版，自动能力的设备原生接入仍未验收。
+
+- 六份 JS 单入口默认请求 auto，保留两种显式模式；共同业务规则与节点选择不变。Shadowrocket 增加原生能力限制说明，不伪造检测支持。
+- 新增可选 Windows FlClash 匹配核心/Helper：有界接口与被动网络证据、同名 A 替代确认、应用 DNS 自适应与独立节点/远端地址族。IPv6-only、用户显式 hosts/地址族、局域网、未知状态保留。
+- 诊断必须读回实际原生状态，不能以保存配置代替能力证明；新原生测试与源码/包分别绑定哈希。未替换现用客户端，未认证其它平台宿主或真实媒体。
+- 完整对应源码与锁定依赖独立分发，rc.5 及更早标签/附件保持不变。
+
 ## v14.3.0-rc.5 — 2026-10-16
 
 - 各客户端只保留一个入口；六份 JS 内含双栈/IPv4 兼容模式，Shadowrocket 保留一份原生配置。

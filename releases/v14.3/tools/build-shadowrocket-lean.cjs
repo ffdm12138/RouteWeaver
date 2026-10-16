@@ -72,6 +72,7 @@ const header=['# V14.3 Shadowrocket — 2026-10-13; shadowrocket-lean-r1 / domes
  '# 已审核国内域名普通 TCP/UDP 跟随国内组；未知 IP UDP 和通用 STUN 保持代理/拒绝。',
  '# 业务与关键国内 Host DNS 显式跟组；其余国内 DNS 依赖原生 DIRECT DNS / 所选节点远端解析。',
  '# Shadowrocket 原生编译、完整国内 DNS 切换和 iOS VPN 接管仍待实机验收。'];
+header.push('# auto-local-family-r1: Mihomo native extension is unavailable in this conf; IPv6 stays enabled with native IPv4 preference.');
 const output=header.join('\n')+'\n\n[General]\n'+section('General').join('\n')+'\n\n[Proxy Group]\n'+section('Proxy Group').join('\n')+'\n\n[Rule]\n'+rules.join('\n')+'\n\n[Host]\n'+outputHosts.map(([k,v])=>k+' = '+v).join('\n')+'\n';
 assert.ok(Buffer.byteLength(output)<1800000,'Self-contained DNS budget exceeded');
 const file='src/ios/v14.3-shadowrocket.conf';

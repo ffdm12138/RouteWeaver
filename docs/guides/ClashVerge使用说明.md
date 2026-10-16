@@ -1,5 +1,12 @@
 # Clash Verge Rev 使用说明
 
+## rc.6：自动模式与原生能力边界
+
+当前源码修订 `auto-local-family-r1`，六份 JS 默认请求 `auto`，每客户端仍一份入口，保留 `dual-stack`／`ipv4-local`。自动出口判断需要匹配原生核心，普通核心接受覆写不等于已接入；Shadowrocket 只保留原生 IPv4 偏好与 IPv6 开启。Windows 指定 FlClash 核心/Helper 已完成新编译和隔离验证，但本轮未安装，维护者此前手动兼容客户端不变。移动端受保护 socket 和其它平台宿主仍需独立接入，真实 TUN/媒体/公网 IPv6 未验收。当前说明与证据入口：`docs/guides/自动网络模式.md`、`docs/reports/v14.3/自动本地地址族与跨端能力.md`。
+
+以下涉及 rc.5 的接入记录只认证原版本，不认证 rc.6 自动能力。
+
+
 本适配按固定的 Clash Verge Rev 2.5.8 官方源码审阅，当前支持范围为 Windows。它使用相同的公司分流、业务 DNS、UDP 防回落、手动组和规则锁定；不是另起一套分流规则。
 
 1. 下载当前唯一入口 `v14.3-clash-verge.js`，把内容绑定到正在使用的订阅脚本。避免同时启用另一个改写规则/组/DNS 的脚本。

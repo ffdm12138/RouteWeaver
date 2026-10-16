@@ -1,5 +1,12 @@
 # 同一份脚本中的 IPv4 兼容模式
 
+## rc.6：自动模式与原生能力边界
+
+当前源码修订 `auto-local-family-r1`，六份 JS 默认请求 `auto`，每客户端仍一份入口，保留 `dual-stack`／`ipv4-local`。自动出口判断需要匹配原生核心，普通核心接受覆写不等于已接入；Shadowrocket 只保留原生 IPv4 偏好与 IPv6 开启。Windows 指定 FlClash 核心/Helper 已完成新编译和隔离验证，但本轮未安装，维护者此前手动兼容客户端不变。移动端受保护 socket 和其它平台宿主仍需独立接入，真实 TUN/媒体/公网 IPv6 未验收。当前说明与证据入口：`docs/guides/自动网络模式.md`、`docs/reports/v14.3/自动本地地址族与跨端能力.md`。
+
+以下涉及 rc.5 的接入记录只认证原版本，不认证 rc.6 自动能力。
+
+
 每个客户端只下载一份当前文件，文件名见根 README。原来的 `-ipv4-local.js` 不再单独分发；旧版保存在历史 Release 和本地归档。
 
 默认 `dual-stack` 保留双栈。当前网络没有可用 IPv6 出口、应用又缓存了 IPv6 时，可在同一份 JS 顶部把这一行改成：

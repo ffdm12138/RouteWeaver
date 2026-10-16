@@ -25,7 +25,10 @@ assert inspection['ipv6'] is True and inspection['fallback']==[]
 compatibility=read(root/'metadata/clashmi-compatibility.json')
 core_file='validation/native-core.json'
 core=read(root/core_file)
-assert core['status']=='BALANCED_LOCAL_CORE_PASS'
+assert core['status'] in ('BALANCED_LOCAL_CORE_PASS','FAIL')
+if core['status']=='FAIL':
+    known=read(root/'validation/known-release-regressions.json')
+    assert any(e['validationFile']==core_file and e['validationSHA256']==sha(root/core_file) for e in known['knownUnresolved'])
 for e in core['sourceFiles']:
     assert sha(root/e['file'])==e['sha256'],e['file']
 historical='archive/v14.3-before-domestic-protocol-r1-20261013/releases/v14.3/validation/clashmi-ios-investigation.json'
@@ -35,7 +38,7 @@ assert history['status']=='FAIL'
 history_sha=sha(project/historical) if (project/historical).exists() else prior['historicalFailedInvestigation']['sha256']
 delivery={
  'version':'14.3','date':'2026-10-16','revision':'ios-delivery-r2','domesticProtocolRevision':'domestic-protocol-r1',
- 'status':'IOS_SOURCE_STATIC_LOCAL_CORE_PASS_NATIVE_DEVICE_PENDING',
+ 'status':'IOS_SOURCE_STATIC_WITH_KNOWN_CORE_REPLAY_FAILURE_DEVICE_PENDING' if core['status']=='FAIL' else 'IOS_SOURCE_STATIC_LOCAL_CORE_PASS_NATIVE_DEVICE_PENDING',
  'authorization':'User selected self-contained business DNS plus remote complete rules, and reviewed domestic TCP/UDP/DNS following 国内网站.',
  'shadowrocket':{
   'file':lean['file'],'sha256':lean['sha256'],'bytes':lean['bytes'],'revision':lean['revision'],'sourceBytesChanged':True,

@@ -1,0 +1,52 @@
+{
+  "status": "AUTO_LOCAL_CORE_BUILD_TEST_MATCHED_HELPER_PASS_NOT_DEPLOYED",
+  "revision": "auto-local-family-r1",
+  "coreSHA256": "6217329b8da473633451dafbd36b290db4b5b8cd2be316e66a45704f067f9bb1",
+  "replayCoreSHA256": "532c4a08fbb47ba8e746cd8cbac1c823a2b1cdc73f108b99842b5e5ac43db778",
+  "helperSHA256": "0bd66d3af2d234b75a82801660159023e6dfecc06ecfa7c79c4356eed6832760",
+  "coreVersion": "v1.19.32-rw-auto6-r1",
+  "goVersion": "go1.27.2",
+  "nativeUnitTestFunctions": 12,
+  "nativeTestLogSHA256": "22c941fb2335225588308600bbd5f1bab5d1febd9edb9ba16a8cdcf2b49a35b0",
+  "matchedHelperHashEmbedded": true,
+  "automaticClientDeployment": false,
+  "publicIPv6Acceptance": "NOT_RUN",
+  "sourceFiles": [
+    {
+      "file": "research/auto-local-family/candidate-binaries.json",
+      "sha256": "a094b874250860606f46822a0c78265d913ac772bb12c1d0e93a7544c76749e4"
+    },
+    {
+      "file": "research/auto-local-family/core-auto.patch",
+      "sha256": "eaaf5edd6834a3df9c7de8869d93ce538022bf704b80bea86315bcc5748e8820"
+    },
+    {
+      "file": "research/auto-local-family/install-flclash-core.ps1",
+      "sha256": "7d406702c1d9732d0a78c1b9cea0fc7889dc50b765242211b7373233c83bdadb"
+    },
+    {
+      "file": "research/auto-local-family/LICENSE",
+      "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986"
+    },
+    {
+      "file": "research/auto-local-family/native-tests.log",
+      "sha256": "22c941fb2335225588308600bbd5f1bab5d1febd9edb9ba16a8cdcf2b49a35b0"
+    },
+    {
+      "file": "research/auto-local-family/patch-files.json",
+      "sha256": "f00d5b7b4fb69109cf700b14c5676c265374d4b127c5ac48108f8aae8357e1c9"
+    },
+    {
+      "file": "research/auto-local-family/README.md",
+      "sha256": "dd9f60516e2314fe42d9769af6544c5ad8a0965ae9b2e5dccf5d0ceef6f14666"
+    },
+    {
+      "file": "research/auto-local-family/rebuild.py",
+      "sha256": "d1ae600255eebafd146ed81c6ab539c4d76d5ea328ef1d80c47a9cd4b99063bc"
+    },
+    {
+      "file": "research/auto-local-family/source-identity.json",
+      "sha256": "450787ee3d97f4f82925acd35cc367474311dfff9d870dbe8e7e1b02912bf11f"
+    }
+  ]
+}

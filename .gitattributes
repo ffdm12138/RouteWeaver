@@ -9,3 +9,4 @@ releases/v14.3/validation/network-review/*.download -whitespace
 
 # Preserve unified-diff context spaces and Go tabs as patch data.
 releases/v14.3/research/ipv6-direct-fast-fail/*.patch -whitespace
+releases/v14.3/research/auto-local-family/*.patch -whitespace

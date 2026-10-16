@@ -1,0 +1,923 @@
+--- /dev/null
++++ b/Clash.Meta/component/dialer/local_family.go
+@@ -0,0 +1,264 @@
++package dialer
++
++// RouteWeaver auto-local-family-r1. All decisions concern the local socket
++// egress, never the remote destination reached through an already chosen proxy.
++// No canary traffic, persistent network blacklist, node switching or routing
++// changes are introduced. Unknown evidence keeps the ordinary dual-stack path.
++
++import (
++	"errors"
++	"fmt"
++	"net"
++	"net/netip"
++	"sort"
++	"strings"
++	"sync"
++	"sync/atomic"
++	"syscall"
++	"time"
++)
++
++const LocalFamilyRevision = "auto-local-family-r1"
++const localFamilySourceTTL = time.Second
++const localFamilyPositiveTTL = 30 * time.Second
++const localFamilyNegativeTTL = 5 * time.Second
++
++// LocalFamilySnapshot is a bounded statement about one local egress, not a
++// claim that all IPv6 destinations or an arbitrary proxy's exit are reachable.
++type LocalFamilySnapshot struct {
++	State         string `json:"state"`
++	Reason        string `json:"reason"`
++	Interface     string `json:"interface,omitempty"`
++	HasIPv4Source bool   `json:"has-ipv4-source"`
++	HasIPv6Source bool   `json:"has-ipv6-source"`
++	Generation    uint64 `json:"generation"`
++	signature     string
++}
++
++type localFamilyEvidence struct {
++	source        LocalFamilySnapshot
++	sourceUntil   time.Time
++	successUntil  time.Time
++	negativeUntil time.Time
++	failures      map[netip.Prefix]time.Time
++}
++
++var localFamilyEnabled atomic.Bool
++var localFamilyGeneration atomic.Uint64
++var localFamilyMu sync.Mutex
++var localFamilyEvidenceByInterface = make(map[string]*localFamilyEvidence)
++
++// Tests replace only this side-effect-free observation seam; production uses
++// the selected interface and its real addresses, not all virtual interfaces.
++var localFamilyReadInterface = readLocalFamilyInterface
++var localFamilyNow = time.Now
++
++func SetLocalFamilyAuto(enabled bool) {
++	if localFamilyEnabled.Swap(enabled) != enabled {
++		InvalidateLocalFamily()
++	}
++}
++
++func LocalFamilyAutoEnabled() bool { return localFamilyEnabled.Load() }
++
++func InvalidateLocalFamily() {
++	localFamilyMu.Lock()
++	defer localFamilyMu.Unlock()
++	localFamilyGeneration.Add(1)
++	localFamilyEvidenceByInterface = make(map[string]*localFamilyEvidence)
++}
++
++func readLocalFamilyInterface(name string) (LocalFamilySnapshot, error) {
++	iface, err := net.InterfaceByName(name)
++	if err != nil {
++		return LocalFamilySnapshot{}, err
++	}
++	addresses, err := iface.Addrs()
++	if err != nil {
++		return LocalFamilySnapshot{}, err
++	}
++	s := LocalFamilySnapshot{State: "unknown", Reason: "no-reachability-evidence", Interface: name}
++	parts := []string{fmt.Sprint(iface.Index), fmt.Sprint(iface.Flags)}
++	for _, address := range addresses {
++		parts = append(parts, address.String())
++		prefix, err := netip.ParsePrefix(address.String())
++		if err != nil {
++			continue
++		}
++		ip := prefix.Addr().Unmap()
++		if ip.IsLoopback() || ip.IsLinkLocalUnicast() || !ip.IsGlobalUnicast() {
++			continue
++		}
++		// ULA on a real selected egress is deliberately retained: a managed
++		// NAT66/tunnel can make it useful. ULA alone is not positive evidence.
++		if ip.Is4() {
++			s.HasIPv4Source = true
++		} else {
++			s.HasIPv6Source = true
++		}
++	}
++	sort.Strings(parts)
++	s.signature = strings.Join(parts, "|")
++	if iface.Flags&net.FlagUp == 0 {
++		s.Reason = "interface-down"
++		return s, nil
++	}
++	if !s.HasIPv6Source {
++		s.State = "no-local-v6"
++		s.Reason = "selected-interface-has-no-routable-ipv6-source"
++	}
++	return s, nil
++}
++
++func selectedLocalFamilyInterface(destination netip.Addr, explicit string) string {
++	if !destination.IsValid() {
++		destination = netip.IPv6Unspecified()
++	}
++	if explicit != "" {
++		return explicit
++	}
++	if name := DefaultInterface.Load(); name != "" {
++		return name
++	}
++	if finder := DefaultInterfaceFinder.Load(); finder != nil {
++		return finder.FindInterfaceName(destination)
++	}
++	return ""
++}
++
++// LocalFamilyFor is evaluated at DNS/dial time. Network-monitor notifications
++// invalidate immediately; address changes are re-read within one second even
++// if a host misses a notification. A single failed destination never poisons
++// the egress state, and stale evidence never applies to another interface.
++func LocalFamilyFor(destination netip.Addr, explicit string) LocalFamilySnapshot {
++	unknown := LocalFamilySnapshot{State: "unknown", Reason: "disabled", Generation: localFamilyGeneration.Load()}
++	if !localFamilyEnabled.Load() {
++		return unknown
++	}
++	if DefaultSocketHook != nil {
++		unknown.Reason = "socket-hook-owned-egress-needs-host-capability"
++		return unknown
++	}
++	name := selectedLocalFamilyInterface(destination, explicit)
++	if name == "" || name == "<invalid>" || name == "<nil>" {
++		unknown.Reason = "egress-interface-unavailable"
++		return unknown
++	}
++	now := localFamilyNow()
++	localFamilyMu.Lock()
++	defer localFamilyMu.Unlock()
++	generation := localFamilyGeneration.Load()
++	entry := localFamilyEvidenceByInterface[name]
++	if entry == nil || !now.Before(entry.sourceUntil) {
++		source, err := localFamilyReadInterface(name)
++		if err != nil {
++			unknown.Reason = "egress-observation-failed"
++			return unknown
++		}
++		source.Generation = generation
++		if entry == nil || entry.source.signature != source.signature {
++			entry = &localFamilyEvidence{failures: make(map[netip.Prefix]time.Time)}
++		}
++		entry.source = source
++		entry.sourceUntil = now.Add(localFamilySourceTTL)
++		if len(localFamilyEvidenceByInterface) >= 16 && localFamilyEvidenceByInterface[name] == nil {
++			localFamilyEvidenceByInterface = make(map[string]*localFamilyEvidence)
++		}
++		localFamilyEvidenceByInterface[name] = entry
++	}
++	result := entry.source
++	result.Generation = generation
++	if result.State == "no-local-v6" {
++		return result
++	}
++	if now.Before(entry.successUntil) {
++		result.State = "local-v6-usable"
++		result.Reason = "recent-local-ipv6-tcp-success"
++		return result
++	}
++	if now.Before(entry.negativeUntil) {
++		result.State = "no-local-v6"
++		result.Reason = "bounded-multiple-prefix-network-unreachable"
++		return result
++	}
++	return result
++}
++
++func LocalFamilyDefault() LocalFamilySnapshot {
++	return LocalFamilyFor(netip.IPv6Unspecified(), "")
++}
++
++func localFamilyObserve(snapshot LocalFamilySnapshot, destination netip.Addr, network string, err error) {
++	if !localFamilyEnabled.Load() || !strings.HasPrefix(network, "tcp") ||
++		!destination.Is6() || destination.Is4In6() || destination.IsLoopback() ||
++		destination.IsLinkLocalUnicast() || destination.IsPrivate() || snapshot.Interface == "" {
++		return
++	}
++	now := localFamilyNow()
++	localFamilyMu.Lock()
++	defer localFamilyMu.Unlock()
++	if snapshot.Generation != localFamilyGeneration.Load() {
++		return
++	}
++	entry := localFamilyEvidenceByInterface[snapshot.Interface]
++	if entry == nil || entry.source.signature != snapshot.signature {
++		return
++	}
++	if err == nil {
++		entry.successUntil = now.Add(localFamilyPositiveTTL)
++		entry.negativeUntil = time.Time{}
++		entry.failures = make(map[netip.Prefix]time.Time)
++		return
++	}
++	// Deadline, refusal, reset, DNS error and cancellation are NOT evidence
++	// of a missing IPv6 exit. Require distinct native unreachable prefixes.
++	if !errors.Is(err, syscall.ENETUNREACH) {
++		return
++	}
++	for prefix, until := range entry.failures {
++		if !now.Before(until) {
++			delete(entry.failures, prefix)
++		}
++	}
++	prefix := netip.PrefixFrom(destination, 48).Masked()
++	if len(entry.failures) < 16 {
++		entry.failures[prefix] = now.Add(localFamilyNegativeTTL)
++	} else if _, exists := entry.failures[prefix]; exists {
++		entry.failures[prefix] = now.Add(localFamilyNegativeTTL)
++	}
++	if len(entry.failures) >= 2 && !now.Before(entry.successUntil) {
++		entry.negativeUntil = now.Add(localFamilyNegativeTTL)
++	}
++}
++
++func localFamilyCandidates(ips []netip.Addr, opt option) []netip.Addr {
++	if !localFamilyEnabled.Load() || opt.network != 0 || opt.prefer == 6 || DefaultSocketHook != nil {
++		return ips
++	}
++	// A proxy-provided netDialer is not a local transport; do not apply local
++	// source observations to another hop or a remote IPv6 destination.
++	if opt.netDialer != nil {
++		if _, ok := opt.netDialer.(*net.Dialer); !ok {
++			return ips
++		}
++	}
++	have4 := false
++	for _, ip := range ips {
++		if ip.Unmap().Is4() {
++			have4 = true
++			break
++		}
++	}
++	if !have4 {
++		return ips
++	} // keep IPv6-only names, explicit/literal IPv6 and their errors
++	kept := make([]netip.Addr, 0, len(ips))
++	for _, ip := range ips {
++		if ip.Is6() && !ip.Is4In6() && !ip.IsPrivate() && !ip.IsLoopback() && !ip.IsLinkLocalUnicast() &&
++			LocalFamilyFor(ip, opt.interfaceName).State == "no-local-v6" {
++			continue
++		}
++		kept = append(kept, ip)
++	}
++	return kept
++}
+--- /dev/null
++++ b/Clash.Meta/component/dialer/local_family_test.go
+@@ -0,0 +1,185 @@
++package dialer
++
++import (
++	"context"
++	"errors"
++	"net"
++	"net/netip"
++	"reflect"
++	"syscall"
++	"testing"
++	"time"
++)
++
++func familyFixture(t *testing.T, has6 bool) (*time.Time, *LocalFamilySnapshot) {
++	t.Helper()
++	oldRead, oldNow := localFamilyReadInterface, localFamilyNow
++	oldInterface := DefaultInterface.Load()
++	oldEnabled := LocalFamilyAutoEnabled()
++	now := time.Unix(1000, 0)
++	source := LocalFamilySnapshot{State: "unknown", Reason: "no-reachability-evidence", Interface: "test-egress", HasIPv4Source: true, HasIPv6Source: has6, signature: "network-A"}
++	if !has6 {
++		source.State = "no-local-v6"
++		source.Reason = "selected-interface-has-no-routable-ipv6-source"
++	}
++	localFamilyReadInterface = func(name string) (LocalFamilySnapshot, error) { s := source; s.Interface = name; return s, nil }
++	localFamilyNow = func() time.Time { return now }
++	DefaultInterface.Store("test-egress")
++	SetLocalFamilyAuto(true)
++	InvalidateLocalFamily()
++	t.Cleanup(func() {
++		localFamilyReadInterface = oldRead
++		localFamilyNow = oldNow
++		DefaultInterface.Store(oldInterface)
++		SetLocalFamilyAuto(oldEnabled)
++		InvalidateLocalFamily()
++	})
++	return &now, &source
++}
++
++func TestRouteWeaverLocalFamilySourcesAndCandidates(t *testing.T) {
++	_, source := familyFixture(t, false)
++	if got := LocalFamilyDefault(); got.State != "no-local-v6" {
++		t.Fatal(got)
++	}
++	ips := []netip.Addr{netip.MustParseAddr("192.0.2.1"), netip.MustParseAddr("2001:db8:1::1"), netip.MustParseAddr("fd00::1"), netip.MustParseAddr("::1")}
++	want := []netip.Addr{ips[0], ips[2], ips[3]}
++	if got := localFamilyCandidates(ips, option{}); !reflect.DeepEqual(got, want) {
++		t.Fatal(got)
++	}
++	for _, opt := range []option{{network: 6}, {network: 4}, {prefer: 6}} {
++		if got := localFamilyCandidates(ips, opt); !reflect.DeepEqual(got, ips) {
++			t.Fatal("explicit family overridden", got)
++		}
++	}
++	if got := localFamilyCandidates(ips[1:2], option{}); !reflect.DeepEqual(got, ips[1:2]) {
++		t.Fatal("IPv6-only destination lost")
++	}
++	SetLocalFamilyAuto(false)
++	if got := localFamilyCandidates(ips, option{}); !reflect.DeepEqual(got, ips) {
++		t.Fatal("disabled changed candidates")
++	}
++	SetLocalFamilyAuto(true)
++	source.State = "unknown"
++	source.HasIPv6Source = true
++	source.signature = "network-B"
++	InvalidateLocalFamily()
++	if got := LocalFamilyDefault(); got.State != "unknown" {
++		t.Fatal("GUA is not proof of reachability", got)
++	}
++	if got := localFamilyCandidates(ips, option{}); !reflect.DeepEqual(got, ips) {
++		t.Fatal("unknown suppressed IPv6")
++	}
++}
++
++func TestRouteWeaverLocalFamilyRequiresIndependentHardFailures(t *testing.T) {
++	now, _ := familyFixture(t, true)
++	ip1 := netip.MustParseAddr("2001:db8:1::1")
++	ip2 := netip.MustParseAddr("2001:db8:2::1")
++	for _, err := range []error{context.DeadlineExceeded, context.Canceled, syscall.ECONNREFUSED, errors.New("network unreachable string only")} {
++		localFamilyObserve(LocalFamilyDefault(), ip1, "tcp", err)
++	}
++	if got := LocalFamilyDefault(); got.State != "unknown" {
++		t.Fatal(got)
++	}
++	localFamilyObserve(LocalFamilyDefault(), ip1, "tcp", syscall.ENETUNREACH)
++	localFamilyObserve(LocalFamilyDefault(), netip.MustParseAddr("2001:db8:1::2"), "tcp", syscall.ENETUNREACH)
++	if got := LocalFamilyDefault(); got.State != "unknown" {
++		t.Fatal("same prefix counted twice", got)
++	}
++	localFamilyObserve(LocalFamilyDefault(), ip2, "tcp", syscall.ENETUNREACH)
++	if got := LocalFamilyDefault(); got.State != "no-local-v6" {
++		t.Fatal(got)
++	}
++	*now = now.Add(localFamilyNegativeTTL + time.Millisecond)
++	if got := LocalFamilyDefault(); got.State != "unknown" {
++		t.Fatal("expired evidence retained", got)
++	}
++}
++
++func TestRouteWeaverLocalFamilySuccessIsBoundedAndUDPIsNotProof(t *testing.T) {
++	now, _ := familyFixture(t, true)
++	ip := netip.MustParseAddr("2001:db8:10::1")
++	localFamilyObserve(LocalFamilyDefault(), ip, "udp", nil)
++	if got := LocalFamilyDefault(); got.State != "unknown" {
++		t.Fatal("UDP socket creation was treated as remote success", got)
++	}
++	localFamilyObserve(LocalFamilyDefault(), ip, "tcp6", nil)
++	if got := LocalFamilyDefault(); got.State != "local-v6-usable" {
++		t.Fatal(got)
++	}
++	for _, s := range []string{"2001:db8:1::1", "2001:db8:2::1"} {
++		localFamilyObserve(LocalFamilyDefault(), netip.MustParseAddr(s), "tcp", syscall.ENETUNREACH)
++	}
++	if got := LocalFamilyDefault(); got.State != "local-v6-usable" {
++		t.Fatal("failure overrode recent success", got)
++	}
++	*now = now.Add(localFamilyPositiveTTL + time.Millisecond)
++	if got := LocalFamilyDefault(); got.State != "unknown" {
++		t.Fatal("positive evidence never expired", got)
++	}
++}
++
++func TestRouteWeaverLocalFamilyNetworkChangeDiscardsOldResults(t *testing.T) {
++	now, source := familyFixture(t, true)
++	ip := netip.MustParseAddr("2001:db8:1::1")
++	old := LocalFamilyDefault()
++	localFamilyObserve(old, ip, "tcp", nil)
++	source.signature = "network-B"
++	source.HasIPv6Source = false
++	source.State = "no-local-v6"
++	*now = now.Add(localFamilySourceTTL + time.Millisecond)
++	if got := LocalFamilyDefault(); got.State != "no-local-v6" {
++		t.Fatal("source change ignored", got)
++	}
++	source.signature = "network-C"
++	source.HasIPv6Source = true
++	source.State = "unknown"
++	InvalidateLocalFamily()
++	if got := LocalFamilyDefault(); got.State != "unknown" {
++		t.Fatal(got)
++	}
++	localFamilyObserve(old, ip, "tcp", nil)
++	if got := LocalFamilyDefault(); got.State != "unknown" {
++		t.Fatal("old network result leaked into new generation", got)
++	}
++}
++
++type familyRemoteDialer struct{}
++
++func (familyRemoteDialer) DialContext(context.Context, string, string) (net.Conn, error) {
++	return nil, errors.New("not invoked")
++}
++
++func TestRouteWeaverLocalFamilyDoesNotRestrictRemoteDialer(t *testing.T) {
++	familyFixture(t, false)
++	ips := []netip.Addr{netip.MustParseAddr("192.0.2.1"), netip.MustParseAddr("2001:db8:1::1")}
++	if got := localFamilyCandidates(ips, option{netDialer: familyRemoteDialer{}}); !reflect.DeepEqual(got, ips) {
++		t.Fatal("proxy-controlled egress was filtered", got)
++	}
++}
++
++func TestRouteWeaverLocalFamilyObservationFailureIsUnknown(t *testing.T) {
++	familyFixture(t, false)
++	localFamilyReadInterface = func(string) (LocalFamilySnapshot, error) { return LocalFamilySnapshot{}, errors.New("interface gone") }
++	InvalidateLocalFamily()
++	if got := LocalFamilyDefault(); got.State != "unknown" {
++		t.Fatal(got)
++	}
++}
++
++func TestRouteWeaverLocalFamilyInterfaceScopeAndInvalidation(t *testing.T) {
++	familyFixture(t, true)
++	a := LocalFamilyFor(netip.IPv6Unspecified(), "egress-A")
++	localFamilyObserve(a, netip.MustParseAddr("2001:db8:1::1"), "tcp", nil)
++	if got := LocalFamilyFor(netip.IPv6Unspecified(), "egress-A"); got.State != "local-v6-usable" {
++		t.Fatal(got)
++	}
++	if got := LocalFamilyFor(netip.IPv6Unspecified(), "egress-B"); got.State != "unknown" {
++		t.Fatal("state crossed interfaces", got)
++	}
++	InvalidateLocalFamily()
++	if got := LocalFamilyFor(netip.IPv6Unspecified(), "egress-A"); got.State != "unknown" {
++		t.Fatal("monitor invalidation ignored", got)
++	}
++}
+--- a/Clash.Meta/component/dialer/dialer.go
++++ b/Clash.Meta/component/dialer/dialer.go
+@@ -55,6 +55,7 @@
+ 		return nil, err
+ 	}
+ 
++	ips = localFamilyCandidates(ips, opt)
+ 	tcpConcurrent := GetTcpConcurrent()
+ 
+ 	switch network {
+@@ -188,7 +189,10 @@
+ 		}
+ 	}
+ 
+-	return dialer.DialContext(ctx, network, address)
++	snapshot := LocalFamilyFor(destination, opt.interfaceName)
++	conn, dialErr := dialer.DialContext(ctx, network, address)
++	localFamilyObserve(snapshot, destination, network, dialErr)
++	return conn, dialErr
+ }
+ 
+ func ICMPControl(destination netip.Addr) func(network, address string, conn syscall.RawConn) error {
+--- /dev/null
++++ b/Clash.Meta/dns/local_family.go
+@@ -0,0 +1,109 @@
++package dns
++
++// RouteWeaver conditional INGRESS address-family handling. Internal resolvers
++// used to connect to nodes/proxy exits are deliberately not filtered here.
++import (
++	"context"
++	"github.com/metacubex/mihomo/component/dialer"
++	D "github.com/miekg/dns"
++	"net/netip"
++	"strings"
++	"time"
++)
++
++var localFamilyStateFor = dialer.LocalFamilyFor
++var localFamilyStateDefault = dialer.LocalFamilyDefault
++
++func localFamilyNameExcluded(name string) bool {
++	host := strings.TrimSuffix(strings.ToLower(name), ".")
++	if !strings.Contains(host, ".") {
++		return true
++	}
++	for _, suffix := range []string{".local", ".lan", ".localdomain", ".home.arpa", ".in-addr.arpa", ".ip6.arpa"} {
++		if strings.HasSuffix(host, suffix) {
++			return true
++		}
++	}
++	return false
++}
++
++func localFamilySuppressVirtualAAAA(name string) bool {
++	return !localFamilyNameExcluded(name) && localFamilyStateDefault().State == "no-local-v6"
++}
++
++func localFamilyFilterResponse(request *D.Msg, response *D.Msg) *D.Msg {
++	if !dialer.LocalFamilyAutoEnabled() || response == nil || len(request.Question) != 1 ||
++		localFamilyNameExcluded(request.Question[0].Name) {
++		return response
++	}
++	q := request.Question[0]
++	if q.Qtype != D.TypeAAAA {
++		return response
++	}
++	// Preserve private/loopback/link-local addresses. Per-address egress
++	// selection prevents a missing default IPv6 source from suppressing a
++	// routed IPv6 address available through another controlled interface.
++	var filtered []D.RR
++	changed := false
++	for _, answer := range response.Answer {
++		if a, ok := answer.(*D.AAAA); ok {
++			ip, valid := netip.AddrFromSlice(a.AAAA)
++			if valid && ip.Is6() && !ip.Is4In6() && !ip.IsPrivate() && !ip.IsLoopback() && !ip.IsLinkLocalUnicast() &&
++				localFamilyStateFor(ip, "").State == "no-local-v6" {
++				changed = true
++				continue
++			}
++		}
++		filtered = append(filtered, answer)
++	}
++	if !changed {
++		return response
++	}
++	result := response.Copy()
++	result.Answer = nil
++	for _, rr := range filtered {
++		if sig, ok := rr.(*D.RRSIG); ok && sig.TypeCovered == D.TypeAAAA {
++			continue
++		}
++		result.Answer = append(result.Answer, rr)
++	}
++	// Modified DNS data cannot retain a claim of DNSSEC authentication.
++	result.AuthenticatedData = false
++	return result
++}
++
++// Query only the already requested name, through its same internal resolver
++// and nameserver-policy. No external canary, guessed mapping or global cache.
++// Saturation/deadline/error means unknown: preserve IPv6 instead of disabling
++// an IPv6-only service that could still be reached through a chosen proxy.
++var localFamilyAlternativeSlots = make(chan struct{}, 8)
++
++type localFamilyExchanger interface {
++	ExchangeContext(context.Context, *D.Msg) (*D.Msg, error)
++}
++
++func localFamilyHasIPv4Alternative(ctx context.Context, name string, backend localFamilyExchanger) bool {
++	if backend == nil {
++		return false
++	}
++	select {
++	case localFamilyAlternativeSlots <- struct{}{}:
++	default:
++		return false
++	}
++	defer func() { <-localFamilyAlternativeSlots }()
++	limited, cancel := context.WithTimeout(ctx, 250*time.Millisecond)
++	defer cancel()
++	query := new(D.Msg)
++	query.SetQuestion(D.Fqdn(name), D.TypeA)
++	response, err := backend.ExchangeContext(limited, query)
++	if err != nil || limited.Err() != nil || response == nil || response.Rcode != D.RcodeSuccess {
++		return false
++	}
++	for _, answer := range response.Answer {
++		if a, ok := answer.(*D.A); ok && a.A.To4() != nil && !a.A.IsUnspecified() {
++			return true
++		}
++	}
++	return false
++}
+--- /dev/null
++++ b/Clash.Meta/dns/local_family_test.go
+@@ -0,0 +1,135 @@
++package dns
++
++import (
++	"context"
++	"errors"
++	"github.com/metacubex/mihomo/component/dialer"
++	D "github.com/miekg/dns"
++	"net"
++	"net/netip"
++	"testing"
++	"time"
++)
++
++func TestRouteWeaverLocalDNSResponseFiltering(t *testing.T) {
++	oldFor, oldDefault := localFamilyStateFor, localFamilyStateDefault
++	oldEnabled := dialer.LocalFamilyAutoEnabled()
++	dialer.SetLocalFamilyAuto(true)
++	t.Cleanup(func() {
++		localFamilyStateFor = oldFor
++		localFamilyStateDefault = oldDefault
++		dialer.SetLocalFamilyAuto(oldEnabled)
++	})
++	state := "no-local-v6"
++	localFamilyStateDefault = func() dialer.LocalFamilySnapshot { return dialer.LocalFamilySnapshot{State: state} }
++	localFamilyStateFor = func(ip netip.Addr, _ string) dialer.LocalFamilySnapshot {
++		if ip == netip.MustParseAddr("2001:db8:2::1") {
++			return dialer.LocalFamilySnapshot{State: "local-v6-usable"}
++		}
++		return dialer.LocalFamilySnapshot{State: state}
++	}
++	req := new(D.Msg)
++	req.SetQuestion("test.example.", D.TypeAAAA)
++	resp := new(D.Msg)
++	resp.SetReply(req)
++	resp.AuthenticatedData = true
++	for _, ip := range []string{"2001:db8:1::1", "2001:db8:2::1", "fd00::1", "fe80::1", "::1"} {
++		resp.Answer = append(resp.Answer, &D.AAAA{Hdr: D.RR_Header{Name: req.Question[0].Name, Rrtype: D.TypeAAAA, Class: D.ClassINET, Ttl: 30}, AAAA: net.ParseIP(ip)})
++	}
++	resp.Answer = append(resp.Answer, &D.RRSIG{Hdr: D.RR_Header{Name: req.Question[0].Name, Rrtype: D.TypeRRSIG, Class: D.ClassINET, Ttl: 30}, TypeCovered: D.TypeAAAA})
++	got := localFamilyFilterResponse(req, resp)
++	if len(got.Answer) != 4 || got.AuthenticatedData {
++		t.Fatal("unexpected filtered response", got)
++	}
++	if len(resp.Answer) != 6 || !resp.AuthenticatedData {
++		t.Fatal("cached upstream response was mutated")
++	}
++	for _, rr := range got.Answer {
++		if a, ok := rr.(*D.AAAA); ok && a.AAAA.Equal(net.ParseIP("2001:db8:1::1")) {
++			t.Fatal("unavailable destination retained")
++		}
++	}
++	state = "unknown"
++	if got := localFamilyFilterResponse(req, resp); got != resp {
++		t.Fatal("unknown altered normal DNS")
++	}
++	state = "local-v6-usable"
++	if localFamilySuppressVirtualAAAA("test.example.") {
++		t.Fatal("usable network suppressed fake6")
++	}
++	state = "no-local-v6"
++	if !localFamilySuppressVirtualAAAA("test.example.") {
++		t.Fatal("missing source did not suppress fake6")
++	}
++	for _, host := range []string{"printer", "printer.local.", "router.lan.", "x.home.arpa.", "1.ip6.arpa."} {
++		if localFamilySuppressVirtualAAAA(host) {
++			t.Fatal("local name changed", host)
++		}
++		req.SetQuestion(host, D.TypeAAAA)
++		if got := localFamilyFilterResponse(req, resp); got != resp {
++			t.Fatal("local response altered", host)
++		}
++	}
++	req.SetQuestion("test.example.", D.TypeA)
++	if got := localFamilyFilterResponse(req, resp); got != resp {
++		t.Fatal("A altered")
++	}
++	dialer.SetLocalFamilyAuto(false)
++	req.SetQuestion("test.example.", D.TypeAAAA)
++	if got := localFamilyFilterResponse(req, resp); got != resp {
++		t.Fatal("disabled extension changed DNS")
++	}
++}
++
++type localFamilyExchangeFunc func(context.Context, *D.Msg) (*D.Msg, error)
++
++func (f localFamilyExchangeFunc) ExchangeContext(ctx context.Context, m *D.Msg) (*D.Msg, error) {
++	return f(ctx, m)
++}
++func TestRouteWeaverLocalDNSRequiresConfirmedIPv4Alternative(t *testing.T) {
++	ctx := context.Background()
++	positive := localFamilyExchangeFunc(func(ctx context.Context, q *D.Msg) (*D.Msg, error) {
++		if q.Question[0].Name != "same.example." || q.Question[0].Qtype != D.TypeA {
++			t.Fatal("wrong name/family", q)
++		}
++		if deadline, ok := ctx.Deadline(); !ok || time.Until(deadline) > 251*time.Millisecond {
++			t.Fatal("unbounded lookup")
++		}
++		response := new(D.Msg)
++		response.SetReply(q)
++		response.Answer = []D.RR{&D.A{Hdr: D.RR_Header{Name: q.Question[0].Name, Rrtype: D.TypeA, Class: D.ClassINET}, A: net.ParseIP("192.0.2.1")}}
++		return response, nil
++	})
++	if !localFamilyHasIPv4Alternative(ctx, "same.example", positive) {
++		t.Fatal("confirmed A ignored")
++	}
++	for _, backend := range []localFamilyExchanger{
++		nil,
++		localFamilyExchangeFunc(func(context.Context, *D.Msg) (*D.Msg, error) { return nil, errors.New("DNS unavailable") }),
++		localFamilyExchangeFunc(func(_ context.Context, q *D.Msg) (*D.Msg, error) { r := new(D.Msg); r.SetReply(q); return r, nil }),
++		localFamilyExchangeFunc(func(_ context.Context, q *D.Msg) (*D.Msg, error) {
++			r := new(D.Msg)
++			r.SetRcode(q, D.RcodeServerFailure)
++			return r, nil
++		}),
++	} {
++		if localFamilyHasIPv4Alternative(ctx, "same.example", backend) {
++			t.Fatal("unknown or IPv6-only service lost")
++		}
++	}
++	canceled, cancel := context.WithCancel(ctx)
++	cancel()
++	if localFamilyHasIPv4Alternative(canceled, "same.example", positive) {
++		t.Fatal("canceled evidence accepted")
++	}
++	for i := 0; i < cap(localFamilyAlternativeSlots); i++ {
++		localFamilyAlternativeSlots <- struct{}{}
++	}
++	got := localFamilyHasIPv4Alternative(ctx, "same.example", positive)
++	for i := 0; i < cap(localFamilyAlternativeSlots); i++ {
++		<-localFamilyAlternativeSlots
++	}
++	if got {
++		t.Fatal("saturated lookup should preserve IPv6")
++	}
++}
+--- a/Clash.Meta/dns/middleware.go
++++ b/Clash.Meta/dns/middleware.go
+@@ -146,7 +146,7 @@
+ 	}
+ }
+ 
+-func withFakeIP(skipper *fakeip.Skipper, fakePool *fakeip.Pool, fakePool6 *fakeip.Pool, fakeIPTTL int) middleware {
++func withFakeIP(skipper *fakeip.Skipper, fakePool *fakeip.Pool, fakePool6 *fakeip.Pool, fakeIPTTL int, backend ...resolver.Resolver) middleware {
+ 	return func(next handler) handler {
+ 		return func(ctx *icontext.DNSContext, r *D.Msg) (*D.Msg, error) {
+ 			q := r.Question[0]
+@@ -168,7 +168,7 @@
+ 					A:   ip.AsSlice(),
+ 				}
+ 			case D.TypeAAAA:
+-				if fakePool6 == nil {
++				if fakePool6 == nil || (len(backend) == 1 && localFamilySuppressVirtualAAAA(q.Name) && localFamilyHasIPv4Alternative(ctx, q.Name, backend[0])) {
+ 					return handleMsgWithEmptyAnswer(r), nil
+ 				}
+ 				ip := fakePool6.Lookup(host)
+@@ -207,10 +207,16 @@
+ 			return handleMsgWithEmptyAnswer(r), nil
+ 		}
+ 
++		if (q.Qtype == D.TypeSVCB || q.Qtype == D.TypeHTTPS) && localFamilySuppressVirtualAAAA(q.Name) && localFamilyHasIPv4Alternative(ctx, q.Name, resolver) {
++			return handleMsgWithEmptyAnswer(r), nil
++		}
+ 		msg, err := resolver.ExchangeContext(ctx, r)
+ 		if err != nil {
+ 			log.Debugln("[DNS Server] Exchange %s failed: %v", q.String(), err)
+ 			return msg, err
++		}
++		if candidate := localFamilyFilterResponse(r, msg); candidate != msg && localFamilyHasIPv4Alternative(ctx, q.Name, resolver) {
++			msg = candidate
+ 		}
+ 		msg.SetRcode(r, msg.Rcode)
+ 		msg.Authoritative = true
+@@ -238,7 +244,7 @@
+ 	}
+ 
+ 	if mapper.mode == C.DNSFakeIP {
+-		middlewares = append(middlewares, withFakeIP(mapper.fakeIPSkipper, mapper.fakeIPPool, mapper.fakeIPPool6, mapper.fakeIPTTL))
++		middlewares = append(middlewares, withFakeIP(mapper.fakeIPSkipper, mapper.fakeIPPool, mapper.fakeIPPool6, mapper.fakeIPTTL, resolver))
+ 	}
+ 
+ 	if mapper.mode != C.DNSNormal {
+--- a/Clash.Meta/config/config.go
++++ b/Clash.Meta/config/config.go
+@@ -47,26 +47,28 @@
+ // General config
+ type General struct {
+ 	Inbound
+-	Mode              T.TunnelMode            `json:"mode"`
+-	UnifiedDelay      bool                    `json:"unified-delay"`
+-	LogLevel          log.LogLevel            `json:"log-level"`
+-	IPv6              bool                    `json:"ipv6"`
+-	Interface         string                  `json:"interface-name"`
+-	RoutingMark       int                     `json:"routing-mark"`
+-	GeoXUrl           GeoXUrl                 `json:"geox-url"`
+-	GeoAutoUpdate     bool                    `json:"geo-auto-update"`
+-	GeoUpdateInterval int                     `json:"geo-update-interval"`
+-	GeodataMode       bool                    `json:"geodata-mode"`
+-	GeodataLoader     string                  `json:"geodata-loader"`
+-	GeositeMatcher    string                  `json:"geosite-matcher"`
+-	TCPConcurrent     bool                    `json:"tcp-concurrent"`
+-	FindProcessMode   process.FindProcessMode `json:"find-process-mode"`
+-	Sniffing          bool                    `json:"sniffing"`
+-	GlobalUA          string                  `json:"global-ua"`
+-	ETagSupport       bool                    `json:"etag-support"`
+-	KeepAliveIdle     int                     `json:"keep-alive-idle"`
+-	KeepAliveInterval int                     `json:"keep-alive-interval"`
+-	DisableKeepAlive  bool                    `json:"disable-keep-alive"`
++	RouteWeaverLocalFamily string                  `json:"routeweaver-local-family"`
++	RouteWeaverLocalState  any                     `json:"routeweaver-local-state,omitempty"`
++	Mode                   T.TunnelMode            `json:"mode"`
++	UnifiedDelay           bool                    `json:"unified-delay"`
++	LogLevel               log.LogLevel            `json:"log-level"`
++	IPv6                   bool                    `json:"ipv6"`
++	Interface              string                  `json:"interface-name"`
++	RoutingMark            int                     `json:"routing-mark"`
++	GeoXUrl                GeoXUrl                 `json:"geox-url"`
++	GeoAutoUpdate          bool                    `json:"geo-auto-update"`
++	GeoUpdateInterval      int                     `json:"geo-update-interval"`
++	GeodataMode            bool                    `json:"geodata-mode"`
++	GeodataLoader          string                  `json:"geodata-loader"`
++	GeositeMatcher         string                  `json:"geosite-matcher"`
++	TCPConcurrent          bool                    `json:"tcp-concurrent"`
++	FindProcessMode        process.FindProcessMode `json:"find-process-mode"`
++	Sniffing               bool                    `json:"sniffing"`
++	GlobalUA               string                  `json:"global-ua"`
++	ETagSupport            bool                    `json:"etag-support"`
++	KeepAliveIdle          int                     `json:"keep-alive-idle"`
++	KeepAliveInterval      int                     `json:"keep-alive-interval"`
++	DisableKeepAlive       bool                    `json:"disable-keep-alive"`
+ }
+ 
+ // Inbound config
+@@ -401,6 +403,7 @@
+ }
+ 
+ type RawConfig struct {
++	RouteWeaverLocalFamily        string                  `yaml:"routeweaver-local-family" json:"routeweaver-local-family"`
+ 	Port                          int                     `yaml:"port" json:"port"`
+ 	SocksPort                     int                     `yaml:"socks-port" json:"socks-port"`
+ 	RedirPort                     int                     `yaml:"redir-port" json:"redir-port"`
+@@ -758,6 +761,9 @@
+ func temporaryUpdateGeneral(general *General) func()
+ 
+ func parseGeneral(cfg *RawConfig) (*General, error) {
++	if cfg.RouteWeaverLocalFamily != "" && cfg.RouteWeaverLocalFamily != "off" && cfg.RouteWeaverLocalFamily != "auto" {
++		return nil, fmt.Errorf("routeweaver-local-family must be auto or off")
++	}
+ 	if cfg.GlobalClientFingerprint != "" {
+ 		log.Errorln("The `global-client-fingerprint` configuration is removed, please set `client-fingerprint` directly on the proxy instead")
+ 	}
+@@ -778,12 +784,13 @@
+ 			InboundTfo:        cfg.InboundTfo,
+ 			InboundMPTCP:      cfg.InboundMPTCP,
+ 		},
+-		UnifiedDelay: cfg.UnifiedDelay,
+-		Mode:         cfg.Mode,
+-		LogLevel:     cfg.LogLevel,
+-		IPv6:         cfg.IPv6,
+-		Interface:    cfg.Interface,
+-		RoutingMark:  cfg.RoutingMark,
++		UnifiedDelay:           cfg.UnifiedDelay,
++		Mode:                   cfg.Mode,
++		LogLevel:               cfg.LogLevel,
++		IPv6:                   cfg.IPv6,
++		RouteWeaverLocalFamily: cfg.RouteWeaverLocalFamily,
++		Interface:              cfg.Interface,
++		RoutingMark:            cfg.RoutingMark,
+ 		GeoXUrl: GeoXUrl{
+ 			GeoIp:   cfg.GeoXUrl.GeoIp,
+ 			Mmdb:    cfg.GeoXUrl.Mmdb,
+--- a/Clash.Meta/hub/executor/executor.go
++++ b/Clash.Meta/hub/executor/executor.go
+@@ -157,8 +157,15 @@
+ 		UnifiedDelay: adapter.UnifiedDelay.Load(),
+ 		LogLevel:     log.Level(),
+ 		IPv6:         !resolver.DisableIPv6,
+-		Interface:    dialer.DefaultInterface.Load(),
+-		RoutingMark:  int(dialer.DefaultRoutingMark.Load()),
++		RouteWeaverLocalFamily: func() string {
++			if dialer.LocalFamilyAutoEnabled() {
++				return "auto"
++			}
++			return "off"
++		}(),
++		RouteWeaverLocalState: dialer.LocalFamilyDefault(),
++		Interface:             dialer.DefaultInterface.Load(),
++		RoutingMark:           int(dialer.DefaultRoutingMark.Load()),
+ 		GeoXUrl: config.GeoXUrl{
+ 			GeoIp:   geodata.GeoIpUrl(),
+ 			Mmdb:    geodata.MmdbUrl(),
+@@ -398,6 +405,10 @@
+ 	tunnel.SetFindProcessMode(general.FindProcessMode)
+ 	resolver.DisableIPv6 = !general.IPv6
+ 
++	dialer.SetLocalFamilyAuto(general.RouteWeaverLocalFamily == "auto")
++	if logging && dialer.LocalFamilyAutoEnabled() {
++		log.Infoln("[RouteWeaver] %s enabled; local DNS candidates and local socket paths only; unknown capability preserves dual-stack", dialer.LocalFamilyRevision)
++	}
+ 	dialer.SetTcpConcurrent(general.TCPConcurrent)
+ 	if logging && general.TCPConcurrent {
+ 		log.Infoln("Use tcp concurrent")
+--- a/Clash.Meta/listener/sing_tun/server.go
++++ b/Clash.Meta/listener/sing_tun/server.go
+@@ -364,7 +364,8 @@
+ 				log.Errorln("[TUN] default interface lost by monitor")
+ 			}
+ 			iface.FlushCache()
+-			resolver.ResetConnection() // reset resolver's connection after default interface changed
++			dialer.InvalidateLocalFamily() // discard route/source/reachability evidence at a network change
++			resolver.ResetConnection()     // reset resolver's connection after default interface changed
+ 		})
+ 		err = defaultInterfaceMonitor.Start()
+ 		if err != nil {
+--- a/Clash.Meta/adapter/outbound/direct.go
++++ b/Clash.Meta/adapter/outbound/direct.go
+@@ -51,7 +51,14 @@
+ 
+ func (d *Direct) ResolveUDP(ctx context.Context, metadata *C.Metadata) error {
+ 	if (!metadata.Resolved() || resolver.DirectHostResolver != resolver.DefaultResolver) && metadata.Host != "" {
+-		ip, err := resolveIPWithResolver(resolver.WithInitiator(ctx, resolver.InitiatorDirect), metadata.Host, d.prefer, resolver.DirectHostResolver)
++		prefer := d.prefer
++		if prefer == C.DualStack && dialer.LocalFamilyAutoEnabled() {
++			state := dialer.LocalFamilyFor(metadata.DstIP, d.iface)
++			if state.State == "no-local-v6" && state.HasIPv4Source {
++				prefer = C.IPv4Prefer
++			}
++		}
++		ip, err := resolveIPWithResolver(resolver.WithInitiator(ctx, resolver.InitiatorDirect), metadata.Host, prefer, resolver.DirectHostResolver)
+ 		if err != nil {
+ 			return fmt.Errorf("can't resolve ip: %w", err)
+ 		}

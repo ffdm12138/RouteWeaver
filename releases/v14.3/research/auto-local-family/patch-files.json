@@ -1,0 +1,55 @@
+{
+  "base": "flclash-core-integration-r1 pinned source plus its core.patch",
+  "files": [
+    {
+      "file": "Clash.Meta/component/dialer/local_family.go",
+      "beforeSHA256": null,
+      "afterSHA256": "2e1735c8eb2a8f1747984f1833035a82952dd852328d7273f03aeea8459a0575"
+    },
+    {
+      "file": "Clash.Meta/component/dialer/local_family_test.go",
+      "beforeSHA256": null,
+      "afterSHA256": "7795ebc5875374aad8da8624ff1777be0f495aa623f027adc9bde5edde9e6f66"
+    },
+    {
+      "file": "Clash.Meta/component/dialer/dialer.go",
+      "beforeSHA256": "2f390067ee9965fae725de6c8b73a987a4259b87ecaa3f04a123edd120c1aef1",
+      "afterSHA256": "37399241e13cf04f888f29f3c8aa391a8b0b9a4f7615724faa42c032d9357667"
+    },
+    {
+      "file": "Clash.Meta/dns/local_family.go",
+      "beforeSHA256": null,
+      "afterSHA256": "3e5c3ac35bc476416a0257c69280321c74b62943172d39dcbefe3bce9cf73cb1"
+    },
+    {
+      "file": "Clash.Meta/dns/local_family_test.go",
+      "beforeSHA256": null,
+      "afterSHA256": "0f08b5ff67aa8701d49b46b66d5d5ebdf5bda432417f5f680dd76d5183d219b1"
+    },
+    {
+      "file": "Clash.Meta/dns/middleware.go",
+      "beforeSHA256": "d89ba45bb889664e2291c370593df1240249a7e0340521af0ed8adf7c3fe90fc",
+      "afterSHA256": "2240b505d29cacfeddad687d3dda103f52ac5b58bbe5af41890882b5886b58a6"
+    },
+    {
+      "file": "Clash.Meta/config/config.go",
+      "beforeSHA256": "6abc55e0ce7e9cc191787e4f5614ea8e53d59ad67e05bdffb03e902062054941",
+      "afterSHA256": "448afc4e9e600f038ef21153077ae7a5281d010970682a9897958cba21284977"
+    },
+    {
+      "file": "Clash.Meta/hub/executor/executor.go",
+      "beforeSHA256": "e69d551ea4bb90abb64637fa0d5a6890b59f65c03d9b002e7b28e8b40b10758f",
+      "afterSHA256": "3ada3aa4cfddad617678109587ca6f152feaf1f4a90e3d7a435635c2e5265a1d"
+    },
+    {
+      "file": "Clash.Meta/listener/sing_tun/server.go",
+      "beforeSHA256": "9baeb550549aaf299a0c565f28b3dabd9e200db74e7b9462320ed337666d3f0f",
+      "afterSHA256": "8eb98142b88c340b365fed93ae34bd5511fe8d63404a73b2479c7a16461340e5"
+    },
+    {
+      "file": "Clash.Meta/adapter/outbound/direct.go",
+      "beforeSHA256": "7b81ce2c806c9e5606934c6f4c954dcba15530c2fca6dedb218ce955d5c14458",
+      "afterSHA256": "6e6518de4d61f8a8ee7680ce75c1890248b8f47fd312af7d4f958b407c917805"
+    }
+  ]
+}

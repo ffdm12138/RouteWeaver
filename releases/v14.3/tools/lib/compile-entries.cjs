@@ -5,19 +5,22 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
 const {render}=require('./render-runtime.cjs');
 function replaceOnce(code,needle,value){assert.equal(code.split(needle).length,2,'Client adapter anchor: '+needle);return code.replace(needle,value);}
 function renameMain(code,name){assert.equal((code.match(/^function main\(input(?:, profileName)?\)/gm)||[]).length,1);return code.replace('function main(','function '+name+'(');}
-function networkModes(raw,adapter,acceptSerializedInput=false){
+function networkModes(raw,adapter,acceptSerializedInput=false,autoAdapter=""){
  const base=renameMain(raw,'v14NetworkModeBase');
  const compat=renameMain(adapter,'v14IPv4LocalMain');
- return '// One current entry; set the default below, or use x-routeweaver.network-mode in the input.\n'+
-  'const ROUTEWEAVER_DEFAULT_NETWORK_MODE = "dual-stack";\n'+base.trimEnd()+'\n\n'+compat.trimEnd()+`\n
+ return '// One current entry; set the default below, or use x-routeweaver.network-mode in the input. Auto requires the matching native core; JS alone cannot inspect physical egress.\n'+
+  'const ROUTEWEAVER_DEFAULT_NETWORK_MODE = "auto";\n'+base.trimEnd()+'\n\n'+compat.trimEnd()+'\n\n'+autoAdapter.trimEnd()+`\n
 function main(input, profileName) {
 ${acceptSerializedInput?'  if (typeof input === "string") { try { input = JSON.parse(input); } catch (_) { v14Fail("Clash Mi JSON 输入无效。"); } }\n':''}  if (!v14Object(input)) v14Fail("覆写输入必须是配置对象。");
   const options = v14Object(input["x-routeweaver"]) ? input["x-routeweaver"] : {};
   const prior = v14Object(input["x-v14-generated"]) ? input["x-v14-generated"] : {};
   const mode = options["network-mode"] ||
-    (prior.version === V14.version && prior.networkMode === "ipv4-local" ? "ipv4-local" : ROUTEWEAVER_DEFAULT_NETWORK_MODE);
-  if (mode !== "dual-stack" && mode !== "ipv4-local") v14Fail("network-mode 仅支持 dual-stack 或 ipv4-local。");
-  return mode === "ipv4-local" ? v14IPv4LocalMain(input, profileName) : v14NetworkModeBase(input, profileName);
+    (prior.version === V14.version && ["auto", "dual-stack", "ipv4-local"].includes(prior.networkMode) ? prior.networkMode : ROUTEWEAVER_DEFAULT_NETWORK_MODE);
+  if (!["auto", "dual-stack", "ipv4-local"].includes(mode)) v14Fail("network-mode 仅支持 auto、dual-stack 或 ipv4-local。");
+  if (mode === "auto") return v14AutoLocalMain(input, profileName);
+  const config = mode === "ipv4-local" ? v14IPv4LocalMain(input, profileName) : v14NetworkModeBase(input, profileName);
+  delete config["routeweaver-local-family"];
+  return config;
 }
 `;
 }
@@ -30,7 +33,7 @@ function compile(root){
  const values={CORE:JSON.stringify(core,null,2),SERVICES:JSON.stringify(services,null,2),EMBEDDED:JSON.stringify(embedded,null,2),PINS:JSON.stringify(pins,null,2),
   DIRECT_RULE_INITIALIZER:vps?'  // Explicit user-authorized IPv4 exception, all protocols/ports, before all other rules.\n  const rules = ['+JSON.stringify(vps.rule)+', "DOMAIN,v14-runtime-check.invalid,REJECT"], emitted = new Set(['+JSON.stringify('IP-CIDR,'+vps.address+',no-resolve')+']);':'  const rules = ["DOMAIN,v14-runtime-check.invalid,REJECT"], emitted = new Set();',
   DIRECT_RULE_MARKER:vps?', vpsDirectRevision: '+JSON.stringify(vps.revision):''};
- const inputs=['tools/lib/compile-entries.cjs','tools/lib/render-runtime.cjs','tools/lib/reviewed-policy.cjs','tools/clashmi-adapter.js','tools/macos-flclash-adapter.js','tools/clash-verge-adapter.js','tools/ipv4-local-adapter.js','data/client-capabilities.json',...(vps?[directFile]:[])];
+ const inputs=['tools/lib/compile-entries.cjs','tools/lib/render-runtime.cjs','tools/lib/reviewed-policy.cjs','tools/clashmi-adapter.js','tools/macos-flclash-adapter.js','tools/clash-verge-adapter.js','tools/ipv4-local-adapter.js','tools/auto-local-adapter.js','data/client-capabilities.json',...(vps?[directFile]:[])];
  const shared={};
  for(const platform of ['desktop','android']){
   const file='runtime/platforms/'+platform+'/layout.json',layout=JSON.parse(read(file));inputs.push(file,layout.preamble);
@@ -61,7 +64,7 @@ function compile(root){
   {platform:'macosFlClash',client:'FlClash',file:'src/macos/v14.3-macos-flclash.js',raw:macFlClash},
   {platform:'macosClashMi',client:'Clash Mi',file:'src/macos/v14.3-macos-clashmi.js',raw:macClashMi},
   {platform:'clashVerge',file:'src/clash-verge/v14.3-clash-verge.js',raw:verge}
- ].map(entry=>({...entry,code:networkModes(entry.raw,optional,['clashmi','macosClashMi'].includes(entry.platform))}));
+ ].map(entry=>({...entry,code:networkModes(entry.raw,optional,['clashmi','macosClashMi'].includes(entry.platform),read('tools/auto-local-adapter.js'))}));
  return {policy,vps,entries,inputs:[...new Set(inputs)]};
 }
 module.exports={compile,networkModes,renameMain};

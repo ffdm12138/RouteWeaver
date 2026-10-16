@@ -62,7 +62,7 @@
     },
     {
       "file": "metadata/macos-sources.json",
-      "sha256": "66acaab519a9336176d729343ed777093f6a419236cf54a568b53af034002baa"
+      "sha256": "4df26d349ff72b72a6113d0e4b0b42d0f29cf62adacfc92d063559cc3ccaa3d8"
     },
     {
       "file": "tools/build-balanced.cjs",
@@ -82,11 +82,11 @@
     },
     {
       "file": "tools/lib/build-entries.cjs",
-      "sha256": "77b15d3285181c2039c24018b72c93b663ef12626133ec4f893894eb86ca2808"
+      "sha256": "3a11aaf16a0da9cb672c6d109258033b657ad2114676ddc532eaed3f9221ee4c"
     },
     {
       "file": "tools/lib/compile-entries.cjs",
-      "sha256": "8298730ee0e8bd34245f88781197188f67f05f548ea0169bf21526430e3f0c36"
+      "sha256": "bd6e1d0f0577ed6e84cc52b5766836086abc6bcec1e9a514d2d99e499da00797"
     },
     {
       "file": "tools/lib/render-runtime.cjs",
@@ -110,11 +110,15 @@
     },
     {
       "file": "tools/ipv4-local-adapter.js",
-      "sha256": "412f0a15d01afbdbb72a9b6d81f56bb9be36c6b407804c17c0cc18349f0d70ab"
+      "sha256": "5a82d7f341133929d30e247671afcce05f918eb06325ec024be6db8b18ba931c"
+    },
+    {
+      "file": "tools/auto-local-adapter.js",
+      "sha256": "e15a238989b4afb1782b562b41a6f9fcf3ebf0e33ea7f7b586cc74c6d5de3262"
     },
     {
       "file": "data/client-capabilities.json",
-      "sha256": "8d0597e5c55fafa52538ae6e2449b8e9149620ffbcc617e02d4d8152b776c4dd"
+      "sha256": "1de71b61cacc5fd4d1d5caf36615f9cc7f5d9339c5d8ffc9725815ed6c8deb4c"
     },
     {
       "file": "runtime/platforms/desktop/layout.json",
@@ -250,11 +254,11 @@
     },
     {
       "file": "src/macos/v14.3-macos-flclash.js",
-      "sha256": "3e0160e34391803ad728f11e7a14e4b7b074a81d181744bfb50889dd8e0f8854"
+      "sha256": "0026fb6a58d8741a737cd18f371bfe969d9b2ee8811e752d6fb83778b55d4c5c"
     },
     {
       "file": "src/macos/v14.3-macos-clashmi.js",
-      "sha256": "cbc1342c6655704c6a546842c1ea36dfdf5ae55cfd2cdd2ba4b8b508e4880bb8"
+      "sha256": "baeda7cfd627541b630c87a982f02c78b31f6b3ed09727af2ef130ad70f3afde"
     }
   ],
   "clientDeployment": false,

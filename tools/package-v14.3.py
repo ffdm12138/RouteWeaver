@@ -14,7 +14,7 @@ parser=argparse.ArgumentParser()
 parser.add_argument('--node',default='node')
 parser.add_argument('--skip-history',action='store_true',default=True,help='Build from a public clone without local historical archives.')
 args=parser.parse_args()
-process_flags=getattr(subprocess,'CREATE_NO_WINDOW',0)
+process_flags=0
 sha=lambda b:hashlib.sha256(b).hexdigest()
 read=lambda p:json.loads(p.read_text(encoding='utf-8-sig'))
 subprocess.run([__import__('sys').executable,str(project/'tools/verify-v14.3.py'),'--node',args.node,*(['--skip-history'] if args.skip_history else [])],cwd=project,check=True,capture_output=True,creationflags=process_flags)
@@ -86,6 +86,7 @@ def write_zip(label,files):
         package_manifest['macosRevision']=mac['revision']
     package_manifest['networkCompatibilityRevision']=network['revision']
     package_manifest['networkCompatibilityRepair']=network['repairRevision']
+    package_manifest['knownNativeRegressions']='PRE_RELEASE_WITH_DISCLOSED_UNRESOLVED_NATIVE_REGRESSIONS'
     files=dict(files)
     files['PACKAGE_MANIFEST.json']=(json.dumps(package_manifest,ensure_ascii=False,indent=2)+'\n').encode('utf-8')
     target=dist/('v14.3-'+label+'.zip')
@@ -116,9 +117,11 @@ if mac:
         deploy[name]=(release/name).read_bytes()
 for name in [e['file'] for e in network['entries']]+['metadata/network-compat.json','metadata/network-compat-delivery.json']+[e['file'] for e in network['testEvidence'].values()]:
     deploy[name]=(release/name).read_bytes()
-for name in ['metadata/clash-verge-sources.json','data/client-capabilities.json','validation/client-integration.json','validation/engine-parity.json','validation/clash-verge-static.json','validation/clash-verge-core.json']:
+for name in ['metadata/clash-verge-sources.json','data/client-capabilities.json','validation/client-integration.json','validation/auto-local-core.json','validation/auto-local-native.json','validation/engine-parity.json','validation/clash-verge-static.json','validation/clash-verge-core.json']:
     deploy[name]=(release/name).read_bytes()
 deploy['tools/diagnose-client.py']=(project/'tools/diagnose-client.py').read_bytes()
+deploy['validation/known-release-regressions.json']=(release/'validation/known-release-regressions.json').read_bytes()
+deploy['tools/configure-flclash-network-mode.py']=(project/'tools/configure-flclash-network-mode.py').read_bytes()
 deploy.update(docs())
 deploy['README.md']=links((release/'README.md').read_bytes())
 deploy_target,deploy_result=write_zip('deployable',deploy)
@@ -135,7 +138,7 @@ for file in release.rglob('*'):
     audit[rel.as_posix()]=file.read_bytes()
 audit.update(docs())
 audit['README.md']=links((release/'README.md').read_bytes())
-for name in ['record-v14.3.py','verify-v14.3.py','package-v14.3.py','verify-layout.py','network_release.py','release_enhancements.py','diagnose-client.py']:
+for name in ['record-v14.3.py','verify-v14.3.py','package-v14.3.py','verify-layout.py','network_release.py','release_enhancements.py','diagnose-client.py','configure-flclash-network-mode.py']:
     audit['project-tools/'+name]=(project/'tools'/name).read_bytes()
 if delivery:
     audit['project-tools/restore-ios-delivery.py']=(project/'tools/restore-ios-delivery.py').read_bytes()
@@ -163,6 +166,7 @@ if mac:
         '两个公共组先手动选节点，确认完整规则已下载。详见 [导入说明](docs/guides/MacBook使用说明.md)。\n\n'
         '源码与本机 Windows Mihomo 回放通过；Mac App、TUN/NetworkExtension 实机接管未验收。包不含实际节点或订阅。\n').encode('utf-8')
     mac_files['README.md']+='\n每个客户端只有一份 JS；本地无 IPv6 出口时，将该文件顶部默认模式改为 ipv4-local，保持核心 IPv6、严格路由与完整 TUN 接管。详见 [IPv4 兼容模式](docs/guides/IPv4兼容模式.md)。\n'.encode('utf-8')
+    mac_files['README.md'] += '\n默认 auto 需要对应原生核心；本次未交付 Mac 宿主接入，不能把 JS 导入成功当作检测生效。详见 docs/guides/自动网络模式.md。\n'.encode('utf8')
     mac_files.update(docs())
     _,mac_result=write_zip('macos',mac_files)
 
@@ -197,7 +201,7 @@ if mac:
 result={'version':'14.3','date':'2026-10-16','revision':'balanced-r1','status':'PACKAGE_CRC_SHA_FRESH_STATIC_PASS',
         'packages':[deploy_result,audit_result]+([mac_result] if mac_result else []),'freshExtraction':fresh.relative_to(project).as_posix(),
         'freshGeneration':'PASS','freshStaticChecks':len(static['checks']),'freshStaticPlatforms':[{k:p[k] for k in ['platform','fullInventoryHosts','normalRouting','normalDNS','criticalColdRouting','criticalColdDNS','existingCases']} for p in static['platforms']],
-        'nativeCore':'SOURCE_HASH_IDENTICAL_BOUND_LOCAL_RECEIPTS_INCLUDED','freshNativeCoreReplay':'NOT_RUN',
+        'nativeCore':'PUBLIC_NATIVE_ROUTING_AND_EMPTY_PROVIDER_REPLAYS_FAILED_DISCLOSED_PRE_RELEASE_ONLY','freshNativeCoreReplay':'NOT_RUN',
         'sourceReviewSHA256':sha((release/'metadata/balanced-review.json').read_bytes()),
         'frozenContractSHA256':sha((project/'docs/需求.md').read_bytes()),'packageToolSHA256':sha(Path(__file__).read_bytes()),
         'clientDeployment':False,'appJavaScriptCore':'NOT_RUN','deviceAcceptance':'NOT_RUN','iOSLongRunMemory':'NOT_RUN'}
@@ -212,6 +216,7 @@ if mac:
                   freshMacStatic=fresh_mac['status'],freshMacStaticChecks=len(fresh_mac['checks']),
                   macosDeliverySHA256=sha((release/'metadata/macos-delivery.json').read_bytes()),macosDeviceAcceptance='NOT_RUN')
 result['networkCompatibilityRevision']=network['revision']
+result['knownRegressions']={'file':'validation/known-release-regressions.json','sha256':sha((release/'validation/known-release-regressions.json').read_bytes()),'status':'PRE_RELEASE_WITH_DISCLOSED_UNRESOLVED_NATIVE_REGRESSIONS'}
 result['freshNetworkCompatibilityStatic']=read(fresh/'validation/network-compat-static.json')['status']
 for entry in network['entries']:
     assert sha((fresh/entry['file']).read_bytes())==entry['sha256']

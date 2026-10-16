@@ -1,5 +1,5 @@
-// One current entry; set the default below, or use x-routeweaver.network-mode in the input.
-const ROUTEWEAVER_DEFAULT_NETWORK_MODE = "dual-stack";
+// One current entry; set the default below, or use x-routeweaver.network-mode in the input. Auto requires the matching native core; JS alone cannot inspect physical egress.
+const ROUTEWEAVER_DEFAULT_NETWORK_MODE = "auto";
 // Clash Verge Rev Windows adapter; main(config, profileName) returns a config object.
 // Small standalone overwrite: critical parents and safety guards inline; complete reviewed rules are remote.
 // Mihomo V14.3 desktop — 2026-10-12; balanced-r1.
@@ -2328,6 +2328,32 @@ function v14NetworkModeBase(input, profileName) {
   return config;
 }
 
+// Shared destination recovery; never changes the selected egress.
+function v14RecoverNetworkDestination(config) {
+  // With a readable HTTP/TLS/QUIC hostname, replace a cached literal destination
+  // with that hostname. DIRECT then resolves an A record; a selected proxy
+  // retains remote DNS/IPv6 ability. This includes HTTP Host: identifying it
+  // for routing alone leaves a stale IPv6 destination unusable on IPv4-only LANs.
+  // Without a hostname a literal IPv6 cannot be converted to an IPv4 target.
+  for (const protocol of ["HTTP", "TLS", "QUIC"])
+    config.sniffer.sniff[protocol]["override-destination"] = true;
+  // Preserve the destination identity needed by leading explicit IP rules.
+  // A hostname rewrite happens before rule evaluation in Mihomo. Without
+  // this exclusion it could erase a highest-priority manual IP exception.
+  const anchor = config.rules.indexOf("DOMAIN,v14-runtime-check.invalid,REJECT");
+  if (anchor < 0) v14Fail("Missing compatibility rule anchor");
+  const explicitIPs = config.rules.slice(0, anchor).flatMap(rule => {
+    const match = /^IP-CIDR6?,([^,]+),DIRECT(?:,no-resolve)?$/.exec(rule);
+    return match ? [match[1]] : [];
+  });
+  config.sniffer["skip-dst-address"] = [...new Set(v14Strings(config.sniffer["skip-dst-address"], "sniffer.skip-dst-address").concat(explicitIPs))];
+  // Keep LAN names at their original addresses. Do not skip every private
+  // address: known company domains must retain their existing priority.
+  if (!config["rule-providers"]["v14-domains-private"]) v14Fail("Missing inline private domain classifier");
+  config.sniffer["skip-domain"] = [...new Set(v14Strings(config.sniffer["skip-domain"], "sniffer.skip-domain").concat(V14.privateNames.map(name => "+." + name), ["rule-set:v14-domains-private"]))];
+  return config;
+}
+
 // Explicit IPv4-local ingress mode. No system reachability probe is performed.
 // Keep core IPv6 and TUN capture so IPv6 cannot escape when networks change.
 // dns.ipv6 only filters client AAAA; apply the same family restriction to
@@ -2351,6 +2377,7 @@ function v14IPv4LocalMain(input) {
     prepared.sniffer["skip-domain"] = v14Strings(prepared.sniffer["skip-domain"], "sniffer.skip-domain").filter(value => value !== "rule-set:v14-domains-private");
   const config = v14NetworkModeBase(prepared);
   config.ipv6 = true;
+  delete config["routeweaver-local-family"];
   config.dns.ipv6 = false;
   delete config.dns["fake-ip-range6"];
   for (const key of ["nameserver", "fallback", "direct-nameserver"])
@@ -2359,27 +2386,7 @@ function v14IPv4LocalMain(input) {
     config.dns["nameserver-policy"][key] = v14IPv4LocalResolver(config.dns["nameserver-policy"][key]);
   config.tun["inet6-address"] = ["fdfe:dcba:9876::1/126"];
   config.tun["route-address"] = ["0.0.0.0/0", "::/0"];
-  // With a readable HTTP/TLS/QUIC hostname, replace a cached literal destination
-  // with that hostname. DIRECT then resolves an A record; a selected proxy
-  // retains remote DNS/IPv6 ability. This includes HTTP Host: identifying it
-  // for routing alone leaves a stale IPv6 destination unusable on IPv4-only LANs.
-  // Without a hostname a literal IPv6 cannot be converted to an IPv4 target.
-  for (const protocol of ["HTTP", "TLS", "QUIC"])
-    config.sniffer.sniff[protocol]["override-destination"] = true;
-  // Preserve the destination identity needed by leading explicit IP rules.
-  // A hostname rewrite happens before rule evaluation in Mihomo. Without
-  // this exclusion it could erase a highest-priority manual IP exception.
-  const anchor = config.rules.indexOf("DOMAIN,v14-runtime-check.invalid,REJECT");
-  if (anchor < 0) v14Fail("Missing compatibility rule anchor");
-  const explicitIPs = config.rules.slice(0, anchor).flatMap(rule => {
-    const match = /^IP-CIDR6?,([^,]+),DIRECT(?:,no-resolve)?$/.exec(rule);
-    return match ? [match[1]] : [];
-  });
-  config.sniffer["skip-dst-address"] = [...new Set(v14Strings(config.sniffer["skip-dst-address"], "sniffer.skip-dst-address").concat(explicitIPs))];
-  // Keep LAN names at their original addresses. Do not skip every private
-  // address: known company domains must retain their existing priority.
-  if (!config["rule-providers"]["v14-domains-private"]) v14Fail("Missing inline private domain classifier");
-  config.sniffer["skip-domain"] = [...new Set(v14Strings(config.sniffer["skip-domain"], "sniffer.skip-domain").concat(V14.privateNames.map(name => "+." + name), ["rule-set:v14-domains-private"]))];
+  v14RecoverNetworkDestination(config);
   const marker = config["x-v14-generated"];
   marker.networkMode = "ipv4-local";
   marker.networkCompatibilityRepair = "http-recovery-r1";
@@ -2391,12 +2398,41 @@ function v14IPv4LocalMain(input) {
   return config;
 }
 
+// Auto requires a native core implementing auto-local-family-r1. The JS
+// requests the capability, but never claims that generating JSON proves it.
+function v14AutoLocalMain(input, profileName) {
+  const prepared = v14Copy(input);
+  delete prepared["routeweaver-local-family"];
+  if (v14Object(prepared.dns)) prepared.dns.ipv6 = true;
+  if (v14Object(prepared.sniffer) && prepared.sniffer["skip-domain"] != null)
+    prepared.sniffer["skip-domain"] = v14Strings(prepared.sniffer["skip-domain"], "sniffer.skip-domain").filter(value => value !== "rule-set:v14-domains-private");
+  const config = v14NetworkModeBase(prepared, profileName);
+  config.ipv6 = true;
+  config.dns.ipv6 = true;
+  config["routeweaver-local-family"] = "auto";
+  v14RecoverNetworkDestination(config);
+  const marker = config["x-v14-generated"];
+  marker.networkMode = "auto";
+  marker.automaticNetworkRevision = "auto-local-family-r1";
+  marker.automaticNetworkCapability = "REQUIRES_MATCHING_NATIVE_CORE_RUNTIME_NOT_CONFIRMED_BY_JS";
+  marker.localIPv6Fallback = "native-egress-observation-and-bounded-passive-evidence; no global IPv6 disable; original-egress-policy-preserved";
+  marker.validationWarnings = marker.validationWarnings.concat([
+    "auto 需要实现 auto-local-family-r1 的核心；覆写无法确认运行核心支持。普通核心只保留双栈/节点 IPv4 偏好/域名恢复，不能视为自动物理出口判断。",
+    "匹配核心在实际出站网卡缺少 IPv6 源地址时抑制应用候选；网络变化更新状态，未知状态保留双栈。节点引导 DNS、代理远端 IPv6、显式地址族、局域网和 hosts 不改。",
+    "无可靠域名的 IPv6 字面量不能透明变成 IPv4；快速失败不保证应用重试。移动端受保护 socket 的出口需要宿主提供能力，不能用 TUN 地址推断。"
+  ]);
+  return config;
+}
+
 function main(input, profileName) {
   if (!v14Object(input)) v14Fail("覆写输入必须是配置对象。");
   const options = v14Object(input["x-routeweaver"]) ? input["x-routeweaver"] : {};
   const prior = v14Object(input["x-v14-generated"]) ? input["x-v14-generated"] : {};
   const mode = options["network-mode"] ||
-    (prior.version === V14.version && prior.networkMode === "ipv4-local" ? "ipv4-local" : ROUTEWEAVER_DEFAULT_NETWORK_MODE);
-  if (mode !== "dual-stack" && mode !== "ipv4-local") v14Fail("network-mode 仅支持 dual-stack 或 ipv4-local。");
-  return mode === "ipv4-local" ? v14IPv4LocalMain(input, profileName) : v14NetworkModeBase(input, profileName);
+    (prior.version === V14.version && ["auto", "dual-stack", "ipv4-local"].includes(prior.networkMode) ? prior.networkMode : ROUTEWEAVER_DEFAULT_NETWORK_MODE);
+  if (!["auto", "dual-stack", "ipv4-local"].includes(mode)) v14Fail("network-mode 仅支持 auto、dual-stack 或 ipv4-local。");
+  if (mode === "auto") return v14AutoLocalMain(input, profileName);
+  const config = mode === "ipv4-local" ? v14IPv4LocalMain(input, profileName) : v14NetworkModeBase(input, profileName);
+  delete config["routeweaver-local-family"];
+  return config;
 }

@@ -8,16 +8,16 @@
   "guide": "docs/guides/MacBook使用说明.md",
   "sourceManifest": {
     "file": "metadata/macos-sources.json",
-    "sha256": "66acaab519a9336176d729343ed777093f6a419236cf54a568b53af034002baa"
+    "sha256": "4df26d349ff72b72a6113d0e4b0b42d0f29cf62adacfc92d063559cc3ccaa3d8"
   },
   "entries": [
     {
       "platform": "macosFlClash",
       "client": "FlClash",
       "file": "src/macos/v14.3-macos-flclash.js",
-      "sha256": "3e0160e34391803ad728f11e7a14e4b7b074a81d181744bfb50889dd8e0f8854",
-      "bytes": 124617,
-      "generatedConfigBytes": 176576,
+      "sha256": "0026fb6a58d8741a737cd18f371bfe969d9b2ee8811e752d6fb83778b55d4c5c",
+      "bytes": 126983,
+      "generatedConfigBytes": 177666,
       "inlineRows": 819,
       "remoteSources": 30
     },
@@ -25,9 +25,9 @@
       "platform": "macosClashMi",
       "client": "Clash Mi",
       "file": "src/macos/v14.3-macos-clashmi.js",
-      "sha256": "cbc1342c6655704c6a546842c1ea36dfdf5ae55cfd2cdd2ba4b8b508e4880bb8",
-      "bytes": 125732,
-      "generatedConfigBytes": 177189,
+      "sha256": "baeda7cfd627541b630c87a982f02c78b31f6b3ed09727af2ef130ad70f3afde",
+      "bytes": 128098,
+      "generatedConfigBytes": 178280,
       "inlineRows": 819,
       "remoteSources": 29
     }
@@ -35,12 +35,12 @@
   "testEvidence": {
     "macos-static": {
       "file": "validation/macos-static.json",
-      "sha256": "4d3efb1e1c4cd64459a8c62f03ac10a4fa70e4e811fa2f96352d6a1d83ed07e3",
+      "sha256": "ab82d0e734c0326edab278ca241436b690a8d3b865ac5f55d2e5c33278035963",
       "status": "MACOS_STATIC_PASS"
     },
     "macos-core": {
       "file": "validation/macos-core.json",
-      "sha256": "3ca9dbd4e00fba450bde802573b151ef3950e8aa77c93e5460715075a6575e54",
+      "sha256": "aa93f5513ad81a630bbb6a24fe7ee06b01b194ebe4301f4043d159498d473cf0",
       "status": "MACOS_LOCAL_CORE_PASS_DEVICE_PENDING"
     }
   },
@@ -73,11 +73,11 @@
   "baseEntries": [
     {
       "file": "src/windows/v14.3.js",
-      "sha256": "8a151f980c5291cedf30d70b76aaa414fd1378540b4e8001dc11ba547ac5539e"
+      "sha256": "2cc432caf839892f24f4fd485f20a1efc3c4d8824adaf54f46a45e60f776b4df"
     },
     {
       "file": "src/ios/v14.3-clashmi-domestic-protocol-r1.js",
-      "sha256": "7cd08073bceb572b8c8e95558c82a1f1d2a5398d99176bcb2d30a06ad55bfdaf"
+      "sha256": "da22e70e017a5cf906ddd58ca94dcf988417953e17d1b2834fddc0b428b08eda"
     }
   ],
   "settings": {

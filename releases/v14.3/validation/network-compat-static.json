@@ -3,6 +3,14 @@
   "revision": "ipv6-fallback-r2",
   "checks": [
     {
+      "name": "windows:auto-requests-native-not-fake-success",
+      "status": "PASS"
+    },
+    {
+      "name": "windows:mode-roundtrip-removes-native-request",
+      "status": "PASS"
+    },
+    {
       "name": "windows:defaults-and-explicit-family",
       "status": "PASS"
     },
@@ -40,6 +48,14 @@
     },
     {
       "name": "windows:proxy-ingress-and-LAN-unchanged",
+      "status": "PASS"
+    },
+    {
+      "name": "android:auto-requests-native-not-fake-success",
+      "status": "PASS"
+    },
+    {
+      "name": "android:mode-roundtrip-removes-native-request",
       "status": "PASS"
     },
     {
@@ -83,6 +99,14 @@
       "status": "PASS"
     },
     {
+      "name": "clashmi:auto-requests-native-not-fake-success",
+      "status": "PASS"
+    },
+    {
+      "name": "clashmi:mode-roundtrip-removes-native-request",
+      "status": "PASS"
+    },
+    {
       "name": "clashmi:defaults-and-explicit-family",
       "status": "PASS"
     },
@@ -120,6 +144,14 @@
     },
     {
       "name": "clashmi:proxy-ingress-and-LAN-unchanged",
+      "status": "PASS"
+    },
+    {
+      "name": "macosFlClash:auto-requests-native-not-fake-success",
+      "status": "PASS"
+    },
+    {
+      "name": "macosFlClash:mode-roundtrip-removes-native-request",
       "status": "PASS"
     },
     {
@@ -163,6 +195,14 @@
       "status": "PASS"
     },
     {
+      "name": "macosClashMi:auto-requests-native-not-fake-success",
+      "status": "PASS"
+    },
+    {
+      "name": "macosClashMi:mode-roundtrip-removes-native-request",
+      "status": "PASS"
+    },
+    {
       "name": "macosClashMi:defaults-and-explicit-family",
       "status": "PASS"
     },
@@ -200,6 +240,14 @@
     },
     {
       "name": "macosClashMi:proxy-ingress-and-LAN-unchanged",
+      "status": "PASS"
+    },
+    {
+      "name": "clashVerge:auto-requests-native-not-fake-success",
+      "status": "PASS"
+    },
+    {
+      "name": "clashVerge:mode-roundtrip-removes-native-request",
       "status": "PASS"
     },
     {
@@ -266,11 +314,11 @@
     },
     {
       "file": "tools/lib/build-entries.cjs",
-      "sha256": "77b15d3285181c2039c24018b72c93b663ef12626133ec4f893894eb86ca2808"
+      "sha256": "3a11aaf16a0da9cb672c6d109258033b657ad2114676ddc532eaed3f9221ee4c"
     },
     {
       "file": "tools/lib/compile-entries.cjs",
-      "sha256": "8298730ee0e8bd34245f88781197188f67f05f548ea0169bf21526430e3f0c36"
+      "sha256": "bd6e1d0f0577ed6e84cc52b5766836086abc6bcec1e9a514d2d99e499da00797"
     },
     {
       "file": "tools/lib/render-runtime.cjs",
@@ -294,11 +342,15 @@
     },
     {
       "file": "tools/ipv4-local-adapter.js",
-      "sha256": "412f0a15d01afbdbb72a9b6d81f56bb9be36c6b407804c17c0cc18349f0d70ab"
+      "sha256": "5a82d7f341133929d30e247671afcce05f918eb06325ec024be6db8b18ba931c"
+    },
+    {
+      "file": "tools/auto-local-adapter.js",
+      "sha256": "e15a238989b4afb1782b562b41a6f9fcf3ebf0e33ea7f7b586cc74c6d5de3262"
     },
     {
       "file": "data/client-capabilities.json",
-      "sha256": "8d0597e5c55fafa52538ae6e2449b8e9149620ffbcc617e02d4d8152b776c4dd"
+      "sha256": "1de71b61cacc5fd4d1d5caf36615f9cc7f5d9339c5d8ffc9725815ed6c8deb4c"
     },
     {
       "file": "runtime/platforms/desktop/layout.json",
@@ -438,35 +490,35 @@
     },
     {
       "file": "src/windows/v14.3.js",
-      "sha256": "8a151f980c5291cedf30d70b76aaa414fd1378540b4e8001dc11ba547ac5539e"
+      "sha256": "2cc432caf839892f24f4fd485f20a1efc3c4d8824adaf54f46a45e60f776b4df"
     },
     {
       "file": "src/android/v14.3-android.js",
-      "sha256": "33b55bccbb40024424db37eed946711bd52161c580687dde6f5c448d2de474c1"
+      "sha256": "46d95fde07dbd229595428860db9da96f72569c830890e31d0020cb7181c2912"
     },
     {
       "file": "src/ios/v14.3-clashmi-domestic-protocol-r1.js",
-      "sha256": "7cd08073bceb572b8c8e95558c82a1f1d2a5398d99176bcb2d30a06ad55bfdaf"
+      "sha256": "da22e70e017a5cf906ddd58ca94dcf988417953e17d1b2834fddc0b428b08eda"
     },
     {
       "file": "src/macos/v14.3-macos-flclash.js",
-      "sha256": "3e0160e34391803ad728f11e7a14e4b7b074a81d181744bfb50889dd8e0f8854"
+      "sha256": "0026fb6a58d8741a737cd18f371bfe969d9b2ee8811e752d6fb83778b55d4c5c"
     },
     {
       "file": "src/macos/v14.3-macos-clashmi.js",
-      "sha256": "cbc1342c6655704c6a546842c1ea36dfdf5ae55cfd2cdd2ba4b8b508e4880bb8"
+      "sha256": "baeda7cfd627541b630c87a982f02c78b31f6b3ed09727af2ef130ad70f3afde"
     },
     {
       "file": "src/clash-verge/v14.3-clash-verge.js",
-      "sha256": "5535812b44ee65b399d1a977ea7d7e9326c287efaba5c21d599e8aca9528ca2c"
+      "sha256": "4e049bf79ac0e468449fa2a85ebe499b1bad5c86473656a6a3872d017d2d7964"
     },
     {
       "file": "src/ios/v14.3-shadowrocket.conf",
-      "sha256": "9829d7e7c74f949cfe5168c3b3f3359b0e41aeb3c81bd3b8e2420bf721f277ec"
+      "sha256": "36b83e9069308567c9497eb4a1902536c78572c6786bbb4d712cb976148c6088"
     },
     {
       "file": "tests/network-compat.cjs",
-      "sha256": "f7b124c6c7277680b65150c182b3437c3b376380d39f7a494f7713468663867a"
+      "sha256": "2184b684cbe36db83e8a5e3159bc7540d0a6319be777cf619fffdb485ab4ea8a"
     },
     {
       "file": "tools/network-compat.cjs",

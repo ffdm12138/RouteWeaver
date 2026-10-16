@@ -24,11 +24,11 @@
     },
     {
       "file": "tools/lib/build-entries.cjs",
-      "sha256": "77b15d3285181c2039c24018b72c93b663ef12626133ec4f893894eb86ca2808"
+      "sha256": "3a11aaf16a0da9cb672c6d109258033b657ad2114676ddc532eaed3f9221ee4c"
     },
     {
       "file": "tools/lib/compile-entries.cjs",
-      "sha256": "8298730ee0e8bd34245f88781197188f67f05f548ea0169bf21526430e3f0c36"
+      "sha256": "bd6e1d0f0577ed6e84cc52b5766836086abc6bcec1e9a514d2d99e499da00797"
     },
     {
       "file": "tools/lib/render-runtime.cjs",
@@ -52,11 +52,15 @@
     },
     {
       "file": "tools/ipv4-local-adapter.js",
-      "sha256": "412f0a15d01afbdbb72a9b6d81f56bb9be36c6b407804c17c0cc18349f0d70ab"
+      "sha256": "5a82d7f341133929d30e247671afcce05f918eb06325ec024be6db8b18ba931c"
+    },
+    {
+      "file": "tools/auto-local-adapter.js",
+      "sha256": "e15a238989b4afb1782b562b41a6f9fcf3ebf0e33ea7f7b586cc74c6d5de3262"
     },
     {
       "file": "data/client-capabilities.json",
-      "sha256": "8d0597e5c55fafa52538ae6e2449b8e9149620ffbcc617e02d4d8152b776c4dd"
+      "sha256": "1de71b61cacc5fd4d1d5caf36615f9cc7f5d9339c5d8ffc9725815ed6c8deb4c"
     },
     {
       "file": "runtime/platforms/desktop/layout.json",
@@ -199,9 +203,9 @@
     {
       "platform": "clashVerge",
       "file": "src/clash-verge/v14.3-clash-verge.js",
-      "sha256": "5535812b44ee65b399d1a977ea7d7e9326c287efaba5c21d599e8aca9528ca2c",
-      "bytes": 125183,
-      "generatedConfigBytes": 176870,
+      "sha256": "4e049bf79ac0e468449fa2a85ebe499b1bad5c86473656a6a3872d017d2d7964",
+      "bytes": 127549,
+      "generatedConfigBytes": 177961,
       "inlineRows": 819,
       "remoteSources": 30
     }

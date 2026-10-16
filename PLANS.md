@@ -45,3 +45,7 @@ rc.3 已在用户客户端生效，但新的 Windows 媒体实测失败，取代
 ## 2026-10-16 · rc.5 implementation
 
 Shared runtime extraction, seven single entries, both in-file modes, Windows Clash Verge adapter, capability table, allowlisted diagnostics, 432 real-engine comparisons and complete owned-core regression are implemented. The matched FlClash core/Helper was installed with explicit user authorization; narrow Windows TUN failure probes passed. Complete corresponding source, vendored dependencies and rollback materials accompany optional binary assets. Package/CI/release completion is recorded in the execution log; media/other-device/public-IPv6 acceptance remains separate.
+
+## 2026-10-17 · rc.6 pre-release risk acceptance
+
+User requested prerelease while two public native loopback core regressions remain unresolved. Both FAIL receipts and SHA256 are retained in `releases/v14.3/validation/known-release-regressions.json`; independent private-worktree successes do not supersede them. Windows auto-native implementation and all six JS entries are candidate-ready. Native integration of Android, iOS, macOS and the actual Windows auto core/TUN/media is still outstanding, as are public IPv6 and network-change device acceptance. Release only as GitHub Pre-release, never Stable.

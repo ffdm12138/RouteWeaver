@@ -5,8 +5,8 @@
   "domesticProtocolRevision": "domestic-protocol-r1",
   "status": "GENERATED_NATIVE_ACCEPTANCE_PENDING",
   "file": "src/ios/v14.3-shadowrocket.conf",
-  "sha256": "9829d7e7c74f949cfe5168c3b3f3359b0e41aeb3c81bd3b8e2420bf721f277ec",
-  "bytes": 1746654,
+  "sha256": "36b83e9069308567c9497eb4a1902536c78572c6786bbb4d712cb976148c6088",
+  "bytes": 1746779,
   "before": {
     "file": "validation/inputs/v14.2-baseline/src/ios/v14.2-shadowrocket.conf",
     "sha256": "4813040cc00845c0d0cfda47123194598dce6d6d89e4b5e8a377f3ac516774f9",
@@ -4637,16 +4637,16 @@
   ],
   "sourceContract": {
     "file": "docs/需求.md",
-    "sha256": "9bb8e0ed45c6df62592c052c131876d6c6473f2443581782cdcdd4abb3a6bc0a"
+    "sha256": "be787d64e317efe1e7c03ada2ef776a72e90f82a2e150035ec67106230c0bccf"
   },
   "inputs": [
     {
       "file": "tools/build-shadowrocket-lean.cjs",
-      "sha256": "15b7625f84a9b5f942f08e9e1731cf3cd2eb764600a8261c30a45d5d40790ebb"
+      "sha256": "d544d5bcb147d8c8bfb5b375ba7be5d37cad1addb69d0ce4c8b4f330bcf3be5f"
     },
     {
       "file": "src/android/v14.3-android.js",
-      "sha256": "33b55bccbb40024424db37eed946711bd52161c580687dde6f5c448d2de474c1"
+      "sha256": "46d95fde07dbd229595428860db9da96f72569c830890e31d0020cb7181c2912"
     },
     {
       "file": "data/rules/embedded-policy.json",

@@ -1,0 +1,385 @@
+{
+  "status": "AUTO_LOCAL_NATIVE_LOOPBACK_PASS_DEVICE_PENDING",
+  "revision": "auto-local-family-r1",
+  "coreSHA256": "532c4a08fbb47ba8e746cd8cbac1c823a2b1cdc73f108b99842b5e5ac43db778",
+  "cases": [
+    {
+      "name": "windows:actual-auto-generated-config-parses",
+      "status": "PASS"
+    },
+    {
+      "name": "android:actual-auto-generated-config-parses",
+      "status": "PASS"
+    },
+    {
+      "name": "clashmi:actual-auto-generated-config-parses",
+      "status": "PASS"
+    },
+    {
+      "name": "macosFlClash:actual-auto-generated-config-parses",
+      "status": "PASS"
+    },
+    {
+      "name": "macosClashMi:actual-auto-generated-config-parses",
+      "status": "PASS"
+    },
+    {
+      "name": "clashVerge:actual-auto-generated-config-parses",
+      "status": "PASS"
+    },
+    {
+      "name": "auto:native-runtime-capability-readback",
+      "status": "PASS",
+      "state": "no-local-v6"
+    },
+    {
+      "name": "auto:fake.auto.test:AAAA-policy",
+      "status": "PASS",
+      "answers": 0
+    },
+    {
+      "name": "auto:real.auto.test:AAAA-policy",
+      "status": "PASS",
+      "answers": 0
+    },
+    {
+      "name": "auto:explicit.auto.test:AAAA-policy",
+      "status": "PASS",
+      "answers": 1
+    },
+    {
+      "name": "auto:fake6only.auto.test:AAAA-policy",
+      "status": "PASS",
+      "answers": 1
+    },
+    {
+      "name": "auto:real6only.auto.test:AAAA-policy",
+      "status": "PASS",
+      "answers": 1
+    },
+    {
+      "name": "auto:A-remains-usable",
+      "status": "PASS"
+    },
+    {
+      "name": "auto:IPv4-node-keeps-IPv6-remote-destination",
+      "status": "PASS"
+    },
+    {
+      "name": "auto:internal-AAAA-not-globally-disabled",
+      "status": "PASS"
+    },
+    {
+      "name": "off:native-runtime-capability-readback",
+      "status": "PASS",
+      "state": "unknown"
+    },
+    {
+      "name": "off:fake.auto.test:AAAA-policy",
+      "status": "PASS",
+      "answers": 1
+    },
+    {
+      "name": "off:real.auto.test:AAAA-policy",
+      "status": "PASS",
+      "answers": 1
+    },
+    {
+      "name": "off:explicit.auto.test:AAAA-policy",
+      "status": "PASS",
+      "answers": 1
+    },
+    {
+      "name": "off:fake6only.auto.test:AAAA-policy",
+      "status": "PASS",
+      "answers": 1
+    },
+    {
+      "name": "off:real6only.auto.test:AAAA-policy",
+      "status": "PASS",
+      "answers": 1
+    },
+    {
+      "name": "off:A-remains-usable",
+      "status": "PASS"
+    },
+    {
+      "name": "off:IPv4-node-keeps-IPv6-remote-destination",
+      "status": "PASS"
+    },
+    {
+      "name": "off:internal-AAAA-not-globally-disabled",
+      "status": "PASS"
+    },
+    {
+      "name": "auto:native-runtime-capability-readback",
+      "status": "PASS",
+      "state": "no-local-v6"
+    },
+    {
+      "name": "auto:fake.auto.test:AAAA-policy",
+      "status": "PASS",
+      "answers": 0
+    },
+    {
+      "name": "auto:real.auto.test:AAAA-policy",
+      "status": "PASS",
+      "answers": 0
+    },
+    {
+      "name": "auto:explicit.auto.test:AAAA-policy",
+      "status": "PASS",
+      "answers": 1
+    },
+    {
+      "name": "auto:fake6only.auto.test:AAAA-policy",
+      "status": "PASS",
+      "answers": 1
+    },
+    {
+      "name": "auto:real6only.auto.test:AAAA-policy",
+      "status": "PASS",
+      "answers": 1
+    },
+    {
+      "name": "auto:A-remains-usable",
+      "status": "PASS"
+    },
+    {
+      "name": "auto:IPv4-node-keeps-IPv6-remote-destination",
+      "status": "PASS"
+    },
+    {
+      "name": "auto:internal-AAAA-not-globally-disabled",
+      "status": "PASS"
+    }
+  ],
+  "scope": "Owned native loopback DNS and SOCKS exchange; physical public IPv6 and client TUN remain untested; mode-off comparison is not a real network switch",
+  "deviceAcceptance": "NOT_RUN",
+  "sourceFiles": [
+    {
+      "file": "tools/build-balanced.cjs",
+      "sha256": "353586bcbc96da42d4bba3bfbdb93b44f0c02916d2a039a4ac1d1e9c945ed519"
+    },
+    {
+      "file": "tools/build-macos.cjs",
+      "sha256": "353586bcbc96da42d4bba3bfbdb93b44f0c02916d2a039a4ac1d1e9c945ed519"
+    },
+    {
+      "file": "tools/build-clash-verge.cjs",
+      "sha256": "353586bcbc96da42d4bba3bfbdb93b44f0c02916d2a039a4ac1d1e9c945ed519"
+    },
+    {
+      "file": "tools/build-network-compat.cjs",
+      "sha256": "353586bcbc96da42d4bba3bfbdb93b44f0c02916d2a039a4ac1d1e9c945ed519"
+    },
+    {
+      "file": "tools/lib/build-entries.cjs",
+      "sha256": "3a11aaf16a0da9cb672c6d109258033b657ad2114676ddc532eaed3f9221ee4c"
+    },
+    {
+      "file": "tools/lib/compile-entries.cjs",
+      "sha256": "bd6e1d0f0577ed6e84cc52b5766836086abc6bcec1e9a514d2d99e499da00797"
+    },
+    {
+      "file": "tools/lib/render-runtime.cjs",
+      "sha256": "0e4496cb2be246f232f52c11b53704c2ea07094192f9eec2409f47fe1b765161"
+    },
+    {
+      "file": "tools/lib/reviewed-policy.cjs",
+      "sha256": "fede3d21c30cfb52c223177d5bfea36a87ca2e8b0a4610bac84b579802828ce7"
+    },
+    {
+      "file": "tools/clashmi-adapter.js",
+      "sha256": "22fa1a686fc55e831cfb3225eb88e7265df05bbb8ea6a8399f04b9df66b9d268"
+    },
+    {
+      "file": "tools/macos-flclash-adapter.js",
+      "sha256": "15862ccc2eb0f24ff4ac0337f2ac96e8353b33fc4e0afa3b4ac528d3abce583d"
+    },
+    {
+      "file": "tools/clash-verge-adapter.js",
+      "sha256": "114a9f870a0e679ff0d81eab149ec95057045da910f1d38e0e1ea4572700c8a9"
+    },
+    {
+      "file": "tools/ipv4-local-adapter.js",
+      "sha256": "5a82d7f341133929d30e247671afcce05f918eb06325ec024be6db8b18ba931c"
+    },
+    {
+      "file": "tools/auto-local-adapter.js",
+      "sha256": "e15a238989b4afb1782b562b41a6f9fcf3ebf0e33ea7f7b586cc74c6d5de3262"
+    },
+    {
+      "file": "data/client-capabilities.json",
+      "sha256": "1de71b61cacc5fd4d1d5caf36615f9cc7f5d9339c5d8ffc9725815ed6c8deb4c"
+    },
+    {
+      "file": "runtime/platforms/desktop/layout.json",
+      "sha256": "a8ac9e2982b005542e0aafa1f49e6cb346f31e93bbeaad7c46c539c229f83ecc"
+    },
+    {
+      "file": "runtime/platforms/desktop/preamble.js.in",
+      "sha256": "1e73b0019d8bec2ede26d206979b7706f994ef45a5b8e08cf86562d0d163a1e9"
+    },
+    {
+      "file": "runtime/shared/v14Fail.js.in",
+      "sha256": "3526ae79ad2ec38054e2e75a7c5fee183b1ea630c6c20d12f820106deb87acc6"
+    },
+    {
+      "file": "runtime/shared/v14Object.js.in",
+      "sha256": "002d7052217fcc6d5c57470730d91bb30ecc7b131be58808ce0d6a0c27cb6eac"
+    },
+    {
+      "file": "runtime/shared/v14Copy.js.in",
+      "sha256": "e2a51d628c4d621882628a8e655aa05dc0d5e190c0108ccaf8351018b44f0b7a"
+    },
+    {
+      "file": "runtime/shared/v14Unique.js.in",
+      "sha256": "81ff5b555193286013767f1f6b63247f03dc5e82101818087cb16c7763a8aab5"
+    },
+    {
+      "file": "runtime/shared/v14Hash.js.in",
+      "sha256": "70d6f9074184d00a07c76b98a15609f4648649b5f8e32e12ebc6d71eae2e252b"
+    },
+    {
+      "file": "runtime/shared/v14Ipv6Literal.js.in",
+      "sha256": "c20aa9fc913eac04dd9c3e66f20d1fb304e8d8a6da5558a3b66f7a24a9438f42"
+    },
+    {
+      "file": "runtime/shared/v14Transport.js.in",
+      "sha256": "875642d4b49d6b52196f97f377658a34af797667e645dd2461e84ed041a207a9"
+    },
+    {
+      "file": "runtime/shared/v14DnsFor.js.in",
+      "sha256": "53fa059396e04f160c8475d5326ab5909c480670c1b48760cc916efb872d4cca"
+    },
+    {
+      "file": "runtime/shared/v14Strings.js.in",
+      "sha256": "49f25768f268413f6277223e558938da9f10c8eccc6f115a4d0dbafc64ea0a5a"
+    },
+    {
+      "file": "runtime/shared/v14Target.js.in",
+      "sha256": "18adb104b27c180f45f07e634b43cab23f1e4b5899a8109802c57b4cb125bb79"
+    },
+    {
+      "file": "runtime/shared/v14InboundGuard.js.in",
+      "sha256": "2a5e20459646a8156c5b8e41ec4230921664efc1e7315267cbcb7cb3db2d0f64"
+    },
+    {
+      "file": "runtime/shared/v14KeepLegacy.js.in",
+      "sha256": "2c3b7f595161fdbf348823100130ccd3eda787e38fc073201590f6ecfd028d51"
+    },
+    {
+      "file": "runtime/shared/v14NetworkDefaults.js.in",
+      "sha256": "dafbdd00d3faaadf72f62bf9b114d74e92d1927a2b66723afbddd1429c978716"
+    },
+    {
+      "file": "runtime/shared/v14ProviderGuard.js.in",
+      "sha256": "fa6afc3ea10263ade3114e9822c4e50add258552dd14476b881be0b9d02f11f6"
+    },
+    {
+      "file": "runtime/shared/v14GraphCheck.js.in",
+      "sha256": "1961ec60e207dc938756795a2268700ffcba3d4144a7bbb16e36ad41788d2544"
+    },
+    {
+      "file": "runtime/shared/v14Source.js.in",
+      "sha256": "5b9554d9d25abc9d1b4088342cca83c6d80a604c66bff09016b469f86f157487"
+    },
+    {
+      "file": "runtime/shared/v14ManagedSource.js.in",
+      "sha256": "6d24d4476755de0fceb0ed10a981264c80ca56145c340694f5b76a05ed081165"
+    },
+    {
+      "file": "runtime/shared/v14AuxRefs.js.in",
+      "sha256": "37aead292b2e2c76a41e8ee998f27db23d87d843670c26a9f0dd27abf6e21a96"
+    },
+    {
+      "file": "runtime/shared/v14WalkRule.js.in",
+      "sha256": "f49d2d7fc19e81243595b126877d004219152a21e262a7bb3ccfe836d8c20e00"
+    },
+    {
+      "file": "runtime/shared/v14RuleRegistry.js.in",
+      "sha256": "5617ceb12b4eba12f09e64ba5241d996f851727a6afa08ebfffd0d3f53e00bb5"
+    },
+    {
+      "file": "runtime/shared/v14ValidateDomainTables.js.in",
+      "sha256": "8229ca16fb8d5a32d6bc63473e3459b88ee92017c46458e3ec8e69f95628c825"
+    },
+    {
+      "file": "runtime/shared/main.js.in",
+      "sha256": "18f2e9c0e4b410a4fdd82b1eb8a0a77e333100915d8a77bbbf406cd445f9c5a1"
+    },
+    {
+      "file": "runtime/platforms/android/layout.json",
+      "sha256": "b050ad679557cd6b6d320ff8f33bcd60343be0e6c71b070ab52ce46fba03adea"
+    },
+    {
+      "file": "runtime/platforms/android/preamble.js.in",
+      "sha256": "d1ba04237e8a4813d8734e29b884f40986eda8545f4b4dbe2269e76c96d0d368"
+    },
+    {
+      "file": "runtime/platforms/android/v14RuleRegistry.js.in",
+      "sha256": "bdfaad2605c8b106d6231ef10a990ba5ed65a7cd0943a4738c245527b189457e"
+    },
+    {
+      "file": "runtime/platforms/android/main.js.in",
+      "sha256": "1d320039066b8ed86544774b585725a64b2a91f7ea20ac94706fe1b6165b6391"
+    },
+    {
+      "file": "tools/validate-azure-async.cjs",
+      "sha256": "ff0c993ec52e3fb04596243545bffd026a9fb0c573841ef6a3543dc7d4ba3a6a"
+    },
+    {
+      "file": "tools/validate-cdn-regex.cjs",
+      "sha256": "8f2e85321c28ed7c47e47dd3f3c9d797d186b91744581de26a38cef8c5056f42"
+    },
+    {
+      "file": "data/rule-sources.lock.json",
+      "sha256": "cd4f33e36b88aafe1e6eda4c56f63a202940aa84cd0901502b22941af4e46acb"
+    },
+    {
+      "file": "data/rules/azure-async-review.json",
+      "sha256": "9fa362952593a1979b00a14a1c246cab184c9b90241fc447e3f29752b13a387f"
+    },
+    {
+      "file": "data/rules/cdn-regex-review.json",
+      "sha256": "1d393c85f119828b861ba64a1c5bc6d5a2d13070af6e6c0cc39f05f1446c2d21"
+    },
+    {
+      "file": "metadata/clashmi-compatibility.json",
+      "sha256": "c13d5678ef753003262e3a23fc06a024fb60acfb433bb47b4a1fc6d0ef0f1a05"
+    },
+    {
+      "file": "src/windows/v14.3.js",
+      "sha256": "2cc432caf839892f24f4fd485f20a1efc3c4d8824adaf54f46a45e60f776b4df"
+    },
+    {
+      "file": "src/android/v14.3-android.js",
+      "sha256": "46d95fde07dbd229595428860db9da96f72569c830890e31d0020cb7181c2912"
+    },
+    {
+      "file": "src/ios/v14.3-clashmi-domestic-protocol-r1.js",
+      "sha256": "da22e70e017a5cf906ddd58ca94dcf988417953e17d1b2834fddc0b428b08eda"
+    },
+    {
+      "file": "src/macos/v14.3-macos-flclash.js",
+      "sha256": "0026fb6a58d8741a737cd18f371bfe969d9b2ee8811e752d6fb83778b55d4c5c"
+    },
+    {
+      "file": "src/macos/v14.3-macos-clashmi.js",
+      "sha256": "baeda7cfd627541b630c87a982f02c78b31f6b3ed09727af2ef130ad70f3afde"
+    },
+    {
+      "file": "src/clash-verge/v14.3-clash-verge.js",
+      "sha256": "4e049bf79ac0e468449fa2a85ebe499b1bad5c86473656a6a3872d017d2d7964"
+    },
+    {
+      "file": "src/ios/v14.3-shadowrocket.conf",
+      "sha256": "36b83e9069308567c9497eb4a1902536c78572c6786bbb4d712cb976148c6088"
+    },
+    {
+      "file": "tests/native-auto-local.cjs",
+      "sha256": "c89caaeaf05517b9c86782fc1443502f2321037f4dbbb5fe18738a84792957fc"
+    }
+  ]
+}

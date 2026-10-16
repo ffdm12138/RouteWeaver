@@ -3,12 +3,12 @@
   "date": "2026-10-16",
   "revision": "ios-delivery-r2",
   "domesticProtocolRevision": "domestic-protocol-r1",
-  "status": "IOS_SOURCE_STATIC_LOCAL_CORE_PASS_NATIVE_DEVICE_PENDING",
+  "status": "IOS_SOURCE_STATIC_WITH_KNOWN_CORE_REPLAY_FAILURE_DEVICE_PENDING",
   "authorization": "User selected self-contained business DNS plus remote complete rules, and reviewed domestic TCP/UDP/DNS following 国内网站.",
   "shadowrocket": {
     "file": "src/ios/v14.3-shadowrocket.conf",
-    "sha256": "9829d7e7c74f949cfe5168c3b3f3359b0e41aeb3c81bd3b8e2420bf721f277ec",
-    "bytes": 1746654,
+    "sha256": "36b83e9069308567c9497eb4a1902536c78572c6786bbb4d712cb976148c6088",
+    "bytes": 1746779,
     "revision": "shadowrocket-lean-r1",
     "sourceBytesChanged": true,
     "immutableSource": "validation/inputs/v14.2-baseline/src/ios/v14.2-shadowrocket.conf",
@@ -20,11 +20,11 @@
     },
     "sourceManifest": {
       "file": "metadata/shadowrocket-lean.json",
-      "sha256": "b67362f9f0c244a3ad1d72c28d22626140e9c5518064a41367bfca0bd487561f"
+      "sha256": "af3f499dd87b6c5829a9302906c8395e8b81729805ce727fc27317d162667de2"
     },
     "staticEvidence": {
       "file": "validation/shadowrocket-lean.json",
-      "sha256": "4d690b2f3b0888454c574e212a6c927376d88800fdd1531acccc94c05c88f4e8",
+      "sha256": "c2c87f39f747210f06b5e62ed3136ecc02c5bf257b101315cb061165fad0ddfa",
       "status": "SHADOWROCKET_LEAN_STATIC_PASS_NATIVE_PENDING"
     },
     "fullBusinessDNS": "SELF_CONTAINED",
@@ -35,18 +35,18 @@
   "jsEntries": [
     {
       "file": "src/windows/v14.3.js",
-      "sha256": "8a151f980c5291cedf30d70b76aaa414fd1378540b4e8001dc11ba547ac5539e",
-      "bytes": 122822
+      "sha256": "2cc432caf839892f24f4fd485f20a1efc3c4d8824adaf54f46a45e60f776b4df",
+      "bytes": 125188
     },
     {
       "file": "src/android/v14.3-android.js",
-      "sha256": "33b55bccbb40024424db37eed946711bd52161c580687dde6f5c448d2de474c1",
-      "bytes": 122708
+      "sha256": "46d95fde07dbd229595428860db9da96f72569c830890e31d0020cb7181c2912",
+      "bytes": 125074
     },
     {
       "file": "src/ios/v14.3-clashmi-domestic-protocol-r1.js",
-      "sha256": "7cd08073bceb572b8c8e95558c82a1f1d2a5398d99176bcb2d30a06ad55bfdaf",
-      "bytes": 125730
+      "sha256": "da22e70e017a5cf906ddd58ca94dcf988417953e17d1b2834fddc0b428b08eda",
+      "bytes": 128096
     }
   ],
   "clashmiSourceInspection": {
@@ -132,8 +132,8 @@
   },
   "localCoreEvidence": {
     "file": "validation/native-core.json",
-    "sha256": "625814a09be7d7b6228b6f94a6829e728795f2825ab7d92db082666d4bf9c5f5",
-    "status": "BALANCED_LOCAL_CORE_PASS"
+    "sha256": "b0fd3addd5149c5588345a2b4cbd9db3fa85aae2c7943ba5cb86c259e99a745d",
+    "status": "FAIL"
   },
   "historicalFailedInvestigation": {
     "file": "archive/v14.3-before-domestic-protocol-r1-20261013/releases/v14.3/validation/clashmi-ios-investigation.json",
@@ -145,7 +145,7 @@
   "report": "docs/reports/v14.3/IPv6回退与兼容入口.md",
   "restorationTool": {
     "file": "tools/restore-ios-delivery.py",
-    "sha256": "83bd6229eba46e5835c230f104241c5bce18d44f12fb9718a7245f33f3a97a9b"
+    "sha256": "6972133445039218fe3f6f4f5201fccc21f0bec41e9eb9596b2618aaf370a08c"
   },
   "clientDeployment": false,
   "deviceAcceptance": "NOT_RUN"

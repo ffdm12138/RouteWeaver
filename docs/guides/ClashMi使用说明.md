@@ -1,5 +1,12 @@
 # V14.3 iOS Clash Mi 使用说明
 
+## rc.6：自动模式与原生能力边界
+
+当前源码修订 `auto-local-family-r1`，六份 JS 默认请求 `auto`，每客户端仍一份入口，保留 `dual-stack`／`ipv4-local`。自动出口判断需要匹配原生核心，普通核心接受覆写不等于已接入；Shadowrocket 只保留原生 IPv4 偏好与 IPv6 开启。Windows 指定 FlClash 核心/Helper 已完成新编译和隔离验证，但本轮未安装，维护者此前手动兼容客户端不变。移动端受保护 socket 和其它平台宿主仍需独立接入，真实 TUN/媒体/公网 IPv6 未验收。当前说明与证据入口：`docs/guides/自动网络模式.md`、`docs/reports/v14.3/自动本地地址族与跨端能力.md`。
+
+以下涉及 rc.5 的接入记录只认证原版本，不认证 rc.6 自动能力。
+
+
 当前 `ipv6-fallback-r2` 同时提供标准双栈与独立 [IPv4 兼容模式](IPv4兼容模式.md)。本页原有 `dns.ipv6: true` 步骤适用于标准入口；兼容入口应为核心 IPv6 开启、`dns.ipv6: false`、无 IPv6 Fake-IP 池，并保持完整 TUN/VPN 接管。不要把两份覆写叠加使用。rc.4 继续过滤内部业务解析的 AAAA/SVCB/HTTPS 并启用 HTTP/TLS/QUIC 域名重解析，撤掉 rc.2 的宽泛 IPv6 拒绝；不等同微信媒体已恢复。Shadowrocket 只有 IPv4 偏好，详见模式限制。
 
 当前修订 **domestic-protocol-r1**。使用 [v14.3-clashmi-domestic-protocol-r1.js](../../releases/v14.3/src/ios/v14.3-clashmi-domestic-protocol-r1.js)，它与[标准入口](../../releases/v14.3/src/ios/v14.3-clashmi-domestic-protocol-r1.js)字节相同。文件 118,837 字节，约 119 KB；关键母域、登录/API/语音及安全边界内嵌，完整规则由固定远程来源加载。脚本返回配置对象，不返回 JSON 字符串。

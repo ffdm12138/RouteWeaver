@@ -1,0 +1,15 @@
+{
+  "flclashCommit": "03f955382409a4a7ac1f3f92e46d9fcc6d39f106",
+  "flclashSourceZipSha256": "8cf43737dd5d74fa00c424be5d32cdae016f072de9ef5e5f410d1455ee6b1553",
+  "mihomoForkCommit": "8380d0e7462f061a964323e9bf3129a236fcc5d5",
+  "installedCoreSha256": "ff0bfb9172a8331da6c5dac38028f47d805b433e8b2796b61c1767d8fb6792d3",
+  "installedCoreToolchain": "go1.27.1",
+  "installedCoreVersion": "v1.19.32",
+  "mihomoForkSourceZipSha256": "1303658851575a9efe75f0f2222edc9f7215d408ae1c5e12b2d185120954b373",
+  "candidateCoreSha256": "6217329b8da473633451dafbd36b290db4b5b8cd2be316e66a45704f067f9bb1",
+  "revision": "auto-local-family-r1",
+  "baseCorePatchSHA256": "157823326830d3122759d238c17f1ca59f75f7ab6b8eac169fb7ce0df59513f6",
+  "autoCorePatchSHA256": "eaaf5edd6834a3df9c7de8869d93ce538022bf704b80bea86315bcc5748e8820",
+  "candidateCoreVersion": "v1.19.32-rw-auto6-r1",
+  "automaticClientDeployment": false
+}

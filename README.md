@@ -1,5 +1,12 @@
 # RouteWeaver
 
+## rc.6：自动模式与原生能力边界
+
+当前源码修订 `auto-local-family-r1`，六份 JS 默认请求 `auto`，每客户端仍一份入口，保留 `dual-stack`／`ipv4-local`。自动出口判断需要匹配原生核心，普通核心接受覆写不等于已接入；Shadowrocket 只保留原生 IPv4 偏好与 IPv6 开启。Windows 指定 FlClash 核心/Helper 已完成新编译和隔离验证，但本轮未安装，维护者此前手动兼容客户端不变。移动端受保护 socket 和其它平台宿主仍需独立接入，真实 TUN/媒体/公网 IPv6 未验收。当前说明与证据入口：`docs/guides/自动网络模式.md`、`docs/reports/v14.3/自动本地地址族与跨端能力.md`。
+
+以下涉及 rc.5 的接入记录只认证原版本，不认证 rc.6 自动能力。
+
+
 保留严格路由、双栈和公司优先分流的跨平台覆写。
 
 [下载 v14.3.0-rc.5](https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-rc.5) · [文档](docs/README.md) · [需求](docs/需求.md) · [当前验收](docs/status/当前验收.md) · [变更](CHANGELOG.md)
@@ -40,3 +47,5 @@ python tools/verify-v14.3.py --skip-history --with-packages
 CI 复跑生成、静态、打包及公开内容扫描，核对已绑定的核心/引擎证据，不冒充设备实验。完整维护命令、可选真实引擎重跑见[维护](docs/maintenance/维护与更新.md)。历史标签和失败证据保持原样。
 
 原创内容采用 [MIT](LICENSE)；上游规则、核心派生补丁和可选核心保留各自许可，详见[第三方声明](THIRD_PARTY_NOTICES.md)。可选核心 Release 同时提供完整对应源码、锁定依赖、许可和备份/回滚工具。
+
+> **rc.6 预发布已知风险**：公开版两项原生核心回放分别遇本地 API 超时／连接拒绝，仍为 FAIL，不是全量通过。匹配原生核心的自动能力未完成跨端实机验收；Shadowrocket 无此 Mihomo 扩展。详见 docs/reports/v14.3/自动本地地址族与跨端能力.md。

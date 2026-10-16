@@ -29,7 +29,7 @@ const cases=[
 const programs=[];
 for(const entry of manifest.entries.filter(e=>e.file.endsWith('.js'))){
  const source=fs.readFileSync(path.join(root,entry.file),'utf8');
- for(const mode of ['dual-stack','ipv4-local'])for(const [label,original]of cases){
+ for(const mode of ['auto','dual-stack','ipv4-local'])for(const [label,original]of cases){
   const prepared=label==='serialized-object'?JSON.stringify({...JSON.parse(original),'x-routeweaver':{'network-mode':mode}}):original;
   const input=prepared&&typeof prepared==='object'&&!Array.isArray(prepared)?{...prepared,'x-routeweaver':{'network-mode':mode,...prepared['x-routeweaver']}}:prepared;
   const code='var console={log:function(){},info:function(){},error:function(){},warn:function(){},debug:function(){}};\n'+source+'\n;'+
@@ -54,6 +54,6 @@ async function run(engine){
 (async()=>{
  const runs=[];for(const engine of ['quickjs','boa'])runs.push(await run(engine));
  const files=[...new Set([...manifest.entries.filter(e=>e.file.endsWith('.js')).map(e=>e.file),'tests/engine-parity.cjs','tests/engines/Cargo.toml','tests/engines/Cargo.lock','tests/engines/src/main.rs'])];
- const report={status:'REAL_ENGINE_PARITY_PASS',date:'2026-10-16',scope:'Synthetic Node versus real QuickJS and Boa, object/error parity and repeated application. Not client import, JavaScriptCore, TUN/VPN or application acceptance.',engines:runs,entryFiles:manifest.entries.filter(e=>e.file.endsWith('.js')).length,inputCases:cases.length,networkModes:2,observations:runs.reduce((n,r)=>n+r.cases.length,0),runnerSHA256:sha(fs.readFileSync(binary)),sourceFiles:files.map(file=>({file,sha256:sha(fs.readFileSync(path.join(root,file)))})),deviceAcceptance:'NOT_RUN'};
+ const report={status:'REAL_ENGINE_PARITY_PASS',date:'2026-10-16',scope:'Synthetic Node versus real QuickJS and Boa, object/error parity and repeated application. Not client import, JavaScriptCore, TUN/VPN or application acceptance.',engines:runs,entryFiles:manifest.entries.filter(e=>e.file.endsWith('.js')).length,inputCases:cases.length,networkModes:3,observations:runs.reduce((n,r)=>n+r.cases.length,0),runnerSHA256:sha(fs.readFileSync(binary)),sourceFiles:files.map(file=>({file,sha256:sha(fs.readFileSync(path.join(root,file)))})),deviceAcceptance:'NOT_RUN'};
  fs.writeFileSync(path.join(root,'validation/engine-parity.json'),JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify({status:report.status,entries:report.entryFiles,observations:report.observations}));
 })().catch(e=>{console.error(e.stack);process.exitCode=1;});

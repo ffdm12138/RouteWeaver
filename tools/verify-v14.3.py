@@ -16,9 +16,23 @@ current=read(project/'CURRENT_RELEASE.json')
 review=read(root/'metadata/balanced-review.json')
 assert current['version']==review['version']=='14.3'
 assert current['repairRevision']==review['revision']=='balanced-r1'
-assert current['status']==review['status']=='SINGLE_ENTRY_SHARED_RUNTIME_CORE_INTEGRATED_DEVICE_PENDING'
+assert current['status']==review['status']=='AUTO_LOCAL_NATIVE_CORE_PASS_DEVICE_PENDING'
 assert current['domesticProtocolRevision']==review['domesticProtocolRevision']=='domestic-protocol-r1'
-assert current['clientDeployment']=='MAINTAINER_WINDOWS_FLCLASH_ONLY'
+assert current['clientDeployment']=='PREVIOUS_MANUAL_WINDOWS_ONLY_AUTO_NOT_DEPLOYED'
+known=read(root/'validation/known-release-regressions.json')
+assert known['status']=='PRE_RELEASE_WITH_DISCLOSED_UNRESOLVED_NATIVE_REGRESSIONS' and len(known['knownUnresolved'])==2
+assert review['knownReleaseRegressions']=={'file':'validation/known-release-regressions.json','sha256':sha(root/'validation/known-release-regressions.json'),'status':known['status']}
+assert current['knownReleaseRegressions']=='releases/v14.3/validation/known-release-regressions.json'
+for item in known['knownUnresolved']:
+    receipt=root/item['validationFile']
+    assert sha(receipt)==item['validationSHA256'] and read(receipt)['status']=='FAIL' and item['exitCode']==1
+known=read(root/'validation/known-release-regressions.json')
+assert known['status']=='PRE_RELEASE_WITH_DISCLOSED_UNRESOLVED_NATIVE_REGRESSIONS' and len(known['knownUnresolved'])==2
+assert review['knownReleaseRegressions']=={'file':'validation/known-release-regressions.json','sha256':sha(root/'validation/known-release-regressions.json'),'status':known['status']}
+assert current['knownReleaseRegressions']=='releases/v14.3/validation/known-release-regressions.json'
+for item in known['knownUnresolved']:
+    receipt=root/item['validationFile']
+    assert sha(receipt)==item['validationSHA256'] and read(receipt)['status']=='FAIL' and item['exitCode']==1
 assert sha(project/review['contract']['file'])==review['contract']['sha256']
 if not args.skip_history:
     assert sha(project/review['contract']['previousFile'])==review['contract']['previousSHA256']
@@ -32,6 +46,8 @@ for e in review['testEvidence'].values():
     assert sha(root/e['file'])==e['sha256']
     receipt=read(root/e['file'])
     assert receipt['status']==e['status']
+    if e.get('knownFailureAcceptedForPreRelease'):
+        assert receipt['status']=='FAIL' and any(x['validationFile']==e['file'] for x in known['knownUnresolved'])
     for source in receipt['sourceFiles']:
         assert sha(root/source['file'])==source['sha256'],source['file']
 for e in [review['sourceComparison'],review['latestCandidates']]:
@@ -152,4 +168,4 @@ if args.with_packages:
                 if package_manifest['kind']=='audit-evidence':
                     for evidence in mac['testEvidence'].values():
                         assert hashlib.sha256(z.read(evidence['file'])).hexdigest()==evidence['sha256']
-print(json.dumps({'status':'V14_3_LAYOUT_SOURCE_CORE_BINDINGS_PASS','history':'SKIPPED_HISTORY' if args.skip_history else 'PASS','historyFiles':history_files,'sourceContract':sha(project/'docs/需求.md'),'packagesChecked':args.with_packages,'deviceAcceptance':'LIMITED_WINDOWS_TUN_ONLY'}))
+print(json.dumps({'status':'V14_3_LAYOUT_SOURCE_CORE_BINDINGS_PASS','history':'SKIPPED_HISTORY' if args.skip_history else 'PASS','historyFiles':history_files,'sourceContract':sha(project/'docs/需求.md'),'packagesChecked':args.with_packages,'deviceAcceptance':'AUTO_CORE_ONLY_DEVICES_PENDING'}))

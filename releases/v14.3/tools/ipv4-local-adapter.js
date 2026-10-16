@@ -1,3 +1,29 @@
+// Shared destination recovery; never changes the selected egress.
+function v14RecoverNetworkDestination(config) {
+  // With a readable HTTP/TLS/QUIC hostname, replace a cached literal destination
+  // with that hostname. DIRECT then resolves an A record; a selected proxy
+  // retains remote DNS/IPv6 ability. This includes HTTP Host: identifying it
+  // for routing alone leaves a stale IPv6 destination unusable on IPv4-only LANs.
+  // Without a hostname a literal IPv6 cannot be converted to an IPv4 target.
+  for (const protocol of ["HTTP", "TLS", "QUIC"])
+    config.sniffer.sniff[protocol]["override-destination"] = true;
+  // Preserve the destination identity needed by leading explicit IP rules.
+  // A hostname rewrite happens before rule evaluation in Mihomo. Without
+  // this exclusion it could erase a highest-priority manual IP exception.
+  const anchor = config.rules.indexOf("DOMAIN,v14-runtime-check.invalid,REJECT");
+  if (anchor < 0) v14Fail("Missing compatibility rule anchor");
+  const explicitIPs = config.rules.slice(0, anchor).flatMap(rule => {
+    const match = /^IP-CIDR6?,([^,]+),DIRECT(?:,no-resolve)?$/.exec(rule);
+    return match ? [match[1]] : [];
+  });
+  config.sniffer["skip-dst-address"] = [...new Set(v14Strings(config.sniffer["skip-dst-address"], "sniffer.skip-dst-address").concat(explicitIPs))];
+  // Keep LAN names at their original addresses. Do not skip every private
+  // address: known company domains must retain their existing priority.
+  if (!config["rule-providers"]["v14-domains-private"]) v14Fail("Missing inline private domain classifier");
+  config.sniffer["skip-domain"] = [...new Set(v14Strings(config.sniffer["skip-domain"], "sniffer.skip-domain").concat(V14.privateNames.map(name => "+." + name), ["rule-set:v14-domains-private"]))];
+  return config;
+}
+
 // Explicit IPv4-local ingress mode. No system reachability probe is performed.
 // Keep core IPv6 and TUN capture so IPv6 cannot escape when networks change.
 // dns.ipv6 only filters client AAAA; apply the same family restriction to
@@ -21,6 +47,7 @@ function main(input) {
     prepared.sniffer["skip-domain"] = v14Strings(prepared.sniffer["skip-domain"], "sniffer.skip-domain").filter(value => value !== "rule-set:v14-domains-private");
   const config = v14NetworkModeBase(prepared);
   config.ipv6 = true;
+  delete config["routeweaver-local-family"];
   config.dns.ipv6 = false;
   delete config.dns["fake-ip-range6"];
   for (const key of ["nameserver", "fallback", "direct-nameserver"])
@@ -29,27 +56,7 @@ function main(input) {
     config.dns["nameserver-policy"][key] = v14IPv4LocalResolver(config.dns["nameserver-policy"][key]);
   config.tun["inet6-address"] = ["fdfe:dcba:9876::1/126"];
   config.tun["route-address"] = ["0.0.0.0/0", "::/0"];
-  // With a readable HTTP/TLS/QUIC hostname, replace a cached literal destination
-  // with that hostname. DIRECT then resolves an A record; a selected proxy
-  // retains remote DNS/IPv6 ability. This includes HTTP Host: identifying it
-  // for routing alone leaves a stale IPv6 destination unusable on IPv4-only LANs.
-  // Without a hostname a literal IPv6 cannot be converted to an IPv4 target.
-  for (const protocol of ["HTTP", "TLS", "QUIC"])
-    config.sniffer.sniff[protocol]["override-destination"] = true;
-  // Preserve the destination identity needed by leading explicit IP rules.
-  // A hostname rewrite happens before rule evaluation in Mihomo. Without
-  // this exclusion it could erase a highest-priority manual IP exception.
-  const anchor = config.rules.indexOf("DOMAIN,v14-runtime-check.invalid,REJECT");
-  if (anchor < 0) v14Fail("Missing compatibility rule anchor");
-  const explicitIPs = config.rules.slice(0, anchor).flatMap(rule => {
-    const match = /^IP-CIDR6?,([^,]+),DIRECT(?:,no-resolve)?$/.exec(rule);
-    return match ? [match[1]] : [];
-  });
-  config.sniffer["skip-dst-address"] = [...new Set(v14Strings(config.sniffer["skip-dst-address"], "sniffer.skip-dst-address").concat(explicitIPs))];
-  // Keep LAN names at their original addresses. Do not skip every private
-  // address: known company domains must retain their existing priority.
-  if (!config["rule-providers"]["v14-domains-private"]) v14Fail("Missing inline private domain classifier");
-  config.sniffer["skip-domain"] = [...new Set(v14Strings(config.sniffer["skip-domain"], "sniffer.skip-domain").concat(V14.privateNames.map(name => "+." + name), ["rule-set:v14-domains-private"]))];
+  v14RecoverNetworkDestination(config);
   const marker = config["x-v14-generated"];
   marker.networkMode = "ipv4-local";
   marker.networkCompatibilityRepair = "http-recovery-r1";
