@@ -1,0 +1,263 @@
+--- a/adapter/outbound/direct.go
++++ b/adapter/outbound/direct.go
+@@ -29,7 +29,7 @@
+ 	opts = append(opts, dialer.WithResolver(resolver.DirectHostResolver))
+ 	c, err := dialer.DialContext(ctx, "tcp", metadata.RemoteAddress(), opts...)
+ 	if err != nil {
+-		return nil, err
++		return nil, d.directIPv6DialError(metadata, err)
+ 	}
+ 	return d.loopBack.NewConn(NewConn(c, d)), nil
+ }
+--- /dev/null
++++ b/adapter/outbound/direct_ipv6_error.go
+@@ -0,0 +1,19 @@
++package outbound
++
++import (
++	"fmt"
++
++	C "github.com/metacubex/mihomo/constant"
++)
++
++// Only mark literal TCP destinations actually used by native DIRECT. A Host
++// takes precedence over DstIP in RemoteAddress, so a cached DstIP alone cannot
++// establish the family dialed for a hostname. No failures are cached across
++// connections; the next connection can succeed after a route change.
++func (d *Direct) directIPv6DialError(metadata *C.Metadata, err error) error {
++	if err == nil || d.Type() != C.Direct || metadata == nil || metadata.NetWork != C.TCP || metadata.Type == C.INNER || metadata.Host != "" ||
++		!metadata.DstIP.Unmap().Is6() || !isDirectNetworkUnreachable(err) {
++		return err
++	}
++	return fmt.Errorf("%w: %w", C.ErrDirectIPv6NetworkUnreachable, err)
++}
+--- /dev/null
++++ b/adapter/outbound/direct_ipv6_error_notwindows.go
+@@ -0,0 +1,12 @@
++//go:build !windows
++
++package outbound
++
++import (
++	"errors"
++	"syscall"
++)
++
++func isDirectNetworkUnreachable(err error) bool {
++	return errors.Is(err, syscall.ENETUNREACH)
++}
+--- /dev/null
++++ b/adapter/outbound/direct_ipv6_error_test.go
+@@ -0,0 +1,75 @@
++package outbound
++
++import (
++	"context"
++	"errors"
++	"net"
++	"net/netip"
++	"os"
++	"syscall"
++	"testing"
++
++	C "github.com/metacubex/mihomo/constant"
++)
++
++func TestRouteWeaverDirectIPv6Error(t *testing.T) {
++	makeMeta := func(ip string) *C.Metadata {
++		return &C.Metadata{NetWork: C.TCP, DstIP: netip.MustParseAddr(ip), DstPort: 443}
++	}
++	wrapped := &net.OpError{Op: "dial", Net: "tcp", Err: &os.SyscallError{Syscall: "connect", Err: syscall.ENETUNREACH}}
++	direct := NewDirect()
++	hostname := makeMeta("2001:db8::42")
++	hostname.Host = "both-families.invalid"
++	udp := makeMeta("2001:db8::42")
++	udp.NetWork = C.UDP
++	inner := makeMeta("2001:db8::42")
++	inner.Type = C.INNER
++	tests := []struct {
++		name     string
++		metadata *C.Metadata
++		err      error
++		marked   bool
++	}{
++		{"ipv6 literal", makeMeta("2001:db8::42"), syscall.ENETUNREACH, true},
++		{"wrapped OS error", makeMeta("2001:db8::42"), wrapped, true},
++		{"IPv6 LAN route absent", makeMeta("fd00::42"), wrapped, true},
++		{"IPv4", makeMeta("192.0.2.42"), wrapped, false},
++		{"IPv4 mapped", makeMeta("::ffff:192.0.2.42"), wrapped, false},
++		{"hostname has precedence over cached IP", hostname, wrapped, false},
++		{"UDP excluded", udp, wrapped, false},
++		{"proxy transport through DIRECT excluded", inner, wrapped, false},
++		{"nil metadata", nil, wrapped, false},
++		{"unresolved", &C.Metadata{NetWork: C.TCP}, wrapped, false},
++		{"host unreachable", makeMeta("2001:db8::42"), syscall.EHOSTUNREACH, false},
++		{"connection refused", makeMeta("2001:db8::42"), syscall.ECONNREFUSED, false},
++		{"timeout", makeMeta("2001:db8::42"), context.DeadlineExceeded, false},
++		{"message text is insufficient", makeMeta("2001:db8::42"), errors.New("unreachable network"), false},
++		{"success", makeMeta("2001:db8::42"), nil, false},
++	}
++	for _, test := range tests {
++		t.Run(test.name, func(t *testing.T) {
++			got := direct.directIPv6DialError(test.metadata, test.err)
++			if errors.Is(got, C.ErrDirectIPv6NetworkUnreachable) != test.marked {
++				t.Fatalf("marked=%v, want %v: %v", errors.Is(got, C.ErrDirectIPv6NetworkUnreachable), test.marked, got)
++			}
++			if test.err != nil && !errors.Is(got, test.err) {
++				t.Fatalf("original OS error lost: %v", got)
++			}
++			if !test.marked && got != test.err {
++				t.Fatalf("unrelated error changed: %v", got)
++			}
++		})
++	}
++	// An earlier failure must not leave any state that suppresses a new dial.
++	_ = direct.directIPv6DialError(makeMeta("2001:db8::42"), wrapped)
++	if got := direct.directIPv6DialError(makeMeta("2001:db8::42"), nil); got != nil {
++		t.Fatalf("success after route change affected: %v", got)
++	}
++}
++
++func TestRouteWeaverCompatibleUnchanged(t *testing.T) {
++	metadata := &C.Metadata{NetWork: C.TCP, DstIP: netip.MustParseAddr("2001:db8::42"), DstPort: 443}
++	if got := NewCompatible().directIPv6DialError(metadata, syscall.ENETUNREACH); got != syscall.ENETUNREACH {
++		t.Fatalf("COMPATIBLE adapter changed: %v", got)
++	}
++}
+--- /dev/null
++++ b/adapter/outbound/direct_ipv6_error_windows.go
+@@ -0,0 +1,14 @@
++package outbound
++
++import (
++	"errors"
++	"syscall"
++
++	"golang.org/x/sys/windows"
++)
++
++func isDirectNetworkUnreachable(err error) bool {
++	// Winsock errors use WSAENETUNREACH (10051), distinct from Go's portable
++	// syscall.ENETUNREACH pseudo-errno on Windows.
++	return errors.Is(err, windows.WSAENETUNREACH) || errors.Is(err, syscall.ENETUNREACH)
++}
+--- /dev/null
++++ b/adapter/outbound/direct_ipv6_error_windows_test.go
+@@ -0,0 +1,24 @@
++package outbound
++
++import (
++	"errors"
++	"net"
++	"net/netip"
++	"os"
++	"testing"
++
++	C "github.com/metacubex/mihomo/constant"
++	"golang.org/x/sys/windows"
++)
++
++func TestRouteWeaverWindowsWinsock(t *testing.T) {
++	metadata := &C.Metadata{NetWork: C.TCP, DstIP: netip.MustParseAddr("2001:db8::42"), DstPort: 443}
++	err := &net.OpError{Op: "dial", Net: "tcp", Err: &os.SyscallError{Syscall: "connectex", Err: windows.WSAENETUNREACH}}
++	got := NewDirect().directIPv6DialError(metadata, err)
++	if !errors.Is(got, C.ErrDirectIPv6NetworkUnreachable) || !errors.Is(got, windows.WSAENETUNREACH) {
++		t.Fatalf("Winsock network-unreachable not preserved and marked: %v", got)
++	}
++	if got := NewDirect().directIPv6DialError(metadata, windows.WSAEHOSTUNREACH); errors.Is(got, C.ErrDirectIPv6NetworkUnreachable) {
++		t.Fatalf("host-unreachable incorrectly classified: %v", got)
++	}
++}
+--- /dev/null
++++ b/constant/direct_ipv6_error.go
+@@ -0,0 +1,8 @@
++package constant
++
++import "errors"
++
++// ErrDirectIPv6NetworkUnreachable marks an OS network-unreachable error for a
++// literal IPv6 TCP dial by the native DIRECT adapter. It does not change policy
++// or imply that an equivalent IPv4 destination exists.
++var ErrDirectIPv6NetworkUnreachable = errors.New("direct IPv6 network unreachable")
+--- /dev/null
++++ b/tunnel/direct_ipv6_retry_test.go
+@@ -0,0 +1,67 @@
++package tunnel
++
++import (
++	"context"
++	"errors"
++	"fmt"
++	"syscall"
++	"testing"
++
++	"github.com/metacubex/mihomo/component/loopback"
++	"github.com/metacubex/mihomo/component/resolver"
++	C "github.com/metacubex/mihomo/constant"
++)
++
++func TestRouteWeaverRetryClassification(t *testing.T) {
++	tests := []struct {
++		name string
++		err  error
++		stop bool
++	}{
++		{"marked direct IPv6", fmt.Errorf("%w: %w", C.ErrDirectIPv6NetworkUnreachable, syscall.ENETUNREACH), true},
++		{"unmarked proxy network error", syscall.ENETUNREACH, false},
++		{"timeout unchanged", context.DeadlineExceeded, false},
++		{"IP missing", resolver.ErrIPNotFound, true},
++		{"IP version", resolver.ErrIPVersion, true},
++		{"IPv6 disabled", resolver.ErrIPv6Disabled, true},
++		{"loopback reject", loopback.ErrReject, true},
++	}
++	for _, test := range tests {
++		t.Run(test.name, func(t *testing.T) {
++			if got := shouldStopRetry(test.err); got != test.stop {
++				t.Fatalf("shouldStopRetry=%v, want %v", got, test.stop)
++			}
++		})
++	}
++}
++
++func TestRouteWeaverRetryCounts(t *testing.T) {
++	for _, marked := range []bool{true, false} {
++		name := "unmarked proxy error keeps ten attempts"
++		want := 10
++		err := error(syscall.ENETUNREACH)
++		if marked {
++			name = "marked direct error stops after one attempt"
++			want = 1
++			err = fmt.Errorf("%w: %w", C.ErrDirectIPv6NetworkUnreachable, err)
++		}
++		t.Run(name, func(t *testing.T) {
++			attempts, warnings := 0, 0
++			_, got := retry(context.Background(), func(context.Context) (int, error) {
++				attempts++
++				return 0, err
++			}, func(error) { warnings++ })
++			if attempts != want || warnings != want || !errors.Is(got, syscall.ENETUNREACH) {
++				t.Fatalf("attempts=%d warnings=%d error=%v; want %d", attempts, warnings, got, want)
++			}
++		})
++	}
++	attempts := 0
++	got, err := retry(context.Background(), func(context.Context) (int, error) {
++		attempts++
++		return 42, nil
++	}, nil)
++	if attempts != 1 || got != 42 || err != nil {
++		t.Fatalf("successful new connection affected: %d %d %v", attempts, got, err)
++	}
++}
+--- a/tunnel/tunnel.go
++++ b/tunnel/tunnel.go
+@@ -721,6 +721,9 @@
+ }
+ 
+ func shouldStopRetry(err error) bool {
++	if errors.Is(err, C.ErrDirectIPv6NetworkUnreachable) {
++		return true
++	}
+ 	if errors.Is(err, resolver.ErrIPNotFound) {
+ 		return true
+ 	}

@@ -7,6 +7,9 @@ release=project/'releases/v14.3'
 dist=project/'dist/v14.3'
 work=project/'.work/packaging'
 HTTP_REPORT='docs/reports/v14.3/HTTP域名重解析修复.md'
+IPV6_RESEARCH_REPORT='docs/reports/v14.3/无域名IPv6与转圈等待研究.md'
+SOURCE_REVIEW_REPORT='docs/reports/v14.3/公开覆写方案比较与改进取舍.md'
+FIELD_OWNERSHIP='docs/reference/配置字段归属与验收.md'
 parser=argparse.ArgumentParser()
 parser.add_argument('--node',default='node')
 parser.add_argument('--skip-history',action='store_true',default=True,help='Build from a public clone without local historical archives.')
@@ -32,7 +35,7 @@ def links(raw):
 
 def docs():
     names=['docs/需求.md','docs/README.md','docs/guides/ClashMi使用说明.md','docs/guides/使用说明.md','docs/maintenance/维护与更新.md','docs/reference/项目结构.md','docs/reports/v14.3/可靠精简与远程来源审核.md','docs/reports/v14.3/国内协议跟组与小火箭精简.md']
-    names.extend([network['guide'],network['report'],HTTP_REPORT])
+    names.extend([network['guide'],network['report'],HTTP_REPORT,IPV6_RESEARCH_REPORT,SOURCE_REVIEW_REPORT,FIELD_OWNERSHIP])
     if delivery:
         names.append('docs/reports/v14.3/iOS交付与覆写排查.md')
         names.append(delivery['report'])
@@ -71,7 +74,7 @@ def credential_check(files,deploy=False):
     return {'status':'PASS','scope':'No private keys, executable/cache/nested ZIP, credential URLs or hard-coded credential literals in deployed entry source; audit uses public rules and synthetic fixtures only'}
 
 def write_zip(label,files):
-    assert HTTP_REPORT in files, 'Current HTTP repair report missing from '+label
+    assert all(name in files for name in [HTTP_REPORT,IPV6_RESEARCH_REPORT,SOURCE_REVIEW_REPORT,FIELD_OWNERSHIP]), 'Current repair/research documents missing from '+label
     checks=credential_check(files,label=='deployable')
     package_manifest={'version':'14.3','revision':'balanced-r1','kind':label,'files':{n:sha(raw) for n,raw in sorted(files.items())},'credentials':checks,'deviceAcceptance':'NOT_RUN'}
     if delivery:
@@ -144,7 +147,7 @@ if mac:
         mac_files[name]=(release/name).read_bytes()
     for name in [mac['guide'],mac['report'],'docs/需求.md']:
         mac_files[name]=docs()[name]
-    for name in [network['guide'],network['report'],HTTP_REPORT]:
+    for name in [network['guide'],network['report'],HTTP_REPORT,IPV6_RESEARCH_REPORT,SOURCE_REVIEW_REPORT,FIELD_OWNERSHIP]:
         mac_files[name]=docs()[name]
     for name,raw in docs().items():
         if name in {'LICENSE','THIRD_PARTY_NOTICES.md'} or name.startswith('third_party/'):

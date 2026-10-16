@@ -25,7 +25,7 @@ GitHub 文件页需选择 **Raw / Download raw file** 保存文件。客户端�
 
 Windows FlClash 0.9.0 在应用的 TUN 设置中开启“严格路由”，关闭“追加系统 DNS”；同一份 JS 可用于系统代理模式，接管边界见使用说明。Clash Mi 使用返回对象的 `main(config)`，追加覆写选择“内置-不覆写”。Shadowrocket 需自行保留订阅和节点，原生完整国内 DNS 跟组仍待实机验证。
 
-本地网络没有 IPv6 出口时，手动选择 [IPv4 兼容入口](docs/guides/IPv4兼容模式.md)。五种 JS 补齐内部业务 DNS 的 IPv4 解析与 HTTP/TLS/QUIC 域名重解析，撤掉 rc.2 的宽泛 IPv6 拒绝，保留代理远端 IPv6。Shadowrocket 文件仅有 IPv4 偏好。rc.2、rc.3 Windows 媒体案例均失败；rc.4 HTTP 修复已在隔离核心验证，媒体复测与各平台设备接管仍待验收，没有自动网卡探测或透明地址转换。
+本地网络没有 IPv6 出口时，手动选择 [IPv4 兼容入口](docs/guides/IPv4兼容模式.md)。五种 JS 补齐内部业务 DNS 的 IPv4 解析与 HTTP/TLS/QUIC 域名重解析，撤掉 rc.2 的宽泛 IPv6 拒绝，保留代理远端 IPv6。Shadowrocket 文件仅有 IPv4 偏好。rc.2、rc.3 Windows 媒体案例均失败；rc.4 用户现已能发图，但仍转圈等待；无域名 IPv6 尚未解决。已增加[核心快速失败研究](docs/reports/v14.3/无域名IPv6与转圈等待研究.md)，通过有界实验但未接入客户端。各平台完整验收、自动出口探测和透明地址转换均未完成。
 
 ## 分流原则
 

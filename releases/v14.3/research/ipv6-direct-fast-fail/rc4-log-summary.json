@@ -1,0 +1,88 @@
+{
+  "status": "RC4_USER_CAN_SEND_MEDIA_WITH_SPINNING_DELAY_ROOT_CAUSE_NOT_FULLY_CLOSED",
+  "window": {
+    "start": "2026-10-16 18:11:40",
+    "end": "2026-10-16 18:13:43",
+    "seconds": 123.0
+  },
+  "recovery": {
+    "sniffSuccesses": 113,
+    "originalLiteralIPv6Recoveries": 49,
+    "wechatHostnameRecoveries": 8,
+    "otherHostnameRecoveries": 41
+  },
+  "unreachableDirectIPv6": {
+    "warnings": 273,
+    "distinctTuples": 29,
+    "tupleAttemptCounts": {
+      "6": 2,
+      "1": 1,
+      "10": 26
+    },
+    "tuplesWith10Warnings": 26,
+    "10WarningSpanSeconds": [
+      2.0,
+      2.0,
+      2.0,
+      1.0,
+      2.0,
+      2.0,
+      2.0,
+      2.0,
+      2.0,
+      3.0,
+      3.0,
+      1.0,
+      1.0,
+      2.0,
+      2.0,
+      2.0,
+      3.0,
+      2.0,
+      2.0,
+      3.0,
+      2.0,
+      1.0,
+      2.0,
+      2.0,
+      3.0,
+      3.0
+    ],
+    "median10WarningSpanSeconds": 2.0,
+    "min10WarningSpanSeconds": 1.0,
+    "max10WarningSpanSeconds": 3.0,
+    "scope": "Time from first to last warning, whole-second log timestamps. Not application request duration or upload throughput. Truncated tuple histories excluded from span stats."
+  },
+  "proxyTransport": {
+    "warningCount": 15,
+    "contextDeadline": 13,
+    "socketTimeout": 2,
+    "scope": "Selected proxy transport warning; cannot attribute all warnings to media or infer throughput.",
+    "distinctGroups": 3
+  },
+  "comparisonWithRC3": {
+    "controlledA_B": false,
+    "differentWindowsAndWorkloads": true,
+    "rc3DomainRuleIPv6UnreachableWarnings": 683,
+    "rc4DomainRuleIPv6UnreachableWarnings": 0
+  },
+  "userReport": "Can send images. User clarified the symptom is a spinning wait; sustained bandwidth degradation is not established. User suspects overwrite/protocol handling.",
+  "logSHA256": "9f5aa50f1edb1e9606dafaffb0f875874609bc2bda85e5688243f474b97ea523",
+  "sniffFailureSummary": {
+    "total": 50,
+    "families": {
+      "6": 20,
+      "4": 30
+    },
+    "ports": {
+      "80": 21,
+      "443": 22,
+      "8080": 7
+    },
+    "ipv6FailedSniffTuplesAlsoHaveNetworkUnreachable": 18,
+    "notEnoughDataDebugRecords": 2,
+    "multipleFailureSkipRecords": 2,
+    "scope": "No raw packets, per-sniff durations, process attribution or upload throughput are present. A shared destination IP does not prove a shared hostname."
+  },
+  "scope": "Aggregate only. Raw log remains private. Not a controlled application A/B or throughput measurement."
+}

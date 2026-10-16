@@ -7,7 +7,7 @@
   "authorization": "User selected reviewed domestic TCP/UDP/DNS following 国内网站 and self-contained Shadowrocket business DNS; unknown IP-only UDP and generic STUN remain protected.",
   "contract": {
     "file": "docs/需求.md",
-    "sha256": "fb860dff40a7bb0d5ccd05b2b119d8853031071e6991b5dd98934117ff4ab4bd",
+    "sha256": "41120cd7be531df4a34369a67289733c1d2b8659bc3f0949c96186a09899d79a",
     "originalBytesPreserved": false,
     "previousFile": "archive/v14.3-before-domestic-protocol-r1-20261013/docs/需求.md",
     "previousSHA256": "5f0086ba18755d8c10c96e2b255e3d7e456afdf4f9c0e6e7f36b7926110859f0",
@@ -74,7 +74,7 @@
     },
     "shadowrocket-lean": {
       "file": "validation/shadowrocket-lean.json",
-      "sha256": "b68f20aaa8df97fd9e4bb6ae9f28095eccd67227f5ce9535e974bc0790662f53",
+      "sha256": "8f83903e2ab397112d6abfcc57b7cbdfb024b16842e687876a5040f926cb712f",
       "status": "SHADOWROCKET_LEAN_STATIC_PASS_NATIVE_PENDING"
     }
   },
@@ -97,7 +97,7 @@
   },
   "iosDelivery": {
     "file": "metadata/ios-delivery.json",
-    "sha256": "de83d3d10f7da05cf1418dd1362830b1497e2d5bb161f8b970c9bf5daa9318b8",
+    "sha256": "9d591e44ed589f1fc679edf27d2f41ece00bcccd8f03a19cf0393dd0f49f8e3f",
     "revision": "ios-delivery-r2",
     "status": "IOS_SOURCE_STATIC_LOCAL_CORE_PASS_NATIVE_DEVICE_PENDING"
   },
@@ -223,7 +223,7 @@
   },
   "networkCompatibility": {
     "file": "metadata/network-compat-delivery.json",
-    "sha256": "23fb91c97f2730f504f3dcffc5e30de1fe63625603ca7d9d55fa5b90c805f363",
+    "sha256": "6a511f8b2d7e79ce2e9350e124ddf1d268475d7115d3870bf5e3e793468af413",
     "revision": "ipv6-fallback-r2"
   }
 }

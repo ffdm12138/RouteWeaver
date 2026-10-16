@@ -36,3 +36,9 @@ rc.4 在兼容 JS 的既有 HTTP 端口 80、8080–8880 启用 `override-destin
 本次没有替换运行客户端、重启 TUN、切节点或改系统网络。Android、macOS、iOS、Shadowrocket、公网双栈与网络切换继续各自验收。当前能力见[兼容模式指南](../../guides/IPv4兼容模式.md)与[总报告](IPv6回退与兼容入口.md)。
 
 依据：[Mihomo 嗅探配置](https://wiki.metacubex.one/config/sniff/)、固定 [v1.19.31 replaceDomain 实现](https://github.com/MetaCubeX/mihomo/blob/v1.19.31/component/sniffer/dispatcher.go)。
+
+## 2026-10-16 后续日志：可发送，仍转圈等待
+
+rc.4 用户现在能够发图，但仍有发送转圈；用户澄清不能认定是上传带宽慢。新窗口 273 条 IPv6 DIRECT 网络不可达警告对应 29 组元组，其中 26 组各重试 10 次。域名恢复被实际使用，剩余无域名路径仍未闭合。
+
+已完成独立核心快速失败原型：仅 DIRECT 字面量 IPv6 TCP 的原生网络不可达停止本次重复拨号，保留原分流和代理远端 IPv6。5 个 Go 测试函数、23 子例和 123 项现有隔离核心回放通过；未接入任何客户端，也不能保证应用 IPv4 后备。现有 rc.4 导入文件和已发布附件不变。详见[无域名 IPv6 与转圈等待研究](无域名IPv6与转圈等待研究.md)。

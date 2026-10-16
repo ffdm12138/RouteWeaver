@@ -1,0 +1,62 @@
+=== RUN   TestRouteWeaverDirectIPv6Error
+=== RUN   TestRouteWeaverDirectIPv6Error/ipv6_literal
+=== RUN   TestRouteWeaverDirectIPv6Error/wrapped_OS_error
+=== RUN   TestRouteWeaverDirectIPv6Error/IPv6_LAN_route_absent
+=== RUN   TestRouteWeaverDirectIPv6Error/IPv4
+=== RUN   TestRouteWeaverDirectIPv6Error/IPv4_mapped
+=== RUN   TestRouteWeaverDirectIPv6Error/hostname_has_precedence_over_cached_IP
+=== RUN   TestRouteWeaverDirectIPv6Error/UDP_excluded
+=== RUN   TestRouteWeaverDirectIPv6Error/proxy_transport_through_DIRECT_excluded
+=== RUN   TestRouteWeaverDirectIPv6Error/nil_metadata
+=== RUN   TestRouteWeaverDirectIPv6Error/unresolved
+=== RUN   TestRouteWeaverDirectIPv6Error/host_unreachable
+=== RUN   TestRouteWeaverDirectIPv6Error/connection_refused
+=== RUN   TestRouteWeaverDirectIPv6Error/timeout
+=== RUN   TestRouteWeaverDirectIPv6Error/message_text_is_insufficient
+=== RUN   TestRouteWeaverDirectIPv6Error/success
+--- PASS: TestRouteWeaverDirectIPv6Error (0.00s)
+    --- PASS: TestRouteWeaverDirectIPv6Error/ipv6_literal (0.00s)
+    --- PASS: TestRouteWeaverDirectIPv6Error/wrapped_OS_error (0.00s)
+    --- PASS: TestRouteWeaverDirectIPv6Error/IPv6_LAN_route_absent (0.00s)
+    --- PASS: TestRouteWeaverDirectIPv6Error/IPv4 (0.00s)
+    --- PASS: TestRouteWeaverDirectIPv6Error/IPv4_mapped (0.00s)
+    --- PASS: TestRouteWeaverDirectIPv6Error/hostname_has_precedence_over_cached_IP (0.00s)
+    --- PASS: TestRouteWeaverDirectIPv6Error/UDP_excluded (0.00s)
+    --- PASS: TestRouteWeaverDirectIPv6Error/proxy_transport_through_DIRECT_excluded (0.00s)
+    --- PASS: TestRouteWeaverDirectIPv6Error/nil_metadata (0.00s)
+    --- PASS: TestRouteWeaverDirectIPv6Error/unresolved (0.00s)
+    --- PASS: TestRouteWeaverDirectIPv6Error/host_unreachable (0.00s)
+    --- PASS: TestRouteWeaverDirectIPv6Error/connection_refused (0.00s)
+    --- PASS: TestRouteWeaverDirectIPv6Error/timeout (0.00s)
+    --- PASS: TestRouteWeaverDirectIPv6Error/message_text_is_insufficient (0.00s)
+    --- PASS: TestRouteWeaverDirectIPv6Error/success (0.00s)
+=== RUN   TestRouteWeaverCompatibleUnchanged
+--- PASS: TestRouteWeaverCompatibleUnchanged (0.00s)
+=== RUN   TestRouteWeaverWindowsWinsock
+--- PASS: TestRouteWeaverWindowsWinsock (0.00s)
+PASS
+ok  	github.com/metacubex/mihomo/adapter/outbound	1.966s
+=== RUN   TestRouteWeaverRetryClassification
+=== RUN   TestRouteWeaverRetryClassification/marked_direct_IPv6
+=== RUN   TestRouteWeaverRetryClassification/unmarked_proxy_network_error
+=== RUN   TestRouteWeaverRetryClassification/timeout_unchanged
+=== RUN   TestRouteWeaverRetryClassification/IP_missing
+=== RUN   TestRouteWeaverRetryClassification/IP_version
+=== RUN   TestRouteWeaverRetryClassification/IPv6_disabled
+=== RUN   TestRouteWeaverRetryClassification/loopback_reject
+--- PASS: TestRouteWeaverRetryClassification (0.00s)
+    --- PASS: TestRouteWeaverRetryClassification/marked_direct_IPv6 (0.00s)
+    --- PASS: TestRouteWeaverRetryClassification/unmarked_proxy_network_error (0.00s)
+    --- PASS: TestRouteWeaverRetryClassification/timeout_unchanged (0.00s)
+    --- PASS: TestRouteWeaverRetryClassification/IP_missing (0.00s)
+    --- PASS: TestRouteWeaverRetryClassification/IP_version (0.00s)
+    --- PASS: TestRouteWeaverRetryClassification/IPv6_disabled (0.00s)
+    --- PASS: TestRouteWeaverRetryClassification/loopback_reject (0.00s)
+=== RUN   TestRouteWeaverRetryCounts
+=== RUN   TestRouteWeaverRetryCounts/marked_direct_error_stops_after_one_attempt
+=== RUN   TestRouteWeaverRetryCounts/unmarked_proxy_error_keeps_ten_attempts
+--- PASS: TestRouteWeaverRetryCounts (2.68s)
+    --- PASS: TestRouteWeaverRetryCounts/marked_direct_error_stops_after_one_attempt (0.00s)
+    --- PASS: TestRouteWeaverRetryCounts/unmarked_proxy_error_keeps_ten_attempts (2.68s)
+PASS
+ok  	github.com/metacubex/mihomo/tunnel	3.341s

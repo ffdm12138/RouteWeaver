@@ -73,11 +73,13 @@
   "shadowrocket": "Native IPv4 preference only; no claim of equivalent Mihomo upstream filters, HTTP/TLS/QUIC recovery or node ip-version defaults; no added IPv6 reject rules",
   "scope": "Source contracts and isolated Windows Mihomo with original routing rules; owned DNS and TCP/UDP, HTTP/TLS/QUIC recovery, IPv4 proxy to IPv6 target; native TUN, app retry, public IPv6 and Shadowrocket NOT_RUN",
   "priorUserCase": "rc.2 and rc.3 Windows media failed with compatibility active. rc.3 retained literal HTTP IPv6 destinations; private/unsniffable IPv6 remains unresolved",
-  "currentUserCase": "RC4_HTTP_CORE_PASS_MEDIA_RETEST_PENDING_OPAQUE_IPV6_UNRESOLVED",
+  "currentUserCase": "RC4_MEDIA_SENDS_WITH_SPINNING_DELAY_OPAQUE_IPV6_UNRESOLVED_CORE_PROTOTYPE_NOT_DEPLOYED",
   "clientDeployment": false,
   "deviceAcceptance": "NOT_RUN",
   "recordingModule": {
     "file": "tools/network_release.py",
-    "sha256": "8759efc25a3bc149b1a6572521314d3534183230ba8bac57d0cdffeda1a5d5b3"
-  }
+    "sha256": "77553f648fee3ab33d18de1d5a786c79d3c5482034ef78a4ad8f1d46af110d63"
+  },
+  "researchReport": "docs/reports/v14.3/无域名IPv6与转圈等待研究.md",
+  "corePrototype": "releases/v14.3/research/ipv6-direct-fast-fail/proof.json"
 }

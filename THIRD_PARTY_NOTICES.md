@@ -22,3 +22,7 @@ RouteWeaver transforms data by normalizing classifier formats, decoding MRS for 
 The three distribution ZIPs include this notice, both rule-license texts and `third_party/SOURCES.json`. The audit ZIP additionally contains the raw inputs, transformation code, test fixtures and original client-excerpt licenses. Small deployable/Mac ZIPs link to the public versioned repository for their corresponding generator inputs.
 
 This is an aggregate of separately licensed contributions; the root MIT grant does not replace upstream terms or grant rights on behalf of upstream authors. No upstream endorsement is implied. Mihomo, FlClash, Clash Mi and Shadowrocket binaries are not bundled and retain their own licenses and trademarks.
+
+## Isolated Mihomo core research
+
+`releases/v14.3/research/ipv6-direct-fast-fail/` contains a patch derived from MetaCubeX/mihomo v1.19.31, commit `ab405bad5beeeac8b003bb01f60f134f6df54471`. The patch and new core sources retain GPL-3.0 terms; the complete license and modification/source hashes are in that directory. It is an undeployed research prototype. No Mihomo binary or dependency tree is distributed. Root MIT terms do not replace the upstream license. The existing rc.4 release assets remain unchanged.

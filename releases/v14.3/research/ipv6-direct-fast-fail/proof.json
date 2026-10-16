@@ -1,0 +1,115 @@
+{
+  "status": "BOUNDED_WINDOWS_CORE_PROTOTYPE_PASS_DEVICE_NOT_RUN",
+  "deployment": "RESEARCH_ONLY_NOT_IN_RC4_OR_ANY_CLIENT",
+  "clientChanged": false,
+  "currentRelease": "v14.3.0-rc.4",
+  "releaseEntriesChanged": false,
+  "upstreamCommit": "ab405bad5beeeac8b003bb01f60f134f6df54471",
+  "goVersion": "go1.27.2 windows/amd64",
+  "toolchainSource": {
+    "goVersion": "go1.27.2",
+    "toolchainSHA256": "1314008898bd40df77af4b014f777f08873dbdfbcd3d92308728ee03304fe04f",
+    "toolchainSource": "https://dl.google.com/go/go1.27.2.windows-amd64.zip",
+    "upstreamCommit": "ab405bad5beeeac8b003bb01f60f134f6df54471",
+    "researchOnly": true,
+    "clientChanged": false
+  },
+  "sourcePatch": {
+    "file": "direct-ipv6-fast-fail.patch",
+    "sha256": "cade83c01baa6322450d44d285f5d72fb81bce572bdca818c53e6969d23ad045"
+  },
+  "sourceRoundTrip": {
+    "status": "PASS",
+    "filesCompared": 1052,
+    "goModAndSumUnchanged": true
+  },
+  "unit": {
+    "result": "PASS",
+    "command": "go test -p 2 -tags with_gvisor ./adapter/outbound ./tunnel -run ^TestRouteWeaver -count=1 -v",
+    "topLevelTests": [
+      "TestRouteWeaverDirectIPv6Error",
+      "TestRouteWeaverCompatibleUnchanged",
+      "TestRouteWeaverWindowsWinsock",
+      "TestRouteWeaverRetryClassification",
+      "TestRouteWeaverRetryCounts"
+    ],
+    "subtestsPassed": 24,
+    "logSHA256": "502ea48fb49f0468ea56c87896045733a9e09bf010bd3a72507816356411a0c2",
+    "outputFile": "unit-output.txt"
+  },
+  "nativeComparison": {
+    "file": "native-proof.json",
+    "sha256": "b2dd1bd9f50b860de4b64a3dfaeff65c753b369739a0418f41f3a92aea0ff87d",
+    "samplesPerCore": 5,
+    "upstreamMedianMilliseconds": 3708.6497,
+    "candidateMedianMilliseconds": 3.661099999997532,
+    "scope": "One Windows host; OS native TCP network-unreachable. Not app IPv4 retry, public IPv6, UDP error propagation or device acceptance."
+  },
+  "productionPolicyReplay": {
+    "file": "production-policy-proof.json",
+    "sha256": "a6375754540a899f9c7806d918ea4bff87fe0a95d43b2d033631f9d3932fe668",
+    "cases": 123,
+    "nativeTun": "NOT_RUN"
+  },
+  "latestUserLog": {
+    "file": "rc4-log-summary.json",
+    "sha256": "2f6c35f48b9eea166fb0bdc47e9c2682e5b1a2dede920851cf10d7fa48829012"
+  },
+  "notProven": [
+    "Application IPv4 fallback",
+    "WeChat click-to-send latency",
+    "UDP write/ICMP error propagation",
+    "Public IPv6 reachability",
+    "Android/macOS/iOS/Shadowrocket native behavior",
+    "Automatic physical-egress detection"
+  ],
+  "priorAttempts": [
+    "Sandbox dependency download blocked before tests; rerun with authorized network access passed.",
+    "First proxy-failure fixture supplied a complete SOCKS reply, which did not produce the intended dial error in upstream. Preserved as a failed fixture; final fixture closes mid-handshake.",
+    "First passing prototype also covered COMPATIBLE through shared implementation. Final patch explicitly limits marking to type DIRECT and was rebuilt and rerun.",
+    "Initial fresh patch application inherited Windows Git CRLF conversion. Preserved; final apply pins per-command core.autocrlf=false and core.eol=lf and checks every file byte. No global Git settings changed.",
+    "Dependency review added explicit INNER proxy-transport exclusion. Final native control verifies dialer-proxy DIRECT retains ten node-transport attempts."
+  ],
+  "files": [
+    {
+      "file": "direct-ipv6-fast-fail.patch",
+      "sha256": "cade83c01baa6322450d44d285f5d72fb81bce572bdca818c53e6969d23ad045"
+    },
+    {
+      "file": "LICENSE",
+      "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986"
+    },
+    {
+      "file": "native-proof.json",
+      "sha256": "b2dd1bd9f50b860de4b64a3dfaeff65c753b369739a0418f41f3a92aea0ff87d"
+    },
+    {
+      "file": "native-retry-bench.cjs",
+      "sha256": "0892b1b63b976309d74ed6c0aaa3c3298b9624b7ff1ce2b15491f9e4a2ed1751"
+    },
+    {
+      "file": "production-policy-proof.json",
+      "sha256": "a6375754540a899f9c7806d918ea4bff87fe0a95d43b2d033631f9d3932fe668"
+    },
+    {
+      "file": "rc4-log-summary.json",
+      "sha256": "2f6c35f48b9eea166fb0bdc47e9c2682e5b1a2dede920851cf10d7fa48829012"
+    },
+    {
+      "file": "README.md",
+      "sha256": "9d7984d1cf4ca3967d555b4a5e8bd2de0b583f27fe883a618bcd361fcd501e05"
+    },
+    {
+      "file": "reproduce.py",
+      "sha256": "ce54a67091fe1375b9fd738c47bb24b27a25f7c19393f0df56254c7014be8048"
+    },
+    {
+      "file": "unit-output.txt",
+      "sha256": "502ea48fb49f0468ea56c87896045733a9e09bf010bd3a72507816356411a0c2"
+    },
+    {
+      "file": "upstream.json",
+      "sha256": "0cc4baf1d2a48606e2713c024ebb0d055097831033cd526a20fb6453800452a9"
+    }
+  ]
+}

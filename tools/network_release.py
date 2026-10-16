@@ -6,6 +6,9 @@ REPAIR = 'http-recovery-r1'
 STATUS = 'NETWORK_COMPAT_SOURCE_LOCAL_CORE_PASS_DEVICE_PENDING'
 GUIDE = 'docs/guides/IPv4兼容模式.md'
 REPORT = 'docs/reports/v14.3/IPv6回退与兼容入口.md'
+USER_CASE = 'RC4_MEDIA_SENDS_WITH_SPINNING_DELAY_OPAQUE_IPV6_UNRESOLVED_CORE_PROTOTYPE_NOT_DEPLOYED'
+RESEARCH_REPORT = 'docs/reports/v14.3/无域名IPv6与转圈等待研究.md'
+CORE_PROTOTYPE = 'releases/v14.3/research/ipv6-direct-fast-fail/proof.json'
 
 
 def evidence(release, sha, read):
@@ -48,7 +51,8 @@ def record(project, release, current, review, sha, read):
         'shadowrocket': manifest['shadowrocketLimit'],
         'scope': 'Source contracts and isolated Windows Mihomo with original routing rules; owned DNS and TCP/UDP, HTTP/TLS/QUIC recovery, IPv4 proxy to IPv6 target; native TUN, app retry, public IPv6 and Shadowrocket NOT_RUN',
         'priorUserCase': 'rc.2 and rc.3 Windows media failed with compatibility active. rc.3 retained literal HTTP IPv6 destinations; private/unsniffable IPv6 remains unresolved',
-        'currentUserCase': 'RC4_HTTP_CORE_PASS_MEDIA_RETEST_PENDING_OPAQUE_IPV6_UNRESOLVED',
+        'currentUserCase': USER_CASE,
+        'researchReport': RESEARCH_REPORT, 'corePrototype': CORE_PROTOTYPE,
         'clientDeployment': False, 'deviceAcceptance': 'NOT_RUN',
         'recordingModule': {'file': 'tools/network_release.py',
                             'sha256': sha(project / 'tools/network_release.py')}}
@@ -67,7 +71,8 @@ def record(project, release, current, review, sha, read):
                    networkCompatibility='releases/v14.3/' + file,
                    networkCompatibilityGuide=GUIDE, defaultNetworkMode='dual-stack',
                    automaticPhysicalNetworkDetection=False,
-                   networkCompatibilityUserCase='RC2_RC3_FAILED_RC4_HTTP_CORE_PASS_MEDIA_PENDING_OPAQUE_IPV6_UNRESOLVED',
+                   networkCompatibilityUserCase=USER_CASE,
+                   networkCompatibilityResearchReport=RESEARCH_REPORT, networkCompatibilityCorePrototype=CORE_PROTOTYPE,
                    compatibilityEntries={e['platform']: 'releases/v14.3/' + e['file'] for e in manifest['entries']})
 
 
@@ -87,4 +92,15 @@ def verify(project, release, current, review, sha, read):
     assert sha(project / module['file']) == module['sha256']
     assert (project / GUIDE).is_file() and (project / REPORT).is_file()
     assert len(review['requirements']) == 12 and review['requirements'][-1]['number'] == 12
+    assert current['networkCompatibilityUserCase'] == delivery['currentUserCase'] == USER_CASE
+    assert current['networkCompatibilityResearchReport'] == delivery['researchReport'] == RESEARCH_REPORT
+    assert current['networkCompatibilityCorePrototype'] == delivery['corePrototype'] == CORE_PROTOTYPE
+    assert (project / RESEARCH_REPORT).is_file()
+    prototype = read(project / CORE_PROTOTYPE)
+    assert prototype['status'] == 'BOUNDED_WINDOWS_CORE_PROTOTYPE_PASS_DEVICE_NOT_RUN'
+    assert prototype['clientChanged'] is False and prototype['releaseEntriesChanged'] is False
+    base = (project / CORE_PROTOTYPE).parent
+    for part in prototype['files']:
+        assert '/' not in part['file'] and '\\' not in part['file']
+        assert sha(base / part['file']) == part['sha256'], part['file']
     return delivery

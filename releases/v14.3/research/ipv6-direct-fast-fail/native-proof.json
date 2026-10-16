@@ -1,0 +1,198 @@
+{
+  "status": "PASS",
+  "researchOnly": true,
+  "clientChanged": false,
+  "cases": [
+    {
+      "name": "upstream:reachable-127.0.0.1",
+      "success": true,
+      "answer": "PONG",
+      "milliseconds": 2.8915999999990163
+    },
+    {
+      "name": "upstream:reachable-::1",
+      "success": true,
+      "answer": "PONG",
+      "milliseconds": 2.5583000000005995
+    },
+    {
+      "name": "upstream:explicit-proxy-keeps-IPv6-over-IPv4",
+      "success": true,
+      "answer": "PONG",
+      "milliseconds": 2.827499999999418,
+      "request": {
+        "atyp": 4,
+        "target": "20010db8000000000000000000000042",
+        "port": 443,
+        "denied": false,
+        "outerFamily": "IPv4"
+      }
+    },
+    {
+      "name": "upstream:proxy-error-keeps-ten-attempts-no-DIRECT-fallback",
+      "success": false,
+      "error": "closed",
+      "milliseconds": 3816.8488999999972,
+      "attempts": 10
+    },
+    {
+      "name": "upstream:proxy-transport-via-DIRECT-keeps-ten-attempts",
+      "success": false,
+      "error": "closed",
+      "milliseconds": 2607.833599999998,
+      "warnings": 10
+    },
+    {
+      "name": "upstream:server-first-sniff-wait-control",
+      "sniffDisabled": {
+        "success": true,
+        "answer": "PONG",
+        "milliseconds": 3.699799999998504
+      },
+      "sniffEnabled": {
+        "success": true,
+        "answer": "PONG",
+        "milliseconds": 1107.0563000000002
+      },
+      "scope": "Constructed server-first protocol; does not identify WeChat protocol or duration."
+    },
+    {
+      "name": "candidate:reachable-127.0.0.1",
+      "success": true,
+      "answer": "PONG",
+      "milliseconds": 2.8237000000008265
+    },
+    {
+      "name": "candidate:reachable-::1",
+      "success": true,
+      "answer": "PONG",
+      "milliseconds": 2.3479000000006636
+    },
+    {
+      "name": "candidate:explicit-proxy-keeps-IPv6-over-IPv4",
+      "success": true,
+      "answer": "PONG",
+      "milliseconds": 2.091100000001461,
+      "request": {
+        "atyp": 4,
+        "target": "20010db8000000000000000000000042",
+        "port": 443,
+        "denied": false,
+        "outerFamily": "IPv4"
+      }
+    },
+    {
+      "name": "candidate:proxy-error-keeps-ten-attempts-no-DIRECT-fallback",
+      "success": false,
+      "error": "closed",
+      "milliseconds": 2926.3223,
+      "attempts": 10
+    },
+    {
+      "name": "candidate:proxy-transport-via-DIRECT-keeps-ten-attempts",
+      "success": false,
+      "error": "closed",
+      "milliseconds": 3899.3824999999997,
+      "warnings": 10
+    },
+    {
+      "name": "candidate:server-first-sniff-wait-control",
+      "sniffDisabled": {
+        "success": true,
+        "answer": "PONG",
+        "milliseconds": 1.9319000000032247
+      },
+      "sniffEnabled": {
+        "success": true,
+        "answer": "PONG",
+        "milliseconds": 1185.4379000000044
+      },
+      "scope": "Constructed server-first protocol; does not identify WeChat protocol or duration."
+    }
+  ],
+  "containment": {
+    "tun": false,
+    "interface": "Loopback Pseudo-Interface 1",
+    "dns": false,
+    "realNodes": false,
+    "processOnlySkipSystemIPv6Check": true,
+    "target": "2001:db8::42 documentation prefix, dial bound to owned loopback interface",
+    "policy": "Minimal lab select group only. Full production rules replay recorded separately."
+  },
+  "scope": "One Windows host; OS native TCP network-unreachable. Not app IPv4 retry, public IPv6, UDP error propagation or device acceptance.",
+  "upstream": {
+    "version": "Mihomo Meta v1.19.31-upstream-control windows amd64 with go1.27.2 research-only\nUse tags: with_gvisor",
+    "binarySHA256": "e92119b3319b9c713d5753897c99989e6ccc2bfc1d29450c45d00edcb3633a04",
+    "attempts": [
+      {
+        "success": false,
+        "error": "closed",
+        "milliseconds": 2836.5746,
+        "warnings": 10
+      },
+      {
+        "success": false,
+        "error": "closed",
+        "milliseconds": 2873.4447,
+        "warnings": 10
+      },
+      {
+        "success": false,
+        "error": "closed",
+        "milliseconds": 3752.7182999999995,
+        "warnings": 10
+      },
+      {
+        "success": false,
+        "error": "closed",
+        "milliseconds": 3708.6497,
+        "warnings": 10
+      },
+      {
+        "success": false,
+        "error": "closed",
+        "milliseconds": 3912.6971999999987,
+        "warnings": 10
+      }
+    ],
+    "medianMilliseconds": 3708.6497
+  },
+  "candidate": {
+    "version": "Mihomo Meta v1.19.31-rw-ipv6-retry-research windows amd64 with go1.27.2 research-only\nUse tags: with_gvisor",
+    "binarySHA256": "eb431b4ee397040ade0fa98f4750e859e87a095dcb51e3da411940b1e36c2217",
+    "attempts": [
+      {
+        "success": false,
+        "error": "closed",
+        "milliseconds": 113.9294000000009,
+        "warnings": 1
+      },
+      {
+        "success": false,
+        "error": "closed",
+        "milliseconds": 3.4372000000003027,
+        "warnings": 1
+      },
+      {
+        "success": false,
+        "error": "closed",
+        "milliseconds": 4.658500000001368,
+        "warnings": 1
+      },
+      {
+        "success": false,
+        "error": "closed",
+        "milliseconds": 3.661099999997532,
+        "warnings": 1
+      },
+      {
+        "success": false,
+        "error": "closed",
+        "milliseconds": 3.2347000000008848,
+        "warnings": 1
+      }
+    ],
+    "medianMilliseconds": 3.661099999997532
+  },
+  "harnessSHA256": "0892b1b63b976309d74ed6c0aaa3c3298b9624b7ff1ce2b15491f9e4a2ed1751"
+}

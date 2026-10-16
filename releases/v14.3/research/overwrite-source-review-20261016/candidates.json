@@ -1,0 +1,170 @@
+{
+  "date": "2026-10-16",
+  "scope": "Fixed snapshots reviewed, not executed or copied; no remote rule adoption",
+  "candidates": [
+    {
+      "repository": "xiaolin-007/clash-verge-script",
+      "url": "https://github.com/xiaolin-007/clash-verge-script",
+      "commit": "66d3ae9937442f6e8ba97d3cf913f8da6b97966f",
+      "commitDate": "2026-08-22T04:38:36Z",
+      "sourceURL": "https://codeload.github.com/xiaolin-007/clash-verge-script/zip/66d3ae9937442f6e8ba97d3cf913f8da6b97966f",
+      "archiveSHA256": "806b978a91c9f2a8702cec90d16f27d385dece6d6e7ce54a3d534df8b0b3f315",
+      "apiLicense": null,
+      "downloadOnly": true,
+      "executedExternalCode": false,
+      "adoptedRuleSources": false,
+      "inspectedFiles": [
+        {
+          "file": "README.md",
+          "sha256": "93feb11abd21a9af501f1fd025e13dbd876c9b321313b80f76c36bfe033b78ac",
+          "sourceURL": "https://github.com/xiaolin-007/clash-verge-script/blob/66d3ae9937442f6e8ba97d3cf913f8da6b97966f/README.md"
+        },
+        {
+          "file": "扩展脚本-优化版.js",
+          "sha256": "02cb218ed250871c470b4960f2cb304f83a8c8551f576e154c8bd5258cd34422",
+          "sourceURL": "https://github.com/xiaolin-007/clash-verge-script/blob/66d3ae9937442f6e8ba97d3cf913f8da6b97966f/%E6%89%A9%E5%B1%95%E8%84%9A%E6%9C%AC-%E4%BC%98%E5%8C%96%E7%89%88.js"
+        }
+      ],
+      "rootLicenseFileFound": false,
+      "implementationCopied": false
+    },
+    {
+      "repository": "wchiway/mihomo-proxy",
+      "url": "https://github.com/wchiway/mihomo-proxy",
+      "commit": "6d98bf76b04155e2194c9a07e42938e05d748197",
+      "commitDate": "2026-09-08T07:02:20Z",
+      "sourceURL": "https://codeload.github.com/wchiway/mihomo-proxy/zip/6d98bf76b04155e2194c9a07e42938e05d748197",
+      "archiveSHA256": "08408f5b5943151748f86e7ecb7994392ede338d59f3fe856aa3a39fb5cff8ae",
+      "apiLicense": "MIT",
+      "downloadOnly": true,
+      "executedExternalCode": false,
+      "adoptedRuleSources": false,
+      "inspectedFiles": [
+        {
+          "file": "LICENSE",
+          "sha256": "96d370baeaec6720bff6787d5330b34573fbda31856f93a9a0997653db5df00b",
+          "sourceURL": "https://github.com/wchiway/mihomo-proxy/blob/6d98bf76b04155e2194c9a07e42938e05d748197/LICENSE"
+        },
+        {
+          "file": "src/runtime.ts",
+          "sha256": "45d86a4d4228b9de577fee6df9778543768ea1989a3657a29a1802a57061d949",
+          "sourceURL": "https://github.com/wchiway/mihomo-proxy/blob/6d98bf76b04155e2194c9a07e42938e05d748197/src/runtime.ts"
+        },
+        {
+          "file": "src/main.ts",
+          "sha256": "3e5e28bc7de740edcc84c941bbbfcf011b65e12563fd0513f44b34f10a680681",
+          "sourceURL": "https://github.com/wchiway/mihomo-proxy/blob/6d98bf76b04155e2194c9a07e42938e05d748197/src/main.ts"
+        },
+        {
+          "file": "src/dns.ts",
+          "sha256": "fd1c3695141aef5d28cea2aea5816227a8a47b98c16f34e3c9a8324977d318cb",
+          "sourceURL": "https://github.com/wchiway/mihomo-proxy/blob/6d98bf76b04155e2194c9a07e42938e05d748197/src/dns.ts"
+        },
+        {
+          "file": "src/settings.ts",
+          "sha256": "045431dc1da914f04798bcfa76aff210560843e5da9a795699e9ec5997fbc577",
+          "sourceURL": "https://github.com/wchiway/mihomo-proxy/blob/6d98bf76b04155e2194c9a07e42938e05d748197/src/settings.ts"
+        },
+        {
+          "file": "src/proxies.ts",
+          "sha256": "e1f8b3d140c7c41636c8044203e64a6a5b9383b6e815f889c8398d03e7eb0d30",
+          "sourceURL": "https://github.com/wchiway/mihomo-proxy/blob/6d98bf76b04155e2194c9a07e42938e05d748197/src/proxies.ts"
+        },
+        {
+          "file": "vite.config.ts",
+          "sha256": "a20a3e9642a6526214d27a88f127d1009044d37c27e085e6dd5a76989565790f",
+          "sourceURL": "https://github.com/wchiway/mihomo-proxy/blob/6d98bf76b04155e2194c9a07e42938e05d748197/vite.config.ts"
+        },
+        {
+          "file": "tests/proxies.test.ts",
+          "sha256": "c4b6a49794c77a6f45094955e6a3ed53605b93c0f8b8dcd9d169537f3e5a81b4",
+          "sourceURL": "https://github.com/wchiway/mihomo-proxy/blob/6d98bf76b04155e2194c9a07e42938e05d748197/tests/proxies.test.ts"
+        }
+      ],
+      "rootLicenseFileFound": true,
+      "implementationCopied": false
+    },
+    {
+      "repository": "skullvek/Clash-Verge-and-Bettbox-Custom-Script",
+      "url": "https://github.com/skullvek/Clash-Verge-and-Bettbox-Custom-Script",
+      "commit": "9c37e02d1eba0ad5a220e8d023fb2e6128f4b111",
+      "commitDate": "2026-10-15T07:10:57Z",
+      "sourceURL": "https://codeload.github.com/skullvek/Clash-Verge-and-Bettbox-Custom-Script/zip/9c37e02d1eba0ad5a220e8d023fb2e6128f4b111",
+      "archiveSHA256": "f5dfbd0facbc3dcc2812764cc3dcb8470042e7efe1d4f151f03e7d9e5932880c",
+      "apiLicense": null,
+      "downloadOnly": true,
+      "executedExternalCode": false,
+      "adoptedRuleSources": false,
+      "inspectedFiles": [
+        {
+          "file": "README.md",
+          "sha256": "2e51aab9d3ea18c352cabe29be0f931c13f8dfd2bc7e798ef34fb439b27a6634",
+          "sourceURL": "https://github.com/skullvek/Clash-Verge-and-Bettbox-Custom-Script/blob/9c37e02d1eba0ad5a220e8d023fb2e6128f4b111/README.md"
+        },
+        {
+          "file": "Clash-Verge-Rev-mihomoScript.js",
+          "sha256": "6ca49420f17234ca487eabf9deee6561b9c50e3af07c2e627a2fd053b279b232",
+          "sourceURL": "https://github.com/skullvek/Clash-Verge-and-Bettbox-Custom-Script/blob/9c37e02d1eba0ad5a220e8d023fb2e6128f4b111/Clash-Verge-Rev-mihomoScript.js"
+        },
+        {
+          "file": "Bettbox-mihomoScript.js",
+          "sha256": "9d9e6d5a848990e0380814c9fa095a7025fd5685708638d53258ff63cbc79f6b",
+          "sourceURL": "https://github.com/skullvek/Clash-Verge-and-Bettbox-Custom-Script/blob/9c37e02d1eba0ad5a220e8d023fb2e6128f4b111/Bettbox-mihomoScript.js"
+        },
+        {
+          "file": "tests/quickjs_check.py",
+          "sha256": "affaa4dcce9ccdf164770e1f859ceb1f44d29f98c237cbaf17e5b87670373747",
+          "sourceURL": "https://github.com/skullvek/Clash-Verge-and-Bettbox-Custom-Script/blob/9c37e02d1eba0ad5a220e8d023fb2e6128f4b111/tests/quickjs_check.py"
+        },
+        {
+          "file": "tests/engine-cases.js",
+          "sha256": "8354c6c846f317b4d0b71e564ca5a351b5c6c49eb344ec90545f458578c2e5e5",
+          "sourceURL": "https://github.com/skullvek/Clash-Verge-and-Bettbox-Custom-Script/blob/9c37e02d1eba0ad5a220e8d023fb2e6128f4b111/tests/engine-cases.js"
+        },
+        {
+          "file": "tests/validate.js",
+          "sha256": "fbdc38356f283b781d534b21e6b29e3e853d54cbf1d0b3e562e1deead57b889e",
+          "sourceURL": "https://github.com/skullvek/Clash-Verge-and-Bettbox-Custom-Script/blob/9c37e02d1eba0ad5a220e8d023fb2e6128f4b111/tests/validate.js"
+        },
+        {
+          "file": ".github/workflows/validate.yml",
+          "sha256": "4a4bf7327be9800bb81e0fd0cc6f772e9a337cdfaa92baf5f4557213bf07ccd8",
+          "sourceURL": "https://github.com/skullvek/Clash-Verge-and-Bettbox-Custom-Script/blob/9c37e02d1eba0ad5a220e8d023fb2e6128f4b111/.github/workflows/validate.yml"
+        }
+      ],
+      "rootLicenseFileFound": false,
+      "implementationCopied": false
+    },
+    {
+      "repository": "mihomo-party-org/override-hub",
+      "url": "https://github.com/mihomo-party-org/override-hub",
+      "commit": "1c7c45c3512a22b5b3425eb2e6c101d4d45691ce",
+      "commitDate": "2026-01-28T09:21:40Z",
+      "sourceURL": "https://codeload.github.com/mihomo-party-org/override-hub/zip/1c7c45c3512a22b5b3425eb2e6c101d4d45691ce",
+      "archiveSHA256": "672ec44c8121ca9e86122861f081fac7a284c87dececaf705ce0766f1f362e3c",
+      "apiLicense": null,
+      "downloadOnly": true,
+      "executedExternalCode": false,
+      "adoptedRuleSources": false,
+      "inspectedFiles": [
+        {
+          "file": "README.md",
+          "sha256": "8be29cf31af875dde8e6befc493fbbf5054a06496e92caca8e7e915f995c1f4b",
+          "sourceURL": "https://github.com/mihomo-party-org/override-hub/blob/1c7c45c3512a22b5b3425eb2e6c101d4d45691ce/README.md"
+        },
+        {
+          "file": "javascript/防止dns泄露(雾).js",
+          "sha256": "7fcdf6908d92b5644af4de122805b064be65df997c174ae6aded48e6fe7abef5",
+          "sourceURL": "https://github.com/mihomo-party-org/override-hub/blob/1c7c45c3512a22b5b3425eb2e6c101d4d45691ce/javascript/%E9%98%B2%E6%AD%A2dns%E6%B3%84%E9%9C%B2%28%E9%9B%BE%29.js"
+        },
+        {
+          "file": "javascript/正则匹配设置代理组图标.js",
+          "sha256": "8ec49630bba01368a82fe4c979fd30556073504dfe20d3149e78957f9cbcd521",
+          "sourceURL": "https://github.com/mihomo-party-org/override-hub/blob/1c7c45c3512a22b5b3425eb2e6c101d4d45691ce/javascript/%E6%AD%A3%E5%88%99%E5%8C%B9%E9%85%8D%E8%AE%BE%E7%BD%AE%E4%BB%A3%E7%90%86%E7%BB%84%E5%9B%BE%E6%A0%87.js"
+        }
+      ],
+      "rootLicenseFileFound": false,
+      "implementationCopied": false
+    }
+  ]
+}

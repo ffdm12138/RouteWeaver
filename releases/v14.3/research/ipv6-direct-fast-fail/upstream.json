@@ -1,0 +1,60 @@
+{
+  "upstream": "MetaCubeX/mihomo",
+  "tag": "v1.19.31",
+  "commit": "ab405bad5beeeac8b003bb01f60f134f6df54471",
+  "sourceArchiveURL": "https://codeload.github.com/MetaCubeX/mihomo/zip/refs/tags/v1.19.31",
+  "sourceArchiveSHA256": "ef491b55a920449c5aa46d5903bbb7007839a1fcf6baaac277016945cbc3e79e",
+  "license": "GPL-3.0",
+  "licenseSHA256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+  "changes": [
+    {
+      "file": "adapter/outbound/direct.go",
+      "beforeSHA256": "ede6e101653d139750b23a8ed698be3c7791845eefccfbc93945f79830b770cb",
+      "afterSHA256": "ba79bb986641c79e818c3720fa6f2c5dd08f638719c550ad7c85eca725b23460"
+    },
+    {
+      "file": "adapter/outbound/direct_ipv6_error.go",
+      "beforeSHA256": null,
+      "afterSHA256": "307809142f95cd5aa236e38d12634c92825ab45d3682bdf0f9b4ce2b1641cd72"
+    },
+    {
+      "file": "adapter/outbound/direct_ipv6_error_notwindows.go",
+      "beforeSHA256": null,
+      "afterSHA256": "95d775a75bde65e959353ddb70c7beaa338a8bae6c1bf9c3eb1905397082dcaa"
+    },
+    {
+      "file": "adapter/outbound/direct_ipv6_error_test.go",
+      "beforeSHA256": null,
+      "afterSHA256": "600a67eab5933f985e012cce0d6f7725de7a2e8690e438d69bbaaf83b94468d8"
+    },
+    {
+      "file": "adapter/outbound/direct_ipv6_error_windows.go",
+      "beforeSHA256": null,
+      "afterSHA256": "f588db304b1c1d78411762950ce660bbe239f92017ae6979cc29ee74ca3962ce"
+    },
+    {
+      "file": "adapter/outbound/direct_ipv6_error_windows_test.go",
+      "beforeSHA256": null,
+      "afterSHA256": "4c4429dc0afef64337c7f5e68b7b76f7d4665b81067c7712dcb19894c83de273"
+    },
+    {
+      "file": "constant/direct_ipv6_error.go",
+      "beforeSHA256": null,
+      "afterSHA256": "6323c74b92a5e48ad34db3e2b1483502e79c90aed83ccc39281b480d58684988"
+    },
+    {
+      "file": "tunnel/direct_ipv6_retry_test.go",
+      "beforeSHA256": null,
+      "afterSHA256": "08b8a4a8f2bc4194e6887feab455c1fc0882b6c6b3f94cf0ba3aa5e5ea29b8d1"
+    },
+    {
+      "file": "tunnel/tunnel.go",
+      "beforeSHA256": "bd0818dddd04779aad3f078819b3ca050bd8bdce29ba57e5a377770539278596",
+      "afterSHA256": "e1233741092ecb3f07a71dfcad22171eecb5fec900652a03d786ea4bea397a13"
+    }
+  ],
+  "patchSHA256": "cade83c01baa6322450d44d285f5d72fb81bce572bdca818c53e6969d23ad045",
+  "modification": "2026-10-16 RouteWeaver research: stop tunnel retries only for native DIRECT literal IPv6 TCP OS network-unreachable. Preserve original error and retry every new connection.",
+  "deployment": "RESEARCH_ONLY_NOT_IN_RC4_OR_ANY_CLIENT",
+  "binaryDistribution": false
+}

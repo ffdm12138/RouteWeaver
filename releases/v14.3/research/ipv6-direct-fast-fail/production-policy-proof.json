@@ -1,0 +1,737 @@
+{
+  "status": "NETWORK_COMPAT_LOCAL_CORE_PASS_DEVICE_PENDING",
+  "scope": "Actual generated node/provider defaults and five compatibility configs over owned TCP/UDP/DNS loopback. Business IPv4 resolution, DNS hint filtering, HTTP/TLS/QUIC hostname recovery and original proxy IPv6 semantics. No native TUN, app retry, Shadowrocket or public IPv6 acceptance; no running client changes",
+  "coreVersion": "Mihomo Meta v1.19.31-rw-ipv6-retry-research windows amd64 with go1.27.2 research-only\nUse tags: with_gvisor",
+  "coreSHA256": "eb431b4ee397040ade0fa98f4750e859e87a095dcb51e3da411940b1e36c2217",
+  "cases": [
+    {
+      "name": "dual-pref4",
+      "result": "PASS",
+      "transportFamily": 4,
+      "command": 1,
+      "atyp": 4,
+      "target": "20010db8000000000000000000000010",
+      "targetPort": 443,
+      "deny": false
+    },
+    {
+      "name": "a-only-pref4",
+      "result": "PASS",
+      "transportFamily": 4,
+      "command": 1,
+      "atyp": 4,
+      "target": "20010db8000000000000000000000010",
+      "targetPort": 443,
+      "deny": false
+    },
+    {
+      "name": "aaaa-only-pref4",
+      "result": "PASS",
+      "transportFamily": 6,
+      "command": 1,
+      "atyp": 4,
+      "target": "20010db8000000000000000000000010",
+      "targetPort": 443,
+      "deny": false
+    },
+    {
+      "name": "a-refused-v6-works",
+      "result": "PASS",
+      "transportFamily": 6,
+      "command": 1,
+      "atyp": 4,
+      "target": "20010db8000000000000000000000010",
+      "targetPort": 443,
+      "deny": false
+    },
+    {
+      "name": "explicit-v6",
+      "result": "PASS",
+      "transportFamily": 6,
+      "command": 1,
+      "atyp": 4,
+      "target": "20010db8000000000000000000000010",
+      "targetPort": 443,
+      "deny": false
+    },
+    {
+      "name": "literal-v6",
+      "result": "PASS",
+      "transportFamily": 6,
+      "command": 1,
+      "atyp": 4,
+      "target": "20010db8000000000000000000000010",
+      "targetPort": 443,
+      "deny": false
+    },
+    {
+      "name": "provider-default",
+      "result": "PASS",
+      "transportFamily": 4,
+      "command": 1,
+      "atyp": 4,
+      "target": "20010db8000000000000000000000010",
+      "targetPort": 443,
+      "deny": false
+    },
+    {
+      "name": "provider-explicit6",
+      "result": "PASS",
+      "transportFamily": 6,
+      "command": 1,
+      "atyp": 4,
+      "target": "20010db8000000000000000000000010",
+      "targetPort": 443,
+      "deny": false
+    },
+    {
+      "name": "provider-literal6",
+      "result": "PASS",
+      "transportFamily": 6,
+      "command": 1,
+      "atyp": 4,
+      "target": "20010db8000000000000000000000010",
+      "targetPort": 443,
+      "deny": false
+    },
+    {
+      "name": "provider-refresh-keeps-default",
+      "result": "PASS",
+      "transportFamily": 4,
+      "command": 1,
+      "atyp": 4,
+      "target": "20010db8000000000000000000000010",
+      "targetPort": 443,
+      "deny": false
+    },
+    {
+      "name": "remote-no-v6-propagates-failure",
+      "result": "PASS",
+      "relayAttempts": 1,
+      "noDirectFallbackConfigured": true
+    },
+    {
+      "name": "ipv4-node-transport-preserves-ipv6-udp-target",
+      "result": "PASS",
+      "outerFamily": "IPv4",
+      "atyp": 4,
+      "target": "20010db8000000000000000000000010"
+    },
+    {
+      "name": "windows:actual-production-config-parse",
+      "result": "PASS",
+      "source": "src/windows/v14.3-ipv4-local.js"
+    },
+    {
+      "name": "windows:client-A-fake4",
+      "result": "PASS",
+      "answers": 1
+    },
+    {
+      "name": "windows:client-AAAA-empty",
+      "result": "PASS",
+      "answers": 0
+    },
+    {
+      "name": "windows:compat-ipv4-node-carries-ipv6-target",
+      "result": "PASS"
+    },
+    {
+      "name": "android:actual-production-config-parse",
+      "result": "PASS",
+      "source": "src/android/v14.3-android-ipv4-local.js"
+    },
+    {
+      "name": "android:client-A-fake4",
+      "result": "PASS",
+      "answers": 1
+    },
+    {
+      "name": "android:client-AAAA-empty",
+      "result": "PASS",
+      "answers": 0
+    },
+    {
+      "name": "android:compat-ipv4-node-carries-ipv6-target",
+      "result": "PASS"
+    },
+    {
+      "name": "clashmi:actual-production-config-parse",
+      "result": "PASS",
+      "source": "src/ios/v14.3-clashmi-ipv4-local.js"
+    },
+    {
+      "name": "clashmi:client-A-fake4",
+      "result": "PASS",
+      "answers": 1
+    },
+    {
+      "name": "clashmi:client-AAAA-empty",
+      "result": "PASS",
+      "answers": 0
+    },
+    {
+      "name": "clashmi:compat-ipv4-node-carries-ipv6-target",
+      "result": "PASS"
+    },
+    {
+      "name": "macosFlClash:actual-production-config-parse",
+      "result": "PASS",
+      "source": "src/macos/v14.3-macos-flclash-ipv4-local.js"
+    },
+    {
+      "name": "macosFlClash:client-A-fake4",
+      "result": "PASS",
+      "answers": 1
+    },
+    {
+      "name": "macosFlClash:client-AAAA-empty",
+      "result": "PASS",
+      "answers": 0
+    },
+    {
+      "name": "macosFlClash:compat-ipv4-node-carries-ipv6-target",
+      "result": "PASS"
+    },
+    {
+      "name": "macosClashMi:actual-production-config-parse",
+      "result": "PASS",
+      "source": "src/macos/v14.3-macos-clashmi-ipv4-local.js"
+    },
+    {
+      "name": "macosClashMi:client-A-fake4",
+      "result": "PASS",
+      "answers": 1
+    },
+    {
+      "name": "macosClashMi:client-AAAA-empty",
+      "result": "PASS",
+      "answers": 0
+    },
+    {
+      "name": "macosClashMi:compat-ipv4-node-carries-ipv6-target",
+      "result": "PASS"
+    },
+    {
+      "name": "windows:DNS-type-28",
+      "result": "PASS",
+      "answers": 0
+    },
+    {
+      "name": "windows:DNS-type-64",
+      "result": "PASS",
+      "answers": 0
+    },
+    {
+      "name": "windows:DNS-type-65",
+      "result": "PASS",
+      "answers": 0
+    },
+    {
+      "name": "windows:DNS-type-16",
+      "result": "PASS",
+      "answers": 1
+    },
+    {
+      "name": "windows:DIRECT-TCP-uses-A",
+      "result": "PASS"
+    },
+    {
+      "name": "windows:LAN-name-keeps-original-literal-destination",
+      "result": "PASS"
+    },
+    {
+      "name": "windows:DIRECT-UDP-uses-A",
+      "result": "PASS"
+    },
+    {
+      "name": "windows:literal-IPv6-TLS-recovers-domain-and-A",
+      "result": "PASS",
+      "testPortAddedToSourceTLSAllowlist": true
+    },
+    {
+      "name": "windows:literal-IPv6-HTTP-recovers-domain-and-A",
+      "result": "PASS",
+      "completeOwnedHTTPResponse": true,
+      "testPortAddedToSourceHTTPAllowlist": true
+    },
+    {
+      "name": "windows:HTTP-LAN-name-keeps-original-destination",
+      "result": "PASS"
+    },
+    {
+      "name": "windows:HTTP-company-name-retains-proxy-egress",
+      "result": "PASS"
+    },
+    {
+      "name": "windows:literal-IPv6-QUIC-recovers-domain-and-A",
+      "result": "PASS",
+      "testPortAddedToSourceQUICAllowlist": true
+    },
+    {
+      "name": "windows:original-rules-proxy-literal-IPv6-over-IPv4",
+      "result": "PASS",
+      "nativeTun": "NOT_RUN"
+    },
+    {
+      "name": "windows:original-rules-proxy-literal-IPv6-UDP-over-IPv4",
+      "result": "PASS",
+      "nativeTun": "NOT_RUN"
+    },
+    {
+      "name": "windows:AAAA-only-DIRECT-fails-without-policy-fallback",
+      "result": "PASS"
+    },
+    {
+      "name": "windows:leading-explicit-IP-wins-over-TLS-company-name",
+      "result": "PASS",
+      "controlledRuleInjectedBeforeCompatibilityAdapter": "IP-CIDR,127.0.0.1/32,DIRECT,no-resolve"
+    },
+    {
+      "name": "windows:leading-explicit-IP-wins-over-HTTP-company-name",
+      "result": "PASS"
+    },
+    {
+      "name": "control:HTTP-host-routing-alone-does-not-recover-IPv6",
+      "result": "PASS",
+      "onlyHTTPDestinationOverrideDisabled": true
+    },
+    {
+      "name": "control:dns-ipv6-false-alone-still-returns-HTTPS-hint",
+      "result": "PASS"
+    },
+    {
+      "name": "control:dns-ipv6-false-alone-allows-internal-AAAA",
+      "result": "PASS"
+    },
+    {
+      "name": "node-bootstrap:explicit-IPv6-node-DNS-preserved",
+      "result": "PASS"
+    },
+    {
+      "name": "recovery:explicit-skip-domain-preserved",
+      "result": "PASS"
+    },
+    {
+      "name": "recovery:HTTP-explicit-skip-domain-preserved",
+      "result": "PASS"
+    },
+    {
+      "name": "android:DNS-type-28",
+      "result": "PASS",
+      "answers": 0
+    },
+    {
+      "name": "android:DNS-type-64",
+      "result": "PASS",
+      "answers": 0
+    },
+    {
+      "name": "android:DNS-type-65",
+      "result": "PASS",
+      "answers": 0
+    },
+    {
+      "name": "android:DNS-type-16",
+      "result": "PASS",
+      "answers": 1
+    },
+    {
+      "name": "android:DIRECT-TCP-uses-A",
+      "result": "PASS"
+    },
+    {
+      "name": "android:LAN-name-keeps-original-literal-destination",
+      "result": "PASS"
+    },
+    {
+      "name": "android:DIRECT-UDP-uses-A",
+      "result": "PASS"
+    },
+    {
+      "name": "android:literal-IPv6-TLS-recovers-domain-and-A",
+      "result": "PASS",
+      "testPortAddedToSourceTLSAllowlist": true
+    },
+    {
+      "name": "android:literal-IPv6-HTTP-recovers-domain-and-A",
+      "result": "PASS",
+      "completeOwnedHTTPResponse": true,
+      "testPortAddedToSourceHTTPAllowlist": true
+    },
+    {
+      "name": "android:HTTP-LAN-name-keeps-original-destination",
+      "result": "PASS"
+    },
+    {
+      "name": "android:HTTP-company-name-retains-proxy-egress",
+      "result": "PASS"
+    },
+    {
+      "name": "android:literal-IPv6-QUIC-recovers-domain-and-A",
+      "result": "PASS",
+      "testPortAddedToSourceQUICAllowlist": true
+    },
+    {
+      "name": "android:original-rules-proxy-literal-IPv6-over-IPv4",
+      "result": "PASS",
+      "nativeTun": "NOT_RUN"
+    },
+    {
+      "name": "android:original-rules-proxy-literal-IPv6-UDP-over-IPv4",
+      "result": "PASS",
+      "nativeTun": "NOT_RUN"
+    },
+    {
+      "name": "android:AAAA-only-DIRECT-fails-without-policy-fallback",
+      "result": "PASS"
+    },
+    {
+      "name": "android:leading-explicit-IP-wins-over-TLS-company-name",
+      "result": "PASS",
+      "controlledRuleInjectedBeforeCompatibilityAdapter": "IP-CIDR,127.0.0.1/32,DIRECT,no-resolve"
+    },
+    {
+      "name": "android:leading-explicit-IP-wins-over-HTTP-company-name",
+      "result": "PASS"
+    },
+    {
+      "name": "clashmi:DNS-type-28",
+      "result": "PASS",
+      "answers": 0
+    },
+    {
+      "name": "clashmi:DNS-type-64",
+      "result": "PASS",
+      "answers": 0
+    },
+    {
+      "name": "clashmi:DNS-type-65",
+      "result": "PASS",
+      "answers": 0
+    },
+    {
+      "name": "clashmi:DNS-type-16",
+      "result": "PASS",
+      "answers": 1
+    },
+    {
+      "name": "clashmi:DIRECT-TCP-uses-A",
+      "result": "PASS"
+    },
+    {
+      "name": "clashmi:LAN-name-keeps-original-literal-destination",
+      "result": "PASS"
+    },
+    {
+      "name": "clashmi:DIRECT-UDP-uses-A",
+      "result": "PASS"
+    },
+    {
+      "name": "clashmi:literal-IPv6-TLS-recovers-domain-and-A",
+      "result": "PASS",
+      "testPortAddedToSourceTLSAllowlist": true
+    },
+    {
+      "name": "clashmi:literal-IPv6-HTTP-recovers-domain-and-A",
+      "result": "PASS",
+      "completeOwnedHTTPResponse": true,
+      "testPortAddedToSourceHTTPAllowlist": true
+    },
+    {
+      "name": "clashmi:HTTP-LAN-name-keeps-original-destination",
+      "result": "PASS"
+    },
+    {
+      "name": "clashmi:HTTP-company-name-retains-proxy-egress",
+      "result": "PASS"
+    },
+    {
+      "name": "clashmi:literal-IPv6-QUIC-recovers-domain-and-A",
+      "result": "PASS",
+      "testPortAddedToSourceQUICAllowlist": true
+    },
+    {
+      "name": "clashmi:original-rules-proxy-literal-IPv6-over-IPv4",
+      "result": "PASS",
+      "nativeTun": "NOT_RUN"
+    },
+    {
+      "name": "clashmi:original-rules-proxy-literal-IPv6-UDP-over-IPv4",
+      "result": "PASS",
+      "nativeTun": "NOT_RUN"
+    },
+    {
+      "name": "clashmi:AAAA-only-DIRECT-fails-without-policy-fallback",
+      "result": "PASS"
+    },
+    {
+      "name": "clashmi:leading-explicit-IP-wins-over-TLS-company-name",
+      "result": "PASS",
+      "controlledRuleInjectedBeforeCompatibilityAdapter": "IP-CIDR,127.0.0.1/32,DIRECT,no-resolve"
+    },
+    {
+      "name": "clashmi:leading-explicit-IP-wins-over-HTTP-company-name",
+      "result": "PASS"
+    },
+    {
+      "name": "macosFlClash:DNS-type-28",
+      "result": "PASS",
+      "answers": 0
+    },
+    {
+      "name": "macosFlClash:DNS-type-64",
+      "result": "PASS",
+      "answers": 0
+    },
+    {
+      "name": "macosFlClash:DNS-type-65",
+      "result": "PASS",
+      "answers": 0
+    },
+    {
+      "name": "macosFlClash:DNS-type-16",
+      "result": "PASS",
+      "answers": 1
+    },
+    {
+      "name": "macosFlClash:DIRECT-TCP-uses-A",
+      "result": "PASS"
+    },
+    {
+      "name": "macosFlClash:LAN-name-keeps-original-literal-destination",
+      "result": "PASS"
+    },
+    {
+      "name": "macosFlClash:DIRECT-UDP-uses-A",
+      "result": "PASS"
+    },
+    {
+      "name": "macosFlClash:literal-IPv6-TLS-recovers-domain-and-A",
+      "result": "PASS",
+      "testPortAddedToSourceTLSAllowlist": true
+    },
+    {
+      "name": "macosFlClash:literal-IPv6-HTTP-recovers-domain-and-A",
+      "result": "PASS",
+      "completeOwnedHTTPResponse": true,
+      "testPortAddedToSourceHTTPAllowlist": true
+    },
+    {
+      "name": "macosFlClash:HTTP-LAN-name-keeps-original-destination",
+      "result": "PASS"
+    },
+    {
+      "name": "macosFlClash:HTTP-company-name-retains-proxy-egress",
+      "result": "PASS"
+    },
+    {
+      "name": "macosFlClash:literal-IPv6-QUIC-recovers-domain-and-A",
+      "result": "PASS",
+      "testPortAddedToSourceQUICAllowlist": true
+    },
+    {
+      "name": "macosFlClash:original-rules-proxy-literal-IPv6-over-IPv4",
+      "result": "PASS",
+      "nativeTun": "NOT_RUN"
+    },
+    {
+      "name": "macosFlClash:original-rules-proxy-literal-IPv6-UDP-over-IPv4",
+      "result": "PASS",
+      "nativeTun": "NOT_RUN"
+    },
+    {
+      "name": "macosFlClash:AAAA-only-DIRECT-fails-without-policy-fallback",
+      "result": "PASS"
+    },
+    {
+      "name": "macosFlClash:leading-explicit-IP-wins-over-TLS-company-name",
+      "result": "PASS",
+      "controlledRuleInjectedBeforeCompatibilityAdapter": "IP-CIDR,127.0.0.1/32,DIRECT,no-resolve"
+    },
+    {
+      "name": "macosFlClash:leading-explicit-IP-wins-over-HTTP-company-name",
+      "result": "PASS"
+    },
+    {
+      "name": "macosClashMi:DNS-type-28",
+      "result": "PASS",
+      "answers": 0
+    },
+    {
+      "name": "macosClashMi:DNS-type-64",
+      "result": "PASS",
+      "answers": 0
+    },
+    {
+      "name": "macosClashMi:DNS-type-65",
+      "result": "PASS",
+      "answers": 0
+    },
+    {
+      "name": "macosClashMi:DNS-type-16",
+      "result": "PASS",
+      "answers": 1
+    },
+    {
+      "name": "macosClashMi:DIRECT-TCP-uses-A",
+      "result": "PASS"
+    },
+    {
+      "name": "macosClashMi:LAN-name-keeps-original-literal-destination",
+      "result": "PASS"
+    },
+    {
+      "name": "macosClashMi:DIRECT-UDP-uses-A",
+      "result": "PASS"
+    },
+    {
+      "name": "macosClashMi:literal-IPv6-TLS-recovers-domain-and-A",
+      "result": "PASS",
+      "testPortAddedToSourceTLSAllowlist": true
+    },
+    {
+      "name": "macosClashMi:literal-IPv6-HTTP-recovers-domain-and-A",
+      "result": "PASS",
+      "completeOwnedHTTPResponse": true,
+      "testPortAddedToSourceHTTPAllowlist": true
+    },
+    {
+      "name": "macosClashMi:HTTP-LAN-name-keeps-original-destination",
+      "result": "PASS"
+    },
+    {
+      "name": "macosClashMi:HTTP-company-name-retains-proxy-egress",
+      "result": "PASS"
+    },
+    {
+      "name": "macosClashMi:literal-IPv6-QUIC-recovers-domain-and-A",
+      "result": "PASS",
+      "testPortAddedToSourceQUICAllowlist": true
+    },
+    {
+      "name": "macosClashMi:original-rules-proxy-literal-IPv6-over-IPv4",
+      "result": "PASS",
+      "nativeTun": "NOT_RUN"
+    },
+    {
+      "name": "macosClashMi:original-rules-proxy-literal-IPv6-UDP-over-IPv4",
+      "result": "PASS",
+      "nativeTun": "NOT_RUN"
+    },
+    {
+      "name": "macosClashMi:AAAA-only-DIRECT-fails-without-policy-fallback",
+      "result": "PASS"
+    },
+    {
+      "name": "macosClashMi:leading-explicit-IP-wins-over-TLS-company-name",
+      "result": "PASS",
+      "controlledRuleInjectedBeforeCompatibilityAdapter": "IP-CIDR,127.0.0.1/32,DIRECT,no-resolve"
+    },
+    {
+      "name": "macosClashMi:leading-explicit-IP-wins-over-HTTP-company-name",
+      "result": "PASS"
+    }
+  ],
+  "providerDefaultExpression": "(select(.[\"ip-version\"] == null and ((.server // \"\") | contains(\":\")) == false and ((.server // \"\") | test(\"^[0-9.]+$\")) == false) | .[\"ip-version\"]) = \"ipv4-prefer\"",
+  "recoveryContainment": {
+    "outboundInterface": "owned-loopback",
+    "nativeTun": false,
+    "publicTraffic": false,
+    "productionRulesUsed": true,
+    "backgroundHealthChecksDisabled": true,
+    "dnsEndpoints": "owned UDP loopback replaces upstream endpoints and pins DNS transport DIRECT; production filters retained",
+    "snifferPorts": "owned ephemeral test ports appended to production allowlists",
+    "explicitIPControl": "127.0.0.1/32 DIRECT injected after base generation and before compatibility adapter for a controlled collision; not a new production exception",
+    "controls": "same candidate configuration with only DNS filter parameters removed; not a prior-device replay",
+    "dnsQueries": 39,
+    "proxyRequests": 18,
+    "proxyDatagrams": 5
+  },
+  "harnessSHA256": "4291810c084039ee5d1b613c210a1ce2c689bb69ed2c9c1505e372a689d4c56d",
+  "revision": "ipv6-fallback-r2",
+  "deviceAcceptance": "NOT_RUN",
+  "clientDeployment": false,
+  "sourceFiles": [
+    {
+      "file": "tools/build-network-compat.cjs",
+      "sha256": "dfbc9b0a02bb34f50776eb27775e139a7aab795229ae6947b16475c26c3fa4fd"
+    },
+    {
+      "file": "tools/ipv4-local-adapter.js",
+      "sha256": "412f0a15d01afbdbb72a9b6d81f56bb9be36c6b407804c17c0cc18349f0d70ab"
+    },
+    {
+      "file": "src/windows/v14.3.js",
+      "sha256": "b2ac9021a498ebd8e2b0b53d7bbd3db92ef99e918b9f49eec046c5c4210cf054"
+    },
+    {
+      "file": "src/android/v14.3-android.js",
+      "sha256": "cfdc2eba7e3552bb067bca46a638596409510dde03f7558f31cebe6feab71d57"
+    },
+    {
+      "file": "src/ios/v14.3-clashmi-domestic-protocol-r1.js",
+      "sha256": "9ded4aef098b1b5b0334597eda4a07996f6f7e8d3c8a24cdc0bfad457e705903"
+    },
+    {
+      "file": "src/macos/v14.3-macos-flclash.js",
+      "sha256": "0ab7a41c2fe746e17d258952942bed72ad64709edb4e9a735a81b2947ac7d199"
+    },
+    {
+      "file": "src/macos/v14.3-macos-clashmi.js",
+      "sha256": "2a65d9cb1240068586f0a733797616cd47786eb13d27bbdf25e52d2e87fcf0ee"
+    },
+    {
+      "file": "src/ios/v14.3-shadowrocket.conf",
+      "sha256": "9829d7e7c74f949cfe5168c3b3f3359b0e41aeb3c81bd3b8e2420bf721f277ec"
+    },
+    {
+      "file": "src/windows/v14.3-ipv4-local.js",
+      "sha256": "916473da5e39ddfcc4b1bedc307ca1ce883ff9019afab6cb2b333beaeba2869b"
+    },
+    {
+      "file": "src/android/v14.3-android-ipv4-local.js",
+      "sha256": "f765c51aedc8a234b2c1cc5f7361767c31e5fdeae7569e6f9877aaad118f963b"
+    },
+    {
+      "file": "src/ios/v14.3-clashmi-ipv4-local.js",
+      "sha256": "93905066b6ba6542eca6e379d4d8ffeab25cf05ccf16f4673e98997f1dc58bb1"
+    },
+    {
+      "file": "src/macos/v14.3-macos-flclash-ipv4-local.js",
+      "sha256": "b6abb353ffbfe99cd430217f490643b0a3c60e7258bda37b363300324574f3e0"
+    },
+    {
+      "file": "src/macos/v14.3-macos-clashmi-ipv4-local.js",
+      "sha256": "bcedc0bc6a630b1ba117c0934e39d5b4bdcca7d3a5bd3d47dd042ed9c2d82cc4"
+    },
+    {
+      "file": "src/ios/v14.3-shadowrocket-ipv4-local.conf",
+      "sha256": "8603cd469cdf107feca9b14468fe34483c2d61dba7ae68579467863d1ef28f89"
+    },
+    {
+      "file": "tools/network-compat.cjs",
+      "sha256": "f6da6582d1dca8fb3ccc5147cad82af183887f9fc89b31bc2f8f2889feb0ba21"
+    },
+    {
+      "file": "tools/network-compat-runtime.js",
+      "sha256": "dcf2fb9431989a8e1c37780b6a752641900b00ab5c7776ac7c9c135f3818c06b"
+    },
+    {
+      "file": "tests/native-network-compat.cjs",
+      "sha256": "4291810c084039ee5d1b613c210a1ce2c689bb69ed2c9c1505e372a689d4c56d"
+    },
+    {
+      "file": "tests/native-ipv4-recovery.cjs",
+      "sha256": "1af8d0c7453f45130304b4fe2da7f331ce01dea9e8c13cf97c4bbe335d5104c6"
+    },
+    {
+      "file": "tests/fixture.cjs",
+      "sha256": "328defa554087c36412fa6c7119c6b25e6d20938ef1af41463622866f7a3ec4c"
+    },
+    {
+      "file": "data/rule-sources.lock.json",
+      "sha256": "cd4f33e36b88aafe1e6eda4c56f63a202940aa84cd0901502b22941af4e46acb"
+    }
+  ]
+}

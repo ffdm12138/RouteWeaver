@@ -18,3 +18,5 @@
 - `dist/<version>/` 为本地构建输出，`.work/` 为实验和解压复验；均不进 Git。上游许可和来源随每个发布包附带。
 
 开发阶段在 `harness/build/`，执行结果记入 `harness/build-log.md`，上下文与审阅分别在 `harness/context/`、`harness/code_review/`。
+
+- 2026-10-16 后续 `opaque-ipv6-research`：rc.4 用户可以发图但仍转圈；不据此认定带宽慢或完整回退通过。核心 DIRECT IPv6 TCP 网络不可达快速失败原型及 123 项原规则回放通过，位于 `releases/v14.3/research/ipv6-direct-fast-fail/`，未接入客户端。十二个入口、rc.4 标签/附件保持；当前结论见 `docs/reports/v14.3/无域名IPv6与转圈等待研究.md`。

@@ -80,6 +80,8 @@
     "macosClashMi": "releases/v14.3/src/macos/v14.3-macos-clashmi-ipv4-local.js",
     "shadowrocket": "releases/v14.3/src/ios/v14.3-shadowrocket-ipv4-local.conf"
   },
-  "networkCompatibilityUserCase": "RC2_RC3_FAILED_RC4_HTTP_CORE_PASS_MEDIA_PENDING_OPAQUE_IPV6_UNRESOLVED",
-  "networkCompatibilityRepair": "http-recovery-r1"
+  "networkCompatibilityUserCase": "RC4_MEDIA_SENDS_WITH_SPINNING_DELAY_OPAQUE_IPV6_UNRESOLVED_CORE_PROTOTYPE_NOT_DEPLOYED",
+  "networkCompatibilityRepair": "http-recovery-r1",
+  "networkCompatibilityResearchReport": "docs/reports/v14.3/无域名IPv6与转圈等待研究.md",
+  "networkCompatibilityCorePrototype": "releases/v14.3/research/ipv6-direct-fast-fail/proof.json"
 }

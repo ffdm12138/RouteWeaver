@@ -46,3 +46,7 @@
 51 项兼容静态检查、123 项隔离 Mihomo 核心检查覆盖五种 JS。HTTP 验证完整自有请求/200 响应、原出口与排除项；另有只关闭 HTTP 目标覆盖的失败对照。TLS 使用合成 ClientHello、QUIC 使用按 RFC 9001 构造的 Initial；只验证嗅探、重解析和报文到达回环 IPv4 服务，不是完整 TLS/QUIC 会话或微信媒体验收。实验保留生产规则，DNS 端点换为自有回环、禁用后台测速，并将测试端口追加到嗅探列表；未启动系统 TUN。标准回归、包完整性和设备验收分别记录，详见[修订报告](../reports/v14.3/IPv6回退与兼容入口.md)。
 
 [Mihomo DNS 参数](https://wiki.metacubex.one/config/dns/) · [域名嗅探](https://wiki.metacubex.one/config/sniff/) · [节点地址族](https://wiki.metacubex.one/config/proxies/#ip-version)
+
+## rc.4 后续转圈反馈与核心研究
+
+当前用户能够发送图片，但仍需转圈等待；不要将此当作带宽慢或完整回退已经验收。无域名 IPv6 仍可能在 DIRECT 不可达时重复拨号。独立核心原型已验证可减少这段重复等待，原分流/防泄漏回放通过；它没有加入本页下载文件，不能通过重新导入同一 JS 启用。原生应用 IPv4 后备、TUN 错误反馈及其它平台仍需分别验证，见[研究报告](../reports/v14.3/无域名IPv6与转圈等待研究.md)。
