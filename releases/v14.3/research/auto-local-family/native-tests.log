@@ -1,0 +1,60 @@
+=== RUN   TestRouteWeaverLocalFamilySourcesAndCandidates
+--- PASS: TestRouteWeaverLocalFamilySourcesAndCandidates (0.00s)
+=== RUN   TestRouteWeaverLocalFamilyRequiresIndependentHardFailures
+--- PASS: TestRouteWeaverLocalFamilyRequiresIndependentHardFailures (0.00s)
+=== RUN   TestRouteWeaverLocalFamilySuccessIsBoundedAndUDPIsNotProof
+--- PASS: TestRouteWeaverLocalFamilySuccessIsBoundedAndUDPIsNotProof (0.00s)
+=== RUN   TestRouteWeaverLocalFamilyNetworkChangeDiscardsOldResults
+--- PASS: TestRouteWeaverLocalFamilyNetworkChangeDiscardsOldResults (0.00s)
+=== RUN   TestRouteWeaverLocalFamilyDoesNotRestrictRemoteDialer
+--- PASS: TestRouteWeaverLocalFamilyDoesNotRestrictRemoteDialer (0.00s)
+=== RUN   TestRouteWeaverLocalFamilyObservationFailureIsUnknown
+--- PASS: TestRouteWeaverLocalFamilyObservationFailureIsUnknown (0.00s)
+=== RUN   TestRouteWeaverLocalFamilyInterfaceScopeAndInvalidation
+--- PASS: TestRouteWeaverLocalFamilyInterfaceScopeAndInvalidation (0.00s)
+PASS
+ok  	github.com/metacubex/mihomo/component/dialer	0.232s
+=== RUN   TestRouteWeaverDirectIPv6Error
+=== RUN   TestRouteWeaverDirectIPv6Error/ipv6_literal
+=== RUN   TestRouteWeaverDirectIPv6Error/wrapped_OS_error
+=== RUN   TestRouteWeaverDirectIPv6Error/IPv6_LAN_route_absent
+=== RUN   TestRouteWeaverDirectIPv6Error/IPv4
+=== RUN   TestRouteWeaverDirectIPv6Error/IPv4_mapped
+=== RUN   TestRouteWeaverDirectIPv6Error/hostname_has_precedence_over_cached_IP
+=== RUN   TestRouteWeaverDirectIPv6Error/UDP_excluded
+=== RUN   TestRouteWeaverDirectIPv6Error/proxy_transport_through_DIRECT_excluded
+=== RUN   TestRouteWeaverDirectIPv6Error/nil_metadata
+=== RUN   TestRouteWeaverDirectIPv6Error/unresolved
+=== RUN   TestRouteWeaverDirectIPv6Error/host_unreachable
+=== RUN   TestRouteWeaverDirectIPv6Error/connection_refused
+=== RUN   TestRouteWeaverDirectIPv6Error/timeout
+=== RUN   TestRouteWeaverDirectIPv6Error/message_text_is_insufficient
+=== RUN   TestRouteWeaverDirectIPv6Error/success
+--- PASS: TestRouteWeaverDirectIPv6Error (0.00s)
+    --- PASS: TestRouteWeaverDirectIPv6Error/ipv6_literal (0.00s)
+    --- PASS: TestRouteWeaverDirectIPv6Error/wrapped_OS_error (0.00s)
+    --- PASS: TestRouteWeaverDirectIPv6Error/IPv6_LAN_route_absent (0.00s)
+    --- PASS: TestRouteWeaverDirectIPv6Error/IPv4 (0.00s)
+    --- PASS: TestRouteWeaverDirectIPv6Error/IPv4_mapped (0.00s)
+    --- PASS: TestRouteWeaverDirectIPv6Error/hostname_has_precedence_over_cached_IP (0.00s)
+    --- PASS: TestRouteWeaverDirectIPv6Error/UDP_excluded (0.00s)
+    --- PASS: TestRouteWeaverDirectIPv6Error/proxy_transport_through_DIRECT_excluded (0.00s)
+    --- PASS: TestRouteWeaverDirectIPv6Error/nil_metadata (0.00s)
+    --- PASS: TestRouteWeaverDirectIPv6Error/unresolved (0.00s)
+    --- PASS: TestRouteWeaverDirectIPv6Error/host_unreachable (0.00s)
+    --- PASS: TestRouteWeaverDirectIPv6Error/connection_refused (0.00s)
+    --- PASS: TestRouteWeaverDirectIPv6Error/timeout (0.00s)
+    --- PASS: TestRouteWeaverDirectIPv6Error/message_text_is_insufficient (0.00s)
+    --- PASS: TestRouteWeaverDirectIPv6Error/success (0.00s)
+=== RUN   TestRouteWeaverCompatibleUnchanged
+--- PASS: TestRouteWeaverCompatibleUnchanged (0.00s)
+=== RUN   TestRouteWeaverWindowsWinsock
+--- PASS: TestRouteWeaverWindowsWinsock (0.00s)
+PASS
+ok  	github.com/metacubex/mihomo/adapter/outbound	1.774s
+=== RUN   TestRouteWeaverLocalDNSResponseFiltering
+--- PASS: TestRouteWeaverLocalDNSResponseFiltering (0.00s)
+=== RUN   TestRouteWeaverLocalDNSRequiresConfirmedIPv4Alternative
+--- PASS: TestRouteWeaverLocalDNSRequiresConfirmedIPv4Alternative (0.00s)
+PASS
+ok  	github.com/metacubex/mihomo/dns	1.125s
