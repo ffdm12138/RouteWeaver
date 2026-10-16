@@ -1,0 +1,131 @@
+{
+  "date": "2026-10-16",
+  "scope": "Research prototype and documentation published. Current rc.4 entry/data bytes unchanged. Client integration and full fallback acceptance remain pending.",
+  "verifiedSourceCommit": "0359ee361c5e0dc4623bf5caf0b5381d12e8e9f4",
+  "cloudCI": {
+    "id": 38893549795,
+    "url": "https://github.com/ffdm12138/RouteWeaver/actions/runs/38893549795",
+    "conclusion": "success",
+    "jobs": [
+      {
+        "name": "verify (windows-latest)",
+        "conclusion": "success"
+      },
+      {
+        "name": "verify (ubuntu-latest)",
+        "conclusion": "success"
+      }
+    ],
+    "scope": "Fresh source, static contracts, package CRC/member hashes, extracted replay and publication scan; no native TUN or new core execution"
+  },
+  "corePrototype": {
+    "file": "releases/v14.3/research/ipv6-direct-fast-fail/proof.json",
+    "sha256": "8e098accb0c11cd521a45db8e380845980449fb4d47838918c01e1179fc0a286",
+    "unitFunctions": 5,
+    "unitSubtests": 24,
+    "nativeControls": 12,
+    "productionPolicyReplay": 123,
+    "sourceRoundTripFiles": 1052,
+    "nativeTun": "NOT_RUN",
+    "clientDeployment": false
+  },
+  "overwriteReview": {
+    "file": "releases/v14.3/research/overwrite-source-review-20261016/candidates.json",
+    "sha256": "c6161785f1cb891962d653984b66307562c1a81a043ffaa148e80d00cdf78c1f",
+    "fixedRepositories": 4,
+    "externalScriptsExecuted": false,
+    "implementationsCopied": false,
+    "remoteRulesAdopted": false
+  },
+  "release": {
+    "url": "https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-rc.4",
+    "tagObject": "1281fa3b3b7d2bba488345d55e1036412b6cc71d",
+    "tagTarget": "3d8a485dc078b50e6b528514e582e9d92e35e9f7",
+    "releaseId": 414805373,
+    "tag": "v14.3.0-rc.4",
+    "bodyBeforeSHA256": "fdf9eccd5b5390a9f5694a465f287ebfdc83b5c303b660a4be41412c10fc578a",
+    "bodyAfterSHA256": "01a8f0b6c75cf4ef6fee655128a113fbba75c0574a020f05bc4d705e4784b3ac",
+    "bodyReadBack": "EXACT_MATCH",
+    "assetMetadataUnchanged": true,
+    "assetCount": 20,
+    "newClientOrEntryUploaded": false
+  },
+  "unchangedEntries": [
+    {
+      "platform": "windows",
+      "file": "releases/v14.3/src/windows/v14.3.js",
+      "sha256": "b2ac9021a498ebd8e2b0b53d7bbd3db92ef99e918b9f49eec046c5c4210cf054"
+    },
+    {
+      "platform": "android",
+      "file": "releases/v14.3/src/android/v14.3-android.js",
+      "sha256": "cfdc2eba7e3552bb067bca46a638596409510dde03f7558f31cebe6feab71d57"
+    },
+    {
+      "platform": "clashmi",
+      "file": "releases/v14.3/src/ios/v14.3-clashmi-domestic-protocol-r1.js",
+      "sha256": "9ded4aef098b1b5b0334597eda4a07996f6f7e8d3c8a24cdc0bfad457e705903"
+    },
+    {
+      "platform": "shadowrocket",
+      "file": "releases/v14.3/src/ios/v14.3-shadowrocket.conf",
+      "sha256": "9829d7e7c74f949cfe5168c3b3f3359b0e41aeb3c81bd3b8e2420bf721f277ec"
+    },
+    {
+      "platform": "macosFlClash",
+      "file": "releases/v14.3/src/macos/v14.3-macos-flclash.js",
+      "sha256": "0ab7a41c2fe746e17d258952942bed72ad64709edb4e9a735a81b2947ac7d199"
+    },
+    {
+      "platform": "macosClashMi",
+      "file": "releases/v14.3/src/macos/v14.3-macos-clashmi.js",
+      "sha256": "2a65d9cb1240068586f0a733797616cd47786eb13d27bbdf25e52d2e87fcf0ee"
+    },
+    {
+      "platform": "ipv4Local.windows",
+      "file": "releases/v14.3/src/windows/v14.3-ipv4-local.js",
+      "sha256": "916473da5e39ddfcc4b1bedc307ca1ce883ff9019afab6cb2b333beaeba2869b"
+    },
+    {
+      "platform": "ipv4Local.android",
+      "file": "releases/v14.3/src/android/v14.3-android-ipv4-local.js",
+      "sha256": "f765c51aedc8a234b2c1cc5f7361767c31e5fdeae7569e6f9877aaad118f963b"
+    },
+    {
+      "platform": "ipv4Local.clashmi",
+      "file": "releases/v14.3/src/ios/v14.3-clashmi-ipv4-local.js",
+      "sha256": "93905066b6ba6542eca6e379d4d8ffeab25cf05ccf16f4673e98997f1dc58bb1"
+    },
+    {
+      "platform": "ipv4Local.macosFlClash",
+      "file": "releases/v14.3/src/macos/v14.3-macos-flclash-ipv4-local.js",
+      "sha256": "b6abb353ffbfe99cd430217f490643b0a3c60e7258bda37b363300324574f3e0"
+    },
+    {
+      "platform": "ipv4Local.macosClashMi",
+      "file": "releases/v14.3/src/macos/v14.3-macos-clashmi-ipv4-local.js",
+      "sha256": "bcedc0bc6a630b1ba117c0934e39d5b4bdcca7d3a5bd3d47dd042ed9c2d82cc4"
+    },
+    {
+      "platform": "ipv4Local.shadowrocket",
+      "file": "releases/v14.3/src/ios/v14.3-shadowrocket-ipv4-local.conf",
+      "sha256": "8603cd469cdf107feca9b14468fe34483c2d61dba7ae68579467863d1ef28f89"
+    }
+  ],
+  "requirements": {
+    "strictRouteRetained": true,
+    "coreAndTunIPv6Retained": true,
+    "proxyRemoteIPv6Retained": true,
+    "noSilentEgressFallback": true
+  },
+  "rawUserLogsPublished": false,
+  "coreBinariesDistributed": false,
+  "notAccepted": [
+    "WeChat click-to-send latency",
+    "Native TUN/VPN error propagation",
+    "Application IPv4 retry",
+    "Automatic physical-egress detection",
+    "UDP write/ICMP propagation",
+    "Other native client platforms"
+  ]
+}

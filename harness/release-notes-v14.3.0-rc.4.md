@@ -11,3 +11,15 @@
 十二个单文件、三种 ZIP 和包回执不包含订阅或节点。附件校验和见 `SHA256SUMS.txt`，详细[问题和验证范围](https://github.com/ffdm12138/RouteWeaver/blob/v14.3.0-rc.4/docs/reports/v14.3/HTTP%E5%9F%9F%E5%90%8D%E9%87%8D%E8%A7%A3%E6%9E%90%E4%BF%AE%E5%A4%8D.md)。
 
 发布核验完成：源码 `3d8a485dc078b50e6b528514e582e9d92e35e9f7` 的 [Windows/Ubuntu CI](https://github.com/ffdm12138/RouteWeaver/actions/runs/38884042324) 均成功，20 个附件全部匿名下载并逐一匹配 SHA256，三份 ZIP CRC 通过。[发布回执](https://github.com/ffdm12138/RouteWeaver/blob/main/harness/releases/v14.3.0-rc.4.json)在发布后补记。媒体复测与无域名 IPv6 仍未解决。
+
+### 2026-10-16 后续日志与研究
+
+用户在 rc.4 已能发送图片，但仍有转圈等待；尚未完成完整媒体及无域名 IPv6 回退验收。严格路由、双栈接管、原分流和当前十二个导入文件保持。
+
+已增加固定 Mihomo 源码的 DIRECT IPv6 TCP 网络不可达快速失败原型，5 个 Go 测试函数/24 子例、12 个原生对照及现有 123 项隔离回放通过；代理链经 DIRECT 拨节点时保留原重试。它尚未接入客户端，不能将核心实验视为微信/TUN/其它平台验收。
+
+- [原型源码与证据](https://github.com/ffdm12138/RouteWeaver/tree/0359ee361c5e0dc4623bf5caf0b5381d12e8e9f4/releases/v14.3/research/ipv6-direct-fast-fail)
+- [日志与完整边界](https://github.com/ffdm12138/RouteWeaver/blob/0359ee361c5e0dc4623bf5caf0b5381d12e8e9f4/docs/reports/v14.3/无域名IPv6与转圈等待研究.md)
+- [四套公开覆写方案比较](https://github.com/ffdm12138/RouteWeaver/blob/0359ee361c5e0dc4623bf5caf0b5381d12e8e9f4/docs/reports/v14.3/公开覆写方案比较与改进取舍.md)
+
+本次后续研究没有覆盖此 Release 的标签或附件。当前下载仍是 rc.4，核心原型需要客户端集成和实机验收后再交付。
