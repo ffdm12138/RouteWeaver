@@ -1,0 +1,154 @@
+{
+  "status": "REMOTE_RELEASE_20_ASSETS_SHA256_PASS",
+  "tag": "v14.3.0-rc.3",
+  "sourceCommit": "1923d715779ec72fd73ca34c26fd37c05bf58e92",
+  "releaseURL": "https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-rc.3",
+  "releaseId": 414749151,
+  "publishedAt": "2026-10-16T09:06:18Z",
+  "assets": [
+    {
+      "file": "SHA256SUMS.txt",
+      "sha256": "2516f4aa272bb0ddf1788ecb91ef4b4a5d58b6e3fc4c1a9bc1d6799aef3091e3",
+      "bytes": 1757
+    },
+    {
+      "file": "package-verification.json",
+      "sha256": "b4ac381ce205e31889cfce33f341e34edab5a037e15feac68065da4f1111d3f4",
+      "bytes": 3841
+    },
+    {
+      "file": "v14.3-android-ipv4-local.js",
+      "sha256": "bb5d3d7d38369db5bfbc0409c52b3a45d2a312f2d4d677a28095cd5cf251e069",
+      "bytes": 121799
+    },
+    {
+      "file": "v14.3-android.js",
+      "sha256": "cfdc2eba7e3552bb067bca46a638596409510dde03f7558f31cebe6feab71d57",
+      "bytes": 117341
+    },
+    {
+      "file": "v14.3-audit-evidence.zip",
+      "sha256": "e9202c5648f8ef82aeec1235f652f94c1efd557e3afe447b6f8c3ce0a3d34b24",
+      "bytes": 12211173
+    },
+    {
+      "file": "v14.3-audit-evidence.zip.sha256",
+      "sha256": "58c3bb5bb478d683f82f8303fe810830ce28b4e73ef5e6cd4eb0dbeb811074b2",
+      "bytes": 92
+    },
+    {
+      "file": "v14.3-clashmi-domestic-protocol-r1.js",
+      "sha256": "9ded4aef098b1b5b0334597eda4a07996f6f7e8d3c8a24cdc0bfad457e705903",
+      "bytes": 120235
+    },
+    {
+      "file": "v14.3-clashmi-ipv4-local.js",
+      "sha256": "221f6fad2c3f882845fff16f209dcb83c5cc735c0737b91a8c817babcc9ae6a4",
+      "bytes": 124693
+    },
+    {
+      "file": "v14.3-deployable.zip",
+      "sha256": "ae63e8e0f1322e9bedad8c4ce1dafbcb60233f4e28b275f2b969e7e4df701c4b",
+      "bytes": 628109
+    },
+    {
+      "file": "v14.3-deployable.zip.sha256",
+      "sha256": "2c3640564485b54af2eb6fe8f6fb030056f5fff3b776f72e3054e25be1067055",
+      "bytes": 88
+    },
+    {
+      "file": "v14.3-ipv4-local.js",
+      "sha256": "14bc49fae89b1a12c25d67d5c2e3061657d2302affa12dcb41a7479c7ebe8e10",
+      "bytes": 121913
+    },
+    {
+      "file": "v14.3-macos-clashmi-ipv4-local.js",
+      "sha256": "1add047e68fef0c33153865f8836de1d31c937fe2163882c11f8d88e405f414f",
+      "bytes": 124695
+    },
+    {
+      "file": "v14.3-macos-clashmi.js",
+      "sha256": "2a65d9cb1240068586f0a733797616cd47786eb13d27bbdf25e52d2e87fcf0ee",
+      "bytes": 120237
+    },
+    {
+      "file": "v14.3-macos-flclash-ipv4-local.js",
+      "sha256": "560d4250a5ac6449cc27ab672e27a8c2e639a656e5106a5e9e928ba27f0947e7",
+      "bytes": 123708
+    },
+    {
+      "file": "v14.3-macos-flclash.js",
+      "sha256": "0ab7a41c2fe746e17d258952942bed72ad64709edb4e9a735a81b2947ac7d199",
+      "bytes": 119250
+    },
+    {
+      "file": "v14.3-macos.zip",
+      "sha256": "33508b7b4f3d1f527d778fe43cd0d790f75bdc2da0b3ada2d193a6d4f17fbb7d",
+      "bytes": 175140
+    },
+    {
+      "file": "v14.3-macos.zip.sha256",
+      "sha256": "718766fb75c3be641102e3e1a2a39860b9a270a3e92e336d79015292e465605c",
+      "bytes": 83
+    },
+    {
+      "file": "v14.3-shadowrocket-ipv4-local.conf",
+      "sha256": "8603cd469cdf107feca9b14468fe34483c2d61dba7ae68579467863d1ef28f89",
+      "bytes": 1746759
+    },
+    {
+      "file": "v14.3-shadowrocket.conf",
+      "sha256": "9829d7e7c74f949cfe5168c3b3f3359b0e41aeb3c81bd3b8e2420bf721f277ec",
+      "bytes": 1746654
+    },
+    {
+      "file": "v14.3.js",
+      "sha256": "b2ac9021a498ebd8e2b0b53d7bbd3db92ef99e918b9f49eec046c5c4210cf054",
+      "bytes": 117455
+    }
+  ],
+  "anonymousPublicDownload": "ALL_20_ASSETS_PASS_NO_AUTHORIZATION_HEADER_CURLRC_DISABLED",
+  "downloadedZipCRC": "ALL_THREE_PASS",
+  "clientDeployment": false,
+  "deviceAcceptance": "NOT_RUN",
+  "scope": "Complete anonymous public asset downloads match the prepared final public clone; source/core/package/CI/device scope remains separate",
+  "gitTag": {
+    "tag": "v14.3.0-rc.3",
+    "tagObject": "cf9b968cea37cf2b739d0927692704ddbb53b61f",
+    "targetCommit": "1923d715779ec72fd73ca34c26fd37c05bf58e92",
+    "priorRc2TagObject": "d9af927ee8c888128e9e5e2e587114ee6eb2d7bf",
+    "verification": "REMOTE_GITHUB_GIT_OBJECTS_MATCH_LOCAL_ANNOTATED_TAG"
+  },
+  "ci": {
+    "runId": 38877191183,
+    "url": "https://github.com/ffdm12138/RouteWeaver/actions/runs/38877191183",
+    "headSha": "1923d715779ec72fd73ca34c26fd37c05bf58e92",
+    "conclusion": "success",
+    "jobs": [
+      {
+        "name": "verify (ubuntu-latest)",
+        "conclusion": "success",
+        "durationSeconds": 326,
+        "url": "https://github.com/ffdm12138/RouteWeaver/actions/runs/38877191183/job/116894961296"
+      },
+      {
+        "name": "verify (windows-latest)",
+        "conclusion": "success",
+        "durationSeconds": 350,
+        "url": "https://github.com/ffdm12138/RouteWeaver/actions/runs/38877191183/job/116894961725"
+      }
+    ],
+    "scope": "Public Windows/Ubuntu source bindings, package generation/extracted static tests and content scanning; no fresh native-core or device TUN replay in CI"
+  },
+  "checks": {
+    "networkCompatibilityStatic": 46,
+    "networkCompatibilityIsolatedCore": 101,
+    "fullStandardBusinessMacAndBoundaryRegression": "PASS_BOUND_TO_UNCHANGED_STANDARD_ENTRY_BYTES",
+    "finalSourcePackaging": "LOCAL_PERSONAL_AND_FRESH_PUBLIC_CLONE_PASS",
+    "publicIndexAudit": "PASS",
+    "runtimeClientInstalled": "UNCHANGED_RC2",
+    "currentDeviceMedia": "RC3_RETEST_PENDING",
+    "priorWindowsMedia": "RC2_USER_REPORTED_FAILURE"
+  },
+  "followUp": "This receipt and publication-only prose are recorded after the immutable release source commit; the release tag and uploaded asset bytes are not rewritten."
+}

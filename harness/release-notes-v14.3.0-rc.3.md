@@ -13,3 +13,5 @@
 **已知限制**：rc.2 Windows 媒体案例仍记录为失败；rc.3 尚待应用复测。没有域名映射的纯 IPv6 私有协议无法透明转换，代理节点超时仍需手动处理。过滤 SVCB/HTTPS 会影响相应服务发现/ECH。没有自动网卡探测。各平台设备接管、公网 IPv6、网络切换和 Shadowrocket 原生均待验收，因此继续 **Pre-release**。
 
 对应单文件、全平台/Mac 部署包和审核包都不含节点或订阅。全部附件校验和见 `SHA256SUMS.txt`，范围见[验证报告](https://github.com/ffdm12138/RouteWeaver/blob/v14.3.0-rc.3/docs/reports/v14.3/IPv6%E5%9B%9E%E9%80%80%E4%B8%8E%E5%85%BC%E5%AE%B9%E5%85%A5%E5%8F%A3.md)。
+
+发布校验完成：最终源码 `1923d715779ec72fd73ca34c26fd37c05bf58e92` 的 [Windows/Ubuntu CI](https://github.com/ffdm12138/RouteWeaver/actions/runs/38877191183) 均成功，20 个附件已全部公开下载并逐一匹配 SHA256。完整[发布回执](https://github.com/ffdm12138/RouteWeaver/blob/main/harness/releases/v14.3.0-rc.3.json)在发布后文档补记保存；设备与媒体复测仍待完成。
