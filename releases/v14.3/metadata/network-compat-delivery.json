@@ -1,5 +1,6 @@
 {
   "revision": "ipv6-fallback-r2",
+  "repairRevision": "http-recovery-r1",
   "date": "2026-10-16",
   "status": "NETWORK_COMPAT_SOURCE_LOCAL_CORE_PASS_DEVICE_PENDING",
   "defaultMode": "dual-stack",
@@ -9,43 +10,43 @@
   "report": "docs/reports/v14.3/IPv6回退与兼容入口.md",
   "sourceManifest": {
     "file": "metadata/network-compat.json",
-    "sha256": "9973da8887e66b7a5f2c8f37984fb1f202794821a55b8aa74ff31dab40ea302b"
+    "sha256": "40d5d56a78afb4257995f39dc74a7060b415117b1f82f96cd7f4ab9f56cb52b3"
   },
   "entries": [
     {
       "platform": "windows",
       "source": "src/windows/v14.3.js",
       "file": "src/windows/v14.3-ipv4-local.js",
-      "sha256": "14bc49fae89b1a12c25d67d5c2e3061657d2302affa12dcb41a7479c7ebe8e10",
-      "bytes": 121913
+      "sha256": "916473da5e39ddfcc4b1bedc307ca1ce883ff9019afab6cb2b333beaeba2869b",
+      "bytes": 122078
     },
     {
       "platform": "android",
       "source": "src/android/v14.3-android.js",
       "file": "src/android/v14.3-android-ipv4-local.js",
-      "sha256": "bb5d3d7d38369db5bfbc0409c52b3a45d2a312f2d4d677a28095cd5cf251e069",
-      "bytes": 121799
+      "sha256": "f765c51aedc8a234b2c1cc5f7361767c31e5fdeae7569e6f9877aaad118f963b",
+      "bytes": 121964
     },
     {
       "platform": "clashmi",
       "source": "src/ios/v14.3-clashmi-domestic-protocol-r1.js",
       "file": "src/ios/v14.3-clashmi-ipv4-local.js",
-      "sha256": "221f6fad2c3f882845fff16f209dcb83c5cc735c0737b91a8c817babcc9ae6a4",
-      "bytes": 124693
+      "sha256": "93905066b6ba6542eca6e379d4d8ffeab25cf05ccf16f4673e98997f1dc58bb1",
+      "bytes": 124858
     },
     {
       "platform": "macosFlClash",
       "source": "src/macos/v14.3-macos-flclash.js",
       "file": "src/macos/v14.3-macos-flclash-ipv4-local.js",
-      "sha256": "560d4250a5ac6449cc27ab672e27a8c2e639a656e5106a5e9e928ba27f0947e7",
-      "bytes": 123708
+      "sha256": "b6abb353ffbfe99cd430217f490643b0a3c60e7258bda37b363300324574f3e0",
+      "bytes": 123873
     },
     {
       "platform": "macosClashMi",
       "source": "src/macos/v14.3-macos-clashmi.js",
       "file": "src/macos/v14.3-macos-clashmi-ipv4-local.js",
-      "sha256": "1add047e68fef0c33153865f8836de1d31c937fe2163882c11f8d88e405f414f",
-      "bytes": 124695
+      "sha256": "bcedc0bc6a630b1ba117c0934e39d5b4bdcca7d3a5bd3d47dd042ed9c2d82cc4",
+      "bytes": 124860
     },
     {
       "platform": "shadowrocket",
@@ -58,25 +59,25 @@
   "testEvidence": {
     "network-compat-static": {
       "file": "validation/network-compat-static.json",
-      "sha256": "0f9a3ba7d16b3725227ae476f7f23ba420da598fe51697bc99747c5fbf74b279",
+      "sha256": "4557d86555eeca73d9848adce80b8f71982e61d813f5636d1acc7725b9ccb82d",
       "status": "NETWORK_COMPAT_STATIC_PASS"
     },
     "network-compat-core": {
       "file": "validation/network-compat-core.json",
-      "sha256": "fea95bf792ef7a8d038dcc08fef8eab4590a77660020d9b68911630ee7551825",
+      "sha256": "e7b74f366d541bdb7bad630a7e1db01833c2ee65eb16933fc3dde5a7f1c6beb7",
       "status": "NETWORK_COMPAT_LOCAL_CORE_PASS_DEVICE_PENDING"
     }
   },
   "nodeDefault": "Mihomo domain nodes without an explicit family: ipv4-prefer; literal and explicit values preserved",
-  "localFallback": "Empty client AAAA and business upstream AAAA/SVCB/HTTPS filtering; TLS/QUIC hostname recovery; no Fake-IP IPv6 pool; core IPv6 and both TUN routes retained; original egress policy preserved",
-  "shadowrocket": "Native IPv4 preference only; no claim of equivalent Mihomo upstream filters, TLS recovery or node ip-version defaults; no added IPv6 reject rules",
-  "scope": "Source contracts and isolated Windows Mihomo with original routing rules; owned DNS and TCP/UDP, TLS/QUIC recovery, IPv4 proxy to IPv6 target; native TUN, app retry, public IPv6 and Shadowrocket NOT_RUN",
-  "priorUserCase": "rc.2 IPv4-local active but Windows media still failed; global literal IPv6 rejection was insufficient",
-  "currentUserCase": "RC3_MEDIA_RETEST_PENDING",
+  "localFallback": "Empty client AAAA and business upstream AAAA/SVCB/HTTPS filtering; HTTP/TLS/QUIC hostname recovery; no Fake-IP IPv6 pool; core IPv6 and both TUN routes retained; original egress policy preserved",
+  "shadowrocket": "Native IPv4 preference only; no claim of equivalent Mihomo upstream filters, HTTP/TLS/QUIC recovery or node ip-version defaults; no added IPv6 reject rules",
+  "scope": "Source contracts and isolated Windows Mihomo with original routing rules; owned DNS and TCP/UDP, HTTP/TLS/QUIC recovery, IPv4 proxy to IPv6 target; native TUN, app retry, public IPv6 and Shadowrocket NOT_RUN",
+  "priorUserCase": "rc.2 and rc.3 Windows media failed with compatibility active. rc.3 retained literal HTTP IPv6 destinations; private/unsniffable IPv6 remains unresolved",
+  "currentUserCase": "RC4_HTTP_CORE_PASS_MEDIA_RETEST_PENDING_OPAQUE_IPV6_UNRESOLVED",
   "clientDeployment": false,
   "deviceAcceptance": "NOT_RUN",
   "recordingModule": {
     "file": "tools/network_release.py",
-    "sha256": "54b43950c008e4aece1cc00a656038464d4047a78894ec3eb391645672e1e130"
+    "sha256": "8759efc25a3bc149b1a6572521314d3534183230ba8bac57d0cdffeda1a5d5b3"
   }
 }

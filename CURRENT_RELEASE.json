@@ -65,7 +65,7 @@
   "macosReport": "docs/reports/v14.3/MacBook适配.md",
   "macos": "CONFIG_SOURCE_WINDOWS_LOCAL_CORE_PASS_MAC_DEVICE_NOT_RUN",
   "distribution": "public",
-  "releaseTag": "v14.3.0-rc.3",
+  "releaseTag": "v14.3.0-rc.4",
   "personalRulesIncluded": false,
   "networkCompatibilityRevision": "ipv6-fallback-r2",
   "networkCompatibility": "releases/v14.3/metadata/network-compat-delivery.json",
@@ -80,5 +80,6 @@
     "macosClashMi": "releases/v14.3/src/macos/v14.3-macos-clashmi-ipv4-local.js",
     "shadowrocket": "releases/v14.3/src/ios/v14.3-shadowrocket-ipv4-local.conf"
   },
-  "networkCompatibilityUserCase": "RC2_FAILED_RC3_MEDIA_RETEST_PENDING"
+  "networkCompatibilityUserCase": "RC2_RC3_FAILED_RC4_HTTP_CORE_PASS_MEDIA_PENDING_OPAQUE_IPV6_UNRESOLVED",
+  "networkCompatibilityRepair": "http-recovery-r1"
 }

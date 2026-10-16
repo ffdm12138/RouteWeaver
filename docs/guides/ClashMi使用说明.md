@@ -1,6 +1,6 @@
 # V14.3 iOS Clash Mi 使用说明
 
-当前 `ipv6-fallback-r2` 同时提供标准双栈与独立 [IPv4 兼容模式](IPv4兼容模式.md)。本页原有 `dns.ipv6: true` 步骤适用于标准入口；兼容入口应为核心 IPv6 开启、`dns.ipv6: false`、无 IPv6 Fake-IP 池，并保持完整 TUN/VPN 接管。不要把两份覆写叠加使用。rc.3 另过滤内部业务解析的 AAAA/SVCB/HTTPS 并启用 TLS/QUIC 域名重解析，撤掉 rc.2 的宽泛 IPv6 拒绝；不等同微信媒体已恢复。Shadowrocket 只有 IPv4 偏好，详见模式限制。
+当前 `ipv6-fallback-r2` 同时提供标准双栈与独立 [IPv4 兼容模式](IPv4兼容模式.md)。本页原有 `dns.ipv6: true` 步骤适用于标准入口；兼容入口应为核心 IPv6 开启、`dns.ipv6: false`、无 IPv6 Fake-IP 池，并保持完整 TUN/VPN 接管。不要把两份覆写叠加使用。rc.4 继续过滤内部业务解析的 AAAA/SVCB/HTTPS 并启用 HTTP/TLS/QUIC 域名重解析，撤掉 rc.2 的宽泛 IPv6 拒绝；不等同微信媒体已恢复。Shadowrocket 只有 IPv4 偏好，详见模式限制。
 
 当前修订 **domestic-protocol-r1**。使用 [v14.3-clashmi-domestic-protocol-r1.js](../../releases/v14.3/src/ios/v14.3-clashmi-domestic-protocol-r1.js)，它与[标准入口](../../releases/v14.3/src/ios/v14.3-clashmi.js)字节相同。文件 118,837 字节，约 119 KB；关键母域、登录/API/语音及安全边界内嵌，完整规则由固定远程来源加载。脚本返回配置对象，不返回 JSON 字符串。
 
@@ -74,3 +74,5 @@ DNS 检测站可能显示阿里或 DNSPod 的解析器及所在地，因为脚�
 本机实验关闭 TUN，只使用合成回环节点；三个 JS 的标准路由、DNS、选择器，以及规则表全空/首次下载被拒绝实验通过。它们不能替代手机 JS 桥、最终合并、NetworkExtension、公网 IPv6 或长期内存验收。本轮 IPv6 回环预检受环境拒绝，AAAA 查询通过也不代表 IPv6 传输通过。详细结果见[本轮报告](../reports/v14.3/国内协议跟组与小火箭精简.md)。
 
 [通用使用说明](使用说明.md)中的出口与 DIRECT 合同仍适用。本次未导入真实订阅或替换运行客户端。
+
+2026-10-16 后续状态：rc.2 与 rc.3 的 Windows 媒体实测均失败；rc.4 补齐可读 HTTP Host 的目标重解析，仍不保证无域名 IPv6 DIRECT 可用。核对兼容标记 `networkCompatibilityRepair=http-recovery-r1` 和最终 HTTP 目标覆盖；[本轮报告](../reports/v14.3/HTTP域名重解析修复.md)区分核心修复与媒体未验收。

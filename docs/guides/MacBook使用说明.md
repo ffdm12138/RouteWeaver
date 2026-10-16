@@ -1,6 +1,6 @@
 # V14.3 MacBook 使用说明
 
-当前 `ipv6-fallback-r2` 同时提供标准双栈与独立 [IPv4 兼容模式](IPv4兼容模式.md)。本页原有 `dns.ipv6: true` 步骤适用于标准入口；兼容入口应为核心 IPv6 开启、`dns.ipv6: false`、无 IPv6 Fake-IP 池，并保持完整 TUN/VPN 接管。不要把两份覆写叠加使用。rc.3 另过滤内部业务解析的 AAAA/SVCB/HTTPS 并启用 TLS/QUIC 域名重解析，撤掉 rc.2 的宽泛 IPv6 拒绝；不等同微信媒体已恢复。Shadowrocket 只有 IPv4 偏好，详见模式限制。
+当前 `ipv6-fallback-r2` 同时提供标准双栈与独立 [IPv4 兼容模式](IPv4兼容模式.md)。本页原有 `dns.ipv6: true` 步骤适用于标准入口；兼容入口应为核心 IPv6 开启、`dns.ipv6: false`、无 IPv6 Fake-IP 池，并保持完整 TUN/VPN 接管。不要把两份覆写叠加使用。rc.4 继续过滤内部业务解析的 AAAA/SVCB/HTTPS 并启用 HTTP/TLS/QUIC 域名重解析，撤掉 rc.2 的宽泛 IPv6 拒绝；不等同微信媒体已恢复。Shadowrocket 只有 IPv4 偏好，详见模式限制。
 
 Mac 适配修订 **macos-r1**，业务合同仍为 **domestic-protocol-r1**。Apple Silicon 和 Intel 使用同一份 JS，区别由客户端及其核心二进制处理。
 
@@ -37,3 +37,5 @@ Mac Clash Mi 沿用已核对的 Apple NetworkExtension 路径：gVisor、MTU 128
 业务组可选两个公共组、单节点或主动 DIRECT；「国内网站」默认 DIRECT，已审核国内域名普通 TCP/UDP/DNS 都跟随此组。未知公网 IP UDP、通用 STUN 继续代理或拒绝。代理节点失败或不支持 UDP 不会自动直连。固定规则的缓存和 24 小时刷新由核心负责；首次无缓存且下载失败时只保证关键内嵌名单。
 
 Mac 源码合同、完整有限域名对照、幂等与隔离 Windows Mihomo 核心回放分开记录。Mac 上的 JS 引擎、最终合并、TUN/NetworkExtension、公网 IPv6 和网络切换尚未实机验收。详细证据见 [MacBook 适配报告](../reports/v14.3/MacBook适配.md)。
+
+2026-10-16 后续状态：rc.2 与 rc.3 的 Windows 媒体实测均失败；rc.4 补齐可读 HTTP Host 的目标重解析，仍不保证无域名 IPv6 DIRECT 可用。核对兼容标记 `networkCompatibilityRepair=http-recovery-r1` 和最终 HTTP 目标覆盖；[本轮报告](../reports/v14.3/HTTP域名重解析修复.md)区分核心修复与媒体未验收。

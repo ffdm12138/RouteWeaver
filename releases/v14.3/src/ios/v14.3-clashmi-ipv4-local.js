@@ -2386,11 +2386,12 @@ function main(input) {
     config.dns["nameserver-policy"][key] = v14IPv4LocalResolver(config.dns["nameserver-policy"][key]);
   config.tun["inet6-address"] = ["fdfe:dcba:9876::1/126"];
   config.tun["route-address"] = ["0.0.0.0/0", "::/0"];
-  // With a readable TLS/QUIC hostname, replace a cached literal destination
+  // With a readable HTTP/TLS/QUIC hostname, replace a cached literal destination
   // with that hostname. DIRECT then resolves an A record; a selected proxy
-  // retains remote DNS/IPv6 ability. Do not rewrite HTTP Host destinations.
+  // retains remote DNS/IPv6 ability. This includes HTTP Host: identifying it
+  // for routing alone leaves a stale IPv6 destination unusable on IPv4-only LANs.
   // Without a hostname a literal IPv6 cannot be converted to an IPv4 target.
-  for (const protocol of ["TLS", "QUIC"])
+  for (const protocol of ["HTTP", "TLS", "QUIC"])
     config.sniffer.sniff[protocol]["override-destination"] = true;
   // Preserve the destination identity needed by leading explicit IP rules.
   // A hostname rewrite happens before rule evaluation in Mihomo. Without
@@ -2408,10 +2409,11 @@ function main(input) {
   config.sniffer["skip-domain"] = [...new Set(v14Strings(config.sniffer["skip-domain"], "sniffer.skip-domain").concat(V14.privateNames.map(name => "+." + name), ["rule-set:v14-domains-private"]))];
   const marker = config["x-v14-generated"];
   marker.networkMode = "ipv4-local";
-  marker.localIPv6Fallback = "IPv4-business-resolution-and-TLS-QUIC-hostname-recovery; original-egress-policy-preserved";
+  marker.networkCompatibilityRepair = "http-recovery-r1";
+  marker.localIPv6Fallback = "IPv4-business-resolution-and-HTTP-TLS-QUIC-hostname-recovery; original-egress-policy-preserved";
   marker.validationWarnings = marker.validationWarnings.concat([
     "IPv4-local 是手动网络模式，不探测物理出口。保持应用核心 IPv6、完整 TUN 接管和严格路由；业务 DNS 过滤 AAAA/SVCB/HTTPS，节点引导 DNS 保留双栈。",
-    "TLS/QUIC 可读域名允许重新解析 IPv4；无域名的 IPv6 字面量继续按原组处理，DIRECT 仍需本地 IPv6，代理目标仍需节点 IPv6。应用私有 DNS/缓存和显式 hosts 不保证回退。"
+    "HTTP/TLS/QUIC 可读域名允许重新解析 IPv4；无域名的 IPv6 字面量继续按原组处理，DIRECT 仍需本地 IPv6，代理目标仍需节点 IPv6。应用私有 DNS/缓存和显式 hosts 不保证回退。"
   ]);
   return config;
 }

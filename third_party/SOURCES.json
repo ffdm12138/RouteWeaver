@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "releaseTag": "v14.3.0-rc.3",
-  "correspondingSource": "https://github.com/ffdm12138/RouteWeaver/tree/v14.3.0-rc.3",
+  "releaseTag": "v14.3.0-rc.4",
+  "correspondingSource": "https://github.com/ffdm12138/RouteWeaver/tree/v14.3.0-rc.4",
   "rootLicenseScope": "Original RouteWeaver contributions only; upstream data and excerpts retain their own terms.",
   "licenses": [
     {

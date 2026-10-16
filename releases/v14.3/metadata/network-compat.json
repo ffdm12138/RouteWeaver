@@ -1,5 +1,6 @@
 {
   "revision": "ipv6-fallback-r2",
+  "repairRevision": "http-recovery-r1",
   "date": "2026-10-16",
   "status": "SOURCE_MODELS_NATIVE_DEVICE_PENDING",
   "defaultMode": "dual-stack",
@@ -8,11 +9,11 @@
   "inputs": [
     {
       "file": "tools/build-network-compat.cjs",
-      "sha256": "5ebba2e749c74628f9049933070ab8f5333200d0d6a22c50c6d4d2383cb367f8"
+      "sha256": "dfbc9b0a02bb34f50776eb27775e139a7aab795229ae6947b16475c26c3fa4fd"
     },
     {
       "file": "tools/ipv4-local-adapter.js",
-      "sha256": "0dbcdd94e48af5b9b6dbd32207eb81fc98e77943e6788f9aeae110ad592e86d9"
+      "sha256": "412f0a15d01afbdbb72a9b6d81f56bb9be36c6b407804c17c0cc18349f0d70ab"
     },
     {
       "file": "src/windows/v14.3.js",
@@ -44,36 +45,36 @@
       "platform": "windows",
       "source": "src/windows/v14.3.js",
       "file": "src/windows/v14.3-ipv4-local.js",
-      "sha256": "14bc49fae89b1a12c25d67d5c2e3061657d2302affa12dcb41a7479c7ebe8e10",
-      "bytes": 121913
+      "sha256": "916473da5e39ddfcc4b1bedc307ca1ce883ff9019afab6cb2b333beaeba2869b",
+      "bytes": 122078
     },
     {
       "platform": "android",
       "source": "src/android/v14.3-android.js",
       "file": "src/android/v14.3-android-ipv4-local.js",
-      "sha256": "bb5d3d7d38369db5bfbc0409c52b3a45d2a312f2d4d677a28095cd5cf251e069",
-      "bytes": 121799
+      "sha256": "f765c51aedc8a234b2c1cc5f7361767c31e5fdeae7569e6f9877aaad118f963b",
+      "bytes": 121964
     },
     {
       "platform": "clashmi",
       "source": "src/ios/v14.3-clashmi-domestic-protocol-r1.js",
       "file": "src/ios/v14.3-clashmi-ipv4-local.js",
-      "sha256": "221f6fad2c3f882845fff16f209dcb83c5cc735c0737b91a8c817babcc9ae6a4",
-      "bytes": 124693
+      "sha256": "93905066b6ba6542eca6e379d4d8ffeab25cf05ccf16f4673e98997f1dc58bb1",
+      "bytes": 124858
     },
     {
       "platform": "macosFlClash",
       "source": "src/macos/v14.3-macos-flclash.js",
       "file": "src/macos/v14.3-macos-flclash-ipv4-local.js",
-      "sha256": "560d4250a5ac6449cc27ab672e27a8c2e639a656e5106a5e9e928ba27f0947e7",
-      "bytes": 123708
+      "sha256": "b6abb353ffbfe99cd430217f490643b0a3c60e7258bda37b363300324574f3e0",
+      "bytes": 123873
     },
     {
       "platform": "macosClashMi",
       "source": "src/macos/v14.3-macos-clashmi.js",
       "file": "src/macos/v14.3-macos-clashmi-ipv4-local.js",
-      "sha256": "1add047e68fef0c33153865f8836de1d31c937fe2163882c11f8d88e405f414f",
-      "bytes": 124695
+      "sha256": "bcedc0bc6a630b1ba117c0934e39d5b4bdcca7d3a5bd3d47dd042ed9c2d82cc4",
+      "bytes": 124860
     },
     {
       "platform": "shadowrocket",
@@ -83,6 +84,6 @@
       "bytes": 1746759
     }
   ],
-  "shadowrocketLimit": "Native IPv4 preference only; no claim of equivalent Mihomo upstream filters, TLS recovery or node ip-version defaults; no added IPv6 reject rules",
+  "shadowrocketLimit": "Native IPv4 preference only; no claim of equivalent Mihomo upstream filters, HTTP/TLS/QUIC recovery or node ip-version defaults; no added IPv6 reject rules",
   "deviceAcceptance": "NOT_RUN"
 }

@@ -1,6 +1,6 @@
 {
   "status": "NETWORK_COMPAT_LOCAL_CORE_PASS_DEVICE_PENDING",
-  "scope": "Actual generated node/provider defaults and five compatibility configs over owned TCP/UDP/DNS loopback. Business IPv4 resolution, DNS hint filtering, TLS/QUIC hostname recovery and original proxy IPv6 semantics. No native TUN, app retry, Shadowrocket or public IPv6 acceptance; no running client changes",
+  "scope": "Actual generated node/provider defaults and five compatibility configs over owned TCP/UDP/DNS loopback. Business IPv4 resolution, DNS hint filtering, HTTP/TLS/QUIC hostname recovery and original proxy IPv6 semantics. No native TUN, app retry, Shadowrocket or public IPv6 acceptance; no running client changes",
   "coreVersion": "Mihomo Meta v1.19.31 windows amd64 with go1.26.8 Mon Sep 14 13:20:49 UTC 2026\nUse tags: with_gvisor",
   "coreSHA256": "1fa8055e03596fc35167f70e9ecd1890517d38d960a39177445746a1b0defc2b",
   "cases": [
@@ -250,6 +250,20 @@
       "testPortAddedToSourceTLSAllowlist": true
     },
     {
+      "name": "windows:literal-IPv6-HTTP-recovers-domain-and-A",
+      "result": "PASS",
+      "completeOwnedHTTPResponse": true,
+      "testPortAddedToSourceHTTPAllowlist": true
+    },
+    {
+      "name": "windows:HTTP-LAN-name-keeps-original-destination",
+      "result": "PASS"
+    },
+    {
+      "name": "windows:HTTP-company-name-retains-proxy-egress",
+      "result": "PASS"
+    },
+    {
       "name": "windows:literal-IPv6-QUIC-recovers-domain-and-A",
       "result": "PASS",
       "testPortAddedToSourceQUICAllowlist": true
@@ -274,6 +288,15 @@
       "controlledRuleInjectedBeforeCompatibilityAdapter": "IP-CIDR,127.0.0.1/32,DIRECT,no-resolve"
     },
     {
+      "name": "windows:leading-explicit-IP-wins-over-HTTP-company-name",
+      "result": "PASS"
+    },
+    {
+      "name": "control:HTTP-host-routing-alone-does-not-recover-IPv6",
+      "result": "PASS",
+      "onlyHTTPDestinationOverrideDisabled": true
+    },
+    {
       "name": "control:dns-ipv6-false-alone-still-returns-HTTPS-hint",
       "result": "PASS"
     },
@@ -287,6 +310,10 @@
     },
     {
       "name": "recovery:explicit-skip-domain-preserved",
+      "result": "PASS"
+    },
+    {
+      "name": "recovery:HTTP-explicit-skip-domain-preserved",
       "result": "PASS"
     },
     {
@@ -327,6 +354,20 @@
       "testPortAddedToSourceTLSAllowlist": true
     },
     {
+      "name": "android:literal-IPv6-HTTP-recovers-domain-and-A",
+      "result": "PASS",
+      "completeOwnedHTTPResponse": true,
+      "testPortAddedToSourceHTTPAllowlist": true
+    },
+    {
+      "name": "android:HTTP-LAN-name-keeps-original-destination",
+      "result": "PASS"
+    },
+    {
+      "name": "android:HTTP-company-name-retains-proxy-egress",
+      "result": "PASS"
+    },
+    {
       "name": "android:literal-IPv6-QUIC-recovers-domain-and-A",
       "result": "PASS",
       "testPortAddedToSourceQUICAllowlist": true
@@ -349,6 +390,10 @@
       "name": "android:leading-explicit-IP-wins-over-TLS-company-name",
       "result": "PASS",
       "controlledRuleInjectedBeforeCompatibilityAdapter": "IP-CIDR,127.0.0.1/32,DIRECT,no-resolve"
+    },
+    {
+      "name": "android:leading-explicit-IP-wins-over-HTTP-company-name",
+      "result": "PASS"
     },
     {
       "name": "clashmi:DNS-type-28",
@@ -388,6 +433,20 @@
       "testPortAddedToSourceTLSAllowlist": true
     },
     {
+      "name": "clashmi:literal-IPv6-HTTP-recovers-domain-and-A",
+      "result": "PASS",
+      "completeOwnedHTTPResponse": true,
+      "testPortAddedToSourceHTTPAllowlist": true
+    },
+    {
+      "name": "clashmi:HTTP-LAN-name-keeps-original-destination",
+      "result": "PASS"
+    },
+    {
+      "name": "clashmi:HTTP-company-name-retains-proxy-egress",
+      "result": "PASS"
+    },
+    {
       "name": "clashmi:literal-IPv6-QUIC-recovers-domain-and-A",
       "result": "PASS",
       "testPortAddedToSourceQUICAllowlist": true
@@ -410,6 +469,10 @@
       "name": "clashmi:leading-explicit-IP-wins-over-TLS-company-name",
       "result": "PASS",
       "controlledRuleInjectedBeforeCompatibilityAdapter": "IP-CIDR,127.0.0.1/32,DIRECT,no-resolve"
+    },
+    {
+      "name": "clashmi:leading-explicit-IP-wins-over-HTTP-company-name",
+      "result": "PASS"
     },
     {
       "name": "macosFlClash:DNS-type-28",
@@ -449,6 +512,20 @@
       "testPortAddedToSourceTLSAllowlist": true
     },
     {
+      "name": "macosFlClash:literal-IPv6-HTTP-recovers-domain-and-A",
+      "result": "PASS",
+      "completeOwnedHTTPResponse": true,
+      "testPortAddedToSourceHTTPAllowlist": true
+    },
+    {
+      "name": "macosFlClash:HTTP-LAN-name-keeps-original-destination",
+      "result": "PASS"
+    },
+    {
+      "name": "macosFlClash:HTTP-company-name-retains-proxy-egress",
+      "result": "PASS"
+    },
+    {
       "name": "macosFlClash:literal-IPv6-QUIC-recovers-domain-and-A",
       "result": "PASS",
       "testPortAddedToSourceQUICAllowlist": true
@@ -471,6 +548,10 @@
       "name": "macosFlClash:leading-explicit-IP-wins-over-TLS-company-name",
       "result": "PASS",
       "controlledRuleInjectedBeforeCompatibilityAdapter": "IP-CIDR,127.0.0.1/32,DIRECT,no-resolve"
+    },
+    {
+      "name": "macosFlClash:leading-explicit-IP-wins-over-HTTP-company-name",
+      "result": "PASS"
     },
     {
       "name": "macosClashMi:DNS-type-28",
@@ -510,6 +591,20 @@
       "testPortAddedToSourceTLSAllowlist": true
     },
     {
+      "name": "macosClashMi:literal-IPv6-HTTP-recovers-domain-and-A",
+      "result": "PASS",
+      "completeOwnedHTTPResponse": true,
+      "testPortAddedToSourceHTTPAllowlist": true
+    },
+    {
+      "name": "macosClashMi:HTTP-LAN-name-keeps-original-destination",
+      "result": "PASS"
+    },
+    {
+      "name": "macosClashMi:HTTP-company-name-retains-proxy-egress",
+      "result": "PASS"
+    },
+    {
       "name": "macosClashMi:literal-IPv6-QUIC-recovers-domain-and-A",
       "result": "PASS",
       "testPortAddedToSourceQUICAllowlist": true
@@ -532,6 +627,10 @@
       "name": "macosClashMi:leading-explicit-IP-wins-over-TLS-company-name",
       "result": "PASS",
       "controlledRuleInjectedBeforeCompatibilityAdapter": "IP-CIDR,127.0.0.1/32,DIRECT,no-resolve"
+    },
+    {
+      "name": "macosClashMi:leading-explicit-IP-wins-over-HTTP-company-name",
+      "result": "PASS"
     }
   ],
   "providerDefaultExpression": "(select(.[\"ip-version\"] == null and ((.server // \"\") | contains(\":\")) == false and ((.server // \"\") | test(\"^[0-9.]+$\")) == false) | .[\"ip-version\"]) = \"ipv4-prefer\"",
@@ -545,22 +644,22 @@
     "snifferPorts": "owned ephemeral test ports appended to production allowlists",
     "explicitIPControl": "127.0.0.1/32 DIRECT injected after base generation and before compatibility adapter for a controlled collision; not a new production exception",
     "controls": "same candidate configuration with only DNS filter parameters removed; not a prior-device replay",
-    "dnsQueries": 34,
-    "proxyRequests": 12,
+    "dnsQueries": 39,
+    "proxyRequests": 18,
     "proxyDatagrams": 5
   },
-  "harnessSHA256": "2ce7387e4b21647d347193ac17caa95f1903c593c1b42259108647814313ccb3",
+  "harnessSHA256": "4291810c084039ee5d1b613c210a1ce2c689bb69ed2c9c1505e372a689d4c56d",
   "revision": "ipv6-fallback-r2",
   "deviceAcceptance": "NOT_RUN",
   "clientDeployment": false,
   "sourceFiles": [
     {
       "file": "tools/build-network-compat.cjs",
-      "sha256": "5ebba2e749c74628f9049933070ab8f5333200d0d6a22c50c6d4d2383cb367f8"
+      "sha256": "dfbc9b0a02bb34f50776eb27775e139a7aab795229ae6947b16475c26c3fa4fd"
     },
     {
       "file": "tools/ipv4-local-adapter.js",
-      "sha256": "0dbcdd94e48af5b9b6dbd32207eb81fc98e77943e6788f9aeae110ad592e86d9"
+      "sha256": "412f0a15d01afbdbb72a9b6d81f56bb9be36c6b407804c17c0cc18349f0d70ab"
     },
     {
       "file": "src/windows/v14.3.js",
@@ -588,23 +687,23 @@
     },
     {
       "file": "src/windows/v14.3-ipv4-local.js",
-      "sha256": "14bc49fae89b1a12c25d67d5c2e3061657d2302affa12dcb41a7479c7ebe8e10"
+      "sha256": "916473da5e39ddfcc4b1bedc307ca1ce883ff9019afab6cb2b333beaeba2869b"
     },
     {
       "file": "src/android/v14.3-android-ipv4-local.js",
-      "sha256": "bb5d3d7d38369db5bfbc0409c52b3a45d2a312f2d4d677a28095cd5cf251e069"
+      "sha256": "f765c51aedc8a234b2c1cc5f7361767c31e5fdeae7569e6f9877aaad118f963b"
     },
     {
       "file": "src/ios/v14.3-clashmi-ipv4-local.js",
-      "sha256": "221f6fad2c3f882845fff16f209dcb83c5cc735c0737b91a8c817babcc9ae6a4"
+      "sha256": "93905066b6ba6542eca6e379d4d8ffeab25cf05ccf16f4673e98997f1dc58bb1"
     },
     {
       "file": "src/macos/v14.3-macos-flclash-ipv4-local.js",
-      "sha256": "560d4250a5ac6449cc27ab672e27a8c2e639a656e5106a5e9e928ba27f0947e7"
+      "sha256": "b6abb353ffbfe99cd430217f490643b0a3c60e7258bda37b363300324574f3e0"
     },
     {
       "file": "src/macos/v14.3-macos-clashmi-ipv4-local.js",
-      "sha256": "1add047e68fef0c33153865f8836de1d31c937fe2163882c11f8d88e405f414f"
+      "sha256": "bcedc0bc6a630b1ba117c0934e39d5b4bdcca7d3a5bd3d47dd042ed9c2d82cc4"
     },
     {
       "file": "src/ios/v14.3-shadowrocket-ipv4-local.conf",
@@ -620,11 +719,11 @@
     },
     {
       "file": "tests/native-network-compat.cjs",
-      "sha256": "2ce7387e4b21647d347193ac17caa95f1903c593c1b42259108647814313ccb3"
+      "sha256": "4291810c084039ee5d1b613c210a1ce2c689bb69ed2c9c1505e372a689d4c56d"
     },
     {
       "file": "tests/native-ipv4-recovery.cjs",
-      "sha256": "880672c46476e933ee60add5aefc87dfe29cfca60e3bd2c37e0ffab94d034d57"
+      "sha256": "1af8d0c7453f45130304b4fe2da7f331ce01dea9e8c13cf97c4bbe335d5104c6"
     },
     {
       "file": "tests/fixture.cjs",

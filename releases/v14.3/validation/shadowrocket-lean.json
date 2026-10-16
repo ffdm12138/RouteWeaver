@@ -59,7 +59,7 @@
     },
     {
       "file": "metadata/shadowrocket-lean.json",
-      "sha256": "874665e2c3bc5c5e481e966037664674451ffc0a23bd2f28420a6a34cd28be64"
+      "sha256": "b793a41281cf8f04801a6e42ef6a11bd21e2cdc4a14b0f845cdab56a9f783a50"
     },
     {
       "file": "src/ios/v14.3-shadowrocket.conf",

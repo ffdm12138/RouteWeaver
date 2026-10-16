@@ -13,7 +13,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--tag', default='v14.3.0-rc.3')
+    parser.add_argument('--tag', default='v14.3.0-rc.4')
     args = parser.parse_args()
     if not re.fullmatch(r'v14\.3\.\d+(?:-rc\.\d+)?', args.tag):
         parser.error('Expected a v14.3.x or v14.3.x-rc.n tag.')
