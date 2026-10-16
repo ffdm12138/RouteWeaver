@@ -1494,7 +1494,7 @@ function v14NetworkDefaults(config) {
     else delete override["override-expr"];
   }
   const marker = config["x-v14-generated"];
-  marker.networkCompatibilityRevision = "ipv6-fallback-r1";
+  marker.networkCompatibilityRevision = "ipv6-fallback-r2";
   marker.networkMode = "dual-stack";
   marker.nodeAddressFamilyDefault = "ipv4-prefer-unless-explicit-domain-nodes-only";
   return config;
@@ -2295,6 +2295,18 @@ function v14NetworkModeBase(input) {
 
 // Explicit IPv4-local ingress mode. No system reachability probe is performed.
 // Keep core IPv6 and TUN capture so IPv6 cannot escape when networks change.
+// dns.ipv6 only filters client AAAA; apply the same family restriction to
+// business/direct upstreams used internally by the core. Node bootstrap and
+// LAN/system resolvers remain independent. Keep every existing #policy.
+function v14IPv4LocalResolver(value) {
+  if (Array.isArray(value)) return value.map(v14IPv4LocalResolver);
+  if (typeof value !== "string" || value === "system" || /^dhcp:\/\//.test(value)) return value;
+  const at = value.indexOf("#");
+  const address = at < 0 ? value : value.slice(0, at);
+  const params = at < 0 ? [] : value.slice(at + 1).split("&");
+  const kept = params.filter(p => p && !/^(disable-ipv6|disable-qtype-64|disable-qtype-65)(=|$)/.test(p));
+  return address + "#" + kept.concat(["disable-ipv6=true", "disable-qtype-64=true", "disable-qtype-65=true"]).join("&");
+}
 function main(input) {
   const prepared = v14Copy(input);
   if (v14Object(prepared.dns)) prepared.dns.ipv6 = true;
@@ -2302,21 +2314,24 @@ function main(input) {
   config.ipv6 = true;
   config.dns.ipv6 = false;
   delete config.dns["fake-ip-range6"];
+  for (const key of ["nameserver", "fallback", "direct-nameserver"])
+    if (config.dns[key] != null) config.dns[key] = v14IPv4LocalResolver(config.dns[key]);
+  for (const key of Object.keys(config.dns["nameserver-policy"] || {}))
+    config.dns["nameserver-policy"][key] = v14IPv4LocalResolver(config.dns["nameserver-policy"][key]);
   config.tun["inet6-address"] = ["fdfe:dcba:9876::1/126"];
   config.tun["route-address"] = ["0.0.0.0/0", "::/0"];
-  // Real public IPv6 TUN requests fail promptly; private/LAN and mapped
-  // Fake-IP domains retain the base policy. HTTP/SOCKS can still carry a
-  // literal IPv6 destination over an IPv4 proxy-server connection.
-  const guard = "AND,((IN-TYPE,TUN),(IP-CIDR6,::/0,no-resolve),(NOT,((IP-CIDR6,fc00::/7,no-resolve))),(NOT,((IP-CIDR6,fe80::/10,no-resolve))),(NOT,((IP-CIDR6,::1/128,no-resolve)))),REJECT";
-  const position = config.rules.indexOf("DOMAIN,v14-runtime-check.invalid,REJECT");
-  if (position < 0) v14Fail("Missing IPv4-local guard anchor");
-  config.rules.splice(position + 1, 0, guard);
+  // With a readable TLS/QUIC hostname, replace a cached literal destination
+  // with that hostname. DIRECT then resolves an A record; a selected proxy
+  // retains remote DNS/IPv6 ability. Do not rewrite HTTP Host destinations.
+  // Without a hostname a literal IPv6 cannot be converted to an IPv4 target.
+  for (const protocol of ["TLS", "QUIC"])
+    config.sniffer.sniff[protocol]["override-destination"] = true;
   const marker = config["x-v14-generated"];
   marker.networkMode = "ipv4-local";
-  marker.localIPv6Fallback = "empty-client-AAAA-and-reject-public-literal-TUN-IPv6";
+  marker.localIPv6Fallback = "IPv4-business-resolution-and-TLS-QUIC-hostname-recovery; original-egress-policy-preserved";
   marker.validationWarnings = marker.validationWarnings.concat([
-    "IPv4-local 是手动网络模式，不探测物理出口。请保持应用核心 IPv6、完整 TUN 接管和严格路由，以保留拒绝规则。",
-    "公网 IPv6 字面量 TUN 连接明确拒绝；应用是否改用 IPv4 取决于其自身后备地址。此模式不将 IPv6 地址转换为 IPv4。"
+    "IPv4-local 是手动网络模式，不探测物理出口。保持应用核心 IPv6、完整 TUN 接管和严格路由；业务 DNS 过滤 AAAA/SVCB/HTTPS，节点引导 DNS 保留双栈。",
+    "TLS/QUIC 可读域名允许重新解析 IPv4；无域名的 IPv6 字面量继续按原组处理，DIRECT 仍需本地 IPv6，代理目标仍需节点 IPv6。应用私有 DNS/缓存和显式 hosts 不保证回退。"
   ]);
   return config;
 }

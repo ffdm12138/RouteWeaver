@@ -2,7 +2,7 @@
   "version": "14.3",
   "repairRevision": "balanced-r1",
   "priorRepairRevision": "embedded-domain-r1",
-  "featureRevision": "ipv6-fallback-r1",
+  "featureRevision": "ipv6-fallback-r2",
   "compatibilityRevision": "api-real-ip-r1",
   "directory": "releases/v14.3",
   "documentation": "docs/README.md",
@@ -65,9 +65,9 @@
   "macosReport": "docs/reports/v14.3/MacBook适配.md",
   "macos": "CONFIG_SOURCE_WINDOWS_LOCAL_CORE_PASS_MAC_DEVICE_NOT_RUN",
   "distribution": "public",
-  "releaseTag": "v14.3.0-rc.2",
+  "releaseTag": "v14.3.0-rc.3",
   "personalRulesIncluded": false,
-  "networkCompatibilityRevision": "ipv6-fallback-r1",
+  "networkCompatibilityRevision": "ipv6-fallback-r2",
   "networkCompatibility": "releases/v14.3/metadata/network-compat-delivery.json",
   "networkCompatibilityGuide": "docs/guides/IPv4兼容模式.md",
   "defaultNetworkMode": "dual-stack",
@@ -79,5 +79,6 @@
     "macosFlClash": "releases/v14.3/src/macos/v14.3-macos-flclash-ipv4-local.js",
     "macosClashMi": "releases/v14.3/src/macos/v14.3-macos-clashmi-ipv4-local.js",
     "shadowrocket": "releases/v14.3/src/ios/v14.3-shadowrocket-ipv4-local.conf"
-  }
+  },
+  "networkCompatibilityUserCase": "RC2_FAILED_RC3_MEDIA_RETEST_PENDING"
 }

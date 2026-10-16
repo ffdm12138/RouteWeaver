@@ -13,7 +13,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--tag', default='v14.3.0-rc.2')
+    parser.add_argument('--tag', default='v14.3.0-rc.3')
     args = parser.parse_args()
     if not re.fullmatch(r'v14\.3\.\d+(?:-rc\.\d+)?', args.tag):
         parser.error('Expected a v14.3.x or v14.3.x-rc.n tag.')
@@ -22,6 +22,8 @@ def main():
     read = lambda name: json.loads((ROOT / name).read_text(encoding='utf-8-sig'))
     digest = lambda path: hashlib.sha256(path.read_bytes()).hexdigest()
     current = read('CURRENT_RELEASE.json')
+    if current.get('vpsDirectRevision'):
+        raise SystemExit('Personalized workspace: prepare public assets only inside opensource/RouteWeaver/.')
     receipt = read('dist/v14.3/package-verification.json')
     assert receipt['packageToolSHA256'] == digest(ROOT / 'tools/package-v14.3.py')
     assets = [ROOT / name for name in [*current['entries'].values(), *current['compatibilityEntries'].values()]]

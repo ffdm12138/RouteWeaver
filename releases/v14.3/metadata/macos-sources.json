@@ -8,7 +8,7 @@
     {
       "client": "FlClash",
       "file": "src/macos/v14.3-macos-flclash.js",
-      "sha256": "c5eb299d23010f3dc2879968025fd6cd89f98e2ee9ba08332436a5f19398007e",
+      "sha256": "0ab7a41c2fe746e17d258952942bed72ad64709edb4e9a735a81b2947ac7d199",
       "bytes": 119250,
       "generatedConfigBytes": 176576,
       "inlineRows": 819,
@@ -17,7 +17,7 @@
     {
       "client": "Clash Mi",
       "file": "src/macos/v14.3-macos-clashmi.js",
-      "sha256": "59431f8e9255ec2c60e5fad684df29ab8e11c729bf7a5915322d598c550c664d",
+      "sha256": "2a65d9cb1240068586f0a733797616cd47786eb13d27bbdf25e52d2e87fcf0ee",
       "bytes": 120237,
       "generatedConfigBytes": 177189,
       "inlineRows": 819,
@@ -36,7 +36,7 @@
     },
     {
       "file": "metadata/balanced-sources.json",
-      "sha256": "9f09113c843b7650af71513e532ac694b9e37321e36c1a380f6cabbdaeb37e9d"
+      "sha256": "cf373cf9b912b44402409bc28540900451641d4ee739b073a055c565ebb0e263"
     },
     {
       "file": "metadata/clashmi-compatibility.json",
@@ -44,11 +44,11 @@
     },
     {
       "file": "src/windows/v14.3.js",
-      "sha256": "9a93c71ae3dbdd3dcb7e9bf45ef86e60d7ffdaac81cc17005ffc540d7f4fb02f"
+      "sha256": "b2ac9021a498ebd8e2b0b53d7bbd3db92ef99e918b9f49eec046c5c4210cf054"
     },
     {
       "file": "src/ios/v14.3-clashmi.js",
-      "sha256": "09014cec334f287506e0f0afba590e143a526784954016244cf87042cda682ff"
+      "sha256": "9ded4aef098b1b5b0334597eda4a07996f6f7e8d3c8a24cdc0bfad457e705903"
     }
   ],
   "officialReferences": [

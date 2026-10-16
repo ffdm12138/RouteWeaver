@@ -16,3 +16,5 @@
 
 
 `network_release.py` 为第 12 条兼容模式回执的共同记录/核对模块；`record-v14.3.py` 在新静态/核心回执与当前文件哈希一致后更新标准与兼容入口索引。更新源码后必须重做受影响的实验，不能仅修改回执哈希。
+
+rc.3 的隔离核心测试另外加载 `tests/native-ipv4-recovery.cjs`，该模块须随审核包分发并绑定哈希。它生成合成 TLS ClientHello / RFC 9001 QUIC Initial，验证报文和地址解析，不宣称完整会话或原生设备验收。

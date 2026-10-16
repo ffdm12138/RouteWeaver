@@ -1,48 +1,48 @@
 # IPv4 兼容模式
 
-`ipv6-fallback-r1` 保留标准双栈入口，并提供六份独立的 `ipv4-local` 入口。网络没有可用本地 IPv6 出口、应用仍尝试 IPv6 而卡住时，手动选择兼容入口。脚本不探测网卡，不自动随 Wi-Fi/热点切换模式；恢复可用双栈网络后可换回标准入口。
+当前修订 `ipv6-fallback-r2` / `v14.3.0-rc.3`。标准入口继续提供双栈；本地没有可用 IPv6 出口时，手动选择对应兼容入口。没有自动网卡探测，Wi-Fi/热点切换后需核对模式与接管。rc.2 曾在 Windows 媒体问题上实测失败；rc.3 已修复核心层面的两个缺口，应用复测尚未完成。
 
 ## 选择文件
 
-每个订阅只绑定一份对应客户端入口。兼容入口已包含全部业务规则，不叠加标准脚本。
+每个订阅只绑定一份对应入口，兼容 JS 已包含全部业务规则。
 
-| 客户端 | IPv4 兼容文件 |
-|---|---|
-| Windows FlClash / Mihomo | [v14.3-ipv4-local.js](../../releases/v14.3/src/windows/v14.3-ipv4-local.js) |
-| Android Mihomo | [v14.3-android-ipv4-local.js](../../releases/v14.3/src/android/v14.3-android-ipv4-local.js) |
-| iOS Clash Mi | [v14.3-clashmi-ipv4-local.js](../../releases/v14.3/src/ios/v14.3-clashmi-ipv4-local.js) |
-| macOS FlClash | [v14.3-macos-flclash-ipv4-local.js](../../releases/v14.3/src/macos/v14.3-macos-flclash-ipv4-local.js) |
-| macOS Clash Mi | [v14.3-macos-clashmi-ipv4-local.js](../../releases/v14.3/src/macos/v14.3-macos-clashmi-ipv4-local.js) |
-| iOS Shadowrocket | [v14.3-shadowrocket-ipv4-local.conf](../../releases/v14.3/src/ios/v14.3-shadowrocket-ipv4-local.conf)；能力限制见下文 |
+| 客户端 | 文件 | 本版能力 |
+|---|---|---|
+| Windows FlClash / Mihomo | [v14.3-ipv4-local.js](../../releases/v14.3/src/windows/v14.3-ipv4-local.js) | 完整 JS 兼容机制 |
+| Android Mihomo | [v14.3-android-ipv4-local.js](../../releases/v14.3/src/android/v14.3-android-ipv4-local.js) | 同上，VPNService 待验收 |
+| iOS Clash Mi | [v14.3-clashmi-ipv4-local.js](../../releases/v14.3/src/ios/v14.3-clashmi-ipv4-local.js) | 同上，NetworkExtension 待验收 |
+| macOS FlClash | [v14.3-macos-flclash-ipv4-local.js](../../releases/v14.3/src/macos/v14.3-macos-flclash-ipv4-local.js) | 同上，Darwin TUN 待验收 |
+| macOS Clash Mi | [v14.3-macos-clashmi-ipv4-local.js](../../releases/v14.3/src/macos/v14.3-macos-clashmi-ipv4-local.js) | 同上，NetworkExtension 待验收 |
+| iOS Shadowrocket | [v14.3-shadowrocket-ipv4-local.conf](../../releases/v14.3/src/ios/v14.3-shadowrocket-ipv4-local.conf) | **仅 IPv4 偏好，不能等同 JS 回退** |
 
-## 到节点、节点到目标、直连分别处理
+## 三段能力与本次修复
 
-五种 Mihomo JS 的标准和兼容入口都为没有显式地址族设置的**域名节点**补 `ip-version: ipv4-prefer`。节点有可达 A 地址时优先使用 IPv4，并保留同一节点的 IPv6 后备；不更换用户选中的节点。AAAA-only、IPv6 字面量节点仍需要本地 IPv6 能力。已有 `ip-version`、provider 固定覆写、自定义地址族表达式和字面量节点保持其选择。provider 的默认值用条件表达式处理，刷新后仍生效。
+1. **本机到节点**：标准/兼容 JS 都为未指定地址族的域名节点补 `ip-version: ipv4-prefer`，保留同一节点的 IPv6 后备、provider 刷新和用户显式设置。不自动换节点。TCP 后备与 UDP 地址选择的能力不同；不能承诺 UDP 超时会换族。AAAA-only 或 IPv6 字面量节点仍需本地 IPv6。
+2. **节点到目标**：本机用 IPv4 连节点，仍允许节点访问 IPv6 目标。rc.3 撤掉 rc.2 的公网 IPv6 前置拒绝，所有目标重新遵守原业务分组和用户选择；节点失败或缺少相应能力时仍失败，绝不转 DIRECT。
+3. **本机直连目标**：兼容 JS 关闭客户端 AAAA、取消 IPv6 Fake-IP 池，并为业务/直连解析上游添加 AAAA、SVCB(TYPE64)、HTTPS(TYPE65) 过滤。这样核心内部解析也使用 A，真实 IP DNS 例外不会继续下发这些记录中的 IPv6 提示。DNS 的 `#策略组` 保持；节点引导 DNS 与局域网 `system` 解析独立保留。静态 hosts 显式设置保持。
 
-地址族偏好不是通用连通性探测：TCP 可并发尝试双栈并优先 IPv4；UDP 的该字段主要选择解析结果中的 IPv4，不保证所有 UDP/QUIC 节点协议在超时后自动换族。本轮 IPv6 后备验证范围是 TCP，UDP 验证范围是 IPv4 外层承载 IPv6 目标。
+兼容 JS 在既有嗅探端口（TLS/QUIC 的 443、8443）启用域名目标重解析：可读取域名时，把缓存/字面量地址改为该域名，再按原规则与 DNS 策略建立连接。DIRECT 可重解析到 IPv4，代理仍可让节点解析并访问 IPv6；IPv4 字面量也会受到该域名重解析影响。HTTP Host 不启用目标替换，已有嗅探排除项保留。这是协议域名恢复，不是 IPv6 到 IPv4 的地址转换。核心 IPv6、TUN IPv6 地址与全路由继续保留。
 
-到节点用 IPv4，不限制代理协议把 IPv6 目标交给远端。支持相应 TCP/UDP 和 IPv6 出口的节点仍可访问 IPv6 目标。远端没有 IPv6 出口时返回失败，不改用 DIRECT。[Mihomo 节点地址族](https://wiki.metacubex.one/config/proxies/#ip-version)、[provider 覆写](https://wiki.metacubex.one/config/proxy-providers/#override)。
+过滤 SVCB/HTTPS 会停用依赖这些 DNS 记录的服务发现和 ECH 配置获取；需要这些能力且本地双栈可用时使用标准入口。不会关闭应用的 HTTPS 证书校验。
 
-兼容 JS 保留核心 `ipv6: true` 与完整 IPv4/IPv6 TUN 路由；向应用的 DNS 返回空 AAAA，取消 IPv6 Fake-IP 地址池，A 查询继续使用现有策略。已知域名和业务 DNS/UDP 按原分组处理。应用缓存或自行提供的真实公网 IPv6 进入 TUN 时优先 REJECT，不等待无效直连反复超时。局域网、ULA、回环及已映射回域名的 Fake-IP 继续按既有规则处理。[DNS IPv6](https://wiki.metacubex.one/config/dns/#ipv6)、[TUN IPv6 地址](https://wiki.metacubex.one/config/inbound/tun/#inet6-address)。
-
-这对所有应用生效，不添加微信特例。拒绝也覆盖原本可能走代理的公网 IPv6 字面量 TUN 连接，因为这类请求无法可靠识别应用是否有等价 IPv4 地址。HTTP/SOCKS 代理入口仍可把 IPv6 目标交给节点。REJECT 让核心停止该连接，不保证所有系统向 UDP 应用即时返回错误。应用存在 IPv4 后备并正确处理失败时才会重试；纯 IPv6 服务、没有后备的应用或应用自己的重试错误仍会失败。脚本没有 NAT64/NAT46 或透明地址转换能力。
+没有可读域名的私有协议、应用自带加密 DNS/缓存、被排除的连接、纯 IPv6 服务和无 A 记录的 DIRECT 目标仍可能失败。不能从任意 IPv6 地址推导等价 IPv4。节点连接超时也不能由规则脚本修好，需要手动选择可用、支持相应 UDP 与 IPv6 能力的节点；不添加微信专属 IP、全 CN UDP 直连或自动换节点。
 
 ## 导入和核对
 
-1. 保留自己的订阅、节点和手动选择，按上表更换绑定的覆写文件。标准入口和兼容入口二选一。
-2. 保持核心 IPv6 开启，保持 TUN/VPN、全路由和严格路由；不要用关闭系统 IPv6、移除 IPv6 路由或关闭 VPN 来代替兼容入口。否则拒绝规则可能接不到连接。
-3. Windows FlClash 0.9.0 应用设置在 JS 之后合并：开启 TUN 严格路由，关闭追加系统 DNS，保留核心 IPv6。DNS 覆写不能重新打开 `dns.ipv6` 或添加 `fake-ip-range6`。Android、macOS 同样核对最终配置；Clash Mi 使用“内置-不覆写”，关闭 TUN 覆写并保留全网络接管。
-4. 核对最终配置：`ipv6: true`、`dns.ipv6: false`、没有 `dns.fake-ip-range6`、TUN 同时覆盖 `0.0.0.0/0` 和 `::/0`，公网 IPv6 TUN 拒绝规则在公司/地域规则之前。局域网例外继续保留。
-5. 应用配置后由用户重连 TUN/VPN；需要时重新打开受影响应用，使旧连接和缓存重新建立。测试文字、图片、表情和其它应用，同时记录网络、系统与客户端版本。不要把这一步视为已完成的设备验收。
+1. 保存自己的订阅、节点与选择，替换绑定的兼容 JS，标准和兼容入口二选一。
+2. Windows FlClash 0.9.0 保持核心 IPv6、TUN、严格路由开启，关闭追加系统 DNS；应用设置会在 JS 之后合并。Clash Mi 使用“内置-不覆写”，关闭额外 TUN 覆写并保持全网络接管。Android/Mac 同样检查最终配置。
+3. 最终配置应有 `ipv6: true`、`dns.ipv6: false`，没有 `fake-ip-range6`；业务与 direct DNS 带上述过滤参数，节点引导 DNS 保留；TLS/QUIC 的 `override-destination: true`，HTTP 为 false；不再有 rc.2 的全局公网 IPv6 REJECT。
+4. 保留双栈 TUN 路由。FlClash 可能将 `route-address` 合并为空数组并采用核心默认全路由，应核对实际系统 IPv4/IPv6 接管，不仅看数组文本。不要移除 IPv6 接管，以免切换网络后应代理流量绕行。
+5. 由用户应用配置并重连 TUN/VPN，重新建立受影响应用的连接；分别测文字、图片、表情及其它应用。既有“国内网站”选择与“漏网之鱼”节点分别核对：未知 IP UDP 仍走兜底，不能据此认定规则错分。
 
-系统代理模式只接管实际使用 HTTP/SOCKS 的连接；绕过代理、独立 DNS 和普通 UDP 不保证经过核心。完整的应用级 IPv6 字面量快速失败需要实际 TUN/VPN 接管。[Windows 和 Android](使用说明.md)、[Clash Mi](ClashMi使用说明.md)、[MacBook](MacBook使用说明.md)。
+系统代理只覆盖实际使用 HTTP/SOCKS 的连接；独立 DNS、普通 UDP 和绕过代理的流量不保证接管。[Windows/Android](使用说明.md)、[Clash Mi](ClashMi使用说明.md)、[MacBook](MacBook使用说明.md)。本次发布不自动安装或改动运行客户端。
 
 ## Shadowrocket 单独说明
 
-兼容 conf 保留 `ipv6 = true` 以接管 IPv6，设置 `prefer-ipv6 = false`，并前置公网 IPv6 与常见 NAT64 前缀的拒绝规则。它没有 Mihomo 的 `IN-TYPE` 和 `ip-version` 等价能力，不能宣称实现了相同的节点地址族默认值或严格的空 AAAA 语义。其规则也无法只限定 TUN，因此可能拒绝代理原本能访问的 IPv6 目标；需要这些服务时使用标准 conf。
+可选 conf 保留 `ipv6 = true` 和原分流，只设置 `prefer-ipv6 = false`。rc.2 的两条公网 IPv6 拒绝已撤掉，避免误伤代理。它没有经过验证的同等上游过滤/TLS-QUIC 重解析和 Mihomo 节点默认能力；不是完整的本地无 IPv6 回退实现。原生 DNS、VPN 和应用行为仍待验收，不复制 Mihomo 字段到 conf。
 
-该文件仅通过有限源码模型，Shadowrocket 原生 DNS、规则求值/远端解析和回退行为尚未实机验证。不要复制 Mihomo 字段到 conf，也不要把上述 JS 核心实验当作 Shadowrocket 通过。
+## 验证范围
 
-## 验收范围
+41 项新静态检查、91 项隔离 Mihomo 核心检查覆盖五种 JS。TLS 使用合成 ClientHello、QUIC 使用按 RFC 9001 构造的 Initial；只验证嗅探、重解析和报文到达回环 IPv4 服务，不是完整 TLS/QUIC 会话或微信媒体验收。实验保留生产规则，DNS 端点换为自有回环、禁用后台测速，并将测试端口追加到嗅探列表；未启动系统 TUN。标准回归、包完整性和设备验收分别记录，详见[修订报告](../reports/v14.3/IPv6回退与兼容入口.md)。
 
-新增静态检查、隔离 Mihomo、完整既有业务回归和包校验分别有哈希回执。新增核心实验关闭 TUN，并把守卫中的 TUN 入站显式替换为 SOCKS 来验证拒绝语义；真实系统 IPv6 路由、FlClash 最终合并、Android VPNService、Apple NetworkExtension、网络切换和微信 IPv4 重试均待设备验收。证据见[修订报告](../reports/v14.3/IPv6回退与兼容入口.md)。
+[Mihomo DNS 参数](https://wiki.metacubex.one/config/dns/) · [域名嗅探](https://wiki.metacubex.one/config/sniff/) · [节点地址族](https://wiki.metacubex.one/config/proxies/#ip-version)

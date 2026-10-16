@@ -4,13 +4,13 @@
 跨平台的代理分流覆写脚本，面向 Windows / Android 的 FlClash、Mihomo，以及 iOS / macOS 的 Clash Mi 和 iOS Shadowrocket。
 
 [![Verify public source](https://github.com/ffdm12138/RouteWeaver/actions/workflows/verify.yml/badge.svg)](https://github.com/ffdm12138/RouteWeaver/actions/workflows/verify.yml)
-[下载 v14.3.0-rc.2](https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-rc.2) · [文档](docs/README.md) · [原始需求](docs/需求.md) · [变更记录](CHANGELOG.md)
+[下载 v14.3.0-rc.3](https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-rc.3) · [文档](docs/README.md) · [原始需求](docs/需求.md) · [变更记录](CHANGELOG.md)
 
-当前发布 **v14.3.0-rc.2**，对应既有 V14.3 的 `domestic-protocol-r1` 、`macos-r1` 和 `ipv6-fallback-r1`。六个平台入口提供独立文件，保留原有业务行为。源码、静态合同和已有隔离核心回执分别核验；**全部平台的原生设备验收尚未完成，因此作为预发布交付。**
+当前发布 **v14.3.0-rc.3**，对应既有 V14.3 的 `domestic-protocol-r1` 、`macos-r1` 和 `ipv6-fallback-r2`。六个平台入口提供独立文件，保留原有业务行为。源码、静态合同和已有隔离核心回执分别核验；**全部平台的原生设备验收尚未完成，因此作为预发布交付。**
 
 ## 下载与导入
 
-优先在 [Release 页面](https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-rc.2) 下载对应单文件，或者下载 `v14.3-deployable.zip`。这些文件不包含节点或订阅，需保留自己的配置并手动选节点。
+优先在 [Release 页面](https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-rc.3) 下载对应单文件，或者下载 `v14.3-deployable.zip`。这些文件不包含节点或订阅，需保留自己的配置并手动选节点。
 
 | 平台 / 客户端 | 独立导入文件 | 使用说明 |
 |---|---|---|
@@ -25,7 +25,7 @@ GitHub 文件页需选择 **Raw / Download raw file** 保存文件。客户端�
 
 Windows FlClash 0.9.0 在应用的 TUN 设置中开启“严格路由”，关闭“追加系统 DNS”；同一份 JS 可用于系统代理模式，接管边界见使用说明。Clash Mi 使用返回对象的 `main(config)`，追加覆写选择“内置-不覆写”。Shadowrocket 需自行保留订阅和节点，原生完整国内 DNS 跟组仍待实机验证。
 
-本地网络没有 IPv6 出口时，手动选择新增的 [IPv4 兼容入口](docs/guides/IPv4兼容模式.md)。标准入口保留双栈；两套 JS 都改善到节点的地址族选择，兼容入口另对所有应用提供空 AAAA 和公网 IPv6 TUN 快速失败。该机制没有自动网卡探测，应用是否重试 IPv4 仍需设备验证。
+本地网络没有 IPv6 出口时，手动选择 [IPv4 兼容入口](docs/guides/IPv4兼容模式.md)。五种 JS 补齐内部业务 DNS 的 IPv4 解析与 TLS/QUIC 域名重解析，撤掉 rc.2 的宽泛 IPv6 拒绝，保留代理远端 IPv6。Shadowrocket 文件仅有 IPv4 偏好。rc.2 Windows 媒体案例失败；rc.3 应用复测、各平台设备接管仍待验收，没有自动网卡探测或透明地址转换。
 
 ## 分流原则
 

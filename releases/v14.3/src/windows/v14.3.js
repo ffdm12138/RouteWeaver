@@ -1493,7 +1493,7 @@ function v14NetworkDefaults(config) {
     else delete override["override-expr"];
   }
   const marker = config["x-v14-generated"];
-  marker.networkCompatibilityRevision = "ipv6-fallback-r1";
+  marker.networkCompatibilityRevision = "ipv6-fallback-r2";
   marker.networkMode = "dual-stack";
   marker.nodeAddressFamilyDefault = "ipv4-prefer-unless-explicit-domain-nodes-only";
   return config;

@@ -1,16 +1,16 @@
 # V14.3 国内协议跟组与自包含小火箭配置
 
-当前追加 `ipv6-fallback-r1`（公开 rc.2）：标准双栈与六份手动 IPv4 兼容入口。完整导入、核心 IPv6/DNS/TUN 联动和 Shadowrocket 限制见 [IPv4 兼容模式](../../docs/guides/IPv4兼容模式.md)；当前验收见 [修订报告](../../docs/reports/v14.3/IPv6回退与兼容入口.md)。较早微信结论保留在历史报告，不能代替新模式设备复测。
+当前追加 `ipv6-fallback-r2`（公开 rc.3）：标准双栈与六份手动可选文件。五种 JS 修复内部 DNS 并支持 TLS/QUIC 域名重解析，撤掉宽泛 IPv6 拒绝；Shadowrocket 只有 IPv4 偏好。rc.2 媒体失败、rc.3 复测待做。完整导入、核心 IPv6/DNS/TUN 联动和 Shadowrocket 限制见 [IPv4 兼容模式](../../docs/guides/IPv4兼容模式.md)；当前验收见 [修订报告](../../docs/reports/v14.3/IPv6回退与兼容入口.md)。较早微信结论保留在历史报告，不能代替新模式设备复测。
 
 当前修订 domestic-protocol-r1 / ios-delivery-r2。已审核国内域名的普通 TCP、UDP、DNS 跟随「国内网站」，默认 DIRECT；公司/共享服务优先，未知公网 IP UDP 和通用 STUN 保持代理或拒绝。业务选择代理后，失败节点或 UDP 不支持不得自动直连。
 
 | 客户端 | 直接导入 | 字节 |
 |---|---|---:|
-| Windows | [v14.3.js](src/windows/v14.3.js) | 116,057 |
-| MacBook FlClash | [v14.3-macos-flclash.js](src/macos/v14.3-macos-flclash.js) | 117,852 |
-| MacBook Clash Mi | [v14.3-macos-clashmi.js](src/macos/v14.3-macos-clashmi.js) | 118,839 |
-| Android | [v14.3-android.js](src/android/v14.3-android.js) | 115,943 |
-| Clash Mi | [v14.3-clashmi-domestic-protocol-r1.js](src/ios/v14.3-clashmi-domestic-protocol-r1.js) | 118,837 |
+| Windows | [v14.3.js](src/windows/v14.3.js) | 117,455 |
+| MacBook FlClash | [v14.3-macos-flclash.js](src/macos/v14.3-macos-flclash.js) | 119,250 |
+| MacBook Clash Mi | [v14.3-macos-clashmi.js](src/macos/v14.3-macos-clashmi.js) | 120,237 |
+| Android | [v14.3-android.js](src/android/v14.3-android.js) | 117,341 |
+| Clash Mi | [v14.3-clashmi-domestic-protocol-r1.js](src/ios/v14.3-clashmi-domestic-protocol-r1.js) | 120,235 |
 | 小火箭 | [v14.3-shadowrocket.conf](src/ios/v14.3-shadowrocket.conf) | 1,746,654 |
 
 Clash Mi 标准入口与带修订号入口字节相同，返回配置对象。当前订阅绑定新的 js，追加覆写选择「内置-不覆写」，规则模式、核心 IPv6 开启。标准输入生成 26 个项目策略组。完整步骤见 [Clash Mi 说明](../../docs/guides/ClashMi使用说明.md)。
