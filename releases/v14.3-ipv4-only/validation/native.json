@@ -1,0 +1,962 @@
+{
+  "status": "IPV4_ONLY_LOCAL_CORE_TCP_UDP_DNS_PROVIDER_PASS",
+  "flavor": "public",
+  "cases": [
+    {
+      "platform": "windows",
+      "name": "node:Relay:IPv4",
+      "result": "PASS"
+    },
+    {
+      "platform": "windows",
+      "name": "node:ForcedFrom6:IPv4",
+      "result": "PASS"
+    },
+    {
+      "platform": "windows",
+      "name": "node:Literal6:fails-without-IPv6",
+      "result": "PASS"
+    },
+    {
+      "platform": "windows",
+      "name": "node:AAAA:fails-without-IPv6",
+      "result": "PASS"
+    },
+    {
+      "platform": "windows",
+      "name": "node:ProviderDual:IPv4",
+      "result": "PASS"
+    },
+    {
+      "platform": "windows",
+      "name": "node:ProviderLiteral6:fails-without-IPv6",
+      "result": "PASS"
+    },
+    {
+      "platform": "windows",
+      "name": "node:ProviderAAAA:fails-without-IPv6",
+      "result": "PASS"
+    },
+    {
+      "platform": "windows",
+      "name": "DIRECT-domain-TCP-IPv4",
+      "result": "PASS"
+    },
+    {
+      "platform": "windows",
+      "name": "DIRECT-UDP-IPv4",
+      "result": "PASS"
+    },
+    {
+      "platform": "windows",
+      "name": "proxy-UDP-IPv4",
+      "result": "PASS"
+    },
+    {
+      "platform": "windows",
+      "name": "reject-cached-literal-or-host:::1",
+      "result": "PASS"
+    },
+    {
+      "platform": "windows",
+      "name": "reject-cached-literal-or-host:six.local",
+      "result": "PASS"
+    },
+    {
+      "platform": "windows",
+      "name": "reject-IPv6-UDP",
+      "result": "PASS"
+    },
+    {
+      "platform": "windows",
+      "name": "DNS-qtype-1:A-present",
+      "result": "PASS"
+    },
+    {
+      "platform": "windows",
+      "name": "DNS-qtype-28:empty",
+      "result": "PASS"
+    },
+    {
+      "platform": "windows",
+      "name": "DNS-qtype-64:empty",
+      "result": "PASS"
+    },
+    {
+      "platform": "windows",
+      "name": "DNS-qtype-65:empty",
+      "result": "PASS"
+    },
+    {
+      "platform": "windows",
+      "name": "DNS-explicit-IPv6-host-AAAA-empty",
+      "result": "PASS"
+    },
+    {
+      "platform": "windows",
+      "name": "provider-refresh-overrides-conflicting-IPv6",
+      "result": "PASS"
+    },
+    {
+      "platform": "windows",
+      "name": "provider-refresh-IPv6-literal-fails",
+      "result": "PASS"
+    },
+    {
+      "platform": "android",
+      "name": "node:Relay:IPv4",
+      "result": "PASS"
+    },
+    {
+      "platform": "android",
+      "name": "node:ForcedFrom6:IPv4",
+      "result": "PASS"
+    },
+    {
+      "platform": "android",
+      "name": "node:Literal6:fails-without-IPv6",
+      "result": "PASS"
+    },
+    {
+      "platform": "android",
+      "name": "node:AAAA:fails-without-IPv6",
+      "result": "PASS"
+    },
+    {
+      "platform": "android",
+      "name": "node:ProviderDual:IPv4",
+      "result": "PASS"
+    },
+    {
+      "platform": "android",
+      "name": "node:ProviderLiteral6:fails-without-IPv6",
+      "result": "PASS"
+    },
+    {
+      "platform": "android",
+      "name": "node:ProviderAAAA:fails-without-IPv6",
+      "result": "PASS"
+    },
+    {
+      "platform": "android",
+      "name": "DIRECT-domain-TCP-IPv4",
+      "result": "PASS"
+    },
+    {
+      "platform": "android",
+      "name": "DIRECT-UDP-IPv4",
+      "result": "PASS"
+    },
+    {
+      "platform": "android",
+      "name": "proxy-UDP-IPv4",
+      "result": "PASS"
+    },
+    {
+      "platform": "android",
+      "name": "reject-cached-literal-or-host:::1",
+      "result": "PASS"
+    },
+    {
+      "platform": "android",
+      "name": "reject-cached-literal-or-host:six.local",
+      "result": "PASS"
+    },
+    {
+      "platform": "android",
+      "name": "reject-IPv6-UDP",
+      "result": "PASS"
+    },
+    {
+      "platform": "android",
+      "name": "DNS-qtype-1:A-present",
+      "result": "PASS"
+    },
+    {
+      "platform": "android",
+      "name": "DNS-qtype-28:empty",
+      "result": "PASS"
+    },
+    {
+      "platform": "android",
+      "name": "DNS-qtype-64:empty",
+      "result": "PASS"
+    },
+    {
+      "platform": "android",
+      "name": "DNS-qtype-65:empty",
+      "result": "PASS"
+    },
+    {
+      "platform": "android",
+      "name": "DNS-explicit-IPv6-host-AAAA-empty",
+      "result": "PASS"
+    },
+    {
+      "platform": "android",
+      "name": "provider-refresh-overrides-conflicting-IPv6",
+      "result": "PASS"
+    },
+    {
+      "platform": "android",
+      "name": "provider-refresh-IPv6-literal-fails",
+      "result": "PASS"
+    },
+    {
+      "platform": "clashmi",
+      "name": "node:Relay:IPv4",
+      "result": "PASS"
+    },
+    {
+      "platform": "clashmi",
+      "name": "node:ForcedFrom6:IPv4",
+      "result": "PASS"
+    },
+    {
+      "platform": "clashmi",
+      "name": "node:Literal6:fails-without-IPv6",
+      "result": "PASS"
+    },
+    {
+      "platform": "clashmi",
+      "name": "node:AAAA:fails-without-IPv6",
+      "result": "PASS"
+    },
+    {
+      "platform": "clashmi",
+      "name": "node:ProviderDual:IPv4",
+      "result": "PASS"
+    },
+    {
+      "platform": "clashmi",
+      "name": "node:ProviderLiteral6:fails-without-IPv6",
+      "result": "PASS"
+    },
+    {
+      "platform": "clashmi",
+      "name": "node:ProviderAAAA:fails-without-IPv6",
+      "result": "PASS"
+    },
+    {
+      "platform": "clashmi",
+      "name": "DIRECT-domain-TCP-IPv4",
+      "result": "PASS"
+    },
+    {
+      "platform": "clashmi",
+      "name": "DIRECT-UDP-IPv4",
+      "result": "PASS"
+    },
+    {
+      "platform": "clashmi",
+      "name": "proxy-UDP-IPv4",
+      "result": "PASS"
+    },
+    {
+      "platform": "clashmi",
+      "name": "reject-cached-literal-or-host:::1",
+      "result": "PASS"
+    },
+    {
+      "platform": "clashmi",
+      "name": "reject-cached-literal-or-host:six.local",
+      "result": "PASS"
+    },
+    {
+      "platform": "clashmi",
+      "name": "reject-IPv6-UDP",
+      "result": "PASS"
+    },
+    {
+      "platform": "clashmi",
+      "name": "DNS-qtype-1:A-present",
+      "result": "PASS"
+    },
+    {
+      "platform": "clashmi",
+      "name": "DNS-qtype-28:empty",
+      "result": "PASS"
+    },
+    {
+      "platform": "clashmi",
+      "name": "DNS-qtype-64:empty",
+      "result": "PASS"
+    },
+    {
+      "platform": "clashmi",
+      "name": "DNS-qtype-65:empty",
+      "result": "PASS"
+    },
+    {
+      "platform": "clashmi",
+      "name": "DNS-explicit-IPv6-host-AAAA-empty",
+      "result": "PASS"
+    },
+    {
+      "platform": "clashmi",
+      "name": "provider-refresh-overrides-conflicting-IPv6",
+      "result": "PASS"
+    },
+    {
+      "platform": "clashmi",
+      "name": "provider-refresh-IPv6-literal-fails",
+      "result": "PASS"
+    },
+    {
+      "platform": "macosFlClash",
+      "name": "node:Relay:IPv4",
+      "result": "PASS"
+    },
+    {
+      "platform": "macosFlClash",
+      "name": "node:ForcedFrom6:IPv4",
+      "result": "PASS"
+    },
+    {
+      "platform": "macosFlClash",
+      "name": "node:Literal6:fails-without-IPv6",
+      "result": "PASS"
+    },
+    {
+      "platform": "macosFlClash",
+      "name": "node:AAAA:fails-without-IPv6",
+      "result": "PASS"
+    },
+    {
+      "platform": "macosFlClash",
+      "name": "node:ProviderDual:IPv4",
+      "result": "PASS"
+    },
+    {
+      "platform": "macosFlClash",
+      "name": "node:ProviderLiteral6:fails-without-IPv6",
+      "result": "PASS"
+    },
+    {
+      "platform": "macosFlClash",
+      "name": "node:ProviderAAAA:fails-without-IPv6",
+      "result": "PASS"
+    },
+    {
+      "platform": "macosFlClash",
+      "name": "DIRECT-domain-TCP-IPv4",
+      "result": "PASS"
+    },
+    {
+      "platform": "macosFlClash",
+      "name": "DIRECT-UDP-IPv4",
+      "result": "PASS"
+    },
+    {
+      "platform": "macosFlClash",
+      "name": "proxy-UDP-IPv4",
+      "result": "PASS"
+    },
+    {
+      "platform": "macosFlClash",
+      "name": "reject-cached-literal-or-host:::1",
+      "result": "PASS"
+    },
+    {
+      "platform": "macosFlClash",
+      "name": "reject-cached-literal-or-host:six.local",
+      "result": "PASS"
+    },
+    {
+      "platform": "macosFlClash",
+      "name": "reject-IPv6-UDP",
+      "result": "PASS"
+    },
+    {
+      "platform": "macosFlClash",
+      "name": "DNS-qtype-1:A-present",
+      "result": "PASS"
+    },
+    {
+      "platform": "macosFlClash",
+      "name": "DNS-qtype-28:empty",
+      "result": "PASS"
+    },
+    {
+      "platform": "macosFlClash",
+      "name": "DNS-qtype-64:empty",
+      "result": "PASS"
+    },
+    {
+      "platform": "macosFlClash",
+      "name": "DNS-qtype-65:empty",
+      "result": "PASS"
+    },
+    {
+      "platform": "macosFlClash",
+      "name": "DNS-explicit-IPv6-host-AAAA-empty",
+      "result": "PASS"
+    },
+    {
+      "platform": "macosFlClash",
+      "name": "provider-refresh-overrides-conflicting-IPv6",
+      "result": "PASS"
+    },
+    {
+      "platform": "macosFlClash",
+      "name": "provider-refresh-IPv6-literal-fails",
+      "result": "PASS"
+    },
+    {
+      "platform": "macosClashMi",
+      "name": "node:Relay:IPv4",
+      "result": "PASS"
+    },
+    {
+      "platform": "macosClashMi",
+      "name": "node:ForcedFrom6:IPv4",
+      "result": "PASS"
+    },
+    {
+      "platform": "macosClashMi",
+      "name": "node:Literal6:fails-without-IPv6",
+      "result": "PASS"
+    },
+    {
+      "platform": "macosClashMi",
+      "name": "node:AAAA:fails-without-IPv6",
+      "result": "PASS"
+    },
+    {
+      "platform": "macosClashMi",
+      "name": "node:ProviderDual:IPv4",
+      "result": "PASS"
+    },
+    {
+      "platform": "macosClashMi",
+      "name": "node:ProviderLiteral6:fails-without-IPv6",
+      "result": "PASS"
+    },
+    {
+      "platform": "macosClashMi",
+      "name": "node:ProviderAAAA:fails-without-IPv6",
+      "result": "PASS"
+    },
+    {
+      "platform": "macosClashMi",
+      "name": "DIRECT-domain-TCP-IPv4",
+      "result": "PASS"
+    },
+    {
+      "platform": "macosClashMi",
+      "name": "DIRECT-UDP-IPv4",
+      "result": "PASS"
+    },
+    {
+      "platform": "macosClashMi",
+      "name": "proxy-UDP-IPv4",
+      "result": "PASS"
+    },
+    {
+      "platform": "macosClashMi",
+      "name": "reject-cached-literal-or-host:::1",
+      "result": "PASS"
+    },
+    {
+      "platform": "macosClashMi",
+      "name": "reject-cached-literal-or-host:six.local",
+      "result": "PASS"
+    },
+    {
+      "platform": "macosClashMi",
+      "name": "reject-IPv6-UDP",
+      "result": "PASS"
+    },
+    {
+      "platform": "macosClashMi",
+      "name": "DNS-qtype-1:A-present",
+      "result": "PASS"
+    },
+    {
+      "platform": "macosClashMi",
+      "name": "DNS-qtype-28:empty",
+      "result": "PASS"
+    },
+    {
+      "platform": "macosClashMi",
+      "name": "DNS-qtype-64:empty",
+      "result": "PASS"
+    },
+    {
+      "platform": "macosClashMi",
+      "name": "DNS-qtype-65:empty",
+      "result": "PASS"
+    },
+    {
+      "platform": "macosClashMi",
+      "name": "DNS-explicit-IPv6-host-AAAA-empty",
+      "result": "PASS"
+    },
+    {
+      "platform": "macosClashMi",
+      "name": "provider-refresh-overrides-conflicting-IPv6",
+      "result": "PASS"
+    },
+    {
+      "platform": "macosClashMi",
+      "name": "provider-refresh-IPv6-literal-fails",
+      "result": "PASS"
+    },
+    {
+      "platform": "clashVerge",
+      "name": "node:Relay:IPv4",
+      "result": "PASS"
+    },
+    {
+      "platform": "clashVerge",
+      "name": "node:ForcedFrom6:IPv4",
+      "result": "PASS"
+    },
+    {
+      "platform": "clashVerge",
+      "name": "node:Literal6:fails-without-IPv6",
+      "result": "PASS"
+    },
+    {
+      "platform": "clashVerge",
+      "name": "node:AAAA:fails-without-IPv6",
+      "result": "PASS"
+    },
+    {
+      "platform": "clashVerge",
+      "name": "node:ProviderDual:IPv4",
+      "result": "PASS"
+    },
+    {
+      "platform": "clashVerge",
+      "name": "node:ProviderLiteral6:fails-without-IPv6",
+      "result": "PASS"
+    },
+    {
+      "platform": "clashVerge",
+      "name": "node:ProviderAAAA:fails-without-IPv6",
+      "result": "PASS"
+    },
+    {
+      "platform": "clashVerge",
+      "name": "DIRECT-domain-TCP-IPv4",
+      "result": "PASS"
+    },
+    {
+      "platform": "clashVerge",
+      "name": "DIRECT-UDP-IPv4",
+      "result": "PASS"
+    },
+    {
+      "platform": "clashVerge",
+      "name": "proxy-UDP-IPv4",
+      "result": "PASS"
+    },
+    {
+      "platform": "clashVerge",
+      "name": "reject-cached-literal-or-host:::1",
+      "result": "PASS"
+    },
+    {
+      "platform": "clashVerge",
+      "name": "reject-cached-literal-or-host:six.local",
+      "result": "PASS"
+    },
+    {
+      "platform": "clashVerge",
+      "name": "reject-IPv6-UDP",
+      "result": "PASS"
+    },
+    {
+      "platform": "clashVerge",
+      "name": "DNS-qtype-1:A-present",
+      "result": "PASS"
+    },
+    {
+      "platform": "clashVerge",
+      "name": "DNS-qtype-28:empty",
+      "result": "PASS"
+    },
+    {
+      "platform": "clashVerge",
+      "name": "DNS-qtype-64:empty",
+      "result": "PASS"
+    },
+    {
+      "platform": "clashVerge",
+      "name": "DNS-qtype-65:empty",
+      "result": "PASS"
+    },
+    {
+      "platform": "clashVerge",
+      "name": "DNS-explicit-IPv6-host-AAAA-empty",
+      "result": "PASS"
+    },
+    {
+      "platform": "clashVerge",
+      "name": "provider-refresh-overrides-conflicting-IPv6",
+      "result": "PASS"
+    },
+    {
+      "platform": "clashVerge",
+      "name": "provider-refresh-IPv6-literal-fails",
+      "result": "PASS"
+    }
+  ],
+  "coreSHA256": "da6569414016c3d2349ebd3610f17443bd67f835109d7e82c725d695f78b761b",
+  "manifestSHA256": "be9b07534000b1b085b37bc94485a35d8143bba70e29c07d47ce646f2f7aa5ff",
+  "harnessSHA256": "cfd6e06fdfceee045006e7ea007b3b5179c0d218cb86ce396e3e7542702bf21a",
+  "deviceAcceptance": "NOT_RUN",
+  "tunEnabled": false,
+  "clientDeployment": false,
+  "controls": {
+    "IPv6LoopbackReachable": "ENVIRONMENT_BLOCKED_EACCES",
+    "limitation": "Zero IPv6 listener hits alone do not certify working IPv6 rejection; IPv4 successes and generated family restrictions are tested independently."
+  },
+  "observations": [
+    {
+      "family": 4,
+      "command": 1,
+      "atyp": 3,
+      "host": "www.gstatic.com",
+      "port": 443
+    },
+    {
+      "family": 4,
+      "command": 1,
+      "atyp": 3,
+      "host": "www.gstatic.com",
+      "port": 443
+    },
+    {
+      "family": 4,
+      "command": 1,
+      "atyp": 3,
+      "host": "www.gstatic.com",
+      "port": 443
+    },
+    {
+      "family": 4,
+      "command": 1,
+      "atyp": 3,
+      "host": "chatgpt.com",
+      "port": 52054
+    },
+    {
+      "family": 4,
+      "command": 1,
+      "atyp": 3,
+      "host": "chatgpt.com",
+      "port": 52054
+    },
+    {
+      "family": 4,
+      "command": 1,
+      "atyp": 3,
+      "host": "chatgpt.com",
+      "port": 52054
+    },
+    {
+      "family": 4,
+      "command": 3,
+      "atyp": 1,
+      "host": "0.0.0.0",
+      "port": 0
+    },
+    {
+      "family": 4,
+      "command": 1,
+      "atyp": 3,
+      "host": "chatgpt.com",
+      "port": 52054
+    },
+    {
+      "family": 4,
+      "command": 1,
+      "atyp": 3,
+      "host": "www.gstatic.com",
+      "port": 443
+    },
+    {
+      "family": 4,
+      "command": 1,
+      "atyp": 3,
+      "host": "www.gstatic.com",
+      "port": 443
+    },
+    {
+      "family": 4,
+      "command": 1,
+      "atyp": 3,
+      "host": "www.gstatic.com",
+      "port": 443
+    },
+    {
+      "family": 4,
+      "command": 1,
+      "atyp": 3,
+      "host": "chatgpt.com",
+      "port": 52054
+    },
+    {
+      "family": 4,
+      "command": 1,
+      "atyp": 3,
+      "host": "chatgpt.com",
+      "port": 52054
+    },
+    {
+      "family": 4,
+      "command": 1,
+      "atyp": 3,
+      "host": "chatgpt.com",
+      "port": 52054
+    },
+    {
+      "family": 4,
+      "command": 3,
+      "atyp": 1,
+      "host": "0.0.0.0",
+      "port": 0
+    },
+    {
+      "family": 4,
+      "command": 1,
+      "atyp": 3,
+      "host": "chatgpt.com",
+      "port": 52054
+    },
+    {
+      "family": 4,
+      "command": 1,
+      "atyp": 3,
+      "host": "www.gstatic.com",
+      "port": 443
+    },
+    {
+      "family": 4,
+      "command": 1,
+      "atyp": 3,
+      "host": "www.gstatic.com",
+      "port": 443
+    },
+    {
+      "family": 4,
+      "command": 1,
+      "atyp": 3,
+      "host": "www.gstatic.com",
+      "port": 443
+    },
+    {
+      "family": 4,
+      "command": 1,
+      "atyp": 3,
+      "host": "chatgpt.com",
+      "port": 52054
+    },
+    {
+      "family": 4,
+      "command": 1,
+      "atyp": 3,
+      "host": "chatgpt.com",
+      "port": 52054
+    },
+    {
+      "family": 4,
+      "command": 1,
+      "atyp": 3,
+      "host": "chatgpt.com",
+      "port": 52054
+    },
+    {
+      "family": 4,
+      "command": 3,
+      "atyp": 1,
+      "host": "0.0.0.0",
+      "port": 0
+    },
+    {
+      "family": 4,
+      "command": 1,
+      "atyp": 3,
+      "host": "chatgpt.com",
+      "port": 52054
+    },
+    {
+      "family": 4,
+      "command": 1,
+      "atyp": 3,
+      "host": "www.gstatic.com",
+      "port": 443
+    },
+    {
+      "family": 4,
+      "command": 1,
+      "atyp": 3,
+      "host": "www.gstatic.com",
+      "port": 443
+    },
+    {
+      "family": 4,
+      "command": 1,
+      "atyp": 3,
+      "host": "www.gstatic.com",
+      "port": 443
+    },
+    {
+      "family": 4,
+      "command": 1,
+      "atyp": 3,
+      "host": "chatgpt.com",
+      "port": 52054
+    },
+    {
+      "family": 4,
+      "command": 1,
+      "atyp": 3,
+      "host": "chatgpt.com",
+      "port": 52054
+    },
+    {
+      "family": 4,
+      "command": 1,
+      "atyp": 3,
+      "host": "chatgpt.com",
+      "port": 52054
+    },
+    {
+      "family": 4,
+      "command": 3,
+      "atyp": 1,
+      "host": "0.0.0.0",
+      "port": 0
+    },
+    {
+      "family": 4,
+      "command": 1,
+      "atyp": 3,
+      "host": "chatgpt.com",
+      "port": 52054
+    },
+    {
+      "family": 4,
+      "command": 1,
+      "atyp": 3,
+      "host": "www.gstatic.com",
+      "port": 443
+    },
+    {
+      "family": 4,
+      "command": 1,
+      "atyp": 3,
+      "host": "www.gstatic.com",
+      "port": 443
+    },
+    {
+      "family": 4,
+      "command": 1,
+      "atyp": 3,
+      "host": "www.gstatic.com",
+      "port": 443
+    },
+    {
+      "family": 4,
+      "command": 1,
+      "atyp": 3,
+      "host": "chatgpt.com",
+      "port": 52054
+    },
+    {
+      "family": 4,
+      "command": 1,
+      "atyp": 3,
+      "host": "chatgpt.com",
+      "port": 52054
+    },
+    {
+      "family": 4,
+      "command": 1,
+      "atyp": 3,
+      "host": "chatgpt.com",
+      "port": 52054
+    },
+    {
+      "family": 4,
+      "command": 3,
+      "atyp": 1,
+      "host": "0.0.0.0",
+      "port": 0
+    },
+    {
+      "family": 4,
+      "command": 1,
+      "atyp": 3,
+      "host": "chatgpt.com",
+      "port": 52054
+    },
+    {
+      "family": 4,
+      "command": 1,
+      "atyp": 3,
+      "host": "www.gstatic.com",
+      "port": 443
+    },
+    {
+      "family": 4,
+      "command": 1,
+      "atyp": 3,
+      "host": "www.gstatic.com",
+      "port": 443
+    },
+    {
+      "family": 4,
+      "command": 1,
+      "atyp": 3,
+      "host": "www.gstatic.com",
+      "port": 443
+    },
+    {
+      "family": 4,
+      "command": 1,
+      "atyp": 3,
+      "host": "chatgpt.com",
+      "port": 52054
+    },
+    {
+      "family": 4,
+      "command": 1,
+      "atyp": 3,
+      "host": "chatgpt.com",
+      "port": 52054
+    },
+    {
+      "family": 4,
+      "command": 1,
+      "atyp": 3,
+      "host": "chatgpt.com",
+      "port": 52054
+    },
+    {
+      "family": 4,
+      "command": 3,
+      "atyp": 1,
+      "host": "0.0.0.0",
+      "port": 0
+    },
+    {
+      "family": 4,
+      "command": 1,
+      "atyp": 3,
+      "host": "chatgpt.com",
+      "port": 52054
+    }
+  ],
+  "counts": {
+    "relay4": 48,
+    "relay6": 0,
+    "direct4": 6,
+    "direct6": 0,
+    "udp4": 12,
+    "udp6": 0
+  }
+}

@@ -95,5 +95,31 @@
   },
   "clientIntegration": "releases/v14.3/validation/client-integration.json",
   "automaticClientDeployment": false,
-  "knownReleaseRegressions": "releases/v14.3/validation/known-release-regressions.json"
+  "knownReleaseRegressions": "releases/v14.3/validation/known-release-regressions.json",
+  "variants": {
+    "ipv4-only": {
+      "revision": "ipv4-only-r1",
+      "directory": "releases/v14.3-ipv4-only",
+      "manifest": "releases/v14.3-ipv4-only/MANIFEST.json",
+      "guide": "releases/v14.3-ipv4-only/README.md",
+      "packages": "dist/v14.3-ipv4-only",
+      "entries": {
+        "windows": "releases/v14.3-ipv4-only/src/windows/v14.3-ipv4-only.js",
+        "android": "releases/v14.3-ipv4-only/src/android/v14.3-android-ipv4-only.js",
+        "clashmi": "releases/v14.3-ipv4-only/src/ios/v14.3-clashmi-domestic-protocol-r1-ipv4-only.js",
+        "shadowrocket": "releases/v14.3-ipv4-only/src/ios/v14.3-shadowrocket-ipv4-only.conf",
+        "macosFlClash": "releases/v14.3-ipv4-only/src/macos/v14.3-macos-flclash-ipv4-only.js",
+        "macosClashMi": "releases/v14.3-ipv4-only/src/macos/v14.3-macos-clashmi-ipv4-only.js",
+        "clashVerge": "releases/v14.3-ipv4-only/src/clash-verge/v14.3-clash-verge-ipv4-only.js"
+      },
+      "status": "SOURCE_ENGINE_LOCAL_CORE_PASS_DEVICE_PENDING",
+      "clientDeployment": false,
+      "wholeDeviceIPv4Requires": "APP_OS_IPV6_BLOCK_AND_IPV4_SYSTEM_DNS",
+      "shadowrocket": "NODE_IPV4_PINNING_REQUIRED_NATIVE_NOT_RUN",
+      "releaseTag": "v14.3.0-ipv4-only-rc.1",
+      "releaseBranch": "release/ipv4-only-r1",
+      "publicReleaseURL": "https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-ipv4-only-rc.1",
+      "releaseStatus": "PRE_RELEASE_DEVICE_PENDING"
+    }
+  }
 }

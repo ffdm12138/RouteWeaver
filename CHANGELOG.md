@@ -1,5 +1,12 @@
 # Changelog
 
+## v14.3.0-ipv4-only-rc.1 — 2026-10-17
+
+新增独立纯 IPv4 分支和七个导入入口，保留原有版本。六份 JS 强制本机直连和节点连接采用 IPv4，保持公司/国内分组、DNS 跟组及 UDP 防回落；IPv6-only hosts 的 AAAA 绕过已修复。附自包含配置包、增量源码回放包和逐成员 SHA256。
+
+本地静态 67 项、真实 QuickJS/Boa 132 项、隔离核心 120 项通过；全机纯 IPv4 还需 App/物理网卡阻止旁路 IPv6，并使用 IPv4 系统 DNS。Shadowrocket 需额外固定节点 IPv4。真实 TUN、跨端设备和媒体未验收。
+
+
 ## v14.3.0-rc.6 — auto-local-family-r1
 
 - **rc.6 公开版已知回归（PRE-RELEASE）**：native-core 本地 API timeout；balanced-empty-core provider API ECONNREFUSED。两项保留 FAIL，不计通过；用户明确授权先发版，自动能力的设备原生接入仍未验收。

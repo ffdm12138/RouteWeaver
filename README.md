@@ -1,5 +1,7 @@
 # RouteWeaver
 
+**独立纯 IPv4 预发布**：[v14.3.0-ipv4-only-rc.1](https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-ipv4-only-rc.1)。七个新入口与客户端设置见 [纯 IPv4 说明](releases/v14.3-ipv4-only/README.md)。原有 auto/双栈入口与历史 Release 保留。
+
 ## rc.6：自动模式与原生能力边界
 
 当前源码修订 `auto-local-family-r1`，六份 JS 默认请求 `auto`，每客户端仍一份入口，保留 `dual-stack`／`ipv4-local`。自动出口判断需要匹配原生核心，普通核心接受覆写不等于已接入；Shadowrocket 只保留原生 IPv4 偏好与 IPv6 开启。Windows 指定 FlClash 核心/Helper 已完成新编译和隔离验证，但本轮未安装，维护者此前手动兼容客户端不变。移动端受保护 socket 和其它平台宿主仍需独立接入，真实 TUN/媒体/公网 IPv6 未验收。当前说明与证据入口：`docs/guides/自动网络模式.md`、`docs/reports/v14.3/自动本地地址族与跨端能力.md`。

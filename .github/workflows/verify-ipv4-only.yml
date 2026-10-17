@@ -1,0 +1,36 @@
+name: Verify IPv4-only release
+
+on:
+  push:
+    branches: [release/ipv4-only-r1]
+    tags: ['v14.3.0-ipv4-only-rc.*']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ipv4-only-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24.19.0'
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.12.10'
+      - name: Audit actual indexed public source
+        run: python tools/audit-publication.py --strict
+      - name: Verify immutable sources, bound evidence and fresh Node/package replay
+        run: python tools/verify-ipv4-only-release.py
