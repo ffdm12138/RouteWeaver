@@ -82,3 +82,18 @@ api.openai.com:
 1. 有回放核心后，重跑上述隔离核心测试并重新绑定回执，替换本轮 `NOT_RUN`。
 2. 由用户在自己的 FlClash 上重新应用覆写脚本后，实测 `Resolve-DnsName api.openai.com` 返回真实 A 记录、Serena/浏览器 API 可用。
 3. 若确认 853 长期不可用，再评估把整个业务 DNS 迁到 DoH/443（会失去 `disable-reuse` 的「每次重新拨号」语义，需要单独设计与验收）。
+
+## 当前 CI 状态（如实记录）
+
+`v14.3.0-rc.7` 推送后 `Verify public source` 在两个平台都失败，第一处是 `tools/verify-v14.3.py` 第 19 行：
+
+```python
+assert current['status']==review['status']=='AUTO_LOCAL_NATIVE_CORE_PASS_DEVICE_PENDING'
+```
+
+本轮把 `CURRENT_RELEASE.json` 的 `status` 改为 `API_DOH_SOURCE_STATIC_PASS_NATIVE_NOT_RUN`（rc.7 的真实状态），而 `metadata/balanced-review.json` 仍是 rc.6 那次绑定的产物。这不是可以顺手改掉的字符串：`balanced-review.json` 由 `tools/record-v14.3.py` 生成，该工具要求 `validation/*.json` 里的 `sourceFiles` 哈希与当前源码逐一致；本轮没有可用的回放核心，重新生成等于伪造核心证据。
+
+同一分支在本轮**之前**就已经是红的：10-17 的 `controller-readiness-r1` 改了 `tools/package-v14.3.py`，但 `validation/known-release-regressions.json` 仍绑定旧字节，`verify` 在第 23 行 `release_regressions.py` 处断言失败。本轮没有修改也没有掩盖这一项。
+
+结论：红的原因是「合同已前进、回执未重新绑定」，属于真实缺口，不是可以靠改断言消除的噪音。要让 CI 转绿，需要一次带回放核心的重新绑定会话，而不是放宽校验。
+
