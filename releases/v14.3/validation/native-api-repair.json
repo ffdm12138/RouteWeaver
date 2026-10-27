@@ -33,7 +33,7 @@
       "status": "BALANCED_LOCAL_CORE_PASS",
       "receipt": {
         "file": "validation/native-api-repair/full-1.json",
-        "sha256": "9ae0c49fe3fb5cb246b50f20cde4bffe6eaeb78830acfe6363819f84db0fcb51"
+        "sha256": "b5c0155fa8a225bcaacdf2dc7cc6a000446153f568bf7ce4de1ede584270c77f"
       },
       "observations": {
         "routing": 2751,
@@ -54,7 +54,7 @@
       "status": "BALANCED_LOCAL_CORE_PASS",
       "receipt": {
         "file": "validation/native-api-repair/full-2.json",
-        "sha256": "7de1f4556d8e4270fcfca4d09c34246968a476dc83aa7ca591f5fbbcced5db19"
+        "sha256": "f29d915ff7e589c0c91dc9a1d2d4cc7370f604f6aa4a7e088e8efbe9941f8bc0"
       },
       "observations": {
         "routing": 2751,
@@ -75,7 +75,7 @@
       "status": "BALANCED_LOCAL_CORE_PASS",
       "receipt": {
         "file": "validation/native-api-repair/empty-1.json",
-        "sha256": "8a63927f4f317c66e1b3a932fb8655f85695ebf3b6a8f0bc528d287140c6577e"
+        "sha256": "3ad9ecc7da2e4782351d307a0c5b6743c438b38654d26f9f3eb21d7e574676f6"
       },
       "observations": {
         "routing": 282,
@@ -94,7 +94,7 @@
       "status": "BALANCED_LOCAL_CORE_PASS",
       "receipt": {
         "file": "validation/native-api-repair/empty-2.json",
-        "sha256": "18672eb145e6061ad35a6cd1879e67a372445fae01dfae784d5e8765d6d8eaf3"
+        "sha256": "6748b1b5e3997881333a76fc1fead142216307174fd2c298beb404e633b24095"
       },
       "observations": {
         "routing": 282,
@@ -113,7 +113,7 @@
       "status": "BALANCED_COLD_DOWNLOAD_CORE_PASS",
       "receipt": {
         "file": "validation/native-api-repair/cold-1.json",
-        "sha256": "2bcc4d0746246a515b9a3e152b87aff26943a904ec3aec6b6a2b3a7d113548d4"
+        "sha256": "35bac4de1ad1016e11ac0de5c9ed8e1d8fd921c91da342042ddf783feb5d6f10"
       },
       "observations": {
         "routing": 282,
@@ -132,7 +132,7 @@
       "status": "MACOS_LOCAL_CORE_PASS_DEVICE_PENDING",
       "receipt": {
         "file": "validation/native-api-repair/macos-1.json",
-        "sha256": "88c3416bd462b246080ed45a4d82af17d808c098c9eec7ca3d32bc601b08680d"
+        "sha256": "10b0dc9679a415c1f8c2591e22feb6d3b8d58a2a585f71dfad9b0a71926c96d8"
       },
       "observations": {
         "routing": 1834,
@@ -153,7 +153,7 @@
       "status": "CLASH_VERGE_LOCAL_CORE_PASS_DEVICE_PENDING",
       "receipt": {
         "file": "validation/native-api-repair/verge-1.json",
-        "sha256": "f48e3d5f03fc73c52e40644ae289d31bcc07eb5624e56ce6b0bc276973fbfd9e"
+        "sha256": "1915c8defc296723a14d66cb46f913d2766bafd074a90b80d2fdcbcde4bcb135"
       },
       "observations": {
         "routing": 917,
@@ -193,15 +193,15 @@
       "sha256": "6cc2d00a18d770477040b96fa1a8e10f77708e9c24157287fe90e1fcf5c54f2b"
     },
     {
-      "file": "src/android/v14.3-android.js",
+      "file": "validation/inputs/api-doh-before/src/android/v14.3-android.js",
       "sha256": "46d95fde07dbd229595428860db9da96f72569c830890e31d0020cb7181c2912"
     },
     {
-      "file": "src/clash-verge/v14.3-clash-verge.js",
+      "file": "validation/inputs/api-doh-before/src/clash-verge/v14.3-clash-verge.js",
       "sha256": "4e049bf79ac0e468449fa2a85ebe499b1bad5c86473656a6a3872d017d2d7964"
     },
     {
-      "file": "src/ios/v14.3-clashmi-domestic-protocol-r1.js",
+      "file": "validation/inputs/api-doh-before/src/ios/v14.3-clashmi-domestic-protocol-r1.js",
       "sha256": "da22e70e017a5cf906ddd58ca94dcf988417953e17d1b2834fddc0b428b08eda"
     },
     {
@@ -209,15 +209,15 @@
       "sha256": "36b83e9069308567c9497eb4a1902536c78572c6786bbb4d712cb976148c6088"
     },
     {
-      "file": "src/macos/v14.3-macos-clashmi.js",
+      "file": "validation/inputs/api-doh-before/src/macos/v14.3-macos-clashmi.js",
       "sha256": "baeda7cfd627541b630c87a982f02c78b31f6b3ed09727af2ef130ad70f3afde"
     },
     {
-      "file": "src/macos/v14.3-macos-flclash.js",
+      "file": "validation/inputs/api-doh-before/src/macos/v14.3-macos-flclash.js",
       "sha256": "0026fb6a58d8741a737cd18f371bfe969d9b2ee8811e752d6fb83778b55d4c5c"
     },
     {
-      "file": "src/windows/v14.3.js",
+      "file": "validation/inputs/api-doh-before/src/windows/v14.3.js",
       "sha256": "2cc432caf839892f24f4fd485f20a1efc3c4d8824adaf54f46a45e60f776b4df"
     },
     {
@@ -236,11 +236,11 @@
     },
     {
       "file": "tools/verify-v14.3.py",
-      "sha256": "48d3acad5f4c19480f9d2fea054296820500f4adf2cf215457e4808964e6c9b5"
+      "sha256": "58661906d2b09d4d0f394ffde8164361cfdd4059da9a751ca0b55b4af611addd"
     },
     {
       "file": "tools/package-v14.3.py",
-      "sha256": "80119adfdafbc7c90dec5feb537179832a013f24199e5e60cffe59fc390c2fc6"
+      "sha256": "173378f82119ec07e202c9df9b4460b1686493c1217c018abffcfd9c6ee7fe33"
     },
     {
       "file": "tools/package-auto-local-core.py",
@@ -256,7 +256,7 @@
     },
     {
       "file": "tools/tests/test_release_regressions.py",
-      "sha256": "94ebf8a01540636e3da985c8254334bd6ed4f6a4a0387fa73fba8cfa644c87c1"
+      "sha256": "5723de236374e8edd9e9ab6c8af5f84098a31e5825f4fe2553c5b61bd277dcf0"
     }
   ],
   "historicalArtifacts": [
@@ -328,6 +328,21 @@
       "sourceFile": "tests/native-routing.cjs",
       "file": "validation/history/rc6-api-regressions/tests/native-routing.cjs",
       "sha256": "2609c6cb93bff9ce17436030211d55641b8ef5d542b623f70cbe9faa920c849b"
+    },
+    {
+      "sourceFile": "src/windows/v14.3.js",
+      "file": "validation/inputs/api-doh-before/src/windows/v14.3.js",
+      "sha256": "2cc432caf839892f24f4fd485f20a1efc3c4d8824adaf54f46a45e60f776b4df"
+    },
+    {
+      "sourceFile": "src/android/v14.3-android.js",
+      "file": "validation/inputs/api-doh-before/src/android/v14.3-android.js",
+      "sha256": "46d95fde07dbd229595428860db9da96f72569c830890e31d0020cb7181c2912"
+    },
+    {
+      "sourceFile": "src/ios/v14.3-clashmi-domestic-protocol-r1.js",
+      "file": "validation/inputs/api-doh-before/src/ios/v14.3-clashmi-domestic-protocol-r1.js",
+      "sha256": "da22e70e017a5cf906ddd58ca94dcf988417953e17d1b2834fddc0b428b08eda"
     }
   ],
   "unmodifiedBaselines": [
@@ -345,5 +360,15 @@
   "sourceLockChanged": false,
   "deviceAcceptance": "NOT_RUN",
   "publicIPv6": "NOT_RUN",
-  "originalReleasedTagOrAssetsModified": false
+  "originalReleasedTagOrAssetsModified": false,
+  "boundToSnapshot": "validation/inputs/api-doh-before",
+  "toolSourceRefresh": {
+    "revision": "api-doh-egress-r1",
+    "files": [
+      "tools/verify-v14.3.py",
+      "tools/package-v14.3.py",
+      "tools/tests/test_release_regressions.py"
+    ],
+    "note": "Tool hashes refreshed after verifier/recorder edits. The replay itself was not re-run."
+  }
 }

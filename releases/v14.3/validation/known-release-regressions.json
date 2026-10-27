@@ -20,7 +20,7 @@
       "resolution": {
         "classification": "CONTROLLER_HARDENED_INDEPENDENT_REPEATS_PASS_ORIGINAL_TRIGGER_UNPROVEN",
         "validationFile": "validation/native-core.json",
-        "validationSHA256": "7de1f4556d8e4270fcfca4d09c34246968a476dc83aa7ca591f5fbbcced5db19",
+        "validationSHA256": "f29d915ff7e589c0c91dc9a1d2d4cc7370f604f6aa4a7e088e8efbe9941f8bc0",
         "status": "BALANCED_LOCAL_CORE_PASS",
         "revision": "controller-readiness-r1"
       }
@@ -40,7 +40,7 @@
       "resolution": {
         "classification": "CONTROLLER_HARDENED_INDEPENDENT_REPEATS_PASS_ORIGINAL_TRIGGER_UNPROVEN",
         "validationFile": "validation/balanced-empty-core.json",
-        "validationSHA256": "18672eb145e6061ad35a6cd1879e67a372445fae01dfae784d5e8765d6d8eaf3",
+        "validationSHA256": "6748b1b5e3997881333a76fc1fead142216307174fd2c298beb404e633b24095",
         "status": "BALANCED_LOCAL_CORE_PASS",
         "revision": "controller-readiness-r1"
       }
@@ -48,7 +48,7 @@
   ],
   "repairEvidence": {
     "file": "validation/native-api-repair.json",
-    "sha256": "b16ed9020ac263c9cd93ed16fea71b4fcfdbbafccf377c39292dff14168817b2"
+    "sha256": "2b0ecf92037660ff39778164cc535e307fa14ea99f23cef952ba5a0784ed5856"
   },
   "scope": "Current loopback regressions passed with hardened controller; original FAIL bytes retained independently. Exact original trigger remains unproven.",
   "deviceAutoSupport": "NOT_VERIFIED",

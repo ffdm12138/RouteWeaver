@@ -20,11 +20,11 @@
     },
     "sourceManifest": {
       "file": "metadata/shadowrocket-lean.json",
-      "sha256": "af3f499dd87b6c5829a9302906c8395e8b81729805ce727fc27317d162667de2"
+      "sha256": "21efd5419d7a4f705afa96f3da9417b1baa55914119615c7c4899df29fd63655"
     },
     "staticEvidence": {
       "file": "validation/shadowrocket-lean.json",
-      "sha256": "c2c87f39f747210f06b5e62ed3136ecc02c5bf257b101315cb061165fad0ddfa",
+      "sha256": "fc5a36ec751ceb5c598de924fca69223b1e7e265694da99f7554cab484e4f541",
       "status": "SHADOWROCKET_LEAN_STATIC_PASS_NATIVE_PENDING"
     },
     "fullBusinessDNS": "SELF_CONTAINED",
@@ -35,18 +35,18 @@
   "jsEntries": [
     {
       "file": "src/windows/v14.3.js",
-      "sha256": "2cc432caf839892f24f4fd485f20a1efc3c4d8824adaf54f46a45e60f776b4df",
-      "bytes": 125188
+      "sha256": "2b0f7eff6c881fc633ec7c07e6da90683582ae5ae99f37a4b53604785898cf84",
+      "bytes": 126491
     },
     {
       "file": "src/android/v14.3-android.js",
-      "sha256": "46d95fde07dbd229595428860db9da96f72569c830890e31d0020cb7181c2912",
-      "bytes": 125074
+      "sha256": "ecf1e3950097fea6b878bcc820ae6d555a3f72a12580cd271ccca4c3f3a5253b",
+      "bytes": 125957
     },
     {
       "file": "src/ios/v14.3-clashmi-domestic-protocol-r1.js",
-      "sha256": "da22e70e017a5cf906ddd58ca94dcf988417953e17d1b2834fddc0b428b08eda",
-      "bytes": 128096
+      "sha256": "9eaa5ea74c03f7a500a89dccdc69102189743f7b08761188c451ec336adc3b88",
+      "bytes": 128979
     }
   ],
   "clashmiSourceInspection": {
@@ -132,7 +132,7 @@
   },
   "localCoreEvidence": {
     "file": "validation/native-core.json",
-    "sha256": "7de1f4556d8e4270fcfca4d09c34246968a476dc83aa7ca591f5fbbcced5db19",
+    "sha256": "f29d915ff7e589c0c91dc9a1d2d4cc7370f604f6aa4a7e088e8efbe9941f8bc0",
     "status": "BALANCED_LOCAL_CORE_PASS"
   },
   "historicalFailedInvestigation": {

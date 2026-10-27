@@ -7,12 +7,12 @@
   "directory": "releases/v14.3",
   "documentation": "docs/README.md",
   "report": "docs/reports/v14.3/自动本地地址族与跨端能力.md",
-  "status": "API_DOH_SOURCE_STATIC_PASS_NATIVE_NOT_RUN",
+  "status": "SOURCE_STATIC_PASS_NATIVE_EVIDENCE_FROZEN_PRE_CHANGE",
   "apiDohRevision": "api-doh-egress-r1",
   "apiDohReport": "docs/reports/v14.3/API真实解析DNS出口修复.md",
   "apiDohScope": "api.openai.com real-answer exception kept; DNS moved from group DoT/853 to the same group's DoH/443 in six JS entries and six ipv4-only entries",
   "apiDohNativeAcceptance": "NOT_RUN_NO_REPLAY_CORE_IN_SESSION",
-  "apiDohPriorReceipts": "BOUND_TO_PRE_CHANGE_BYTES_NOT_THIS_REVISION",
+  "apiDohPriorReceipts": "BOUND_TO_FROZEN_PRE_CHANGE_SNAPSHOT",
   "appleLogin541": "UNRESOLVED_BROWSER_RETEST_NOT_RUN",
   "openAIConnectivity": "API_REAL_IP_A0_SOURCE_STATIC_PASS_DOH_443; BROWSER_TUN_RETEST_PENDING",
   "windows": "AUTO_CORE_LOOPBACK_PASS_NOT_DEPLOYED_PREVIOUS_MANUAL_MODE_RETAINED",
@@ -24,7 +24,7 @@
   "clashmiUserObservedVersion": "1.0.30.1605 ios",
   "clashmiBridge": "OBJECT_RETURN_SOURCE_LOCAL_CORE_PASS_DEVICE_RETEST_PENDING",
   "ipv6Transport": "NOT_RUN_ENVIRONMENT_IN_CURRENT_DNS_REPLAY",
-  "clientDeployment": "PREVIOUS_MANUAL_WINDOWS_ONLY_AUTO_NOT_DEPLOYED",
+  "clientDeployment": "MAINTAINER_WINDOWS_FLCLASH_ONLY",
   "publicSelectors": [
     "高纯净度AI用",
     "高网速视频用"
@@ -72,7 +72,7 @@
   "macosReport": "docs/reports/v14.3/MacBook适配.md",
   "macos": "CONFIG_SOURCE_WINDOWS_LOCAL_CORE_PASS_MAC_DEVICE_NOT_RUN",
   "distribution": "public",
-  "releaseTag": "v14.3.0-rc.7",
+  "releaseTag": "v14.3.0-rc.8",
   "personalRulesIncluded": false,
   "networkCompatibilityRevision": "ipv6-fallback-r2",
   "networkCompatibility": "releases/v14.3/metadata/network-compat-delivery.json",
@@ -133,5 +133,12 @@
       "publicReleaseRemoteSHA256": "ALL_15_ANONYMOUS_DOWNLOADS_MATCH",
       "priorReleasesPreserved": 6
     }
+  },
+  "nativeEvidenceSnapshot": "validation/inputs/api-doh-before/manifest.json",
+  "apiRealAnswerRevision": "api-real-answer-by-mode-r1",
+  "apiRealAnswerByMode": {
+    "ipv4-local/ipv4-only": "api.openai.com stays inside Fake-IP; no local real resolution",
+    "dual-stack/auto": "real A/AAAA over the OpenAI group DoH/443",
+    "reason": "Chromium classifies every usable IPv6 Fake-IP prefix as local network"
   }
 }

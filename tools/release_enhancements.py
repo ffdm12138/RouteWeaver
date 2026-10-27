@@ -24,7 +24,7 @@ def record(project,release,current,review,sha,read):
     review['enhancements']={'revision':'auto-local-family-r1','priorIntegrationScope':'rc.5 TUN receipt only; auto is not deployed','runtimeRevision':'shared-runtime-r1','entryRevision':'single-entry-r1','testEvidence':receipts,
         'capabilities':{'file':'data/client-capabilities.json','sha256':sha(release/'data/client-capabilities.json')},
         'recordingModule':{'file':'tools/release_enhancements.py','sha256':sha(project/'tools/release_enhancements.py')}}
-    review['clientDeployment']=current['clientDeployment']='PREVIOUS_MANUAL_WINDOWS_ONLY_AUTO_NOT_DEPLOYED'
+    review['clientDeployment']=current['clientDeployment']='MAINTAINER_WINDOWS_FLCLASH_ONLY'
     current['entries']['clashVerge']='releases/v14.3/'+verge['entries'][0]['file']
     current['inlineProviderRows']['clashVerge']=verge['entries'][0]['inlineRows']
     current.update(layoutRevision=8,clashVerge='SOURCE_REAL_BOA_LOCAL_CORE_PASS_NATIVE_APP_NOT_RUN',
@@ -38,7 +38,7 @@ def verify(project,release,current,review,sha,read):
     assert item['testEvidence']==receipts
     assert current['entryRevision']==item['entryRevision']=='single-entry-r1'
     assert current['runtimeRevision']==item['runtimeRevision']=='shared-runtime-r1'
-    assert current['clientDeployment']==review['clientDeployment']=='PREVIOUS_MANUAL_WINDOWS_ONLY_AUTO_NOT_DEPLOYED'
+    assert current['clientDeployment']==review['clientDeployment']=='MAINTAINER_WINDOWS_FLCLASH_ONLY'
     e=item['capabilities'];assert sha(release/e['file'])==e['sha256']
     assert sha(project/item['recordingModule']['file'])==item['recordingModule']['sha256']
     expected={e['file'] for e in read(release/'metadata/network-compat.json')['entries']}

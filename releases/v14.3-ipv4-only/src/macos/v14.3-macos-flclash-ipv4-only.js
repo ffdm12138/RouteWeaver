@@ -2252,6 +2252,9 @@ function v14IPv4LocalMain(input) {
   delete config["routeweaver-local-family"];
   config.dns.ipv6 = false;
   delete config.dns["fake-ip-range6"];
+  if (Array.isArray(config.dns["fake-ip-filter"]))
+    config.dns["fake-ip-filter"] = config.dns["fake-ip-filter"].filter(value => value !== "api.openai.com");
+  if (v14Object(config.dns["nameserver-policy"])) delete config.dns["nameserver-policy"]["api.openai.com"];
   for (const key of ["nameserver", "fallback", "direct-nameserver"])
     if (config.dns[key] != null) config.dns[key] = v14IPv4LocalResolver(config.dns[key]);
   for (const key of Object.keys(config.dns["nameserver-policy"] || {}))

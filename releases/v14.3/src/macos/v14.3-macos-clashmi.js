@@ -2412,6 +2412,13 @@ function v14IPv4LocalMain(input) {
   delete config["routeweaver-local-family"];
   config.dns.ipv6 = false;
   delete config.dns["fake-ip-range6"];
+  // AAAA is suppressed here, so no IPv6 Fake-IP ULA can reach Chromium and the
+  // api.openai.com real-answer exception stops buying anything. Let the name
+  // fall back to Fake-IP: the proxy resolves it remotely, which needs no local
+  // resolver transport at all. Dual-stack and auto keep the exception.
+  if (Array.isArray(config.dns["fake-ip-filter"]))
+    config.dns["fake-ip-filter"] = config.dns["fake-ip-filter"].filter(value => value !== "api.openai.com");
+  if (v14Object(config.dns["nameserver-policy"])) delete config.dns["nameserver-policy"]["api.openai.com"];
   for (const key of ["nameserver", "fallback", "direct-nameserver"])
     if (config.dns[key] != null) config.dns[key] = v14IPv4LocalResolver(config.dns[key]);
   for (const key of Object.keys(config.dns["nameserver-policy"] || {}))

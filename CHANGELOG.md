@@ -1,5 +1,12 @@
 # Changelog
 
+## v14.3.0-rc.8 — api-real-answer-by-mode-r1
+
+- `fake-ip-filter` 里的 `api.openai.com` 例外按模式区分，取代 rc.7 的全模式 DoH 解析：`ipv4-local` / `ipv4-only` 抑制 AAAA 后 Chromium 拿不到 IPv6 Fake-IP 的 ULA，例外只剩一个本地解析依赖，直接回到纯 Fake-IP（代理远端解析，本地零解析依赖）；`dual-stack` / `auto` 保留真实 A/AAAA，走同一「OpenAI 服务」组的 DoH/443。
+- 为什么不能靠换前缀绕过：Chromium 的地址空间表把 `fc00::/7`、`fe80::/10`、`fec0::/10`、`2001:db8::/32`、`3fff::/20` 全部判为 `local`，任何可用作 Fake-IP 的 IPv6 段都会触发公共页面 `public → local` 拦截；IPv4 `198.18.0.0/15` 不在表内，所以 IPv4 Fake-IP 一直没问题。
+- 原生证据冻结：本轮没有回放核心，既有 native/macOS 回执按原字节冻结到 `validation/inputs/api-doh-before/`（10 个文件），由 `tools/record-source-only.py` 记录，`verify-v14.3.py` 强制校验「快照存在、哈希自洽、且不等于当前入口」，并断言 `appliesToCurrentEntries: false`。核心回放与实机仍为 NOT_RUN，不冒充通过。
+- 两侧 `verify-v14.3.py`、`package-v14.3.py`、`--with-packages` 全过，CI 恢复 push 全严格校验。
+
 ## v14.3.0-rc.7 — api-doh-egress-r1
 
 - `api.openai.com` 是配置中唯一被排除出 Fake-IP、必须真实解析的域名（Chromium 会把 IPv6 Fake-IP 的 ULA 判为本地网络并拦截公共页面访问 API）。此前它的解析继承业务组 DoT/853 策略，853 被运营商或节点封禁时该域名单独 SERVFAIL，其余 Fake-IP 域名无感。本修订保留真实答案，把这一条精确主机策略改为同一「OpenAI 服务」组的 DoH/443。

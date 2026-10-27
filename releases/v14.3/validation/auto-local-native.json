@@ -202,7 +202,7 @@
       "sha256": "114a9f870a0e679ff0d81eab149ec95057045da910f1d38e0e1ea4572700c8a9"
     },
     {
-      "file": "tools/ipv4-local-adapter.js",
+      "file": "validation/inputs/api-doh-before/tools/ipv4-local-adapter.js",
       "sha256": "5a82d7f341133929d30e247671afcce05f918eb06325ec024be6db8b18ba931c"
     },
     {
@@ -218,7 +218,7 @@
       "sha256": "a8ac9e2982b005542e0aafa1f49e6cb346f31e93bbeaad7c46c539c229f83ecc"
     },
     {
-      "file": "runtime/platforms/desktop/preamble.js.in",
+      "file": "validation/inputs/api-doh-before/runtime/platforms/desktop/preamble.js.in",
       "sha256": "1e73b0019d8bec2ede26d206979b7706f994ef45a5b8e08cf86562d0d163a1e9"
     },
     {
@@ -306,7 +306,7 @@
       "sha256": "8229ca16fb8d5a32d6bc63473e3459b88ee92017c46458e3ec8e69f95628c825"
     },
     {
-      "file": "runtime/shared/main.js.in",
+      "file": "validation/inputs/api-doh-before/runtime/shared/main.js.in",
       "sha256": "18f2e9c0e4b410a4fdd82b1eb8a0a77e333100915d8a77bbbf406cd445f9c5a1"
     },
     {
@@ -314,7 +314,7 @@
       "sha256": "b050ad679557cd6b6d320ff8f33bcd60343be0e6c71b070ab52ce46fba03adea"
     },
     {
-      "file": "runtime/platforms/android/preamble.js.in",
+      "file": "validation/inputs/api-doh-before/runtime/platforms/android/preamble.js.in",
       "sha256": "d1ba04237e8a4813d8734e29b884f40986eda8545f4b4dbe2269e76c96d0d368"
     },
     {
@@ -350,27 +350,27 @@
       "sha256": "c13d5678ef753003262e3a23fc06a024fb60acfb433bb47b4a1fc6d0ef0f1a05"
     },
     {
-      "file": "src/windows/v14.3.js",
+      "file": "validation/inputs/api-doh-before/src/windows/v14.3.js",
       "sha256": "2cc432caf839892f24f4fd485f20a1efc3c4d8824adaf54f46a45e60f776b4df"
     },
     {
-      "file": "src/android/v14.3-android.js",
+      "file": "validation/inputs/api-doh-before/src/android/v14.3-android.js",
       "sha256": "46d95fde07dbd229595428860db9da96f72569c830890e31d0020cb7181c2912"
     },
     {
-      "file": "src/ios/v14.3-clashmi-domestic-protocol-r1.js",
+      "file": "validation/inputs/api-doh-before/src/ios/v14.3-clashmi-domestic-protocol-r1.js",
       "sha256": "da22e70e017a5cf906ddd58ca94dcf988417953e17d1b2834fddc0b428b08eda"
     },
     {
-      "file": "src/macos/v14.3-macos-flclash.js",
+      "file": "validation/inputs/api-doh-before/src/macos/v14.3-macos-flclash.js",
       "sha256": "0026fb6a58d8741a737cd18f371bfe969d9b2ee8811e752d6fb83778b55d4c5c"
     },
     {
-      "file": "src/macos/v14.3-macos-clashmi.js",
+      "file": "validation/inputs/api-doh-before/src/macos/v14.3-macos-clashmi.js",
       "sha256": "baeda7cfd627541b630c87a982f02c78b31f6b3ed09727af2ef130ad70f3afde"
     },
     {
-      "file": "src/clash-verge/v14.3-clash-verge.js",
+      "file": "validation/inputs/api-doh-before/src/clash-verge/v14.3-clash-verge.js",
       "sha256": "4e049bf79ac0e468449fa2a85ebe499b1bad5c86473656a6a3872d017d2d7964"
     },
     {
@@ -381,5 +381,6 @@
       "file": "tests/native-auto-local.cjs",
       "sha256": "c89caaeaf05517b9c86782fc1443502f2321037f4dbbb5fe18738a84792957fc"
     }
-  ]
+  ],
+  "boundToSnapshot": "validation/inputs/api-doh-before"
 }

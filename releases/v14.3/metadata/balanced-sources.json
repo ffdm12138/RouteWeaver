@@ -13,8 +13,8 @@
     {
       "platform": "windows",
       "file": "src/windows/v14.3.js",
-      "sha256": "cf9559a67f291ec9ebd6d875a2b3b677e7b11ad887877f373352d156507b0985",
-      "bytes": 125913,
+      "sha256": "2b0f7eff6c881fc633ec7c07e6da90683582ae5ae99f37a4b53604785898cf84",
+      "bytes": 126491,
       "generatedConfigBytes": 177493,
       "inlineRows": 819,
       "remoteSources": 30
@@ -22,8 +22,8 @@
     {
       "platform": "android",
       "file": "src/android/v14.3-android.js",
-      "sha256": "755bd9d52e4bf72d47b9a6b3e3ce2406491e0b2353aa356eaf75ab577e378960",
-      "bytes": 125379,
+      "sha256": "ecf1e3950097fea6b878bcc820ae6d555a3f72a12580cd271ccca4c3f3a5253b",
+      "bytes": 125957,
       "generatedConfigBytes": 177194,
       "inlineRows": 819,
       "remoteSources": 29
@@ -31,8 +31,8 @@
     {
       "platform": "clashmi",
       "file": "src/ios/v14.3-clashmi-domestic-protocol-r1.js",
-      "sha256": "d8e07bfc3e4e9b55dedd76451e75de090b4319fe452c17e5a689e82d63e1e514",
-      "bytes": 128401,
+      "sha256": "9eaa5ea74c03f7a500a89dccdc69102189743f7b08761188c451ec336adc3b88",
+      "bytes": 128979,
       "generatedConfigBytes": 178282,
       "inlineRows": 819,
       "remoteSources": 29
@@ -94,7 +94,7 @@
     },
     {
       "file": "tools/ipv4-local-adapter.js",
-      "sha256": "5a82d7f341133929d30e247671afcce05f918eb06325ec024be6db8b18ba931c"
+      "sha256": "cee3ffa5e922dd9f3aa4be95e473c0341f59e5b6f8a5452701c4654e4bf59dfc"
     },
     {
       "file": "tools/auto-local-adapter.js",

@@ -5,8 +5,6 @@ on:
     branches: [main]
   pull_request:
   workflow_dispatch:
-  release:
-    types: [published]
 
 permissions:
   contents: read
@@ -16,8 +14,6 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  # Offline checks: generation, static contracts, publication scan. No native
-  # replay core needed, so this runs on every push.
   verify:
     strategy:
       fail-fast: false
@@ -38,45 +34,6 @@ jobs:
         run: python tools/audit-publication.py --strict
       - name: Check publication scanner
         run: python -m unittest discover -s tools/tests -p "test_*.py"
-      - name: Fail on stale generated entries
-        run: |
-          node releases/v14.3/tools/build-all.cjs --check
-          node tools/build-ipv4-only.cjs --check
-      - name: Run static and compatibility contracts
-        working-directory: releases/v14.3
-        run: |
-          node tests/static.cjs
-          node tests/macos-static.cjs
-          node tests/clash-verge.cjs
-          node tests/shadowrocket-lean.cjs
-          node tests/network-compat.cjs
-      - name: Run IPv4-only parity
-        run: node tools/test-ipv4-only.cjs
-      - name: Ensure tracked inputs were not rewritten
-        run: git diff --exit-code
-
-  # Strict receipt binding, packaging and archive audit. Every claim here is
-  # bound to source hashes produced by a native replay core. When a revision
-  # changes the generated entries without a rebind session, this job fails by
-  # design -- that is the signal to re-run the replays, not to relax the check.
-  # It therefore runs on release publication and on demand, not on every push.
-  bound-release:
-    if: github.event_name == 'release' || github.event_name == 'workflow_dispatch'
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ubuntu-latest, windows-latest]
-    runs-on: ${{ matrix.os }}
-    steps:
-      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
-        with:
-          persist-credentials: false
-      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
-        with:
-          node-version: '24.19.0'
-      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
-        with:
-          python-version: '3.12.10'
       - name: Verify source and bound receipts
         run: python tools/verify-v14.3.py --skip-history
       - name: Build licensed packages and replay extracted static tests

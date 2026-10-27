@@ -1,0 +1,59 @@
+{
+  "revision": "api-doh-egress-r1",
+  "status": "FROZEN_PRE_CHANGE_SOURCES",
+  "producedFrom": "public commit 9626fea rebuilt as-is",
+  "purpose": "Exact bytes every existing receipt was recorded against; verified against each recorded SHA256 before freezing.",
+  "appliesToCurrentEntries": false,
+  "files": [
+    {
+      "file": "runtime/platforms/android/preamble.js.in",
+      "sha256": "d1ba04237e8a4813d8734e29b884f40986eda8545f4b4dbe2269e76c96d0d368",
+      "bytes": 12305
+    },
+    {
+      "file": "runtime/platforms/desktop/preamble.js.in",
+      "sha256": "1e73b0019d8bec2ede26d206979b7706f994ef45a5b8e08cf86562d0d163a1e9",
+      "bytes": 11611
+    },
+    {
+      "file": "runtime/shared/main.js.in",
+      "sha256": "18f2e9c0e4b410a4fdd82b1eb8a0a77e333100915d8a77bbbf406cd445f9c5a1",
+      "bytes": 27359
+    },
+    {
+      "file": "src/android/v14.3-android.js",
+      "sha256": "46d95fde07dbd229595428860db9da96f72569c830890e31d0020cb7181c2912",
+      "bytes": 125074
+    },
+    {
+      "file": "src/clash-verge/v14.3-clash-verge.js",
+      "sha256": "4e049bf79ac0e468449fa2a85ebe499b1bad5c86473656a6a3872d017d2d7964",
+      "bytes": 127549
+    },
+    {
+      "file": "src/ios/v14.3-clashmi-domestic-protocol-r1.js",
+      "sha256": "da22e70e017a5cf906ddd58ca94dcf988417953e17d1b2834fddc0b428b08eda",
+      "bytes": 128096
+    },
+    {
+      "file": "src/macos/v14.3-macos-clashmi.js",
+      "sha256": "baeda7cfd627541b630c87a982f02c78b31f6b3ed09727af2ef130ad70f3afde",
+      "bytes": 128098
+    },
+    {
+      "file": "src/macos/v14.3-macos-flclash.js",
+      "sha256": "0026fb6a58d8741a737cd18f371bfe969d9b2ee8811e752d6fb83778b55d4c5c",
+      "bytes": 126983
+    },
+    {
+      "file": "src/windows/v14.3.js",
+      "sha256": "2cc432caf839892f24f4fd485f20a1efc3c4d8824adaf54f46a45e60f776b4df",
+      "bytes": 125188
+    },
+    {
+      "file": "tools/ipv4-local-adapter.js",
+      "sha256": "5a82d7f341133929d30e247671afcce05f918eb06325ec024be6db8b18ba931c",
+      "bytes": 4734
+    }
+  ]
+}

@@ -52,7 +52,7 @@
     },
     {
       "file": "tools/ipv4-local-adapter.js",
-      "sha256": "5a82d7f341133929d30e247671afcce05f918eb06325ec024be6db8b18ba931c"
+      "sha256": "cee3ffa5e922dd9f3aa4be95e473c0341f59e5b6f8a5452701c4654e4bf59dfc"
     },
     {
       "file": "tools/auto-local-adapter.js",
@@ -203,8 +203,8 @@
     {
       "platform": "clashVerge",
       "file": "src/clash-verge/v14.3-clash-verge.js",
-      "sha256": "02f7b70fcaad666778d1c417befc99e42860e1b5f73da28ea5d5bc1ab39574ed",
-      "bytes": 128274,
+      "sha256": "5063d72023be9d0e5bb75130a5ebe0fa714dae8ad76775283fbd035c39ba4a0d",
+      "bytes": 128852,
       "generatedConfigBytes": 178071,
       "inlineRows": 819,
       "remoteSources": 30

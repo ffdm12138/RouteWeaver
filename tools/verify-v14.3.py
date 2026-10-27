@@ -16,9 +16,9 @@ current=read(project/'CURRENT_RELEASE.json')
 review=read(root/'metadata/balanced-review.json')
 assert current['version']==review['version']=='14.3'
 assert current['repairRevision']==review['revision']=='balanced-r1'
-assert current['status']==review['status']=='AUTO_LOCAL_NATIVE_CORE_PASS_DEVICE_PENDING'
+assert current['status']==review['status']=='SOURCE_STATIC_PASS_NATIVE_EVIDENCE_FROZEN_PRE_CHANGE'
 assert current['domesticProtocolRevision']==review['domesticProtocolRevision']=='domestic-protocol-r1'
-assert current['clientDeployment']=='PREVIOUS_MANUAL_WINDOWS_ONLY_AUTO_NOT_DEPLOYED'
+assert current['clientDeployment']=='MAINTAINER_WINDOWS_FLCLASH_ONLY'
 from release_regressions import verify_regressions
 known=verify_regressions(root,sha,read)
 assert review['knownReleaseRegressions']=={'file':'validation/known-release-regressions.json','sha256':sha(root/'validation/known-release-regressions.json'),'status':known['status']}
@@ -42,6 +42,24 @@ for e in review['testEvidence'].values():
         assert sha(root/source['file'])==source['sha256'],source['file']
 for e in [review['sourceComparison'],review['latestCandidates']]:
     assert sha(root/e['file'])==e['sha256']
+# Native evidence is frozen, not current. Check that the freeze is real: the
+# snapshot exists, its own bytes match, it does NOT coincide with the current
+# entries, and every receipt declares the same snapshot. A revision that
+# changes the entries without a replay can pass only through this block.
+native=review['nativeEvidence']
+assert native['appliesToCurrentEntries'] is False
+assert native['actualReplay']=='NOT_RUN_NO_REPLAY_CORE'
+assert sha(root/native['snapshot'])==native['snapshotSHA256']
+frozen=read(root/native['snapshot'])
+assert frozen['appliesToCurrentEntries'] is False and len(frozen['files'])>=6
+base=(root/native['snapshot']).parent
+for item in frozen['files']:
+    assert sha(base/item['file'])==item['sha256'],item['file']
+    assert sha(root/item['file'])!=item['sha256'],item['file']+' is not frozen evidence'
+for name in native['receipts']:
+    receipt=read(root/name)
+    assert receipt['boundToSnapshot']==native['snapshot'].rsplit('/manifest.json',1)[0],name
+assert set(native['receipts'])=={'validation/native-core.json','validation/balanced-empty-core.json','validation/balanced-download-failure.json','validation/macos-core.json'}
 assert sha(project/review['recordingTool']['file'])==review['recordingTool']['sha256']
 history_files=0
 if not args.skip_history:

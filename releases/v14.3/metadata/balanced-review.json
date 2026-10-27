@@ -1,12 +1,12 @@
 {
   "version": "14.3",
-  "date": "2026-10-16",
+  "date": "2026-10-27",
   "revision": "balanced-r1",
   "domesticProtocolRevision": "domestic-protocol-r1",
-  "status": "AUTO_LOCAL_NATIVE_CORE_PASS_DEVICE_PENDING",
+  "status": "SOURCE_STATIC_PASS_NATIVE_EVIDENCE_FROZEN_PRE_CHANGE",
   "knownReleaseRegressions": {
     "file": "validation/known-release-regressions.json",
-    "sha256": "571a053711ec1eb5a6ee7a082f9b37a7b1f11aefa8cb7cd9853038d1ed62d746",
+    "sha256": "1f49c43d7f59774dc6673ee5351d8b11cd7a97a5e589e25e411eff485bdd15a5",
     "status": "RC6_NATIVE_API_REGRESSIONS_REPAIRED_DEVICE_PENDING"
   },
   "authorization": "User selected reviewed domestic TCP/UDP/DNS following 国内网站 and self-contained Shadowrocket business DNS; unknown IP-only UDP and generic STUN remain protected.",
@@ -16,27 +16,29 @@
     "originalBytesPreserved": false,
     "previousFile": "archive/v14.3-before-domestic-protocol-r1-20261013/docs/需求.md",
     "previousSHA256": "5f0086ba18755d8c10c96e2b255e3d7e456afdf4f9c0e6e7f36b7926110859f0",
-    "change": "User-authorized requirement 11 domestic domain protocol and DNS affinity; earlier contract preserved in archive. Additive Mac adapters retain this business contract and have separate delivery evidence. Requirement 12 separates local/node/target families; one file per client with auto requiring native support plus two explicit modes, strict routing retained, typed core fast failure and safe TLS prefix rejection. Observations are separate from the stable contract."
+    "change": "User-authorized requirement 11 domestic domain protocol and DNS affinity; earlier contract preserved in archive. Additive Mac adapters retain this business contract and have separate delivery evidence. Requirement 12 separates local/node/target families; one file per client with auto requiring native support plus two explicit modes, strict routing retained, typed core fast failure and safe TLS prefix rejection. Observations are separate from the stable contract.",
+    "refreshedBy": "tools/record-source-only.py",
+    "refreshScope": "Byte binding only. The requirement text was not re-reviewed in this revision."
   },
   "sourceManifest": {
     "file": "metadata/balanced-sources.json",
-    "sha256": "2a68c74babe3f11ead74a14262083dde729b9624464251008744162ba1d30334"
+    "sha256": "be6848f282727432f5cba6432bc39e943fb47660b86d56f8749ac78f60b93364"
   },
   "entries": [
     {
       "platform": "windows",
       "file": "src/windows/v14.3.js",
-      "sha256": "2cc432caf839892f24f4fd485f20a1efc3c4d8824adaf54f46a45e60f776b4df",
-      "bytes": 125188,
-      "generatedConfigBytes": 177383,
+      "sha256": "2b0f7eff6c881fc633ec7c07e6da90683582ae5ae99f37a4b53604785898cf84",
+      "bytes": 126491,
+      "generatedConfigBytes": 177493,
       "inlineRows": 819,
       "remoteSources": 30
     },
     {
       "platform": "android",
       "file": "src/android/v14.3-android.js",
-      "sha256": "46d95fde07dbd229595428860db9da96f72569c830890e31d0020cb7181c2912",
-      "bytes": 125074,
+      "sha256": "ecf1e3950097fea6b878bcc820ae6d555a3f72a12580cd271ccca4c3f3a5253b",
+      "bytes": 125957,
       "generatedConfigBytes": 177194,
       "inlineRows": 819,
       "remoteSources": 29
@@ -44,8 +46,8 @@
     {
       "platform": "clashmi",
       "file": "src/ios/v14.3-clashmi-domestic-protocol-r1.js",
-      "sha256": "da22e70e017a5cf906ddd58ca94dcf988417953e17d1b2834fddc0b428b08eda",
-      "bytes": 128096,
+      "sha256": "9eaa5ea74c03f7a500a89dccdc69102189743f7b08761188c451ec336adc3b88",
+      "bytes": 128979,
       "generatedConfigBytes": 178282,
       "inlineRows": 819,
       "remoteSources": 29
@@ -54,31 +56,31 @@
   "testEvidence": {
     "static": {
       "file": "validation/static.json",
-      "sha256": "450e7fdd8d34938cd1676d3653cc2aa11129141c9800de9a35dc71f9da1722c5",
+      "sha256": "9aba757f9696e1f4d740e8d9175990c1ed8b8e2e1034e47da91886a262c9d829",
       "status": "BALANCED_STATIC_PASS",
       "knownFailureAcceptedForPreRelease": false
     },
     "native-core": {
       "file": "validation/native-core.json",
-      "sha256": "7de1f4556d8e4270fcfca4d09c34246968a476dc83aa7ca591f5fbbcced5db19",
+      "sha256": "f29d915ff7e589c0c91dc9a1d2d4cc7370f604f6aa4a7e088e8efbe9941f8bc0",
       "status": "BALANCED_LOCAL_CORE_PASS",
       "knownFailureAcceptedForPreRelease": false
     },
     "balanced-empty-core": {
       "file": "validation/balanced-empty-core.json",
-      "sha256": "18672eb145e6061ad35a6cd1879e67a372445fae01dfae784d5e8765d6d8eaf3",
+      "sha256": "6748b1b5e3997881333a76fc1fead142216307174fd2c298beb404e633b24095",
       "status": "BALANCED_LOCAL_CORE_PASS",
       "knownFailureAcceptedForPreRelease": false
     },
     "balanced-download-failure": {
       "file": "validation/balanced-download-failure.json",
-      "sha256": "2bcc4d0746246a515b9a3e152b87aff26943a904ec3aec6b6a2b3a7d113548d4",
+      "sha256": "35bac4de1ad1016e11ac0de5c9ed8e1d8fd921c91da342042ddf783feb5d6f10",
       "status": "BALANCED_COLD_DOWNLOAD_CORE_PASS",
       "knownFailureAcceptedForPreRelease": false
     },
     "shadowrocket-lean": {
       "file": "validation/shadowrocket-lean.json",
-      "sha256": "c2c87f39f747210f06b5e62ed3136ecc02c5bf257b101315cb061165fad0ddfa",
+      "sha256": "fc5a36ec751ceb5c598de924fca69223b1e7e265694da99f7554cab484e4f541",
       "status": "SHADOWROCKET_LEAN_STATIC_PASS_NATIVE_PENDING",
       "knownFailureAcceptedForPreRelease": false
     }
@@ -102,7 +104,7 @@
   },
   "iosDelivery": {
     "file": "metadata/ios-delivery.json",
-    "sha256": "69e9df9e5af5acb47626998600fb3d2271a793f64e487029867c1cb7b39d6433",
+    "sha256": "3313ea23bc37572a2d4e2a99f3dd76e50e94b2f95bc471550e0b7b59ba9a9f85",
     "revision": "ios-delivery-r2",
     "status": "IOS_SOURCE_STATIC_LOCAL_CORE_PASS_NATIVE_DEVICE_PENDING"
   },
@@ -209,26 +211,26 @@
       "deviceAcceptance": "AUTO_CORE_ONLY_DEVICES_PENDING"
     }
   ],
-  "scope": "Current native routing and empty-provider replays pass; original rc.6 FAIL evidence is preserved with separate repair receipts. Three standalone JS entries, finite domain models and owned Mihomo loopback. Shadowrocket finite source model only; full domestic DNS relies on native direct/selected-node resolution and is not native verified.",
+  "scope": "Six JS entries and the Shadowrocket model verified by generation and static contracts only. Native core replay and device acceptance for this revision: NOT_RUN.",
   "historicalCounterexample": "NOT_RUN; prior failed evidence preserved",
   "appJavaScriptCore": "NOT_RUN",
   "vpnCapture": "NOT_RUN",
   "publicIPv6": "NOT_RUN",
   "longRunMemory": "NOT_RUN",
-  "clientDeployment": "PREVIOUS_MANUAL_WINDOWS_ONLY_AUTO_NOT_DEPLOYED",
+  "clientDeployment": "MAINTAINER_WINDOWS_FLCLASH_ONLY",
   "recordingTool": {
-    "file": "tools/record-v14.3.py",
-    "sha256": "c7c6489e263273dbabadc414b42ac3daac50d7dcecab1984cbbc355b4759a160"
+    "file": "tools/record-source-only.py",
+    "sha256": "77b5e1c5f2254e86d32c371b27b29ab4a89cb9ec9b318776956a0421414b38ff"
   },
   "macosDelivery": {
     "file": "metadata/macos-delivery.json",
-    "sha256": "3cb1e48596e32407bf7c94e7d0625ba39a886d9716d0987aea73df854d484475",
+    "sha256": "46cbf17ddcd433a61c05d280f43124c092e212b10ad430d3806e7b8f719fb35c",
     "revision": "macos-r1",
     "status": "MACOS_SOURCE_LOCAL_CORE_PASS_DEVICE_PENDING"
   },
   "networkCompatibility": {
     "file": "metadata/network-compat-delivery.json",
-    "sha256": "84b125c9f187ddb7f0ba9cdff8dcdf946e963c859631eaf1d468116bd1571a39",
+    "sha256": "dcf307286fade5b4378fd833042d47f48e872247c78b5f303cc64bf9532c0462",
     "revision": "ipv6-fallback-r2"
   },
   "enhancements": {
@@ -244,17 +246,17 @@
       },
       "clash-verge-static": {
         "file": "validation/clash-verge-static.json",
-        "sha256": "9a7e781e28a96299f5da6acc90e21c3496c2e146316c179cbb9ac8c9552d72a9",
+        "sha256": "21e8834b979b6a23c596054dbb0c6cdc7141bc060d343fec3b35e32ae896b4b9",
         "status": "CLASH_VERGE_STATIC_PASS"
       },
       "clash-verge-core": {
         "file": "validation/clash-verge-core.json",
-        "sha256": "f48e3d5f03fc73c52e40644ae289d31bcc07eb5624e56ce6b0bc276973fbfd9e",
+        "sha256": "1915c8defc296723a14d66cb46f913d2766bafd074a90b80d2fdcbcde4bcb135",
         "status": "CLASH_VERGE_LOCAL_CORE_PASS_DEVICE_PENDING"
       },
       "engine-parity": {
         "file": "validation/engine-parity.json",
-        "sha256": "d6eb867f9fc7fd1de26bd99e1ad7df110346f28ea261e0ef43b69e32e0bd1920",
+        "sha256": "48acf28f0f26c0e6a64fca61445a4b78e15f2879147da2e1c731c21ae67970c0",
         "status": "REAL_ENGINE_PARITY_PASS"
       },
       "auto-local-core": {
@@ -274,11 +276,24 @@
     },
     "recordingModule": {
       "file": "tools/release_enhancements.py",
-      "sha256": "08fcd105e893e71ad2485f1ca4df152f4402df7b75389d8bd1c81f862c4966c8"
+      "sha256": "30af7b71da11612ba4dfb682dc1b70caacc2d0948ef4bfcdceaf492a8481fbb5"
     }
   },
   "nativeApiRepair": {
     "file": "validation/native-api-repair.json",
     "sha256": "b16ed9020ac263c9cd93ed16fea71b4fcfdbbafccf377c39292dff14168817b2"
+  },
+  "nativeEvidence": {
+    "snapshot": "validation/inputs/api-doh-before/manifest.json",
+    "snapshotSHA256": "7b797eec18aed3c72b989c95a79b9c37512b49c7f7bafae7a274f86f84adf5b8",
+    "appliesToCurrentEntries": false,
+    "receipts": [
+      "validation/native-core.json",
+      "validation/balanced-empty-core.json",
+      "validation/balanced-download-failure.json",
+      "validation/macos-core.json"
+    ],
+    "actualReplay": "NOT_RUN_NO_REPLAY_CORE",
+    "note": "Receipts describe the entry bytes frozen in the snapshot. They prove nothing about the current entries and are not claimed to."
   }
 }

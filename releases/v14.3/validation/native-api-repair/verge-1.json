@@ -18806,7 +18806,7 @@
       "sha256": "059d71af3ec13dd1de8ac2e8303e4045f589f9257f210d08f519a033a8795a75"
     },
     {
-      "file": "src/clash-verge/v14.3-clash-verge.js",
+      "file": "validation/inputs/api-doh-before/src/clash-verge/v14.3-clash-verge.js",
       "sha256": "4e049bf79ac0e468449fa2a85ebe499b1bad5c86473656a6a3872d017d2d7964"
     },
     {
@@ -18828,5 +18828,6 @@
   ],
   "clientDeployment": false,
   "deviceAcceptance": "NOT_RUN",
-  "home": "validation/experiments/clash-verge-core"
+  "home": "validation/experiments/clash-verge-core",
+  "boundToSnapshot": "validation/inputs/api-doh-before"
 }

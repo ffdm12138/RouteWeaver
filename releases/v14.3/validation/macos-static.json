@@ -62,7 +62,7 @@
     },
     {
       "file": "metadata/macos-sources.json",
-      "sha256": "cf11feb2ccf94113519f5fef27eb792023dd8be1459c8be3a71814e7bdbe2f4c"
+      "sha256": "66681e6575982115900785f5d6eb4af2d672659b6ecab1b8ac6279c378d3eed6"
     },
     {
       "file": "tools/build-balanced.cjs",
@@ -110,7 +110,7 @@
     },
     {
       "file": "tools/ipv4-local-adapter.js",
-      "sha256": "5a82d7f341133929d30e247671afcce05f918eb06325ec024be6db8b18ba931c"
+      "sha256": "cee3ffa5e922dd9f3aa4be95e473c0341f59e5b6f8a5452701c4654e4bf59dfc"
     },
     {
       "file": "tools/auto-local-adapter.js",
@@ -254,11 +254,11 @@
     },
     {
       "file": "src/macos/v14.3-macos-flclash.js",
-      "sha256": "b57beda9572e79e566af007a4562018b33c62680e53b73c0aa4344d9eb7377d2"
+      "sha256": "188fe2798fa3655e21413ff225a9d45fb2f27d039f68aa31abac0f35887b0984"
     },
     {
       "file": "src/macos/v14.3-macos-clashmi.js",
-      "sha256": "737d7e451d2a517517b5e42cc3a3d62ce182bdc54142dc2d864e475f9f7035fb"
+      "sha256": "757a3e08675375f0ba22f7091f732d5076d36c879d4a9fbfadec613bb68ade27"
     }
   ],
   "clientDeployment": false,

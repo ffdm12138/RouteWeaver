@@ -9441,15 +9441,15 @@
       "sha256": "059d71af3ec13dd1de8ac2e8303e4045f589f9257f210d08f519a033a8795a75"
     },
     {
-      "file": "src/windows/v14.3.js",
+      "file": "validation/inputs/api-doh-before/src/windows/v14.3.js",
       "sha256": "2cc432caf839892f24f4fd485f20a1efc3c4d8824adaf54f46a45e60f776b4df"
     },
     {
-      "file": "src/android/v14.3-android.js",
+      "file": "validation/inputs/api-doh-before/src/android/v14.3-android.js",
       "sha256": "46d95fde07dbd229595428860db9da96f72569c830890e31d0020cb7181c2912"
     },
     {
-      "file": "src/ios/v14.3-clashmi-domestic-protocol-r1.js",
+      "file": "validation/inputs/api-doh-before/src/ios/v14.3-clashmi-domestic-protocol-r1.js",
       "sha256": "da22e70e017a5cf906ddd58ca94dcf988417953e17d1b2834fddc0b428b08eda"
     }
   ],
@@ -9503,5 +9503,6 @@
       ]
     }
   ],
-  "home": "validation/experiments/balanced-download-failure"
+  "home": "validation/experiments/balanced-download-failure",
+  "boundToSnapshot": "validation/inputs/api-doh-before"
 }

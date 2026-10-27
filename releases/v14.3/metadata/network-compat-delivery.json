@@ -3,7 +3,7 @@
   "repairRevision": "http-recovery-r1",
   "entryRevision": "single-entry-r1",
   "date": "2026-10-16",
-  "status": "AUTO_LOCAL_NATIVE_CORE_PASS_DEVICE_PENDING",
+  "status": "SOURCE_STATIC_PASS_NATIVE_EVIDENCE_FROZEN_PRE_CHANGE",
   "defaultMode": "auto",
   "compatibilityMode": "ipv4-local",
   "automaticPhysicalNetworkDetection": "REQUIRES_MATCHING_NATIVE_CORE",
@@ -18,8 +18,8 @@
       "platform": "windows",
       "source": "src/windows/v14.3.js",
       "file": "src/windows/v14.3.js",
-      "sha256": "2cc432caf839892f24f4fd485f20a1efc3c4d8824adaf54f46a45e60f776b4df",
-      "bytes": 125188,
+      "sha256": "2b0f7eff6c881fc633ec7c07e6da90683582ae5ae99f37a4b53604785898cf84",
+      "bytes": 126491,
       "modes": [
         "auto",
         "dual-stack",
@@ -30,8 +30,8 @@
       "platform": "android",
       "source": "src/android/v14.3-android.js",
       "file": "src/android/v14.3-android.js",
-      "sha256": "46d95fde07dbd229595428860db9da96f72569c830890e31d0020cb7181c2912",
-      "bytes": 125074,
+      "sha256": "ecf1e3950097fea6b878bcc820ae6d555a3f72a12580cd271ccca4c3f3a5253b",
+      "bytes": 125957,
       "modes": [
         "auto",
         "dual-stack",
@@ -42,8 +42,8 @@
       "platform": "clashmi",
       "source": "src/ios/v14.3-clashmi-domestic-protocol-r1.js",
       "file": "src/ios/v14.3-clashmi-domestic-protocol-r1.js",
-      "sha256": "da22e70e017a5cf906ddd58ca94dcf988417953e17d1b2834fddc0b428b08eda",
-      "bytes": 128096,
+      "sha256": "9eaa5ea74c03f7a500a89dccdc69102189743f7b08761188c451ec336adc3b88",
+      "bytes": 128979,
       "modes": [
         "auto",
         "dual-stack",
@@ -54,8 +54,8 @@
       "platform": "macosFlClash",
       "source": "src/macos/v14.3-macos-flclash.js",
       "file": "src/macos/v14.3-macos-flclash.js",
-      "sha256": "0026fb6a58d8741a737cd18f371bfe969d9b2ee8811e752d6fb83778b55d4c5c",
-      "bytes": 126983,
+      "sha256": "188fe2798fa3655e21413ff225a9d45fb2f27d039f68aa31abac0f35887b0984",
+      "bytes": 128286,
       "modes": [
         "auto",
         "dual-stack",
@@ -66,8 +66,8 @@
       "platform": "macosClashMi",
       "source": "src/macos/v14.3-macos-clashmi.js",
       "file": "src/macos/v14.3-macos-clashmi.js",
-      "sha256": "baeda7cfd627541b630c87a982f02c78b31f6b3ed09727af2ef130ad70f3afde",
-      "bytes": 128098,
+      "sha256": "757a3e08675375f0ba22f7091f732d5076d36c879d4a9fbfadec613bb68ade27",
+      "bytes": 128981,
       "modes": [
         "auto",
         "dual-stack",
@@ -78,8 +78,8 @@
       "platform": "clashVerge",
       "source": "src/clash-verge/v14.3-clash-verge.js",
       "file": "src/clash-verge/v14.3-clash-verge.js",
-      "sha256": "4e049bf79ac0e468449fa2a85ebe499b1bad5c86473656a6a3872d017d2d7964",
-      "bytes": 127549,
+      "sha256": "5063d72023be9d0e5bb75130a5ebe0fa714dae8ad76775283fbd035c39ba4a0d",
+      "bytes": 128852,
       "modes": [
         "auto",
         "dual-stack",
@@ -100,17 +100,17 @@
   "testEvidence": {
     "network-compat-static": {
       "file": "validation/network-compat-static.json",
-      "sha256": "8a9a501376cd274bdca2ac46c66522094bdfcdfd49a14490d49d121c48e302af",
+      "sha256": "7efe7826aa5c9c5936d2b6590a7e604a2454a12b56245041659f929c58235b2a",
       "status": "NETWORK_COMPAT_STATIC_PASS"
     },
     "network-compat-core": {
       "file": "validation/network-compat-core.json",
-      "sha256": "6d8583230010011ba61477ee77480468408dc8a16a77821a20ffe2686a298f56",
+      "sha256": "5e1c2389d779d0209171da905bd006c23d32efeb8e07f949632e541d90266457",
       "status": "NETWORK_COMPAT_LOCAL_CORE_PASS_DEVICE_PENDING"
     },
     "auto-local-native": {
       "file": "validation/auto-local-native.json",
-      "sha256": "b983e82652a6f1fd0914874ecdb8409df97ad3effe66f0961021be2870a5bf13",
+      "sha256": "e666d38eb6e652b68f98894f454a177a52fbacf0754e495870f4301499318086",
       "status": "AUTO_LOCAL_NATIVE_LOOPBACK_PASS_DEVICE_PENDING"
     }
   },
@@ -126,6 +126,6 @@
   "deviceAcceptance": "AUTO_CORE_ONLY_DEVICES_PENDING",
   "recordingModule": {
     "file": "tools/network_release.py",
-    "sha256": "81570f31687dc1137d9967eecb7c748c3b4426a2725096ecbe4ec1711b08277e"
+    "sha256": "fe79bff0b04228014b5d9f166572a5dd6572224f058e028d0a212fcb3107e268"
   }
 }
