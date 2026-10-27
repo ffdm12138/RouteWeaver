@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026-10-28 · CI 门禁拆分与 IPv4-only 回执刷新
+
+- `verify.yml` 拆成两层：push/PR 运行不依赖原生回放的离线生成、静态/兼容合同、IPv4-only 一致性和洁净检查；严格来源/回执绑定、打包与归档扫描只在 Release 发布或手动 `workflow_dispatch` 时运行。生成物更新但回执尚未重绑的中间提交不再让每次 push 变红并发送失败邮件；发版时仍会严格拦截。
+- 补跑 `tools/test-ipv4-only.cjs`，刷新 `releases/v14.3-ipv4-only/validation/static.json` 的 `manifestSHA256`。此前 rc.8 更新 `MANIFEST.json` 后该公开回执已过期，而 push 流程没有覆盖这项检查。
+- 本地验证：公开索引扫描、31 项单元测试、严格 `verify-v14.3.py`、打包、`--with-packages`、三包归档扫描、生成检查、全部静态合同和 IPv4-only 67 项一致性通过；未运行原生回放和实机验收。
+
 ## v14.3.0-rc.8 — api-real-answer-by-mode-r1
 
 - `fake-ip-filter` 里的 `api.openai.com` 例外按模式区分，取代 rc.7 的全模式 DoH 解析：`ipv4-local` / `ipv4-only` 抑制 AAAA 后 Chromium 拿不到 IPv6 Fake-IP 的 ULA，例外只剩一个本地解析依赖，直接回到纯 Fake-IP（代理远端解析，本地零解析依赖）；`dual-stack` / `auto` 保留真实 A/AAAA，走同一「OpenAI 服务」组的 DoH/443。

@@ -3,7 +3,7 @@
   "flavor": "public",
   "checks": 67,
   "engines": [],
-  "manifestSHA256": "04972a4041ce613819303dd53c328fa57cc246462a80d36067f0ced7493ae3dd",
+  "manifestSHA256": "db5058bf06d8b40f3b4fd22ab5bb183a815bf384e5add12b9b16ccb68ae2617b",
   "harnessSHA256": "7b9bf3775c3aa28a97c72e0b3bb99b90732990b4365a548e0dfa963746cf34c2",
   "cases": [
     {

@@ -46,7 +46,7 @@ python tools/package-v14.3.py --skip-history
 python tools/verify-v14.3.py --skip-history --with-packages
 ~~~
 
-CI 复跑生成、静态、打包及公开内容扫描，核对已绑定的核心/引擎证据，不冒充设备实验。完整维护命令、可选真实引擎重跑见[维护](docs/maintenance/维护与更新.md)。历史标签和失败证据保持原样。
+CI 在 push/PR 复跑生成、静态和公开内容扫描；在 Release 发布或手动触发时复跑严格回执绑定、打包和解压静态回放。引擎证据按当前入口核对，不冒充设备实验。完整维护命令、可选真实引擎重跑见[维护](docs/maintenance/维护与更新.md)。历史标签和失败证据保持原样。
 
 原创内容采用 [MIT](LICENSE)；上游规则、核心派生补丁和可选核心保留各自许可，详见[第三方声明](THIRD_PARTY_NOTICES.md)。可选核心 Release 同时提供完整对应源码、锁定依赖、许可和备份/回滚工具。
 
