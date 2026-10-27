@@ -1,0 +1,3 @@
+{"platform":"macos-flclash","fullInventoryHosts":233096,"normalRouting":233096,"normalDNS":233096,"existingCases":917}
+{"platform":"macos-clashmi","fullInventoryHosts":233096,"normalRouting":233096,"normalDNS":233096,"existingCases":917}
+{"status":"MACOS_STATIC_PASS","checks":11,"failures":[]}

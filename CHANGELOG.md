@@ -1,5 +1,18 @@
 # Changelog
 
+## v14.3.0-rc.7 — api-doh-egress-r1
+
+- `api.openai.com` 是配置中唯一被排除出 Fake-IP、必须真实解析的域名（Chromium 会把 IPv6 Fake-IP 的 ULA 判为本地网络并拦截公共页面访问 API）。此前它的解析继承业务组 DoT/853 策略，853 被运营商或节点封禁时该域名单独 SERVFAIL，其余 Fake-IP 域名无感。本修订保留真实答案，把这一条精确主机策略改为同一「OpenAI 服务」组的 DoH/443。
+- 不改 Fake-IP 范围、其余 DNS 上游、分流、UDP/STUN 保护、TUN、节点组。`ipv4-local`／`auto` 模式的 DNS 过滤适配继续生效。Shadowrocket 原生配置本来就用 DoH/443，不受影响。
+- 六份标准入口与六份 `ipv4-only` 入口重新生成并通过静态全量对照（27/11/10/5/73/67 项）。本轮**未运行**隔离核心回放与实机验收；既有核心回执仍绑定修改前字节，不作为本修订证据。DoH 不解析 `disable-reuse`，切换节点后该条解析可能短暂复用旧连接。
+- 完整说明与回滚见 `docs/reports/v14.3/API真实解析DNS出口修复.md`。
+
+## 未发布 — controller-readiness-r1 · 2026-10-17
+
+- 为 rc.6 两项间歇性本地 API 回放失败增加共享控制器：实际时间上限、就绪期限、有限幂等重试、核心退出检测与有界清理；保留所有业务断言。
+- 保存原始 FAIL 与修改前基线，独立记录新回放；证据校验同时核对历史失败和当前通过，不再把“必须有两项 FAIL”写死为发版条件。
+- 七个客户端入口、核心二进制和固定规则不变，设备自动能力仍单独验收。详细结果见 [修复报告](docs/reports/v14.3/rc6本地API回归修复.md)。
+
 ## v14.3.0-rc.6 — auto-local-family-r1
 
 - **rc.6 公开版已知回归（PRE-RELEASE）**：native-core 本地 API timeout；balanced-empty-core provider API ECONNREFUSED。两项保留 FAIL，不计通过；用户明确授权先发版，自动能力的设备原生接入仍未验收。

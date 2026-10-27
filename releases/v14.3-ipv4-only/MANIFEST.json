@@ -1,0 +1,109 @@
+{
+  "version": "14.3-ipv4-only",
+  "revision": "ipv4-only-r1",
+  "date": "2026-10-17",
+  "flavor": "public",
+  "baseVersion": "14.3",
+  "requestedScope": "IPv4 local DIRECT and local connection to proxies; proxy onward family unconstrained",
+  "entryMapSHA256": "834e98ae700812a31b753490b022784c5c2651b4019eae4cd904d37a24087810",
+  "entries": {
+    "windows": {
+      "file": "releases/v14.3-ipv4-only/src/windows/v14.3-ipv4-only.js",
+      "sha256": "7801a8280a30d6e63b220eb0ea04828cb225d5c147cde7bd414d37fed74cedeb",
+      "bytes": 119716,
+      "source": "releases/v14.3/src/windows/v14.3.js",
+      "sourceSHA256": "cf9559a67f291ec9ebd6d875a2b3b677e7b11ad887877f373352d156507b0985",
+      "status": "GENERATED_NATIVE_REPLAY_DEVICE_PENDING"
+    },
+    "android": {
+      "file": "releases/v14.3-ipv4-only/src/android/v14.3-android-ipv4-only.js",
+      "sha256": "bf81e0491c73cac8e354a3e8087c9bee2885a388334abd20e6b8faf0a0d2aa27",
+      "bytes": 119244,
+      "source": "releases/v14.3/src/android/v14.3-android.js",
+      "sourceSHA256": "755bd9d52e4bf72d47b9a6b3e3ce2406491e0b2353aa356eaf75ab577e378960",
+      "status": "GENERATED_NATIVE_REPLAY_DEVICE_PENDING"
+    },
+    "clashmi": {
+      "file": "releases/v14.3-ipv4-only/src/ios/v14.3-clashmi-domestic-protocol-r1-ipv4-only.js",
+      "sha256": "dab5ffb04f29c12dca5677d63245466cbd853af1efaece205db188fb5414774c",
+      "bytes": 121473,
+      "source": "releases/v14.3/src/ios/v14.3-clashmi-domestic-protocol-r1.js",
+      "sourceSHA256": "d8e07bfc3e4e9b55dedd76451e75de090b4319fe452c17e5a689e82d63e1e514",
+      "status": "GENERATED_NATIVE_REPLAY_DEVICE_PENDING"
+    },
+    "shadowrocket": {
+      "file": "releases/v14.3-ipv4-only/src/ios/v14.3-shadowrocket-ipv4-only.conf",
+      "sha256": "d4cda5ec99460cce07fa2fb8d886c2b0e1038ebff515b793d0adeb0aea425bc2",
+      "bytes": 1746839,
+      "source": "releases/v14.3/src/ios/v14.3-shadowrocket.conf",
+      "sourceSHA256": "36b83e9069308567c9497eb4a1902536c78572c6786bbb4d712cb976148c6088",
+      "status": "CONFIG_ONLY_NODE_IPV4_PINNING_AND_DEVICE_CHECK_REQUIRED"
+    },
+    "macosFlClash": {
+      "file": "releases/v14.3-ipv4-only/src/macos/v14.3-macos-flclash-ipv4-only.js",
+      "sha256": "f6ccf233ea8195e302271ea6cc4d30194442343f9a3c859f888b01c963e42839",
+      "bytes": 121473,
+      "source": "releases/v14.3/src/macos/v14.3-macos-flclash.js",
+      "sourceSHA256": "b57beda9572e79e566af007a4562018b33c62680e53b73c0aa4344d9eb7377d2",
+      "status": "GENERATED_NATIVE_REPLAY_DEVICE_PENDING"
+    },
+    "macosClashMi": {
+      "file": "releases/v14.3-ipv4-only/src/macos/v14.3-macos-clashmi-ipv4-only.js",
+      "sha256": "44952039333497aec142975c790ca1c40765674d6f0e52baa926036589d691bd",
+      "bytes": 121471,
+      "source": "releases/v14.3/src/macos/v14.3-macos-clashmi.js",
+      "sourceSHA256": "737d7e451d2a517517b5e42cc3a3d62ce182bdc54142dc2d864e475f9f7035fb",
+      "status": "GENERATED_NATIVE_REPLAY_DEVICE_PENDING"
+    },
+    "clashVerge": {
+      "file": "releases/v14.3-ipv4-only/src/clash-verge/v14.3-clash-verge-ipv4-only.js",
+      "sha256": "b3a3a083ae03aed30af22c4a0f0c0d08f3c5684ef96ff12196efe5772ba30bbf",
+      "bytes": 121654,
+      "source": "releases/v14.3/src/clash-verge/v14.3-clash-verge.js",
+      "sourceSHA256": "02f7b70fcaad666778d1c417befc99e42860e1b5f73da28ea5d5bc1ab39574ed",
+      "status": "GENERATED_NATIVE_REPLAY_DEVICE_PENDING"
+    }
+  },
+  "inputs": [
+    {
+      "file": "tools/build-ipv4-only.cjs",
+      "sha256": "8cb5a11a1d1f0a62dff50b95d1dc08d0999f1508c41c52056660c08e40580c53"
+    },
+    {
+      "file": "tools/ipv4-only-runtime.js",
+      "sha256": "bcfe7e56570cec78f7bb0a3f10772c7ec82ef3c169140256be708fba5c26ece0"
+    },
+    {
+      "file": "releases/v14.3/src/windows/v14.3.js",
+      "sha256": "cf9559a67f291ec9ebd6d875a2b3b677e7b11ad887877f373352d156507b0985"
+    },
+    {
+      "file": "releases/v14.3/src/android/v14.3-android.js",
+      "sha256": "755bd9d52e4bf72d47b9a6b3e3ce2406491e0b2353aa356eaf75ab577e378960"
+    },
+    {
+      "file": "releases/v14.3/src/ios/v14.3-clashmi-domestic-protocol-r1.js",
+      "sha256": "d8e07bfc3e4e9b55dedd76451e75de090b4319fe452c17e5a689e82d63e1e514"
+    },
+    {
+      "file": "releases/v14.3/src/ios/v14.3-shadowrocket.conf",
+      "sha256": "36b83e9069308567c9497eb4a1902536c78572c6786bbb4d712cb976148c6088"
+    },
+    {
+      "file": "releases/v14.3/src/macos/v14.3-macos-flclash.js",
+      "sha256": "b57beda9572e79e566af007a4562018b33c62680e53b73c0aa4344d9eb7377d2"
+    },
+    {
+      "file": "releases/v14.3/src/macos/v14.3-macos-clashmi.js",
+      "sha256": "737d7e451d2a517517b5e42cc3a3d62ce182bdc54142dc2d864e475f9f7035fb"
+    },
+    {
+      "file": "releases/v14.3/src/clash-verge/v14.3-clash-verge.js",
+      "sha256": "02f7b70fcaad666778d1c417befc99e42860e1b5f73da28ea5d5bc1ab39574ed"
+    }
+  ],
+  "systemDNS": "SYSTEM_DNS_MUST_BE_IPV4_OR_CONFIGURE_x-routeweaver.ipv4-lan-dns",
+  "deviceAcceptance": "NOT_RUN",
+  "clientDeployment": false,
+  "originalEntriesModified": false
+}

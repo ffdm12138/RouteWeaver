@@ -40,7 +40,7 @@
     },
     "macos-core": {
       "file": "validation/macos-core.json",
-      "sha256": "aa93f5513ad81a630bbb6a24fe7ee06b01b194ebe4301f4043d159498d473cf0",
+      "sha256": "88c3416bd462b246080ed45a4d82af17d808c098c9eec7ca3d32bc601b08680d",
       "status": "MACOS_LOCAL_CORE_PASS_DEVICE_PENDING"
     }
   },

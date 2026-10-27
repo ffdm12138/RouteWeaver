@@ -1,0 +1,1 @@
+{"status":"SHADOWROCKET_LEAN_STATIC_PASS_NATIVE_PENDING","checks":5,"metrics":{"routingHosts":232528,"tcp":232528,"udp":232528,"businessDNS":9129,"criticalDomesticDNS":6,"coldRouting":36,"protectedFlows":9},"failures":[],"nativeAcceptance":"NOT_RUN"}

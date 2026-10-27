@@ -1,0 +1,10 @@
+PASS desktop: 94 real-core routing cases
+AssertionError [ERR_ASSERTION]: Core/provider readiness {"lastError":"GET /providers/rules: connect ECONNREFUSED 127.0.0.1:62438","expected":["v14-core-1d436d47","v14-core-8c5b7297","v14-core-40208988","v14-core-843ade9a","v14-core-1cf57d4e","v14-cdn-shared-guard","v12r-domain-anthropic","v12r-domain-google-gemini","v12r-domain-youtube","v12r-domain-google","v12r-domain-netflix","v12r-domain-disney","v12r-domain-spotify","v12r-domain-telegram","v12r-domain-discord","v12r-domain-tiktok","v12r-domain-twitter","v12r-domain-meta","v12r-domain-steam","v12r-domain-epicgames","v12r-domain-microsoft","v12r-domain-linkedin","v12r-domain-apple","v12r-domain-bilibili","v12r-ip-netflix","v12r-ip-telegram","v12r-ip-twitter","v14-domains-private","v12r-domain-private","v12r-domain-douyin","v12r-domain-apple_at_cn","v12r-domain-google_at_cn","v12r-domain-microsoft_at_cn","v12r-domain-steam_at_cn","v14-domains-cn","v12r-domain-cn","v12r-ip-cn","v14-generic-stun-domain-guard","v14-domains-category-doh","v14-domestic-protocol-seeds"]}
+    at main (E:\2\覆写脚本\opensource\RouteWeaver\.work\core\v14.3\balanced-boundaries-FS2b62\native-routing.cjs:48:434) {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}

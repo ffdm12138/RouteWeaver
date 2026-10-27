@@ -31,6 +31,10 @@ const V14 = Object.freeze({
   bootstrapDns: ["https://223.5.5.5/dns-query", "https://223.6.6.6/dns-query"],
   // An upstream reachable directly in China and through ordinary proxy nodes.
   groupDnsUrls: ["tls://dns.alidns.com:853", "tls://dot.pub:853"],
+  // The one name outside Fake-IP (see fake-ip-filter) must return a real
+  // answer, so it cannot ride the DoT/853 policy: a carrier or node that drops
+  // 853 turns it into SERVFAIL. Same reviewed upstreams, DoH on 443.
+  apiRealDns: ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"],
 });
 
 const V14_BUILTINS = new Set(["DIRECT", "REJECT", "REJECT-DROP", "REJECT-NO-DROP", "PASS", "PASS-RULE", "COMPATIBLE", "GLOBAL"]);
@@ -2201,13 +2205,19 @@ function v14NetworkModeBase(input) {
     if (V14_REVIEWED_DOMAINS[tag]) dnsPolicy["rule-set:" + embeddedDomainSet(tag)] = v14DnsFor(domesticPolicy);
     dnsPolicy["rule-set:" + ruleSet("domain", tag)] = v14DnsFor(domesticPolicy);
   }
+  // api.openai.com is the only name excluded from Fake-IP, so it is the only
+  // one that must resolve for real. Keep the OpenAI group egress, but resolve
+  // it over DoH/443 instead of the shared DoT/853 policy: 853 is blocked on
+  // some carriers and node providers, which turned this host into SERVFAIL
+  // while every Fake-IP name kept working.
+  dnsPolicy["api.openai.com"] = V14.apiRealDns.map(url => url + "#" + groupName("OpenAI 服务"));
   const oldDns = v14Object(config.dns) ? config.dns : {};
   config.dns = Object.assign({}, oldDns, {
     enable: true, ipv6: true, "enhanced-mode": "fake-ip", "fake-ip-range": "198.18.0.1/16",
     "fake-ip-range6": "fdfe:dcba:9876::1/64", "fake-ip-filter-mode": "blacklist",
     // Chromium treats the IPv6 Fake-IP ULA as local network access. Return
-    // real A/AAAA for this public API; nameserver-policy still uses OpenAI's
-    // chosen group, and the existing company rules retain fail-closed routing.
+    // real A/AAAA for this public API (resolved over DoH/443 above); company
+    // rules still retain fail-closed routing.
     "fake-ip-filter": V14.privateNames.map(d => "+." + d).concat(["api.openai.com"]), "use-hosts": true,
     "use-system-hosts": true, "respect-rules": false, "prefer-h3": false,
     "default-nameserver": V14.bootstrapDns.slice(), "proxy-server-nameserver": V14.nodeDns.slice(),

@@ -7,11 +7,8 @@ read=lambda p:json.loads(p.read_text(encoding='utf-8-sig'))
 sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
 manifest=read(root/'metadata/balanced-sources.json')
 assert manifest['domesticProtocolRevision']=='domestic-protocol-r1'
-known=json.loads((root/'validation/known-release-regressions.json').read_text(encoding='utf-8'))
-assert known['status']=='PRE_RELEASE_WITH_DISCLOSED_UNRESOLVED_NATIVE_REGRESSIONS' and len(known['knownUnresolved'])==2
-known_map={e['test']:e for e in known['knownUnresolved']}
-known=json.loads((root/'validation/known-release-regressions.json').read_text(encoding='utf-8'))
-assert known['status']=='PRE_RELEASE_WITH_DISCLOSED_UNRESOLVED_NATIVE_REGRESSIONS' and len(known['knownUnresolved'])==2
+from release_regressions import verify_regressions
+known=verify_regressions(root,sha,read)
 known_map={e['test']:e for e in known['knownUnresolved']}
 evidence={}
 for name,expected in [('static','BALANCED_STATIC_PASS'),('native-core','BALANCED_LOCAL_CORE_PASS'),('balanced-empty-core','BALANCED_LOCAL_CORE_PASS'),('balanced-download-failure','BALANCED_COLD_DOWNLOAD_CORE_PASS'),('shadowrocket-lean','SHADOWROCKET_LEAN_STATIC_PASS_NATIVE_PENDING')]:
@@ -43,7 +40,6 @@ def item(file):return {'file':file,'sha256':sha(root/file)}
 review={'version':'14.3','date':'2026-10-14','revision':'balanced-r1','domesticProtocolRevision':'domestic-protocol-r1',
  'status':'DOMESTIC_PROTOCOL_SOURCE_LOCAL_CORE_PASS_DEVICE_PENDING',
  'knownReleaseRegressions':{'file':'validation/known-release-regressions.json','sha256':sha(root/'validation/known-release-regressions.json'),'status':known['status']},
- 'knownReleaseRegressions':{'file':'validation/known-release-regressions.json','sha256':sha(root/'validation/known-release-regressions.json'),'status':known['status']},
  'authorization':'User selected reviewed domestic TCP/UDP/DNS following 国内网站 and self-contained Shadowrocket business DNS; unknown IP-only UDP and generic STUN remain protected.',
  'contract':{'file':'docs/需求.md','sha256':sha(project/'docs/需求.md'),'originalBytesPreserved':False,
   'previousFile':protocol_archive+'/docs/需求.md','previousSHA256':previous_contract_sha,
@@ -58,7 +54,7 @@ review={'version':'14.3','date':'2026-10-14','revision':'balanced-r1','domesticP
   'businessParents':sum(len(s['seeds']) for s in policy['services']),'businessExact':sum(len(s.get('exact',[])) for s in policy['services']),
   'criticalDomesticParents':len(policy['embedded']['cn']['payloadText'].splitlines()),'nativeSourceLock':30,'shadowrocketRuntimeSources':delivery['shadowrocket']['remoteSources'],'latestSemanticDeltas':0},
  'requirements':[{'number':i,'sourceContract':'PASS_JS_AND_DECLARED_SHADOWROCKET_MODEL','localCore':'PASS_JS_WITH_DECLARED_SCOPE','shadowrocketNative':'NOT_RUN','deviceAcceptance':'NOT_RUN'} for i in range(1,12)],
- 'scope':'The public native routing and empty-provider replays have recorded FAIL results accepted for this pre-release only. Three standalone JS entries, finite domain models and owned Mihomo loopback. Shadowrocket finite source model only; full domestic DNS relies on native direct/selected-node resolution and is not native verified.',
+ 'scope':('Named native FAIL results remain unresolved for this pre-release. ' if known['knownUnresolved'] else 'Current native routing and empty-provider replays pass; original rc.6 FAIL evidence is preserved with separate repair receipts. ')+'Three standalone JS entries, finite domain models and owned Mihomo loopback. Shadowrocket finite source model only; full domestic DNS relies on native direct/selected-node resolution and is not native verified.',
  'historicalCounterexample':core.get('historicalPreFixCounterexample',prior.get('historicalCounterexample')),
  'appJavaScriptCore':'NOT_RUN','vpnCapture':'NOT_RUN','publicIPv6':'NOT_RUN','longRunMemory':'NOT_RUN','clientDeployment':False,
  'recordingTool':{'file':'tools/record-v14.3.py','sha256':sha(Path(__file__))}}
@@ -90,6 +86,11 @@ if (root/'metadata/macos-delivery.json').exists():
         current['inlineProviderRows'][key]=e['inlineRows']
 from network_release import record
 record(project,root,current,review,sha,read)
+if known.get('repairEvidence'):
+    current.update(maintenanceRevision='controller-readiness-r1',
+                   maintenanceStatus='LOCAL_VERIFIED_UNPUBLISHED',
+                   maintenanceReport='docs/reports/v14.3/rc6本地API回归修复.md')
+    review['nativeApiRepair']=known['repairEvidence']
 (root/'metadata/balanced-review.json').write_text(json.dumps(review,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
 (project/'CURRENT_RELEASE.json').write_text(json.dumps(current,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
 print(json.dumps({'status':review['status'],'metrics':review['metrics'],'shadowrocketNative':'NOT_RUN','clientDeployment':current['clientDeployment']}))

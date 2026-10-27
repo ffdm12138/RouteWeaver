@@ -1,0 +1,16 @@
+✔ a delayed controller must become ready and confirm nonempty providers (262.8236ms)
+✔ a silent controller fails within the whole request deadline (153.2206ms)
+✔ an idempotent request retries a reset, and reads the actual recovered response (31.2491ms)
+✔ exhausted transport retries still fail (91.9609ms)
+✔ non-idempotent POST is never replayed after a reset (3.281ms)
+✔ HTTP rejection and invalid JSON fail without transport retries (3.5638ms)
+✔ an alive controller with empty providers never passes a nonempty readiness condition (223.8981ms)
+✔ a core that exited before readiness is a failure and cleanup returns promptly (72.3389ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 926.2976

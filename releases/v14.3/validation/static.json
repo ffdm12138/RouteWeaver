@@ -114,7 +114,7 @@
     },
     {
       "file": "metadata/balanced-sources.json",
-      "sha256": "2a68c74babe3f11ead74a14262083dde729b9624464251008744162ba1d30334"
+      "sha256": "0ac55bf6e84e0bfec9aca3465a6313f48c7de6685d24027d23fc5a4a50382bad"
     },
     {
       "file": "metadata/source-comparison.json",
@@ -138,15 +138,15 @@
     },
     {
       "file": "src/windows/v14.3.js",
-      "sha256": "2cc432caf839892f24f4fd485f20a1efc3c4d8824adaf54f46a45e60f776b4df"
+      "sha256": "cf9559a67f291ec9ebd6d875a2b3b677e7b11ad887877f373352d156507b0985"
     },
     {
       "file": "src/android/v14.3-android.js",
-      "sha256": "46d95fde07dbd229595428860db9da96f72569c830890e31d0020cb7181c2912"
+      "sha256": "755bd9d52e4bf72d47b9a6b3e3ce2406491e0b2353aa356eaf75ab577e378960"
     },
     {
       "file": "src/ios/v14.3-clashmi-domestic-protocol-r1.js",
-      "sha256": "da22e70e017a5cf906ddd58ca94dcf988417953e17d1b2834fddc0b428b08eda"
+      "sha256": "d8e07bfc3e4e9b55dedd76451e75de090b4319fe452c17e5a689e82d63e1e514"
     },
     {
       "file": "data/rules/reviewed/v12r-domain-private.yaml",

@@ -1,0 +1,12 @@
+PASS macos-flclash: 917 real-core routing cases
+PASS macos-clashmi: 917 real-core routing cases
+PASS macos-flclash: 431 observed DNS/Fake-IP cases; persistent switch and API real-address exception PASS
+PASS macos-clashmi: 431 observed DNS/Fake-IP cases; persistent switch and API real-address exception PASS
+PASS macos-flclash provider: 37 actual selector observations
+PASS macos-flclash raw: 37 actual selector observations
+PASS macos-flclash override: 38 actual selector observations
+PASS macos-clashmi provider: 37 actual selector observations
+PASS macos-clashmi raw: 37 actual selector observations
+PASS macos-clashmi override: 38 actual selector observations
+{"status":"CORE_INBOUND_GUARD_PASS","platforms":[{"platform":"macos-flclash","cases":2,"observations":[{"stage":"before-fixed-direct","providerReadiness":{"nonemptyFileProviders":30},"mainRule":"DOMAIN,v14-runtime-check.invalid,REJECT","result":{"status":200,"body":"owned-loopback-marker"},"markerHits":1,"generationGuard":"REJECTED"},{"stage":"after-main-rules","providerReadiness":{"nonemptyFileProviders":30},"mainRule":"DOMAIN,v14-runtime-check.invalid,REJECT","result":{"status":502,"body":""},"markerHits":0,"generationGuard":"ORDINARY_LISTENER_PRESERVED"}]},{"platform":"macos-clashmi","cases":2,"observations":[{"stage":"before-fixed-direct","providerReadiness":{"nonemptyFileProviders":29},"mainRule":"DOMAIN,v14-runtime-check.invalid,REJECT","result":{"status":200,"body":"owned-loopback-marker"},"markerHits":1,"generationGuard":"REJECTED"},{"stage":"after-main-rules","providerReadiness":{"nonemptyFileProviders":29},"mainRule":"DOMAIN,v14-runtime-check.invalid,REJECT","result":{"status":502,"body":""},"markerHits":0,"generationGuard":"ORDINARY_LISTENER_PRESERVED"}]}]}
+{"status":"MACOS_LOCAL_CORE_PASS_DEVICE_PENDING","runs":[{"kind":"routing","cases":[{"platform":"macos-flclash","cases":917},{"platform":"macos-clashmi","cases":917}]},{"kind":"dns-egress","cases":[{"platform":"macos-flclash","cases":431},{"platform":"macos-clashmi","cases":431}]},{"kind":"selectors","cases":[{"platform":"macos-flclash","cases":37},{"platform":"macos-flclash","cases":37},{"platform":"macos-flclash","cases":38},{"platform":"macos-clashmi","cases":37},{"platform":"macos-clashmi","cases":37},{"platform":"macos-clashmi","cases":38}]},{"kind":"inbound-guard","cases":[{"platform":"macos-flclash","cases":2},{"platform":"macos-clashmi","cases":2}]}],"deviceAcceptance":"NOT_RUN"}

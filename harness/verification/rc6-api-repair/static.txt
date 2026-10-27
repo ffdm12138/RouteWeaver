@@ -1,0 +1,4 @@
+{"platform":"desktop","fullInventoryHosts":233396,"normalRouting":233396,"normalDNS":233396,"criticalColdRouting":4232,"criticalColdDNS":1058,"existingCases":917}
+{"platform":"android","fullInventoryHosts":233396,"normalRouting":233396,"normalDNS":233396,"criticalColdRouting":4232,"criticalColdDNS":1058,"existingCases":917}
+{"platform":"clashmi","fullInventoryHosts":233396,"normalRouting":233396,"normalDNS":233396,"criticalColdRouting":4232,"criticalColdDNS":1058,"existingCases":917}
+{"status":"BALANCED_STATIC_PASS","checks":27,"failures":[],"normalMismatches":[],"coldMismatches":[]}

@@ -1,0 +1,279 @@
+{
+  "status": "IPV4_ONLY_STATIC_BUSINESS_PARITY_PASS",
+  "flavor": "public",
+  "checks": 67,
+  "engines": [],
+  "manifestSHA256": "04972a4041ce613819303dd53c328fa57cc246462a80d36067f0ced7493ae3dd",
+  "harnessSHA256": "7b9bf3775c3aa28a97c72e0b3bb99b90732990b4365a548e0dfa963746cf34c2",
+  "cases": [
+    {
+      "name": "windows:minimal",
+      "status": "PASS"
+    },
+    {
+      "name": "windows:inherited-auto",
+      "status": "PASS"
+    },
+    {
+      "name": "windows:inherited-dual",
+      "status": "PASS"
+    },
+    {
+      "name": "windows:inline-provider",
+      "status": "PASS"
+    },
+    {
+      "name": "windows:remote-provider",
+      "status": "PASS"
+    },
+    {
+      "name": "windows:hosts",
+      "status": "PASS"
+    },
+    {
+      "name": "windows:LAN-dns",
+      "status": "PASS"
+    },
+    {
+      "name": "windows:serialized",
+      "status": "PASS"
+    },
+    {
+      "name": "windows:null",
+      "status": "PASS"
+    },
+    {
+      "name": "windows:array",
+      "status": "PASS"
+    },
+    {
+      "name": "windows:string",
+      "status": "PASS"
+    },
+    {
+      "name": "android:minimal",
+      "status": "PASS"
+    },
+    {
+      "name": "android:inherited-auto",
+      "status": "PASS"
+    },
+    {
+      "name": "android:inherited-dual",
+      "status": "PASS"
+    },
+    {
+      "name": "android:inline-provider",
+      "status": "PASS"
+    },
+    {
+      "name": "android:remote-provider",
+      "status": "PASS"
+    },
+    {
+      "name": "android:hosts",
+      "status": "PASS"
+    },
+    {
+      "name": "android:LAN-dns",
+      "status": "PASS"
+    },
+    {
+      "name": "android:serialized",
+      "status": "PASS"
+    },
+    {
+      "name": "android:null",
+      "status": "PASS"
+    },
+    {
+      "name": "android:array",
+      "status": "PASS"
+    },
+    {
+      "name": "android:string",
+      "status": "PASS"
+    },
+    {
+      "name": "clashmi:minimal",
+      "status": "PASS"
+    },
+    {
+      "name": "clashmi:inherited-auto",
+      "status": "PASS"
+    },
+    {
+      "name": "clashmi:inherited-dual",
+      "status": "PASS"
+    },
+    {
+      "name": "clashmi:inline-provider",
+      "status": "PASS"
+    },
+    {
+      "name": "clashmi:remote-provider",
+      "status": "PASS"
+    },
+    {
+      "name": "clashmi:hosts",
+      "status": "PASS"
+    },
+    {
+      "name": "clashmi:LAN-dns",
+      "status": "PASS"
+    },
+    {
+      "name": "clashmi:serialized",
+      "status": "PASS"
+    },
+    {
+      "name": "clashmi:null",
+      "status": "PASS"
+    },
+    {
+      "name": "clashmi:array",
+      "status": "PASS"
+    },
+    {
+      "name": "clashmi:string",
+      "status": "PASS"
+    },
+    {
+      "name": "shadowrocket:native-conf",
+      "status": "PASS"
+    },
+    {
+      "name": "macosFlClash:minimal",
+      "status": "PASS"
+    },
+    {
+      "name": "macosFlClash:inherited-auto",
+      "status": "PASS"
+    },
+    {
+      "name": "macosFlClash:inherited-dual",
+      "status": "PASS"
+    },
+    {
+      "name": "macosFlClash:inline-provider",
+      "status": "PASS"
+    },
+    {
+      "name": "macosFlClash:remote-provider",
+      "status": "PASS"
+    },
+    {
+      "name": "macosFlClash:hosts",
+      "status": "PASS"
+    },
+    {
+      "name": "macosFlClash:LAN-dns",
+      "status": "PASS"
+    },
+    {
+      "name": "macosFlClash:serialized",
+      "status": "PASS"
+    },
+    {
+      "name": "macosFlClash:null",
+      "status": "PASS"
+    },
+    {
+      "name": "macosFlClash:array",
+      "status": "PASS"
+    },
+    {
+      "name": "macosFlClash:string",
+      "status": "PASS"
+    },
+    {
+      "name": "macosClashMi:minimal",
+      "status": "PASS"
+    },
+    {
+      "name": "macosClashMi:inherited-auto",
+      "status": "PASS"
+    },
+    {
+      "name": "macosClashMi:inherited-dual",
+      "status": "PASS"
+    },
+    {
+      "name": "macosClashMi:inline-provider",
+      "status": "PASS"
+    },
+    {
+      "name": "macosClashMi:remote-provider",
+      "status": "PASS"
+    },
+    {
+      "name": "macosClashMi:hosts",
+      "status": "PASS"
+    },
+    {
+      "name": "macosClashMi:LAN-dns",
+      "status": "PASS"
+    },
+    {
+      "name": "macosClashMi:serialized",
+      "status": "PASS"
+    },
+    {
+      "name": "macosClashMi:null",
+      "status": "PASS"
+    },
+    {
+      "name": "macosClashMi:array",
+      "status": "PASS"
+    },
+    {
+      "name": "macosClashMi:string",
+      "status": "PASS"
+    },
+    {
+      "name": "clashVerge:minimal",
+      "status": "PASS"
+    },
+    {
+      "name": "clashVerge:inherited-auto",
+      "status": "PASS"
+    },
+    {
+      "name": "clashVerge:inherited-dual",
+      "status": "PASS"
+    },
+    {
+      "name": "clashVerge:inline-provider",
+      "status": "PASS"
+    },
+    {
+      "name": "clashVerge:remote-provider",
+      "status": "PASS"
+    },
+    {
+      "name": "clashVerge:hosts",
+      "status": "PASS"
+    },
+    {
+      "name": "clashVerge:LAN-dns",
+      "status": "PASS"
+    },
+    {
+      "name": "clashVerge:serialized",
+      "status": "PASS"
+    },
+    {
+      "name": "clashVerge:null",
+      "status": "PASS"
+    },
+    {
+      "name": "clashVerge:array",
+      "status": "PASS"
+    },
+    {
+      "name": "clashVerge:string",
+      "status": "PASS"
+    }
+  ],
+  "deviceAcceptance": "NOT_RUN"
+}

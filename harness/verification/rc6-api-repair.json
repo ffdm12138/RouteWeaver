@@ -1,0 +1,104 @@
+{
+  "revision": "controller-readiness-r1",
+  "status": "LOCAL_SOURCE_REPLAY_PACKAGE_VERIFIED_UNPUBLISHED",
+  "dateUTC": "2026-10-16T20:15:33.209076+00:00",
+  "basedOnCommit": "e342ed4aa581c981279f821436436fd5484fc96c",
+  "nativeObservations": 14886,
+  "controllerUnitCases": 8,
+  "pythonUnitTests": 31,
+  "repairEvidence": {
+    "file": "releases/v14.3/validation/native-api-repair.json",
+    "sha256": "b16ed9020ac263c9cd93ed16fea71b4fcfdbbafccf377c39292dff14168817b2"
+  },
+  "checks": [
+    {
+      "file": "harness/verification/rc6-api-repair/generation.txt",
+      "sha256": "7c9b0c8ee42c2ef33eed7bd27f6679e49f39c633781f93b68eac65c9532746a8"
+    },
+    {
+      "file": "harness/verification/rc6-api-repair/static.txt",
+      "sha256": "aded42162f9c24b64bcf146b80a5217b86b86331163bfdaf686fc3a294e531c0"
+    },
+    {
+      "file": "harness/verification/rc6-api-repair/macos-static.txt",
+      "sha256": "e51045e0d1fa722614d951d32725daabacdb6d7b4e0a12eaa61376720c17983b"
+    },
+    {
+      "file": "harness/verification/rc6-api-repair/clash-verge.txt",
+      "sha256": "d8285924336fed1a0e1658d0f02529364ce8a42ac5ee16ae13f41b6ac34dc45d"
+    },
+    {
+      "file": "harness/verification/rc6-api-repair/shadowrocket-lean.txt",
+      "sha256": "76bbfb9945641d0a7043db65911363a0c728879de5aa4f6c9047338a740fbe53"
+    },
+    {
+      "file": "harness/verification/rc6-api-repair/network-compat.txt",
+      "sha256": "b41421d07b5b3826f8d1def61d173f13303888e270986c59d4de6335f0843edc"
+    },
+    {
+      "file": "harness/verification/rc6-api-repair/python-tests.txt",
+      "sha256": "ec51edaf528912737fb3033a6a342c178bc90480f0388a522c42ddb1d0f3c423"
+    },
+    {
+      "file": "harness/verification/rc6-api-repair/source-verify.txt",
+      "sha256": "64b7efa5e7656d32fa19125850ee8ccdae0fcdbd8d2fe3402201c27eb3000dd1"
+    },
+    {
+      "file": "harness/verification/rc6-api-repair/packages.txt",
+      "sha256": "e8dd11cc1bc8f95e35beffd560795bc78a47e5cc8d120e6e0845adc6a3aa6570"
+    },
+    {
+      "file": "harness/verification/rc6-api-repair/package-verify.txt",
+      "sha256": "de044a4551bc31da06d69c296e785395d441a70ef5c8ab3bd32c7eeca08d6939"
+    },
+    {
+      "file": "harness/verification/rc6-api-repair/package-scan.txt",
+      "sha256": "23aa48942253c04ea6058ed9e653b4cfc25fd33575f2650b16939a427c397f32"
+    }
+  ],
+  "packages": [
+    {
+      "file": "dist/v14.3/v14.3-deployable.zip",
+      "sha256": "bd4bb5a75ac23a987647e460b30f51452a0f49141527ee7c16985bdc70f2d1df",
+      "bytes": 765494,
+      "members": 83,
+      "credentials": {
+        "status": "PASS",
+        "scope": "No private keys, executable/cache/nested ZIP, credential URLs or hard-coded credential literals in deployed entry source; audit uses public rules and synthetic fixtures only"
+      },
+      "crc": "PASS",
+      "memberSHA256": "PASS"
+    },
+    {
+      "file": "dist/v14.3/v14.3-audit-evidence.zip",
+      "sha256": "cb711cceaa0951a9c7eed9d136c0b68b44351a5e47cbdf70292154c26a3ec835",
+      "bytes": 13014924,
+      "members": 715,
+      "credentials": {
+        "status": "PASS",
+        "scope": "No private keys, executable/cache/nested ZIP, credential URLs or hard-coded credential literals in deployed entry source; audit uses public rules and synthetic fixtures only"
+      },
+      "crc": "PASS",
+      "memberSHA256": "PASS"
+    },
+    {
+      "file": "dist/v14.3/v14.3-macos.zip",
+      "sha256": "7d55e0c0e1705ef4ca8c9501749ac38b7a0fbcf71ef8de1a1f0a7103145a167d",
+      "bytes": 251437,
+      "members": 51,
+      "credentials": {
+        "status": "PASS",
+        "scope": "No private keys, executable/cache/nested ZIP, credential URLs or hard-coded credential literals in deployed entry source; audit uses public rules and synthetic fixtures only"
+      },
+      "crc": "PASS",
+      "memberSHA256": "PASS"
+    }
+  ],
+  "sourceEntryBytesChanged": false,
+  "pinnedRuleLockChanged": false,
+  "originalFailBytesPreserved": true,
+  "originalTrigger": "NOT_REPRODUCED_UNMODIFIED_BASELINES_PASSED",
+  "deviceAcceptance": "NOT_RUN",
+  "publishedReleaseModified": false,
+  "installedClientModified": false
+}

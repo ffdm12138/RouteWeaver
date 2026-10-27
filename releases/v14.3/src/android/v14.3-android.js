@@ -32,6 +32,10 @@ const V14 = Object.freeze({
   bootstrapDns: ["https://223.5.5.5/dns-query", "https://223.6.6.6/dns-query"],
   // An upstream reachable directly in China and through ordinary proxy nodes.
   groupDnsUrls: ["tls://dns.alidns.com:853", "tls://dot.pub:853"],
+  // The one name outside Fake-IP (see fake-ip-filter) must return a real
+  // answer, so it cannot ride the DoT/853 policy: a carrier or node that drops
+  // 853 turns it into SERVFAIL. Same reviewed upstreams, DoH on 443.
+  apiRealDns: ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"],
 });
 
 const V14_BUILTINS = new Set(["DIRECT", "REJECT", "REJECT-DROP", "REJECT-NO-DROP", "PASS", "PASS-RULE", "COMPATIBLE", "GLOBAL"]);

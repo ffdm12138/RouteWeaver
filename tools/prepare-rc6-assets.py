@@ -17,11 +17,12 @@ def main():
     assert len(entries)==7 and all(p.is_file() for p in entries)
     package=read(OUT/'package-verification.json')
     auto=read(OUT/'auto-core-package-verification.json')
-    risk=read(REL/'validation/known-release-regressions.json')
+    from release_regressions import verify_regressions
+    risk=verify_regressions(REL,sha,read)
     assert package['status']=='PACKAGE_CRC_SHA_FRESH_STATIC_PASS'
     assert auto['status']=='MATCHED_RC6_PAIR_AND_COMPLETE_SOURCE_PACKAGED_CRC_SHA_PASS'
-    assert risk['status']=='PRE_RELEASE_WITH_DISCLOSED_UNRESOLVED_NATIVE_REGRESSIONS'
-    assert len(risk['knownUnresolved'])==2
+    assert package['knownRegressions']['status']==risk['status']
+    assert auto['knownFailures']==risk['status']
     files={p.name:p for p in entries}
     for e in package['packages']+auto['packages']:
         f=ROOT/e['file']

@@ -1,0 +1,17 @@
+PASS desktop: 917 real-core routing cases
+PASS android: 917 real-core routing cases
+PASS clashmi: 917 real-core routing cases
+PASS desktop: 431 observed DNS/Fake-IP cases; persistent switch and API real-address exception PASS
+PASS android: 431 observed DNS/Fake-IP cases; persistent switch and API real-address exception PASS
+PASS clashmi: 431 observed DNS/Fake-IP cases; persistent switch and API real-address exception PASS
+PASS desktop provider: 37 actual selector observations
+PASS desktop raw: 37 actual selector observations
+PASS desktop override: 38 actual selector observations
+PASS android provider: 37 actual selector observations
+PASS android raw: 37 actual selector observations
+PASS android override: 38 actual selector observations
+PASS clashmi provider: 37 actual selector observations
+PASS clashmi raw: 37 actual selector observations
+PASS clashmi override: 38 actual selector observations
+{"status":"CORE_INBOUND_GUARD_PASS","platforms":[{"platform":"desktop","cases":2,"observations":[{"stage":"before-fixed-direct","providerReadiness":{"nonemptyFileProviders":30},"mainRule":"DOMAIN,v14-runtime-check.invalid,REJECT","result":{"status":200,"body":"owned-loopback-marker"},"markerHits":1,"generationGuard":"REJECTED"},{"stage":"after-main-rules","providerReadiness":{"nonemptyFileProviders":30},"mainRule":"DOMAIN,v14-runtime-check.invalid,REJECT","result":{"status":502,"body":""},"markerHits":0,"generationGuard":"ORDINARY_LISTENER_PRESERVED"}]},{"platform":"android","cases":2,"observations":[{"stage":"before-fixed-direct","providerReadiness":{"nonemptyFileProviders":29},"mainRule":"DOMAIN,v14-runtime-check.invalid,REJECT","result":{"status":200,"body":"owned-loopback-marker"},"markerHits":1,"generationGuard":"REJECTED"},{"stage":"after-main-rules","providerReadiness":{"nonemptyFileProviders":29},"mainRule":"DOMAIN,v14-runtime-check.invalid,REJECT","result":{"status":502,"body":""},"markerHits":0,"generationGuard":"ORDINARY_LISTENER_PRESERVED"}]},{"platform":"clashmi","cases":2,"observations":[{"stage":"before-fixed-direct","providerReadiness":{"nonemptyFileProviders":29},"mainRule":"DOMAIN,v14-runtime-check.invalid,REJECT","result":{"status":200,"body":"owned-loopback-marker"},"markerHits":1,"generationGuard":"REJECTED"},{"stage":"after-main-rules","providerReadiness":{"nonemptyFileProviders":29},"mainRule":"DOMAIN,v14-runtime-check.invalid,REJECT","result":{"status":502,"body":""},"markerHits":0,"generationGuard":"ORDINARY_LISTENER_PRESERVED"}]}]}
+{"status":"BALANCED_LOCAL_CORE_PASS","runs":[{"kind":"routing","cases":[{"platform":"desktop","cases":917},{"platform":"android","cases":917},{"platform":"clashmi","cases":917}]},{"kind":"dns-egress","cases":[{"platform":"desktop","cases":431},{"platform":"android","cases":431},{"platform":"clashmi","cases":431}]},{"kind":"selectors","cases":[{"platform":"desktop","cases":37},{"platform":"desktop","cases":37},{"platform":"desktop","cases":38},{"platform":"android","cases":37},{"platform":"android","cases":37},{"platform":"android","cases":38},{"platform":"clashmi","cases":37},{"platform":"clashmi","cases":37},{"platform":"clashmi","cases":38}]},{"kind":"inbound-guard","cases":[{"platform":"desktop","cases":2},{"platform":"android","cases":2},{"platform":"clashmi","cases":2}]}]}

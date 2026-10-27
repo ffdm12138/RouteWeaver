@@ -6,8 +6,8 @@
   "status": "AUTO_LOCAL_NATIVE_CORE_PASS_DEVICE_PENDING",
   "knownReleaseRegressions": {
     "file": "validation/known-release-regressions.json",
-    "sha256": "479d1dd0a46c2d9ba977e80288f4b327b6214b5437ec05c67b6352dff4e78970",
-    "status": "PRE_RELEASE_WITH_DISCLOSED_UNRESOLVED_NATIVE_REGRESSIONS"
+    "sha256": "571a053711ec1eb5a6ee7a082f9b37a7b1f11aefa8cb7cd9853038d1ed62d746",
+    "status": "RC6_NATIVE_API_REGRESSIONS_REPAIRED_DEVICE_PENDING"
   },
   "authorization": "User selected reviewed domestic TCP/UDP/DNS following 国内网站 and self-contained Shadowrocket business DNS; unknown IP-only UDP and generic STUN remain protected.",
   "contract": {
@@ -60,19 +60,19 @@
     },
     "native-core": {
       "file": "validation/native-core.json",
-      "sha256": "b0fd3addd5149c5588345a2b4cbd9db3fa85aae2c7943ba5cb86c259e99a745d",
-      "status": "FAIL",
-      "knownFailureAcceptedForPreRelease": true
+      "sha256": "7de1f4556d8e4270fcfca4d09c34246968a476dc83aa7ca591f5fbbcced5db19",
+      "status": "BALANCED_LOCAL_CORE_PASS",
+      "knownFailureAcceptedForPreRelease": false
     },
     "balanced-empty-core": {
       "file": "validation/balanced-empty-core.json",
-      "sha256": "d0e9773b136e7fa4fbac7317774b3dbb23e8cdeb8c4a5bcc8c094135c1e596b4",
-      "status": "FAIL",
-      "knownFailureAcceptedForPreRelease": true
+      "sha256": "18672eb145e6061ad35a6cd1879e67a372445fae01dfae784d5e8765d6d8eaf3",
+      "status": "BALANCED_LOCAL_CORE_PASS",
+      "knownFailureAcceptedForPreRelease": false
     },
     "balanced-download-failure": {
       "file": "validation/balanced-download-failure.json",
-      "sha256": "b6e2cfc4440ca0130eacbec900a031ec5de845e6e25cab81c97623b6944e016c",
+      "sha256": "2bcc4d0746246a515b9a3e152b87aff26943a904ec3aec6b6a2b3a7d113548d4",
       "status": "BALANCED_COLD_DOWNLOAD_CORE_PASS",
       "knownFailureAcceptedForPreRelease": false
     },
@@ -102,15 +102,20 @@
   },
   "iosDelivery": {
     "file": "metadata/ios-delivery.json",
-    "sha256": "193ce759bad539d89867bd7938f70ae72cd8f27eb4e3c23e6069a4cf1294637f",
+    "sha256": "69e9df9e5af5acb47626998600fb3d2271a793f64e487029867c1cb7b39d6433",
     "revision": "ios-delivery-r2",
-    "status": "IOS_SOURCE_STATIC_WITH_KNOWN_CORE_REPLAY_FAILURE_DEVICE_PENDING"
+    "status": "IOS_SOURCE_STATIC_LOCAL_CORE_PASS_NATIVE_DEVICE_PENDING"
   },
   "metrics": {
     "fullInventoryHostsPerPlatform": 233396,
     "criticalEmptyHostsPerPlatform": 1058,
     "staticChecks": 27,
-    "nativeObservations": {},
+    "nativeObservations": {
+      "routing": 2751,
+      "dns-egress": 1293,
+      "selectors": 336,
+      "inbound-guard": 6
+    },
     "businessParents": 199,
     "businessExact": 164,
     "criticalDomesticParents": 51,
@@ -204,7 +209,7 @@
       "deviceAcceptance": "AUTO_CORE_ONLY_DEVICES_PENDING"
     }
   ],
-  "scope": "The public native routing and empty-provider replays have recorded FAIL results accepted for this pre-release only. Three standalone JS entries, finite domain models and owned Mihomo loopback. Shadowrocket finite source model only; full domestic DNS relies on native direct/selected-node resolution and is not native verified.",
+  "scope": "Current native routing and empty-provider replays pass; original rc.6 FAIL evidence is preserved with separate repair receipts. Three standalone JS entries, finite domain models and owned Mihomo loopback. Shadowrocket finite source model only; full domestic DNS relies on native direct/selected-node resolution and is not native verified.",
   "historicalCounterexample": "NOT_RUN; prior failed evidence preserved",
   "appJavaScriptCore": "NOT_RUN",
   "vpnCapture": "NOT_RUN",
@@ -213,11 +218,11 @@
   "clientDeployment": "PREVIOUS_MANUAL_WINDOWS_ONLY_AUTO_NOT_DEPLOYED",
   "recordingTool": {
     "file": "tools/record-v14.3.py",
-    "sha256": "bfa240d02e7b0900a2a5da61dbef96f0f003002f806cb480474c9cff817b73f5"
+    "sha256": "c7c6489e263273dbabadc414b42ac3daac50d7dcecab1984cbbc355b4759a160"
   },
   "macosDelivery": {
     "file": "metadata/macos-delivery.json",
-    "sha256": "94be67a8b26aabcf733e82f800ce9ce0d702e3585e5d6932f8cd915fdd37612f",
+    "sha256": "3cb1e48596e32407bf7c94e7d0625ba39a886d9716d0987aea73df854d484475",
     "revision": "macos-r1",
     "status": "MACOS_SOURCE_LOCAL_CORE_PASS_DEVICE_PENDING"
   },
@@ -244,7 +249,7 @@
       },
       "clash-verge-core": {
         "file": "validation/clash-verge-core.json",
-        "sha256": "355877f558899bb9c3a834583010e90d11c57a0163260cb58f4f6e4d681c84e5",
+        "sha256": "f48e3d5f03fc73c52e40644ae289d31bcc07eb5624e56ce6b0bc276973fbfd9e",
         "status": "CLASH_VERGE_LOCAL_CORE_PASS_DEVICE_PENDING"
       },
       "engine-parity": {
@@ -271,5 +276,9 @@
       "file": "tools/release_enhancements.py",
       "sha256": "08fcd105e893e71ad2485f1ca4df152f4402df7b75389d8bd1c81f862c4966c8"
     }
+  },
+  "nativeApiRepair": {
+    "file": "validation/native-api-repair.json",
+    "sha256": "b16ed9020ac263c9cd93ed16fea71b4fcfdbbafccf377c39292dff14168817b2"
   }
 }

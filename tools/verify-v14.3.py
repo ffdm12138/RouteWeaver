@@ -19,20 +19,10 @@ assert current['repairRevision']==review['revision']=='balanced-r1'
 assert current['status']==review['status']=='AUTO_LOCAL_NATIVE_CORE_PASS_DEVICE_PENDING'
 assert current['domesticProtocolRevision']==review['domesticProtocolRevision']=='domestic-protocol-r1'
 assert current['clientDeployment']=='PREVIOUS_MANUAL_WINDOWS_ONLY_AUTO_NOT_DEPLOYED'
-known=read(root/'validation/known-release-regressions.json')
-assert known['status']=='PRE_RELEASE_WITH_DISCLOSED_UNRESOLVED_NATIVE_REGRESSIONS' and len(known['knownUnresolved'])==2
+from release_regressions import verify_regressions
+known=verify_regressions(root,sha,read)
 assert review['knownReleaseRegressions']=={'file':'validation/known-release-regressions.json','sha256':sha(root/'validation/known-release-regressions.json'),'status':known['status']}
 assert current['knownReleaseRegressions']=='releases/v14.3/validation/known-release-regressions.json'
-for item in known['knownUnresolved']:
-    receipt=root/item['validationFile']
-    assert sha(receipt)==item['validationSHA256'] and read(receipt)['status']=='FAIL' and item['exitCode']==1
-known=read(root/'validation/known-release-regressions.json')
-assert known['status']=='PRE_RELEASE_WITH_DISCLOSED_UNRESOLVED_NATIVE_REGRESSIONS' and len(known['knownUnresolved'])==2
-assert review['knownReleaseRegressions']=={'file':'validation/known-release-regressions.json','sha256':sha(root/'validation/known-release-regressions.json'),'status':known['status']}
-assert current['knownReleaseRegressions']=='releases/v14.3/validation/known-release-regressions.json'
-for item in known['knownUnresolved']:
-    receipt=root/item['validationFile']
-    assert sha(receipt)==item['validationSHA256'] and read(receipt)['status']=='FAIL' and item['exitCode']==1
 assert sha(project/review['contract']['file'])==review['contract']['sha256']
 if not args.skip_history:
     assert sha(project/review['contract']['previousFile'])==review['contract']['previousSHA256']

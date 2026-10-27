@@ -1,11 +1,10 @@
 """Package standalone entries and a replayable audit, with explicit validation scope."""
 from pathlib import Path
-import argparse, hashlib, json, re, shutil, subprocess, tempfile, zipfile
+import argparse, hashlib, json, re, shutil, subprocess, tempfile, time, zipfile
 
 project=Path(__file__).resolve().parents[1]
 release=project/'releases/v14.3'
 dist=project/'dist/v14.3'
-work=project/'.work/packaging'
 HTTP_REPORT='docs/reports/v14.3/HTTP域名重解析修复.md'
 IPV6_RESEARCH_REPORT='docs/reports/v14.3/无域名IPv6与转圈等待研究.md'
 SOURCE_REVIEW_REPORT='docs/reports/v14.3/公开覆写方案比较与改进取舍.md'
@@ -19,9 +18,9 @@ sha=lambda b:hashlib.sha256(b).hexdigest()
 read=lambda p:json.loads(p.read_text(encoding='utf-8-sig'))
 subprocess.run([__import__('sys').executable,str(project/'tools/verify-v14.3.py'),'--node',args.node,*(['--skip-history'] if args.skip_history else [])],cwd=project,check=True,capture_output=True,creationflags=process_flags)
 dist.mkdir(parents=True,exist_ok=True)
-work.mkdir(parents=True,exist_ok=True)
 review=read(release/'metadata/balanced-review.json')
 manifest=read(release/'metadata/balanced-sources.json')
+known=read(release/'validation/known-release-regressions.json')
 delivery=read(release/'metadata/ios-delivery.json') if (release/'metadata/ios-delivery.json').exists() else None
 mac=read(release/'metadata/macos-delivery.json') if (release/'metadata/macos-delivery.json').exists() else None
 network=read(release/review['networkCompatibility']['file'])
@@ -86,7 +85,7 @@ def write_zip(label,files):
         package_manifest['macosRevision']=mac['revision']
     package_manifest['networkCompatibilityRevision']=network['revision']
     package_manifest['networkCompatibilityRepair']=network['repairRevision']
-    package_manifest['knownNativeRegressions']='PRE_RELEASE_WITH_DISCLOSED_UNRESOLVED_NATIVE_REGRESSIONS'
+    package_manifest['knownNativeRegressions']=known['status']
     files=dict(files)
     files['PACKAGE_MANIFEST.json']=(json.dumps(package_manifest,ensure_ascii=False,indent=2)+'\n').encode('utf-8')
     target=dist/('v14.3-'+label+'.zip')
@@ -121,6 +120,12 @@ for name in ['metadata/clash-verge-sources.json','data/client-capabilities.json'
     deploy[name]=(release/name).read_bytes()
 deploy['tools/diagnose-client.py']=(project/'tools/diagnose-client.py').read_bytes()
 deploy['validation/known-release-regressions.json']=(release/'validation/known-release-regressions.json').read_bytes()
+if known.get('repairEvidence'):
+    name=known['repairEvidence']['file']
+    deploy[name]=(release/name).read_bytes()
+    for item in known['resolved']:
+        for name in [item['validationFile'],item['resolution']['validationFile']]:
+            deploy[name]=(release/name).read_bytes()
 deploy['tools/configure-flclash-network-mode.py']=(project/'tools/configure-flclash-network-mode.py').read_bytes()
 deploy.update(docs())
 deploy['README.md']=links((release/'README.md').read_bytes())
@@ -138,7 +143,7 @@ for file in release.rglob('*'):
     audit[rel.as_posix()]=file.read_bytes()
 audit.update(docs())
 audit['README.md']=links((release/'README.md').read_bytes())
-for name in ['record-v14.3.py','verify-v14.3.py','package-v14.3.py','verify-layout.py','network_release.py','release_enhancements.py','diagnose-client.py','configure-flclash-network-mode.py']:
+for name in ['record-v14.3.py','verify-v14.3.py','package-v14.3.py','verify-layout.py','network_release.py','release_enhancements.py','release_regressions.py','diagnose-client.py','configure-flclash-network-mode.py','package-auto-local-core.py','prepare-rc6-assets.py','tests/test_native_controller.py','tests/test_release_regressions.py']:
     audit['project-tools/'+name]=(project/'tools'/name).read_bytes()
 if delivery:
     audit['project-tools/restore-ios-delivery.py']=(project/'tools/restore-ios-delivery.py').read_bytes()
@@ -170,56 +175,89 @@ if mac:
     mac_files.update(docs())
     _,mac_result=write_zip('macos',mac_files)
 
-fresh=Path(tempfile.mkdtemp(prefix='v14.3-audit-',dir=work))
-with zipfile.ZipFile(audit_target) as z:
-    z.extractall(fresh)
-commands=['tools/build-balanced.cjs','tools/build-shadowrocket-lean.cjs','tests/static.cjs','tests/shadowrocket-lean.cjs']
-if mac:
-    commands.extend(['tools/build-macos.cjs','tests/macos-static.cjs'])
-commands.extend(['tools/build-network-compat.cjs','tests/network-compat.cjs','tests/clash-verge.cjs'])
-for name in commands:
-    command=[args.node,str(fresh/name),*(['--check'] if name.startswith('tools/') else [])]
-    run=subprocess.run(command,cwd=fresh,capture_output=True,text=True,encoding='utf-8',timeout=600,creationflags=process_flags)
-    (fresh/(Path(name).stem+'-fresh.log')).write_text(run.stdout+run.stderr,encoding='utf-8')
-    assert run.returncode==0,(name,run.stdout[-4000:],run.stderr[-2000:])
-static=read(fresh/'validation/static.json')
-assert static['status']=='BALANCED_STATIC_PASS'
-for e in manifest['entries']:
-    assert sha((fresh/e['file']).read_bytes())==e['sha256']
-if delivery:
-    sr=delivery['shadowrocket']
-    assert sha((fresh/sr['file']).read_bytes())==sr['sha256']
-    assert sha((fresh/sr['immutableSource']).read_bytes())==sr['immutableSourceSHA256']
-    assert sha((fresh/'metadata/ios-delivery.json').read_bytes())==sha((release/'metadata/ios-delivery.json').read_bytes())
-    for e in delivery['jsEntries']:
-        assert sha((fresh/e['file']).read_bytes())==e['sha256']
-if mac:
-    fresh_mac=read(fresh/'validation/macos-static.json')
-    assert fresh_mac['status']=='MACOS_STATIC_PASS'
-    for e in mac['entries']:
-        assert sha((fresh/e['file']).read_bytes())==e['sha256']
-result={'version':'14.3','date':'2026-10-16','revision':'balanced-r1','status':'PACKAGE_CRC_SHA_FRESH_STATIC_PASS',
-        'packages':[deploy_result,audit_result]+([mac_result] if mac_result else []),'freshExtraction':fresh.relative_to(project).as_posix(),
-        'freshGeneration':'PASS','freshStaticChecks':len(static['checks']),'freshStaticPlatforms':[{k:p[k] for k in ['platform','fullInventoryHosts','normalRouting','normalDNS','criticalColdRouting','criticalColdDNS','existingCases']} for p in static['platforms']],
-        'nativeCore':'PUBLIC_NATIVE_ROUTING_AND_EMPTY_PROVIDER_REPLAYS_FAILED_DISCLOSED_PRE_RELEASE_ONLY','freshNativeCoreReplay':'NOT_RUN',
-        'sourceReviewSHA256':sha((release/'metadata/balanced-review.json').read_bytes()),
-        'frozenContractSHA256':sha((project/'docs/需求.md').read_bytes()),'packageToolSHA256':sha(Path(__file__).read_bytes()),
-        'clientDeployment':False,'appJavaScriptCore':'NOT_RUN','deviceAcceptance':'NOT_RUN','iOSLongRunMemory':'NOT_RUN'}
-if delivery:
-    result.update(deliveryRevision=delivery['revision'],
-                  domesticProtocolRevision=delivery['domesticProtocolRevision'],
-                  shadowrocket='LEAN_STATIC_PASS_NATIVE_DEVICE_PENDING_IN_BOTH_PACKAGES',
-                  freshShadowrocketStatic=read(fresh/'validation/shadowrocket-lean.json')['status'],
-                  iosDeliverySHA256=sha((release/'metadata/ios-delivery.json').read_bytes()))
-if mac:
-    result.update(macosRevision=mac['revision'],freshMacGeneration='PASS',
-                  freshMacStatic=fresh_mac['status'],freshMacStaticChecks=len(fresh_mac['checks']),
-                  macosDeliverySHA256=sha((release/'metadata/macos-delivery.json').read_bytes()),macosDeviceAcceptance='NOT_RUN')
-result['networkCompatibilityRevision']=network['revision']
-result['knownRegressions']={'file':'validation/known-release-regressions.json','sha256':sha((release/'validation/known-release-regressions.json').read_bytes()),'status':'PRE_RELEASE_WITH_DISCLOSED_UNRESOLVED_NATIVE_REGRESSIONS'}
-result['freshNetworkCompatibilityStatic']=read(fresh/'validation/network-compat-static.json')['status']
-for entry in network['entries']:
-    assert sha((fresh/entry['file']).read_bytes())==entry['sha256']
-result['historyVerification']='SKIPPED_HISTORY' if args.skip_history else 'PASS'
+# Fresh replay is ephemeral; the fixed verification receipt retains its evidence.
+fresh_commands=[]
+fresh=None
+try:
+    with tempfile.TemporaryDirectory(prefix='routeweaver-v14.3-audit-') as fresh_path:
+        fresh=Path(fresh_path)
+        with zipfile.ZipFile(audit_target) as z:
+            z.extractall(fresh)
+        commands=['tools/build-balanced.cjs','tools/build-shadowrocket-lean.cjs','tests/static.cjs','tests/shadowrocket-lean.cjs']
+        if mac:
+            commands.extend(['tools/build-macos.cjs','tests/macos-static.cjs'])
+        commands.extend(['tools/build-network-compat.cjs','tests/network-compat.cjs','tests/clash-verge.cjs'])
+        for name in commands:
+            command=[args.node,str(fresh/name),*(['--check'] if name.startswith('tools/') else [])]
+            run=subprocess.run(command,cwd=fresh,capture_output=True,text=True,encoding='utf-8',timeout=600,creationflags=process_flags)
+            fresh_commands.append({'script':name,'arguments':['--check'] if name.startswith('tools/') else [],'returncode':run.returncode,'stdout':run.stdout,'stderr':run.stderr})
+            assert run.returncode==0,(name,run.stdout[-4000:],run.stderr[-2000:])
+        static=read(fresh/'validation/static.json')
+        assert static['status']=='BALANCED_STATIC_PASS'
+        for e in manifest['entries']:
+            assert sha((fresh/e['file']).read_bytes())==e['sha256']
+        if delivery:
+            sr=delivery['shadowrocket']
+            assert sha((fresh/sr['file']).read_bytes())==sr['sha256']
+            assert sha((fresh/sr['immutableSource']).read_bytes())==sr['immutableSourceSHA256']
+            assert sha((fresh/'metadata/ios-delivery.json').read_bytes())==sha((release/'metadata/ios-delivery.json').read_bytes())
+            for e in delivery['jsEntries']:
+                assert sha((fresh/e['file']).read_bytes())==e['sha256']
+        if mac:
+            fresh_mac=read(fresh/'validation/macos-static.json')
+            assert fresh_mac['status']=='MACOS_STATIC_PASS'
+            for e in mac['entries']:
+                assert sha((fresh/e['file']).read_bytes())==e['sha256']
+        result={'version':'14.3','date':'2026-10-16','revision':'balanced-r1','status':'PACKAGE_CRC_SHA_FRESH_STATIC_PASS',
+                'packages':[deploy_result,audit_result]+([mac_result] if mac_result else []),'freshExtraction':None,'freshReplayArchive':audit_result['file'],'freshReplayArchiveSHA256':audit_result['sha256'],
+                'freshGeneration':'PASS','freshStaticChecks':len(static['checks']),'freshStaticPlatforms':[{k:p[k] for k in ['platform','fullInventoryHosts','normalRouting','normalDNS','criticalColdRouting','criticalColdDNS','existingCases']} for p in static['platforms']],
+                'nativeCore':'PUBLIC_NATIVE_REPLAYS_FAILED_DISCLOSED_PRE_RELEASE_ONLY' if known['knownUnresolved'] else 'CURRENT_NATIVE_REPLAYS_PASS_ORIGINAL_RC6_FAILURES_PRESERVED','freshNativeCoreReplay':'NOT_RUN',
+                'sourceReviewSHA256':sha((release/'metadata/balanced-review.json').read_bytes()),
+                'frozenContractSHA256':sha((project/'docs/需求.md').read_bytes()),'packageToolSHA256':sha(Path(__file__).read_bytes()),
+                'clientDeployment':False,'appJavaScriptCore':'NOT_RUN','deviceAcceptance':'NOT_RUN','iOSLongRunMemory':'NOT_RUN'}
+        if delivery:
+            result.update(deliveryRevision=delivery['revision'],
+                          domesticProtocolRevision=delivery['domesticProtocolRevision'],
+                          shadowrocket='LEAN_STATIC_PASS_NATIVE_DEVICE_PENDING_IN_BOTH_PACKAGES',
+                          freshShadowrocketStatic=read(fresh/'validation/shadowrocket-lean.json')['status'],
+                          iosDeliverySHA256=sha((release/'metadata/ios-delivery.json').read_bytes()))
+        if mac:
+            result.update(macosRevision=mac['revision'],freshMacGeneration='PASS',
+                          freshMacStatic=fresh_mac['status'],freshMacStaticChecks=len(fresh_mac['checks']),
+                          macosDeliverySHA256=sha((release/'metadata/macos-delivery.json').read_bytes()),macosDeviceAcceptance='NOT_RUN')
+        result['networkCompatibilityRevision']=network['revision']
+        result['knownRegressions']={'file':'validation/known-release-regressions.json','sha256':sha((release/'validation/known-release-regressions.json').read_bytes()),'status':known['status']}
+        result['freshNetworkCompatibilityStatic']=read(fresh/'validation/network-compat-static.json')['status']
+        for entry in network['entries']:
+            assert sha((fresh/entry['file']).read_bytes())==entry['sha256']
+        result['historyVerification']='SKIPPED_HISTORY' if args.skip_history else 'PASS'
+except BaseException as error:
+    # The context has attempted cleanup before this receipt is written.
+    retained=bool(fresh is not None and fresh.exists())
+    failure={'version':'14.3','status':'PACKAGE_FRESH_STATIC_FAILED',
+             'recordedAtUTC':time.strftime('%Y-%m-%dT%H:%M:%SZ',time.gmtime()),
+             'packages':[deploy_result,audit_result]+([mac_result] if mac_result else []),
+             'freshExtraction':str(fresh) if retained else None,'freshExtractionRetained':retained,
+             'freshExtractionPolicy':'SYSTEM_TEMP_CLEANUP_FAILED' if retained else 'SYSTEM_TEMP_CLEANED',
+             'freshReplayArchive':audit_result['file'],'freshReplayArchiveSHA256':audit_result['sha256'],
+             'freshGeneration':'FAILED_OR_INCOMPLETE','freshCommands':fresh_commands,
+             'freshNativeCoreReplay':'NOT_RUN','deviceAcceptance':'NOT_RUN','clientDeployment':False,
+             'sourceReviewSHA256':sha((release/'metadata/balanced-review.json').read_bytes()),
+             'frozenContractSHA256':sha((project/'docs/需求.md').read_bytes()),
+             'packageToolSHA256':sha(Path(__file__).read_bytes()),
+             'error':{'type':type(error).__name__,'detail':str(error)}}
+    # TimeoutExpired may carry bytes even when subprocess text mode was requested.
+    for key in ('stdout','stderr'):
+        value=getattr(error,key,None)
+        if value is not None:
+            failure['error'][key]=value.decode('utf-8',errors='replace') if isinstance(value,bytes) else str(value)
+    (dist/'package-verification.json').write_text(json.dumps(failure,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+    raise
+
+# A PASS receipt is emitted only after TemporaryDirectory cleanup succeeds.
+result['freshExtractionRetained']=False
+result['freshExtractionPolicy']='SYSTEM_TEMP_CLEANED'
+result['freshCommands']=fresh_commands
+result['recordedAtUTC']=time.strftime('%Y-%m-%dT%H:%M:%SZ',time.gmtime())
 (dist/'package-verification.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
 print(json.dumps({'status':result['status'],'packages':result['packages'],'freshStaticChecks':result['freshStaticChecks'],'freshNativeCoreReplay':'NOT_RUN'},ensure_ascii=False))

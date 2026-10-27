@@ -1,0 +1,7 @@
+PASS desktop: 94 real-core routing cases
+PASS android: 94 real-core routing cases
+PASS clashmi: 94 real-core routing cases
+PASS desktop: 98 empty-domain DNS checks
+PASS android: 98 empty-domain DNS checks
+PASS clashmi: 98 empty-domain DNS checks
+{"status":"BALANCED_COLD_DOWNLOAD_CORE_PASS","runs":[{"kind":"routing","cases":[{"platform":"desktop","cases":94},{"platform":"android","cases":94},{"platform":"clashmi","cases":94}]},{"kind":"dns-egress","cases":[{"platform":"desktop","cases":98},{"platform":"android","cases":98},{"platform":"clashmi","cases":98}]}]}

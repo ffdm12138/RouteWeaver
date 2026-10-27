@@ -41,7 +41,7 @@ def create_zip(name,kind,items,extra):
         for key,b in sorted(extra.items()):
             z.writestr(member_info(key),b)
             hashes[key]=hashlib.sha256(b).hexdigest()
-        manifest={'release':'v14.3.0-rc.6','kind':kind,'status':'PRE_RELEASE_WITH_DISCLOSED_UNRESOLVED_NATIVE_REGRESSIONS','files':dict(sorted(hashes.items())),
+        manifest={'release':'v14.3.0-rc.6','kind':kind,'status':load(REL/'validation/known-release-regressions.json')['status'],'files':dict(sorted(hashes.items())),
                   'automaticDeviceAcceptance':'NOT_RUN','baseline':'pinned FlClash 0.9.0 fork + rc.5 patch + auto-local-family-r1'}
         z.writestr(member_info('PACKAGE_MANIFEST.json'),(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n').encode('utf-8'))
     with zipfile.ZipFile(target,'r') as z:
@@ -83,8 +83,8 @@ def main():
     assert load(binary/'manifest.json')['coreSha256']==pair['coreSHA256']
     assert sha(helper/'Cargo.lock')==load(FORMAL/'source-identity.json').get('cargoLockSha256',sha(helper/'Cargo.lock'))
     regression=REL/'validation/known-release-regressions.json'
-    failures=load(regression)
-    assert failures['status']=='PRE_RELEASE_WITH_DISCLOSED_UNRESOLVED_NATIVE_REGRESSIONS' and len(failures['knownUnresolved'])==2
+    from release_regressions import verify_regressions
+    failures=verify_regressions(REL,sha,load)
     OUT.mkdir(parents=True,exist_ok=True)
     source_items={'core/'+key:f for key,f in base_files.items()}
     source_items.update({'helper/'+key:f for key,f in iter_files(helper)})

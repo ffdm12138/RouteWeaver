@@ -139,7 +139,7 @@ def main():
               'findings': findings,
               'localPathFiles': local, 'publicationReady': not findings,
               'caveat': 'Heuristic credential scan; source provenance and human review remain necessary.'}
-    target = ROOT / '.work/publication-audit.json'
+    target = ROOT / 'dist/publication-audit.json'
     target.parent.mkdir(parents=True, exist_ok=True)
     target.write_text(json.dumps(report, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
     print(json.dumps({'indexedFiles': len(files), 'archives': archives,

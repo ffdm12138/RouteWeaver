@@ -1,0 +1,1 @@
+{"status": "V14_3_LAYOUT_SOURCE_CORE_BINDINGS_PASS", "history": "SKIPPED_HISTORY", "historyFiles": 0, "sourceContract": "be787d64e317efe1e7c03ada2ef776a72e90f82a2e150035ec67106230c0bccf", "packagesChecked": false, "deviceAcceptance": "AUTO_CORE_ONLY_DEVICES_PENDING"}

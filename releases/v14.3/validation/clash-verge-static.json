@@ -46,7 +46,7 @@
   "sourceFiles": [
     {
       "file": "src/clash-verge/v14.3-clash-verge.js",
-      "sha256": "4e049bf79ac0e468449fa2a85ebe499b1bad5c86473656a6a3872d017d2d7964"
+      "sha256": "02f7b70fcaad666778d1c417befc99e42860e1b5f73da28ea5d5bc1ab39574ed"
     },
     {
       "file": "tests/clash-verge.cjs",
@@ -58,7 +58,7 @@
     },
     {
       "file": "metadata/clash-verge-sources.json",
-      "sha256": "c0e4821685c1dcd0136e6458a6067dace4603be24005bfc89fa1bdcc81594773"
+      "sha256": "980c879d5d344915d0204542bdfd28b7fa905ef1e5cac8193633ab407b03b0ea"
     }
   ],
   "nativeClientAcceptance": "NOT_RUN",

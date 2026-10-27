@@ -1,0 +1,102 @@
+{
+  "status": "FAIL",
+  "flavor": "public",
+  "cases": [
+    {
+      "platform": "windows",
+      "name": "node:Relay:IPv4",
+      "result": "PASS"
+    },
+    {
+      "platform": "windows",
+      "name": "node:ForcedFrom6:IPv4",
+      "result": "PASS"
+    },
+    {
+      "platform": "windows",
+      "name": "node:Literal6:fails-without-IPv6",
+      "result": "PASS"
+    },
+    {
+      "platform": "windows",
+      "name": "node:AAAA:fails-without-IPv6",
+      "result": "PASS"
+    },
+    {
+      "platform": "windows",
+      "name": "node:ProviderDual:IPv4",
+      "result": "PASS"
+    },
+    {
+      "platform": "windows",
+      "name": "node:ProviderLiteral6:fails-without-IPv6",
+      "result": "PASS"
+    },
+    {
+      "platform": "windows",
+      "name": "node:ProviderAAAA:fails-without-IPv6",
+      "result": "PASS"
+    },
+    {
+      "platform": "windows",
+      "name": "DIRECT-domain-TCP-IPv4",
+      "result": "PASS"
+    },
+    {
+      "platform": "windows",
+      "name": "DIRECT-UDP-IPv4",
+      "result": "PASS"
+    },
+    {
+      "platform": "windows",
+      "name": "proxy-UDP-IPv4",
+      "result": "PASS"
+    },
+    {
+      "platform": "windows",
+      "name": "reject-cached-literal-or-host:::1",
+      "result": "PASS"
+    },
+    {
+      "platform": "windows",
+      "name": "reject-cached-literal-or-host:six.local",
+      "result": "PASS"
+    },
+    {
+      "platform": "windows",
+      "name": "reject-IPv6-UDP",
+      "result": "PASS"
+    },
+    {
+      "platform": "windows",
+      "name": "DNS-qtype-1:A-present",
+      "result": "PASS"
+    },
+    {
+      "platform": "windows",
+      "name": "DNS-qtype-28:empty",
+      "result": "PASS"
+    },
+    {
+      "platform": "windows",
+      "name": "DNS-qtype-64:empty",
+      "result": "PASS"
+    },
+    {
+      "platform": "windows",
+      "name": "DNS-qtype-65:empty",
+      "result": "PASS"
+    }
+  ],
+  "coreSHA256": "da6569414016c3d2349ebd3610f17443bd67f835109d7e82c725d695f78b761b",
+  "manifestSHA256": "507393705e40cc274eed75792f5f8eff4c950c3b1b411839437c16b52b86bc12",
+  "harnessSHA256": "cfd6e06fdfceee045006e7ea007b3b5179c0d218cb86ce396e3e7542702bf21a",
+  "deviceAcceptance": "NOT_RUN",
+  "tunEnabled": false,
+  "clientDeployment": false,
+  "controls": {
+    "IPv6LoopbackReachable": "ENVIRONMENT_BLOCKED_EACCES",
+    "limitation": "Zero IPv6 listener hits alone do not certify working IPv6 rejection; IPv4 successes and generated family restrictions are tested independently."
+  },
+  "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n1 !== 0\n\n    at main (E:\\2\\覆写脚本\\opensource\\RouteWeaver\\tools\\native-ipv4-only.cjs:65:52)"
+}

@@ -1,0 +1,81 @@
+"use strict";
+// Real core + isolated SOCKS relay. DIRECT rules use a labeled local marker
+// proxy during this test; no packet is sent to a public destination or TUN.
+const fs=require('node:fs'),path=require('node:path'),net=require('node:net'),dgram=require('node:dgram'),http=require('node:http'),cp=require('node:child_process'),crypto=require('node:crypto'),assert=require('node:assert/strict');
+const {once}=require('node:events'),{root,local,load,sha,installReviewedProviders,newExperiment,captureExperiment}=require('./fixture.cjs'),{cases}=require('./cases.cjs');
+const core=process.argv[2];assert.ok(core&&fs.existsSync(core),'Provide a Mihomo executable');
+const failureOnly=process.argv.includes('--failure-only');
+const sleep=ms=>new Promise(r=>setTimeout(r,ms)),report={version:'14.3',date:'2026-10-10',status:'RUNNING',scope:'Isolated real-core routing, not physical DNS/TUN/device leak certification',coreSHA256:sha(core),platforms:[]};
+fs.mkdirSync(local('validation'),{recursive:true});const home=newExperiment('native-routing');
+function reader(socket){let buffer=Buffer.alloc(0),pending=[];socket.on('data',b=>{buffer=Buffer.concat([buffer,b]);drain();});function drain(){while(pending.length&&buffer.length>=pending[0].size){const p=pending.shift();clearTimeout(p.timer);const b=buffer.subarray(0,p.size);buffer=buffer.subarray(p.size);p.resolve(b);}}return size=>new Promise((resolve,reject)=>{pending.push({size,resolve,timer:setTimeout(()=>reject(Error('Local SOCKS timeout')),3000)});drain();});}
+const portBytes=p=>{const b=Buffer.alloc(2);b.writeUInt16BE(p);return b;};
+function address(host){if(net.isIP(host)===4)return Buffer.from([1,...host.split('.').map(Number)]);if(net.isIP(host)===6){const {number}=require('./fixture.cjs'),value=number(host).value,b=Buffer.alloc(17);b[0]=4;for(let i=0;i<16;i++)b[i+1]=Number(value>>BigInt((15-i)*8)&255n);return b;}const b=Buffer.from(host);return Buffer.concat([Buffer.from([3,b.length]),b]);}
+async function consume(read,type){if(type===1)await read(4);else if(type===4)await read(16);else if(type===3){const b=await read(1);await read(b[0]);}else throw Error('Bad ATYP');}
+async function socks(socket,command,host,targetPort){const read=reader(socket);socket.write(Buffer.from([5,1,0]));assert.deepEqual(await read(2),Buffer.from([5,0]));socket.write(Buffer.concat([Buffer.from([5,command,0]),address(host),portBytes(targetPort)]));const h=await read(4);assert.equal(h[1],0);await consume(read,h[3]);return (await read(2)).readUInt16BE(0);}
+async function freePort(){const server=net.createServer();server.listen(0,'127.0.0.1');await once(server,'listening');const p=server.address().port;await new Promise(r=>server.close(r));return p;}
+async function main(){report.coreVersion=cp.execFileSync(core,['-v'],{encoding:'utf8',windowsHide:true}).trim();let received=0,relayConnects=0,child;const sockets=new Set(),relay=dgram.createSocket('udp4');relay.on('message',()=>received++);relay.bind(0,'127.0.0.1');await once(relay,'listening');
+  // DNS-disabled core mode can consult the host's SystemResolver during UDP
+  // metadata resolution. Keep every such lookup inside this experiment.
+  const resolver=dgram.createSocket('udp4');let resolverQueries=0;
+  resolver.on('message',(b,peer)=>{let at=12;while(b[at])at+=b[at]+1;at++;const type=b.readUInt16BE(at),questionEnd=at+4,header=Buffer.from(b.subarray(0,12));header.writeUInt16BE(0x8180,2);header.writeUInt16BE(1,6);header.writeUInt16BE(0,8);header.writeUInt16BE(0,10);const data=type===28?Buffer.from('20014860486000000000000000008888','hex'):Buffer.from([8,8,8,8]),answer=Buffer.alloc(12);answer.writeUInt16BE(0xc00c,0);answer.writeUInt16BE(type,2);answer.writeUInt16BE(1,4);answer.writeUInt32BE(0,6);answer.writeUInt16BE(data.length,10);resolverQueries++;resolver.send(Buffer.concat([header,b.subarray(12,questionEnd),answer,data]),peer.port,peer.address);});
+  resolver.bind(0,'127.0.0.1');await once(resolver,'listening');const resolverAddress='127.0.0.1:'+resolver.address().port;
+  const server=net.createServer(socket=>{relayConnects++;sockets.add(socket);socket.on('close',()=>sockets.delete(socket));socket.on('error',()=>{});(async()=>{const read=reader(socket),hello=await read(2);await read(hello[1]);socket.write(Buffer.from([5,0]));const req=await read(4);await consume(read,req[3]);await read(2);socket.write(Buffer.concat([Buffer.from([5,0,0,1,127,0,0,1]),portBytes(req[1]===3?relay.address().port:server.address().port)]));})().catch(()=>socket.destroy());});
+  server.listen(0,'127.0.0.1');await once(server,'listening');
+  try{for(const platform of ['desktop','android']){
+    const fixture=load(platform),inputs=installReviewedProviders(fixture.config,home),original=path.join(home,platform+'-original.json');fs.writeFileSync(original,JSON.stringify(fixture.config,null,2));
+    const parsed=cp.spawnSync(core,['-t','-d',home,'-f',original],{encoding:'utf8',windowsHide:true,timeout:15000});fs.writeFileSync(path.join(home,platform+'-parse.log'),(parsed.stdout||'')+(parsed.stderr||''));assert.equal(parsed.status,0,'Native parse');
+    const apiPort=await freePort(),proxyPort=await freePort(),secret=crypto.randomBytes(16).toString('hex'),config=JSON.parse(JSON.stringify(fixture.config));
+    Object.assign(config,{'mixed-port':proxyPort,port:0,'socks-port':0,'redir-port':0,'tproxy-port':0,'bind-address':'127.0.0.1','allow-lan':false,'external-controller':'127.0.0.1:'+apiPort,secret,'log-level':'debug',tun:{enable:false},dns:{enable:true,ipv6:true,'enhanced-mode':'redir-host','use-hosts':false,'use-system-hosts':false,nameserver:[resolverAddress],'default-nameserver':[resolverAddress],'proxy-server-nameserver':[resolverAddress],'direct-nameserver':[resolverAddress]},sniffer:{enable:false},profile:{'store-selected':false,'store-fake-ip':false}});
+    config.proxies=['AuditAI','AuditVideo','AuditNoUDP','AuditDirect'].map(name=>({name,type:'socks5',server:'127.0.0.1',port:server.address().port,udp:name!=='AuditNoUDP'}));config.proxies.push({name:'AuditDead',type:'socks5',server:'127.0.0.1',port:await freePort(),udp:true});config['proxy-providers']={};
+    config['proxy-groups']=fixture.config['proxy-groups'].map(g=>({name:g.name,type:'select','empty-fallback':'REJECT',proxies:g.name==='自动选择'?['AuditAI']:['高纯净度AI用','高网速视频用'].includes(g.name)?['AuditAI','AuditVideo','AuditNoUDP','AuditDead']:['高纯净度AI用','高网速视频用','AuditDirect','AuditNoUDP']}));
+    config.rules=config.rules.map(r=>r.replace(/,DIRECT(?=,no-resolve$|$)/,',AuditDirect'));
+    for(const p of Object.values(config['rule-providers']))if(p.type!=='inline'){p.type='file';delete p.url;delete p.proxy;delete p.interval;}
+    const file=path.join(home,platform+'-loopback.json');fs.writeFileSync(file,JSON.stringify(config,null,2));let logs='';child=cp.spawn(core,['-d',home,'-f',file],{windowsHide:true,stdio:['ignore','pipe','pipe']});child.stdout.on('data',b=>logs+=b);child.stderr.on('data',b=>logs+=b);
+    const rawApi=(method,resource,value)=>new Promise((resolve,reject)=>{const body=value?JSON.stringify(value):'',q=http.request({host:'127.0.0.1',port:apiPort,path:resource,method,headers:{Authorization:'Bearer '+secret,'Content-Type':'application/json','Content-Length':Buffer.byteLength(body)}},r=>{let b='';r.on('data',x=>b+=x);r.on('end',()=>r.statusCode>=400?reject(Error(b)):resolve(b?JSON.parse(b):{}));});q.on('error',reject);q.setTimeout(1500,()=>q.destroy(Error('Local API timeout')));q.end(body);});
+    // Transient resets of a local HTTP controller request are retried only
+    // for idempotent GET/PUT/DELETE operations. A dead core still fails.
+    let controllerRetries=0;
+    const api=async(method,resource,value)=>{
+      for(let attempt=0;;attempt++)try{return await rawApi(method,resource,value);}
+      catch(error){
+        if(attempt>=2||!['GET','PUT','DELETE'].includes(method)||!['ECONNRESET','EPIPE'].includes(error.code))
+          throw new Error(method+' '+resource+': '+error.message,{cause:error});
+        controllerRetries++;await sleep(20*(attempt+1));
+      }
+    };
+    // Inline classifiers are not reported by /providers/rules in this core;
+    // native packet cases below prove their matching instead.
+    try{let ready=false,lastError='',snapshot;for(let i=0;i<60;i++){try{const p=await api('GET','/providers/rules');snapshot=Object.fromEntries(Object.entries(p.providers||{}).map(([k,v])=>[k,v.ruleCount]));if(Object.entries(config['rule-providers']).filter(([,v])=>v.type!=='inline').every(([n])=>p.providers[n]?.ruleCount>0)){ready=true;break;}}catch(e){lastError=e.message;}await sleep(50);}assert.ok(ready,'Core/provider readiness '+JSON.stringify({lastError,snapshot,expected:Object.keys(config['rule-providers'])}));
+      const results=[],tests=failureOnly?[]:cases.filter(c=>!c.staticOnly).concat([
+        {name:'steam-follows-video',flow:{host:'steamserver.net',port:27015,protocol:'UDP'},policy:'Steam',options:{},followVideo:true},
+        {name:'google-follows-video-unified',flow:{host:'gemini.google.com',port:443,protocol:'TCP'},policy:'谷歌服务',options:{},followVideo:true},
+        {name:'openai-follows-ai',flow:{host:'chatgpt.com',port:443,protocol:'TCP'},policy:'OpenAI 服务',options:{}},
+      ]);
+      for(const test of tests){await api('DELETE','/connections');await api('PUT','/proxies/'+encodeURIComponent('高纯净度AI用'),{name:test.options.udpSupported===false?'AuditNoUDP':'AuditAI'});await api('PUT','/proxies/'+encodeURIComponent('高网速视频用'),{name:'AuditVideo'});
+        for(const group of fixture.config['x-v14-generated'].groups.filter(g=>!['高纯净度AI用','高网速视频用','自动选择'].includes(g)))await api('PUT','/proxies/'+encodeURIComponent(group),{name:test.options.selections?.[group]==='DIRECT'||group==='国内网站'&&!test.options.selections?.[group]?'AuditDirect':test.followVideo&&test.policy===group?'高网速视频用':'高纯净度AI用'});
+        const socket=net.connect(proxyPort,'127.0.0.1');socket.on('error',()=>{});await once(socket,'connect');let udp,packet,relayPort;const start=received,relayStart=relayConnects,logStart=logs.length;
+        const send=()=>new Promise((resolve,reject)=>udp.send(packet,relayPort,'127.0.0.1',e=>e?reject(e):resolve()));
+        try{if(test.flow.protocol==='UDP'){udp=dgram.createSocket('udp4');udp.bind(0,'127.0.0.1');await once(udp,'listening');relayPort=await socks(socket,3,'127.0.0.1',udp.address().port);packet=Buffer.concat([Buffer.from([0,0,0]),address(test.flow.host||test.flow.ip),portBytes(test.flow.port),Buffer.from('audit-'+test.name)]);await send();}
+          else{await socks(socket,1,test.flow.host||test.flow.ip,test.flow.port);socket.write(test.name.startsWith('r5-stun-') ? Buffer.from('000100002112a4420102030405060708090a0b0c','hex') : Buffer.from('audit-'+test.name));}
+          if(test.policy==='REJECT'){for(let i=0;i<3;i++){await sleep(40);if(udp&&!logs.slice(logStart).includes('REJECT'))await send();}assert.equal(received,start,'Rejected packet reached relay');
+           assert.equal(relayConnects,relayStart,'Rejected packet created an outbound connection: '+test.name);
+           results.push({name:test.name,expected:'REJECT',actual:'REJECT',noRelayDatagram:true,noRelayConnection:true,nativeRejectLogObserved:logs.slice(logStart).includes('REJECT')});}
+          else{let connection;for(let i=0;i<50;i++){const data=await api('GET','/connections');connection=data.connections?.find(c=>Number(c.metadata.destinationPort)===test.flow.port);if(connection)break;if(udp&&[5,15,25].includes(i))await send();await sleep(20);}
+            assert.ok(connection,test.name+' '+logs.slice(logStart));const actual=connection.chains.includes('AuditDirect')?'DIRECT':connection.chains.find(n=>fixture.config['x-v14-generated'].groups.includes(n)&&!['高纯净度AI用','高网速视频用','自动选择'].includes(n));assert.equal(actual,test.policy,test.name+' '+connection.chains.join(' -> '));
+            if(test.followVideo)assert.ok(connection.chains.includes('AuditVideo')&&connection.chains.includes('高网速视频用'));if(test.name==='openai-follows-ai')assert.ok(connection.chains.includes('AuditAI')&&connection.chains.includes('高纯净度AI用'));
+            if(udp){for(let i=0;i<20&&received===start;i++)await sleep(10);assert.ok(received>start,test.name+' did not reach UDP relay');}
+            results.push({name:test.name,expected:test.policy,actual,chains:connection.chains,rule:connection.rule,rulePayload:connection.rulePayload});}
+        }finally{socket.destroy();if(udp)udp.close();}
+      }
+      for(const [failureGroup,failureHost,protocol]of [['OpenAI 服务','api.openai.com','TCP'],['OpenAI 服务','chatgpt.com','UDP'],['国内网站','baidu.com','TCP']]){await api('DELETE','/connections');await api('PUT','/proxies/'+encodeURIComponent('高纯净度AI用'),{name:'AuditDead'});await api('PUT','/proxies/'+encodeURIComponent(failureGroup),{name:'高纯净度AI用'});const socket=net.connect(proxyPort,'127.0.0.1');socket.on('error',()=>{});await once(socket,'connect');const start=received,relayStart=relayConnects,logStart=logs.length;let udp;
+        try{if(protocol==='TCP'){await socks(socket,1,failureHost,443);socket.write('audit-dead-node');for(let i=0;i<50&&!logs.slice(logStart).includes(':'+config.proxies.find(p=>p.name==='AuditDead').port);i++)await sleep(20);}
+          else {udp=dgram.createSocket('udp4');udp.bind(0,'127.0.0.1');await once(udp,'listening');const relayPort=await socks(socket,3,'127.0.0.1',udp.address().port);udp.send(Buffer.concat([Buffer.from([0,0,0]),address('chatgpt.com'),portBytes(49000),Buffer.from('dead-node')]),relayPort,'127.0.0.1');await sleep(100);}
+          const logsAfter=logs.slice(logStart);assert.ok(logsAfter.includes(':'+config.proxies.find(p=>p.name==='AuditDead').port)&&/error|refused/i.test(logsAfter),logsAfter);assert.ok(!logsAfter.includes('AuditDirect'));assert.equal(received,start);assert.equal(relayConnects,relayStart);const state=await api('GET','/proxies/'+encodeURIComponent('高纯净度AI用'));assert.equal(state.now,'AuditDead','Manual selector changed on failure');results.push({name:'node-failure-'+failureGroup+'-'+protocol.toLowerCase(),host:failureHost,expected:'FAIL_CLOSED',actual:'FAIL_CLOSED',selectedNodePreserved:true,noRelayDatagram:true,noRelayConnection:true});
+        }finally{socket.destroy();if(udp)udp.close();}
+      }
+      report.platforms.push({platform,parse:'PASS',cases:results.length,controllerRetries,inputs,results});console.log('PASS '+platform+': '+results.length+' real-core routing cases');
+    }finally{fs.writeFileSync(path.join(home,platform+'-runtime.log'),logs);const stopped=once(child,'exit');child.kill();await stopped;child=undefined;}
+  }report.status=failureOnly?'CORE_FAILURE_ONLY_PASS':'CORE_ROUTING_PASS';}
+  finally{if(child&&child.exitCode===null){const stopped=once(child,'exit');child.kill();await stopped;}for(const s of sockets)s.destroy();await new Promise(r=>server.close(r));relay.close();resolver.close();report.loopbackResolverQueries=resolverQueries;}
+}
+main().catch(e=>{report.status='FAIL';report.error=e.stack;process.exitCode=1;console.error(e);}).finally(()=>{report.home=captureExperiment(home,failureOnly?'native-routing-node-failure':'native-routing');report.sourceFiles=['src/windows/v14.3.js','src/android/v14.3-android.js','tests/native-routing.cjs','tests/cases.cjs','tests/fixture.cjs','data/rule-sources.lock.json'].map(file=>({file,sha256:sha(local(file))}));fs.writeFileSync(local(failureOnly?'validation/native-routing-node-failure.json':'validation/native-routing.json'),JSON.stringify(report,null,2)+'\n');});

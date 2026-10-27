@@ -1,0 +1,36 @@
+{
+  "status": "PRE_RELEASE_WITH_DISCLOSED_UNRESOLVED_NATIVE_REGRESSIONS",
+  "tag": "v14.3.0-rc.6",
+  "date": "2026-10-17",
+  "userDecision": "User explicitly authorized prerelease with known regression errors documented",
+  "knownUnresolved": [
+    {
+      "test": "native-core",
+      "task": "native",
+      "validationFile": "validation/native-core.json",
+      "validationSHA256": "b0fd3addd5149c5588345a2b4cbd9db3fa85aae2c7943ba5cb86c259e99a745d",
+      "exitCode": 1,
+      "observedAtUTC": "2026-10-16T17:45:24.359967+00:00",
+      "runLogSHA256": "960dc600dd24716086ad791204ee208c6408097ef908a308d05104f0a5b595e8",
+      "description": "Public native routing replay: local proxy API timeout; earlier provider-readiness ECONNREFUSED",
+      "classification": "UNRESOLVED_LOCAL_CORE_API_READINESS_OR_TIMEOUT",
+      "passClaim": false
+    },
+    {
+      "test": "balanced-empty-core",
+      "task": "empty-native",
+      "validationFile": "validation/balanced-empty-core.json",
+      "validationSHA256": "d0e9773b136e7fa4fbac7317774b3dbb23e8cdeb8c4a5bcc8c094135c1e596b4",
+      "exitCode": 1,
+      "observedAtUTC": "2026-10-16T17:46:07.886230+00:00",
+      "runLogSHA256": "aac9f58ecbd7f04c16cc73ff99a7321f7081f8965c471447faa3ec00377eaf47",
+      "description": "Public empty-provider replay: local provider API ECONNREFUSED",
+      "classification": "UNRESOLVED_LOCAL_CORE_API_READINESS_OR_TIMEOUT",
+      "passClaim": false
+    }
+  ],
+  "scope": "Two named FAIL receipts, never converted to PASS",
+  "privateComparison": "Separate private worktree batch passed; does not supersede public failures",
+  "deviceAutoSupport": "NOT_VERIFIED",
+  "publicIPv6Acceptance": "NOT_RUN"
+}

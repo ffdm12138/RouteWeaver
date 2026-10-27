@@ -1,0 +1,349 @@
+{
+  "status": "RC6_NATIVE_API_REGRESSIONS_REPAIRED_DEVICE_PENDING",
+  "revision": "controller-readiness-r1",
+  "date": "2026-10-16T20:07:20.938305+00:00",
+  "baseRelease": "v14.3.0-rc.6",
+  "publication": "LOCAL_VERIFIED_UNPUBLISHED",
+  "coreSHA256": "532c4a08fbb47ba8e746cd8cbac1c823a2b1cdc73f108b99842b5e5ac43db778",
+  "originalTrigger": "NOT_REPRODUCED_UNMODIFIED_BASELINES_PASSED",
+  "repairScope": "Owned loopback controller readiness, bounded transport retries and exited-child cleanup; no production core or routing change",
+  "nativeObservations": 14886,
+  "runs": [
+    {
+      "name": "controller-unit",
+      "exitCode": 0,
+      "startedAtUTC": "2026-10-16T19:57:01.350941+00:00",
+      "finishedAtUTC": "2026-10-16T19:57:02.488728+00:00",
+      "runLog": {
+        "file": "validation/native-api-repair/controller-unit.txt",
+        "sha256": "5dc7061e86508c3cedb5cd2c1e7ce832e5377d6c243326c5bb99408c6c3a5919"
+      },
+      "status": "CONTROLLER_UNIT_PASS",
+      "cases": 8
+    },
+    {
+      "name": "full-1",
+      "exitCode": 0,
+      "startedAtUTC": "2026-10-16T19:57:02.496837+00:00",
+      "finishedAtUTC": "2026-10-16T19:59:51.687528+00:00",
+      "runLog": {
+        "file": "validation/native-api-repair/full-1.txt",
+        "sha256": "6929ec2e9a73b25600b8af67f7ff8b42dde5ecf0df164ead3e511571653dca1c"
+      },
+      "status": "BALANCED_LOCAL_CORE_PASS",
+      "receipt": {
+        "file": "validation/native-api-repair/full-1.json",
+        "sha256": "9ae0c49fe3fb5cb246b50f20cde4bffe6eaeb78830acfe6363819f84db0fcb51"
+      },
+      "observations": {
+        "routing": 2751,
+        "dns-egress": 1293,
+        "selectors": 336,
+        "inbound-guard": 6
+      }
+    },
+    {
+      "name": "full-2",
+      "exitCode": 0,
+      "startedAtUTC": "2026-10-16T19:59:51.882581+00:00",
+      "finishedAtUTC": "2026-10-16T20:02:41.946534+00:00",
+      "runLog": {
+        "file": "validation/native-api-repair/full-2.txt",
+        "sha256": "6929ec2e9a73b25600b8af67f7ff8b42dde5ecf0df164ead3e511571653dca1c"
+      },
+      "status": "BALANCED_LOCAL_CORE_PASS",
+      "receipt": {
+        "file": "validation/native-api-repair/full-2.json",
+        "sha256": "7de1f4556d8e4270fcfca4d09c34246968a476dc83aa7ca591f5fbbcced5db19"
+      },
+      "observations": {
+        "routing": 2751,
+        "dns-egress": 1293,
+        "selectors": 336,
+        "inbound-guard": 6
+      }
+    },
+    {
+      "name": "empty-1",
+      "exitCode": 0,
+      "startedAtUTC": "2026-10-16T20:02:42.127493+00:00",
+      "finishedAtUTC": "2026-10-16T20:03:00.498714+00:00",
+      "runLog": {
+        "file": "validation/native-api-repair/empty-1.txt",
+        "sha256": "e5d100e91294da8b697bb86071f7b0a43ce8899aa76150c7162d5a99278d31af"
+      },
+      "status": "BALANCED_LOCAL_CORE_PASS",
+      "receipt": {
+        "file": "validation/native-api-repair/empty-1.json",
+        "sha256": "8a63927f4f317c66e1b3a932fb8655f85695ebf3b6a8f0bc528d287140c6577e"
+      },
+      "observations": {
+        "routing": 282,
+        "dns-egress": 294
+      }
+    },
+    {
+      "name": "empty-2",
+      "exitCode": 0,
+      "startedAtUTC": "2026-10-16T20:03:00.539628+00:00",
+      "finishedAtUTC": "2026-10-16T20:03:18.398159+00:00",
+      "runLog": {
+        "file": "validation/native-api-repair/empty-2.txt",
+        "sha256": "e5d100e91294da8b697bb86071f7b0a43ce8899aa76150c7162d5a99278d31af"
+      },
+      "status": "BALANCED_LOCAL_CORE_PASS",
+      "receipt": {
+        "file": "validation/native-api-repair/empty-2.json",
+        "sha256": "18672eb145e6061ad35a6cd1879e67a372445fae01dfae784d5e8765d6d8eaf3"
+      },
+      "observations": {
+        "routing": 282,
+        "dns-egress": 294
+      }
+    },
+    {
+      "name": "cold-1",
+      "exitCode": 0,
+      "startedAtUTC": "2026-10-16T20:03:18.419228+00:00",
+      "finishedAtUTC": "2026-10-16T20:03:36.193728+00:00",
+      "runLog": {
+        "file": "validation/native-api-repair/cold-1.txt",
+        "sha256": "440aefa177419acfc788ec89c86948a93515a61f535d5187d0e9ea4dcb609eed"
+      },
+      "status": "BALANCED_COLD_DOWNLOAD_CORE_PASS",
+      "receipt": {
+        "file": "validation/native-api-repair/cold-1.json",
+        "sha256": "2bcc4d0746246a515b9a3e152b87aff26943a904ec3aec6b6a2b3a7d113548d4"
+      },
+      "observations": {
+        "routing": 282,
+        "dns-egress": 294
+      }
+    },
+    {
+      "name": "macos-1",
+      "exitCode": 0,
+      "startedAtUTC": "2026-10-16T20:03:36.217346+00:00",
+      "finishedAtUTC": "2026-10-16T20:05:29.588736+00:00",
+      "runLog": {
+        "file": "validation/native-api-repair/macos-1.txt",
+        "sha256": "a92d17ca06e195f49f9dfc3d5411b50dc58819acdedd91d566064ee32137c3d7"
+      },
+      "status": "MACOS_LOCAL_CORE_PASS_DEVICE_PENDING",
+      "receipt": {
+        "file": "validation/native-api-repair/macos-1.json",
+        "sha256": "88c3416bd462b246080ed45a4d82af17d808c098c9eec7ca3d32bc601b08680d"
+      },
+      "observations": {
+        "routing": 1834,
+        "dns-egress": 862,
+        "selectors": 224,
+        "inbound-guard": 4
+      }
+    },
+    {
+      "name": "verge-1",
+      "exitCode": 0,
+      "startedAtUTC": "2026-10-16T20:05:29.743850+00:00",
+      "finishedAtUTC": "2026-10-16T20:06:26.817443+00:00",
+      "runLog": {
+        "file": "validation/native-api-repair/verge-1.txt",
+        "sha256": "948d070bbe246e8450391ef4ae4ebb3567d7567fb08b693d80be49a59d1f2a84"
+      },
+      "status": "CLASH_VERGE_LOCAL_CORE_PASS_DEVICE_PENDING",
+      "receipt": {
+        "file": "validation/native-api-repair/verge-1.json",
+        "sha256": "f48e3d5f03fc73c52e40644ae289d31bcc07eb5624e56ce6b0bc276973fbfd9e"
+      },
+      "observations": {
+        "routing": 917,
+        "dns-egress": 431,
+        "selectors": 112,
+        "inbound-guard": 2
+      }
+    }
+  ],
+  "sourceFiles": [
+    {
+      "file": "tests/native-controller.cjs",
+      "sha256": "e38b34b50c9d7b3950300f2f338686ac7dd60f36c12ce9a3173d6ee29451c9ba"
+    },
+    {
+      "file": "tests/native-controller.test.cjs",
+      "sha256": "4bb9c88598f30c02217c50c83c927ce1a5349aac0fa82fb238468cd663fa3212"
+    },
+    {
+      "file": "tests/native-routing.cjs",
+      "sha256": "3bae560c22c9eadf077815058445343d4fd3ae55e5ae02faf2bd83bfce30c92e"
+    },
+    {
+      "file": "tests/native-core.cjs",
+      "sha256": "56a4ac2467d4d6e533fc43808ca07530fb047dcd64c10a0030edc2f4efcaa8f5"
+    },
+    {
+      "file": "tests/native-boundaries.cjs",
+      "sha256": "40a76e46873593629a1736dd5327c78ad558fc5c9094412a0319d27a0fd131e5"
+    },
+    {
+      "file": "tests/native-macos.cjs",
+      "sha256": "b39b64931442dc2167ecf70a720f07359b099f50ec139c06b996a6fb04626856"
+    },
+    {
+      "file": "tests/native-clash-verge.cjs",
+      "sha256": "6cc2d00a18d770477040b96fa1a8e10f77708e9c24157287fe90e1fcf5c54f2b"
+    },
+    {
+      "file": "src/android/v14.3-android.js",
+      "sha256": "46d95fde07dbd229595428860db9da96f72569c830890e31d0020cb7181c2912"
+    },
+    {
+      "file": "src/clash-verge/v14.3-clash-verge.js",
+      "sha256": "4e049bf79ac0e468449fa2a85ebe499b1bad5c86473656a6a3872d017d2d7964"
+    },
+    {
+      "file": "src/ios/v14.3-clashmi-domestic-protocol-r1.js",
+      "sha256": "da22e70e017a5cf906ddd58ca94dcf988417953e17d1b2834fddc0b428b08eda"
+    },
+    {
+      "file": "src/ios/v14.3-shadowrocket.conf",
+      "sha256": "36b83e9069308567c9497eb4a1902536c78572c6786bbb4d712cb976148c6088"
+    },
+    {
+      "file": "src/macos/v14.3-macos-clashmi.js",
+      "sha256": "baeda7cfd627541b630c87a982f02c78b31f6b3ed09727af2ef130ad70f3afde"
+    },
+    {
+      "file": "src/macos/v14.3-macos-flclash.js",
+      "sha256": "0026fb6a58d8741a737cd18f371bfe969d9b2ee8811e752d6fb83778b55d4c5c"
+    },
+    {
+      "file": "src/windows/v14.3.js",
+      "sha256": "2cc432caf839892f24f4fd485f20a1efc3c4d8824adaf54f46a45e60f776b4df"
+    },
+    {
+      "file": "data/rule-sources.lock.json",
+      "sha256": "cd4f33e36b88aafe1e6eda4c56f63a202940aa84cd0901502b22941af4e46acb"
+    }
+  ],
+  "projectSourceFiles": [
+    {
+      "file": "tools/release_regressions.py",
+      "sha256": "f65e3db06e4c2dd870edf1efb197f1b62fe83638ba58e0a67264a608aa934854"
+    },
+    {
+      "file": "tools/record-v14.3.py",
+      "sha256": "c7c6489e263273dbabadc414b42ac3daac50d7dcecab1984cbbc355b4759a160"
+    },
+    {
+      "file": "tools/verify-v14.3.py",
+      "sha256": "48d3acad5f4c19480f9d2fea054296820500f4adf2cf215457e4808964e6c9b5"
+    },
+    {
+      "file": "tools/package-v14.3.py",
+      "sha256": "80119adfdafbc7c90dec5feb537179832a013f24199e5e60cffe59fc390c2fc6"
+    },
+    {
+      "file": "tools/package-auto-local-core.py",
+      "sha256": "98097af9969bfd37396eb48bb8b07074b9c2110d120fd38f01999172546ed86b"
+    },
+    {
+      "file": "tools/prepare-rc6-assets.py",
+      "sha256": "af64db39597efbc155fe798b8180c09458f5154a9242cf8a1eedf8ff2dcf60df"
+    },
+    {
+      "file": "tools/tests/test_native_controller.py",
+      "sha256": "37cdb86293f53afbdb4cdce77cb23b419565b669b5e3c41853bbac7a81325c5e"
+    },
+    {
+      "file": "tools/tests/test_release_regressions.py",
+      "sha256": "94ebf8a01540636e3da985c8254334bd6ed4f6a4a0387fa73fba8cfa644c87c1"
+    }
+  ],
+  "historicalArtifacts": [
+    {
+      "file": "validation/history/rc6-api-regressions/balanced-empty-core-android-runtime.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "validation/history/rc6-api-regressions/balanced-empty-core-desktop-runtime.txt",
+      "sha256": "32e3334a6ad7c32009eac51b0f6fda6be2bd36f6d60cfe757eeee695d880c4d8"
+    },
+    {
+      "file": "validation/history/rc6-api-regressions/balanced-empty-core-run.txt",
+      "sha256": "fa02fb38456ddc8c30f553f9bf00a9e23550f95ad3e0bc9040feddca2d81d64f"
+    },
+    {
+      "file": "validation/history/rc6-api-regressions/balanced-empty-core.json",
+      "sha256": "d0e9773b136e7fa4fbac7317774b3dbb23e8cdeb8c4a5bcc8c094135c1e596b4"
+    },
+    {
+      "file": "validation/history/rc6-api-regressions/known-release-regressions.json",
+      "sha256": "479d1dd0a46c2d9ba977e80288f4b327b6214b5437ec05c67b6352dff4e78970"
+    },
+    {
+      "file": "validation/history/rc6-api-regressions/native-core-desktop-runtime.txt",
+      "sha256": "7704ba6fad77b06c52292e176ecb634a78264fe30d7aa8e4f96a264d216c4e72"
+    },
+    {
+      "file": "validation/history/rc6-api-regressions/native-core-run.txt",
+      "sha256": "b183220d347186dd8b7572787f1724df1bf1b4786868819366b2246dd65febd7"
+    },
+    {
+      "file": "validation/history/rc6-api-regressions/native-core.json",
+      "sha256": "b0fd3addd5149c5588345a2b4cbd9db3fa85aae2c7943ba5cb86c259e99a745d"
+    },
+    {
+      "file": "validation/history/rc6-api-regressions/tests/native-boundaries.cjs",
+      "sha256": "12180ebccd77998d9620679e5909ffb3ec50b035acb64da79de5d6aec224ca34"
+    },
+    {
+      "file": "validation/history/rc6-api-regressions/tests/native-core.cjs",
+      "sha256": "f07210a060bac4591072fbaf62674e20311272566f47b7795c0f98ccf8082521"
+    },
+    {
+      "file": "validation/history/rc6-api-regressions/tests/native-routing.cjs",
+      "sha256": "2609c6cb93bff9ce17436030211d55641b8ef5d542b623f70cbe9faa920c849b"
+    },
+    {
+      "file": "validation/history/rc6-api-regressions/unmodified-baseline-core.json",
+      "sha256": "3d3924c2ad3fc51d7feb57633ee2cec2c28bfe79b3829ff91bfb399ba0c8169c"
+    },
+    {
+      "file": "validation/history/rc6-api-regressions/unmodified-baseline-empty.json",
+      "sha256": "fff9cd4f37e4b9bd9076881ac9e02aef5f2d49a96795ea491c07c6e703ef24c1"
+    }
+  ],
+  "archivedSources": [
+    {
+      "sourceFile": "tests/native-boundaries.cjs",
+      "file": "validation/history/rc6-api-regressions/tests/native-boundaries.cjs",
+      "sha256": "12180ebccd77998d9620679e5909ffb3ec50b035acb64da79de5d6aec224ca34"
+    },
+    {
+      "sourceFile": "tests/native-core.cjs",
+      "file": "validation/history/rc6-api-regressions/tests/native-core.cjs",
+      "sha256": "f07210a060bac4591072fbaf62674e20311272566f47b7795c0f98ccf8082521"
+    },
+    {
+      "sourceFile": "tests/native-routing.cjs",
+      "file": "validation/history/rc6-api-regressions/tests/native-routing.cjs",
+      "sha256": "2609c6cb93bff9ce17436030211d55641b8ef5d542b623f70cbe9faa920c849b"
+    }
+  ],
+  "unmodifiedBaselines": [
+    {
+      "file": "validation/history/rc6-api-regressions/unmodified-baseline-core.json",
+      "sha256": "3d3924c2ad3fc51d7feb57633ee2cec2c28bfe79b3829ff91bfb399ba0c8169c"
+    },
+    {
+      "file": "validation/history/rc6-api-regressions/unmodified-baseline-empty.json",
+      "sha256": "fff9cd4f37e4b9bd9076881ac9e02aef5f2d49a96795ea491c07c6e703ef24c1"
+    }
+  ],
+  "deployedClientChanged": false,
+  "entryBytesChanged": false,
+  "sourceLockChanged": false,
+  "deviceAcceptance": "NOT_RUN",
+  "publicIPv6": "NOT_RUN",
+  "originalReleasedTagOrAssetsModified": false
+}

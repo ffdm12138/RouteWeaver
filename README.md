@@ -1,5 +1,7 @@
 # RouteWeaver
 
+新增两套并行版本中的本目录纯 IPv4 版见 [独立纯 IPv4 入口与设置](releases/v14.3-ipv4-only/README.md)，七个独立入口及包位于 `releases/v14.3-ipv4-only/`、`dist/v14.3-ipv4-only/`。原版入口继续保留；设备所有流量纯 IPv4 还需 App/系统关闭 IPv6 与 IPv4 系统 DNS，小火箭需额外固定节点为 IPv4。
+
 ## rc.6：自动模式与原生能力边界
 
 当前源码修订 `auto-local-family-r1`，六份 JS 默认请求 `auto`，每客户端仍一份入口，保留 `dual-stack`／`ipv4-local`。自动出口判断需要匹配原生核心，普通核心接受覆写不等于已接入；Shadowrocket 只保留原生 IPv4 偏好与 IPv6 开启。Windows 指定 FlClash 核心/Helper 已完成新编译和隔离验证，但本轮未安装，维护者此前手动兼容客户端不变。移动端受保护 socket 和其它平台宿主仍需独立接入，真实 TUN/媒体/公网 IPv6 未验收。当前说明与证据入口：`docs/guides/自动网络模式.md`、`docs/reports/v14.3/自动本地地址族与跨端能力.md`。
@@ -9,9 +11,9 @@
 
 保留严格路由、双栈和公司优先分流的跨平台覆写。
 
-[下载 v14.3.0-rc.5](https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-rc.5) · [文档](docs/README.md) · [需求](docs/需求.md) · [当前验收](docs/status/当前验收.md) · [变更](CHANGELOG.md)
+[已发布 v14.3.0-rc.6](https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-rc.6) · [文档](docs/README.md) · [需求](docs/需求.md) · [当前验收](docs/status/当前验收.md) · [变更](CHANGELOG.md)
 
-当前每个客户端只保留一个入口，六份 JS 各自包含 `dual-stack` 和 `ipv4-local` 两种模式；默认双栈。旧的重复兼容文件已移出当前 `src/`。Shadowrocket 使用一份保留 IPv6、偏好 IPv4 的原生配置，能力边界单独说明。
+当前每个客户端只保留一个入口，六份 JS 默认请求 `auto`，同一文件保留 `dual-stack` 和 `ipv4-local`；自动模式需要匹配的原生核心。Shadowrocket 使用一份保留 IPv6、偏好 IPv4 的原生配置，能力边界单独说明。
 
 | 客户端 | 直接导入 | 使用说明 |
 |---|---|---|
@@ -23,7 +25,7 @@
 | macOS Clash Mi | [v14.3-macos-clashmi.js](releases/v14.3/src/macos/v14.3-macos-clashmi.js) | [说明](docs/guides/MacBook使用说明.md) |
 | Windows Clash Verge Rev | [v14.3-clash-verge.js](releases/v14.3/src/clash-verge/v14.3-clash-verge.js) | [说明](docs/guides/ClashVerge使用说明.md) |
 
-本地无 IPv6 出口时，按[网络模式说明](docs/guides/IPv4兼容模式.md)修改同一份 JS 顶部默认值，或通过输入字段选择模式。不是自动物理网络探测。两种模式都保留核心 IPv6 和 TUN IPv6 接管；代理远端仍可访问 IPv6。
+自动能力接入按[自动网络模式](docs/guides/自动网络模式.md)核对。需要显式兼容时，按[IPv4 兼容说明](docs/guides/IPv4兼容模式.md)修改同一份 JS 顶部默认值，或通过输入字段选择模式。各模式均保留核心 IPv6 和 TUN IPv6 接管；代理远端仍可访问 IPv6。
 
 Windows FlClash 0.9.0 有独立的[可选核心与回滚说明](docs/guides/FlClash核心接入与回滚.md)：限定的本地 IPv6 不可达停止重复退避，明显非 TLS 的短首包提前识别失败。维护者 Windows TUN 受控探测从数秒缩到 15～31 ms；完全无首包的 443 仍等待约 1 秒。这是失败反馈实验，未测量微信真实发图耗时。JS 单文件不会替换核心。
 
@@ -31,7 +33,7 @@ Windows FlClash 0.9.0 有独立的[可选核心与回滚说明](docs/guides/FlCl
 
 公开版不含个人 VPS 直连例外。
 
-真实 QuickJS、Boa 与 Node 的 432 项对照通过。源码、有限核心回放、Windows TUN 和包复验分别记录；Clash Verge App、Mac/iOS/Android 原生接管、Shadowrocket、公网 IPv6和真实媒体发送未统一验收，因此仍按预发布交付。用户选择正常使用后反馈。
+已有绑定的真实 QuickJS、Boa 与 Node 对照共 648 项。源码、有限核心回放、Windows TUN 和包复验分别记录；Clash Verge App、Mac/iOS/Android 原生接管、Shadowrocket、公网 IPv6和真实媒体发送未统一验收，因此仍按预发布交付。
 
 `runtime/` 是可读共用源码，`src/` 是独立导入产物，`data/` 保存审核规则和能力表。`tools/diagnose-client.py` 可生成省略凭证、节点和目标的最终配置诊断。项目入口由 [CURRENT_RELEASE.json](CURRENT_RELEASE.json) 唯一指定。
 
@@ -48,4 +50,4 @@ CI 复跑生成、静态、打包及公开内容扫描，核对已绑定的核�
 
 原创内容采用 [MIT](LICENSE)；上游规则、核心派生补丁和可选核心保留各自许可，详见[第三方声明](THIRD_PARTY_NOTICES.md)。可选核心 Release 同时提供完整对应源码、锁定依赖、许可和备份/回滚工具。
 
-> **rc.6 预发布已知风险**：公开版两项原生核心回放分别遇本地 API 超时／连接拒绝，仍为 FAIL，不是全量通过。匹配原生核心的自动能力未完成跨端实机验收；Shadowrocket 无此 Mihomo 扩展。详见 docs/reports/v14.3/自动本地地址族与跨端能力.md。
+> **当前本地维护候选**：`controller-readiness-r1` 加固回放控制器，两项原生回放各自独立复跑通过；已发布 rc.6 的原始 FAIL 保留。尚未发布新标签，具体范围见[修复报告](docs/reports/v14.3/rc6本地API回归修复.md)。匹配核心的跨端实机自动能力仍待验收。

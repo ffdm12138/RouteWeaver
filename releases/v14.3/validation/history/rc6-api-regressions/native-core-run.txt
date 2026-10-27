@@ -1,0 +1,16 @@
+Error: GET /proxies/%E9%AB%98%E7%BA%AF%E5%87%80%E5%BA%A6AI%E7%94%A8: Local API timeout
+    at api (E:\2\覆写脚本\opensource\RouteWeaver\.work\core\v14.3\balanced-core-Xm9r9u\native-routing.cjs:42:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async main (E:\2\覆写脚本\opensource\RouteWeaver\.work\core\v14.3\balanced-core-Xm9r9u\native-routing.cjs:73:303) {
+  [cause]: Error: Local API timeout
+      at ClientRequest.<anonymous> (E:\2\覆写脚本\opensource\RouteWeaver\.work\core\v14.3\balanced-core-Xm9r9u\native-routing.cjs:34:469)
+      at Object.onceWrapper (node:events:630:28)
+      at ClientRequest.emit (node:events:509:28)
+      at Socket.emitRequestTimeout (node:_http_client:1099:9)
+      at Object.onceWrapper (node:events:630:28)
+      at Socket.emit (node:events:521:24)
+      at Socket._onTimeout (node:net:740:8)
+      at Timeout.onStreamTimeout [as _onTimeout] (node:internal/stream_base_commons:237:10)
+      at listOnTimeout (node:internal/timers:637:11)
+      at process.processTimers (node:internal/timers:571:7)
+}

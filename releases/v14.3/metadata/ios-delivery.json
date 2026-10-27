@@ -3,7 +3,7 @@
   "date": "2026-10-16",
   "revision": "ios-delivery-r2",
   "domesticProtocolRevision": "domestic-protocol-r1",
-  "status": "IOS_SOURCE_STATIC_WITH_KNOWN_CORE_REPLAY_FAILURE_DEVICE_PENDING",
+  "status": "IOS_SOURCE_STATIC_LOCAL_CORE_PASS_NATIVE_DEVICE_PENDING",
   "authorization": "User selected self-contained business DNS plus remote complete rules, and reviewed domestic TCP/UDP/DNS following 国内网站.",
   "shadowrocket": {
     "file": "src/ios/v14.3-shadowrocket.conf",
@@ -132,8 +132,8 @@
   },
   "localCoreEvidence": {
     "file": "validation/native-core.json",
-    "sha256": "b0fd3addd5149c5588345a2b4cbd9db3fa85aae2c7943ba5cb86c259e99a745d",
-    "status": "FAIL"
+    "sha256": "7de1f4556d8e4270fcfca4d09c34246968a476dc83aa7ca591f5fbbcced5db19",
+    "status": "BALANCED_LOCAL_CORE_PASS"
   },
   "historicalFailedInvestigation": {
     "file": "archive/v14.3-before-domestic-protocol-r1-20261013/releases/v14.3/validation/clashmi-ios-investigation.json",

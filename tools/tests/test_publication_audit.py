@@ -13,9 +13,7 @@ spec.loader.exec_module(audit)
 
 class PublicationAuditTests(unittest.TestCase):
     def test_index_is_scanned_even_after_working_copy_is_cleaned(self):
-        work = ROOT / '.work'
-        work.mkdir(exist_ok=True)
-        with tempfile.TemporaryDirectory(prefix='audit-test-', dir=work) as directory:
+        with tempfile.TemporaryDirectory(prefix='audit-test-') as directory:
             root = Path(directory)
             subprocess.run(['git', 'init', '-q', str(root)], check=True)
             path = root / 'example.txt'
@@ -32,9 +30,7 @@ class PublicationAuditTests(unittest.TestCase):
         self.assertIn('NON_REGULAR_FILE', audit.inspect_file('link', b'target', '120000')[0])
 
     def test_empty_index_is_not_a_success(self):
-        work = ROOT / '.work'
-        work.mkdir(exist_ok=True)
-        with tempfile.TemporaryDirectory(prefix='audit-empty-', dir=work) as directory:
+        with tempfile.TemporaryDirectory(prefix='audit-empty-') as directory:
             root = Path(directory)
             subprocess.run(['git', 'init', '-q', str(root)], check=True)
             with self.assertRaises(RuntimeError):

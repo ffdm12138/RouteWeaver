@@ -7,7 +7,7 @@ fs.writeFileSync(path.join(home,'fixture.cjs'),`'use strict';
 const fs=require('node:fs'),path=require('node:path'),base=require(${JSON.stringify(f.local('tests/fixture.cjs'))});
 module.exports={...base,local:n=>n.startsWith('validation')?path.join(__dirname,n):base.local(n),newExperiment:kind=>fs.mkdtempSync(path.join(__dirname,kind+'-')),captureExperiment:(p,kind)=>base.captureExperiment(p,'balanced-'+kind)};
 `);
-for(const file of ['cases.cjs','dns-relay-labels.cjs'])fs.copyFileSync(f.local('tests/'+file),path.join(home,file));
+for(const file of ['cases.cjs','dns-relay-labels.cjs','native-controller.cjs'])fs.copyFileSync(f.local('tests/'+file),path.join(home,file));
 const kinds=['routing','dns-egress','selectors','inbound-guard'];
 for(const kind of kinds){let source=fs.readFileSync(f.local('tests/native-'+kind+'.cjs'),'utf8');assert.equal(source.split("['desktop','android']").length,2);source=source.replace("['desktop','android']","['desktop','android','clashmi']");
  if(kind==='dns-egress'&&process.argv.includes('--current-contract')){
@@ -40,6 +40,6 @@ try{
   report.status='BALANCED_LOCAL_CORE_PASS';
 }
 catch(e){report.status='FAIL';report.error=e.stack;process.exitCode=1;console.error(e.message);}
-report.sourceFiles=['src/windows/v14.3.js','src/android/v14.3-android.js','src/ios/v14.3-clashmi-domestic-protocol-r1.js','data/rules/embedded-policy.json','data/rule-sources.lock.json','tests/native-core.cjs','tests/fixture.cjs','tests/cases.cjs','tests/dns-relay-labels.cjs',...kinds.map(k=>'tests/native-'+k+'.cjs')].map(file=>({file,sha256:f.sha(f.local(file))}));
-report.harnesses=['fixture.cjs','cases.cjs','dns-relay-labels.cjs',...kinds.map(k=>'native-'+k+'.cjs')].map(file=>({file,sha256:f.sha(path.join(home,file)),source:fs.readFileSync(path.join(home,file),'utf8')}));
+report.sourceFiles=['src/windows/v14.3.js','src/android/v14.3-android.js','src/ios/v14.3-clashmi-domestic-protocol-r1.js','data/rules/embedded-policy.json','data/rule-sources.lock.json','tests/native-core.cjs','tests/fixture.cjs','tests/cases.cjs','tests/dns-relay-labels.cjs','tests/native-controller.cjs',...kinds.map(k=>'tests/native-'+k+'.cjs')].map(file=>({file,sha256:f.sha(f.local(file))}));
+report.harnesses=['fixture.cjs','cases.cjs','dns-relay-labels.cjs','native-controller.cjs',...kinds.map(k=>'native-'+k+'.cjs')].map(file=>({file,sha256:f.sha(path.join(home,file)),source:fs.readFileSync(path.join(home,file),'utf8')}));
 fs.writeFileSync(path.join(home,'proof.json'),JSON.stringify(report,null,2)+'\n');report.home=f.captureExperiment(home,'balanced-core');fs.writeFileSync(f.local('validation/native-core.json'),JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify({status:report.status,runs:report.runs.map(r=>({kind:r.kind,cases:r.receipt.platforms.map(p=>({platform:p.platform,cases:p.cases}))})),error:report.error}));
