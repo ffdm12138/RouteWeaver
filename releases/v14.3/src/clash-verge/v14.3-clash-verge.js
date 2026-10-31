@@ -2338,13 +2338,32 @@ function v14NetworkModeBase(input, profileName) {
   return config;
 }
 
+// Remove only exclusions this adapter previously added. A fresh user's
+// identically named provider is not ours, and must survive regeneration.
+function v14PrepareNetworkInput(input) {
+  const prepared = v14Copy(input), marker = prepared["x-v14-generated"];
+  if (!v14Object(marker) || marker.version !== V14.version || !v14Object(prepared.sniffer)) return prepared;
+  const owned = marker.networkRecovery;
+  if (v14Object(owned) && owned.revision === "owned-exclusions-r1") {
+    for (const pair of [["skip-domain", "addedDomains"], ["skip-dst-address", "addedDestinations"]]) {
+      const remove = v14Strings(owned[pair[1]], "networkRecovery." + pair[1]);
+      if (prepared.sniffer[pair[0]] != null)
+        prepared.sniffer[pair[0]] = v14Strings(prepared.sniffer[pair[0]], "sniffer." + pair[0]).filter(value => !remove.includes(value));
+    }
+  } else if (["auto", "ipv4-local", "ipv4-only"].includes(marker.networkMode)) {
+    // Older entries did not record ownership. Migrate only their generated
+    // classifier reference, not user domain exclusions or destination ranges.
+    const old = (marker.embeddedDomainClassifiers || []).find(row => row.tag === "private");
+    if (old && /^v14-domains-private(?:-\d+)?$/.test(old.provider) && prepared.sniffer["skip-domain"] != null)
+      prepared.sniffer["skip-domain"] = v14Strings(prepared.sniffer["skip-domain"], "sniffer.skip-domain").filter(value => value !== "rule-set:" + old.provider);
+  }
+  return prepared;
+}
+
 // Shared destination recovery; never changes the selected egress.
 function v14RecoverNetworkDestination(config) {
-  // With a readable HTTP/TLS/QUIC hostname, replace a cached literal destination
-  // with that hostname. DIRECT then resolves an A record; a selected proxy
-  // retains remote DNS/IPv6 ability. This includes HTTP Host: identifying it
-  // for routing alone leaves a stale IPv6 destination unusable on IPv4-only LANs.
-  // Without a hostname a literal IPv6 cannot be converted to an IPv4 target.
+  // Recover reliable HTTP/TLS/QUIC hostnames without changing the egress.
+  // No hostname means no safe IPv6-to-IPv4 substitution.
   for (const protocol of ["HTTP", "TLS", "QUIC"])
     config.sniffer.sniff[protocol]["override-destination"] = true;
   // Preserve the destination identity needed by leading explicit IP rules.
@@ -2356,11 +2375,17 @@ function v14RecoverNetworkDestination(config) {
     const match = /^IP-CIDR6?,([^,]+),DIRECT(?:,no-resolve)?$/.exec(rule);
     return match ? [match[1]] : [];
   });
-  config.sniffer["skip-dst-address"] = [...new Set(v14Strings(config.sniffer["skip-dst-address"], "sniffer.skip-dst-address").concat(explicitIPs))];
-  // Keep LAN names at their original addresses. Do not skip every private
-  // address: known company domains must retain their existing priority.
-  if (!config["rule-providers"]["v14-domains-private"]) v14Fail("Missing inline private domain classifier");
-  config.sniffer["skip-domain"] = [...new Set(v14Strings(config.sniffer["skip-domain"], "sniffer.skip-domain").concat(V14.privateNames.map(name => "+." + name), ["rule-set:v14-domains-private"]))];
+  const destinations = v14Strings(config.sniffer["skip-dst-address"], "sniffer.skip-dst-address");
+  const domains = v14Strings(config.sniffer["skip-domain"], "sniffer.skip-domain");
+  const marker = config["x-v14-generated"];
+  const privateSet = marker.embeddedDomainClassifiers.find(row => row.tag === "private");
+  if (!privateSet || !config["rule-providers"][privateSet.provider]) v14Fail("Missing inline private domain classifier");
+  const extraDomains = V14.privateNames.map(name => "+." + name).concat("rule-set:" + privateSet.provider);
+  config.sniffer["skip-dst-address"] = v14Unique(destinations.concat(explicitIPs));
+  config.sniffer["skip-domain"] = v14Unique(domains.concat(extraDomains));
+  marker.networkRecovery = {revision: "owned-exclusions-r1",
+    addedDomains: extraDomains.filter(value => !domains.includes(value)),
+    addedDestinations: explicitIPs.filter(value => !destinations.includes(value))};
   return config;
 }
 
@@ -2379,12 +2404,8 @@ function v14IPv4LocalResolver(value) {
   return address + "#" + kept.concat(["disable-ipv6=true", "disable-qtype-64=true", "disable-qtype-65=true"]).join("&");
 }
 function v14IPv4LocalMain(input) {
-  const prepared = v14Copy(input);
+  const prepared = v14PrepareNetworkInput(input);
   if (v14Object(prepared.dns)) prepared.dns.ipv6 = true;
-  // This generated inline reference is restored below. Exclude it from the
-  // base adapter's inherited auxiliary dependency migration on later runs.
-  if (v14Object(prepared.sniffer) && prepared.sniffer["skip-domain"] != null)
-    prepared.sniffer["skip-domain"] = v14Strings(prepared.sniffer["skip-domain"], "sniffer.skip-domain").filter(value => value !== "rule-set:v14-domains-private");
   const config = v14NetworkModeBase(prepared);
   config.ipv6 = true;
   delete config["routeweaver-local-family"];
@@ -2401,6 +2422,9 @@ function v14IPv4LocalMain(input) {
     if (config.dns[key] != null) config.dns[key] = v14IPv4LocalResolver(config.dns[key]);
   for (const key of Object.keys(config.dns["nameserver-policy"] || {}))
     config.dns["nameserver-policy"][key] = v14IPv4LocalResolver(config.dns["nameserver-policy"][key]);
+  // Raw Android subscriptions can omit TUN. Supply policy fields without
+  // enabling VPN or taking ownership of the app's file descriptor.
+  if (!v14Object(config.tun)) config.tun = {};
   config.tun["inet6-address"] = ["fdfe:dcba:9876::1/126"];
   config.tun["route-address"] = ["0.0.0.0/0", "::/0"];
   v14RecoverNetworkDestination(config);
@@ -2418,11 +2442,9 @@ function v14IPv4LocalMain(input) {
 // Auto requires a native core implementing auto-local-family-r1. The JS
 // requests the capability, but never claims that generating JSON proves it.
 function v14AutoLocalMain(input, profileName) {
-  const prepared = v14Copy(input);
+  const prepared = v14PrepareNetworkInput(input);
   delete prepared["routeweaver-local-family"];
   if (v14Object(prepared.dns)) prepared.dns.ipv6 = true;
-  if (v14Object(prepared.sniffer) && prepared.sniffer["skip-domain"] != null)
-    prepared.sniffer["skip-domain"] = v14Strings(prepared.sniffer["skip-domain"], "sniffer.skip-domain").filter(value => value !== "rule-set:v14-domains-private");
   const config = v14NetworkModeBase(prepared, profileName);
   config.ipv6 = true;
   config.dns.ipv6 = true;
@@ -2449,7 +2471,7 @@ function main(input, profileName) {
     (prior.version === V14.version && ["auto", "dual-stack", "ipv4-local"].includes(prior.networkMode) ? prior.networkMode : ROUTEWEAVER_DEFAULT_NETWORK_MODE);
   if (!["auto", "dual-stack", "ipv4-local"].includes(mode)) v14Fail("network-mode 仅支持 auto、dual-stack 或 ipv4-local。");
   if (mode === "auto") return v14AutoLocalMain(input, profileName);
-  const config = mode === "ipv4-local" ? v14IPv4LocalMain(input, profileName) : v14NetworkModeBase(input, profileName);
+  const config = mode === "ipv4-local" ? v14IPv4LocalMain(input, profileName) : v14NetworkModeBase(v14PrepareNetworkInput(input), profileName);
   delete config["routeweaver-local-family"];
   return config;
 }

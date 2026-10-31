@@ -1,0 +1,44 @@
+{
+  "revision": "architecture-audit-r1",
+  "executedAt": "2026-10-31T18:04:43.292774+00:00",
+  "scope": "CURRENT_SOURCE_OFFLINE_ONLY_NOT_TUN_OR_DEVICE",
+  "suite": "python",
+  "sources": {
+    "releases/v14.3-ipv4-only/src/android/v14.3-android-flclash-ipv4-only.js": "1d47f9a5b64af00855cb1451d35abf8f0028a7a09008e443bbb89b6a99bab0cd",
+    "releases/v14.3-ipv4-only/src/clash-verge/v14.3-clash-verge-ipv4-only.js": "2cffce5cd51b87537496eeaa9f372b2f1ef90686e2239fbc5da204fbc2f3ec73",
+    "releases/v14.3-ipv4-only/src/ios/v14.3-clashmi-domestic-protocol-r1-ipv4-only.js": "54aca7584ede9fb8a1e1255fa0a91c23aed266f1ab308d9de8b57c2dbf694ce1",
+    "releases/v14.3-ipv4-only/src/ios/v14.3-shadowrocket-ipv4-only.conf": "d4cda5ec99460cce07fa2fb8d886c2b0e1038ebff515b793d0adeb0aea425bc2",
+    "releases/v14.3-ipv4-only/src/macos/v14.3-macos-clashmi-ipv4-only.js": "613f5e84c06be5f0292db93b07ad0929ef80c2fd2a5a73a2725a1114f07e62f3",
+    "releases/v14.3-ipv4-only/src/macos/v14.3-macos-flclash-ipv4-only.js": "0c61d378f57339e6ae2b21759df70a6816b4f839f4a1bfafe2332eda1452a050",
+    "releases/v14.3-ipv4-only/src/windows/v14.3-windows-flclash-ipv4-only.js": "11d68bc8384006bf35691997bbb10f014ad356f25046002de20acd83b02a0179",
+    "releases/v14.3/src/android/v14.3-android-flclash.js": "a6af2f7b4a75b12f6f14ac9c8efe5b83fca71a862b82c396d4a97cbe754158da",
+    "releases/v14.3/src/clash-verge/v14.3-clash-verge.js": "8e5ba94433ba46980e75da2b38e5eaee6900a9fc50f08c931aae15ca6d247d2e",
+    "releases/v14.3/src/ios/v14.3-clashmi-domestic-protocol-r1.js": "0beb8d6201a2823d94331b95baf51e0cf8de1f69a55c4847e4d2d118525c6cbd",
+    "releases/v14.3/src/ios/v14.3-shadowrocket.conf": "36b83e9069308567c9497eb4a1902536c78572c6786bbb4d712cb976148c6088",
+    "releases/v14.3/src/macos/v14.3-macos-clashmi.js": "1e30fb2002bfedfcfd05a844510e06bc99d519d5b5e783d70b6d24e4301b41e5",
+    "releases/v14.3/src/macos/v14.3-macos-flclash.js": "d7eb787244e3120967cb97c7801f027f31b68a587cdb6b150a47fbfec2331e34",
+    "releases/v14.3/src/windows/v14.3-windows-flclash.js": "5186074bd47902f69a4d9e076b5969bc05f7e515b13c0536319d5ebc81eb279b"
+  },
+  "runnerSHA256": "68f5af74c1d73e0b6c2ea35760799606c2eb1a61b19460f617863e15b7a9bacd",
+  "entryBytesUnchanged": true,
+  "results": [
+    {
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools/tests",
+        "-p",
+        "test_*.py"
+      ],
+      "status": "PASS",
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": ".......................................\n----------------------------------------------------------------------\nRan 39 tests in 1.860s\n\nOK\n",
+      "seconds": 2.097
+    }
+  ],
+  "status": "PASS"
+}

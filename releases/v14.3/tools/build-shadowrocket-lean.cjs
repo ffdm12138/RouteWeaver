@@ -9,7 +9,7 @@ assert.equal(sha(local(sourceFile)),baseline.files.find(e=>e.file==='src/ios/v14
 const old=require('../validation/inputs/v14.2-baseline/tests/fixture.cjs'),index=require('../tests/domain-index.cjs'),before=old.load('shadowrocket');
 const beforeRoute=index.indexRoute(before),beforeDNS=index.indexDNS(before);
 const lock=read(prefix+'data/rule-sources.lock.json'),oldManifest=read(prefix+'metadata/shadowrocket-sources.json');
-const source=fs.readFileSync(local('src/android/v14.3-android.js'),'utf8'),ctx=vm.createContext({console:{log(){}}});vm.runInContext(source,ctx);
+const source=fs.readFileSync(local('src/android/v14.3-android-flclash.js'),'utf8'),ctx=vm.createContext({console:{log(){}}});vm.runInContext(source,ctx);
 const data=JSON.parse(vm.runInContext('JSON.stringify({settings:V14,domestic:V14_DOMESTIC_SEEDS,stunNames:V14.stunHostPatterns})',ctx));
 const policy=read('data/rules/embedded-policy.json');assert.equal(policy.domesticProtocolRevision,'domestic-protocol-r1');
 function section(name){return oldText.split('['+name+']')[1].split(/\r?\n\[/)[0].split(/\r?\n/).map(s=>s.trim()).filter(s=>s&&!s.startsWith('#'));}
@@ -87,7 +87,7 @@ const manifest={version:'14.3',date:'2026-10-13',revision:'shadowrocket-lean-r1'
   standaloneDomesticDNSAffinity:'NOT_NATIVE_VERIFIED'},
  groups:section('Proxy Group').map(r=>r.split(' = ')[0]),sources,
  sourceContract:{file:'docs/需求.md',sha256:sha(contractPath)},
- inputs:['tools/build-shadowrocket-lean.cjs','src/android/v14.3-android.js','data/rules/embedded-policy.json',prefix+'manifest.json',prefix+'metadata/shadowrocket-sources.json',prefix+'data/rule-sources.lock.json'].map(file=>({file,sha256:sha(local(file))})),
+ inputs:['tools/build-shadowrocket-lean.cjs','src/android/v14.3-android-flclash.js','data/rules/embedded-policy.json',prefix+'manifest.json',prefix+'metadata/shadowrocket-sources.json',prefix+'data/rule-sources.lock.json'].map(file=>({file,sha256:sha(local(file))})),
  clientDeployment:false,nativeCompilation:'NOT_RUN',nativeDNSAffinity:'NOT_RUN',deviceAcceptance:'NOT_RUN'};
 const text=JSON.stringify(manifest,null,2)+'\n';
 if(process.argv.includes('--check')){assert.equal(fs.readFileSync(local(file),'utf8'),output);assert.equal(fs.readFileSync(local('metadata/shadowrocket-lean.json'),'utf8'),text);}

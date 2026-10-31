@@ -18,7 +18,7 @@ ${acceptSerializedInput?'  if (typeof input === "string") { try { input = JSON.p
     (prior.version === V14.version && ["auto", "dual-stack", "ipv4-local"].includes(prior.networkMode) ? prior.networkMode : ROUTEWEAVER_DEFAULT_NETWORK_MODE);
   if (!["auto", "dual-stack", "ipv4-local"].includes(mode)) v14Fail("network-mode 仅支持 auto、dual-stack 或 ipv4-local。");
   if (mode === "auto") return v14AutoLocalMain(input, profileName);
-  const config = mode === "ipv4-local" ? v14IPv4LocalMain(input, profileName) : v14NetworkModeBase(input, profileName);
+  const config = mode === "ipv4-local" ? v14IPv4LocalMain(input, profileName) : v14NetworkModeBase(v14PrepareNetworkInput(input), profileName);
   delete config["routeweaver-local-family"];
   return config;
 }
@@ -58,8 +58,8 @@ function compile(root){
  const verge='// Clash Verge Rev Windows adapter; main(config, profileName) returns a config object.\n'+renameMain(shared.desktop,'v14VergeBase').trimEnd()+'\n\n'+read('tools/clash-verge-adapter.js').replaceAll('\r\n','\n');
  const optional=read('tools/ipv4-local-adapter.js').replaceAll('\r\n','\n');
  const entries=[
-  {platform:'windows',file:'src/windows/v14.3.js',raw:shared.desktop},
-  {platform:'android',file:'src/android/v14.3-android.js',raw:shared.android},
+  {platform:'windows',file:'src/windows/v14.3-windows-flclash.js',raw:shared.desktop},
+  {platform:'android',file:'src/android/v14.3-android-flclash.js',raw:shared.android},
   {platform:'clashmi',file:'src/ios/v14.3-clashmi-domestic-protocol-r1.js',raw:ios},
   {platform:'macosFlClash',client:'FlClash',file:'src/macos/v14.3-macos-flclash.js',raw:macFlClash},
   {platform:'macosClashMi',client:'Clash Mi',file:'src/macos/v14.3-macos-clashmi.js',raw:macClashMi},

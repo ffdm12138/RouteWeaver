@@ -1,3 +1,9 @@
+<!-- ARCHITECTURE_AUDIT_CURRENT:BEGIN -->
+> **当前工作区修订：architecture-audit-r1（2026-11-01）**。两轨七客户端的当前源码、有限静态清单及隔离 Windows 核心已验证；跨端设备、原生 auto 能力和真实 AI 账号任务未验收。
+> 本轮仅发布公开源码与候选交付，未安装脚本、改动现用客户端或重启服务。当前公开预发布版本为 `v14.3.0-rc.9`；真实设备验收仍未完成。历史 rc.5–rc.8 段落及旧回执仅作当时记录，不认证本轮新字节。
+> 当前入口：[全架构审计与修复](docs/reports/v14.3/全架构审计与修复.md) · [手动部署与验证](docs/guides/本轮修复手动部署.md)。当前候选使用 `tools/verify-current-audit.py` 和 `tools/package-architecture-audit.py`，不重签旧正式发布链。
+<!-- ARCHITECTURE_AUDIT_CURRENT:END -->
+
 # RouteWeaver
 
 新增两套并行版本中的本目录纯 IPv4 版见 [独立纯 IPv4 入口与设置](releases/v14.3-ipv4-only/README.md)，七个独立入口及包位于 `releases/v14.3-ipv4-only/`、`dist/v14.3-ipv4-only/`。原版入口继续保留；设备所有流量纯 IPv4 还需 App/系统关闭 IPv6 与 IPv4 系统 DNS，小火箭需额外固定节点为 IPv4。
@@ -11,14 +17,14 @@
 
 保留严格路由、双栈和公司优先分流的跨平台覆写。
 
-[已发布 v14.3.0-rc.6](https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-rc.6) · [文档](docs/README.md) · [需求](docs/需求.md) · [当前验收](docs/status/当前验收.md) · [变更](CHANGELOG.md)
+[最新 v14.3.0-rc.9 预发布](https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-rc.9) · [文档](docs/README.md) · [需求](docs/需求.md) · [当前验收](docs/status/当前验收.md) · [变更](CHANGELOG.md)
 
 当前每个客户端只保留一个入口，六份 JS 默认请求 `auto`，同一文件保留 `dual-stack` 和 `ipv4-local`；自动模式需要匹配的原生核心。Shadowrocket 使用一份保留 IPv6、偏好 IPv4 的原生配置，能力边界单独说明。
 
 | 客户端 | 直接导入 | 使用说明 |
 |---|---|---|
-| Windows FlClash / Mihomo | [v14.3.js](releases/v14.3/src/windows/v14.3.js) | [说明](docs/guides/使用说明.md) |
-| Android Mihomo 客户端 | [v14.3-android.js](releases/v14.3/src/android/v14.3-android.js) | [说明](docs/guides/使用说明.md) |
+| Windows FlClash / Mihomo | [v14.3-windows-flclash.js](releases/v14.3/src/windows/v14.3-windows-flclash.js) | [说明](docs/guides/使用说明.md) |
+| Android FlClash（Mihomo 核心） | [v14.3-android-flclash.js](releases/v14.3/src/android/v14.3-android-flclash.js) | [说明](docs/guides/使用说明.md) |
 | iOS Clash Mi | [v14.3-clashmi-domestic-protocol-r1.js](releases/v14.3/src/ios/v14.3-clashmi-domestic-protocol-r1.js) | [说明](docs/guides/ClashMi使用说明.md) |
 | iOS Shadowrocket | [v14.3-shadowrocket.conf](releases/v14.3/src/ios/v14.3-shadowrocket.conf) | [说明](docs/guides/使用说明.md) |
 | macOS FlClash | [v14.3-macos-flclash.js](releases/v14.3/src/macos/v14.3-macos-flclash.js) | [说明](docs/guides/MacBook使用说明.md) |
@@ -41,9 +47,9 @@ Windows FlClash 0.9.0 有独立的[可选核心与回滚说明](docs/guides/FlCl
 
 ~~~sh
 python -m unittest discover -s tools/tests -p "test_*.py"
-python tools/verify-v14.3.py --skip-history
-python tools/package-v14.3.py --skip-history
-python tools/verify-v14.3.py --skip-history --with-packages
+python tools/verify-current-audit.py
+python tools/package-architecture-audit.py
+python tools/audit-publication.py --strict --archive dist/architecture-audit/RouteWeaver-architecture-audit-r1-public.zip
 ~~~
 
 CI 在 push/PR 复跑生成、静态和公开内容扫描；在 Release 发布或手动触发时复跑严格回执绑定、打包和解压静态回放。引擎证据按当前入口核对，不冒充设备实验。完整维护命令、可选真实引擎重跑见[维护](docs/maintenance/维护与更新.md)。历史标签和失败证据保持原样。

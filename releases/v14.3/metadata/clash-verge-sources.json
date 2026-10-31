@@ -28,7 +28,7 @@
     },
     {
       "file": "tools/lib/compile-entries.cjs",
-      "sha256": "bd6e1d0f0577ed6e84cc52b5766836086abc6bcec1e9a514d2d99e499da00797"
+      "sha256": "8984cc2ca1bdb6f2a4998ce99a51e9b76defc6675c152861aa834382225ffb64"
     },
     {
       "file": "tools/lib/render-runtime.cjs",
@@ -52,11 +52,11 @@
     },
     {
       "file": "tools/ipv4-local-adapter.js",
-      "sha256": "cee3ffa5e922dd9f3aa4be95e473c0341f59e5b6f8a5452701c4654e4bf59dfc"
+      "sha256": "4aa4e573c34f709d512a25ba561dfb3e474ba370cc688d536d7e6b3981fde837"
     },
     {
       "file": "tools/auto-local-adapter.js",
-      "sha256": "e15a238989b4afb1782b562b41a6f9fcf3ebf0e33ea7f7b586cc74c6d5de3262"
+      "sha256": "a943d16655f6072038b72747c874c5222ee0651d22a2c0dd634aeff30a838408"
     },
     {
       "file": "data/client-capabilities.json",
@@ -172,7 +172,7 @@
     },
     {
       "file": "runtime/platforms/android/main.js.in",
-      "sha256": "1d320039066b8ed86544774b585725a64b2a91f7ea20ac94706fe1b6165b6391"
+      "sha256": "d5d745dcc527763aeccaabf875e3b6ae9030a8ddb2a2530f8620d9a9e189f6bc"
     },
     {
       "file": "tools/validate-azure-async.cjs",
@@ -203,9 +203,9 @@
     {
       "platform": "clashVerge",
       "file": "src/clash-verge/v14.3-clash-verge.js",
-      "sha256": "5063d72023be9d0e5bb75130a5ebe0fa714dae8ad76775283fbd035c39ba4a0d",
-      "bytes": 128852,
-      "generatedConfigBytes": 178071,
+      "sha256": "8e5ba94433ba46980e75da2b38e5eaee6900a9fc50f08c931aae15ca6d247d2e",
+      "bytes": 129992,
+      "generatedConfigBytes": 178257,
       "inlineRows": 819,
       "remoteSources": 30
     }

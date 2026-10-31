@@ -2103,6 +2103,7 @@ function v14ClashMiBase(input) {
     if (V14_REVIEWED_DOMAINS[tag]) dnsPolicy["rule-set:" + embeddedDomainSet(tag)] = v14DnsFor(domesticPolicy);
     dnsPolicy["rule-set:" + ruleSet("domain", tag)] = v14DnsFor(domesticPolicy);
   }
+  dnsPolicy["api.openai.com"] = V14.apiRealDns.map(url => url + "#" + groupName("OpenAI 服务"));
   const oldDns = v14Object(config.dns) ? config.dns : {};
   config.dns = Object.assign({}, oldDns, {
     enable: true, ipv6: true, "fake-ip-range6": oldDns["fake-ip-range6"] || "fdfe:dcba:9876::1/64", "enhanced-mode": "fake-ip", "fake-ip-range": "198.18.0.1/16",
@@ -2242,6 +2243,24 @@ function v14NetworkModeBase(input) {
   return document;
 }
 
+function v14PrepareNetworkInput(input) {
+  const prepared = v14Copy(input), marker = prepared["x-v14-generated"];
+  if (!v14Object(marker) || marker.version !== V14.version || !v14Object(prepared.sniffer)) return prepared;
+  const owned = marker.networkRecovery;
+  if (v14Object(owned) && owned.revision === "owned-exclusions-r1") {
+    for (const pair of [["skip-domain", "addedDomains"], ["skip-dst-address", "addedDestinations"]]) {
+      const remove = v14Strings(owned[pair[1]], "networkRecovery." + pair[1]);
+      if (prepared.sniffer[pair[0]] != null)
+        prepared.sniffer[pair[0]] = v14Strings(prepared.sniffer[pair[0]], "sniffer." + pair[0]).filter(value => !remove.includes(value));
+    }
+  } else if (["auto", "ipv4-local", "ipv4-only"].includes(marker.networkMode)) {
+    const old = (marker.embeddedDomainClassifiers || []).find(row => row.tag === "private");
+    if (old && /^v14-domains-private(?:-\d+)?$/.test(old.provider) && prepared.sniffer["skip-domain"] != null)
+      prepared.sniffer["skip-domain"] = v14Strings(prepared.sniffer["skip-domain"], "sniffer.skip-domain").filter(value => value !== "rule-set:" + old.provider);
+  }
+  return prepared;
+}
+
 function v14RecoverNetworkDestination(config) {
   for (const protocol of ["HTTP", "TLS", "QUIC"])
     config.sniffer.sniff[protocol]["override-destination"] = true;
@@ -2251,9 +2270,17 @@ function v14RecoverNetworkDestination(config) {
     const match = /^IP-CIDR6?,([^,]+),DIRECT(?:,no-resolve)?$/.exec(rule);
     return match ? [match[1]] : [];
   });
-  config.sniffer["skip-dst-address"] = [...new Set(v14Strings(config.sniffer["skip-dst-address"], "sniffer.skip-dst-address").concat(explicitIPs))];
-  if (!config["rule-providers"]["v14-domains-private"]) v14Fail("Missing inline private domain classifier");
-  config.sniffer["skip-domain"] = [...new Set(v14Strings(config.sniffer["skip-domain"], "sniffer.skip-domain").concat(V14.privateNames.map(name => "+." + name), ["rule-set:v14-domains-private"]))];
+  const destinations = v14Strings(config.sniffer["skip-dst-address"], "sniffer.skip-dst-address");
+  const domains = v14Strings(config.sniffer["skip-domain"], "sniffer.skip-domain");
+  const marker = config["x-v14-generated"];
+  const privateSet = marker.embeddedDomainClassifiers.find(row => row.tag === "private");
+  if (!privateSet || !config["rule-providers"][privateSet.provider]) v14Fail("Missing inline private domain classifier");
+  const extraDomains = V14.privateNames.map(name => "+." + name).concat("rule-set:" + privateSet.provider);
+  config.sniffer["skip-dst-address"] = v14Unique(destinations.concat(explicitIPs));
+  config.sniffer["skip-domain"] = v14Unique(domains.concat(extraDomains));
+  marker.networkRecovery = {revision: "owned-exclusions-r1",
+    addedDomains: extraDomains.filter(value => !domains.includes(value)),
+    addedDestinations: explicitIPs.filter(value => !destinations.includes(value))};
   return config;
 }
 
@@ -2267,10 +2294,8 @@ function v14IPv4LocalResolver(value) {
   return address + "#" + kept.concat(["disable-ipv6=true", "disable-qtype-64=true", "disable-qtype-65=true"]).join("&");
 }
 function v14IPv4LocalMain(input) {
-  const prepared = v14Copy(input);
+  const prepared = v14PrepareNetworkInput(input);
   if (v14Object(prepared.dns)) prepared.dns.ipv6 = true;
-  if (v14Object(prepared.sniffer) && prepared.sniffer["skip-domain"] != null)
-    prepared.sniffer["skip-domain"] = v14Strings(prepared.sniffer["skip-domain"], "sniffer.skip-domain").filter(value => value !== "rule-set:v14-domains-private");
   const config = v14NetworkModeBase(prepared);
   config.ipv6 = true;
   delete config["routeweaver-local-family"];
@@ -2283,6 +2308,7 @@ function v14IPv4LocalMain(input) {
     if (config.dns[key] != null) config.dns[key] = v14IPv4LocalResolver(config.dns[key]);
   for (const key of Object.keys(config.dns["nameserver-policy"] || {}))
     config.dns["nameserver-policy"][key] = v14IPv4LocalResolver(config.dns["nameserver-policy"][key]);
+  if (!v14Object(config.tun)) config.tun = {};
   config.tun["inet6-address"] = ["fdfe:dcba:9876::1/126"];
   config.tun["route-address"] = ["0.0.0.0/0", "::/0"];
   v14RecoverNetworkDestination(config);
@@ -2314,6 +2340,13 @@ function rw4Resolver(value) {
 }
 
 function rw4IPv6(value) { return typeof value === "string" && value.includes(":"); }
+
+function rw4ValidLanDNS(value) {
+  if (typeof value !== "string") return false;
+  const match = /^(?:udp:\/\/|tcp:\/\/)?((?:\d{1,3}\.){3}\d{1,3})(?::(\d{1,5}))?$/.exec(value);
+  if (!match || match[1].split(".").some(octet => !/^(?:0|[1-9]\d{0,2})$/.test(octet) || Number(octet) > 255)) return false;
+  return match[2] === undefined || (Number(match[2]) >= 1 && Number(match[2]) <= 65535);
+}
 
 function main(input, profileName) {
   if (RW4_ACCEPT_SERIALIZED && typeof input === "string") {
@@ -2397,7 +2430,7 @@ function main(input, profileName) {
   ]);
   const lanDNS = prepared["x-routeweaver"]["ipv4-lan-dns"];
   if (lanDNS != null) {
-    if (!Array.isArray(lanDNS) || !lanDNS.length || lanDNS.some(s => typeof s !== "string" || !/^(?:udp:\/\/|tcp:\/\/)?(?:\d{1,3}\.){3}\d{1,3}(?::\d+)?$/.test(s)))
+    if (!Array.isArray(lanDNS) || !lanDNS.length || lanDNS.some(s => !rw4ValidLanDNS(s)))
       v14Fail("ipv4-lan-dns 必须是非空的 IPv4 DNS 地址数组。");
     for (const [key, values] of Object.entries(config.dns["nameserver-policy"]))
       if (Array.isArray(values) && values.includes("system")) config.dns["nameserver-policy"][key] = rw4Resolver(lanDNS);

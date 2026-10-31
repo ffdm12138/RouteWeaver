@@ -40,7 +40,7 @@
     },
     {
       "file": "tools/lib/compile-entries.cjs",
-      "sha256": "bd6e1d0f0577ed6e84cc52b5766836086abc6bcec1e9a514d2d99e499da00797"
+      "sha256": "8984cc2ca1bdb6f2a4998ce99a51e9b76defc6675c152861aa834382225ffb64"
     },
     {
       "file": "tools/lib/render-runtime.cjs",
@@ -64,11 +64,11 @@
     },
     {
       "file": "tools/ipv4-local-adapter.js",
-      "sha256": "cee3ffa5e922dd9f3aa4be95e473c0341f59e5b6f8a5452701c4654e4bf59dfc"
+      "sha256": "4aa4e573c34f709d512a25ba561dfb3e474ba370cc688d536d7e6b3981fde837"
     },
     {
       "file": "tools/auto-local-adapter.js",
-      "sha256": "e15a238989b4afb1782b562b41a6f9fcf3ebf0e33ea7f7b586cc74c6d5de3262"
+      "sha256": "a943d16655f6072038b72747c874c5222ee0651d22a2c0dd634aeff30a838408"
     },
     {
       "file": "data/client-capabilities.json",
@@ -184,7 +184,7 @@
     },
     {
       "file": "runtime/platforms/android/main.js.in",
-      "sha256": "1d320039066b8ed86544774b585725a64b2a91f7ea20ac94706fe1b6165b6391"
+      "sha256": "d5d745dcc527763aeccaabf875e3b6ae9030a8ddb2a2530f8620d9a9e189f6bc"
     },
     {
       "file": "tools/validate-azure-async.cjs",
@@ -214,10 +214,10 @@
   "entries": [
     {
       "platform": "windows",
-      "source": "src/windows/v14.3.js",
-      "file": "src/windows/v14.3.js",
-      "sha256": "2b0f7eff6c881fc633ec7c07e6da90683582ae5ae99f37a4b53604785898cf84",
-      "bytes": 126491,
+      "source": "src/windows/v14.3-windows-flclash.js",
+      "file": "src/windows/v14.3-windows-flclash.js",
+      "sha256": "5186074bd47902f69a4d9e076b5969bc05f7e515b13c0536319d5ebc81eb279b",
+      "bytes": 127631,
       "modes": [
         "auto",
         "dual-stack",
@@ -226,10 +226,10 @@
     },
     {
       "platform": "android",
-      "source": "src/android/v14.3-android.js",
-      "file": "src/android/v14.3-android.js",
-      "sha256": "ecf1e3950097fea6b878bcc820ae6d555a3f72a12580cd271ccca4c3f3a5253b",
-      "bytes": 125957,
+      "source": "src/android/v14.3-android-flclash.js",
+      "file": "src/android/v14.3-android-flclash.js",
+      "sha256": "a6af2f7b4a75b12f6f14ac9c8efe5b83fca71a862b82c396d4a97cbe754158da",
+      "bytes": 127714,
       "modes": [
         "auto",
         "dual-stack",
@@ -240,8 +240,8 @@
       "platform": "clashmi",
       "source": "src/ios/v14.3-clashmi-domestic-protocol-r1.js",
       "file": "src/ios/v14.3-clashmi-domestic-protocol-r1.js",
-      "sha256": "9eaa5ea74c03f7a500a89dccdc69102189743f7b08761188c451ec336adc3b88",
-      "bytes": 128979,
+      "sha256": "0beb8d6201a2823d94331b95baf51e0cf8de1f69a55c4847e4d2d118525c6cbd",
+      "bytes": 130736,
       "modes": [
         "auto",
         "dual-stack",
@@ -252,8 +252,8 @@
       "platform": "macosFlClash",
       "source": "src/macos/v14.3-macos-flclash.js",
       "file": "src/macos/v14.3-macos-flclash.js",
-      "sha256": "188fe2798fa3655e21413ff225a9d45fb2f27d039f68aa31abac0f35887b0984",
-      "bytes": 128286,
+      "sha256": "d7eb787244e3120967cb97c7801f027f31b68a587cdb6b150a47fbfec2331e34",
+      "bytes": 129426,
       "modes": [
         "auto",
         "dual-stack",
@@ -264,8 +264,8 @@
       "platform": "macosClashMi",
       "source": "src/macos/v14.3-macos-clashmi.js",
       "file": "src/macos/v14.3-macos-clashmi.js",
-      "sha256": "757a3e08675375f0ba22f7091f732d5076d36c879d4a9fbfadec613bb68ade27",
-      "bytes": 128981,
+      "sha256": "1e30fb2002bfedfcfd05a844510e06bc99d519d5b5e783d70b6d24e4301b41e5",
+      "bytes": 130738,
       "modes": [
         "auto",
         "dual-stack",
@@ -276,8 +276,8 @@
       "platform": "clashVerge",
       "source": "src/clash-verge/v14.3-clash-verge.js",
       "file": "src/clash-verge/v14.3-clash-verge.js",
-      "sha256": "5063d72023be9d0e5bb75130a5ebe0fa714dae8ad76775283fbd035c39ba4a0d",
-      "bytes": 128852,
+      "sha256": "8e5ba94433ba46980e75da2b38e5eaee6900a9fc50f08c931aae15ca6d247d2e",
+      "bytes": 129992,
       "modes": [
         "auto",
         "dual-stack",

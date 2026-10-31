@@ -1,3 +1,9 @@
+<!-- ARCHITECTURE_AUDIT_CURRENT:BEGIN -->
+> **当前工作区修订：architecture-audit-r1（2026-11-01）**。两轨七客户端的当前源码、有限静态清单及隔离 Windows 核心已验证；跨端设备、原生 auto 能力和真实 AI 账号任务未验收。
+> 本轮仅发布公开源码与候选交付，未安装脚本、改动现用客户端或重启服务。当前公开预发布版本为 `v14.3.0-rc.9`；真实设备验收仍未完成。历史 rc.5–rc.8 段落及旧回执仅作当时记录，不认证本轮新字节。
+> 当前入口：[全架构审计与修复](reports/v14.3/全架构审计与修复.md) · [手动部署与验证](guides/本轮修复手动部署.md)。当前候选使用 `tools/verify-current-audit.py` 和 `tools/package-architecture-audit.py`，不重签旧正式发布链。
+<!-- ARCHITECTURE_AUDIT_CURRENT:END -->
+
 # 文档索引
 
 - [独立纯 IPv4 版](../releases/v14.3-ipv4-only/README.md)：新增七个入口、IPv4 直连/节点连接、两版包和客户端前置条件。

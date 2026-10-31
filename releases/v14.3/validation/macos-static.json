@@ -46,7 +46,7 @@
     },
     {
       "file": "tests/fixture.cjs",
-      "sha256": "238de968f94b2bc40070a053a47969dddfc4541ff841b555a0ecf5924869d39e"
+      "sha256": "40d9c211de3d062b9cc22b79098e9a6ff35755adf73c0e2d9597c18ebe327e2d"
     },
     {
       "file": "tests/domain-index.cjs",
@@ -62,7 +62,7 @@
     },
     {
       "file": "metadata/macos-sources.json",
-      "sha256": "66681e6575982115900785f5d6eb4af2d672659b6ecab1b8ac6279c378d3eed6"
+      "sha256": "3b65571c13b56a3196ce35dc3f52aa374d0315c5b58fa0fb6e7809b53a9eade6"
     },
     {
       "file": "tools/build-balanced.cjs",
@@ -86,7 +86,7 @@
     },
     {
       "file": "tools/lib/compile-entries.cjs",
-      "sha256": "bd6e1d0f0577ed6e84cc52b5766836086abc6bcec1e9a514d2d99e499da00797"
+      "sha256": "8984cc2ca1bdb6f2a4998ce99a51e9b76defc6675c152861aa834382225ffb64"
     },
     {
       "file": "tools/lib/render-runtime.cjs",
@@ -110,11 +110,11 @@
     },
     {
       "file": "tools/ipv4-local-adapter.js",
-      "sha256": "cee3ffa5e922dd9f3aa4be95e473c0341f59e5b6f8a5452701c4654e4bf59dfc"
+      "sha256": "4aa4e573c34f709d512a25ba561dfb3e474ba370cc688d536d7e6b3981fde837"
     },
     {
       "file": "tools/auto-local-adapter.js",
-      "sha256": "e15a238989b4afb1782b562b41a6f9fcf3ebf0e33ea7f7b586cc74c6d5de3262"
+      "sha256": "a943d16655f6072038b72747c874c5222ee0651d22a2c0dd634aeff30a838408"
     },
     {
       "file": "data/client-capabilities.json",
@@ -230,7 +230,7 @@
     },
     {
       "file": "runtime/platforms/android/main.js.in",
-      "sha256": "1d320039066b8ed86544774b585725a64b2a91f7ea20ac94706fe1b6165b6391"
+      "sha256": "d5d745dcc527763aeccaabf875e3b6ae9030a8ddb2a2530f8620d9a9e189f6bc"
     },
     {
       "file": "tools/validate-azure-async.cjs",
@@ -254,11 +254,11 @@
     },
     {
       "file": "src/macos/v14.3-macos-flclash.js",
-      "sha256": "188fe2798fa3655e21413ff225a9d45fb2f27d039f68aa31abac0f35887b0984"
+      "sha256": "d7eb787244e3120967cb97c7801f027f31b68a587cdb6b150a47fbfec2331e34"
     },
     {
       "file": "src/macos/v14.3-macos-clashmi.js",
-      "sha256": "757a3e08675375f0ba22f7091f732d5076d36c879d4a9fbfadec613bb68ade27"
+      "sha256": "1e30fb2002bfedfcfd05a844510e06bc99d519d5b5e783d70b6d24e4301b41e5"
     }
   ],
   "clientDeployment": false,

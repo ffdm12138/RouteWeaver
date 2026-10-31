@@ -66,7 +66,7 @@ current.update(version='14.3',repairRevision='balanced-r1',domesticProtocolRevis
  inlineProviderRows={k:manifest['entries'][i]['inlineRows'] for i,k in enumerate(['windows','android','clashmi'])},
  layoutRevision=6,packages='dist/v14.3',shadowrocket='LEAN_SOURCE_MODEL_PASS_NATIVE_NOT_RUN',
  ipv6Transport='NOT_RUN_ENVIRONMENT_IN_CURRENT_DNS_REPLAY',clientDeployment=False,
- entries={'windows':'releases/v14.3/src/windows/v14.3.js','android':'releases/v14.3/src/android/v14.3-android.js',
+ entries={'windows':'releases/v14.3/src/windows/v14.3-windows-flclash.js','android':'releases/v14.3/src/android/v14.3-android-flclash.js',
   'clashmi':'releases/v14.3/src/ios/v14.3-clashmi-domestic-protocol-r1.js','shadowrocket':'releases/v14.3/'+delivery['shadowrocket']['file']},
  deliveryRevision=delivery['revision'],iosDelivery='releases/v14.3/metadata/ios-delivery.json',iosInvestigationReport=delivery['report'])
 if (root/'metadata/macos-delivery.json').exists():

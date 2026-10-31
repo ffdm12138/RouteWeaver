@@ -271,6 +271,9 @@ function main(input) {
     if (V14_REVIEWED_DOMAINS[tag]) dnsPolicy["rule-set:" + embeddedDomainSet(tag)] = v14DnsFor(domesticPolicy);
     dnsPolicy["rule-set:" + ruleSet("domain", tag)] = v14DnsFor(domesticPolicy);
   }
+  // Real API answers must use the selected OpenAI group's DoH/443 on every
+  // platform. Other Fake-IP names retain the existing group-affine policy.
+  dnsPolicy["api.openai.com"] = V14.apiRealDns.map(url => url + "#" + groupName("OpenAI 服务"));
   const oldDns = v14Object(config.dns) ? config.dns : {};
   config.dns = Object.assign({}, oldDns, {
     enable: true, ipv6: true, "fake-ip-range6": oldDns["fake-ip-range6"] || "fdfe:dcba:9876::1/64", "enhanced-mode": "fake-ip", "fake-ip-range": "198.18.0.1/16",

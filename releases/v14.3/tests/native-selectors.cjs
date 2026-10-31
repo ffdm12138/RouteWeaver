@@ -64,4 +64,4 @@ async function run(platform,mode){
   }
 }
 async function main(){for(const platform of ['desktop','android'])for(const mode of ['provider','raw','override'])await run(platform,mode);report.status='CORE_MANUAL_SELECTORS_PASS';}
-main().catch(e=>{report.status='FAIL';report.error=e.stack;process.exitCode=1;console.error(e);}).finally(()=>{report.sourceFiles=['src/windows/v14.3.js','src/android/v14.3-android.js','tests/native-selectors.cjs','tests/fixture.cjs','data/rule-sources.lock.json'].map(file=>({file,sha256:f.sha(f.local(file))}));fs.writeFileSync(f.local('validation/native-selectors.json'),JSON.stringify(report,null,2)+'\n');});
+main().catch(e=>{report.status='FAIL';report.error=e.stack;process.exitCode=1;console.error(e);}).finally(()=>{report.sourceFiles=['src/windows/v14.3-windows-flclash.js','src/android/v14.3-android-flclash.js','tests/native-selectors.cjs','tests/fixture.cjs','data/rule-sources.lock.json'].map(file=>({file,sha256:f.sha(f.local(file))}));fs.writeFileSync(f.local('validation/native-selectors.json'),JSON.stringify(report,null,2)+'\n');});

@@ -1,3 +1,9 @@
+<!-- ARCHITECTURE_AUDIT_CURRENT:BEGIN -->
+> **当前工作区修订：architecture-audit-r1（2026-11-01）**。两轨七客户端的当前源码、有限静态清单及隔离 Windows 核心已验证；跨端设备、原生 auto 能力和真实 AI 账号任务未验收。
+> 本轮未安装脚本、改动现用客户端、重启服务或发布 GitHub。历史 rc.5–rc.8 段落及旧回执仅作当时记录，不认证本轮新字节。
+> 当前入口：[全架构审计与修复](../../docs/reports/v14.3/全架构审计与修复.md) · [手动部署与验证](../../docs/guides/本轮修复手动部署.md)。当前候选使用 `tools/verify-current-audit.py` 和 `tools/package-architecture-audit.py`，不重签旧正式发布链。
+<!-- ARCHITECTURE_AUDIT_CURRENT:END -->
+
 # V14.3 独立纯 IPv4 版
 
 日期：2026-10-17。修订：`ipv4-only-r1`。这是在既有版本旁新增的版本，不替换原来的 auto／dual-stack／ipv4-local 七个入口。每个客户端在本目录仍只有一份独立导入文件。
@@ -8,8 +14,8 @@
 
 | 客户端 | 导入文件 |
 |---|---|
-| Windows FlClash | [v14.3-ipv4-only.js](src/windows/v14.3-ipv4-only.js) |
-| Android Mihomo / FlClash | [Android JS](src/android/v14.3-android-ipv4-only.js) |
+| Windows FlClash | [v14.3-windows-flclash-ipv4-only.js](src/windows/v14.3-windows-flclash-ipv4-only.js) |
+| Android Mihomo / FlClash | [Android JS](src/android/v14.3-android-flclash-ipv4-only.js) |
 | iOS Clash Mi | [Clash Mi JS](src/ios/v14.3-clashmi-domestic-protocol-r1-ipv4-only.js) |
 | Windows Clash Verge Rev | [Clash Verge JS](src/clash-verge/v14.3-clash-verge-ipv4-only.js) |
 | macOS FlClash | [Mac FlClash JS](src/macos/v14.3-macos-flclash-ipv4-only.js) |

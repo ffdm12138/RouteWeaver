@@ -6,8 +6,8 @@
   "compatibilityRevision": "api-real-ip-r1",
   "directory": "releases/v14.3",
   "documentation": "docs/README.md",
-  "report": "docs/reports/v14.3/自动本地地址族与跨端能力.md",
-  "status": "SOURCE_STATIC_PASS_NATIVE_EVIDENCE_FROZEN_PRE_CHANGE",
+  "report": "docs/reports/v14.3/全架构审计与修复.md",
+  "status": "CURRENT_SOURCE_STATIC_LIMITED_NATIVE_PASS_DEVICE_PENDING",
   "apiDohRevision": "api-doh-egress-r1",
   "apiDohReport": "docs/reports/v14.3/API真实解析DNS出口修复.md",
   "apiDohScope": "api.openai.com real-answer exception kept; DNS moved from group DoT/853 to the same group's DoH/443 in six JS entries and six ipv4-only entries",
@@ -36,8 +36,8 @@
   "packages": "dist/v14.3",
   "workDirectory": ".work",
   "entries": {
-    "windows": "releases/v14.3/src/windows/v14.3.js",
-    "android": "releases/v14.3/src/android/v14.3-android.js",
+    "windows": "releases/v14.3/src/windows/v14.3-windows-flclash.js",
+    "android": "releases/v14.3/src/android/v14.3-android-flclash.js",
     "clashmi": "releases/v14.3/src/ios/v14.3-clashmi-domestic-protocol-r1.js",
     "shadowrocket": "releases/v14.3/src/ios/v14.3-shadowrocket.conf",
     "macosFlClash": "releases/v14.3/src/macos/v14.3-macos-flclash.js",
@@ -72,7 +72,7 @@
   "macosReport": "docs/reports/v14.3/MacBook适配.md",
   "macos": "CONFIG_SOURCE_WINDOWS_LOCAL_CORE_PASS_MAC_DEVICE_NOT_RUN",
   "distribution": "public",
-  "releaseTag": "v14.3.0-rc.8",
+  "releaseTag": "v14.3.0-rc.9",
   "personalRulesIncluded": false,
   "networkCompatibilityRevision": "ipv6-fallback-r2",
   "networkCompatibility": "releases/v14.3/metadata/network-compat-delivery.json",
@@ -112,8 +112,8 @@
       "guide": "releases/v14.3-ipv4-only/README.md",
       "packages": "dist/v14.3-ipv4-only",
       "entries": {
-        "windows": "releases/v14.3-ipv4-only/src/windows/v14.3-ipv4-only.js",
-        "android": "releases/v14.3-ipv4-only/src/android/v14.3-android-ipv4-only.js",
+        "windows": "releases/v14.3-ipv4-only/src/windows/v14.3-windows-flclash-ipv4-only.js",
+        "android": "releases/v14.3-ipv4-only/src/android/v14.3-android-flclash-ipv4-only.js",
         "clashmi": "releases/v14.3-ipv4-only/src/ios/v14.3-clashmi-domestic-protocol-r1-ipv4-only.js",
         "shadowrocket": "releases/v14.3-ipv4-only/src/ios/v14.3-shadowrocket-ipv4-only.conf",
         "macosFlClash": "releases/v14.3-ipv4-only/src/macos/v14.3-macos-flclash-ipv4-only.js",
@@ -140,5 +140,20 @@
     "ipv4-local/ipv4-only": "api.openai.com stays inside Fake-IP; no local real resolution",
     "dual-stack/auto": "real A/AAAA over the OpenAI group DoH/443",
     "reason": "Chromium classifies every usable IPv6 Fake-IP prefix as local network"
+  },
+  "architectureRevision": "architecture-audit-r1",
+  "architectureAudit": {
+    "revision": "architecture-audit-r1",
+    "manifest": "releases/v14.3/validation/architecture-audit/CURRENT_ACCEPTANCE.json",
+    "verifier": "tools/verify-current-audit.py",
+    "packager": "tools/package-architecture-audit.py",
+    "report": "docs/reports/v14.3/全架构审计与修复.md",
+    "guide": "docs/guides/本轮修复手动部署.md",
+    "clientDeployment": false,
+    "systemRoutesChanged": false,
+    "gitPublished": false,
+    "nativeCore": "Mihomo v1.19.33 isolated only",
+    "deviceAcceptance": "NOT_VERIFIED",
+    "legacyEvidence": "HISTORICAL_ONLY_NOT_REISSUED"
   }
 }

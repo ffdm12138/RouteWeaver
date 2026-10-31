@@ -4642,11 +4642,11 @@
   "inputs": [
     {
       "file": "tools/build-shadowrocket-lean.cjs",
-      "sha256": "d544d5bcb147d8c8bfb5b375ba7be5d37cad1addb69d0ce4c8b4f330bcf3be5f"
+      "sha256": "280aecceb7462701a35ccaa3aca1aa4f54074391a6a40c466fe298d273e99bd0"
     },
     {
-      "file": "src/android/v14.3-android.js",
-      "sha256": "ecf1e3950097fea6b878bcc820ae6d555a3f72a12580cd271ccca4c3f3a5253b"
+      "file": "src/android/v14.3-android-flclash.js",
+      "sha256": "a6af2f7b4a75b12f6f14ac9c8efe5b83fca71a862b82c396d4a97cbe754158da"
     },
     {
       "file": "data/rules/embedded-policy.json",

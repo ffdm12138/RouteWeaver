@@ -28,7 +28,7 @@ def load(path):
 
 
 def inspect(config, live=None, expected_network_mode=None):
-    if expected_network_mode not in (None, 'auto', 'dual-stack', 'ipv4-local'):
+    if expected_network_mode not in (None, 'auto', 'dual-stack', 'ipv4-local', 'ipv4-only'):
         raise ValueError('Unsupported expected network mode')
     marker = config.get('x-v14-generated') or {}
     tun = config.get('tun') or {}
@@ -42,7 +42,20 @@ def inspect(config, live=None, expected_network_mode=None):
         findings.append('CURRENT_ENTRY_NOT_IDENTIFIED')
     if config.get('mode') != 'rule':
         findings.append('RULE_MODE_NOT_EFFECTIVE')
-    if config.get('ipv6') is not True:
+    if mode == 'ipv4-only':
+        if config.get('ipv6') is not False:
+            findings.append('PURE_IPV4_CORE_FLAG_OVERRIDDEN')
+        if dns.get('use-system-hosts') is not False:
+            findings.append('PURE_IPV4_SYSTEM_HOSTS_ENABLED')
+        if any(p.get('ip-version') != 'ipv4' for p in config.get('proxies', []) if isinstance(p, dict)):
+            findings.append('PURE_IPV4_NODE_FAMILY_NOT_FORCED')
+        if any((p.get('override') or {}).get('ip-version') != 'ipv4'
+               for p in (config.get('proxy-providers') or {}).values() if isinstance(p, dict)):
+            findings.append('PURE_IPV4_PROVIDER_FAMILY_NOT_FORCED')
+        guard = 'IP-CIDR6,::/0,REJECT,no-resolve'
+        if guard not in (config.get('rules') or []) or config['rules'].index(guard) > 1:
+            findings.append('PURE_IPV4_LITERAL_REJECT_GUARD_MISSING_OR_SHADOWED')
+    elif config.get('ipv6') is not True:
         findings.append('CORE_IPV6_NOT_ENABLED')
     if tun.get('enable') is True and tun.get('strict-route') is not True:
         findings.append('STRICT_ROUTE_NOT_EFFECTIVE')
@@ -62,7 +75,7 @@ def inspect(config, live=None, expected_network_mode=None):
             findings.append('AUTO_NATIVE_RUNTIME_NOT_VERIFIED')
         elif state.get('reason') == 'socket-hook-owned-egress-needs-host-capability':
             findings.append('AUTO_HOST_EGRESS_CAPABILITY_NOT_INTEGRATED')
-    if mode == 'ipv4-local':
+    if mode in ('ipv4-local', 'ipv4-only'):
         if dns.get('ipv6') is not False:
             findings.append('COMPAT_DNS_AAAA_FILTER_OVERRIDDEN')
         if dns.get('fake-ip-range6'):
@@ -71,18 +84,41 @@ def inspect(config, live=None, expected_network_mode=None):
             if (sniff.get('sniff', {}).get(name) or {}).get('override-destination') is not True:
                 findings.append('COMPAT_' + name + '_TARGET_RECOVERY_NOT_EFFECTIVE')
     rules = config.get('rules') or []
-    expected_tail = ['MATCH,漏网之鱼', 'MATCH,REJECT']
+    groups = {g.get('name'): g for g in config.get('proxy-groups', []) if isinstance(g, dict)}
+    def actual_group(logical):
+        candidates = [name for name in marker.get('groups', []) if isinstance(name, str)
+                      and re.sub(r' \[V(?:12|13|14)(?:-\d+)?\]$', '', name) == logical
+                      and name in groups]
+        return candidates[0] if len(candidates) == 1 else logical
+    expected_tail = ['MATCH,' + actual_group('漏网之鱼'), 'MATCH,REJECT']
     if rules[-2:] != expected_tail:
         findings.append('UNKNOWN_TRAFFIC_FAIL_CLOSED_TAIL_DIFFERS')
-    groups = {g.get('name'): g for g in config.get('proxy-groups', []) if isinstance(g, dict)}
     public_groups = []
     for name in ('高纯净度AI用', '高网速视频用'):
-        group = groups.get(name) or {}
+        group = groups.get(actual_group(name)) or {}
         manual = group.get('type') == 'select' and 'DIRECT' not in group.get('proxies', [])
         if not manual:
             findings.append('PUBLIC_GROUP_MANUAL_PROXY_BOUNDARY_DIFFERS')
         public_groups.append({'logicalGroup': name, 'manualProxyOnly': manual})
     policies = dns.get('nameserver-policy') or {}
+    if mode in ('auto', 'dual-stack') and marker.get('compatibilityRevision', '').startswith('api-real-ip-'):
+        api_servers = policies.get('api.openai.com') or []
+        if (not isinstance(api_servers, list) or not api_servers
+                or any(not isinstance(s, str) or not s.startswith('https://')
+                       or s.partition('#')[2].split('&')[0] != actual_group('OpenAI 服务') for s in api_servers)):
+            findings.append('API_REAL_ANSWER_DOH_GROUP_POLICY_MISSING')
+    security_warnings = []
+    endpoint = str(config.get('external-controller') or '')
+    if endpoint and not re.fullmatch(r'(127\.0\.0\.1|localhost|\[::1\]):\d+', endpoint):
+        security_warnings.append('CONTROLLER_NOT_EXPLICITLY_LOOPBACK')
+        if not config.get('secret'):
+            findings.append('NON_LOOPBACK_CONTROLLER_WITHOUT_SECRET')
+    if config.get('allow-lan') is True and not config.get('authentication'):
+        security_warnings.append('LAN_PROXY_WITHOUT_AUTHENTICATION_REVIEW_INTENT')
+    if str(dns.get('listen') or '').startswith(('0.0.0.0:', '[::]:', ':')):
+        security_warnings.append('DNS_LISTENER_NOT_LOOPBACK_REVIEW_FIREWALL')
+    if any(p.get('skip-cert-verify') is True for p in config.get('proxies', []) if isinstance(p, dict)):
+        security_warnings.append('NODE_TLS_VERIFICATION_DISABLED_REVIEW_SUBSCRIPTION')
     upstreams = []
     for value in [dns.get(k) for k in ('nameserver', 'fallback', 'direct-nameserver')]:
         if isinstance(value, list):
@@ -102,6 +138,7 @@ def inspect(config, live=None, expected_network_mode=None):
         'sniffer': {'enabled': sniff.get('enable'), 'targetRecovery': {name: (sniff.get('sniff', {}).get(name) or {}).get('override-destination') for name in ('HTTP', 'TLS', 'QUIC')}},
         'counts': {'rules': len(rules), 'groups': len(groups), 'nodes': len(config.get('proxies') or []), 'providers': len(config.get('proxy-providers') or {})},
         'publicGroups': public_groups, 'findings': sorted(set(findings)),
+        'securityWarnings': sorted(set(security_warnings)),
         'privacy': 'Allowlisted fields and counts only; credentials, URLs, node names, destinations and raw rules omitted',
     }
     if automatic is not None:
@@ -120,12 +157,18 @@ def inspect(config, live=None, expected_network_mode=None):
     return summary
 
 
+class LocalOnlyRedirectHandler(urllib.request.HTTPRedirectHandler):
+    """Never forward a loopback controller's bearer token through redirects."""
+    def redirect_request(self, req, fp, code, msg, headers, newurl):
+        raise ValueError('Loopback controller redirects are not permitted')
+
+
 def read_live(config):
     endpoint = str(config.get('external-controller') or '')
     match = re.fullmatch(r'(127\.0\.0\.1|localhost):([0-9]{1,5})', endpoint)
     if not match or not 1 <= int(match[2]) <= 65535:
         raise ValueError('Only an explicitly configured IPv4 loopback controller is supported')
-    opener = urllib.request.build_opener(urllib.request.ProxyHandler({}))
+    opener = urllib.request.build_opener(urllib.request.ProxyHandler({}), LocalOnlyRedirectHandler())
     def get(path):
         request = urllib.request.Request('http://127.0.0.1:' + match[2] + path,
                                          headers={'Authorization': 'Bearer ' + str(config.get('secret') or '')})
@@ -140,7 +183,7 @@ def read_live(config):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--config', required=True)
-    parser.add_argument('--expected-network-mode', choices=('auto', 'dual-stack', 'ipv4-local'),
+    parser.add_argument('--expected-network-mode', choices=('auto', 'dual-stack', 'ipv4-local', 'ipv4-only'),
                         help='Assert the intended device mode; a valid but unintended mode is a mismatch')
     parser.add_argument('--entry', help='Optional actually imported JS; only its SHA256 is reported')
     parser.add_argument('--live', action='store_true', help='Read only an explicitly configured loopback controller')

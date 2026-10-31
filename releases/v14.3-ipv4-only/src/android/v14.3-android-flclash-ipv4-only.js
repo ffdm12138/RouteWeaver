@@ -1,11 +1,5 @@
-// One current entry; set the default below, or use x-routeweaver.network-mode in the input. Auto requires the matching native core; JS alone cannot inspect physical egress.
-const ROUTEWEAVER_DEFAULT_NETWORK_MODE = "auto";
-// Small standalone overwrite: critical parents and safety guards inline; complete reviewed rules are remote.
-// Mihomo V14.3 android — 2026-10-12; balanced-r1.
-// Company rules precede geographic shortcuts; DNS uses the same group.
-// Unknown public UDP is proxied or rejected, including arbitrary WebRTC ports.
-// Private LAN and the explicit manual DIRECT list are intentional exceptions.
-// TUN/VPN capture still requires client settings and device verification.
+// RouteWeaver IPv4-only standalone entry; ipv4-only-r1.
+
 const V14 = Object.freeze({
   version: "14.3",
   ruleInterval: 86400, // seconds; native core timer, not a JS timer
@@ -13,10 +7,7 @@ const V14 = Object.freeze({
   testUrl: "https://www.gstatic.com/generate_204",
   testInterval: 600,
   providerInterval: 3600,
-  // WebRTC STUN is a separate destination; route known generic STUN through fallback.
-  // This cannot identify the site that initiated the WebRTC request.
   stunPorts: ["3478", "5349", "19302-19309"],
-  // Whole STUN/TURN labels avoid matching unrelated names such as stunning.cn.
   stunHostPatterns: ["stun.*", "*.stun.*", "turn.*", "*.turn.*"],
   domesticStunDns: ["stun.chat.bilibili.com", "stun.hitv.com"],
   stunDns: ["stun.l.google.com", "stun.services.mozilla.com", "stun.cloudflare.com"],
@@ -30,11 +21,7 @@ const V14 = Object.freeze({
     "https://223.6.6.6/dns-query#DIRECT",
   ],
   bootstrapDns: ["https://223.5.5.5/dns-query", "https://223.6.6.6/dns-query"],
-  // An upstream reachable directly in China and through ordinary proxy nodes.
   groupDnsUrls: ["tls://dns.alidns.com:853", "tls://dot.pub:853"],
-  // The one name outside Fake-IP (see fake-ip-filter) must return a real
-  // answer, so it cannot ride the DoT/853 policy: a carrier or node that drops
-  // 853 turns it into SERVFAIL. Same reviewed upstreams, DoH on 443.
   apiRealDns: ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"],
 });
 
@@ -44,9 +31,6 @@ const V14_PRIVATE_IPS = [
   "127.0.0.0/8", "10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16", "169.254.0.0/16", "100.64.0.0/10",
   "::1/128", "fc00::/7", "fe80::/10",
 ];
-// China-hosted services are fixed DIRECT. TikTok remains a distinct overseas
-// selector; broad ByteDance and international Microsoft/Google domains are absent.
-// These are deliberately bounded additions from the user's Mojie profile.
 const V14_DOMESTIC_SETS = ["douyin", "apple@cn", "google@cn", "microsoft@cn", "steam@cn"];
 const V14_DOMESTIC_SEEDS = [
   "douyin.com",
@@ -72,7 +56,6 @@ const V14_DOMESTIC_SEEDS = [
   "baidustatic.com",
   "didi-labs.com"
 ];
-// Immutable approved application DNS destinations; core resolver dialing is independent.
 const V14_EXTERNAL_DNS_RULES = [
   "DOMAIN,dns.adguard.com",
   "DOMAIN,dns.adguard-dns.com",
@@ -203,23 +186,12 @@ const V14_EXTERNAL_DNS_RULES = [
   "DOMAIN-SUFFIX,nextdns.io"
 ];
 
-// Google Play can use a .cn API and a separate download CDN. Match both
-// before the generic .cn / CN-IP DIRECT rules, and keep their DNS on the
-// same selectable Google exit.
 const V14_GOOGLE_PLAY_DELIVERY_SEEDS = [
   "googleapis.cn", "xn--ngstr-lra8j.com", "gvt1.com", "gvt2.com", "gvt3.com",
 ];
 
-// CN IP classification is a managed remote MRS provider below, not a frozen JS snapshot.
-// Existing private ranges, Voice endpoints and Telegram dedicated ranges remain embedded.
 
-// OpenAI's published ChatGPT Voice IPv4 list (created 2026-03-26).
-// Downloaded and compared on 2026-10-10: all 23 prefixes unchanged.
-// Refresh from the official list when it changes; unknown UDP uses
-// the no-DIRECT 漏网之鱼 group rather than falling through to DIRECT.
 const V14_OPENAI_VOICE_HOSTS = ["chatgpt.livekit.cloud", "host.livekit.cloud", "turn.livekit.cloud"];
-// Dynamic LiveKit names do not identify the tenant. Keep known exact hosts
-// and official Voice IPs above this safe fallback, across TCP and UDP.
 const V14_UNIDENTIFIED_VOICE_SUFFIXES = ["chatgpt.livekit.cloud", "host.livekit.cloud", "turn.livekit.cloud"];
 const V14_OPENAI_VOICE_IPV4 = [
   "102.37.57.54/32", "13.71.25.29/32", "135.220.40.201/32", "172.203.39.49/32",
@@ -230,7 +202,6 @@ const V14_OPENAI_VOICE_IPV4 = [
   "68.155.152.41/32", "72.146.20.246/32", "74.248.148.7/32",
 ];
 
-// One selectable group per company. Earlier entries win over later domains.
 const V14_SERVICES = [
   {
     "name": "OpenAI 服务",
@@ -774,8 +745,6 @@ const V14_SERVICES = [
   }
 ];
 
-// Shared web dependencies have their own selector. Domain rules cannot infer
-// which top-level site requested them, so keep these out of company groups.
 const V14_SHARED_INFRA = {
   "name": "公共基础服务",
   "sets": [],
@@ -856,13 +825,11 @@ const V14_SHARED_INFRA = {
 };
 
 
-// Immutable company classifiers, generated from data/rules/company-core.json.
 const V14_CDN_SHARED_GUARDS = [
   "DOMAIN-REGEX,^cdn.*-epicgames-.*\\.file\\.myqcloud\\.com$",
   "DOMAIN-REGEX,^epicgames-download.*-.*\\.file\\.myqcloud\\.com$"
 ];
 
-// Generated reviewed domain snapshots; standalone clients need no local files.
 const V14_REVIEWED_DOMAINS = {
   "private": {
     "behavior": "classical",
@@ -1372,8 +1339,6 @@ const V14_COMPANY_CORE = {
   ]
 };
 
-// Display order is independent of V14_SERVICES' routing precedence.
-// Unlisted services keep their relative order after these pinned groups.
 const V14_PINNED_GROUPS = [
   "高纯净度AI用", "高网速视频用", "自动选择", "公共基础服务", "漏网之鱼", "国内网站",
   "OpenAI 服务", "Anthropic 服务", "谷歌服务", "微软生态",
@@ -1382,8 +1347,6 @@ const V14_PINNED_GROUPS = [
 const V14_GROUP_ORDER = V14_PINNED_GROUPS.concat(
   V14_SERVICES.map(s => s.name).filter(name => !V14_PINNED_GROUPS.includes(name)));
 
-// Telegram official CIDR snapshot, retrieved 2026-09-24 via the web reader.
-// Source: https://core.telegram.org/resources/cidr.txt
 const V14_TELEGRAM_CIDRS = ["91.108.56.0/22", "91.108.4.0/22", "91.108.8.0/22", "91.108.16.0/22", "91.108.12.0/22", "149.154.160.0/20", "91.105.192.0/23", "91.108.20.0/22", "185.76.151.0/24", "2001:b28:f23d::/48", "2001:b28:f23f::/48", "2001:67c:4e8::/48", "2001:b28:f23c::/48", "2a0a:f280::/32"];
 
 function v14Fail(message) { throw new Error("V14: " + message); }
@@ -1402,7 +1365,6 @@ function v14Ipv6Literal(s) {
 function v14Transport(p) { return !V14_NOT_NODES.has(String(p.type || "").toLowerCase()); }
 function v14DnsFor(group) { return V14.groupDnsUrls.map(url => url + "#" + group + "&disable-reuse=true"); }
 
-// Shared V14 candidate validation. No network I/O and no node wrappers.
 function v14Strings(xs, owner) {
   if (xs == null) return [];
   if (!Array.isArray(xs) || xs.some(x => typeof x !== "string")) v14Fail(owner + " 必须是字符串数组。");
@@ -1414,8 +1376,6 @@ function v14Target(rule) {
   return fields[fields.length - (fields[fields.length - 1] === "no-resolve" ? 2 : 1)].trim();
 }
 function v14InboundGuard(config) {
-  // A retained inbound with its own policy skips the company/DNS/UDP rules.
-  // Reject incompatible inputs before returning any generated configuration.
   if (config.listeners != null && !Array.isArray(config.listeners)) v14Fail("listeners 必须是数组。");
   for (const l of (config.listeners || [])) {
     if (!v14Object(l)) v14Fail("存在无效 listener。");
@@ -1431,8 +1391,6 @@ function v14InboundGuard(config) {
 }
 
 function v14KeepLegacy(config, retain, android) {
-  // Preserve the dependency closure of non-generated sub-rules and custom
-  // inbounds. Never preserve an object while discarding its dependencies.
   const subs = config["sub-rules"] == null ? {} : config["sub-rules"];
   const oldSets = config["rule-providers"] == null ? {} : config["rule-providers"];
   if (!v14Object(subs) || !v14Object(oldSets)) v14Fail("sub-rules/rule-providers 必须是对象。");
@@ -1451,7 +1409,6 @@ function v14KeepLegacy(config, retain, android) {
     if (android && set.behavior === "classical" && set.type !== "inline")
       v14Fail("Android 无法静态排除外部 classical rule-provider 中的 Geo 依赖：" + name);
     setState.set(name, 1); keptSets[name] = v14Copy(set);
-    // Our previous generated download selector is rebuilt later in main().
     if (!v14ManagedSource(name, set)) retain(set.proxy, "rule-provider " + name);
     if (set.type === "inline") {
       for (const item of v14Strings(set.payload, "rule-provider " + name + ".payload")) {
@@ -1495,7 +1452,6 @@ function v14KeepLegacy(config, retain, android) {
   for (const [name, owner] of v14AuxRefs(config)) setRef(name, owner);
   return keptSets;
 }
-// Address-family defaults affect the connection to a node, not its remote exit.
 const V14_NODE_FAMILY_DEFAULT = '(select(.["ip-version"] == null and ((.server // "") | contains(":")) == false and ((.server // "") | test("^[0-9.]+$")) == false) | .["ip-version"]) = "ipv4-prefer"';
 function v14NetworkDefaults(config) {
   for (const node of config.proxies || []) {
@@ -1505,7 +1461,6 @@ function v14NetworkDefaults(config) {
   for (const provider of Object.values(config["proxy-providers"] || {})) {
     const override = provider.override;
     const expressions = (override["override-expr"] || []).filter(x => x !== V14_NODE_FAMILY_DEFAULT);
-    // A user expression which removes or assigns the field is an explicit choice.
     if (!expressions.some(x => /ip-version/i.test(x))) expressions.push(V14_NODE_FAMILY_DEFAULT);
     if (expressions.length) override["override-expr"] = expressions;
     else delete override["override-expr"];
@@ -1518,13 +1473,9 @@ function v14NetworkDefaults(config) {
 }
 
 function v14ProviderGuard(provider, name, retain, warnings, upgradingFromV13) {
-  // V13 appended two commands to every provider. Remove that exact suffix on
-  // upgrade; never erase user-defined custom expressions or dialer references.
   const formerBlock6 = '(select((.server // "") | contains(":")) | .type) = "reject"';
   const formerForce4 = '.["ip-version"] = "ipv4"';
   const o = provider.override;
-  // Provider exclude-type acts on raw mappings, before override-expr.
-  // Hide and reject a mapping that a custom expression turns into a bypass.
   const guardName = '(select(.type == "direct" or .type == "compatible" or .type == "pass" or .type == "pass-rule" or .type == "dns" or .type == "rematch" or .type == "reject" or .type == "reject-drop" or .type == "reject-no-drop") | .name) = "@v14-nontransport:" + .name';
   const guardType = '(select((.name // "") | contains("@v14-nontransport:")) | .type) = "reject"';
   const expressions = v14Strings(o["override-expr"], "provider " + name + ".override.override-expr").filter(e => e !== guardName && e !== guardType && e !== V14_NODE_FAMILY_DEFAULT);
@@ -1556,9 +1507,6 @@ function v14GraphCheck(config, warnings) {
   const providers = config["proxy-providers"] || {};
   const edges = new Map(), state = new Map();
   const providerId = n => "\u0000provider:" + n;
-  // Only use the portable regexp subset for supplementary static checks.
-  // Native fields remain untouched. Nonportable patterns are explicitly
-  // recorded as unverified, not approximated as a successful runtime check.
   function match(pattern, text, owner) {
     if (!pattern) return true;
     if (typeof pattern !== "string") v14Fail(owner + " 正则必须是字符串。");
@@ -1605,8 +1553,6 @@ function v14GraphCheck(config, warnings) {
         continue;
       }
       for (const [index, raw] of (pd.payload || []).entries()) {
-        // With no custom expressions or name transforms, provider/group name
-        // filters can be checked without approximating the effective names.
         if (match(pd.filter, raw.name, source + ".filter") !== true) continue;
         if (pd["exclude-filter"] && match(pd["exclude-filter"], raw.name, source + ".exclude-filter") !== false) continue;
         if (String(pd["exclude-type"] || "").toLowerCase().split("|").includes(String(raw.type).toLowerCase())) continue;
@@ -1624,9 +1570,6 @@ function v14GraphCheck(config, warnings) {
     }
     edges.set(name, v14Unique(refs));
   }
-  // A provider marker records membership for bootstrap-cycle detection.
-  // Concrete inline node edges above respect each referencing group's filter.
-  // Do not conflate all provider payload nodes into every filtered group.
   for (const name of Object.keys(providers)) edges.set(providerId(name), []);
   function walk(n, path) {
     if (V14_BUILTINS.has(n)) return;
@@ -1659,12 +1602,7 @@ function v14GraphCheck(config, warnings) {
   for (const [name, p] of Object.entries(config["rule-providers"] || {})) dialable(p.proxy, "rule-provider " + name + ".proxy", new Set());
 }
 
-// V14 Android managed rule sources (shared V14 data format). This is a compiler, not a runtime network client.
-// Full classical domain sets preserve DOMAIN-REGEX/DOMAIN-KEYWORD. The large
-// CN domain set (domain/full entries in the checked upstream) and IP sets use MRS.
-// No generated matcher needs a local GEOSITE.dat/GEOIP.dat/Country.mmdb file.
 const V14_RULE_ROOT = "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/";
-// DIRECT boundaries change only with an explicitly reviewed release.
 const V14_DIRECT_RULE_PINS = {
   "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/private.yaml": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/private.yaml",
   "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/category-doh.yaml": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/category-doh.yaml",
@@ -1725,8 +1663,6 @@ function v14ManagedSource(name, provider) {
   }
   return null;
 }
-// Auxiliary rule-set dependencies must not disappear when old top-level rules
-// are replaced. These fields are native Mihomo matchers / TUN address sets.
 function v14AuxRefs(config) {
   const out = [];
   for (const key of ["force-domain", "skip-domain", "skip-src-address", "skip-dst-address"]) {
@@ -1739,8 +1675,6 @@ function v14AuxRefs(config) {
   }
   return out;
 }
-// Parenthesis-aware rule walker. Plain DOMAIN-REGEX payloads are left byte-for-
-// byte unchanged; a regex containing the word "GEOSITE" is not a Geo matcher.
 function v14WalkRule(text, atom, owner) {
   if (typeof text !== "string" || !text.trim()) v14Fail(owner + " 含无效规则。");
   const lead = /^\s*([A-Za-z0-9-]+)\s*(?:,|$)/.exec(text);
@@ -1789,8 +1723,6 @@ function v14WalkRule(text, atom, owner) {
 function v14RuleRegistry(config, downloadProxy) {
   const sets = config["rule-providers"];
   const byKey = new Map(), generated = new Map();
-  // Only recognize our canonical sources. A user provider with the same name
-  // but different content is never overwritten.
   for (const [name, p] of Object.entries(sets)) {
     const s = v14ManagedSource(name, p);
     if (s && !byKey.has(s.kind + ":" + s.tag)) byKey.set(s.kind + ":" + s.tag, name);
@@ -1805,8 +1737,6 @@ function v14RuleRegistry(config, downloadProxy) {
       byKey.set(key, name);
     }
     if (!generated.has(name)) {
-      // URL + kind identify the cache, NOT patch version or runtime group name.
-      // Naming collisions do not cause two distinct sources to share a file.
       const path = "./ruleset/v12-managed/" + s.kind + "-" + s.tag.replace(/@/g, "_at_") + "-" + v14Hash(s.url) + "." + s.format;
       sets[name] = { type: "http", behavior: s.behavior, format: s.format, url: s.url,
         path, interval: V14.ruleInterval, proxy: downloadProxy, "size-limit": V14.ruleSizeLimit };
@@ -1844,8 +1774,6 @@ function v14RuleRegistry(config, downloadProxy) {
     return text;
   }
   function finish() {
-    // Main rules were emitted directly as RULE-SET; this also migrates retained
-    // legacy sub-rules, including nested logical conditions, in their old order.
     config.rules = config.rules.map(r => v14WalkRule(r, convertAtom, "rules"));
     for (const [name, rules] of Object.entries(config["sub-rules"] || {}))
       config["sub-rules"][name] = rules.map(r => v14WalkRule(r, convertAtom, "sub-rules." + name));
@@ -1861,13 +1789,11 @@ function v14RuleRegistry(config, downloadProxy) {
       }
       config.dns[field] = result;
     }
-    // Providers retained by an old sub-rule or sniffer may already be ours.
     for (const [name, p] of Object.entries(sets)) {
       const src = v14ManagedSource(name, p);
       if (src) {
         const selected = ref(src.kind, src.tag);
         if (selected !== name) {
-          // Alias required by a preserved external reference: own cache filename.
           sets[name] = {...sets[selected], path: "./ruleset/v12-managed/alias-" + v14Hash(name) + "-" + v14Hash(src.url) + "." + src.format};
           generated.set(name, {...src, name, path: sets[name].path, proxy: downloadProxy});
         }
@@ -1883,9 +1809,6 @@ function v14RuleRegistry(config, downloadProxy) {
           }, "rule-provider " + name);
       }
     }
-    // DNS bootstrap and DIRECT remain untouched. Stop automatic local Geo file
-    // updates in the produced core configuration; this does not control UI geo
-    // downloads a client application might independently choose to perform.
     config["geo-auto-update"] = false;
     for (const k of ["geox-url", "geo-update-interval", "geodata-mode", "geodata-loader", "geosite-matcher"]) delete config[k];
     for (const r of config.rules) v14WalkRule(r, verifyAtom, "rules");
@@ -2004,9 +1927,6 @@ function v14NetworkModeBase(input) {
     if (provider.type === "http" && (typeof provider.url !== "string" || !/^https?:\/\//i.test(provider.url))) v14Fail("HTTP provider 缺少有效 URL：" + name);
     if (provider.type === "file" && !provider.path) v14Fail("file provider 缺少 path：" + name);
     if (provider.type === "inline" && (!Array.isArray(provider.payload) || !provider.payload.length)) v14Fail("inline provider 缺少 payload：" + name);
-    // A missing or retired bootstrap policy is not permission to use DIRECT.
-    // Explicit provider.proxy=DIRECT remains an intentional control-plane choice.
-    // Cached providers remain usable; a first download needs an explicit route.
     if (!provider.proxy || generatedGroups.has(provider.proxy) || generatedProxies.has(provider.proxy)) provider.proxy = "REJECT";
     if (provider.type === "http" && provider.proxy === "REJECT")
       warnings.push("provider " + name + " 的引导出口为 REJECT；需要首次下载时明确设置 provider.proxy，绝不静默直连。");
@@ -2014,8 +1934,6 @@ function v14NetworkModeBase(input) {
     provider.override = Object.assign({}, v14Object(provider.override) ? provider.override : {});
     if (upgradingFromV13 && provider.override["ip-version"] === "ipv4") delete provider.override["ip-version"];
     retain(provider.override["dialer-proxy"], "provider override " + name);
-    // Filter provider members before explicit selector sentinels are added.
-    // Group-level exclusion would also remove business DIRECT and public REJECT.
     provider["exclude-type"] = v14Unique(String(provider["exclude-type"] || "").split("|").filter(Boolean).concat(
       ["Direct", "Compatible", "Pass", "PassRule", "pass-rule", "Dns", "Rematch", "Reject", "RejectDrop", "reject-drop", "RejectNoDrop", "reject-no-drop"])).join("|");
     v14ProviderGuard(provider, name, retain, warnings, upgradingFromV13);
@@ -2029,13 +1947,11 @@ function v14NetworkModeBase(input) {
   }
   const keptGroups = Array.from(retained, name => oldGroupMap.get(name));
   for (const g of keptGroups) {
-    // Keep native include/filter semantics. Do not expand into explicit proxies.
     g.hidden = true;
   }
 
   const occupied = new Set([...V14_BUILTINS, ...nodeNames, ...providerNames, ...retained]);
   const logicalGroups = V14_GROUP_ORDER;
-  // Preserve previously generated names so stored selector choices survive upgrades.
   const previousGroupNames = new Map();
   for (const actual of generatedGroups) {
     const logical = actual.replace(/ \[V(?:12|13|14)(?:-\d+)?\]$/, "");
@@ -2086,12 +2002,10 @@ function v14NetworkModeBase(input) {
     embeddedNames.set(tag, name); return name;
   }
   function addDomainSet(tag, policy) {
-    // Keep the old priority. Reviewed baseline first, remote additions next.
     if (V14_REVIEWED_DOMAINS[tag]) add("RULE-SET," + embeddedDomainSet(tag), policy);
     add("RULE-SET," + ruleSet("domain", tag), policy);
   }
 
-  // Inline providers are immutable, require no download, and also drive DNS.
   const coreNames = new Map();
   for (const [logical, payload] of Object.entries(V14_COMPANY_CORE)) {
     const base = "v14-core-" + v14Hash(logical), sets = config["rule-providers"];
@@ -2118,8 +2032,6 @@ function v14NetworkModeBase(input) {
   for (const match of V14_EXTERNAL_DNS_RULES) add(match, "REJECT");
   for (const d of V14_GOOGLE_PLAY_DELIVERY_SEEDS) add("DOMAIN-SUFFIX," + d, groupName("谷歌服务"));
   for (const host of V14_OPENAI_VOICE_HOSTS) add("DOMAIN," + host, groupName("OpenAI 服务"));
-  // Reviewed exact Azure tenants below precede the generic shared suffix.
-  // Dedicated company hosts on third-party infrastructure remain precise.
   for (const service of V14_SERVICES) for (const d of service.exact || []) add("DOMAIN," + d, groupName(service.name));
   add("RULE-SET," + cdnGuardName, groupName("公共基础服务"));
   for (const suffix of V14_UNIDENTIFIED_VOICE_SUFFIXES) add("DOMAIN-SUFFIX," + suffix, groupName("公共基础服务"));
@@ -2130,22 +2042,17 @@ function v14NetworkModeBase(input) {
     if (coreNames.has(service.name)) add("RULE-SET," + coreNames.get(service.name), policy);
     for (const tag of service.sets) addDomainSet(tag, policy);
   }
-  // Shared infrastructure must win over broad cloud-provider ownership lists.
   emitService(V14_SHARED_INFRA);
   for (const service of V14_SERVICES) emitService(service);
   for (const ip of V14_OPENAI_VOICE_IPV4) add("IP-CIDR," + ip, groupName("OpenAI 服务"), true);
   for (const ip of V14_TELEGRAM_CIDRS) add((ip.includes(":") ? "IP-CIDR6," : "IP-CIDR,") + ip, groupName("Telegram"), true);
   for (const service of V14_SERVICES) for (const tag of service.ips || [])
     add("RULE-SET," + ruleSet("ip", tag), groupName(service.name), true);
-  // Known corporate domains win even with private/ULA destination metadata.
   for (const ip of V14_PRIVATE_IPS) add((ip.includes(":") ? "IP-CIDR6," : "IP-CIDR,") + ip, "DIRECT", true);
   addDomainSet("private", "DIRECT");
-  // Unknown domestic STUN servers are protected, without stealing Google's.
   for (const host of V14.domesticStunDns)
     if (!V14_SERVICES.some(s => s.seeds.some(d => host === d || host.endsWith("."+d))))
       add("DOMAIN," + host, groupName("漏网之鱼"));
-  // Corporate/LAN/manual rules above retain priority. Recognisable generic
-  // STUN stays protected before domestic domain classifications.
   for (const network of ["TCP", "UDP"]) {
     for (const port of V14.stunPorts) add("AND,((NETWORK," + network + "),(DST-PORT," + port + "),(NOT,((IN-TYPE,INNER))))", groupName("漏网之鱼"));
     for (const host of V14.stunHostPatterns) add("AND,((NETWORK," + network + "),(DOMAIN-WILDCARD," + host + "),(NOT,((IN-TYPE,INNER))))", groupName("漏网之鱼"));
@@ -2155,7 +2062,6 @@ function v14NetworkModeBase(input) {
   for (const tag of V14_DOMESTIC_SETS) addDomainSet(tag, domesticPolicy);
   addDomainSet("cn", domesticPolicy);
   add("DOMAIN-SUFFIX,cn", domesticPolicy);
-  // Unclassified IP-only public UDP cannot reach geographic TCP shortcuts.
   add("AND,((NETWORK,UDP),(NOT,((IN-TYPE,INNER))))", groupName("漏网之鱼"));
   add("RULE-SET," + ruleSet("ip", "cn"), domesticPolicy, true);
   add("MATCH", groupName("漏网之鱼")); config.rules = rules; config.mode = "rule";
@@ -2172,8 +2078,6 @@ function v14NetworkModeBase(input) {
   for (const service of [V14_SHARED_INFRA].concat(V14_SERVICES)) {
     const servers = v14DnsFor(groupName(service.name));
     for (const d of service.exact || []) dnsPolicy[d] = servers;
-    // Specific shared Storage names must beat broad google.com/googleapis.com
-    // literals. Exact WebPubSub exceptions override the shared namespace policy.
     for (const d of service.seeds) if (service.name !== V14_SHARED_INFRA.name || d !== "webpubsub.azure.com")
       if (dnsPolicy["+." + d] === undefined) dnsPolicy["+." + d] = servers;
   }
@@ -2185,15 +2089,10 @@ function v14NetworkModeBase(input) {
       if (V14_REVIEWED_DOMAINS[tag]) dnsPolicy["rule-set:" + embeddedDomainSet(tag)] = v14DnsFor(groupName(service.name));
       dnsPolicy["rule-set:" + ruleSet("domain", tag)] = v14DnsFor(groupName(service.name));
     }
-  // Existing corporate literals and rule-set policies above win. The
-  // reviewed domestic domain inventories now use the same selectable egress.
-  // Name-only STUN protection cannot identify a hidden protocol on an ordinary host.
   let stunDNSSet = "v14-generic-stun-domain-guard", stunDNSIndex = 1;
   while (config["rule-providers"][stunDNSSet]) stunDNSSet = "v14-generic-stun-domain-guard-" + (++stunDNSIndex);
   config["rule-providers"][stunDNSSet] = {type:"inline", behavior:"classical", payload:V14.stunHostPatterns.map(d=>"DOMAIN-WILDCARD,"+d)};
   dnsPolicy["rule-set:" + stunDNSSet] = v14DnsFor(groupName("漏网之鱼"));
-  // Preserve existing local/private-name fallback unless an earlier corporate
-  // policy or explicit system/manual literal already identifies it.
   dnsPolicy["rule-set:" + embeddedDomainSet("private")] = v14DnsFor(groupName("漏网之鱼"));
   dnsPolicy["rule-set:" + embeddedDomainSet("category-doh")] = v14DnsFor(groupName("漏网之鱼"));
   let domesticSeedsSet = "v14-domestic-protocol-seeds", domesticSetIndex = 1;
@@ -2204,13 +2103,11 @@ function v14NetworkModeBase(input) {
     if (V14_REVIEWED_DOMAINS[tag]) dnsPolicy["rule-set:" + embeddedDomainSet(tag)] = v14DnsFor(domesticPolicy);
     dnsPolicy["rule-set:" + ruleSet("domain", tag)] = v14DnsFor(domesticPolicy);
   }
+  dnsPolicy["api.openai.com"] = V14.apiRealDns.map(url => url + "#" + groupName("OpenAI 服务"));
   const oldDns = v14Object(config.dns) ? config.dns : {};
   config.dns = Object.assign({}, oldDns, {
     enable: true, ipv6: true, "fake-ip-range6": oldDns["fake-ip-range6"] || "fdfe:dcba:9876::1/64", "enhanced-mode": "fake-ip", "fake-ip-range": "198.18.0.1/16",
     "fake-ip-filter-mode": "blacklist",
-    // Chromium treats the IPv6 Fake-IP ULA as local network access. Return
-    // real A/AAAA for this public API; nameserver-policy still uses OpenAI's
-    // chosen group, and the existing company rules retain fail-closed routing.
     "fake-ip-filter": V14.privateNames.map(d => "+." + d).concat(["api.openai.com"]), "use-hosts": true,
     "use-system-hosts": true, "respect-rules": false, "prefer-h3": false,
     "default-nameserver": V14.bootstrapDns.slice(), "proxy-server-nameserver": V14.nodeDns.slice(),
@@ -2223,8 +2120,6 @@ function v14NetworkModeBase(input) {
 
   config.ipv6 = true;
   config.profile = Object.assign({}, v14Object(config.profile) ? config.profile : {}, { "store-selected": true, "store-fake-ip": true });
-  // Android FlClash/VpnService owns the actual TUN file descriptor, routes,
-  // DNS hijack and IPv6 OS routes. Preserve the client-managed TUN object; core DNS/IPv6 are enabled above.
   const oldSniffer = v14Object(config.sniffer) ? config.sniffer : {};
   config.sniffer = Object.assign({}, oldSniffer, { enable: true, "force-dns-mapping": true,
     "parse-pure-ip": true, "override-destination": false,
@@ -2235,19 +2130,16 @@ function v14NetworkModeBase(input) {
   });
 
   const ruleSources = managedRules.finish();
-  // Guard against regressions when sharing code with the desktop build.
   for (const key of ["tun", "allow-lan", "bind-address", "mixed-port", "external-controller", "secret", "authentication"]) {
     if (JSON.stringify(config[key]) !== JSON.stringify(input[key]))
       v14Fail("Android 平台字段不应由覆写改动：" + key);
   }
   const ipv6DeviceWarning = "V14.2 已开启核心双栈；请同时在 FlClash Android 开启 IPv6，确保 VpnService 接管 IPv6 路由。";
   const priorMarker = input["x-v14-generated"];
-  // Keep this device reminder on replay; generated core flags cannot certify VpnService.
   if (input.ipv6 === false || (input.dns || {}).ipv6 === false ||
       (v14Object(priorMarker) && priorMarker.version === V14.version &&
        Array.isArray(priorMarker.validationWarnings) && priorMarker.validationWarnings.includes(ipv6DeviceWarning)))
     warnings.push(ipv6DeviceWarning);
-  // Check the relationships that caused V11 to fail at runtime.
   const allGroups = new Map(config["proxy-groups"].map(g => [g.name, g]));
   if (allGroups.size !== config["proxy-groups"].length) v14Fail("代理组名称冲突。");
   const known = new Set([...V14_BUILTINS, ...nodeNames, ...allGroups.keys()]);
@@ -2296,37 +2188,47 @@ function v14NetworkModeBase(input) {
   return v14NetworkDefaults(config);
 }
 
-// Shared destination recovery; never changes the selected egress.
+function v14PrepareNetworkInput(input) {
+  const prepared = v14Copy(input), marker = prepared["x-v14-generated"];
+  if (!v14Object(marker) || marker.version !== V14.version || !v14Object(prepared.sniffer)) return prepared;
+  const owned = marker.networkRecovery;
+  if (v14Object(owned) && owned.revision === "owned-exclusions-r1") {
+    for (const pair of [["skip-domain", "addedDomains"], ["skip-dst-address", "addedDestinations"]]) {
+      const remove = v14Strings(owned[pair[1]], "networkRecovery." + pair[1]);
+      if (prepared.sniffer[pair[0]] != null)
+        prepared.sniffer[pair[0]] = v14Strings(prepared.sniffer[pair[0]], "sniffer." + pair[0]).filter(value => !remove.includes(value));
+    }
+  } else if (["auto", "ipv4-local", "ipv4-only"].includes(marker.networkMode)) {
+    const old = (marker.embeddedDomainClassifiers || []).find(row => row.tag === "private");
+    if (old && /^v14-domains-private(?:-\d+)?$/.test(old.provider) && prepared.sniffer["skip-domain"] != null)
+      prepared.sniffer["skip-domain"] = v14Strings(prepared.sniffer["skip-domain"], "sniffer.skip-domain").filter(value => value !== "rule-set:" + old.provider);
+  }
+  return prepared;
+}
+
 function v14RecoverNetworkDestination(config) {
-  // With a readable HTTP/TLS/QUIC hostname, replace a cached literal destination
-  // with that hostname. DIRECT then resolves an A record; a selected proxy
-  // retains remote DNS/IPv6 ability. This includes HTTP Host: identifying it
-  // for routing alone leaves a stale IPv6 destination unusable on IPv4-only LANs.
-  // Without a hostname a literal IPv6 cannot be converted to an IPv4 target.
   for (const protocol of ["HTTP", "TLS", "QUIC"])
     config.sniffer.sniff[protocol]["override-destination"] = true;
-  // Preserve the destination identity needed by leading explicit IP rules.
-  // A hostname rewrite happens before rule evaluation in Mihomo. Without
-  // this exclusion it could erase a highest-priority manual IP exception.
   const anchor = config.rules.indexOf("DOMAIN,v14-runtime-check.invalid,REJECT");
   if (anchor < 0) v14Fail("Missing compatibility rule anchor");
   const explicitIPs = config.rules.slice(0, anchor).flatMap(rule => {
     const match = /^IP-CIDR6?,([^,]+),DIRECT(?:,no-resolve)?$/.exec(rule);
     return match ? [match[1]] : [];
   });
-  config.sniffer["skip-dst-address"] = [...new Set(v14Strings(config.sniffer["skip-dst-address"], "sniffer.skip-dst-address").concat(explicitIPs))];
-  // Keep LAN names at their original addresses. Do not skip every private
-  // address: known company domains must retain their existing priority.
-  if (!config["rule-providers"]["v14-domains-private"]) v14Fail("Missing inline private domain classifier");
-  config.sniffer["skip-domain"] = [...new Set(v14Strings(config.sniffer["skip-domain"], "sniffer.skip-domain").concat(V14.privateNames.map(name => "+." + name), ["rule-set:v14-domains-private"]))];
+  const destinations = v14Strings(config.sniffer["skip-dst-address"], "sniffer.skip-dst-address");
+  const domains = v14Strings(config.sniffer["skip-domain"], "sniffer.skip-domain");
+  const marker = config["x-v14-generated"];
+  const privateSet = marker.embeddedDomainClassifiers.find(row => row.tag === "private");
+  if (!privateSet || !config["rule-providers"][privateSet.provider]) v14Fail("Missing inline private domain classifier");
+  const extraDomains = V14.privateNames.map(name => "+." + name).concat("rule-set:" + privateSet.provider);
+  config.sniffer["skip-dst-address"] = v14Unique(destinations.concat(explicitIPs));
+  config.sniffer["skip-domain"] = v14Unique(domains.concat(extraDomains));
+  marker.networkRecovery = {revision: "owned-exclusions-r1",
+    addedDomains: extraDomains.filter(value => !domains.includes(value)),
+    addedDestinations: explicitIPs.filter(value => !destinations.includes(value))};
   return config;
 }
 
-// Explicit IPv4-local ingress mode. No system reachability probe is performed.
-// Keep core IPv6 and TUN capture so IPv6 cannot escape when networks change.
-// dns.ipv6 only filters client AAAA; apply the same family restriction to
-// business/direct upstreams used internally by the core. Node bootstrap and
-// LAN/system resolvers remain independent. Keep every existing #policy.
 function v14IPv4LocalResolver(value) {
   if (Array.isArray(value)) return value.map(v14IPv4LocalResolver);
   if (typeof value !== "string" || value === "system" || /^dhcp:\/\//.test(value)) return value;
@@ -2337,21 +2239,13 @@ function v14IPv4LocalResolver(value) {
   return address + "#" + kept.concat(["disable-ipv6=true", "disable-qtype-64=true", "disable-qtype-65=true"]).join("&");
 }
 function v14IPv4LocalMain(input) {
-  const prepared = v14Copy(input);
+  const prepared = v14PrepareNetworkInput(input);
   if (v14Object(prepared.dns)) prepared.dns.ipv6 = true;
-  // This generated inline reference is restored below. Exclude it from the
-  // base adapter's inherited auxiliary dependency migration on later runs.
-  if (v14Object(prepared.sniffer) && prepared.sniffer["skip-domain"] != null)
-    prepared.sniffer["skip-domain"] = v14Strings(prepared.sniffer["skip-domain"], "sniffer.skip-domain").filter(value => value !== "rule-set:v14-domains-private");
   const config = v14NetworkModeBase(prepared);
   config.ipv6 = true;
   delete config["routeweaver-local-family"];
   config.dns.ipv6 = false;
   delete config.dns["fake-ip-range6"];
-  // AAAA is suppressed here, so no IPv6 Fake-IP ULA can reach Chromium and the
-  // api.openai.com real-answer exception stops buying anything. Let the name
-  // fall back to Fake-IP: the proxy resolves it remotely, which needs no local
-  // resolver transport at all. Dual-stack and auto keep the exception.
   if (Array.isArray(config.dns["fake-ip-filter"]))
     config.dns["fake-ip-filter"] = config.dns["fake-ip-filter"].filter(value => value !== "api.openai.com");
   if (v14Object(config.dns["nameserver-policy"])) delete config.dns["nameserver-policy"]["api.openai.com"];
@@ -2359,6 +2253,7 @@ function v14IPv4LocalMain(input) {
     if (config.dns[key] != null) config.dns[key] = v14IPv4LocalResolver(config.dns[key]);
   for (const key of Object.keys(config.dns["nameserver-policy"] || {}))
     config.dns["nameserver-policy"][key] = v14IPv4LocalResolver(config.dns["nameserver-policy"][key]);
+  if (!v14Object(config.tun)) config.tun = {};
   config.tun["inet6-address"] = ["fdfe:dcba:9876::1/126"];
   config.tun["route-address"] = ["0.0.0.0/0", "::/0"];
   v14RecoverNetworkDestination(config);
@@ -2373,41 +2268,117 @@ function v14IPv4LocalMain(input) {
   return config;
 }
 
-// Auto requires a native core implementing auto-local-family-r1. The JS
-// requests the capability, but never claims that generating JSON proves it.
-function v14AutoLocalMain(input, profileName) {
-  const prepared = v14Copy(input);
-  delete prepared["routeweaver-local-family"];
-  if (v14Object(prepared.dns)) prepared.dns.ipv6 = true;
-  if (v14Object(prepared.sniffer) && prepared.sniffer["skip-domain"] != null)
-    prepared.sniffer["skip-domain"] = v14Strings(prepared.sniffer["skip-domain"], "sniffer.skip-domain").filter(value => value !== "rule-set:v14-domains-private");
-  const config = v14NetworkModeBase(prepared, profileName);
-  config.ipv6 = true;
-  config.dns.ipv6 = true;
-  config["routeweaver-local-family"] = "auto";
-  v14RecoverNetworkDestination(config);
-  const marker = config["x-v14-generated"];
-  marker.networkMode = "auto";
-  marker.automaticNetworkRevision = "auto-local-family-r1";
-  marker.automaticNetworkCapability = "REQUIRES_MATCHING_NATIVE_CORE_RUNTIME_NOT_CONFIRMED_BY_JS";
-  marker.localIPv6Fallback = "native-egress-observation-and-bounded-passive-evidence; no global IPv6 disable; original-egress-policy-preserved";
-  marker.validationWarnings = marker.validationWarnings.concat([
-    "auto 需要实现 auto-local-family-r1 的核心；覆写无法确认运行核心支持。普通核心只保留双栈/节点 IPv4 偏好/域名恢复，不能视为自动物理出口判断。",
-    "匹配核心在实际出站网卡缺少 IPv6 源地址时抑制应用候选；网络变化更新状态，未知状态保留双栈。节点引导 DNS、代理远端 IPv6、显式地址族、局域网和 hosts 不改。",
-    "无可靠域名的 IPv6 字面量不能透明变成 IPv4；快速失败不保证应用重试。移动端受保护 socket 的出口需要宿主提供能力，不能用 TUN 地址推断。"
-  ]);
-  return config;
+
+function rw4BaseMain(input, profileName) { return v14IPv4LocalMain(input, profileName); }
+
+const RW4_ACCEPT_SERIALIZED = false;
+const ROUTEWEAVER_IPV4_ONLY_REVISION = "ipv4-only-r1";
+const RW4_FORCE_FAMILY = '.["ip-version"] = "ipv4"';
+
+function rw4Resolver(value) {
+  if (Array.isArray(value)) return value.map(rw4Resolver);
+  if (typeof value !== "string" || value === "system" || /^dhcp:\/\//.test(value)) return value;
+  const at = value.indexOf("#"), address = at < 0 ? value : value.slice(0, at);
+  const params = at < 0 ? [] : value.slice(at + 1).split("&");
+  const kept = params.filter(p => p && !/^(disable-ipv4|disable-ipv6|disable-qtype-(1|28|64|65))(=|$)/.test(p));
+  return address + "#" + kept.concat(["disable-ipv6=true", "disable-qtype-64=true", "disable-qtype-65=true"]).join("&");
+}
+
+function rw4IPv6(value) { return typeof value === "string" && value.includes(":"); }
+
+function rw4ValidLanDNS(value) {
+  if (typeof value !== "string") return false;
+  const match = /^(?:udp:\/\/|tcp:\/\/)?((?:\d{1,3}\.){3}\d{1,3})(?::(\d{1,5}))?$/.exec(value);
+  if (!match || match[1].split(".").some(octet => !/^(?:0|[1-9]\d{0,2})$/.test(octet) || Number(octet) > 255)) return false;
+  return match[2] === undefined || (Number(match[2]) >= 1 && Number(match[2]) <= 65535);
 }
 
 function main(input, profileName) {
+  if (RW4_ACCEPT_SERIALIZED && typeof input === "string") {
+    try { input = JSON.parse(input); } catch (_) { v14Fail("Clash Mi JSON 输入无效。"); }
+  }
   if (!v14Object(input)) v14Fail("覆写输入必须是配置对象。");
-  const options = v14Object(input["x-routeweaver"]) ? input["x-routeweaver"] : {};
-  const prior = v14Object(input["x-v14-generated"]) ? input["x-v14-generated"] : {};
-  const mode = options["network-mode"] ||
-    (prior.version === V14.version && ["auto", "dual-stack", "ipv4-local"].includes(prior.networkMode) ? prior.networkMode : ROUTEWEAVER_DEFAULT_NETWORK_MODE);
-  if (!["auto", "dual-stack", "ipv4-local"].includes(mode)) v14Fail("network-mode 仅支持 auto、dual-stack 或 ipv4-local。");
-  if (mode === "auto") return v14AutoLocalMain(input, profileName);
-  const config = mode === "ipv4-local" ? v14IPv4LocalMain(input, profileName) : v14NetworkModeBase(input, profileName);
+  const prepared = v14Copy(input);
+  const previous = v14Object(prepared["x-v14-generated"]) ? prepared["x-v14-generated"] : {};
+  if (v14Object(previous.ipv4OnlyBlockedHosts) && Object.keys(previous.ipv4OnlyBlockedHosts).length) {
+    prepared.hosts = v14Object(prepared.hosts) ? prepared.hosts : {};
+    for (const [name, value] of Object.entries(previous.ipv4OnlyBlockedHosts))
+      if (!Object.prototype.hasOwnProperty.call(prepared.hosts, name)) prepared.hosts[name] = v14Copy(value);
+  }
+  prepared["x-routeweaver"] = Object.assign({}, v14Object(prepared["x-routeweaver"]) ? prepared["x-routeweaver"] : {}, {"network-mode":"ipv4-local"});
+  for (const provider of Object.values(prepared["proxy-providers"] || {})) {
+    if (v14Object(provider) && v14Object(provider.override) && Array.isArray(provider.override["override-expr"]))
+      provider.override["override-expr"] = provider.override["override-expr"].filter(expr => expr !== RW4_FORCE_FAMILY);
+  }
+  const config = rw4BaseMain(prepared, profileName);
+  config.ipv6 = false;
   delete config["routeweaver-local-family"];
+  config.dns.ipv6 = false;
+  delete config.dns["fake-ip-range6"];
+  config.dns["use-system-hosts"] = false;
+  for (const node of config.proxies || []) node["ip-version"] = "ipv4";
+  for (const provider of Object.values(config["proxy-providers"] || {})) {
+    for (const node of provider.payload || []) node["ip-version"] = "ipv4";
+    provider.override["ip-version"] = "ipv4";
+    const exprs = (provider.override["override-expr"] || []).filter(expr => expr !== RW4_FORCE_FAMILY);
+    provider.override["override-expr"] = exprs.concat(RW4_FORCE_FAMILY);
+  }
+  for (const key of ["nameserver", "fallback", "direct-nameserver", "default-nameserver", "proxy-server-nameserver"])
+    if (config.dns[key] != null) config.dns[key] = rw4Resolver(config.dns[key]);
+  for (const key of Object.keys(config.dns["nameserver-policy"] || {}))
+    config.dns["nameserver-policy"][key] = rw4Resolver(config.dns["nameserver-policy"][key]);
+
+  const hostRejects = [], blockedHosts = new Set(), blockedMappings = {};
+  const hostSource = v14Copy(config.hosts || {});
+  for (const [name, value] of Object.entries(config.hosts || {})) {
+    const values = Array.isArray(value) ? value : [value];
+    if (!values.some(rw4IPv6)) continue;
+    const kept = values.filter(value => !rw4IPv6(value));
+    if (kept.length) config.hosts[name] = Array.isArray(value) ? kept : kept[0];
+    else {
+      blockedHosts.add(name);
+    }
+  }
+  let changed = true;
+  while (changed) {
+    changed = false;
+    for (const [name, value] of Object.entries(hostSource))
+      if (!blockedHosts.has(name) && typeof value === "string" && blockedHosts.has(value)) { blockedHosts.add(name); changed = true; }
+  }
+  for (const name of blockedHosts) {
+    blockedMappings[name] = hostSource[name];
+    delete config.hosts[name];
+    const kind = name.startsWith("+.") ? "DOMAIN-SUFFIX" : name.includes("*") ? "DOMAIN-WILDCARD" : "DOMAIN";
+    hostRejects.push(kind + "," + (kind === "DOMAIN-SUFFIX" ? name.slice(2) : name) + ",REJECT");
+  }
+  const guard = "IP-CIDR6,::/0,REJECT,no-resolve";
+  const original = config.rules.filter(rule => rule !== guard && !hostRejects.includes(rule));
+  const first = original[0] && /^IP-CIDR,[^,]+,DIRECT,no-resolve$/.test(original[0]) ? [original.shift()] : [];
+  config.rules = first.concat(guard, hostRejects, original);
+  delete config.tun["inet6-address"];
+  delete config.tun["inet6-route-address"];
+  config.tun["route-address"] = ["0.0.0.0/0", "::/0"];
+
+  const marker = config["x-v14-generated"];
+  marker.networkMode = "ipv4-only";
+  marker.ipv4OnlyRevision = ROUTEWEAVER_IPV4_ONLY_REVISION;
+  marker.ipv4OnlyBlockedHosts = blockedMappings;
+  marker.nodeAddressFamilyDefault = "ipv4-forced-including-explicit-and-refreshed-provider-nodes";
+  marker.localIPv6Fallback = "disabled; IPv6-only endpoints fail; no node switching or DIRECT fallback";
+  marker.notes = "IPv4-only local egress; proxy onward family remains server-controlled; existing routing and DNS group affinity retained";
+  delete marker.automaticNetworkRevision;
+  delete marker.automaticNetworkCapability;
+  marker.validationWarnings = marker.validationWarnings.filter(text => !/IPv4-local|auto-local-family|自动物理|代理目标仍需节点 IPv6|V14.2 已开启核心双栈/.test(text)).concat([
+    "独立纯 IPv4 版：本机直连与到节点连接限定 IPv4；不控制代理服务器后续出口。IPv6-only 节点/目标会失败。",
+    "App 后置合并必须保留 ipv6=false、dns.ipv6=false 和节点 IPv4；TUN/VPN 外的 IPv6 由 App/操作系统阻止，系统代理不能接管所有流量。",
+    "局域网 system/DHCP DNS 保留原语义；严格纯 IPv4 使用时，系统 DNS 服务器与物理网卡也须禁用 IPv6，或通过 x-routeweaver.ipv4-lan-dns 显式提供 IPv4 DNS。"
+  ]);
+  const lanDNS = prepared["x-routeweaver"]["ipv4-lan-dns"];
+  if (lanDNS != null) {
+    if (!Array.isArray(lanDNS) || !lanDNS.length || lanDNS.some(s => !rw4ValidLanDNS(s)))
+      v14Fail("ipv4-lan-dns 必须是非空的 IPv4 DNS 地址数组。");
+    for (const [key, values] of Object.entries(config.dns["nameserver-policy"]))
+      if (Array.isArray(values) && values.includes("system")) config.dns["nameserver-policy"][key] = rw4Resolver(lanDNS);
+  }
   return config;
 }

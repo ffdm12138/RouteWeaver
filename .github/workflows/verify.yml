@@ -55,11 +55,10 @@ jobs:
       - name: Ensure tracked inputs were not rewritten
         run: git diff --exit-code
 
-  # Strict receipt binding, packaging and archive audit. Every claim here is
-  # bound to source hashes produced by a native replay core. When a revision
-  # changes the generated entries without a rebind session, this job fails by
-  # design -- that is the signal to re-run the replays, not to relax the check.
-  # It therefore runs on release publication and on demand, not on every push.
+  # Release-only gate: the current candidate inventory is bound to exact
+  # import bytes and limited native replay evidence. Old release receipts
+  # remain historical and are never silently re-signed for new source bytes.
+  # Current-candidate and device acceptance remain separate statuses.
   bound-release:
     if: github.event_name == 'release' || github.event_name == 'workflow_dispatch'
     strategy:
@@ -77,14 +76,14 @@ jobs:
       - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
         with:
           python-version: '3.12.10'
-      - name: Verify source and bound receipts
-        run: python tools/verify-v14.3.py --skip-history
-      - name: Build licensed packages and replay extracted static tests
-        run: python tools/package-v14.3.py --skip-history
-      - name: Verify packages and scan all members
+      - name: Verify current candidate exact source and bounded evidence
+        run: python tools/verify-current-audit.py
+      - name: Package, hash and reproduce tests from fresh extraction
+        run: python tools/package-architecture-audit.py
+      - name: Audit publication and packed candidate
         run: |
-          python tools/verify-v14.3.py --skip-history --with-packages
-          python tools/audit-publication.py --strict --archive dist/v14.3/v14.3-deployable.zip --archive dist/v14.3/v14.3-audit-evidence.zip --archive dist/v14.3/v14.3-macos.zip
+          python tools/audit-publication.py --strict --archive dist/architecture-audit/RouteWeaver-architecture-audit-r1-public.zip
+          python tools/verify-current-audit.py
       - name: Ensure tracked inputs were not rewritten
         run: git diff --exit-code
 

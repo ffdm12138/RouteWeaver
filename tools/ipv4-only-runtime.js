@@ -14,6 +14,13 @@ function rw4Resolver(value) {
 
 function rw4IPv6(value) { return typeof value === "string" && value.includes(":"); }
 
+function rw4ValidLanDNS(value) {
+  if (typeof value !== "string") return false;
+  const match = /^(?:udp:\/\/|tcp:\/\/)?((?:\d{1,3}\.){3}\d{1,3})(?::(\d{1,5}))?$/.exec(value);
+  if (!match || match[1].split(".").some(octet => !/^(?:0|[1-9]\d{0,2})$/.test(octet) || Number(octet) > 255)) return false;
+  return match[2] === undefined || (Number(match[2]) >= 1 && Number(match[2]) <= 65535);
+}
+
 function main(input, profileName) {
   if (RW4_ACCEPT_SERIALIZED && typeof input === "string") {
     try { input = JSON.parse(input); } catch (_) { v14Fail("Clash Mi JSON 输入无效。"); }
@@ -109,7 +116,7 @@ function main(input, profileName) {
   ]);
   const lanDNS = prepared["x-routeweaver"]["ipv4-lan-dns"];
   if (lanDNS != null) {
-    if (!Array.isArray(lanDNS) || !lanDNS.length || lanDNS.some(s => typeof s !== "string" || !/^(?:udp:\/\/|tcp:\/\/)?(?:\d{1,3}\.){3}\d{1,3}(?::\d+)?$/.test(s)))
+    if (!Array.isArray(lanDNS) || !lanDNS.length || lanDNS.some(s => !rw4ValidLanDNS(s)))
       v14Fail("ipv4-lan-dns 必须是非空的 IPv4 DNS 地址数组。");
     for (const [key, values] of Object.entries(config.dns["nameserver-policy"]))
       if (Array.isArray(values) && values.includes("system")) config.dns["nameserver-policy"][key] = rw4Resolver(lanDNS);

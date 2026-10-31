@@ -2,8 +2,7 @@
 
 const V14 = Object.freeze({
   version: "14.3",
-  ruleInterval: 86400, // seconds; native core timer, not a JS timer
-  ruleSizeLimit: 16777216, // 16 MiB per managed source; native download limit
+  ruleInterval: 86400,
   testUrl: "https://www.gstatic.com/generate_204",
   testInterval: 600,
   providerInterval: 3600,
@@ -30,31 +29,6 @@ const V14_NOT_NODES = new Set(["direct", "reject", "reject-drop", "reject-no-dro
 const V14_PRIVATE_IPS = [
   "127.0.0.0/8", "10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16", "169.254.0.0/16", "100.64.0.0/10",
   "::1/128", "fc00::/7", "fe80::/10",
-];
-const V14_DOMESTIC_SETS = ["douyin", "apple@cn", "google@cn", "microsoft@cn", "steam@cn"];
-const V14_DOMESTIC_SEEDS = [
-  "douyin.com",
-  "douyincdn.com",
-  "jianying.com",
-  "jimeng.com",
-  "toutiao.com",
-  "ixigua.com",
-  "feishu.cn",
-  "volcengine.com",
-  "bilibili.com",
-  "bilivideo.com",
-  "hdslb.com",
-  "dl.steam.clngaa.com",
-  "st.dl.bscstorage.net",
-  "st.dl.eccdnx.com",
-  "st.dl.pinyuncloud.com",
-  "prts.plus",
-  "cnbeta.com",
-  "cnbetacdn.com",
-  "easou.com",
-  "mob.com",
-  "baidustatic.com",
-  "didi-labs.com"
 ];
 const V14_EXTERNAL_DNS_RULES = [
   "DOMAIN,dns.adguard.com",
@@ -185,11 +159,31 @@ const V14_EXTERNAL_DNS_RULES = [
   "DOMAIN-SUFFIX,cloudflare-dns.com",
   "DOMAIN-SUFFIX,nextdns.io"
 ];
-
-const V14_GOOGLE_PLAY_DELIVERY_SEEDS = [
-  "googleapis.cn", "xn--ngstr-lra8j.com", "gvt1.com", "gvt2.com", "gvt3.com",
+const V14_DOMESTIC_SETS = ["douyin", "apple@cn", "google@cn", "microsoft@cn", "steam@cn"];
+const V14_DOMESTIC_SEEDS = [
+  "douyin.com",
+  "douyincdn.com",
+  "jianying.com",
+  "jimeng.com",
+  "toutiao.com",
+  "ixigua.com",
+  "feishu.cn",
+  "volcengine.com",
+  "bilibili.com",
+  "bilivideo.com",
+  "hdslb.com",
+  "dl.steam.clngaa.com",
+  "st.dl.bscstorage.net",
+  "st.dl.eccdnx.com",
+  "st.dl.pinyuncloud.com",
+  "prts.plus",
+  "cnbeta.com",
+  "cnbetacdn.com",
+  "easou.com",
+  "mob.com",
+  "baidustatic.com",
+  "didi-labs.com"
 ];
-
 
 const V14_OPENAI_VOICE_HOSTS = ["chatgpt.livekit.cloud", "host.livekit.cloud", "turn.livekit.cloud"];
 const V14_UNIDENTIFIED_VOICE_SUFFIXES = ["chatgpt.livekit.cloud", "host.livekit.cloud", "turn.livekit.cloud"];
@@ -1348,6 +1342,7 @@ const V14_GROUP_ORDER = V14_PINNED_GROUPS.concat(
   V14_SERVICES.map(s => s.name).filter(name => !V14_PINNED_GROUPS.includes(name)));
 
 const V14_TELEGRAM_CIDRS = ["91.108.56.0/22", "91.108.4.0/22", "91.108.8.0/22", "91.108.16.0/22", "91.108.12.0/22", "149.154.160.0/20", "91.105.192.0/23", "91.108.20.0/22", "185.76.151.0/24", "2001:b28:f23d::/48", "2001:b28:f23f::/48", "2001:67c:4e8::/48", "2001:b28:f23c::/48", "2a0a:f280::/32"];
+const V14_GOOGLE_PLAY_DELIVERY_SEEDS = ["googleapis.cn", "xn--ngstr-lra8j.com", "gvt1.com", "gvt2.com", "gvt3.com"];
 
 function v14Fail(message) { throw new Error("V14: " + message); }
 function v14Object(x) { return x !== null && typeof x === "object" && !Array.isArray(x); }
@@ -1739,7 +1734,7 @@ function v14RuleRegistry(config, downloadProxy) {
     if (!generated.has(name)) {
       const path = "./ruleset/v12-managed/" + s.kind + "-" + s.tag.replace(/@/g, "_at_") + "-" + v14Hash(s.url) + "." + s.format;
       sets[name] = { type: "http", behavior: s.behavior, format: s.format, url: s.url,
-        path, interval: V14.ruleInterval, proxy: downloadProxy, "size-limit": V14.ruleSizeLimit };
+        path, interval: V14.ruleInterval, proxy: downloadProxy };
       generated.set(name, {...s, name, path, proxy: downloadProxy});
     }
     return name;
@@ -1871,7 +1866,6 @@ function v14NetworkModeBase(input) {
     for (const name of (mark.proxies || [])) generatedProxies.add(name);
     for (const name of (mark.subRules || [])) generatedSubRules.add(name);
   }
-  if (config["sub-rules"] != null && !v14Object(config["sub-rules"])) v14Fail("sub-rules 必须是对象。");
   if (v14Object(config["sub-rules"])) {
     const kept = {};
     for (const [name, rules] of Object.entries(config["sub-rules"])) if (!generatedSubRules.has(name)) kept[name] = rules;
@@ -1887,7 +1881,7 @@ function v14NetworkModeBase(input) {
   const infoRe = new RegExp(V14.infoPattern, "i");
   for (const original of rawProxies) {
     if (!v14Object(original) || typeof original.name !== "string" || !original.type) v14Fail("存在无效节点。");
-    if (generatedProxies.has(original.name) || original.type === "rematch") continue;
+    if (generatedProxies.has(original.name) || (original.type === "rematch" && /^v(?:10[1-6]|11)-strict-/.test(original["target-sub-rule"] || ""))) continue;
     if (nodeNames.has(original.name) || V14_BUILTINS.has(original.name)) v14Fail("节点名称重复或保留：" + original.name);
     const node = v14Copy(original);
     if (upgradingFromV13 && v14Transport(node) && node["ip-version"] === "ipv4")
@@ -1917,8 +1911,19 @@ function v14NetworkModeBase(input) {
     if (g["empty-fallback"]) retain(g["empty-fallback"], g.name + ".empty-fallback");
     if (!g["include-all"] && !g["include-all-providers"]) for (const source of v14Strings(g.use, g.name + ".use")) if (!providers[source]) v14Fail(g.name + " 引用未知 provider：" + source);
   }
+  const tunBypassKeys = ["route-address-set", "route-exclude-address", "route-exclude-address-set", "inet4-route-address", "inet6-route-address", "inet4-route-exclude-address", "inet6-route-exclude-address"];
+  const suppliedTun = v14Object(config.tun) ? config.tun : {};
+  const priorMarker = input["x-v14-generated"];
+  const priorTunWarnings = v14Object(priorMarker) && priorMarker.version === V14.version &&
+    priorMarker.platform === "desktop" && Array.isArray(priorMarker.validationWarnings)
+    ? priorMarker.validationWarnings : [];
+  for (const key of tunBypassKeys) {
+    const warning = "V14.2 已移除 TUN 路由旁路字段 " + key + "；直连在业务规则之后由核心判断。";
+    if ((suppliedTun[key] && suppliedTun[key].length) || priorTunWarnings.includes(warning)) warnings.push(warning);
+    delete suppliedTun[key];
+  }
   v14InboundGuard(config);
-  const legacyRuleProviders = v14KeepLegacy(config, retain, false); // explicit Geo references are migrated/checked below
+  const legacyRuleProviders = v14KeepLegacy(config, retain, false);
   for (const node of allNodes) retain(node["dialer-proxy"], "节点 " + node.name);
   for (const [name, provider] of Object.entries(providers)) {
     if (!v14Object(provider)) v14Fail("provider 无效：" + name);
@@ -2030,6 +2035,7 @@ function v14NetworkModeBase(input) {
   for (const d of V14.manualProxy) add("DOMAIN-SUFFIX," + d, groupName("高纯净度AI用"));
   add("DST-PORT,853", "REJECT");
   for (const match of V14_EXTERNAL_DNS_RULES) add(match, "REJECT");
+  addDomainSet("category-doh", "REJECT");
   for (const d of V14_GOOGLE_PLAY_DELIVERY_SEEDS) add("DOMAIN-SUFFIX," + d, groupName("谷歌服务"));
   for (const host of V14_OPENAI_VOICE_HOSTS) add("DOMAIN," + host, groupName("OpenAI 服务"));
   for (const service of V14_SERVICES) for (const d of service.exact || []) add("DOMAIN," + d, groupName(service.name));
@@ -2103,10 +2109,11 @@ function v14NetworkModeBase(input) {
     if (V14_REVIEWED_DOMAINS[tag]) dnsPolicy["rule-set:" + embeddedDomainSet(tag)] = v14DnsFor(domesticPolicy);
     dnsPolicy["rule-set:" + ruleSet("domain", tag)] = v14DnsFor(domesticPolicy);
   }
+  dnsPolicy["api.openai.com"] = V14.apiRealDns.map(url => url + "#" + groupName("OpenAI 服务"));
   const oldDns = v14Object(config.dns) ? config.dns : {};
   config.dns = Object.assign({}, oldDns, {
-    enable: true, ipv6: true, "fake-ip-range6": oldDns["fake-ip-range6"] || "fdfe:dcba:9876::1/64", "enhanced-mode": "fake-ip", "fake-ip-range": "198.18.0.1/16",
-    "fake-ip-filter-mode": "blacklist",
+    enable: true, ipv6: true, "enhanced-mode": "fake-ip", "fake-ip-range": "198.18.0.1/16",
+    "fake-ip-range6": "fdfe:dcba:9876::1/64", "fake-ip-filter-mode": "blacklist",
     "fake-ip-filter": V14.privateNames.map(d => "+." + d).concat(["api.openai.com"]), "use-hosts": true,
     "use-system-hosts": true, "respect-rules": false, "prefer-h3": false,
     "default-nameserver": V14.bootstrapDns.slice(), "proxy-server-nameserver": V14.nodeDns.slice(),
@@ -2119,6 +2126,15 @@ function v14NetworkModeBase(input) {
 
   config.ipv6 = true;
   config.profile = Object.assign({}, v14Object(config.profile) ? config.profile : {}, { "store-selected": true, "store-fake-ip": true });
+  const oldTun = v14Object(config.tun) ? config.tun : {};
+  const hijack = Array.isArray(oldTun["dns-hijack"]) ? oldTun["dns-hijack"] : [];
+  config.tun = Object.assign({}, oldTun, { // FlClash owns enable / auto-route
+    "dns-hijack": v14Unique(hijack.concat(["any:53", "tcp://any:53"])) });
+  config.tun["strict-route"] = true; // V14.2 privacy contract
+  config.tun["route-address"] = ["0.0.0.0/0", "::/0"];
+  if (config["x-v11-generated"]) {
+    if (JSON.stringify(config.tun["inet6-address"]) === JSON.stringify(["2001:2::1/126"])) delete config.tun["inet6-address"];
+  }
   const oldSniffer = v14Object(config.sniffer) ? config.sniffer : {};
   config.sniffer = Object.assign({}, oldSniffer, { enable: true, "force-dns-mapping": true,
     "parse-pure-ip": true, "override-destination": false,
@@ -2129,16 +2145,7 @@ function v14NetworkModeBase(input) {
   });
 
   const ruleSources = managedRules.finish();
-  for (const key of ["tun", "allow-lan", "bind-address", "mixed-port", "external-controller", "secret", "authentication"]) {
-    if (JSON.stringify(config[key]) !== JSON.stringify(input[key]))
-      v14Fail("Android 平台字段不应由覆写改动：" + key);
-  }
-  const ipv6DeviceWarning = "V14.2 已开启核心双栈；请同时在 FlClash Android 开启 IPv6，确保 VpnService 接管 IPv6 路由。";
-  const priorMarker = input["x-v14-generated"];
-  if (input.ipv6 === false || (input.dns || {}).ipv6 === false ||
-      (v14Object(priorMarker) && priorMarker.version === V14.version &&
-       Array.isArray(priorMarker.validationWarnings) && priorMarker.validationWarnings.includes(ipv6DeviceWarning)))
-    warnings.push(ipv6DeviceWarning);
+
   const allGroups = new Map(config["proxy-groups"].map(g => [g.name, g]));
   if (allGroups.size !== config["proxy-groups"].length) v14Fail("代理组名称冲突。");
   const known = new Set([...V14_BUILTINS, ...nodeNames, ...allGroups.keys()]);
@@ -2166,25 +2173,41 @@ function v14NetworkModeBase(input) {
   if (rules[rules.length - 2] !== "MATCH," + groupName("漏网之鱼") || rules[rules.length - 1] !== "MATCH,REJECT") v14Fail("末尾 UDP 防回落缺失。");
   v14GraphCheck(config, warnings);
   for (const key of previous) delete config[key];
-  config["x-v14-generated"] = { version: V14.version, revision: "domestic-selector-r1-20261010", routingRevision: "domestic-selector-r1-20261010", compatibilityRevision: "api-real-ip-r1-20261010", groups: groups.map(g => g.name), proxies: [],
-    platform: "android",
-    ruleDataMode: "critical-inline-pinned-full-remote-no-local-geo",
+  config["x-v14-generated"] = { version: V14.version, revision: "domestic-selector-r1-20261010", routingRevision: "domestic-selector-r1-20261010", compatibilityRevision: "api-real-ip-r1-20261010", platform: "desktop", groups: groups.map(g => g.name), proxies: [],
+    ruleDataMode: "reviewed-inline-domains-with-pinned-remote-supplements-no-local-geo",
     ruleProviders: ruleSources.map(s => s.name), ruleSources,
     auditRepairRevision: "balanced-r1", domesticProtocolRevision: "domestic-protocol-r1",
     embeddedDomainClassifiers: Array.from(embeddedNames, ([tag, provider]) => ({tag, provider, records: V14_REVIEWED_DOMAINS[tag].payloadText.split("\n").length})),
     immutableCompanyCore: Array.from(coreNames, ([group, provider]) => ({group, provider, records: V14_COMPANY_CORE[group].length})),
-    ruleDownloadProxy: groupName("高纯净度AI用"), ruleInterval: V14.ruleInterval,
-    ruleReadiness: "not-observable-in-JS-check-core-providers",
+    ruleDownloadProxy: groupName("高纯净度AI用"),
     dnsMode: "company-core-group-affine-dot-no-reuse-safe-default", udpMode: "company-first-unknown-public-udp-proxy-or-reject",
     notes: "Dual-stack proxy dialing enabled; remote exit IP family remains node-controlled; domain-to-group DNS affinity; live connections and caches survive selection changes",
     acceptedBoundaries: ["remote-node-to-destination-ip-family", "TUN and browser WebRTC enforcement outside JS", "per-flow DNS affinity"],
     openIssues: ["device/browser DNS caches and application connection migration", "Windows/Android device TUN and IPv6 leak acceptance"],
     validationWarnings: v14Unique(warnings),
-    releaseStatus: "offline-regression-tested-device-acceptance-pending" };
-  if (typeof console !== "undefined" && console.log) console.log("[V14 Android] " + selectable.length + " 个可用节点、" + providerNames.length + " 个 provider、" + business.length + " 个可选业务组；公司规则优先；未分类公网 UDP 不直连，国内 TCP 由国内网站组选择，默认 DIRECT。");
-  if (typeof console !== "undefined" && console.log) console.log("[V14 Android] " + ruleSources.length + " 个远程分类按 24h 更新；首次无缓存须可用节点。检查规则已加载，不要把生成成功当成下载成功。");
+    releaseStatus: "candidate-not-full-acceptance" };
+  if (typeof console !== "undefined" && console.log) console.log("[V14] " + selectable.length + " 个可用节点、" + providerNames.length + " 个 provider、" + business.length + " 个可选业务组；公司规则优先；未分类公网 UDP 不直连，国内 TCP 由国内网站组选择，默认 DIRECT。");
+  if (typeof console !== "undefined" && console.log) console.log("[V14] " + ruleSources.length + " 个独立规则集；无本地 Geo 数据依赖。首次运行检查所有规则集已加载且 ruleCount>0，下载经 " + groupName("高纯净度AI用") + "，不静默改走 DIRECT。");
   if (typeof console !== "undefined" && console.log) for (const w of v14Unique(warnings)) console.log("[V14 检查范围] " + w);
   return v14NetworkDefaults(config);
+}
+
+function v14PrepareNetworkInput(input) {
+  const prepared = v14Copy(input), marker = prepared["x-v14-generated"];
+  if (!v14Object(marker) || marker.version !== V14.version || !v14Object(prepared.sniffer)) return prepared;
+  const owned = marker.networkRecovery;
+  if (v14Object(owned) && owned.revision === "owned-exclusions-r1") {
+    for (const pair of [["skip-domain", "addedDomains"], ["skip-dst-address", "addedDestinations"]]) {
+      const remove = v14Strings(owned[pair[1]], "networkRecovery." + pair[1]);
+      if (prepared.sniffer[pair[0]] != null)
+        prepared.sniffer[pair[0]] = v14Strings(prepared.sniffer[pair[0]], "sniffer." + pair[0]).filter(value => !remove.includes(value));
+    }
+  } else if (["auto", "ipv4-local", "ipv4-only"].includes(marker.networkMode)) {
+    const old = (marker.embeddedDomainClassifiers || []).find(row => row.tag === "private");
+    if (old && /^v14-domains-private(?:-\d+)?$/.test(old.provider) && prepared.sniffer["skip-domain"] != null)
+      prepared.sniffer["skip-domain"] = v14Strings(prepared.sniffer["skip-domain"], "sniffer.skip-domain").filter(value => value !== "rule-set:" + old.provider);
+  }
+  return prepared;
 }
 
 function v14RecoverNetworkDestination(config) {
@@ -2196,9 +2219,17 @@ function v14RecoverNetworkDestination(config) {
     const match = /^IP-CIDR6?,([^,]+),DIRECT(?:,no-resolve)?$/.exec(rule);
     return match ? [match[1]] : [];
   });
-  config.sniffer["skip-dst-address"] = [...new Set(v14Strings(config.sniffer["skip-dst-address"], "sniffer.skip-dst-address").concat(explicitIPs))];
-  if (!config["rule-providers"]["v14-domains-private"]) v14Fail("Missing inline private domain classifier");
-  config.sniffer["skip-domain"] = [...new Set(v14Strings(config.sniffer["skip-domain"], "sniffer.skip-domain").concat(V14.privateNames.map(name => "+." + name), ["rule-set:v14-domains-private"]))];
+  const destinations = v14Strings(config.sniffer["skip-dst-address"], "sniffer.skip-dst-address");
+  const domains = v14Strings(config.sniffer["skip-domain"], "sniffer.skip-domain");
+  const marker = config["x-v14-generated"];
+  const privateSet = marker.embeddedDomainClassifiers.find(row => row.tag === "private");
+  if (!privateSet || !config["rule-providers"][privateSet.provider]) v14Fail("Missing inline private domain classifier");
+  const extraDomains = V14.privateNames.map(name => "+." + name).concat("rule-set:" + privateSet.provider);
+  config.sniffer["skip-dst-address"] = v14Unique(destinations.concat(explicitIPs));
+  config.sniffer["skip-domain"] = v14Unique(domains.concat(extraDomains));
+  marker.networkRecovery = {revision: "owned-exclusions-r1",
+    addedDomains: extraDomains.filter(value => !domains.includes(value)),
+    addedDestinations: explicitIPs.filter(value => !destinations.includes(value))};
   return config;
 }
 
@@ -2212,10 +2243,8 @@ function v14IPv4LocalResolver(value) {
   return address + "#" + kept.concat(["disable-ipv6=true", "disable-qtype-64=true", "disable-qtype-65=true"]).join("&");
 }
 function v14IPv4LocalMain(input) {
-  const prepared = v14Copy(input);
+  const prepared = v14PrepareNetworkInput(input);
   if (v14Object(prepared.dns)) prepared.dns.ipv6 = true;
-  if (v14Object(prepared.sniffer) && prepared.sniffer["skip-domain"] != null)
-    prepared.sniffer["skip-domain"] = v14Strings(prepared.sniffer["skip-domain"], "sniffer.skip-domain").filter(value => value !== "rule-set:v14-domains-private");
   const config = v14NetworkModeBase(prepared);
   config.ipv6 = true;
   delete config["routeweaver-local-family"];
@@ -2228,6 +2257,7 @@ function v14IPv4LocalMain(input) {
     if (config.dns[key] != null) config.dns[key] = v14IPv4LocalResolver(config.dns[key]);
   for (const key of Object.keys(config.dns["nameserver-policy"] || {}))
     config.dns["nameserver-policy"][key] = v14IPv4LocalResolver(config.dns["nameserver-policy"][key]);
+  if (!v14Object(config.tun)) config.tun = {};
   config.tun["inet6-address"] = ["fdfe:dcba:9876::1/126"];
   config.tun["route-address"] = ["0.0.0.0/0", "::/0"];
   v14RecoverNetworkDestination(config);
@@ -2259,6 +2289,13 @@ function rw4Resolver(value) {
 }
 
 function rw4IPv6(value) { return typeof value === "string" && value.includes(":"); }
+
+function rw4ValidLanDNS(value) {
+  if (typeof value !== "string") return false;
+  const match = /^(?:udp:\/\/|tcp:\/\/)?((?:\d{1,3}\.){3}\d{1,3})(?::(\d{1,5}))?$/.exec(value);
+  if (!match || match[1].split(".").some(octet => !/^(?:0|[1-9]\d{0,2})$/.test(octet) || Number(octet) > 255)) return false;
+  return match[2] === undefined || (Number(match[2]) >= 1 && Number(match[2]) <= 65535);
+}
 
 function main(input, profileName) {
   if (RW4_ACCEPT_SERIALIZED && typeof input === "string") {
@@ -2342,7 +2379,7 @@ function main(input, profileName) {
   ]);
   const lanDNS = prepared["x-routeweaver"]["ipv4-lan-dns"];
   if (lanDNS != null) {
-    if (!Array.isArray(lanDNS) || !lanDNS.length || lanDNS.some(s => typeof s !== "string" || !/^(?:udp:\/\/|tcp:\/\/)?(?:\d{1,3}\.){3}\d{1,3}(?::\d+)?$/.test(s)))
+    if (!Array.isArray(lanDNS) || !lanDNS.length || lanDNS.some(s => !rw4ValidLanDNS(s)))
       v14Fail("ipv4-lan-dns 必须是非空的 IPv4 DNS 地址数组。");
     for (const [key, values] of Object.entries(config.dns["nameserver-policy"]))
       if (Array.isArray(values) && values.includes("system")) config.dns["nameserver-policy"][key] = rw4Resolver(lanDNS);

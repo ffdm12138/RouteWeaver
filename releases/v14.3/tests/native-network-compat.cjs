@@ -24,7 +24,7 @@ async function main(){
  apiPort=await port();proxyPort=await port();
  const node=(name,server,n=relayPort,version=null)=>({name,type:'socks5',server,port:n,udp:true,...(version?{'ip-version':version}:{})});
  const rawProxies=[node('dual-pref4','both.test'),node('a-only-pref4','aonly.test'),node('aaaa-only-pref4','aaaaonly.test'),node('a-refused-v6-works','both.test',v6Port),node('explicit-v6','both.test',relayPort,'ipv6'),node('literal-v6','::1',relayPort,null),node('remote-v6-refused','aonly.test',denyPort)];
- const generated=generate('src/windows/v14.3.js',{proxies:rawProxies,tun:{enable:false},'proxy-providers':{LabProvider:{type:'file',path:'unused.json'}}});
+ const generated=generate('src/windows/v14.3-windows-flclash.js',{proxies:rawProxies,tun:{enable:false},'proxy-providers':{LabProvider:{type:'file',path:'unused.json'}}});
  const proxies=generated.proxies.filter(p=>rawProxies.some(r=>r.name===p.name));
  const expr=generated['proxy-providers'].LabProvider.override['override-expr'].find(e=>e.includes('ipv4-prefer'));
  assert.ok(expr,'Actual generated conditional provider default');

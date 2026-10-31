@@ -1,0 +1,268 @@
+{
+  "revision": "architecture-audit-r1",
+  "flavor": "public",
+  "scope": "REAL_WINDOWS_NATIVE_CORE_WITH_SYNTHETIC_LOOPBACK_UPSTREAMS_NOT_MOBILE_DEVICE_OR_PUBLIC_AI_AUTH",
+  "coreSHA256": "926bfea2ce48a247d6a7ce4cf641980e416202d5e40fe4ee5c949089ace0e197",
+  "DNSAffinityTransport": "NOT_VERIFIED_DNS_UPSTREAM_REPLACED_FOR_ISOLATION",
+  "status": "PASS",
+  "passed": 52,
+  "failed": 0,
+  "cases": [
+    {
+      "case": "windows-dual-stack",
+      "source": "releases/v14.3/src/windows/v14.3-windows-flclash.js",
+      "sourceSHA256": "5186074bd47902f69a4d9e076b5969bc05f7e515b13c0536319d5ebc81eb279b",
+      "isolatedInputSHA256": "af639919408fefcfea3e3cd7afb8450cf8a340bff343341bc7b2ffe72f062fd6",
+      "checks": [
+        {
+          "name": "literal-cf-fallback",
+          "status": "PASS"
+        },
+        {
+          "name": "cloudflare-shared",
+          "status": "PASS"
+        },
+        {
+          "name": "openai-company",
+          "status": "PASS"
+        },
+        {
+          "name": "tls-sse-stream",
+          "status": "PASS"
+        },
+        {
+          "name": "tls-websocket-upgrade-and-echo",
+          "status": "PASS"
+        },
+        {
+          "name": "dns-fake-ip-A",
+          "status": "PASS"
+        },
+        {
+          "name": "dns-AAAA-family",
+          "status": "PASS"
+        },
+        {
+          "name": "api-real-answer-versus-fake-ip",
+          "status": "PASS"
+        },
+        {
+          "name": "company-UDP-roundtrip",
+          "status": "PASS"
+        },
+        {
+          "name": "unsupported-UDP-fails-closed",
+          "status": "PASS"
+        },
+        {
+          "name": "node-unavailable-no-direct-fallback",
+          "status": "PASS"
+        },
+        {
+          "name": "manual-node-recovery",
+          "status": "PASS"
+        },
+        {
+          "name": "application-doh-domain-stays-blocked",
+          "status": "PASS"
+        }
+      ],
+      "childExited": true
+    },
+    {
+      "case": "windows-ipv4-local",
+      "source": "releases/v14.3/src/windows/v14.3-windows-flclash.js",
+      "sourceSHA256": "5186074bd47902f69a4d9e076b5969bc05f7e515b13c0536319d5ebc81eb279b",
+      "isolatedInputSHA256": "220354fbdb8753e608a23f710a7ee08a93b7fd6719f5896b357d16d2332013ae",
+      "checks": [
+        {
+          "name": "literal-cf-fallback",
+          "status": "PASS"
+        },
+        {
+          "name": "cloudflare-shared",
+          "status": "PASS"
+        },
+        {
+          "name": "openai-company",
+          "status": "PASS"
+        },
+        {
+          "name": "tls-sse-stream",
+          "status": "PASS"
+        },
+        {
+          "name": "tls-websocket-upgrade-and-echo",
+          "status": "PASS"
+        },
+        {
+          "name": "dns-fake-ip-A",
+          "status": "PASS"
+        },
+        {
+          "name": "dns-AAAA-family",
+          "status": "PASS"
+        },
+        {
+          "name": "api-real-answer-versus-fake-ip",
+          "status": "PASS"
+        },
+        {
+          "name": "company-UDP-roundtrip",
+          "status": "PASS"
+        },
+        {
+          "name": "unsupported-UDP-fails-closed",
+          "status": "PASS"
+        },
+        {
+          "name": "node-unavailable-no-direct-fallback",
+          "status": "PASS"
+        },
+        {
+          "name": "manual-node-recovery",
+          "status": "PASS"
+        },
+        {
+          "name": "application-doh-domain-stays-blocked",
+          "status": "PASS"
+        }
+      ],
+      "childExited": true
+    },
+    {
+      "case": "windows-ipv4-only",
+      "source": "releases/v14.3-ipv4-only/src/windows/v14.3-windows-flclash-ipv4-only.js",
+      "sourceSHA256": "11d68bc8384006bf35691997bbb10f014ad356f25046002de20acd83b02a0179",
+      "isolatedInputSHA256": "2cfe300f610606b47464e96a58f22266d8436184b4672ced6cd92f39a6f264b4",
+      "checks": [
+        {
+          "name": "literal-cf-fallback",
+          "status": "PASS"
+        },
+        {
+          "name": "cloudflare-shared",
+          "status": "PASS"
+        },
+        {
+          "name": "openai-company",
+          "status": "PASS"
+        },
+        {
+          "name": "tls-sse-stream",
+          "status": "PASS"
+        },
+        {
+          "name": "tls-websocket-upgrade-and-echo",
+          "status": "PASS"
+        },
+        {
+          "name": "dns-fake-ip-A",
+          "status": "PASS"
+        },
+        {
+          "name": "dns-AAAA-family",
+          "status": "PASS"
+        },
+        {
+          "name": "api-real-answer-versus-fake-ip",
+          "status": "PASS"
+        },
+        {
+          "name": "company-UDP-roundtrip",
+          "status": "PASS"
+        },
+        {
+          "name": "unsupported-UDP-fails-closed",
+          "status": "PASS"
+        },
+        {
+          "name": "node-unavailable-no-direct-fallback",
+          "status": "PASS"
+        },
+        {
+          "name": "manual-node-recovery",
+          "status": "PASS"
+        },
+        {
+          "name": "application-doh-domain-stays-blocked",
+          "status": "PASS"
+        }
+      ],
+      "childExited": true
+    },
+    {
+      "case": "android-auto",
+      "source": "releases/v14.3/src/android/v14.3-android-flclash.js",
+      "sourceSHA256": "a6af2f7b4a75b12f6f14ac9c8efe5b83fca71a862b82c396d4a97cbe754158da",
+      "isolatedInputSHA256": "d6c0edd4d0a7744d29af340241d879a540286ae5b869b7f41055692c463b75b5",
+      "checks": [
+        {
+          "name": "literal-cf-fallback",
+          "status": "PASS"
+        },
+        {
+          "name": "cloudflare-shared",
+          "status": "PASS"
+        },
+        {
+          "name": "openai-company",
+          "status": "PASS"
+        },
+        {
+          "name": "tls-sse-stream",
+          "status": "PASS"
+        },
+        {
+          "name": "tls-websocket-upgrade-and-echo",
+          "status": "PASS"
+        },
+        {
+          "name": "dns-fake-ip-A",
+          "status": "PASS"
+        },
+        {
+          "name": "dns-AAAA-family",
+          "status": "PASS"
+        },
+        {
+          "name": "api-real-answer-versus-fake-ip",
+          "status": "PASS"
+        },
+        {
+          "name": "company-UDP-roundtrip",
+          "status": "PASS"
+        },
+        {
+          "name": "unsupported-UDP-fails-closed",
+          "status": "PASS"
+        },
+        {
+          "name": "node-unavailable-no-direct-fallback",
+          "status": "PASS"
+        },
+        {
+          "name": "manual-node-recovery",
+          "status": "PASS"
+        },
+        {
+          "name": "application-doh-domain-stays-blocked",
+          "status": "PASS"
+        }
+      ],
+      "childExited": true
+    }
+  ],
+  "temporaryDirectoryRemoved": true,
+  "liveClientTouched": false,
+  "publicProjection": {
+    "redactedFields": [
+      "configPath",
+      "coreLogTail",
+      "stdout",
+      "stderr"
+    ],
+    "rawEvidenceSHA256": "cef992d814a146013c654490964214bea16a2c3d114898ed4a911e3a828f2f33",
+    "reason": "Remove temporary local paths and verbose logs; status, case names and source bindings unchanged"
+  }
+}

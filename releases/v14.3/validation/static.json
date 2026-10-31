@@ -86,7 +86,7 @@
     },
     {
       "file": "tests/fixture.cjs",
-      "sha256": "238de968f94b2bc40070a053a47969dddfc4541ff841b555a0ecf5924869d39e"
+      "sha256": "40d9c211de3d062b9cc22b79098e9a6ff35755adf73c0e2d9597c18ebe327e2d"
     },
     {
       "file": "tests/domain-index.cjs",
@@ -114,7 +114,7 @@
     },
     {
       "file": "metadata/balanced-sources.json",
-      "sha256": "be6848f282727432f5cba6432bc39e943fb47660b86d56f8749ac78f60b93364"
+      "sha256": "ed00af5e0dfaebfced5fe35d7207f5ad0a7f7593841dcf3fdda95be3758fbdac"
     },
     {
       "file": "metadata/source-comparison.json",
@@ -137,16 +137,16 @@
       "sha256": "e324ec885bcaf655b9b2b07ca80e6b2c2668f51f504bbf29b37a23d0b6349309"
     },
     {
-      "file": "src/windows/v14.3.js",
-      "sha256": "2b0f7eff6c881fc633ec7c07e6da90683582ae5ae99f37a4b53604785898cf84"
+      "file": "src/windows/v14.3-windows-flclash.js",
+      "sha256": "5186074bd47902f69a4d9e076b5969bc05f7e515b13c0536319d5ebc81eb279b"
     },
     {
-      "file": "src/android/v14.3-android.js",
-      "sha256": "ecf1e3950097fea6b878bcc820ae6d555a3f72a12580cd271ccca4c3f3a5253b"
+      "file": "src/android/v14.3-android-flclash.js",
+      "sha256": "a6af2f7b4a75b12f6f14ac9c8efe5b83fca71a862b82c396d4a97cbe754158da"
     },
     {
       "file": "src/ios/v14.3-clashmi-domestic-protocol-r1.js",
-      "sha256": "9eaa5ea74c03f7a500a89dccdc69102189743f7b08761188c451ec336adc3b88"
+      "sha256": "0beb8d6201a2823d94331b95baf51e0cf8de1f69a55c4847e4d2d118525c6cbd"
     },
     {
       "file": "data/rules/reviewed/v12r-domain-private.yaml",
