@@ -1,17 +1,19 @@
 <!-- ARCHITECTURE_AUDIT_CURRENT:BEGIN -->
-> **当前工作区修订：architecture-audit-r1（2026-11-01）**。两轨七客户端的当前源码、有限静态清单及隔离 Windows 核心已验证；跨端设备、原生 auto 能力和真实 AI 账号任务未验收。
+> **历史架构审计基线 architecture-audit-r1（2026-11-01）**。两轨七客户端的当时源码、有限静态清单及隔离 Windows 核心已验证；跨端设备、原生 auto 能力和真实 AI 账号任务未验收。
 > 本轮未安装脚本、改动现用客户端、重启服务或发布 GitHub。历史 rc.5–rc.8 段落及旧回执仅作当时记录，不认证本轮新字节。
-> 当前入口：[全架构审计与修复](docs/reports/v14.3/全架构审计与修复.md) · [手动部署与验证](docs/guides/本轮修复手动部署.md)。当前候选使用 `tools/verify-current-audit.py` 和 `tools/package-architecture-audit.py`，不重签旧正式发布链。
+> 审计资料 [全架构审计与修复](docs/reports/v14.3/全架构审计与修复.md) · [手动部署与验证](docs/guides/本轮修复手动部署.md)。该候选使用 `tools/verify-current-audit.py` 和 `tools/package-architecture-audit.py`，不重签旧正式发布链。
 <!-- ARCHITECTURE_AUDIT_CURRENT:END -->
 
 # 项目目标
+
+两轨均提供七个入口，其中六个 Mihomo JS 支持三档手选备用。新连接优先使用所选主节点，再按档位选路。 [分流合同](docs/需求.md)
 
 公开设计合同为 [docs/需求.md](docs/需求.md)，保留用户共同业务需求；此文件只作目标映射。
 
 1. 公司归组和共享基础设施边界清楚，Google/Gemini/YouTube 同组。
 2. 业务 DNS/UDP 跟随所选策略，失败或不支持 UDP 时拒绝，不能静默直连。
 3. 保留两个公共手动节点组及业务 DIRECT 选项，正确处理国内/局域网例外与未知目标。
-4. 提供 Windows、Android、iOS Clash Mi/Shadowrocket、macOS FlClash/Clash Mi 六个独立入口。
+4. 每轨提供 Windows FlClash 与 Clash Verge Rev、Android FlClash、iOS Clash Mi 与 Shadowrocket、macOS FlClash 与 Clash Mi 七个独立入口。
 5. 固定来源、可重复生成、完整有限域名合同、包校验和清晰的验收边界。
 6. 公开源自足，不依赖外层工作区，不包含个人目标例外、真实节点/订阅、私钥或运行凭证。
 

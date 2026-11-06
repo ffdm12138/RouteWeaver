@@ -1,27 +1,15 @@
-> **三档原生故障转移**已合入 [支持 IPv6 的主版](releases/v14.3/README.md) 和 [纯 IPv4 版](releases/v14.3-ipv4-only/README.md) 的六个 Mihomo JS 入口。 [使用说明](docs/guides/故障转移.md) · [主版预发布](https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-rc.11) · [纯 IPv4 预发布](https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-ipv4-only-rc.2)
-
-<!-- ARCHITECTURE_AUDIT_CURRENT:BEGIN -->
-> **当前工作区修订：architecture-audit-r1（2026-11-01）**。两轨七客户端的当前源码、有限静态清单及隔离 Windows 核心已验证；跨端设备、原生 auto 能力和真实 AI 账号任务未验收。
-> 本轮仅发布公开源码与候选交付，未安装脚本、改动现用客户端或重启服务。架构审计基线的公开预发布版本为 `v14.3.0-rc.9`；真实设备验收仍未完成。历史 rc.5–rc.8 段落及旧回执仅作当时记录，不认证本轮新字节。
-> 当前入口：[全架构审计与修复](docs/reports/v14.3/全架构审计与修复.md) · [手动部署与验证](docs/guides/本轮修复手动部署.md)。当前候选使用 `tools/verify-current-audit.py` 和 `tools/package-architecture-audit.py`，不重签旧正式发布链。
-<!-- ARCHITECTURE_AUDIT_CURRENT:END -->
-
 # RouteWeaver
 
-新增两套并行版本中的本目录纯 IPv4 版见 [独立纯 IPv4 入口与设置](releases/v14.3-ipv4-only/README.md)，七个独立入口及包位于 `releases/v14.3-ipv4-only/`、`dist/v14.3-ipv4-only/`。原版入口继续保留；设备所有流量纯 IPv4 还需 App/系统关闭 IPv6 与 IPv4 系统 DNS，小火箭需额外固定节点为 IPv4。
+跨平台分流覆写，按客户端选择对应入口。每个网络版本都提供六份 Mihomo JS 和一份 Shadowrocket 原生配置。本目录是独立公开版源码。
 
-## rc.6：自动模式与原生能力边界
+| 版本 | 本地入口 | GitHub 预发布 |
+|---|---|---|
+| 支持 IPv6 的主版 | [各客户端导入文件](releases/v14.3/README.md) | [主版 v14.3.0-rc.12](https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-rc.12) |
+| 纯 IPv4 版 | [各客户端导入文件](releases/v14.3-ipv4-only/README.md) | [纯 IPv4 v14.3.0-ipv4-only-rc.3](https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-ipv4-only-rc.3) |
 
-当前源码修订 `auto-local-family-r1`，六份 JS 默认请求 `auto`，每客户端仍一份入口，保留 `dual-stack`／`ipv4-local`。自动出口判断需要匹配原生核心，普通核心接受覆写不等于已接入；Shadowrocket 只保留原生 IPv4 偏好与 IPv6 开启。Windows 指定 FlClash 核心/Helper 已完成新编译和隔离验证，但本轮未安装，维护者此前手动兼容客户端不变。移动端受保护 socket 和其它平台宿主仍需独立接入，真实 TUN/媒体/公网 IPv6 未验收。当前说明与证据入口：`docs/guides/自动网络模式.md`、`docs/reports/v14.3/自动本地地址族与跨端能力.md`。
+六份 Mihomo JS 在两条发布线使用相同的三档原生故障转移。规则模式下在原组选择 A，再手选所需的三个备用，按 A → 1 → 2 → 3 选路。活动链探测间隔 3 秒，超时 3 秒。 [故障转移说明](docs/guides/故障转移.md)
 
-以下涉及 rc.5 的接入记录只认证原版本，不认证 rc.6 自动能力。
-
-
-保留严格路由、双栈和公司优先分流的跨平台覆写。
-
-[最新 v14.3.0-rc.9 预发布](https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-rc.9) · [文档](docs/README.md) · [需求](docs/需求.md) · [当前验收](docs/status/当前验收.md) · [变更](CHANGELOG.md)
-
-当前每个客户端只保留一个入口，六份 JS 默认请求 `auto`，同一文件保留 `dual-stack` 和 `ipv4-local`；自动模式需要匹配的原生核心。Shadowrocket 使用一份保留 IPv6、偏好 IPv4 的原生配置，能力边界单独说明。
+## 主版快速导入
 
 | 客户端 | 直接导入 | 使用说明 |
 |---|---|---|
@@ -33,29 +21,13 @@
 | macOS Clash Mi | [v14.3-macos-clashmi.js](releases/v14.3/src/macos/v14.3-macos-clashmi.js) | [说明](docs/guides/MacBook使用说明.md) |
 | Windows Clash Verge Rev | [v14.3-clash-verge.js](releases/v14.3/src/clash-verge/v14.3-clash-verge.js) | [说明](docs/guides/ClashVerge使用说明.md) |
 
-自动能力接入按[自动网络模式](docs/guides/自动网络模式.md)核对。需要显式兼容时，按[IPv4 兼容说明](docs/guides/IPv4兼容模式.md)修改同一份 JS 顶部默认值，或通过输入字段选择模式。各模式均保留核心 IPv6 和 TUN IPv6 接管；代理远端仍可访问 IPv6。
+主版默认请求 auto，实际自动判断需要匹配的原生核心。用原装核心且本地无 IPv6 出口时，可手动选同一份 JS 的 `ipv4-local` 模式。需要限制核心的本地连接和节点拨号都使用 IPv4 时，导入纯 IPv4 版。两种模式的设备接管设置分别核对。 [网络模式与设备设置](docs/guides/IPv4兼容模式.md)
 
-Windows FlClash 0.9.0 有独立的[可选核心与回滚说明](docs/guides/FlClash核心接入与回滚.md)：限定的本地 IPv6 不可达停止重复退避，明显非 TLS 的短首包提前识别失败。维护者 Windows TUN 受控探测从数秒缩到 15～31 ms；完全无首包的 443 仍等待约 1 秒。这是失败反馈实验，未测量微信真实发图耗时。JS 单文件不会替换核心。
+## 文档与验证
 
-两个公共组只手动选代理节点；业务组允许跟随、单节点或明确 DIRECT。国内普通 TCP/UDP/DNS 跟组，CN IP 捷径仅 TCP；未知公网 UDP/STUN 继续保护，代理失败不会回落 DIRECT。远程规则仍固定审核提交。
+- [使用与维护文档](docs/README.md) · [需求](docs/需求.md) · [当前验收](docs/status/当前验收.md) · [变更记录](CHANGELOG.md)
+- [当前文件与两轨标签](CURRENT_RELEASE.json) · [开源与发布流程](docs/maintenance/开源与发布.md)
 
-公开版不含个人 VPS 直连例外。
+原装 Windows FlClash 0.9.3 的隔离回放覆盖两轨六个 JS 入口的 TCP、UDP、DoH、DoT 及各档切换。各端实际导入界面与 TUN/VPN 单独验收。Shadowrocket 两轨继续提供原生配置，其三档回退仍待实机验证。 [隔离回执](releases/v14.3/validation/proxy-failover/native-fallback-r3.json)
 
-已有绑定的真实 QuickJS、Boa 与 Node 对照共 648 项。源码、有限核心回放、Windows TUN 和包复验分别记录；Clash Verge App、Mac/iOS/Android 原生接管、Shadowrocket、公网 IPv6和真实媒体发送未统一验收，因此仍按预发布交付。
-
-`runtime/` 是可读共用源码，`src/` 是独立导入产物，`data/` 保存审核规则和能力表。`tools/diagnose-client.py` 可生成省略凭证、节点和目标的最终配置诊断。项目入口由 [CURRENT_RELEASE.json](CURRENT_RELEASE.json) 唯一指定。
-
-从公开克隆复验，使用 Node.js 24.19.0、Python 3.12：
-
-~~~sh
-python -m unittest discover -s tools/tests -p "test_*.py"
-python tools/verify-current-audit.py
-python tools/package-architecture-audit.py
-python tools/audit-publication.py --strict --archive dist/architecture-audit/RouteWeaver-architecture-audit-r1-public.zip
-~~~
-
-CI 在 push/PR 复跑生成、静态和公开内容扫描；在 Release 发布或手动触发时复跑严格回执绑定、打包和解压静态回放。引擎证据按当前入口核对，不冒充设备实验。完整维护命令、可选真实引擎重跑见[维护](docs/maintenance/维护与更新.md)。历史标签和失败证据保持原样。
-
-原创内容采用 [MIT](LICENSE)；上游规则、核心派生补丁和可选核心保留各自许可，详见[第三方声明](THIRD_PARTY_NOTICES.md)。可选核心 Release 同时提供完整对应源码、锁定依赖、许可和备份/回滚工具。
-
-> **当前本地维护候选**：`controller-readiness-r1` 加固回放控制器，两项原生回放各自独立复跑通过；已发布 rc.6 的原始 FAIL 保留。尚未发布新标签，具体范围见[修复报告](docs/reports/v14.3/rc6本地API回归修复.md)。匹配核心的跨端实机自动能力仍待验收。
+原创内容采用 [MIT](LICENSE)，上游规则与历史可选核心使用各自的许可。 [第三方声明](THIRD_PARTY_NOTICES.md)

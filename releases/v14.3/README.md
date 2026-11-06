@@ -1,9 +1,9 @@
 > **支持 IPv6 的主版**。六份 Mihomo JS 支持三档原生故障转移。 [使用说明](../../docs/guides/故障转移.md)
 
 <!-- ARCHITECTURE_AUDIT_CURRENT:BEGIN -->
-> **当前工作区修订：architecture-audit-r1（2026-11-01）**。两轨七客户端的当前源码、有限静态清单及隔离 Windows 核心已验证；跨端设备、原生 auto 能力和真实 AI 账号任务未验收。
+> **历史架构审计基线 architecture-audit-r1（2026-11-01）**。两轨七客户端的当时源码、有限静态清单及隔离 Windows 核心已验证；跨端设备、原生 auto 能力和真实 AI 账号任务未验收。
 > 本轮未安装脚本、改动现用客户端、重启服务或发布 GitHub。历史 rc.5–rc.8 段落及旧回执仅作当时记录，不认证本轮新字节。
-> 当前入口：[全架构审计与修复](../../docs/reports/v14.3/全架构审计与修复.md) · [手动部署与验证](../../docs/guides/本轮修复手动部署.md)。当前候选使用 `tools/verify-current-audit.py` 和 `tools/package-architecture-audit.py`，不重签旧正式发布链。
+> 审计资料 [全架构审计与修复](../../docs/reports/v14.3/全架构审计与修复.md) · [手动部署与验证](../../docs/guides/本轮修复手动部署.md)。该候选使用 `tools/verify-current-audit.py` 和 `tools/package-architecture-audit.py`，不重签旧正式发布链。
 <!-- ARCHITECTURE_AUDIT_CURRENT:END -->
 
 # V14.3 单入口交付
@@ -15,7 +15,7 @@
 以下涉及 rc.5 的接入记录只认证原版本，不认证 rc.6 自动能力。
 
 
-当前预发布标签 `v14.3.0-rc.11`。各客户端使用以下对应文件。
+当前公开预发布为 [v14.3.0-rc.12](https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-rc.12)。活动链的探测间隔 3 秒，超时 3 秒。各客户端使用以下对应文件。
 
 | 客户端 | 入口 |
 |---|---|

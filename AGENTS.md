@@ -1,7 +1,7 @@
 <!-- ARCHITECTURE_AUDIT_CURRENT:BEGIN -->
-> **当前工作区修订：architecture-audit-r1（2026-11-01）**。两轨七客户端的当前源码、有限静态清单及隔离 Windows 核心已验证；跨端设备、原生 auto 能力和真实 AI 账号任务未验收。
+> **历史架构审计基线 architecture-audit-r1（2026-11-01）**。两轨七客户端的当时源码、有限静态清单及隔离 Windows 核心已验证；跨端设备、原生 auto 能力和真实 AI 账号任务未验收。
 > 本轮未安装脚本、改动现用客户端、重启服务或发布 GitHub。历史 rc.5–rc.8 段落及旧回执仅作当时记录，不认证本轮新字节。
-> 当前入口：[全架构审计与修复](docs/reports/v14.3/全架构审计与修复.md) · [手动部署与验证](docs/guides/本轮修复手动部署.md)。当前候选使用 `tools/verify-current-audit.py` 和 `tools/package-architecture-audit.py`，不重签旧正式发布链。
+> 审计资料 [全架构审计与修复](docs/reports/v14.3/全架构审计与修复.md) · [手动部署与验证](docs/guides/本轮修复手动部署.md)。该候选使用 `tools/verify-current-audit.py` 和 `tools/package-architecture-audit.py`，不重签旧正式发布链。
 <!-- ARCHITECTURE_AUDIT_CURRENT:END -->
 
 # RouteWeaver 工作约定
@@ -13,7 +13,7 @@
 以下涉及 rc.5 的接入记录只认证原版本，不认证 rc.6 自动能力。
 
 
-当前 rc.5：七个单入口，六 JS 内含双模式；shared-runtime-r1 / client-integration-r1。Windows FlClash 已由用户明确授权接入匹配核心和 Helper，有限 TUN 快速失败通过；真实微信及跨端设备不可据此宣称验收。后续更换运行客户端仍须相应用户授权。当前范围见 docs/status/当前验收.md，稳定合同见 docs/需求.md。
+历史 rc.5：七个单入口，六 JS 内含双模式；shared-runtime-r1 / client-integration-r1。Windows FlClash 已由用户明确授权接入匹配核心和 Helper，有限 TUN 快速失败通过；真实微信及跨端设备不可据此宣称验收。后续更换运行客户端仍须相应用户授权。当前范围见 docs/status/当前验收.md，稳定合同见 docs/需求.md。
 
 
 
@@ -23,13 +23,13 @@
 - 用户设计目标保留在 `docs/需求.md`，不要为整理目录改写合同；共同目标不等于所有平台已通过设备验收。
 - 运行入口在 `releases/v14.3/src/<platform>/`，规则在 `data/`。客户端直接导入独立 JS / conf，不读取本地仓库路径。
 - 公司规则先于地域 DIRECT；Google/Gemini/YouTube 同组，共享基础设施独立。DIRECT 是主动选择或明确国内/局域网例外；代理失败或 UDP 不支持不得自动直连。
-- 两个公共组只手动选代理节点，不提供 DIRECT、测速择优或故障切换；业务组可跟随公共组、选单节点或主动 DIRECT。
+- 两个公共组手动选代理节点，业务组可跟随公共组、选单节点或主动 DIRECT。六个 Mihomo 入口按需求中的受控三档回退执行，两个公共组仍只提供手选入口。
 - 审核过的国内域名普通 TCP/UDP/DNS 跟随国内组；通用 STUN、未知公网 UDP 保持保护，CN IP 捷径仅供 TCP。
 - 远程规则固定已审核提交。先保存候选、哈希和分类差异，再审核采用；不得改为浮动来源。
 - 固定输入、原始源码、失败反例和既有回执保留原字节。`.gitattributes` 不转换行尾；不要批量格式化 `validation/inputs/`。
 - 修改后执行生成、静态及必要的隔离核心实验。源码、本机核心、包回放与真实设备验收分别报告，不相互替代。
 - 不放入真实订阅、节点密码、私钥、运行中控制器凭证。不要替换运行客户端或改系统网络。
-- 公开克隆使用 `python tools/verify-v14.3.py --skip-history`、`python tools/package-v14.3.py --skip-history`；详细发版步骤见 `docs/maintenance/开源与发布.md`。
+- 当前双轨使用 `python -B tools/verify-native-fallback-release.py --static` 检查已暂存的公开源码。历史包的复验见 `docs/maintenance/开源与发布.md`。
 - `dist/<version>/` 为本地构建输出，仍不进 Git；上游许可和来源随每个发布包附带。<!-- TEMP_LIFECYCLE_20261023 --> 不再新建持久 `.work/`、修改前快照或日期工作树。当前 v14.3 打包的解压复验使用系统 `TemporaryDirectory`，正常结束和 Python 异常后自动收尾；固定 `dist/v14.3/package-verification.json` 保存本次解压复验成功/失败、对应包 SHA 与关键命令 stdout/stderr。清理完成后 `freshExtraction` 为 null；若清理失败，仅记录实际仍存在的临时目录并明确报错。
 - 遗留 `.work/packaging`、`.work/core` 不因名称而自动可删：先确认无运行任务和路径依赖，独有补丁、对应源码、冻结输入与既有失败证据须保留到正式位置或验证已有完整保留件，再清理逐项确认的副本/可再生输出。`package-v14.2.py` 仅为历史入口，不用于当前发版；若确需历史复验，先修正其临时目录生命周期。
 

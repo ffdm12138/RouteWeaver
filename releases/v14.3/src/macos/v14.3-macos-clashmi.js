@@ -1794,7 +1794,7 @@ function v14NativeFallback(config, poolName, policies) {
     // The URL fragment gives this probe a separate cache key on the same HTTPS endpoint.
     return addGroup(label, {
       type: "fallback", proxies: [primary, ...backups], hidden: true,
-      url: V14.testUrl + "#routeweaver-failover", interval: 5, timeout: 3000, lazy: true,
+      url: V14.testUrl + "#routeweaver-failover", interval: 3, timeout: 3000, lazy: true,
       "expected-status": 204, "empty-fallback": "REJECT",
     });
   }

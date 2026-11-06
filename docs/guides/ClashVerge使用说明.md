@@ -1,10 +1,12 @@
 <!-- ARCHITECTURE_AUDIT_CURRENT:BEGIN -->
-> **当前工作区修订：architecture-audit-r1（2026-11-01）**。两轨七客户端的当前源码、有限静态清单及隔离 Windows 核心已验证；跨端设备、原生 auto 能力和真实 AI 账号任务未验收。
+> **历史架构审计基线 architecture-audit-r1（2026-11-01）**。两轨七客户端的当时源码、有限静态清单及隔离 Windows 核心已验证；跨端设备、原生 auto 能力和真实 AI 账号任务未验收。
 > 本轮未安装脚本、改动现用客户端、重启服务或发布 GitHub。历史 rc.5–rc.8 段落及旧回执仅作当时记录，不认证本轮新字节。
-> 当前入口：[全架构审计与修复](../reports/v14.3/全架构审计与修复.md) · [手动部署与验证](本轮修复手动部署.md)。当前候选使用 `tools/verify-current-audit.py` 和 `tools/package-architecture-audit.py`，不重签旧正式发布链。
+> 审计资料 [全架构审计与修复](../reports/v14.3/全架构审计与修复.md) · [手动部署与验证](本轮修复手动部署.md)。该候选使用 `tools/verify-current-audit.py` 和 `tools/package-architecture-audit.py`，不重签旧正式发布链。
 <!-- ARCHITECTURE_AUDIT_CURRENT:END -->
 
 # Clash Verge Rev 使用说明
+
+选择支持 IPv6 的主版或纯 IPv4 版，再在相应目录导入本客户端入口。Mihomo 的规则模式提供三档原生故障转移，活动链按 3 秒间隔探测，超时 3 秒。从未带 ↻ 的旧版升级时需要重选一次。 [主版](../../releases/v14.3/README.md) · [纯 IPv4 版](../../releases/v14.3-ipv4-only/README.md) · [故障转移](故障转移.md)
 
 ## rc.6：自动模式与原生能力边界
 

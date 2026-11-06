@@ -1,10 +1,16 @@
 <!-- ARCHITECTURE_AUDIT_CURRENT:BEGIN -->
-> **当前工作区修订：architecture-audit-r1（2026-11-01）**。两轨七客户端的当前源码、有限静态清单及隔离 Windows 核心已验证；跨端设备、原生 auto 能力和真实 AI 账号任务未验收。
+> **历史架构审计基线 architecture-audit-r1（2026-11-01）**。两轨七客户端的当时源码、有限静态清单及隔离 Windows 核心已验证；跨端设备、原生 auto 能力和真实 AI 账号任务未验收。
 > 本轮仅发布公开源码与候选交付，未安装脚本、改动现用客户端或重启服务。架构审计基线的公开预发布版本为 `v14.3.0-rc.9`；真实设备验收仍未完成。历史 rc.5–rc.8 段落及旧回执仅作当时记录，不认证本轮新字节。
-> 当前入口：[全架构审计与修复](docs/reports/v14.3/全架构审计与修复.md) · [手动部署与验证](docs/guides/本轮修复手动部署.md)。当前候选使用 `tools/verify-current-audit.py` 和 `tools/package-architecture-audit.py`，不重签旧正式发布链。
+> 审计资料 [全架构审计与修复](docs/reports/v14.3/全架构审计与修复.md) · [手动部署与验证](docs/guides/本轮修复手动部署.md)。该候选使用 `tools/verify-current-audit.py` 和 `tools/package-architecture-audit.py`，不重签旧正式发布链。
 <!-- ARCHITECTURE_AUDIT_CURRENT:END -->
 
 # 执行计划
+
+## 当前两轨 · 三档原生回退
+
+在六个 Mihomo 入口共用的生成器维护 3 秒间隔与 3 秒超时，执行两轨配置、隔离核心与附件哈希检查。设备导入和 TUN/VPN 独立登记。 [当前验收](docs/status/当前验收.md) · [发版流程](docs/maintenance/开源与发布.md)
+
+## 历史计划
 
 公开合同：[需求](docs/需求.md)。仅在此独立公开目录开发和发版。
 

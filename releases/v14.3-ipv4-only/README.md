@@ -1,14 +1,14 @@
 > **纯 IPv4 版**。六份 Mihomo JS 支持三档原生故障转移。 [使用说明](../../docs/guides/故障转移.md)
 
 <!-- ARCHITECTURE_AUDIT_CURRENT:BEGIN -->
-> **当前工作区修订：architecture-audit-r1（2026-11-01）**。两轨七客户端的当前源码、有限静态清单及隔离 Windows 核心已验证；跨端设备、原生 auto 能力和真实 AI 账号任务未验收。
+> **历史架构审计基线 architecture-audit-r1（2026-11-01）**。两轨七客户端的当时源码、有限静态清单及隔离 Windows 核心已验证；跨端设备、原生 auto 能力和真实 AI 账号任务未验收。
 > 本轮未安装脚本、改动现用客户端、重启服务或发布 GitHub。历史 rc.5–rc.8 段落及旧回执仅作当时记录，不认证本轮新字节。
-> 当前入口：[全架构审计与修复](../../docs/reports/v14.3/全架构审计与修复.md) · [手动部署与验证](../../docs/guides/本轮修复手动部署.md)。当前候选使用 `tools/verify-current-audit.py` 和 `tools/package-architecture-audit.py`，不重签旧正式发布链。
+> 审计资料 [全架构审计与修复](../../docs/reports/v14.3/全架构审计与修复.md) · [手动部署与验证](../../docs/guides/本轮修复手动部署.md)。该候选使用 `tools/verify-current-audit.py` 和 `tools/package-architecture-audit.py`，不重签旧正式发布链。
 <!-- ARCHITECTURE_AUDIT_CURRENT:END -->
 
 # V14.3 独立纯 IPv4 版
 
-当前预发布标签 `v14.3.0-ipv4-only-rc.2`。每个客户端在本目录使用一份独立导入文件。
+当前公开预发布为 [v14.3.0-ipv4-only-rc.3](https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-ipv4-only-rc.3)。活动链的探测间隔 3 秒，超时 3 秒。每个客户端在本目录使用一份独立导入文件。
 
 本机直连目标、连接代理服务器都限定 IPv4。代理服务器往后的出口与远端 DNS 地址族由服务器决定。三档备用按同一纯 IPv4 配置拨号。
 

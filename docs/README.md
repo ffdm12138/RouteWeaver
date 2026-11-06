@@ -1,18 +1,18 @@
 <!-- ARCHITECTURE_AUDIT_CURRENT:BEGIN -->
-> **当前工作区修订：architecture-audit-r1（2026-11-01）**。两轨七客户端的当前源码、有限静态清单及隔离 Windows 核心已验证；跨端设备、原生 auto 能力和真实 AI 账号任务未验收。
+> **历史架构审计基线 architecture-audit-r1（2026-11-01）**。两轨七客户端的当时源码、有限静态清单及隔离 Windows 核心已验证；跨端设备、原生 auto 能力和真实 AI 账号任务未验收。
 > 本轮仅发布公开源码与候选交付，未安装脚本、改动现用客户端或重启服务。架构审计基线的公开预发布版本为 `v14.3.0-rc.9`；真实设备验收仍未完成。历史 rc.5–rc.8 段落及旧回执仅作当时记录，不认证本轮新字节。
-> 当前入口：[全架构审计与修复](reports/v14.3/全架构审计与修复.md) · [手动部署与验证](guides/本轮修复手动部署.md)。当前候选使用 `tools/verify-current-audit.py` 和 `tools/package-architecture-audit.py`，不重签旧正式发布链。
+> 审计资料 [全架构审计与修复](reports/v14.3/全架构审计与修复.md) · [手动部署与验证](guides/本轮修复手动部署.md)。该候选使用 `tools/verify-current-audit.py` 和 `tools/package-architecture-audit.py`，不重签旧正式发布链。
 <!-- ARCHITECTURE_AUDIT_CURRENT:END -->
 
 # 文档索引
 
-- [策略组故障转移](guides/故障转移.md) · Windows FlClash 匹配核心候选、使用方法及跨端验收边界。
+- [策略组故障转移](guides/故障转移.md) · 两轨的原生三档回退、探测时序、升级和验收。
 
 - [独立纯 IPv4 版](../releases/v14.3-ipv4-only/README.md)：新增七个入口、IPv4 直连/节点连接、两版包和客户端前置条件。
 
 - [rc.6 本地 API 回归修复](reports/v14.3/rc6本地API回归修复.md)：未发布维护候选、原始 FAIL 与独立复跑、控制器失败边界。
 
-- [当前自动网络模式](guides/自动网络模式.md)：匹配核心要求、纯 IPv6 域名保护与平台边界。
+- [rc.6 自动网络模式](guides/自动网络模式.md)：匹配核心要求、纯 IPv6 域名保护与平台边界。
 - [自动本地地址族实现报告](reports/v14.3/自动本地地址族与跨端能力.md)：源码、回放、原生未接入和发布边界。
 - [API 真实解析 DNS 出口修复](reports/v14.3/API真实解析DNS出口修复.md)：rc.7，`api.openai.com` 由业务组 DoT/853 改到同组 DoH/443。
 

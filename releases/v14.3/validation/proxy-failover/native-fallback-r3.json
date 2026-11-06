@@ -1,0 +1,173 @@
+{
+  "revision": "native-fallback-r3",
+  "date": "2026-11-06",
+  "edition": "public",
+  "status": "PASS_ISOLATED_STOCK_CORE",
+  "scope": "Generated entries replayed through isolated Windows FlClash. Other clients' packaged cores and frontends were not exercised on their devices.",
+  "core": {
+    "client": "Windows FlClash 0.9.3+2026110401",
+    "sha256": "d5097d4ea34f2975a7a7188dac9554d6b309c2abbf21a94c0a4111aca23bb8d0",
+    "config": "Synthetic loopback proxies and DNS, pinned rule snapshots, TUN disabled"
+  },
+  "quickJS": {
+    "library": "quickjs_c_bridge.dll",
+    "sha256": "e2051274a1d7599d131d45b96c7cc53519a9009bf43a802b922f73031d3d3b4b",
+    "scope": "Semantic parity with Node and repeated application; not the Clash Mi or Verge app JS bridge"
+  },
+  "staticCases": 72,
+  "tracks": {
+    "main": {
+      "windows": {
+        "file": "releases/v14.3/src/windows/v14.3-windows-flclash.js",
+        "sourceSHA256": "aacb395fac17e0270795b4e4dd25155b16eee60856c9d042629f19e8b8e964db",
+        "coreChecks": 33,
+        "quickJSChecks": 6
+      },
+      "android": {
+        "file": "releases/v14.3/src/android/v14.3-android-flclash.js",
+        "sourceSHA256": "bae34dea55538855c7e9131223ee649c1974c22016b5478ae42bddeb2832c9ab",
+        "coreChecks": 33,
+        "quickJSChecks": 6
+      },
+      "clashmi": {
+        "file": "releases/v14.3/src/ios/v14.3-clashmi-domestic-protocol-r1.js",
+        "sourceSHA256": "38714fdd433bd93e76e6c32503d898bb41fc4beea12a5170b67a3aeddbeea72a",
+        "coreChecks": 33,
+        "quickJSChecks": 6
+      },
+      "shadowrocket": {
+        "file": "releases/v14.3/src/ios/v14.3-shadowrocket.conf",
+        "sourceSHA256": "36b83e9069308567c9497eb4a1902536c78572c6786bbb4d712cb976148c6088",
+        "feature": "BASELINE_CONF"
+      },
+      "macosFlClash": {
+        "file": "releases/v14.3/src/macos/v14.3-macos-flclash.js",
+        "sourceSHA256": "3db8feac19cab4849d77ef1a643d14633abb7c7bdaff8506677f720f4dbfb905",
+        "coreChecks": 33,
+        "quickJSChecks": 6
+      },
+      "macosClashMi": {
+        "file": "releases/v14.3/src/macos/v14.3-macos-clashmi.js",
+        "sourceSHA256": "bdbf4b1694b4260dbda8fecad847f967c252f5114e651f7601a8b5259e50f428",
+        "coreChecks": 33,
+        "quickJSChecks": 6
+      },
+      "clashVerge": {
+        "file": "releases/v14.3/src/clash-verge/v14.3-clash-verge.js",
+        "sourceSHA256": "5f7b8f7ac0f92df0e06097f090c185eccb7db141e535ddcc77fcbb38f3cb1a1c",
+        "coreChecks": 33,
+        "quickJSChecks": 6
+      }
+    },
+    "ipv4-only": {
+      "windows": {
+        "file": "releases/v14.3-ipv4-only/src/windows/v14.3-windows-flclash-ipv4-only.js",
+        "sourceSHA256": "1518a645480e83d0e739e5757c632eb4fd2e506968268f2619353e31dac72e65",
+        "coreChecks": 33,
+        "quickJSChecks": 2
+      },
+      "android": {
+        "file": "releases/v14.3-ipv4-only/src/android/v14.3-android-flclash-ipv4-only.js",
+        "sourceSHA256": "16f0d64993c348e2b8821c8cb9b585e3e8c1bd9998e9c21658cb76acdf11e661",
+        "coreChecks": 33,
+        "quickJSChecks": 2
+      },
+      "clashmi": {
+        "file": "releases/v14.3-ipv4-only/src/ios/v14.3-clashmi-domestic-protocol-r1-ipv4-only.js",
+        "sourceSHA256": "904f41c3fa3c4ceb1283ac437e9adf16ae1ceb8724839d4fbf0504f9c2ecf4de",
+        "coreChecks": 33,
+        "quickJSChecks": 2
+      },
+      "shadowrocket": {
+        "file": "releases/v14.3-ipv4-only/src/ios/v14.3-shadowrocket-ipv4-only.conf",
+        "sourceSHA256": "d4cda5ec99460cce07fa2fb8d886c2b0e1038ebff515b793d0adeb0aea425bc2",
+        "feature": "BASELINE_CONF"
+      },
+      "macosFlClash": {
+        "file": "releases/v14.3-ipv4-only/src/macos/v14.3-macos-flclash-ipv4-only.js",
+        "sourceSHA256": "09abd63d63a794f5326409b398c8997202465a798ad8841f0dcce4257aa6f75d",
+        "coreChecks": 33,
+        "quickJSChecks": 2
+      },
+      "macosClashMi": {
+        "file": "releases/v14.3-ipv4-only/src/macos/v14.3-macos-clashmi-ipv4-only.js",
+        "sourceSHA256": "3c436d9e519d9eaa624aaf5505b8a43da93c30114f2e14ec5bae6c299b323c41",
+        "coreChecks": 33,
+        "quickJSChecks": 2
+      },
+      "clashVerge": {
+        "file": "releases/v14.3-ipv4-only/src/clash-verge/v14.3-clash-verge-ipv4-only.js",
+        "sourceSHA256": "0a76d05114ddfafd7f4a920b6151a25c81441f40edc76d3038cc222c6bc428e1",
+        "coreChecks": 33,
+        "quickJSChecks": 2
+      }
+    }
+  },
+  "checks": [
+    "core_lists_only_three_new_visible_cards",
+    "single_pick_primary_A",
+    "udp:A",
+    "dot:A",
+    "doh:A",
+    "business_independent_primary_C",
+    "domestic_independent_primary_B",
+    "catchall_keeps_A",
+    "A_down_to_B",
+    "udp:B",
+    "dot:B",
+    "doh:B",
+    "AB_down_to_C",
+    "ABC_down_to_D",
+    "udp_unsupported_rejected",
+    "ABCD_down_only_attempts_A",
+    "online_unselected_X_ignored",
+    "recover_D",
+    "recover_C",
+    "recover_B",
+    "recover_A",
+    "dot:A",
+    "doh:A",
+    "before_REJECT",
+    "slot_1_REJECT_skips_to_2",
+    "domestic_explicit_DIRECT",
+    "explicit_DIRECT_rule",
+    "domestic_explicit_REJECT",
+    "three_REJECT_only_attempts_A",
+    "stale_legacy_pick_routes_to_missing_chain",
+    "removed_A_uses_selected_backup",
+    "removed_A_blocks_with_no_backup",
+    "same_name_refresh_uses_replacement"
+  ],
+  "deviceAcceptance": "NOT_RUN",
+  "shadowrocket": "BASELINE_BYTES_UNCHANGED",
+  "probeTiming": {
+    "activeIntervalSeconds": 3,
+    "timeoutMs": 3000,
+    "lazy": true,
+    "expectedStatus": 204,
+    "scope": "Independent stock-core loopback timing fixture with healthy backup. A business route remained up during the single slow health probe. Timings are observations, not application recovery bounds.",
+    "results": [
+      {
+        "intervalSeconds": 5,
+        "timeoutMs": 3000,
+        "singleProbeStallMs": 2700,
+        "temporarilySwitchedOnStall": false,
+        "outageToNewTCPViaBackupSeconds": 8.23
+      },
+      {
+        "intervalSeconds": 3,
+        "timeoutMs": 3000,
+        "singleProbeStallMs": 2700,
+        "temporarilySwitchedOnStall": false,
+        "outageToNewTCPViaBackupSeconds": 6.12
+      },
+      {
+        "intervalSeconds": 3,
+        "timeoutMs": 2500,
+        "singleProbeStallMs": 2700,
+        "temporarilySwitchedOnStall": true,
+        "outageToNewTCPViaBackupSeconds": 6.11
+      }
+    ]
+  }
+}

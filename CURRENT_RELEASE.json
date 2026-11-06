@@ -142,10 +142,10 @@
     "reason": "Chromium classifies every usable IPv6 Fake-IP prefix as local network"
   },
   "nativeFallback": {
-    "revision": "native-fallback-r2",
+    "revision": "native-fallback-r3",
     "guide": "docs/guides/故障转移.md",
-    "verification": "releases/v14.3/validation/proxy-failover/native-fallback-r2.json",
-    "releaseTags": {"main": "v14.3.0-rc.11", "ipv4-only": "v14.3.0-ipv4-only-rc.2"},
+    "verification": "releases/v14.3/validation/proxy-failover/native-fallback-r3.json",
+    "releaseTags": {"main": "v14.3.0-rc.12", "ipv4-only": "v14.3.0-ipv4-only-rc.3"},
     "deviceAcceptance": "NOT_RUN"
   },
   "proxyFailover": {

@@ -69,7 +69,7 @@ for (const {entries, modes} of tracks) {
         assert.equal(aliases.has(primary), false, 'share one chain per primary');
         aliases.set(primary, fallback.name);
         assert.equal(fallback.type, 'fallback');
-        assert.equal(fallback.interval, 5);
+        assert.equal(fallback.interval, 3);
         assert.equal(fallback.timeout, 3000);
         assert.equal(fallback['expected-status'], 204);
         assert.equal(fallback['empty-fallback'], 'REJECT');
