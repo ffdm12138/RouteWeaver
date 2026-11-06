@@ -1,4 +1,4 @@
-> **Windows FlClash 0.9.3 三档故障转移** · [GitHub 预发布](https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-rc.10) · [安装与回滚](../v14.3/research/proxy-failover/FlClash-0.9.3.md) · [隔离验收回执](../v14.3/validation/proxy-failover/windows-flclash-0.9.3.json)
+> **纯 IPv4 版**。六份 Mihomo JS 支持三档原生故障转移。 [使用说明](../../docs/guides/故障转移.md)
 
 <!-- ARCHITECTURE_AUDIT_CURRENT:BEGIN -->
 > **当前工作区修订：architecture-audit-r1（2026-11-01）**。两轨七客户端的当前源码、有限静态清单及隔离 Windows 核心已验证；跨端设备、原生 auto 能力和真实 AI 账号任务未验收。
@@ -8,9 +8,9 @@
 
 # V14.3 独立纯 IPv4 版
 
-日期：2026-10-17。修订：`ipv4-only-r1`。这是在既有版本旁新增的版本，不替换原来的 auto／dual-stack／ipv4-local 七个入口。每个客户端在本目录仍只有一份独立导入文件。
+当前预发布标签 `v14.3.0-ipv4-only-rc.2`。每个客户端在本目录使用一份独立导入文件。
 
-本机直连目标、连接代理服务器都限定 IPv4。代理服务器往后的出口与远端 DNS 地址族由服务器决定。IPv6-only 节点与目标会失败，不会自动换节点、转 DIRECT 或猜测对应 IPv4。
+本机直连目标、连接代理服务器都限定 IPv4。代理服务器往后的出口与远端 DNS 地址族由服务器决定。三档备用按同一纯 IPv4 配置拨号。
 
 公司、共享基础设施、国内、未知流量的分组和顺序、公共组手动选择、业务组 DIRECT、DNS 跟组、UDP 防回落及固定规则来源沿用本版本各自的原入口。个人与公开版本分别从各自原入口生成，个人目的地址例外只在个人版本保留。
 

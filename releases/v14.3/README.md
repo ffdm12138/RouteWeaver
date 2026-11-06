@@ -1,4 +1,4 @@
-> **Windows FlClash 0.9.3 三档故障转移** · [GitHub 预发布](https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-rc.10) · [安装与回滚](research/proxy-failover/FlClash-0.9.3.md) · [隔离验收回执](validation/proxy-failover/windows-flclash-0.9.3.json)
+> **支持 IPv6 的主版**。六份 Mihomo JS 支持三档原生故障转移。 [使用说明](../../docs/guides/故障转移.md)
 
 <!-- ARCHITECTURE_AUDIT_CURRENT:BEGIN -->
 > **当前工作区修订：architecture-audit-r1（2026-11-01）**。两轨七客户端的当前源码、有限静态清单及隔离 Windows 核心已验证；跨端设备、原生 auto 能力和真实 AI 账号任务未验收。
@@ -15,7 +15,7 @@
 以下涉及 rc.5 的接入记录只认证原版本，不认证 rc.6 自动能力。
 
 
-当前 `auto-local-family-r1 / shared-runtime-r1 / single-entry-r1`，已发布标签 v14.3.0-rc.6。`controller-readiness-r1` 为尚未发布的本地回放维护修订，详见[修复报告](../../docs/reports/v14.3/rc6本地API回归修复.md)。保留既有业务合同和双栈，各客户端只保留以下一个当前文件。
+当前预发布标签 `v14.3.0-rc.11`。各客户端使用以下对应文件。
 
 | 客户端 | 入口 |
 |---|---|

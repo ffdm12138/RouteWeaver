@@ -11,9 +11,9 @@
       "platform": "macosFlClash",
       "client": "FlClash",
       "file": "src/macos/v14.3-macos-flclash.js",
-      "sha256": "5d1556218db5b1e8b6f531adf6eddb68dc6c6bdc0c1930047c74fe49fe6426e0",
-      "bytes": 129467,
-      "generatedConfigBytes": 177962,
+      "sha256": "ff614ddc89107901a607ad305eca9886111cb2a763852a02e6024239f3be0a31",
+      "bytes": 128363,
+      "generatedConfigBytes": 180011,
       "inlineRows": 819,
       "remoteSources": 30
     },
@@ -21,9 +21,9 @@
       "platform": "macosClashMi",
       "client": "Clash Mi",
       "file": "src/macos/v14.3-macos-clashmi.js",
-      "sha256": "bfd0cc551f302e11509546fb7bfabaf426206006bbb6bb31eca9b69e02016217",
-      "bytes": 130779,
-      "generatedConfigBytes": 178576,
+      "sha256": "a42e56fbb7ad4c22f70b2f868c6233dc90f5d3b5da0e1409482bd7a43204e4b0",
+      "bytes": 129678,
+      "generatedConfigBytes": 180625,
       "inlineRows": 819,
       "remoteSources": 29
     }
@@ -52,7 +52,7 @@
     },
     {
       "file": "tools/lib/compile-entries.cjs",
-      "sha256": "02f4492c9fbaa072ad4f6a7981e3d619e51019df76cc47e839677fb1d9aef2fd"
+      "sha256": "6f74354a3eb41325be043fcd0067647eebd0c9cdbfd7fa354e68636618831332"
     },
     {
       "file": "tools/lib/render-runtime.cjs",
@@ -85,6 +85,10 @@
     {
       "file": "data/client-capabilities.json",
       "sha256": "1de71b61cacc5fd4d1d5caf36615f9cc7f5d9339c5d8ffc9725815ed6c8deb4c"
+    },
+    {
+      "file": "runtime/shared/v14NativeFallback.js.in",
+      "sha256": "3e54d878d6f717910e791bf9163fca318ef719fde8c754857b3f07e935c36665"
     },
     {
       "file": "runtime/platforms/desktop/layout.json",
@@ -180,7 +184,7 @@
     },
     {
       "file": "runtime/shared/main.js.in",
-      "sha256": "3b399eb8de45dc945740e8973395a81c7d4bae6126487e89e9a0e5213c74915c"
+      "sha256": "5e1f4fb60e89283526e54f6bfc401d065ced5e4d9757747ae6b76d3ce0b19617"
     },
     {
       "file": "runtime/platforms/android/layout.json",
@@ -196,7 +200,7 @@
     },
     {
       "file": "runtime/platforms/android/main.js.in",
-      "sha256": "d5d745dcc527763aeccaabf875e3b6ae9030a8ddb2a2530f8620d9a9e189f6bc"
+      "sha256": "f566f2e68d1c07185ea50a0313d55b3680fb60011cd1ab0dc6098d688764d5f2"
     },
     {
       "file": "tools/validate-azure-async.cjs",

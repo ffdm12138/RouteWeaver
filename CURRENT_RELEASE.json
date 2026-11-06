@@ -141,6 +141,13 @@
     "dual-stack/auto": "real A/AAAA over the OpenAI group DoH/443",
     "reason": "Chromium classifies every usable IPv6 Fake-IP prefix as local network"
   },
+  "nativeFallback": {
+    "revision": "native-fallback-r2",
+    "guide": "docs/guides/故障转移.md",
+    "verification": "releases/v14.3/validation/proxy-failover/native-fallback-r2.json",
+    "releaseTags": {"main": "v14.3.0-rc.11", "ipv4-only": "v14.3.0-ipv4-only-rc.2"},
+    "deviceAcceptance": "NOT_RUN"
+  },
   "proxyFailover": {
     "revision": "proxy-failover-flclash093-r1",
     "status": "WINDOWS_ISOLATED_CORE_AND_HOST_TESTS_PASS_DEVICE_PENDING",

@@ -1,4 +1,4 @@
-> **Windows FlClash 0.9.3 三档故障转移候选**。主版与纯 IPv4 版共用配对核心。配对包、使用与手动部署见 [策略组故障转移](docs/guides/故障转移.md) · [下载 v14.3.0-rc.10](https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-rc.10)。
+> **三档原生故障转移**已合入 [支持 IPv6 的主版](releases/v14.3/README.md) 和 [纯 IPv4 版](releases/v14.3-ipv4-only/README.md) 的六个 Mihomo JS 入口。 [使用说明](docs/guides/故障转移.md) · [主版预发布](https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-rc.11) · [纯 IPv4 预发布](https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-ipv4-only-rc.2)
 
 <!-- ARCHITECTURE_AUDIT_CURRENT:BEGIN -->
 > **当前工作区修订：architecture-audit-r1（2026-11-01）**。两轨七客户端的当前源码、有限静态清单及隔离 Windows 核心已验证；跨端设备、原生 auto 能力和真实 AI 账号任务未验收。

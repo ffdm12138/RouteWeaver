@@ -196,548 +196,7 @@ const V14_OPENAI_VOICE_IPV4 = [
   "68.155.152.41/32", "72.146.20.246/32", "74.248.148.7/32",
 ];
 
-const V14_SERVICES = [
-  {
-    "name": "OpenAI 服务",
-    "sets": [],
-    "seeds": [
-      "openai.com",
-      "chatgpt.com",
-      "chat.com",
-      "sora.com",
-      "oaistatic.com",
-      "oaistatsig.com",
-      "oaiusercontent.com",
-      "chatgpt.site"
-    ],
-    "exact": [
-      "chatgpt.livekit.cloud",
-      "host.livekit.cloud",
-      "turn.livekit.cloud",
-      "openaiapi-site.azureedge.net",
-      "openaiassets.blob.core.windows.net",
-      "openaicom-api-bdcpf8c6d2e9atf6.z01.azurefd.net",
-      "openaicom.imgix.net",
-      "openaicomproductionae4b.blob.core.windows.net",
-      "production-openaicom-storage.azureedge.net",
-      "cdn.openaimerge.com",
-      "openai.qualtrics.com",
-      "openai.com.cdn.cloudflare.net",
-      "chatgpt-async-webps-prod-eastus-1.webpubsub.azure.com",
-      "chatgpt-async-webps-prod-eastus-17.webpubsub.azure.com",
-      "chatgpt-async-webps-prod-eastus-23.webpubsub.azure.com"
-    ]
-  },
-  {
-    "name": "Anthropic 服务",
-    "sets": [
-      "anthropic"
-    ],
-    "seeds": [
-      "anthropic.com",
-      "claude.ai",
-      "claude.com",
-      "claudeusercontent.com",
-      "clau.de",
-      "claudemcpclient.com",
-      "claudemcpcontent.com"
-    ]
-  },
-  {
-    "name": "谷歌服务",
-    "sets": [
-      "google-gemini",
-      "youtube",
-      "google"
-    ],
-    "seeds": [
-      "gemini.google.com",
-      "aistudio.google.com",
-      "generativelanguage.googleapis.com",
-      "notebooklm.google.com",
-      "notebooklm.google",
-      "deepmind.google",
-      "generativeai.google",
-      "ai.google.dev",
-      "jules.google",
-      "google.com",
-      "googleapis.com",
-      "googleapis.cn",
-      "gstatic.com",
-      "googleusercontent.com",
-      "gmail.com",
-      "google.com.hk",
-      "google.co.jp",
-      "google.co.uk",
-      "google.com.tw",
-      "google.com.sg",
-      "youtube.com",
-      "youtu.be",
-      "googlevideo.com",
-      "ytimg.com",
-      "youtube-nocookie.com",
-      "ggpht.com",
-      "gvt1.com",
-      "gvt2.com",
-      "gvt3.com",
-      "xn--ngstr-lra8j.com",
-      "android.com",
-      "googleplay.com",
-      "google-analytics.com",
-      "googlezip.net",
-      "pki.goog",
-      "recaptcha.net",
-      "doubleclick.net",
-      "googlesyndication.com",
-      "googleadservices.com",
-      "googletagmanager.com",
-      "firebase.google.com",
-      "googlecloud.com",
-      "cloud.google.com",
-      "waze.com",
-      "fitbit.com",
-      "nest.com",
-      "blogger.com",
-      "blogspot.com",
-      "withgoogle.com"
-    ]
-  },
-  {
-    "name": "OpenRouter",
-    "sets": [],
-    "seeds": [
-      "openrouter.ai"
-    ]
-  },
-  {
-    "name": "Perplexity",
-    "sets": [],
-    "seeds": [
-      "perplexity.ai",
-      "perplexity.com",
-      "pplx.ai"
-    ],
-    "exact": [
-      "ppl-ai-file-upload.s3.amazonaws.com",
-      "pplx-res.cloudinary.com"
-    ]
-  },
-  {
-    "name": "Hugging Face",
-    "sets": [],
-    "seeds": [
-      "huggingface.co",
-      "hf.co",
-      "hf.space"
-    ]
-  },
-  {
-    "name": "xAI",
-    "sets": [],
-    "seeds": [
-      "x.ai",
-      "grok.com",
-      "grok.me"
-    ]
-  },
-  {
-    "name": "Netflix",
-    "sets": [
-      "netflix"
-    ],
-    "ips": [
-      "netflix"
-    ],
-    "seeds": [
-      "netflix.com",
-      "nflxvideo.net",
-      "nflximg.net",
-      "nflxext.com",
-      "nflxso.net",
-      "nflximg.com",
-      "netflix.net"
-    ]
-  },
-  {
-    "name": "Disney+",
-    "sets": [
-      "disney"
-    ],
-    "seeds": [
-      "disneyplus.com",
-      "dssott.com",
-      "bamgrid.com"
-    ],
-    "exact": [
-      "hses.akamaized.net",
-      "hses1.akamaized.net",
-      "hses2.akamaized.net",
-      "hses3.akamaized.net",
-      "hses4.akamaized.net",
-      "hses5.akamaized.net",
-      "hses6.akamaized.net",
-      "hses7.akamaized.net"
-    ]
-  },
-  {
-    "name": "Spotify",
-    "sets": [
-      "spotify"
-    ],
-    "seeds": [
-      "spotify.com",
-      "scdn.co",
-      "spotifycdn.com",
-      "spotifycdn.net"
-    ]
-  },
-  {
-    "name": "Telegram",
-    "sets": [
-      "telegram"
-    ],
-    "ips": [
-      "telegram"
-    ],
-    "seeds": [
-      "telegram.org",
-      "t.me",
-      "telegra.ph",
-      "cdn-telegram.org",
-      "telegram.me",
-      "tdesktop.com",
-      "telegram-cdn.org"
-    ]
-  },
-  {
-    "name": "Discord",
-    "sets": [
-      "discord"
-    ],
-    "seeds": [
-      "discord.com",
-      "discord.gg",
-      "discordapp.com",
-      "discordapp.net",
-      "discord.media",
-      "discordapp.io",
-      "discordcdn.com"
-    ]
-  },
-  {
-    "name": "TikTok",
-    "sets": [
-      "tiktok"
-    ],
-    "seeds": [
-      "tiktok.com",
-      "tiktokcdn.com",
-      "tiktokv.com",
-      "tiktokcdn-us.com",
-      "byteoversea.com",
-      "ibytedtos.com",
-      "musical.ly",
-      "muscdn.com",
-      "capcut.com",
-      "larksuite.com",
-      "trae.ai",
-      "tiktokd.net"
-    ]
-  },
-  {
-    "name": "Twitter",
-    "sets": [
-      "twitter"
-    ],
-    "ips": [
-      "twitter"
-    ],
-    "seeds": [
-      "x.com",
-      "twitter.com",
-      "twimg.com",
-      "t.co",
-      "tweetdeck.com"
-    ]
-  },
-  {
-    "name": "Meta 服务",
-    "sets": [
-      "meta"
-    ],
-    "seeds": [
-      "facebook.com",
-      "fb.com",
-      "fb.me",
-      "fbcdn.net",
-      "fbsbx.com",
-      "messenger.com",
-      "instagram.com",
-      "cdninstagram.com",
-      "whatsapp.com",
-      "whatsapp.net",
-      "threads.net",
-      "threads.com",
-      "meta.com",
-      "meta.ai",
-      "oculus.com",
-      "wa.me"
-    ]
-  },
-  {
-    "name": "Steam",
-    "sets": [
-      "steam"
-    ],
-    "seeds": [
-      "steamcontent.com",
-      "dl.steam.clngaa.com",
-      "st.dl.bscstorage.net",
-      "st.dl.eccdnx.com",
-      "st.dl.pinyuncloud.com",
-      "steampowered.com",
-      "steamcommunity.com",
-      "steamstatic.com",
-      "steamserver.net",
-      "steamusercontent.com",
-      "s.team",
-      "steam-chat.com"
-    ],
-    "exact": [
-      "steamcdn-a.akamaihd.net",
-      "steampipe.akamaized.net",
-      "steampipe-partner.akamaized.net"
-    ]
-  },
-  {
-    "name": "Epic Games",
-    "sets": [
-      "epicgames"
-    ],
-    "seeds": [
-      "epicgames.com",
-      "epicgames.dev",
-      "epicgamescdn.com",
-      "fortnite.com",
-      "unrealengine.com"
-    ],
-    "exact": [
-      "epicgames-download0.akamaized.net",
-      "epicgames-download1.akamaized.net",
-      "epicgames-download2.akamaized.net",
-      "epicgames-download3.akamaized.net",
-      "epicgames-download4.akamaized.net",
-      "epicgames-download5.akamaized.net",
-      "epicgames-download6.akamaized.net",
-      "epicgames-download7.akamaized.net",
-      "epicgames-download8.akamaized.net",
-      "epicgames-download9.akamaized.net",
-      "cdn0-epicgames-0.file.myqcloud.com",
-      "cdn0-epicgames-1.file.myqcloud.com",
-      "cdn0-epicgames-17.file.myqcloud.com",
-      "cdn0-epicgames-23.file.myqcloud.com",
-      "cdn0-epicgames-999.file.myqcloud.com",
-      "cdn1-epicgames-0.file.myqcloud.com",
-      "cdn1-epicgames-1.file.myqcloud.com",
-      "cdn1-epicgames-17.file.myqcloud.com",
-      "cdn1-epicgames-23.file.myqcloud.com",
-      "cdn1-epicgames-999.file.myqcloud.com",
-      "cdn2-epicgames-0.file.myqcloud.com",
-      "cdn2-epicgames-1.file.myqcloud.com",
-      "cdn2-epicgames-17.file.myqcloud.com",
-      "cdn2-epicgames-23.file.myqcloud.com",
-      "cdn2-epicgames-999.file.myqcloud.com",
-      "cdn3-epicgames-0.file.myqcloud.com",
-      "cdn3-epicgames-1.file.myqcloud.com",
-      "cdn3-epicgames-17.file.myqcloud.com",
-      "cdn3-epicgames-23.file.myqcloud.com",
-      "cdn3-epicgames-999.file.myqcloud.com",
-      "cdn4-epicgames-0.file.myqcloud.com",
-      "cdn4-epicgames-1.file.myqcloud.com",
-      "cdn4-epicgames-17.file.myqcloud.com",
-      "cdn4-epicgames-23.file.myqcloud.com",
-      "cdn4-epicgames-999.file.myqcloud.com",
-      "cdn5-epicgames-0.file.myqcloud.com",
-      "cdn5-epicgames-1.file.myqcloud.com",
-      "cdn5-epicgames-17.file.myqcloud.com",
-      "cdn5-epicgames-23.file.myqcloud.com",
-      "cdn5-epicgames-999.file.myqcloud.com",
-      "cdn6-epicgames-0.file.myqcloud.com",
-      "cdn6-epicgames-1.file.myqcloud.com",
-      "cdn6-epicgames-17.file.myqcloud.com",
-      "cdn6-epicgames-23.file.myqcloud.com",
-      "cdn6-epicgames-999.file.myqcloud.com",
-      "cdn7-epicgames-0.file.myqcloud.com",
-      "cdn7-epicgames-1.file.myqcloud.com",
-      "cdn7-epicgames-17.file.myqcloud.com",
-      "cdn7-epicgames-23.file.myqcloud.com",
-      "cdn7-epicgames-999.file.myqcloud.com",
-      "cdn8-epicgames-0.file.myqcloud.com",
-      "cdn8-epicgames-1.file.myqcloud.com",
-      "cdn8-epicgames-17.file.myqcloud.com",
-      "cdn8-epicgames-23.file.myqcloud.com",
-      "cdn8-epicgames-999.file.myqcloud.com",
-      "cdn9-epicgames-0.file.myqcloud.com",
-      "cdn9-epicgames-1.file.myqcloud.com",
-      "cdn9-epicgames-17.file.myqcloud.com",
-      "cdn9-epicgames-23.file.myqcloud.com",
-      "cdn9-epicgames-999.file.myqcloud.com",
-      "epicgames-download0-0.file.myqcloud.com",
-      "epicgames-download0-1.file.myqcloud.com",
-      "epicgames-download0-17.file.myqcloud.com",
-      "epicgames-download0-23.file.myqcloud.com",
-      "epicgames-download0-999.file.myqcloud.com",
-      "epicgames-download1-0.file.myqcloud.com",
-      "epicgames-download1-1.file.myqcloud.com",
-      "epicgames-download1-17.file.myqcloud.com",
-      "epicgames-download1-23.file.myqcloud.com",
-      "epicgames-download1-999.file.myqcloud.com",
-      "epicgames-download2-0.file.myqcloud.com",
-      "epicgames-download2-1.file.myqcloud.com",
-      "epicgames-download2-17.file.myqcloud.com",
-      "epicgames-download2-23.file.myqcloud.com",
-      "epicgames-download2-999.file.myqcloud.com",
-      "epicgames-download3-0.file.myqcloud.com",
-      "epicgames-download3-1.file.myqcloud.com",
-      "epicgames-download3-17.file.myqcloud.com",
-      "epicgames-download3-23.file.myqcloud.com",
-      "epicgames-download3-999.file.myqcloud.com",
-      "epicgames-download4-0.file.myqcloud.com",
-      "epicgames-download4-1.file.myqcloud.com",
-      "epicgames-download4-17.file.myqcloud.com",
-      "epicgames-download4-23.file.myqcloud.com",
-      "epicgames-download4-999.file.myqcloud.com",
-      "epicgames-download5-0.file.myqcloud.com",
-      "epicgames-download5-1.file.myqcloud.com",
-      "epicgames-download5-17.file.myqcloud.com",
-      "epicgames-download5-23.file.myqcloud.com",
-      "epicgames-download5-999.file.myqcloud.com",
-      "epicgames-download6-0.file.myqcloud.com",
-      "epicgames-download6-1.file.myqcloud.com",
-      "epicgames-download6-17.file.myqcloud.com",
-      "epicgames-download6-23.file.myqcloud.com",
-      "epicgames-download6-999.file.myqcloud.com",
-      "epicgames-download7-0.file.myqcloud.com",
-      "epicgames-download7-1.file.myqcloud.com",
-      "epicgames-download7-17.file.myqcloud.com",
-      "epicgames-download7-23.file.myqcloud.com",
-      "epicgames-download7-999.file.myqcloud.com",
-      "epicgames-download8-0.file.myqcloud.com",
-      "epicgames-download8-1.file.myqcloud.com",
-      "epicgames-download8-17.file.myqcloud.com",
-      "epicgames-download8-23.file.myqcloud.com",
-      "epicgames-download8-999.file.myqcloud.com",
-      "epicgames-download9-0.file.myqcloud.com",
-      "epicgames-download9-1.file.myqcloud.com",
-      "epicgames-download9-17.file.myqcloud.com",
-      "epicgames-download9-23.file.myqcloud.com",
-      "epicgames-download9-999.file.myqcloud.com"
-    ]
-  },
-  {
-    "name": "微软生态",
-    "sets": [
-      "microsoft",
-      "linkedin",
-      "linkedin"
-    ],
-    "seeds": [
-      "microsoft.com",
-      "microsoftonline.com",
-      "microsoftstore.com",
-      "windows.com",
-      "windowsupdate.com",
-      "update.microsoft.com",
-      "office.com",
-      "office.net",
-      "office365.com",
-      "live.com",
-      "aka.ms",
-      "onedrive.com",
-      "sharepoint.com",
-      "msftconnecttest.com",
-      "msftncsi.com",
-      "bing.com",
-      "copilot.microsoft.com",
-      "copilot.bing.com",
-      "githubcopilot.com",
-      "github.com",
-      "githubusercontent.com",
-      "githubassets.com",
-      "microsoftazure.com",
-      "msn.com",
-      "skype.com",
-      "linkedin.com",
-      "licdn.com",
-      "xbox.com",
-      "xboxlive.com"
-    ],
-    "exact": [
-      "go.microsoft.com",
-      "download.microsoft.com",
-      "download.windowsupdate.com",
-      "software.download.prss.microsoft.com",
-      "dl.delivery.mp.microsoft.com",
-      "fe3.delivery.mp.microsoft.com",
-      "storeedgefd.dsx.mp.microsoft.com",
-      "bingsettingssearch.trafficmanager.net",
-      "dtlgalleryint.cloudapp.net",
-      "poshtestgallery.cloudapp.net",
-      "psg-int-centralus.cloudapp.net",
-      "psg-int-eastus.cloudapp.net",
-      "vscode-sync-insiders.trafficmanager.net",
-      "vscode-sync.trafficmanager.net"
-    ]
-  },
-  {
-    "name": "苹果国际",
-    "sets": [
-      "apple"
-    ],
-    "seeds": [
-      "apple.com",
-      "apple.com.cn",
-      "aaplimg.com",
-      "icloud.com",
-      "icloud-content.com",
-      "apple-cloudkit.com",
-      "mzstatic.com",
-      "cdn-apple.com",
-      "apple-dns.net",
-      "itunes.com",
-      "appstore.com",
-      "apple-dns.cn"
-    ],
-    "exact": [
-      "swcdn.apple.com",
-      "swdist.apple.com",
-      "swdownload.apple.com",
-      "swscan.apple.com",
-      "oscdn.apple.com",
-      "osrecovery.apple.com",
-      "updates.cdn-apple.com",
-      "updates-http.cdn-apple.com",
-      "gdmf-ados.apple.com",
-      "gsra.apple.com",
-      "wkms-public.apple.com",
-      "fcs-keys-pub-prod.cdn-apple.com"
-    ]
-  },
-  {
-    "name": "哔哩国际",
-    "sets": [
-      "bilibili"
-    ],
-    "seeds": [
-      "bilibili.com",
-      "bilivideo.com",
-      "hdslb.com",
-      "bilibili.tv",
-      "biliintl.com",
-      "b23.tv"
-    ]
-  }
-];
+const V14_SERVICES = [{"name":"OpenAI 服务","sets":[],"seeds":["openai.com","chatgpt.com","chat.com","sora.com","oaistatic.com","oaistatsig.com","oaiusercontent.com","chatgpt.site"],"exact":["chatgpt.livekit.cloud","host.livekit.cloud","turn.livekit.cloud","openaiapi-site.azureedge.net","openaiassets.blob.core.windows.net","openaicom-api-bdcpf8c6d2e9atf6.z01.azurefd.net","openaicom.imgix.net","openaicomproductionae4b.blob.core.windows.net","production-openaicom-storage.azureedge.net","cdn.openaimerge.com","openai.qualtrics.com","openai.com.cdn.cloudflare.net","chatgpt-async-webps-prod-eastus-1.webpubsub.azure.com","chatgpt-async-webps-prod-eastus-17.webpubsub.azure.com","chatgpt-async-webps-prod-eastus-23.webpubsub.azure.com"]},{"name":"Anthropic 服务","sets":["anthropic"],"seeds":["anthropic.com","claude.ai","claude.com","claudeusercontent.com","clau.de","claudemcpclient.com","claudemcpcontent.com"]},{"name":"谷歌服务","sets":["google-gemini","youtube","google"],"seeds":["gemini.google.com","aistudio.google.com","generativelanguage.googleapis.com","notebooklm.google.com","notebooklm.google","deepmind.google","generativeai.google","ai.google.dev","jules.google","google.com","googleapis.com","googleapis.cn","gstatic.com","googleusercontent.com","gmail.com","google.com.hk","google.co.jp","google.co.uk","google.com.tw","google.com.sg","youtube.com","youtu.be","googlevideo.com","ytimg.com","youtube-nocookie.com","ggpht.com","gvt1.com","gvt2.com","gvt3.com","xn--ngstr-lra8j.com","android.com","googleplay.com","google-analytics.com","googlezip.net","pki.goog","recaptcha.net","doubleclick.net","googlesyndication.com","googleadservices.com","googletagmanager.com","firebase.google.com","googlecloud.com","cloud.google.com","waze.com","fitbit.com","nest.com","blogger.com","blogspot.com","withgoogle.com"]},{"name":"OpenRouter","sets":[],"seeds":["openrouter.ai"]},{"name":"Perplexity","sets":[],"seeds":["perplexity.ai","perplexity.com","pplx.ai"],"exact":["ppl-ai-file-upload.s3.amazonaws.com","pplx-res.cloudinary.com"]},{"name":"Hugging Face","sets":[],"seeds":["huggingface.co","hf.co","hf.space"]},{"name":"xAI","sets":[],"seeds":["x.ai","grok.com","grok.me"]},{"name":"Netflix","sets":["netflix"],"ips":["netflix"],"seeds":["netflix.com","nflxvideo.net","nflximg.net","nflxext.com","nflxso.net","nflximg.com","netflix.net"]},{"name":"Disney+","sets":["disney"],"seeds":["disneyplus.com","dssott.com","bamgrid.com"],"exact":["hses.akamaized.net","hses1.akamaized.net","hses2.akamaized.net","hses3.akamaized.net","hses4.akamaized.net","hses5.akamaized.net","hses6.akamaized.net","hses7.akamaized.net"]},{"name":"Spotify","sets":["spotify"],"seeds":["spotify.com","scdn.co","spotifycdn.com","spotifycdn.net"]},{"name":"Telegram","sets":["telegram"],"ips":["telegram"],"seeds":["telegram.org","t.me","telegra.ph","cdn-telegram.org","telegram.me","tdesktop.com","telegram-cdn.org"]},{"name":"Discord","sets":["discord"],"seeds":["discord.com","discord.gg","discordapp.com","discordapp.net","discord.media","discordapp.io","discordcdn.com"]},{"name":"TikTok","sets":["tiktok"],"seeds":["tiktok.com","tiktokcdn.com","tiktokv.com","tiktokcdn-us.com","byteoversea.com","ibytedtos.com","musical.ly","muscdn.com","capcut.com","larksuite.com","trae.ai","tiktokd.net"]},{"name":"Twitter","sets":["twitter"],"ips":["twitter"],"seeds":["x.com","twitter.com","twimg.com","t.co","tweetdeck.com"]},{"name":"Meta 服务","sets":["meta"],"seeds":["facebook.com","fb.com","fb.me","fbcdn.net","fbsbx.com","messenger.com","instagram.com","cdninstagram.com","whatsapp.com","whatsapp.net","threads.net","threads.com","meta.com","meta.ai","oculus.com","wa.me"]},{"name":"Steam","sets":["steam"],"seeds":["steamcontent.com","dl.steam.clngaa.com","st.dl.bscstorage.net","st.dl.eccdnx.com","st.dl.pinyuncloud.com","steampowered.com","steamcommunity.com","steamstatic.com","steamserver.net","steamusercontent.com","s.team","steam-chat.com"],"exact":["steamcdn-a.akamaihd.net","steampipe.akamaized.net","steampipe-partner.akamaized.net"]},{"name":"Epic Games","sets":["epicgames"],"seeds":["epicgames.com","epicgames.dev","epicgamescdn.com","fortnite.com","unrealengine.com"],"exact":["epicgames-download0.akamaized.net","epicgames-download1.akamaized.net","epicgames-download2.akamaized.net","epicgames-download3.akamaized.net","epicgames-download4.akamaized.net","epicgames-download5.akamaized.net","epicgames-download6.akamaized.net","epicgames-download7.akamaized.net","epicgames-download8.akamaized.net","epicgames-download9.akamaized.net","cdn0-epicgames-0.file.myqcloud.com","cdn0-epicgames-1.file.myqcloud.com","cdn0-epicgames-17.file.myqcloud.com","cdn0-epicgames-23.file.myqcloud.com","cdn0-epicgames-999.file.myqcloud.com","cdn1-epicgames-0.file.myqcloud.com","cdn1-epicgames-1.file.myqcloud.com","cdn1-epicgames-17.file.myqcloud.com","cdn1-epicgames-23.file.myqcloud.com","cdn1-epicgames-999.file.myqcloud.com","cdn2-epicgames-0.file.myqcloud.com","cdn2-epicgames-1.file.myqcloud.com","cdn2-epicgames-17.file.myqcloud.com","cdn2-epicgames-23.file.myqcloud.com","cdn2-epicgames-999.file.myqcloud.com","cdn3-epicgames-0.file.myqcloud.com","cdn3-epicgames-1.file.myqcloud.com","cdn3-epicgames-17.file.myqcloud.com","cdn3-epicgames-23.file.myqcloud.com","cdn3-epicgames-999.file.myqcloud.com","cdn4-epicgames-0.file.myqcloud.com","cdn4-epicgames-1.file.myqcloud.com","cdn4-epicgames-17.file.myqcloud.com","cdn4-epicgames-23.file.myqcloud.com","cdn4-epicgames-999.file.myqcloud.com","cdn5-epicgames-0.file.myqcloud.com","cdn5-epicgames-1.file.myqcloud.com","cdn5-epicgames-17.file.myqcloud.com","cdn5-epicgames-23.file.myqcloud.com","cdn5-epicgames-999.file.myqcloud.com","cdn6-epicgames-0.file.myqcloud.com","cdn6-epicgames-1.file.myqcloud.com","cdn6-epicgames-17.file.myqcloud.com","cdn6-epicgames-23.file.myqcloud.com","cdn6-epicgames-999.file.myqcloud.com","cdn7-epicgames-0.file.myqcloud.com","cdn7-epicgames-1.file.myqcloud.com","cdn7-epicgames-17.file.myqcloud.com","cdn7-epicgames-23.file.myqcloud.com","cdn7-epicgames-999.file.myqcloud.com","cdn8-epicgames-0.file.myqcloud.com","cdn8-epicgames-1.file.myqcloud.com","cdn8-epicgames-17.file.myqcloud.com","cdn8-epicgames-23.file.myqcloud.com","cdn8-epicgames-999.file.myqcloud.com","cdn9-epicgames-0.file.myqcloud.com","cdn9-epicgames-1.file.myqcloud.com","cdn9-epicgames-17.file.myqcloud.com","cdn9-epicgames-23.file.myqcloud.com","cdn9-epicgames-999.file.myqcloud.com","epicgames-download0-0.file.myqcloud.com","epicgames-download0-1.file.myqcloud.com","epicgames-download0-17.file.myqcloud.com","epicgames-download0-23.file.myqcloud.com","epicgames-download0-999.file.myqcloud.com","epicgames-download1-0.file.myqcloud.com","epicgames-download1-1.file.myqcloud.com","epicgames-download1-17.file.myqcloud.com","epicgames-download1-23.file.myqcloud.com","epicgames-download1-999.file.myqcloud.com","epicgames-download2-0.file.myqcloud.com","epicgames-download2-1.file.myqcloud.com","epicgames-download2-17.file.myqcloud.com","epicgames-download2-23.file.myqcloud.com","epicgames-download2-999.file.myqcloud.com","epicgames-download3-0.file.myqcloud.com","epicgames-download3-1.file.myqcloud.com","epicgames-download3-17.file.myqcloud.com","epicgames-download3-23.file.myqcloud.com","epicgames-download3-999.file.myqcloud.com","epicgames-download4-0.file.myqcloud.com","epicgames-download4-1.file.myqcloud.com","epicgames-download4-17.file.myqcloud.com","epicgames-download4-23.file.myqcloud.com","epicgames-download4-999.file.myqcloud.com","epicgames-download5-0.file.myqcloud.com","epicgames-download5-1.file.myqcloud.com","epicgames-download5-17.file.myqcloud.com","epicgames-download5-23.file.myqcloud.com","epicgames-download5-999.file.myqcloud.com","epicgames-download6-0.file.myqcloud.com","epicgames-download6-1.file.myqcloud.com","epicgames-download6-17.file.myqcloud.com","epicgames-download6-23.file.myqcloud.com","epicgames-download6-999.file.myqcloud.com","epicgames-download7-0.file.myqcloud.com","epicgames-download7-1.file.myqcloud.com","epicgames-download7-17.file.myqcloud.com","epicgames-download7-23.file.myqcloud.com","epicgames-download7-999.file.myqcloud.com","epicgames-download8-0.file.myqcloud.com","epicgames-download8-1.file.myqcloud.com","epicgames-download8-17.file.myqcloud.com","epicgames-download8-23.file.myqcloud.com","epicgames-download8-999.file.myqcloud.com","epicgames-download9-0.file.myqcloud.com","epicgames-download9-1.file.myqcloud.com","epicgames-download9-17.file.myqcloud.com","epicgames-download9-23.file.myqcloud.com","epicgames-download9-999.file.myqcloud.com"]},{"name":"微软生态","sets":["microsoft","linkedin","linkedin"],"seeds":["microsoft.com","microsoftonline.com","microsoftstore.com","windows.com","windowsupdate.com","update.microsoft.com","office.com","office.net","office365.com","live.com","aka.ms","onedrive.com","sharepoint.com","msftconnecttest.com","msftncsi.com","bing.com","copilot.microsoft.com","copilot.bing.com","githubcopilot.com","github.com","githubusercontent.com","githubassets.com","microsoftazure.com","msn.com","skype.com","linkedin.com","licdn.com","xbox.com","xboxlive.com"],"exact":["go.microsoft.com","download.microsoft.com","download.windowsupdate.com","software.download.prss.microsoft.com","dl.delivery.mp.microsoft.com","fe3.delivery.mp.microsoft.com","storeedgefd.dsx.mp.microsoft.com","bingsettingssearch.trafficmanager.net","dtlgalleryint.cloudapp.net","poshtestgallery.cloudapp.net","psg-int-centralus.cloudapp.net","psg-int-eastus.cloudapp.net","vscode-sync-insiders.trafficmanager.net","vscode-sync.trafficmanager.net"]},{"name":"苹果国际","sets":["apple"],"seeds":["apple.com","apple.com.cn","aaplimg.com","icloud.com","icloud-content.com","apple-cloudkit.com","mzstatic.com","cdn-apple.com","apple-dns.net","itunes.com","appstore.com","apple-dns.cn"],"exact":["swcdn.apple.com","swdist.apple.com","swdownload.apple.com","swscan.apple.com","oscdn.apple.com","osrecovery.apple.com","updates.cdn-apple.com","updates-http.cdn-apple.com","gdmf-ados.apple.com","gsra.apple.com","wkms-public.apple.com","fcs-keys-pub-prod.cdn-apple.com"]},{"name":"哔哩国际","sets":["bilibili"],"seeds":["bilibili.com","bilivideo.com","hdslb.com","bilibili.tv","biliintl.com","b23.tv"]}];
 
 const V14_SHARED_INFRA = {
   "name": "公共基础服务",
@@ -2189,8 +1648,56 @@ function v14MacOSBase(input) {
   if (typeof console !== "undefined" && console.log) console.log("[V14] " + selectable.length + " 个可用节点、" + providerNames.length + " 个 provider、" + business.length + " 个可选业务组；公司规则优先；未分类公网 UDP 不直连，国内 TCP 由国内网站组选择，默认 DIRECT。");
   if (typeof console !== "undefined" && console.log) console.log("[V14] " + ruleSources.length + " 个独立规则集；无本地 Geo 数据依赖。首次运行检查所有规则集已加载且 ruleCount>0，下载经 " + groupName("高纯净度AI用") + "，不静默改走 DIRECT。");
   if (typeof console !== "undefined" && console.log) for (const w of v14Unique(warnings)) console.log("[V14 检查范围] " + w);
-  delete config["routeweaver-failover"];
+  v14NativeFallback(config, groupName("高纯净度AI用"),
+    [groupName("高纯净度AI用"), groupName("高网速视频用"), ...business.map(groupName)]);
   return v14NetworkDefaults(config);
+}
+
+
+function v14NativeFallback(config, poolName, policies) {
+  delete config["routeweaver-failover"];
+  const groups = config["proxy-groups"];
+  const byName = new Map(groups.map(group => [group.name, group]));
+  const pool = byName.get(poolName);
+  const marker = config["x-v14-generated"];
+  if (pool.use && pool.use.length) {
+    const warning = "本订阅由 proxy-providers 提供节点，沿用原分流，三档故障转移未启用。";
+    marker.validationWarnings.push(warning);
+    if (typeof console !== "undefined" && console.log) console.log("[V14] " + warning);
+    return;
+  }
+
+  const occupied = new Set([...V14_BUILTINS, ...byName.keys(), ...config.proxies.map(node => node.name)]);
+  function addGroup(label, fields) {
+    let name = label;
+    for (let i = 1; occupied.has(name); i++) {
+      name = label + " [原生" + (i > 1 ? "-" + i : "") + "]";
+    }
+    occupied.add(name);
+    groups.push({name, ...fields});
+    marker.groups.push(name);
+    return name;
+  }
+  const manual = {
+    type: "select", proxies: pool.proxies.slice(), "default-selected": "REJECT", "empty-fallback": "REJECT",
+  };
+  const backups = [1, 2, 3].map(slot => addGroup("故障转移" + slot, manual));
+  function addFallback(label, primary) {
+    return addGroup(label, {
+      type: "fallback", proxies: [primary, ...backups], hidden: true,
+      url: V14.testUrl + "#routeweaver-failover", interval: 5, timeout: 3000, lazy: true,
+      "expected-status": 204, "empty-fallback": "REJECT",
+    });
+  }
+  const choices = new Map(pool.proxies.filter(name => name !== "REJECT")
+    .map(name => [name, addFallback(name + " ↻", name)]));
+  const missing = addFallback("主节点缺失 · 已选备用", "REJECT");
+  for (const policy of policies) {
+    const group = byName.get(policy);
+    group.proxies = [missing, ...group.proxies.map(name => choices.get(name) || name)];
+    const preferred = choices.get(group["default-selected"]);
+    if (preferred) group["default-selected"] = preferred;
+  }
 }
 
 function v14NetworkModeBase(input) {

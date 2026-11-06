@@ -39,7 +39,7 @@ jobs:
       - name: Check publication scanner
         run: python -m unittest discover -s tools/tests -p "test_*.py"
       - name: Verify candidate bindings and replay static contracts from the index
-        run: python -B tools/verify-proxy-failover-release.py --static
+        run: python -B tools/verify-native-fallback-release.py --static
       - name: Ensure tracked inputs were not rewritten
         run: git diff --exit-code
 
@@ -67,7 +67,7 @@ jobs:
       - name: Audit indexed public source
         run: python tools/audit-publication.py --strict
       - name: Verify exact source and isolated Windows evidence
-        run: python -B tools/verify-proxy-failover-release.py
+        run: python -B tools/verify-native-fallback-release.py
       - name: Verify published attachments against the candidate inventory
         if: github.event_name == 'release'
         shell: bash
@@ -76,7 +76,7 @@ jobs:
           RELEASE_TAG: ${{ github.event.release.tag_name }}
         run: |
           gh release download "$RELEASE_TAG" --repo "$GITHUB_REPOSITORY" --dir dist/release-download
-          python -B tools/verify-proxy-failover-release.py --assets dist/release-download
+          python -B tools/verify-native-fallback-release.py --tag "$RELEASE_TAG" --assets dist/release-download
       - name: Ensure tracked inputs were not rewritten
         run: git diff --exit-code
 

@@ -14,9 +14,8 @@ for(const platform of Object.keys(f.entries)){
   check(platform+':exact-business-DNS-UDP-selectors-and-fixed-provider-equivalence',()=>{
     const current=structuredClone(model.config),before=structuredClone(reference.config);
     for(const c of [current,before]){delete c.tun;delete c['x-v14-generated'];}
-    if(platform==='macos-flclash')delete before['routeweaver-failover'];
     assert.deepEqual(current,before);
-    assert.equal(model.config['proxy-groups'].length,26);
+    assert.equal(model.config['proxy-groups'].filter(group=>!group.hidden).length,29);
     for(const name of ['高纯净度AI用','高网速视频用']){const group=model.config['proxy-groups'].find(g=>g.name===name);assert.equal(group.type,'select');assert.ok(!group.proxies.includes('DIRECT'));assert.equal(group['default-selected'],'REJECT');}
   });
   check(platform+':complete-reviewed-domain-inventory-and-existing-failure-cases',()=>{
