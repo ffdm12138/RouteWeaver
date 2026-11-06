@@ -1,0 +1,992 @@
+diff --git a/core/Clash.Meta/config/config.go b/core/Clash.Meta/config/config.go
+--- a/core/Clash.Meta/config/config.go
++++ b/core/Clash.Meta/config/config.go
+@@ -179,6 +179,8 @@
+ type Profile struct {
+ 	StoreSelected bool
+ 	StoreFakeIP   bool
++	// SelectedOverrides carries the host app selections for this load.
++	SelectedOverrides map[string]string
+ }
+ 
+ // TLS config
+@@ -677,13 +679,14 @@
+ 	}
+ 	config.TLS = tlsCfg
+ 
+-	proxies, providers, err := parseProxies(rawCfg)
++	var backupNames routeWeaverBackupNames
++	proxies, providers, err := parseProxies(rawCfg, &backupNames)
+ 	if err != nil {
+ 		return nil, err
+ 	}
+ 	config.Proxies = proxies
+ 	config.Providers = providers
+-	config.RouteWeaverFailover = rawCfg.RouteWeaverFailover.bind(proxies)
++	config.RouteWeaverFailover = rawCfg.RouteWeaverFailover.bind(proxies, backupNames)
+ 
+ 	listeners, err := parseListeners(rawCfg)
+ 	if err != nil {
+@@ -880,7 +883,7 @@
+ 	}, nil
+ }
+ 
+-func parseProxies(cfg *RawConfig) (proxies map[string]C.Proxy, providersMap map[string]P.ProxyProvider, err error) {
++func parseProxies(cfg *RawConfig, backupNames *routeWeaverBackupNames) (proxies map[string]C.Proxy, providersMap map[string]P.ProxyProvider, err error) {
+ 	proxies = make(map[string]C.Proxy)
+ 	providersMap = make(map[string]P.ProxyProvider)
+ 	proxiesConfig := cfg.Proxy
+@@ -916,7 +919,23 @@
+ 		AllProxies = append(AllProxies, proxy.Name())
+ 	}
+ 
+-	groupsConfig, err = cfg.RouteWeaverFailover.addGroup(groupsConfig, proxies)
++	var AllProviders []string
++	// parse and initial providers
++	for name, mapping := range providersConfig {
++		if name == provider.ReservedName {
++			return nil, nil, fmt.Errorf("can not defined a provider called `%s`", provider.ReservedName)
++		}
++
++		pd, err := provider.ParseProxyProvider(name, mapping, T.Tunnel)
++		if err != nil {
++			return nil, nil, fmt.Errorf("parse proxy provider %s error: %w", name, err)
++		}
++
++		providersMap[name] = pd
++		AllProviders = append(AllProviders, name)
++	}
++
++	groupsConfig, err = cfg.RouteWeaverFailover.addGroups(groupsConfig, proxies, providersMap, backupNames)
+ 	if err != nil {
+ 		return nil, nil, err
+ 	}
+@@ -936,22 +955,6 @@
+ 	// check if any loop exists and sort the ProxyGroups
+ 	if err := proxyGroupsDagSort(groupsConfig); err != nil {
+ 		return nil, nil, err
+-	}
+-
+-	var AllProviders []string
+-	// parse and initial providers
+-	for name, mapping := range providersConfig {
+-		if name == provider.ReservedName {
+-			return nil, nil, fmt.Errorf("can not defined a provider called `%s`", provider.ReservedName)
+-		}
+-
+-		pd, err := provider.ParseProxyProvider(name, mapping, T.Tunnel)
+-		if err != nil {
+-			return nil, nil, fmt.Errorf("parse proxy provider %s error: %w", name, err)
+-		}
+-
+-		providersMap[name] = pd
+-		AllProviders = append(AllProviders, name)
+ 	}
+ 
+ 	slices.Sort(AllProxies)
+diff --git a/core/Clash.Meta/config/utils_test.go b/core/Clash.Meta/config/utils_test.go
+--- a/core/Clash.Meta/config/utils_test.go
++++ b/core/Clash.Meta/config/utils_test.go
+@@ -137,7 +137,8 @@
+ 			config := RawConfig{Proxy: testCase.proxy}
+ 			// repeat so that different map iteration orders are covered
+ 			for i := 0; i < 20; i++ {
+-				_, _, err := parseProxies(&config)
++				var backupNames routeWeaverBackupNames
++				_, _, err := parseProxies(&config, &backupNames)
+ 				if testCase.errs == nil {
+ 					assert.NoError(t, err)
+ 				} else if assert.Error(t, err) {
+diff --git a/core/Clash.Meta/config/routeweaver_failover.go b/core/Clash.Meta/config/routeweaver_failover.go
+--- a/core/Clash.Meta/config/routeweaver_failover.go
++++ b/core/Clash.Meta/config/routeweaver_failover.go
+@@ -2,36 +2,50 @@
+ 
+ import (
+ 	"fmt"
++	"regexp"
+ 	"slices"
+ 	"strings"
+ 
+ 	"github.com/metacubex/mihomo/adapter/outboundgroup"
+ 	"github.com/metacubex/mihomo/common/structure"
+ 	C "github.com/metacubex/mihomo/constant"
++	P "github.com/metacubex/mihomo/constant/provider"
+ 	T "github.com/metacubex/mihomo/tunnel"
+ )
+ 
+-// RawRouteWeaverFailover describes an optional selector synthesized by the core.
++// RawRouteWeaverFailover describes the controlled backup selectors synthesized by the core.
+ type RawRouteWeaverFailover struct {
+ 	Name     string   `yaml:"name" json:"name"`
+ 	Source   string   `yaml:"source" json:"source"`
+ 	Policies []string `yaml:"policies" json:"policies"`
+ }
+ 
+-func (f *RawRouteWeaverFailover) addGroup(groups []map[string]any, proxies map[string]C.Proxy) ([]map[string]any, error) {
++type routeWeaverBackupNames = [T.RouteWeaverBackupCount]string
++
++var routeWeaverOldSuffix = regexp.MustCompile(" \\[V14(-[0-9]+)?\\]$")
++
++func (f *RawRouteWeaverFailover) addGroups(groups []map[string]any, proxies map[string]C.Proxy, providers map[string]P.ProxyProvider, allocated *routeWeaverBackupNames) ([]map[string]any, error) {
+ 	if f == nil {
+ 		return groups, nil
+ 	}
+-	if f.Name == "" || f.Name == "GLOBAL" || strings.ContainsAny(f.Name, ",#&\r\n") || proxies[f.Name] != nil || len(f.Policies) == 0 {
++	if f.Name == "" || f.Name == "GLOBAL" || strings.ContainsAny(f.Name, ",#&\r\n") || len(f.Policies) == 0 {
+ 		return nil, fmt.Errorf("routeweaver-failover: invalid selector name or empty policies")
+ 	}
+ 	var source map[string]any
+ 	selectors := make(map[string]bool, len(groups))
++	occupied := make(map[string]bool, len(proxies)+len(groups)+len(providers))
++	for name := range proxies {
++		occupied[name] = true
++	}
++	for name, provider := range providers {
++		occupied[name] = true
++		for _, node := range provider.Proxies() {
++			occupied[node.Name()] = true
++		}
++	}
+ 	for _, group := range groups {
+ 		name, _ := group["name"].(string)
+-		if name == f.Name {
+-			return nil, fmt.Errorf("routeweaver-failover: duplicate selector %q", f.Name)
+-		}
++		occupied[name] = true
+ 		if group["type"] == "select" {
+ 			selectors[name] = true
+ 			if name == f.Source {
+@@ -64,21 +78,43 @@
+ 		}
+ 		names = append(names, name)
+ 	}
+-	backup := map[string]any{
+-		"name": f.Name, "type": "select", "proxies": names, "use": options.Use,
+-		"exclude-filter": options.ExcludeFilter, "default-selected": "REJECT", "empty-fallback": "REJECT",
++	prefix := routeWeaverOldSuffix.ReplaceAllString(f.Name, "")
++	if prefix == "" {
++		prefix = f.Name
+ 	}
+-	return append(slices.Clone(groups), backup), nil
++	groups = slices.Clone(groups)
++	for slot := range allocated {
++		base := fmt.Sprintf("%s%d", prefix, slot+1)
++		name := base
++		for n := 1; occupied[name]; n++ {
++			if n == 1 {
++				name = base + " [V14]"
++			} else {
++				name = fmt.Sprintf("%s [V14-%d]", base, n)
++			}
++		}
++		occupied[name] = true
++		allocated[slot] = name
++		groups = append(groups, map[string]any{
++			"name": name, "type": "select", "proxies": names, "use": options.Use,
++			"filter": options.Filter, "exclude-filter": options.ExcludeFilter, "exclude-type": options.ExcludeType,
++			"default-selected": "REJECT", "empty-fallback": "REJECT",
++		})
++	}
++	return groups, nil
+ }
+ 
+-func (f *RawRouteWeaverFailover) bind(proxies map[string]C.Proxy) *T.RouteWeaverFailover {
++func (f *RawRouteWeaverFailover) bind(proxies map[string]C.Proxy, names routeWeaverBackupNames) *T.RouteWeaverFailover {
+ 	if f == nil {
+ 		return nil
+ 	}
+-	backup := proxies[f.Name]
++	var backups [T.RouteWeaverBackupCount]C.Proxy
++	for i, name := range names {
++		backups[i] = proxies[name]
++	}
+ 	policies := make(map[string]C.Proxy, len(f.Policies))
+ 	for _, name := range f.Policies {
+ 		policies[name] = proxies[name]
+ 	}
+-	return T.NewRouteWeaverFailover(backup, proxies["REJECT"], policies)
++	return T.NewRouteWeaverFailover(backups, proxies["REJECT"], policies)
+ }
+diff --git a/core/Clash.Meta/adapter/outboundgroup/selector.go b/core/Clash.Meta/adapter/outboundgroup/selector.go
+--- a/core/Clash.Meta/adapter/outboundgroup/selector.go
++++ b/core/Clash.Meta/adapter/outboundgroup/selector.go
+@@ -14,18 +14,14 @@
+ 	DefaultSelected string `group:"default-selected,omitempty"`
+ }
+ 
+-// selectionToken identifies a particular manual selection.
+-type selectionToken struct {
+-	name string
+-}
+-
+ type Selector struct {
+ 	*GroupBase
+-	disableUDP    bool
+-	selected      atomic.Pointer[selectionToken]
+-	backupReject  C.Proxy
+-	backupChanged func()
+-	testUrl       string
++	disableUDP       bool
++	selected         atomic.Pointer[string]
++	backupReject     C.Proxy
++	backupNames      map[string]struct{}
++	selectionChanged func()
++	testUrl          string
+ }
+ 
+ // DialContext implements C.ProxyAdapter
+@@ -85,6 +81,11 @@
+ }
+ 
+ func (s *Selector) Now() string {
++	// A missing standby should be visible as a missing pick. This lets the
++	// user explicitly select REJECT to disable that tier.
++	if s.backupReject != nil {
++		return *s.selected.Load()
++	}
+ 	return s.selectedProxy(false).Name()
+ }
+ 
+@@ -99,15 +100,30 @@
+ }
+ 
+ func (s *Selector) ForceSet(name string) {
+-	s.selected.Store(&selectionToken{name: name})
+-	if s.backupChanged != nil {
+-		s.backupChanged()
+-	}
+-}
+-
+-func (s *Selector) SetRouteWeaverBackup(reject C.Proxy, changed func()) {
++	if name == "" && s.backupReject != nil {
++		name = s.backupReject.Name()
++	}
++	s.selected.Store(&name)
++	if s.selectionChanged != nil {
++		s.selectionChanged()
++	}
++}
++
++// These hooks are configured before the selector is exposed to the tunnel.
++func (s *Selector) SetRouteWeaverBackup(reject C.Proxy, names map[string]struct{}) {
+ 	s.backupReject = reject
+-	s.backupChanged = changed
++	s.backupNames = names
++}
++
++func (s *Selector) IsRouteWeaverBackup() bool { return s.backupReject != nil }
++
++func (s *Selector) isBackupMember(proxy C.Proxy) bool {
++	_, reserved := s.backupNames[proxy.Name()]
++	return !reserved && C.IsRouteWeaverTransport(proxy)
++}
++
++func (s *Selector) SetRouteWeaverChanged(changed func()) {
++	s.selectionChanged = changed
+ }
+ 
+ func (s *Selector) UDPDisabled() bool { return s.disableUDP }
+@@ -118,27 +134,33 @@
+ }
+ 
+ func (s *Selector) selectedProxy(touch bool) C.Proxy {
+-	proxy, _ := s.Selection(touch)
+-	return proxy
+-}
+-
+-// Selection returns the manual target and the token used to read it. The
+-// backup's explicit REJECT remains available even if provider filters change.
+-func (s *Selector) Selection(touch bool) (C.Proxy, any) {
+-	choice := s.selected.Load()
+-	if s.backupReject != nil && choice.name == s.backupReject.Name() {
+-		return s.backupReject, choice
+-	}
+ 	proxies := s.GetProxies(touch)
++	if proxy := s.selectedMember(proxies); proxy != nil {
++		return proxy
++	}
++	if s.backupReject != nil {
++		return s.backupReject
++	}
++	return proxies[0]
++}
++
++// RouteWeaverSelection never falls through to the first member. A nil result
++// means that the actual saved pick is missing, distinct from explicit REJECT.
++func (s *Selector) RouteWeaverSelection(touch bool) C.Proxy {
++	return s.selectedMember(s.GetProxies(touch))
++}
++
++func (s *Selector) selectedMember(proxies []C.Proxy) C.Proxy {
++	name := *s.selected.Load()
++	if s.backupReject != nil && name == s.backupReject.Name() {
++		return s.backupReject
++	}
+ 	for _, proxy := range proxies {
+-		if proxy.Name() == choice.name && (s.backupReject == nil || C.IsRouteWeaverTransport(proxy)) {
+-			return proxy, choice
++		if proxy.Name() == name && (s.backupReject == nil || s.isBackupMember(proxy)) {
++			return proxy
+ 		}
+ 	}
+-	if s.backupReject != nil {
+-		return s.backupReject, choice
+-	}
+-	return proxies[0], choice
++	return nil
+ }
+ 
+ func (s *Selector) Providers() []P.ProxyProvider {
+@@ -152,7 +174,7 @@
+ 	}
+ 	choices := []C.Proxy{s.backupReject}
+ 	for _, proxy := range proxies {
+-		if C.IsRouteWeaverTransport(proxy) && proxy.Name() != s.backupReject.Name() {
++		if s.isBackupMember(proxy) && proxy.Name() != s.backupReject.Name() {
+ 			choices = append(choices, proxy)
+ 		}
+ 	}
+diff --git a/core/Clash.Meta/tunnel/routeweaver_failover.go b/core/Clash.Meta/tunnel/routeweaver_failover.go
+--- a/core/Clash.Meta/tunnel/routeweaver_failover.go
++++ b/core/Clash.Meta/tunnel/routeweaver_failover.go
+@@ -12,29 +12,37 @@
+ )
+ 
+ const (
+-	routeWeaverProbeInterval = 5 * time.Second
+-	routeWeaverProbeTimeout  = 3 * time.Second
++	RouteWeaverBackupCount    = 3
++	routeWeaverProbeURL       = "https://www.gstatic.com/generate_204"
++	routeWeaverProbeInterval  = 5 * time.Second
++	routeWeaverProbeTimeout   = 3 * time.Second
++	routeWeaverProbeFreshness = 2*routeWeaverProbeInterval + routeWeaverProbeTimeout
+ )
+ 
+ var activeRouteWeaverFailover atomic.Pointer[RouteWeaverFailover]
+ 
+ type routeWeaverSelector interface {
+-	Selection(touch bool) (C.Proxy, any)
+-	SetRouteWeaverBackup(C.Proxy, func())
++	RouteWeaverSelection(touch bool) C.Proxy
++	SetRouteWeaverBackup(C.Proxy, map[string]struct{})
++	IsRouteWeaverBackup() bool
++	SetRouteWeaverChanged(func())
+ 	UDPDisabled() bool
+ }
+ 
++type routeWeaverBackup struct {
++	group    C.Proxy
++	selector routeWeaverSelector
++}
++
+ type RouteWeaverFailover struct {
+-	backup   C.Proxy
+-	selector routeWeaverSelector
++	backups  [RouteWeaverBackupCount]routeWeaverBackup
++	reject   C.Proxy
+ 	policies map[string]C.Proxy
+ 	wake     chan struct{}
+ 	cancel   context.CancelFunc
+ 
+-	mu      sync.RWMutex
+-	choice  any
+-	current C.Proxy
+-	nodes   map[C.Proxy]*routeWeaverHealth
++	mu    sync.RWMutex
++	nodes map[C.Proxy]*routeWeaverHealth
+ }
+ 
+ type routeWeaverHealth struct {
+@@ -45,9 +53,9 @@
+ 	down       bool
+ }
+ 
+-func (h *routeWeaverHealth) observe(ok bool) {
++func (h *routeWeaverHealth) observe(ok bool, now time.Time) {
+ 	if ok {
+-		h.readyUntil = time.Now().Add(2 * routeWeaverProbeInterval)
++		h.readyUntil = now.Add(routeWeaverProbeFreshness)
+ 		h.failures = 0
+ 		if h.successes < 2 {
+ 			h.successes++
+@@ -56,7 +64,6 @@
+ 			h.down = false
+ 		}
+ 	} else {
+-		h.readyUntil = time.Time{}
+ 		h.successes = 0
+ 		if h.failures < 2 {
+ 			h.failures++
+@@ -67,12 +74,28 @@
+ 	}
+ }
+ 
+-func NewRouteWeaverFailover(backup, reject C.Proxy, policies map[string]C.Proxy) *RouteWeaverFailover {
++func (h *routeWeaverHealth) usable(now time.Time) bool {
++	return h != nil && !h.down && now.Before(h.readyUntil)
++}
++
++func NewRouteWeaverFailover(backups [RouteWeaverBackupCount]C.Proxy, reject C.Proxy, policies map[string]C.Proxy) *RouteWeaverFailover {
+ 	f := &RouteWeaverFailover{
+-		backup: backup, selector: backup.Adapter().(routeWeaverSelector), policies: policies,
+-		wake: make(chan struct{}, 1), nodes: make(map[C.Proxy]*routeWeaverHealth),
+-	}
+-	f.selector.SetRouteWeaverBackup(reject, f.schedule)
++		reject: reject, policies: policies, wake: make(chan struct{}, 1),
++		nodes: make(map[C.Proxy]*routeWeaverHealth),
++	}
++	backupNames := make(map[string]struct{}, len(backups))
++	for _, group := range backups {
++		backupNames[group.Name()] = struct{}{}
++	}
++	for i, group := range backups {
++		selector := group.Adapter().(routeWeaverSelector)
++		selector.SetRouteWeaverBackup(reject, backupNames)
++		selector.SetRouteWeaverChanged(f.schedule)
++		f.backups[i] = routeWeaverBackup{group, selector}
++	}
++	for _, policy := range policies {
++		policy.Adapter().(routeWeaverSelector).SetRouteWeaverChanged(f.schedule)
++	}
+ 	return f
+ }
+ 
+@@ -111,11 +134,25 @@
+ 	}
+ }
+ 
++// Only three explicit REJECT picks hand control back to the original rules.
++// Missing provider members are still saved picks, but cannot be used.
++func (f *RouteWeaverFailover) selections() (nodes [RouteWeaverBackupCount]C.Proxy, enabled bool) {
++	for i, slot := range f.backups {
++		nodes[i] = slot.selector.RouteWeaverSelection(false)
++		enabled = enabled || nodes[i] != f.reject
++	}
++	return
++}
++
+ func (f *RouteWeaverFailover) reconcile(ctx context.Context) {
+-	backup, choice := f.selector.Selection(false)
++	backups, enabled := f.selections()
+ 	wanted := make(map[C.Proxy]struct{})
+-	if C.IsRouteWeaverTransport(backup) {
+-		wanted[backup] = struct{}{}
++	if enabled {
++		for _, node := range backups {
++			if C.IsRouteWeaverTransport(node) {
++				wanted[node] = struct{}{}
++			}
++		}
+ 		for _, policy := range f.policies {
+ 			primary, _, _ := routeWeaverSelected(policy, false)
+ 			if C.IsRouteWeaverTransport(primary) {
+@@ -126,13 +163,6 @@
+ 
+ 	f.mu.Lock()
+ 	defer f.mu.Unlock()
+-	if f.choice != choice || f.current != backup {
+-		for _, health := range f.nodes {
+-			health.cancel()
+-		}
+-		f.nodes = make(map[C.Proxy]*routeWeaverHealth)
+-		f.choice, f.current = choice, backup
+-	}
+ 	for node, health := range f.nodes {
+ 		if _, ok := wanted[node]; !ok {
+ 			health.cancel()
+@@ -144,12 +174,12 @@
+ 			probeCtx, cancel := context.WithCancel(ctx)
+ 			health := &routeWeaverHealth{cancel: cancel}
+ 			f.nodes[node] = health
+-			go f.probe(probeCtx, node, health, backup, choice)
+-		}
+-	}
+-}
+-
+-func (f *RouteWeaverFailover) probe(ctx context.Context, node C.Proxy, health *routeWeaverHealth, backup C.Proxy, choice any) {
++			go f.probe(probeCtx, node, health)
++		}
++	}
++}
++
++func (f *RouteWeaverFailover) probe(ctx context.Context, node C.Proxy, health *routeWeaverHealth) {
+ 	prober, ok := node.(interface {
+ 		RouteWeaverProbe(context.Context, string) bool
+ 	})
+@@ -159,18 +189,13 @@
+ 	ticker := time.NewTicker(routeWeaverProbeInterval)
+ 	defer ticker.Stop()
+ 	for ctx.Err() == nil {
+-		selected, token := f.selector.Selection(false)
+-		if selected != backup || token != choice {
+-			f.schedule()
+-			return
+-		}
+ 		check, cancel := context.WithTimeout(ctx, routeWeaverProbeTimeout)
+-		healthy := prober.RouteWeaverProbe(check, C.DefaultTestURL)
++		healthy := prober.RouteWeaverProbe(check, routeWeaverProbeURL)
+ 		cancel()
+ 
+ 		f.mu.Lock()
+ 		if ctx.Err() == nil {
+-			health.observe(healthy)
++			health.observe(healthy, time.Now())
+ 		}
+ 		f.mu.Unlock()
+ 		select {
+@@ -181,34 +206,57 @@
+ 	}
+ }
+ 
+-// Resolve once per new flow, before the UDP and DNS L3 capability checks. The
+-// selection saved by the app is separate from this connection's actual route.
++// Resolve once per new flow, before UDP and DNS L3 capability checks.
++// The app's saved selections and the effective connection route are separate.
+ func routeWeaverEffective(policy C.Proxy) C.Proxy {
+ 	f := activeRouteWeaverFailover.Load()
+ 	if f == nil || policy == nil || f.policies[policy.Name()] != policy {
+ 		return policy
+ 	}
+-	backup, choice := f.selector.Selection(false)
+-	if !C.IsRouteWeaverTransport(backup) {
++	backups, enabled := f.selections()
++	if !enabled {
+ 		return policy
+ 	}
+ 	primary, chain, udp := routeWeaverSelected(policy, true)
+-	if !C.IsRouteWeaverTransport(primary) {
+-		return policy
+-	}
++	if primary != nil && !C.IsRouteWeaverTransport(primary) {
++		switch primary.Type() {
++		case C.Direct, C.Reject, C.RejectDrop:
++			return &routeWeaverRoute{Proxy: primary, chain: chain, udp: udp}
++		default:
++			// Any explicit choice of another kind of group remains its own policy.
++			return policy
++		}
++	}
++
++	node, slot := f.pick(primary, backups)
++	if slot >= 0 {
++		group := f.backups[slot].group
++		chain = []C.ProxyAdapter{policy, group}
++		log.Debugln("[RouteWeaver] %s uses %s via %s", policy.Name(), node.Name(), group.Name())
++	}
++	return &routeWeaverRoute{Proxy: node, chain: chain, udp: udp}
++}
++
++func (f *RouteWeaverFailover) pick(primary C.Proxy, backups [RouteWeaverBackupCount]C.Proxy) (C.Proxy, int) {
+ 	f.mu.RLock()
+-	main, spare := f.nodes[primary], f.nodes[backup]
+-	current := f.choice == choice && f.current == backup
+-	takeover := current && main != nil && main.down && spare != nil && time.Now().Before(spare.readyUntil) && primary != backup
+-	f.mu.RUnlock()
+-	if !current || main == nil {
+-		f.schedule()
+-	}
+-	if takeover {
+-		log.Debugln("[RouteWeaver] %s uses %s via %s (primary %s)", policy.Name(), backup.Name(), f.backup.Name(), primary.Name())
+-		primary, chain = backup, []C.ProxyAdapter{policy, f.backup}
+-	}
+-	return &routeWeaverRoute{Proxy: primary, chain: chain, udp: udp}
++	defer f.mu.RUnlock()
++	main := f.nodes[primary]
++	if primary != nil && (main == nil || !main.down) {
++		if main == nil {
++			f.schedule()
++		}
++		return primary, -1
++	}
++	now := time.Now()
++	for i, node := range backups {
++		if node != primary && f.nodes[node].usable(now) {
++			return node, i
++		}
++	}
++	if primary == nil {
++		return f.reject, -1
++	}
++	return primary, -1
+ }
+ 
+ func routeWeaverNamed(adapter C.ProxyAdapter) C.ProxyAdapter {
+@@ -221,18 +269,20 @@
+ func routeWeaverSelected(policy C.Proxy, touch bool) (C.Proxy, []C.ProxyAdapter, bool) {
+ 	var chain []C.ProxyAdapter
+ 	udp := true
+-	for current := policy; ; {
++	current := policy
++	for current != nil {
+ 		selector, ok := current.Adapter().(routeWeaverSelector)
+ 		if !ok {
+-			return current, chain, udp
++			break
+ 		}
+ 		if slices.Contains(chain, C.ProxyAdapter(current)) {
+-			return nil, nil, false
++			return nil, chain, udp
+ 		}
+ 		chain = append(chain, current)
+ 		udp = udp && !selector.UDPDisabled()
+-		current, _ = selector.Selection(touch)
+-	}
++		current = selector.RouteWeaverSelection(touch)
++	}
++	return current, chain, udp
+ }
+ 
+ type routeWeaverRoute struct {
+@@ -242,6 +292,9 @@
+ }
+ 
+ func (r *routeWeaverRoute) Name() string { return r.chain[0].Name() }
++
++// FlClash's exit comparison follows Unwrap to the node that will actually dial.
++func (r *routeWeaverRoute) Unwrap(*C.Metadata, bool) C.Proxy { return r.Proxy }
+ 
+ func (r *routeWeaverRoute) SupportUDP() bool { return r.udp && r.Proxy.SupportUDP() }
+ 
+diff --git a/core/Clash.Meta/tunnel/tunnel.go b/core/Clash.Meta/tunnel/tunnel.go
+--- a/core/Clash.Meta/tunnel/tunnel.go
++++ b/core/Clash.Meta/tunnel/tunnel.go
+@@ -670,6 +670,7 @@
+ 					continue
+ 				}
+ 
++				adapter = routeWeaverEffective(adapter)
+ 				// parse multi-layer nesting
+ 				for adapter := adapter; adapter != nil; adapter = adapter.Unwrap(metadata, false) {
+ 					if adapter.Type() == C.Pass {
+@@ -684,8 +685,10 @@
+ 					}
+ 				}
+ 
+-				adapter = routeWeaverEffective(adapter)
+ 				if metadata.NetWork == C.UDP && !adapter.SupportUDP() {
++					if _, controlled := adapter.(*routeWeaverRoute); controlled {
++						return nil, rule, fmt.Errorf("%s: selected exit does not support UDP", adapter.Name())
++					}
+ 					log.Debugln("%s UDP is not supported", adapter.Name())
+ 					continue
+ 				}
+diff --git a/core/Clash.Meta/hub/executor/executor.go b/core/Clash.Meta/hub/executor/executor.go
+--- a/core/Clash.Meta/hub/executor/executor.go
++++ b/core/Clash.Meta/hub/executor/executor.go
+@@ -117,8 +117,8 @@
+ 	updateProfile(cfg)
+ 	loadProvider(cfg.RuleProviders)
+ 	runtime.GC()
++	tunnel.SetRouteWeaverFailover(cfg.RouteWeaverFailover)
+ 	tunnel.OnRunning()
+-	tunnel.SetRouteWeaverFailover(cfg.RouteWeaverFailover)
+ 	updateUpdater(cfg)
+ 
+ 	resolver.ResetConnection()
+@@ -446,24 +446,20 @@
+ 
+ 	profile.StoreSelected.Store(profileCfg.StoreSelected)
+ 	if profileCfg.StoreSelected {
+-		patchSelectGroup(cfg.Proxies)
+-	}
+-}
+-
+-func patchSelectGroup(proxies map[string]C.Proxy) {
+-	mapping := cachefile.Cache().SelectedMap()
+-	if mapping == nil {
+-		return
+-	}
+-
+-	for name, outbound := range proxies {
++		patchSelectGroup(cfg.Proxies, cachefile.Cache().SelectedMap())
++	}
++	// Apply the host's saved selections before inbound traffic resumes.
++	patchSelectGroup(cfg.Proxies, profileCfg.SelectedOverrides)
++}
++
++func patchSelectGroup(proxies map[string]C.Proxy, mapping map[string]string) {
++	for name, selected := range mapping {
++		outbound := proxies[name]
++		if outbound == nil {
++			continue
++		}
+ 		selector, ok := outbound.Adapter().(outboundgroup.SelectAble)
+ 		if !ok {
+-			continue
+-		}
+-
+-		selected, exist := mapping[name]
+-		if !exist {
+ 			continue
+ 		}
+ 
+diff --git a/core/config.go b/core/config.go
+--- a/core/config.go
++++ b/core/config.go
+@@ -161,8 +161,13 @@
+ 	}
+ 
+ 	currentConfig = cfg
++	if cfg.RouteWeaverFailover != nil {
++		cfg.Profile.SelectedOverrides = params.SelectedMap
++	}
+ 	hub.ApplyConfig(cfg)
+-	patchSelectGroup(params.SelectedMap)
++	if cfg.RouteWeaverFailover == nil {
++		patchSelectGroup(params.SelectedMap)
++	}
+ 	bumpRouteEpoch()
+ 	updateListeners(cfg)
+ 	reconcileGeoUpdater()
+diff --git a/core/Clash.Meta/config/routeweaver_failover_test.go b/core/Clash.Meta/config/routeweaver_failover_test.go
+--- a/core/Clash.Meta/config/routeweaver_failover_test.go
++++ b/core/Clash.Meta/config/routeweaver_failover_test.go
+@@ -13,28 +13,47 @@
+ 	const raw = `
+ proxies:
+   - {name: Node, type: socks5, server: 127.0.0.1, port: 1080}
++  - {name: Standby1, type: socks5, server: 127.0.0.1, port: 1081}
+ proxy-groups:
+-  - {name: Primary, type: select, proxies: [REJECT, Node], exclude-filter: '^REJECT$'}
+-routeweaver-failover: {name: Standby, source: Primary, policies: [Primary]}
++  - {name: Primary, type: select, proxies: [REJECT, Node], default-selected: Node, exclude-filter: '^REJECT$'}
++  - {name: 'Standby1 [V14]', type: select, proxies: [DIRECT]}
++routeweaver-failover: {name: 'Standby [V14]', source: Primary, policies: [Primary]}
+ `
+ 	cfg, err := config.Parse([]byte(raw))
+ 	if err != nil {
+ 		t.Fatal(err)
+ 	}
+-	selector := cfg.Proxies["Standby"].Adapter().(*outboundgroup.Selector)
+-	var names []string
+-	for _, node := range selector.Proxies() {
+-		names = append(names, node.Name())
++	for _, name := range []string{"Standby1 [V14-2]", "Standby2", "Standby3"} {
++		proxy := cfg.Proxies[name]
++		if proxy == nil {
++			t.Fatalf("missing standby %q", name)
++		}
++		selector := proxy.Adapter().(*outboundgroup.Selector)
++		var names []string
++		for _, node := range selector.Proxies() {
++			names = append(names, node.Name())
++		}
++		if !slices.Equal(names, []string{"REJECT", "Node"}) || selector.Now() != "REJECT" {
++			t.Fatalf("%s: members %v, selected %s", name, names, selector.Now())
++		}
++		if err := selector.Set("Node"); err != nil || selector.RouteWeaverSelection(false) != cfg.Proxies["Node"] {
++			t.Fatalf("%s: manual selection: %v (%s)", name, err, selector.Now())
++		}
++		selector.ForceSet("removed")
++		if selector.RouteWeaverSelection(false) != nil || selector.Now() != "removed" {
++			t.Fatalf("%s: missing member was substituted: %s", name, selector.Now())
++		}
++		if err := selector.Set("REJECT"); err != nil || selector.RouteWeaverSelection(false) != cfg.Proxies["REJECT"] {
++			t.Fatalf("%s: explicit REJECT unavailable: %v", name, err)
++		}
+ 	}
+-	if !slices.Equal(names, []string{"REJECT", "Node"}) || selector.Now() != "REJECT" {
+-		t.Fatalf("members %v, selected %s", names, selector.Now())
++	primary := cfg.Proxies["Primary"].Adapter().(*outboundgroup.Selector)
++	if primary.Now() != "Node" {
++		t.Fatalf("primary was changed to %s", primary.Now())
+ 	}
+-	if err := selector.Set("Node"); err != nil || selector.Now() != "Node" {
+-		t.Fatalf("manual selection: %v (%s)", err, selector.Now())
+-	}
+-	selector.ForceSet("removed")
+-	if selector.Now() != "REJECT" {
+-		t.Fatalf("missing saved member must disable failover: %s", selector.Now())
++	primary.ForceSet("removed")
++	if primary.RouteWeaverSelection(false) != nil || primary.Now() != "Node" {
++		t.Fatal("controlled and original primary selection must remain distinct")
+ 	}
+ }
+ 
+diff --git a/core/Clash.Meta/tunnel/routeweaver_failover_test.go b/core/Clash.Meta/tunnel/routeweaver_failover_test.go
+--- a/core/Clash.Meta/tunnel/routeweaver_failover_test.go
++++ b/core/Clash.Meta/tunnel/routeweaver_failover_test.go
+@@ -3,21 +3,71 @@
+ import (
+ 	"testing"
+ 	"time"
++
++	C "github.com/metacubex/mihomo/constant"
+ )
+ 
+ func TestRouteWeaverFailoverHysteresis(t *testing.T) {
+ 	var node routeWeaverHealth
++	now := time.Now()
+ 	for _, step := range []struct {
+-		probe bool
+-		down  bool
++		probe  bool
++		down   bool
++		usable bool
+ 	}{
+-		{true, false}, {false, false}, {true, false},
+-		{false, false}, {false, true}, {true, true},
+-		{false, true}, {true, true}, {true, false},
++		{false, false, false}, {true, false, true}, {false, false, true},
++		{false, true, false}, {true, true, false}, {false, true, false},
++		{true, true, false}, {true, false, true},
+ 	} {
+-		node.observe(step.probe)
+-		if node.down != step.down || time.Now().Before(node.readyUntil) != step.probe {
++		node.observe(step.probe, now)
++		if node.down != step.down || node.usable(now) != step.usable {
+ 			t.Fatalf("after %+v got %+v", step, node)
+ 		}
++		now = now.Add(routeWeaverProbeInterval)
++	}
++	if node.usable(now.Add(routeWeaverProbeFreshness)) {
++		t.Fatal("stale success allowed takeover")
+ 	}
+ }
++
++// Distinct objects with the same name represent a refreshed provider node.
++type routeWeaverTestProxy struct {
++	C.Proxy
++	name string
++}
++
++func (p *routeWeaverTestProxy) Name() string { return p.name }
++
++func TestRouteWeaverFailoverPriority(t *testing.T) {
++	a := &routeWeaverTestProxy{name: "A"}
++	b := &routeWeaverTestProxy{name: "B"}
++	bRefreshed := &routeWeaverTestProxy{name: "B"}
++	c := &routeWeaverTestProxy{name: "C"}
++	reject := &routeWeaverTestProxy{name: "REJECT"}
++	f := &RouteWeaverFailover{reject: reject, wake: make(chan struct{}, 1), nodes: map[C.Proxy]*routeWeaverHealth{
++		a: {down: true},
++		b: {readyUntil: time.Now().Add(time.Minute)},
++		c: {readyUntil: time.Now().Add(time.Minute)},
++	}}
++	for _, step := range []struct {
++		primary C.Proxy
++		backups [RouteWeaverBackupCount]C.Proxy
++		want    C.Proxy
++		slot    int
++	}{
++		{a, [3]C.Proxy{b, c, nil}, b, 0},
++		{a, [3]C.Proxy{bRefreshed, c, reject}, c, 1},
++		{a, [3]C.Proxy{a, nil, c}, c, 2},
++		{a, [3]C.Proxy{reject, nil, bRefreshed}, a, -1},
++		{nil, [3]C.Proxy{nil, b, c}, b, 1},
++		{nil, [3]C.Proxy{nil, bRefreshed, reject}, reject, -1},
++	} {
++		if node, slot := f.pick(step.primary, step.backups); node != step.want || slot != step.slot {
++			t.Fatalf("got %v via slot %d, want %v via slot %d", node, slot, step.want, step.slot)
++		}
++	}
++	f.nodes[a].down = false
++	if node, _ := f.pick(a, [3]C.Proxy{b, c, nil}); node != a {
++		t.Fatal("did not restore the primary")
++	}
++}
+diff --git a/core/Clash.Meta/tunnel/patch.go b/core/Clash.Meta/tunnel/patch.go
+--- a/core/Clash.Meta/tunnel/patch.go
++++ b/core/Clash.Meta/tunnel/patch.go
+@@ -56,7 +56,15 @@
+ 		// than the list that was read, and the cache never recovers.
+ 		versions[name] = p.Version()
+ 		for _, proxy := range p.Proxies() {
+-			rebuilt[proxy.Name()] = proxy
++			name := proxy.Name()
++			// A late provider refresh must not replace a saved standby control
++			// with a transport that happens to use the same display name.
++			if configured := proxies[name]; configured != nil {
++				if selector, ok := configured.Adapter().(routeWeaverSelector); ok && selector.IsRouteWeaverBackup() {
++					continue
++				}
++			}
++			rebuilt[name] = proxy
+ 		}
+ 	}
+ 
+diff --git a/core/hub_test.go b/core/hub_test.go
+--- a/core/hub_test.go
++++ b/core/hub_test.go
+@@ -10,6 +10,7 @@
+ 	"net"
+ 	"net/url"
+ 	"os"
++	"os/exec"
+ 	"path/filepath"
+ 	"slices"
+ 	"strconv"
+@@ -1182,3 +1183,72 @@
+ 		t.Fatal("dumping a text rule set succeeded")
+ 	}
+ }
++
++func TestRouteWeaverFailoverAppSelections(t *testing.T) {
++	// A fresh process owns Mihomo's provider cache, so Windows releases the
++	// database handle before the parent removes the test home.
++	const homeKey = "RW_FAILOVER_APP_TEST_HOME"
++	home := os.Getenv(homeKey)
++	if home == "" {
++		child := exec.Command(os.Args[0], "-test.run=^TestRouteWeaverFailoverAppSelections$")
++		child.Env = append(os.Environ(), homeKey+"="+t.TempDir())
++		if output, err := child.CombinedOutput(); err != nil {
++			t.Fatalf("isolated app selection test: %v\n%s", err, output)
++		}
++		return
++	}
++	previous := constant.Path.HomeDir()
++	constant.SetHomeDir(home)
++	t.Cleanup(func() { constant.SetHomeDir(previous) })
++	withCurrentConfig(t, nil)
++	keepTunnel(t)
++	t.Cleanup(func() { tunnel.SetRouteWeaverFailover(nil) })
++
++	const raw = `
++mode: rule
++proxies:
++  - {name: A, type: socks5, server: 127.0.0.1, port: 1}
++  - {name: B, type: socks5, server: 127.0.0.1, port: 2}
++proxy-providers:
++  inline-collision:
++    type: inline
++    payload:
++      - {name: Standby1, type: socks5, server: 127.0.0.1, port: 3}
++  late-collision:
++    type: file
++    path: ./late.yaml
++proxy-groups:
++  - {name: Primary, type: select, proxies: [A, B], use: [inline-collision, late-collision], default-selected: A}
++routeweaver-failover: {name: Standby, source: Primary, policies: [Primary]}
++rules: ['MATCH,Primary']
++`
++	const provider = "proxies:\n  - {name: Standby2, type: socks5, server: 127.0.0.1, port: 4}\n"
++	for name, data := range map[string]string{"config.yaml": raw, "late.yaml": provider} {
++		if err := os.WriteFile(filepath.Join(home, name), []byte(data), 0o600); err != nil {
++			t.Fatal(err)
++		}
++	}
++	if err := applyConfig(&SetupParams{SelectedMap: map[string]string{
++		"Primary": "B", "Standby": "B", "Standby1 [V14]": "A",
++	}}); err != nil {
++		t.Fatal(err)
++	}
++	if got := handleGetProxies().All; !slices.Equal(got, []string{"GLOBAL", "Primary", "Standby1 [V14]", "Standby2", "Standby3"}) {
++		t.Fatalf("app group list = %v", got)
++	}
++	for name, want := range map[string]string{"Primary": "B", "Standby1 [V14]": "A", "Standby2": "REJECT", "Standby3": "REJECT"} {
++		group, err := selectableGroup(name)
++		if err != nil || group.Now() != want {
++			t.Fatalf("%s: want saved pick %s, group %v (%v)", name, want, group, err)
++		}
++	}
++	if result := handleChangeProxy(&ChangeProxyParams{GroupName: "Standby2", ProxyName: "Standby2"}); result.Message == "" {
++		t.Fatal("a late provider node with the same name was offered as a standby")
++	}
++	if result := handleChangeProxy(&ChangeProxyParams{GroupName: "Standby2", ProxyName: "A"}); result.Message != "" || !result.Changed {
++		t.Fatalf("app could not update standby 2: %+v", result)
++	}
++	if got, want := resolveExit("www.example.net:443", ""), exitName(tunnel.Proxies()["B"]); got != want {
++		t.Fatalf("route inspection reported %q, want %q", got, want)
++	}
++}

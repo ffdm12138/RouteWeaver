@@ -141,6 +141,51 @@
     "dual-stack/auto": "real A/AAAA over the OpenAI group DoH/443",
     "reason": "Chromium classifies every usable IPv6 Fake-IP prefix as local network"
   },
+  "proxyFailover": {
+    "revision": "proxy-failover-flclash093-r1",
+    "status": "WINDOWS_ISOLATED_CORE_AND_HOST_TESTS_PASS_DEVICE_PENDING",
+    "clients": [
+      "windows"
+    ],
+    "tracks": [
+      "v14.3",
+      "v14.3-ipv4-only"
+    ],
+    "flclashVersion": "0.9.3+2026110401",
+    "backupTiers": 3,
+    "coreVersion": "v1.19.33-rw-failover-flclash093-r1",
+    "coreSHA256": "478643086f2b8f409bcdebba8398b4e03ed3cb01dc9b1e2ac229498953d40a03",
+    "defaultSelection": "REJECT",
+    "guide": "docs/guides/故障转移.md",
+    "verification": "releases/v14.3/validation/proxy-failover/windows-flclash-0.9.3.json",
+    "corePackage": "dist/v14.3/v14.3-proxy-failover-flclash-0.9.3-windows-core.zip",
+    "sourcePackage": "dist/v14.3/v14.3-proxy-failover-flclash-0.9.3-corresponding-source.zip",
+    "overwritesPackage": "dist/v14.3/v14.3-proxy-failover-flclash-0.9.3-public-overwrites.zip",
+    "shadowrocket": "NATIVE_FALLBACK_DOCUMENTED_DEVICE_NOT_RUN",
+    "clientDeployment": false,
+    "legacyWindowsFlClash090": {
+      "revision": "proxy-failover-r1",
+      "status": "WINDOWS_ISOLATED_CORE_PASS_DEVICE_PENDING",
+      "clients": [
+        "windows"
+      ],
+      "tracks": [
+        "v14.3",
+        "v14.3-ipv4-only"
+      ],
+      "coreVersion": "v1.19.32-rw-failover-r1",
+      "coreSHA256": "2abb383b7255618aa595a7553a8f6d811daf2ca3ae02d5631ae29366a3303068",
+      "defaultSelection": "REJECT",
+      "guide": "releases/v14.3/research/proxy-failover/README.md",
+      "verification": "dist/v14.3/proxy-failover-verification.json",
+      "shadowrocket": "NATIVE_FALLBACK_DOCUMENTED_DEVICE_NOT_RUN",
+      "baselineEvidence": "architecture-audit-r1 records the preceding revision",
+      "clientDeployment": false
+    },
+    "publicReleaseTag": "v14.3.0-rc.10",
+    "publicReleaseUrl": "https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-rc.10",
+    "publicationManifest": "harness/releases/v14.3.0-rc.10.json"
+  },
   "architectureRevision": "architecture-audit-r1",
   "architectureAudit": {
     "revision": "architecture-audit-r1",

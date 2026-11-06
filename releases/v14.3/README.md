@@ -1,3 +1,5 @@
+> **Windows FlClash 0.9.3 三档故障转移** · [GitHub 预发布](https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-rc.10) · [安装与回滚](research/proxy-failover/FlClash-0.9.3.md) · [隔离验收回执](validation/proxy-failover/windows-flclash-0.9.3.json)
+
 <!-- ARCHITECTURE_AUDIT_CURRENT:BEGIN -->
 > **当前工作区修订：architecture-audit-r1（2026-11-01）**。两轨七客户端的当前源码、有限静态清单及隔离 Windows 核心已验证；跨端设备、原生 auto 能力和真实 AI 账号任务未验收。
 > 本轮未安装脚本、改动现用客户端、重启服务或发布 GitHub。历史 rc.5–rc.8 段落及旧回执仅作当时记录，不认证本轮新字节。

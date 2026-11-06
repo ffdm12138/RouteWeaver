@@ -28,7 +28,7 @@
     },
     {
       "file": "tools/lib/compile-entries.cjs",
-      "sha256": "8984cc2ca1bdb6f2a4998ce99a51e9b76defc6675c152861aa834382225ffb64"
+      "sha256": "02f4492c9fbaa072ad4f6a7981e3d619e51019df76cc47e839677fb1d9aef2fd"
     },
     {
       "file": "tools/lib/render-runtime.cjs",
@@ -203,8 +203,8 @@
     {
       "platform": "clashVerge",
       "file": "src/clash-verge/v14.3-clash-verge.js",
-      "sha256": "8e5ba94433ba46980e75da2b38e5eaee6900a9fc50f08c931aae15ca6d247d2e",
-      "bytes": 129992,
+      "sha256": "749e9add2cb3d2ff90a43d13312c7ebb6ab8943f04da717d087358d4253654d7",
+      "bytes": 130033,
       "generatedConfigBytes": 178257,
       "inlineRows": 819,
       "remoteSources": 30

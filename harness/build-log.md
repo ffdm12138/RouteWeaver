@@ -120,3 +120,19 @@ Six JS entry modes (auto/dual-stack/ipv4-local) and Shadowrocket native preferen
 ## 2026-10-17 · rc.6 controller-readiness-r1 local repair
 
 The unchanged full/empty baselines passed with the identical core; the exact original trigger remains unproven. Hardened only the owned replay controller: bounded whole-request and readiness deadlines, finite idempotent transport retries, actual provider readiness and exited-child cleanup. Original rc.6 FAIL bytes and prior harnesses are retained separately. Two full and two empty-provider runs plus cold-download/Mac/Verge all passed, 14,886 native observations; 8 controller failure-path cases and 31 Python unit tests passed. Generation, all relevant static contracts and current hash bindings passed; three packages passed CRC/member SHA256, independent extracted static replay and publication scans. Seven entry files, production runtime, pinned rule lock, core binaries and running clients were not changed. Local repair is unpublished; device auto/TUN/media/public IPv6 acceptance remains pending. Final evidence: harness/verification/rc6-api-repair.json.
+
+## 2026-11-06 · Windows proxy-failover-r1
+
+Windows FlClash 主版与纯 IPv4 入口增加可选原生描述。两种口味分别通过 24 项新增配置、160 项架构回归和 67 项纯 IPv4 检查，口味差异 26 项通过。Go 配置与状态测试通过。8 项 Windows 加载检查和 14 组隔离回环场景通过，验证业务与漏网之鱼的 TCP、UDP、DoH/DoT、切回、REJECT 和 provider 刷新。两次受控黑洞接管分别为 12.70 秒和 12.75 秒，恢复切回各 10.00 秒。
+
+构建中修正了核心包依赖、基线 Go 语言级别、测试链接及回环入站初始化。最终回放按中继端看到的主机或 hosts 映射 IP 判定出口。配对核心 SHA-256 为 `2abb383b7255618aa595a7553a8f6d811daf2ca3ae02d5631ae29366a3303068`，Helper 内嵌同一 SHA-256。本地新候选与回执在 `dist/v14.3`。真机 Windows TUN、其它客户端与 Shadowrocket 设备验收待测。
+
+## 2026-11-06 · Windows FlClash 0.9.3 受控三档
+
+配对核心 v1.19.33-rw-failover-flclash093-r1，SHA-256 478643086f2b8f409bcdebba8398b4e03ed3cb01dc9b1e2ac229498953d40a03。Go 配置、隧道和 FlClash 宿主入口单测通过。4 项隔离加载与 16 组回放通过，覆盖 A → 1 → 2 → 3、乱序恢复、全故障仅尝试 A、在线自动组隔离、REJECT、UDP 能力以及 provider 刷新。验证实际 TCP、UDP、DoH、DoT 出口。
+
+三件套、依赖与对应源码、两轨覆写和逐文件哈希已校验。本地候选回执在 dist/v14.3/proxy-failover-flclash-0.9.3-verification.json。全量生成检查仍报告小火箭历史需求文档哈希差异，当前 Shadowrocket 配置字节与生成结果一致。App/TUN、iOS 真机和 GitHub 发布分别待验收。
+
+## v14.3.0-rc.10 · 公开发版
+
+公开版隔离回执和十四份导入入口由独立发布清单绑定。附件清单含三个候选 ZIP、逐包 SHA-256、总校验和及隔离回执。当前生成与静态合同从 Git 索引的临时副本执行。此前已封签架构审计回执继续对应 rc.9。 [发布清单](releases/v14.3.0-rc.10.json) · [GitHub 预发布](https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-rc.10)

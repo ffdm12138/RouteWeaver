@@ -1,0 +1,172 @@
+{
+  "tag": "v14.3.0-rc.10",
+  "scope": "PUBLIC_WINDOWS_FLCLASH_0_9_3_THREE_TIER_CANDIDATE",
+  "prerelease": true,
+  "deviceAcceptance": "NOT_RUN",
+  "imports": {
+    "releases/v14.3-ipv4-only/src/android/v14.3-android-flclash-ipv4-only.js": "ed8df22fdedefd2c07118d4dbe720a04089c9787fd603a009f5d395a3ac8eb6f",
+    "releases/v14.3-ipv4-only/src/clash-verge/v14.3-clash-verge-ipv4-only.js": "7020d080ecad6b0cec14d652cae5068af8bfcb394755071b0bb0dd5a58aeb648",
+    "releases/v14.3-ipv4-only/src/ios/v14.3-clashmi-domestic-protocol-r1-ipv4-only.js": "6d0a255a979cb6cdce99185228999a3d2b9268e93ffff06548450b43c3deaa30",
+    "releases/v14.3-ipv4-only/src/ios/v14.3-shadowrocket-ipv4-only.conf": "d4cda5ec99460cce07fa2fb8d886c2b0e1038ebff515b793d0adeb0aea425bc2",
+    "releases/v14.3-ipv4-only/src/macos/v14.3-macos-clashmi-ipv4-only.js": "0d3f07dae866b1b3af7f01e47d4dd79d7ca327aae3389657b89f9cac28519109",
+    "releases/v14.3-ipv4-only/src/macos/v14.3-macos-flclash-ipv4-only.js": "3a742a6bae412f4b386aec2ba5b1d3018d1d39a8f2318f9e41085972dd969303",
+    "releases/v14.3-ipv4-only/src/windows/v14.3-windows-flclash-ipv4-only.js": "1f11cfe6e02d7219994b8f904dfebebe2df45383b5c92fb190081b82e547d900",
+    "releases/v14.3/src/android/v14.3-android-flclash.js": "6d1d784926ee34faee8ef508d4c82f12f99ec579be39c22c0b4c11b7045564bc",
+    "releases/v14.3/src/clash-verge/v14.3-clash-verge.js": "749e9add2cb3d2ff90a43d13312c7ebb6ab8943f04da717d087358d4253654d7",
+    "releases/v14.3/src/ios/v14.3-clashmi-domestic-protocol-r1.js": "b814b184acc3b941cafe8648c14ca35dc8fdf6d386a464eb70ef496960e67bb6",
+    "releases/v14.3/src/ios/v14.3-shadowrocket.conf": "36b83e9069308567c9497eb4a1902536c78572c6786bbb4d712cb976148c6088",
+    "releases/v14.3/src/macos/v14.3-macos-clashmi.js": "bfd0cc551f302e11509546fb7bfabaf426206006bbb6bb31eca9b69e02016217",
+    "releases/v14.3/src/macos/v14.3-macos-flclash.js": "5d1556218db5b1e8b6f531adf6eddb68dc6c6bdc0c1930047c74fe49fe6426e0",
+    "releases/v14.3/src/windows/v14.3-windows-flclash.js": "4526de72b61d7dd6aded0f48bf03e1ec0b33fdb109f38b0c5c541627b704542f"
+  },
+  "sources": {
+    ".gitattributes": "4c193090b1c46f43978bd47e1a483b5b78b913cc2a4323d09b075616b0fe4dd3",
+    ".github/workflows/verify.yml": "404bf4fd7626b4e792fce0198d31c37f66413be3de4b20c9d049e69aba148e76",
+    "CHANGELOG.md": "859dcb8d5dc051a68d1b2874664a00764b13188d3d780900d665d044fadd26f5",
+    "CURRENT_RELEASE.json": "98affc3040da61fabd224e41b1a4d4456693dbfdf8d7dfef52f8fbbaa20ec3f8",
+    "PLANS.md": "022b2dfcaa356061091b0f5348a047ec09ec59d8345e8f5ec26c38929006b646",
+    "README.md": "b55d82d70f9484048ff78d9cf055d9a9e9ad26b6561cbad8103b4a77a81e8f90",
+    "docs/README.md": "11ce357def854d8a94fe699ec2485b7141979a212c37996e9d341d6be00c9d8c",
+    "docs/guides/故障转移.md": "fab573faca46ed92e19a56f708711d8df84294534ea4494b217263dece8fa38e",
+    "docs/maintenance/开源与发布.md": "3c287fda162d8049988e14e6dcf4b9c3cb629148a2c2f3f9755d4f1f22afee07",
+    "docs/status/当前验收.md": "cc8b44bebc2e1e91028fc07370e3acd4f8df836e715206ca59f48ba0395592d9",
+    "docs/需求.md": "ce8e8807431702087123364eea63208d69fc472e71262fe814cae2ef63624326",
+    "harness/build-log.md": "a8e0d3daf1e22077851372402e6f8f2a30eb911bd7e69fa4498814d41c24ccb2",
+    "releases/v14.3-ipv4-only/MANIFEST.json": "b8157ca7436342d305c6f8462d0c90265a1e147008bf257a923da0ea36b4b12e",
+    "releases/v14.3-ipv4-only/README.md": "043d0b90222469620a99fffbf37215a4d86d4ea37521d08236a20a1490f41c8e",
+    "releases/v14.3-ipv4-only/src/android/v14.3-android-flclash-ipv4-only.js": "ed8df22fdedefd2c07118d4dbe720a04089c9787fd603a009f5d395a3ac8eb6f",
+    "releases/v14.3-ipv4-only/src/clash-verge/v14.3-clash-verge-ipv4-only.js": "7020d080ecad6b0cec14d652cae5068af8bfcb394755071b0bb0dd5a58aeb648",
+    "releases/v14.3-ipv4-only/src/ios/v14.3-clashmi-domestic-protocol-r1-ipv4-only.js": "6d0a255a979cb6cdce99185228999a3d2b9268e93ffff06548450b43c3deaa30",
+    "releases/v14.3-ipv4-only/src/macos/v14.3-macos-clashmi-ipv4-only.js": "0d3f07dae866b1b3af7f01e47d4dd79d7ca327aae3389657b89f9cac28519109",
+    "releases/v14.3-ipv4-only/src/macos/v14.3-macos-flclash-ipv4-only.js": "3a742a6bae412f4b386aec2ba5b1d3018d1d39a8f2318f9e41085972dd969303",
+    "releases/v14.3-ipv4-only/src/windows/v14.3-windows-flclash-ipv4-only.js": "1f11cfe6e02d7219994b8f904dfebebe2df45383b5c92fb190081b82e547d900",
+    "releases/v14.3/README.md": "15ecefd80a3fb17fc4b347143c1df66d051e9d9e9509cdd8bb8c319e7996b59f",
+    "releases/v14.3/metadata/balanced-sources.json": "8689b1bc18931f3e5e4f4179f8935fbdc645b9255d90d340afa2c06adb15da19",
+    "releases/v14.3/metadata/clash-verge-sources.json": "1e2278bbbf9e4b356f046d9ec62e6830e1338733b78b9c60fffdf6681e8b8cbb",
+    "releases/v14.3/metadata/macos-sources.json": "7c0ac23baae2f81518ce87475d58e0660f138b0c95fff934763024303abdea9a",
+    "releases/v14.3/metadata/network-compat.json": "41c794004a3178756ff725d617a878bb39883efe8dde9be977eeb462ae60258f",
+    "releases/v14.3/metadata/shadowrocket-lean.json": "0ea6206f395421b70fb0538542b0a10c543468c30edeb7bcfd2391b9f5e799bc",
+    "releases/v14.3/research/proxy-failover/FlClash-0.9.3.md": "c93516bdb8b895b5916fe640bf69aa05be5c7810685bf298a1e103a9bcdba6dc",
+    "releases/v14.3/research/proxy-failover/README.md": "d3cc365da895930ea8b9af5fb5a882d51420324a4be6568285811d10b47e0b16",
+    "releases/v14.3/research/proxy-failover/core-failover-flclash093.patch": "efbe255ce2b0139bf091d80c71cc4b08ae04f9eaba2563ac85c7e1172cc25b94",
+    "releases/v14.3/research/proxy-failover/core-failover.patch": "7e9834b77f0091f2176247de31f6f57b2b7dc1709fcc67ce3269be2c2efb848b",
+    "releases/v14.3/research/proxy-failover/native/config/routeweaver_failover.go": "de25eebdb04c5e5d14490876b1617c15ef97bf78ce471be782ed4eb563240db8",
+    "releases/v14.3/research/proxy-failover/native/config/routeweaver_failover_test.go": "bbfc9d7c53fd674224b5209e68510dd43cd81e5f728b999e6ee1b4a1219fedeb",
+    "releases/v14.3/research/proxy-failover/native/replay/main.go": "ad5323c994bf82f57848ddb31e7d4cdcc13cffb0013b5be671eff1e0af0d54f0",
+    "releases/v14.3/research/proxy-failover/native/tunnel/routeweaver_failover.go": "b6f59586c0e92ef745dc995fa660c70cc0b1e836fc43a4c1ba10f28772ec0257",
+    "releases/v14.3/research/proxy-failover/native/tunnel/routeweaver_failover_test.go": "2f7102a107fcb8e21a2fffaef41d050aeef257a6ff6377834a5ccd06367427ae",
+    "releases/v14.3/src/android/v14.3-android-flclash.js": "6d1d784926ee34faee8ef508d4c82f12f99ec579be39c22c0b4c11b7045564bc",
+    "releases/v14.3/src/clash-verge/v14.3-clash-verge.js": "749e9add2cb3d2ff90a43d13312c7ebb6ab8943f04da717d087358d4253654d7",
+    "releases/v14.3/src/ios/v14.3-clashmi-domestic-protocol-r1.js": "b814b184acc3b941cafe8648c14ca35dc8fdf6d386a464eb70ef496960e67bb6",
+    "releases/v14.3/src/macos/v14.3-macos-clashmi.js": "bfd0cc551f302e11509546fb7bfabaf426206006bbb6bb31eca9b69e02016217",
+    "releases/v14.3/src/macos/v14.3-macos-flclash.js": "5d1556218db5b1e8b6f531adf6eddb68dc6c6bdc0c1930047c74fe49fe6426e0",
+    "releases/v14.3/src/windows/v14.3-windows-flclash.js": "4526de72b61d7dd6aded0f48bf03e1ec0b33fdb109f38b0c5c541627b704542f",
+    "releases/v14.3/tests/clash-verge.cjs": "22bc0a4f85627fb65a2f090c257933c9ab1c7d0b1e8b57ee710f9a169e9afddf",
+    "releases/v14.3/tests/macos-static.cjs": "ee8d765e3541575f5a715039d9053058e919ed9fcd1c1d9b84d92823040b5f12",
+    "releases/v14.3/tests/static.cjs": "bd4e35a2d76a732b347ff6ea098c36f96899bd7264b56be852b75ab874e67f38",
+    "releases/v14.3/tools/build-all.cjs": "cc4a74636deaa78936b87f38c4711915b3bdd5459c5952b9fbf4995dd021dc67",
+    "releases/v14.3/tools/lib/compile-entries.cjs": "02f4492c9fbaa072ad4f6a7981e3d619e51019df76cc47e839677fb1d9aef2fd",
+    "releases/v14.3/validation/proxy-failover/windows-flclash-0.9.3.json": "c9293a1fc27a7867e23ef7a12bab4240d071e49ebc73632c8c894b6a9812c2fc",
+    "tools/audit-publication.py": "763b53bda96aa0e1f30cdccf910a53c47b71d769bec0e00cb4b2cf60f9264f63",
+    "tools/build-proxy-failover-093.py": "b723636f75410d33c9193d6987a8e0aa7071aac1c61171843282ffcd352d2c7f",
+    "tools/build-proxy-failover.py": "1f40acb21030edb9016309e2b8da64360c297bef0b1193407f254b5692755541",
+    "tools/current_audit.py": "f9e1ae9f46adf4ff57013142f837d8ed37ba7fe9e881e1674a072db8c6e6dfa6",
+    "tools/native-architecture.py": "305d7dcbc414b6dc643489a43e425bba847fba512f3d2ecb88276edd138db367",
+    "tools/prepare-native-audit.cjs": "68de896432421060f1a9665aa083c4dfcc647f131355ba43f3971adc0a698992",
+    "tools/test-architecture.cjs": "ae09886316139d0d06f991e97907f29aa1cd62495672fedcc9d59c0b0a247871",
+    "tools/test-ipv4-only.cjs": "7b9bf3775c3aa28a97c72e0b3bb99b90732990b4365a548e0dfa963746cf34c2",
+    "tools/test-proxy-failover.cjs": "d5861b9da2bfd4c7e4bab39a4cd1a123c43e9acf9090b901fccc25139f54067e",
+    "tools/test-proxy-failover.py": "5750447c349f33b3162b64600b3b3e2e6ef316d339227455c769683dd5e5255a",
+    "tools/verify-proxy-failover-release.py": "c21edb414f845206a7f3a91e894630541fc90c4245540e8159deba6eb3e2b982"
+  },
+  "assets": {
+    "SHA256SUMS.txt": {
+      "sha256": "d8c3ed8c5578146d2af7b0f639ec8d3e2cfca05b3cb20c120387b309496ea302",
+      "bytes": 2220
+    },
+    "proxy-failover-flclash-0.9.3-verification.json": {
+      "sha256": "c9293a1fc27a7867e23ef7a12bab4240d071e49ebc73632c8c894b6a9812c2fc",
+      "bytes": 6893
+    },
+    "v14.3-android-flclash-ipv4-only.js": {
+      "sha256": "ed8df22fdedefd2c07118d4dbe720a04089c9787fd603a009f5d395a3ac8eb6f",
+      "bytes": 121769
+    },
+    "v14.3-android-flclash.js": {
+      "sha256": "6d1d784926ee34faee8ef508d4c82f12f99ec579be39c22c0b4c11b7045564bc",
+      "bytes": 127755
+    },
+    "v14.3-clash-verge-ipv4-only.js": {
+      "sha256": "7020d080ecad6b0cec14d652cae5068af8bfcb394755071b0bb0dd5a58aeb648",
+      "bytes": 123748
+    },
+    "v14.3-clash-verge.js": {
+      "sha256": "749e9add2cb3d2ff90a43d13312c7ebb6ab8943f04da717d087358d4253654d7",
+      "bytes": 130033
+    },
+    "v14.3-clashmi-domestic-protocol-r1-ipv4-only.js": {
+      "sha256": "6d0a255a979cb6cdce99185228999a3d2b9268e93ffff06548450b43c3deaa30",
+      "bytes": 123998
+    },
+    "v14.3-clashmi-domestic-protocol-r1.js": {
+      "sha256": "b814b184acc3b941cafe8648c14ca35dc8fdf6d386a464eb70ef496960e67bb6",
+      "bytes": 130777
+    },
+    "v14.3-macos-clashmi-ipv4-only.js": {
+      "sha256": "0d3f07dae866b1b3af7f01e47d4dd79d7ca327aae3389657b89f9cac28519109",
+      "bytes": 123996
+    },
+    "v14.3-macos-clashmi.js": {
+      "sha256": "bfd0cc551f302e11509546fb7bfabaf426206006bbb6bb31eca9b69e02016217",
+      "bytes": 130779
+    },
+    "v14.3-macos-flclash-ipv4-only.js": {
+      "sha256": "3a742a6bae412f4b386aec2ba5b1d3018d1d39a8f2318f9e41085972dd969303",
+      "bytes": 123567
+    },
+    "v14.3-macos-flclash.js": {
+      "sha256": "5d1556218db5b1e8b6f531adf6eddb68dc6c6bdc0c1930047c74fe49fe6426e0",
+      "bytes": 129467
+    },
+    "v14.3-proxy-failover-flclash-0.9.3-corresponding-source.zip": {
+      "sha256": "fb6ebe97f7d18ba6a5e88c1eb198bc8d390054d298ffb091f4cae14218bc5b58",
+      "bytes": 49864662
+    },
+    "v14.3-proxy-failover-flclash-0.9.3-corresponding-source.zip.sha256": {
+      "sha256": "3716279edfd501bcecafcc6d05386cccbde6c15870adf17676814bb72b940495",
+      "bytes": 127
+    },
+    "v14.3-proxy-failover-flclash-0.9.3-public-overwrites.zip": {
+      "sha256": "1fcd00c90bc33e648049555877f50fedce67b807a090166dde614d8032cda008",
+      "bytes": 65713
+    },
+    "v14.3-proxy-failover-flclash-0.9.3-public-overwrites.zip.sha256": {
+      "sha256": "2f2675c50a41ebecd60ad79ec67a9b6b45e45fb1f795f3ad9bf8bcad42d6ec66",
+      "bytes": 124
+    },
+    "v14.3-proxy-failover-flclash-0.9.3-windows-core.zip": {
+      "sha256": "2d7cb44de3ccdc124d27e18f54be53d2146a7028ef8cb08c74ef03b380c324e8",
+      "bytes": 27008894
+    },
+    "v14.3-proxy-failover-flclash-0.9.3-windows-core.zip.sha256": {
+      "sha256": "732fa83770d7426bf17cf4d1c81f50d478de45af43f53a6836ddd47f50cd041f",
+      "bytes": 119
+    },
+    "v14.3-shadowrocket-ipv4-only.conf": {
+      "sha256": "d4cda5ec99460cce07fa2fb8d886c2b0e1038ebff515b793d0adeb0aea425bc2",
+      "bytes": 1746839
+    },
+    "v14.3-shadowrocket.conf": {
+      "sha256": "36b83e9069308567c9497eb4a1902536c78572c6786bbb4d712cb976148c6088",
+      "bytes": 1746779
+    },
+    "v14.3-windows-flclash-ipv4-only.js": {
+      "sha256": "1f11cfe6e02d7219994b8f904dfebebe2df45383b5c92fb190081b82e547d900",
+      "bytes": 122038
+    },
+    "v14.3-windows-flclash.js": {
+      "sha256": "4526de72b61d7dd6aded0f48bf03e1ec0b33fdb109f38b0c5c541627b704542f",
+      "bytes": 127900
+    }
+  }
+}

@@ -1,0 +1,146 @@
+{
+  "status": "PASS",
+  "scope": "isolated Windows core; actual TCP, UDP, DoH and DoT via loopback nodes",
+  "nativeLoadCount": 4,
+  "nativeLoads": [
+    {
+      "edition": "public",
+      "mode": "auto",
+      "source": "releases/v14.3/src/windows/v14.3-windows-flclash.js",
+      "sourceSHA256": "4526de72b61d7dd6aded0f48bf03e1ec0b33fdb109f38b0c5c541627b704542f"
+    },
+    {
+      "edition": "public",
+      "mode": "dual-stack",
+      "source": "releases/v14.3/src/windows/v14.3-windows-flclash.js",
+      "sourceSHA256": "4526de72b61d7dd6aded0f48bf03e1ec0b33fdb109f38b0c5c541627b704542f"
+    },
+    {
+      "edition": "public",
+      "mode": "ipv4-local",
+      "source": "releases/v14.3/src/windows/v14.3-windows-flclash.js",
+      "sourceSHA256": "4526de72b61d7dd6aded0f48bf03e1ec0b33fdb109f38b0c5c541627b704542f"
+    },
+    {
+      "edition": "public",
+      "mode": "ipv4-only",
+      "source": "releases/v14.3-ipv4-only/src/windows/v14.3-windows-flclash-ipv4-only.js",
+      "sourceSHA256": "1f11cfe6e02d7219994b8f904dfebebe2df45383b5c92fb190081b82e547d900"
+    }
+  ],
+  "nativeCases": [
+    {
+      "edition": "public",
+      "name": "windows-dual-stack",
+      "mode": "dual-stack",
+      "source": "releases/v14.3/src/windows/v14.3-windows-flclash.js",
+      "sourceSHA256": "4526de72b61d7dd6aded0f48bf03e1ec0b33fdb109f38b0c5c541627b704542f",
+      "fixtureSHA256": "8a48b5b3431872c6111abf83881c75595f5640bc5a2d639ff66943361b8f4736",
+      "checks": [
+        "three-default-reject-and-primary-tcp-udp-doh-dot",
+        "two-timeouts-to-tier1-business-catchall-domestic-tcp-udp-doh-dot",
+        "tier2-tier3-and-all-down-tries-only-a-even-with-live-auto",
+        "two-recoveries-preempt-by-priority-and-restore-a",
+        "reject-skips-each-tier-and-all-reject-immediately-disables",
+        "explicit-direct-reject-and-original-doh-guard",
+        "same-name-new-node-reprobed-and-udp-rejected-without-fallthrough",
+        "missing-a-and-spare-fail-closed-until-explicit-all-reject"
+      ],
+      "takeoverSeconds": 12.64,
+      "recoverySeconds": 9.97,
+      "childExited": true
+    },
+    {
+      "edition": "public",
+      "name": "windows-ipv4-only",
+      "mode": "ipv4-only",
+      "source": "releases/v14.3-ipv4-only/src/windows/v14.3-windows-flclash-ipv4-only.js",
+      "sourceSHA256": "1f11cfe6e02d7219994b8f904dfebebe2df45383b5c92fb190081b82e547d900",
+      "fixtureSHA256": "f4fba51f7edca3bae9bc50bc3b4c5443862cd5c8b91a4d027fe32026d6b60715",
+      "checks": [
+        "three-default-reject-and-primary-tcp-udp-doh-dot",
+        "two-timeouts-to-tier1-business-catchall-domestic-tcp-udp-doh-dot",
+        "tier2-tier3-and-all-down-tries-only-a-even-with-live-auto",
+        "two-recoveries-preempt-by-priority-and-restore-a",
+        "reject-skips-each-tier-and-all-reject-immediately-disables",
+        "explicit-direct-reject-and-original-doh-guard",
+        "same-name-new-node-reprobed-and-udp-rejected-without-fallthrough",
+        "missing-a-and-spare-fail-closed-until-explicit-all-reject"
+      ],
+      "takeoverSeconds": 12.73,
+      "recoverySeconds": 10.03,
+      "childExited": true
+    }
+  ],
+  "temporaryDirectoryRemoved": true,
+  "shadowrocket": "NATIVE_FALLBACK_DOCUMENTED_DEVICE_NOT_RUN",
+  "replayHarnessSHA256": "5750447c349f33b3162b64600b3b3e2e6ef316d339227455c769683dd5e5255a",
+  "replaySHA256": "7243051f099e59d81ee13bdcb4721f5d4d6c6071e43c34930b095c1c92768a1e",
+  "flclashVersion": "0.9.3+2026110401",
+  "flclashCommit": "be84736605527034689c95bf27828ff27d912c5e",
+  "mihomoForkCommit": "024245dc72bc92f48237f865119afe0cd53ac9e6",
+  "controlledPatchSHA256": "efbe255ce2b0139bf091d80c71cc4b08ae04f9eaba2563ac85c7e1172cc25b94",
+  "flclashCoreConfigSHA256": "643ea7978cb31c0c934d6fc0efd7df93d7a01ed34c161346831e6986b3254fc1",
+  "revision": "v1.19.33-rw-failover-flclash093-r1",
+  "sourceBaseSHA256": "5bfcc200f69e8c0cc9ac62cc3f8a1db5f582363ec7be997152c6d4c8131d756b",
+  "nativeFiles": {
+    "adapter/adapter.go": "fbcb948d7d77ba43a7559ee1e580ceef580f26ab10077b3f2ad8897aef33162f",
+    "adapter/outboundgroup/selector.go": "b86b310709daffc026c62da9faf5d3768bae8bc9643768dda585ad3058a4c9f2",
+    "config/config.go": "4983e21d48f9fd9a5b359a97aa6433c200097bfcf31b2ce4439a6f259e2368c0",
+    "config/routeweaver_failover.go": "556a112b9ef17f0b7bd1302a56b2a006fdc5c4178db095403901841c938cee89",
+    "config/routeweaver_failover_test.go": "67582fa2b60a85885189e90863fa2ae6fc9560925dfeff45174a6cc255b2d013",
+    "config/utils_test.go": "05b9579c4283be7aae0efa250671953f3777b801ad7659896b0cf53854061c24",
+    "constant/adapters.go": "e05fec4b716759e9f69234158cc4a345489a608e3428a14cbccd195dd677ac13",
+    "hub/executor/executor.go": "812ad6d63a571a548838b15004ea5dab2ba7272f144e42689de85ec6ca00d97c",
+    "tunnel/dns_dialer.go": "db38f8ea839a242838a0c0f3cc602a1c7b3d5cb06bb442e169e6fd47374ad9a6",
+    "tunnel/patch.go": "14260912e9faa934d9620fd6a957ee33e9d3899ccf255620dfd8163566cdb66d",
+    "tunnel/routeweaver_failover.go": "4cc6089a4b6c864f7ca2d78365ab5944a9bd4b781b679cb34c0bec8a2d2f203e",
+    "tunnel/routeweaver_failover_test.go": "96c4df6999697812261f238050b2b619853744955ca2445e489dd0e9fe1996f5",
+    "tunnel/tunnel.go": "82564736d73250bbd0f7df2a83ab83cd5f1e0e52204dd4b513069f9c80d86f07"
+  },
+  "integrationPatchSHA256": "7e9834b77f0091f2176247de31f6f57b2b7dc1709fcc67ce3269be2c2efb848b",
+  "binaries": {
+    "FlClashCore.exe": "478643086f2b8f409bcdebba8398b4e03ed3cb01dc9b1e2ac229498953d40a03",
+    "FlClashHelperService.exe": "849e8999312ccfdb02c9bc3103abb3260b6783ed6302ec0148cb77eb550bd891",
+    "manifest.json": "a75354d59657052efc1771215e269621b689e5ea4bb22db23d5645a21ddaf268"
+  },
+  "packages": [
+    {
+      "name": "v14.3-proxy-failover-flclash-0.9.3-corresponding-source.zip",
+      "sha256": "fb6ebe97f7d18ba6a5e88c1eb198bc8d390054d298ffb091f4cae14218bc5b58",
+      "members": 15021
+    },
+    {
+      "name": "v14.3-proxy-failover-flclash-0.9.3-windows-core.zip",
+      "sha256": "2d7cb44de3ccdc124d27e18f54be53d2146a7028ef8cb08c74ef03b380c324e8",
+      "members": 418
+    },
+    {
+      "name": "v14.3-proxy-failover-flclash-0.9.3-public-overwrites.zip",
+      "sha256": "1fcd00c90bc33e648049555877f50fedce67b807a090166dde614d8032cda008",
+      "members": 4
+    }
+  ],
+  "deviceAcceptance": "NOT_RUN",
+  "clientDeployment": false,
+  "packageVerification": {
+    "status": "PASS",
+    "scope": "member hashes, source tree, amd64 PE, core SHA in Helper, public Windows entry bytes",
+    "appCoreUnitPackages": [
+      "github.com/metacubex/mihomo/config",
+      "github.com/metacubex/mihomo/tunnel",
+      "core"
+    ]
+  },
+  "staticChecks": [
+    {
+      "edition": "public",
+      "sharedGeneration": "PASS",
+      "ipv4OnlyGeneration": "PASS",
+      "descriptorChecks": 24,
+      "architectureChecks": 160,
+      "ipv4OnlyChecks": 67,
+      "shadowrocketMetadataCheck": "SOURCE_CONTRACT_SHA_STALE_CONFIG_BYTES_MATCH"
+    }
+  ]
+}

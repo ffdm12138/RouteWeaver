@@ -1,6 +1,6 @@
 <!-- ARCHITECTURE_AUDIT_CURRENT:BEGIN -->
 > **当前工作区修订：architecture-audit-r1（2026-11-01）**。两轨七客户端的当前源码、有限静态清单及隔离 Windows 核心已验证；跨端设备、原生 auto 能力和真实 AI 账号任务未验收。
-> 本轮仅发布公开源码与候选交付，未安装脚本、改动现用客户端或重启服务。当前公开预发布版本为 `v14.3.0-rc.9`；真实设备验收仍未完成。历史 rc.5–rc.8 段落及旧回执仅作当时记录，不认证本轮新字节。
+> 本轮仅发布公开源码与候选交付，未安装脚本、改动现用客户端或重启服务。架构审计基线的公开预发布版本为 `v14.3.0-rc.9`；真实设备验收仍未完成。历史 rc.5–rc.8 段落及旧回执仅作当时记录，不认证本轮新字节。
 > 当前入口：[全架构审计与修复](docs/reports/v14.3/全架构审计与修复.md) · [手动部署与验证](docs/guides/本轮修复手动部署.md)。当前候选使用 `tools/verify-current-audit.py` 和 `tools/package-architecture-audit.py`，不重签旧正式发布链。
 <!-- ARCHITECTURE_AUDIT_CURRENT:END -->
 
@@ -21,6 +21,12 @@
 
 需求合同、分流优先级和固定远程规则源变化需明确审核。发版不安装客户端、不改外层工作区。实际结果见 [build-log](harness/build-log.md)。
 
+
+## Windows FlClash 0.9.3 受控三档故障转移
+
+- 主出口与三个共用手选备用按 A → 1 → 2 → 3 排序，恢复后按相同顺序切回。每档可设 REJECT，三档均设 REJECT 交回原策略。全故障只尝试 A，A 已从订阅移除且无可用备用时拒绝。显式 DIRECT、REJECT 和「自动选择」各自独立。
+- 从 0.9.3 锁定源码构建配对核心与 Helper。个人版、公开版的主版和纯 IPv4 版验证配置、实际 TCP/UDP/DoH/DoT 出口、逐档断开与恢复、订阅移除及同名刷新。交付配对三件套、完整源码、哈希和手动部署说明。
+- 实际 App/TUN 单独验收。其他 Clash 端以各自匹配核心通过合同为启用条件。Shadowrocket 用 iOS 真机检查 FINAL 和业务组的三档顺序、REJECT 与 DIRECT 边界，以及 TCP/UDP/DNS 出口，通过后再生成两轨配置。
 
 ## 2026-10-16 · ipv6-fallback-r1 / rc.2
 

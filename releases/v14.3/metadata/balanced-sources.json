@@ -13,17 +13,17 @@
     {
       "platform": "windows",
       "file": "src/windows/v14.3-windows-flclash.js",
-      "sha256": "5186074bd47902f69a4d9e076b5969bc05f7e515b13c0536319d5ebc81eb279b",
-      "bytes": 127631,
-      "generatedConfigBytes": 177679,
+      "sha256": "4526de72b61d7dd6aded0f48bf03e1ec0b33fdb109f38b0c5c541627b704542f",
+      "bytes": 127900,
+      "generatedConfigBytes": 178107,
       "inlineRows": 819,
       "remoteSources": 30
     },
     {
       "platform": "android",
       "file": "src/android/v14.3-android-flclash.js",
-      "sha256": "a6af2f7b4a75b12f6f14ac9c8efe5b83fca71a862b82c396d4a97cbe754158da",
-      "bytes": 127714,
+      "sha256": "6d1d784926ee34faee8ef508d4c82f12f99ec579be39c22c0b4c11b7045564bc",
+      "bytes": 127755,
       "generatedConfigBytes": 177490,
       "inlineRows": 819,
       "remoteSources": 29
@@ -31,8 +31,8 @@
     {
       "platform": "clashmi",
       "file": "src/ios/v14.3-clashmi-domestic-protocol-r1.js",
-      "sha256": "0beb8d6201a2823d94331b95baf51e0cf8de1f69a55c4847e4d2d118525c6cbd",
-      "bytes": 130736,
+      "sha256": "b814b184acc3b941cafe8648c14ca35dc8fdf6d386a464eb70ef496960e67bb6",
+      "bytes": 130777,
       "generatedConfigBytes": 178578,
       "inlineRows": 819,
       "remoteSources": 29
@@ -70,7 +70,7 @@
     },
     {
       "file": "tools/lib/compile-entries.cjs",
-      "sha256": "8984cc2ca1bdb6f2a4998ce99a51e9b76defc6675c152861aa834382225ffb64"
+      "sha256": "02f4492c9fbaa072ad4f6a7981e3d619e51019df76cc47e839677fb1d9aef2fd"
     },
     {
       "file": "tools/lib/render-runtime.cjs",

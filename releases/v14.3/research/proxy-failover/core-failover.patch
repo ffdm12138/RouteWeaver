@@ -1,0 +1,295 @@
+--- a/constant/adapters.go
++++ b/constant/adapters.go
+@@ -63,6 +63,15 @@
+ 	DefaultDropTime   = 12 * DefaultTCPTimeout
+ 	DefaultTLSTimeout = DefaultTCPTimeout
+ )
++
++// IsRouteWeaverTransport excludes groups and all built-in policy actions.
++func IsRouteWeaverTransport(p Proxy) bool {
++	if p == nil {
++		return false
++	}
++	typ := p.Type()
++	return typ >= Shadowsocks && typ <= GostRelay
++}
+ 
+ var DefaultTestURL = "https://www.gstatic.com/generate_204"
+ 
+--- a/adapter/adapter.go
++++ b/adapter/adapter.go
+@@ -203,8 +203,20 @@
+ 
+ 	}()
+ 
+-	unifiedDelay := UnifiedDelay.Load()
+-
++	var status uint16
++	t, status, err = p.testURL(ctx, url, UnifiedDelay.Load())
++	satisfied = status != 0 && (expectedStatus == nil || expectedStatus.Check(status))
++	return
++}
++
++// RouteWeaverProbe reads the status of this probe directly, without updating
++// the shared URL-test history or borrowing a provider's cached health result.
++func (p *Proxy) RouteWeaverProbe(ctx context.Context, url string) bool {
++	_, status, err := p.testURL(ctx, url, false)
++	return err == nil && status == http.StatusNoContent && ctx.Err() == nil
++}
++
++func (p *Proxy) testURL(ctx context.Context, url string, unifiedDelay bool) (t, status uint16, err error) {
+ 	addr, err := urlToMetadata(url)
+ 	if err != nil {
+ 		return
+@@ -277,7 +289,7 @@
+ 		}
+ 	}
+ 
+-	satisfied = resp != nil && (expectedStatus == nil || expectedStatus.Check(uint16(resp.StatusCode)))
++	status = uint16(resp.StatusCode)
+ 	t = uint16(time.Since(start) / time.Millisecond)
+ 	return
+ }
+--- a/adapter/outboundgroup/selector.go
++++ b/adapter/outboundgroup/selector.go
+@@ -4,6 +4,7 @@
+ 	"context"
+ 	"encoding/json"
+ 	"errors"
++	"sync/atomic"
+ 
+ 	C "github.com/metacubex/mihomo/constant"
+ 	P "github.com/metacubex/mihomo/constant/provider"
+@@ -13,11 +14,18 @@
+ 	DefaultSelected string `group:"default-selected,omitempty"`
+ }
+ 
++// selectionToken identifies a particular manual selection.
++type selectionToken struct {
++	name string
++}
++
+ type Selector struct {
+ 	*GroupBase
+-	disableUDP bool
+-	selected   string
+-	testUrl    string
++	disableUDP   bool
++	selected     atomic.Pointer[selectionToken]
++	backupReject C.Proxy
++	backupChanged func()
++	testUrl      string
+ }
+ 
+ // DialContext implements C.ProxyAdapter
+@@ -55,7 +63,7 @@
+ // MarshalJSON implements C.ProxyAdapter
+ func (s *Selector) MarshalJSON() ([]byte, error) {
+ 	all := []string{}
+-	for _, proxy := range s.GetProxies(false) {
++	for _, proxy := range s.Proxies() {
+ 		all = append(all, proxy.Name())
+ 	}
+ 	// When testurl is the default value
+@@ -81,19 +89,28 @@
+ }
+ 
+ func (s *Selector) Set(name string) error {
+-	for _, proxy := range s.GetProxies(false) {
++	for _, proxy := range s.Proxies() {
+ 		if proxy.Name() == name {
+-			s.selected = name
++			s.ForceSet(name)
+ 			return nil
+ 		}
+ 	}
+-
+ 	return errors.New("proxy not exist")
+ }
+ 
+ func (s *Selector) ForceSet(name string) {
+-	s.selected = name
++	s.selected.Store(&selectionToken{name: name})
++	if s.backupChanged != nil {
++		s.backupChanged()
++	}
+ }
++
++func (s *Selector) SetRouteWeaverBackup(reject C.Proxy, changed func()) {
++	s.backupReject = reject
++	s.backupChanged = changed
++}
++
++func (s *Selector) UDPDisabled() bool { return s.disableUDP }
+ 
+ // Unwrap implements C.ProxyAdapter
+ func (s *Selector) Unwrap(metadata *C.Metadata, touch bool) C.Proxy {
+@@ -101,14 +118,27 @@
+ }
+ 
+ func (s *Selector) selectedProxy(touch bool) C.Proxy {
++	proxy, _ := s.Selection(touch)
++	return proxy
++}
++
++// Selection returns the manual target and the token used to read it. The
++// backup's explicit REJECT remains available even if provider filters change.
++func (s *Selector) Selection(touch bool) (C.Proxy, any) {
++	choice := s.selected.Load()
++	if s.backupReject != nil && choice.name == s.backupReject.Name() {
++		return s.backupReject, choice
++	}
+ 	proxies := s.GetProxies(touch)
+ 	for _, proxy := range proxies {
+-		if proxy.Name() == s.selected {
+-			return proxy
++		if proxy.Name() == choice.name && (s.backupReject == nil || C.IsRouteWeaverTransport(proxy)) {
++			return proxy, choice
+ 		}
+ 	}
+-
+-	return proxies[0]
++	if s.backupReject != nil {
++		return s.backupReject, choice
++	}
++	return proxies[0], choice
+ }
+ 
+ func (s *Selector) Providers() []P.ProxyProvider {
+@@ -116,11 +146,21 @@
+ }
+ 
+ func (s *Selector) Proxies() []C.Proxy {
+-	return s.GetProxies(false)
++	proxies := s.GetProxies(false)
++	if s.backupReject == nil {
++		return proxies
++	}
++	choices := []C.Proxy{s.backupReject}
++	for _, proxy := range proxies {
++		if C.IsRouteWeaverTransport(proxy) && proxy.Name() != s.backupReject.Name() {
++			choices = append(choices, proxy)
++		}
++	}
++	return choices
+ }
+ 
+ func NewSelector(option GroupCommonOption, selectorOption SelectorOption, emptyFallback C.Proxy, providers []P.ProxyProvider) (*Selector, error) {
+-	return &Selector{
++	s := &Selector{
+ 		GroupBase: NewGroupBase(GroupBaseOption{
+ 			Name:           option.Name,
+ 			Type:           C.Selector,
+@@ -135,8 +175,9 @@
+ 			Providers:      providers,
+ 			UsePosition:    option.UsePosition,
+ 		}),
+-		selected:   selectorOption.DefaultSelected,
+ 		disableUDP: option.DisableUDP,
+ 		testUrl:    option.URL,
+-	}, nil
++	}
++	s.ForceSet(selectorOption.DefaultSelected)
++	return s, nil
+ }
+--- a/config/config.go
++++ b/config/config.go
+@@ -193,6 +193,7 @@
+ 
+ // Config is mihomo config manager
+ type Config struct {
++	RouteWeaverFailover *T.RouteWeaverFailover
+ 	General       *General
+ 	Controller    *Controller
+ 	Experimental  *Experimental
+@@ -401,6 +402,7 @@
+ }
+ 
+ type RawConfig struct {
++	RouteWeaverFailover *RawRouteWeaverFailover `yaml:"routeweaver-failover" json:"routeweaver-failover,omitempty"`
+ 	Port                          int                     `yaml:"port" json:"port"`
+ 	SocksPort                     int                     `yaml:"socks-port" json:"socks-port"`
+ 	RedirPort                     int                     `yaml:"redir-port" json:"redir-port"`
+@@ -680,6 +682,7 @@
+ 	}
+ 	config.Proxies = proxies
+ 	config.Providers = providers
++	config.RouteWeaverFailover = rawCfg.RouteWeaverFailover.bind(proxies)
+ 
+ 	listeners, err := parseListeners(rawCfg)
+ 	if err != nil {
+@@ -912,6 +915,11 @@
+ 		AllProxies = append(AllProxies, proxy.Name())
+ 	}
+ 
++	groupsConfig, err = cfg.RouteWeaverFailover.addGroup(groupsConfig, proxies)
++	if err != nil {
++		return nil, nil, err
++	}
++
+ 	// keep the original order of ProxyGroups in config file
+ 	for idx, mapping := range groupsConfig {
+ 		groupName, existName := mapping["name"].(string)
+--- a/hub/executor/executor.go
++++ b/hub/executor/executor.go
+@@ -87,6 +87,7 @@
+ 	log.SetLevel(cfg.General.LogLevel)
+ 
+ 	tunnel.OnSuspend()
++	tunnel.SetRouteWeaverFailover(nil)
+ 
+ 	ca.ResetCertificate()
+ 	for _, c := range cfg.TLS.CustomTrustCert {
+@@ -117,6 +118,7 @@
+ 	loadProvider(cfg.RuleProviders)
+ 	runtime.GC()
+ 	tunnel.OnRunning()
++	tunnel.SetRouteWeaverFailover(cfg.RouteWeaverFailover)
+ 	updateUpdater(cfg)
+ 
+ 	resolver.ResetConnection()
+@@ -533,6 +535,7 @@
+ }
+ 
+ func Shutdown() {
++	tunnel.SetRouteWeaverFailover(nil)
+ 	listener.Cleanup()
+ 	tproxy.CleanupTProxyIPTables()
+ 	resolver.StoreFakePoolState()
+--- a/tunnel/tunnel.go
++++ b/tunnel/tunnel.go
+@@ -321,6 +321,8 @@
+ 		proxy, exist = proxies[metadata.SpecialProxy]
+ 		if !exist {
+ 			err = fmt.Errorf("proxy %s not found", metadata.SpecialProxy)
++		} else {
++			proxy = routeWeaverEffective(proxy)
+ 		}
+ 		return
+ 	}
+@@ -682,6 +684,7 @@
+ 					}
+ 				}
+ 
++				adapter = routeWeaverEffective(adapter)
+ 				if metadata.NetWork == C.UDP && !adapter.SupportUDP() {
+ 					log.Debugln("%s UDP is not supported", adapter.Name())
+ 					continue
+--- a/tunnel/dns_dialer.go
++++ b/tunnel/dns_dialer.go
+@@ -78,6 +78,7 @@
+ 		}
+ 	}
+ 
++	proxyAdapter = routeWeaverNamed(proxyAdapter)
+ 	if metadata.NetWork == C.TCP {
+ 		if proxyAdapter == nil {
+ 			opts = append(opts, dialer.WithResolver(r))
+@@ -172,6 +173,7 @@
+ 		return dialer.NewDialer(opts...).ListenPacket(ctx, network, "", metadata.AddrPort())
+ 	}
+ 
++	proxyAdapter = routeWeaverNamed(proxyAdapter)
+ 	if !proxyAdapter.SupportUDP() {
+ 		return nil, fmt.Errorf("proxy adapter [%s] UDP is not supported", proxyAdapter.Name())
+ 	}

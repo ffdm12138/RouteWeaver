@@ -5,7 +5,7 @@ const run=input=>{const ctx=vm.createContext({console:{log(){}}});vm.runInContex
 const input=()=>({proxies:[{name:'Lab',type:'socks5',server:'node.example.test',port:1080,udp:true}],tun:{enable:false,'auto-route':false}});
 function check(name,fn){fn();rows.push({name,status:'PASS'});}
 for(const mode of ['dual-stack','ipv4-local']){
- check(mode+':business-DNS-groups-and-rules-equal-Windows',()=>{const raw={...input(),'x-routeweaver':{'network-mode':mode}},actual=run(raw),before=f.generate('desktop',raw);for(const c of [actual,before]){delete c['x-v14-generated'];delete c.tun;}assert.deepEqual(actual,before);});
+ check(mode+':business-DNS-groups-and-rules-equal-Windows',()=>{const raw={...input(),'x-routeweaver':{'network-mode':mode}},actual=run(raw),before=f.generate('desktop',raw);delete before['routeweaver-failover'];for(const c of [actual,before]){delete c['x-v14-generated'];delete c.tun;}assert.deepEqual(actual,before);});
  check(mode+':three-pass-idempotence',()=>{const first=run({...input(),'x-routeweaver':{'network-mode':mode}});assert.deepEqual(run(first),first);assert.deepEqual(run(run(first)),first);});
  check(mode+':strict-route-and-dual-stack-with-app-switches-retained',()=>{const c=run({...input(),'x-routeweaver':{'network-mode':mode}});assert.equal(c.ipv6,true);assert.equal(c.tun['strict-route'],true);assert.deepEqual(c.tun['route-address'],['0.0.0.0/0','::/0']);assert.equal(c.tun.enable,false);assert.equal(c.tun['auto-route'],false);});
 }

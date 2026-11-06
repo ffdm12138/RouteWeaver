@@ -2301,6 +2301,11 @@ function v14NetworkModeBase(input) {
   if (typeof console !== "undefined" && console.log) console.log("[V14] " + selectable.length + " 个可用节点、" + providerNames.length + " 个 provider、" + business.length + " 个可选业务组；公司规则优先；未分类公网 UDP 不直连，国内 TCP 由国内网站组选择，默认 DIRECT。");
   if (typeof console !== "undefined" && console.log) console.log("[V14] " + ruleSources.length + " 个独立规则集；无本地 Geo 数据依赖。首次运行检查所有规则集已加载且 ruleCount>0，下载经 " + groupName("高纯净度AI用") + "，不静默改走 DIRECT。");
   if (typeof console !== "undefined" && console.log) for (const w of v14Unique(warnings)) console.log("[V14 检查范围] " + w);
+  delete config["routeweaver-failover"];
+  config["routeweaver-failover"] = {
+    name: groupName("故障转移"), source: groupName("高纯净度AI用"),
+    policies: [groupName("高纯净度AI用"), groupName("高网速视频用"), ...business.map(groupName)],
+  };
   return v14NetworkDefaults(config);
 }
 

@@ -11,8 +11,8 @@
       "platform": "macosFlClash",
       "client": "FlClash",
       "file": "src/macos/v14.3-macos-flclash.js",
-      "sha256": "d7eb787244e3120967cb97c7801f027f31b68a587cdb6b150a47fbfec2331e34",
-      "bytes": 129426,
+      "sha256": "5d1556218db5b1e8b6f531adf6eddb68dc6c6bdc0c1930047c74fe49fe6426e0",
+      "bytes": 129467,
       "generatedConfigBytes": 177962,
       "inlineRows": 819,
       "remoteSources": 30
@@ -21,8 +21,8 @@
       "platform": "macosClashMi",
       "client": "Clash Mi",
       "file": "src/macos/v14.3-macos-clashmi.js",
-      "sha256": "1e30fb2002bfedfcfd05a844510e06bc99d519d5b5e783d70b6d24e4301b41e5",
-      "bytes": 130738,
+      "sha256": "bfd0cc551f302e11509546fb7bfabaf426206006bbb6bb31eca9b69e02016217",
+      "bytes": 130779,
       "generatedConfigBytes": 178576,
       "inlineRows": 819,
       "remoteSources": 29
@@ -52,7 +52,7 @@
     },
     {
       "file": "tools/lib/compile-entries.cjs",
-      "sha256": "8984cc2ca1bdb6f2a4998ce99a51e9b76defc6675c152861aa834382225ffb64"
+      "sha256": "02f4492c9fbaa072ad4f6a7981e3d619e51019df76cc47e839677fb1d9aef2fd"
     },
     {
       "file": "tools/lib/render-runtime.cjs",

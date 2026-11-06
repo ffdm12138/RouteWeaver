@@ -1,3 +1,10 @@
+## v14.3.0-rc.10 · Windows FlClash 0.9.3 三档故障转移
+
+- 新连接按原手选节点 A → 故障转移1 → 故障转移2 → 故障转移3 排序。三档默认 REJECT，全选 REJECT 交回原策略。
+- 四个手选出口全故障时只拨 A。订阅移除 A 且无可用备用时拒绝。主动 DIRECT、REJECT 和「自动选择」各自独立。
+- 其他客户端的 JS 在导入 Windows 合并配置时移除 Windows 专用故障转移字段。
+- 公开主版与纯 IPv4 版均通过隔离 TCP、UDP、DoH、DoT 出口回放。发布 Windows amd64 配对三件套、完整对应源码和两轨独立覆写。App/TUN 与 Shadowrocket 真机待验收。
+
 ## v14.3.0-rc.9 · architecture-audit-r1 · 2026-11-01 (Pre-release)
 
 - 修复 Android 精确 API DoH 策略与无 tun 对象时的兼容模式异常。

@@ -56,15 +56,26 @@ function compile(root){
  macClashMi=replaceOnce(macClashMi,'marker.platformRevision = "domestic-protocol-r1"','marker.platformRevision = "macos-r1"');
  macClashMi=replaceOnce(macClashMi,'iOS VPN memory limit, remote provider cache and long-run acceptance','macOS NetworkExtension, remote provider cache and long-run acceptance').replaceAll('iOS','macOS');
  const verge='// Clash Verge Rev Windows adapter; main(config, profileName) returns a config object.\n'+renameMain(shared.desktop,'v14VergeBase').trimEnd()+'\n\n'+read('tools/clash-verge-adapter.js').replaceAll('\r\n','\n');
+ const windows=replaceOnce(shared.desktop,'  return v14NetworkDefaults(config);',`  delete config["routeweaver-failover"];
+  config["routeweaver-failover"] = {
+    name: groupName("故障转移"), source: groupName("高纯净度AI用"),
+    policies: [groupName("高纯净度AI用"), groupName("高网速视频用"), ...business.map(groupName)],
+  };
+  return v14NetworkDefaults(config);`);
  const optional=read('tools/ipv4-local-adapter.js').replaceAll('\r\n','\n');
  const entries=[
-  {platform:'windows',file:'src/windows/v14.3-windows-flclash.js',raw:shared.desktop},
+  {platform:'windows',file:'src/windows/v14.3-windows-flclash.js',raw:windows},
   {platform:'android',file:'src/android/v14.3-android-flclash.js',raw:shared.android},
   {platform:'clashmi',file:'src/ios/v14.3-clashmi-domestic-protocol-r1.js',raw:ios},
   {platform:'macosFlClash',client:'FlClash',file:'src/macos/v14.3-macos-flclash.js',raw:macFlClash},
   {platform:'macosClashMi',client:'Clash Mi',file:'src/macos/v14.3-macos-clashmi.js',raw:macClashMi},
   {platform:'clashVerge',file:'src/clash-verge/v14.3-clash-verge.js',raw:verge}
- ].map(entry=>({...entry,code:networkModes(entry.raw,optional,['clashmi','macosClashMi'].includes(entry.platform),read('tools/auto-local-adapter.js'))}));
+ ].map(entry=>{
+  // Only the Windows FlClash adapter owns this descriptor. Drop it on cross-client imports.
+  const raw=entry.platform==='windows'?entry.raw:replaceOnce(entry.raw,
+   '  return v14NetworkDefaults(config);','  delete config["routeweaver-failover"];\n  return v14NetworkDefaults(config);');
+  return {...entry,code:networkModes(raw,optional,['clashmi','macosClashMi'].includes(entry.platform),read('tools/auto-local-adapter.js'))};
+ });
  return {policy,vps,entries,inputs:[...new Set(inputs)]};
 }
 module.exports={compile,networkModes,renameMain};

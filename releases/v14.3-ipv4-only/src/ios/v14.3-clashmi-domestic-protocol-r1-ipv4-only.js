@@ -2185,6 +2185,7 @@ function v14ClashMiBase(input) {
   if (typeof console !== "undefined" && console.log) console.log("[V14 Android] " + selectable.length + " 个可用节点、" + providerNames.length + " 个 provider、" + business.length + " 个可选业务组；公司规则优先；未分类公网 UDP 不直连，国内 TCP 由国内网站组选择，默认 DIRECT。");
   if (typeof console !== "undefined" && console.log) console.log("[V14 Android] " + ruleSources.length + " 个远程分类按 24h 更新；首次无缓存须可用节点。检查规则已加载，不要把生成成功当成下载成功。");
   if (typeof console !== "undefined" && console.log) for (const w of v14Unique(warnings)) console.log("[V14 检查范围] " + w);
+  delete config["routeweaver-failover"];
   return v14NetworkDefaults(config);
 }
 

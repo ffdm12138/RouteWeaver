@@ -4637,7 +4637,7 @@
   ],
   "sourceContract": {
     "file": "docs/需求.md",
-    "sha256": "be787d64e317efe1e7c03ada2ef776a72e90f82a2e150035ec67106230c0bccf"
+    "sha256": "ce8e8807431702087123364eea63208d69fc472e71262fe814cae2ef63624326"
   },
   "inputs": [
     {
@@ -4646,7 +4646,7 @@
     },
     {
       "file": "src/android/v14.3-android-flclash.js",
-      "sha256": "a6af2f7b4a75b12f6f14ac9c8efe5b83fca71a862b82c396d4a97cbe754158da"
+      "sha256": "6d1d784926ee34faee8ef508d4c82f12f99ec579be39c22c0b4c11b7045564bc"
     },
     {
       "file": "data/rules/embedded-policy.json",
