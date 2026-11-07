@@ -1,0 +1,146 @@
+{
+  "revision": "domestic-resilience-r1",
+  "status": "FAIL",
+  "checks": 36,
+  "failed": 12,
+  "failures": [
+    {
+      "file": "releases/v14.3/src/windows/v14.3-windows-flclash.js",
+      "mode": "auto",
+      "key": "+.openai.com",
+      "servers": [
+        "tls://dns.alidns.com:853#OpenAI 服务&disable-reuse=true",
+        "tls://dot.pub:853#OpenAI 服务&disable-reuse=true"
+      ],
+      "error": "Expected values to be strictly equal:\n+ actual - expected\n\n+ '+.openai.com'\n- 'api.openai.com'\n"
+    },
+    {
+      "file": "releases/v14.3/src/windows/v14.3-windows-flclash.js",
+      "mode": "dual-stack",
+      "key": "+.openai.com",
+      "servers": [
+        "tls://dns.alidns.com:853#OpenAI 服务&disable-reuse=true",
+        "tls://dot.pub:853#OpenAI 服务&disable-reuse=true"
+      ],
+      "error": "Expected values to be strictly equal:\n+ actual - expected\n\n+ '+.openai.com'\n- 'api.openai.com'\n"
+    },
+    {
+      "file": "releases/v14.3/src/android/v14.3-android-flclash.js",
+      "mode": "auto",
+      "key": "+.openai.com",
+      "servers": [
+        "tls://dns.alidns.com:853#OpenAI 服务&disable-reuse=true",
+        "tls://dot.pub:853#OpenAI 服务&disable-reuse=true"
+      ],
+      "error": "Expected values to be strictly equal:\n+ actual - expected\n\n+ '+.openai.com'\n- 'api.openai.com'\n"
+    },
+    {
+      "file": "releases/v14.3/src/android/v14.3-android-flclash.js",
+      "mode": "dual-stack",
+      "key": "+.openai.com",
+      "servers": [
+        "tls://dns.alidns.com:853#OpenAI 服务&disable-reuse=true",
+        "tls://dot.pub:853#OpenAI 服务&disable-reuse=true"
+      ],
+      "error": "Expected values to be strictly equal:\n+ actual - expected\n\n+ '+.openai.com'\n- 'api.openai.com'\n"
+    },
+    {
+      "file": "releases/v14.3/src/ios/v14.3-clashmi-domestic-protocol-r1.js",
+      "mode": "auto",
+      "key": "+.openai.com",
+      "servers": [
+        "tls://dns.alidns.com:853#OpenAI 服务&disable-reuse=true",
+        "tls://dot.pub:853#OpenAI 服务&disable-reuse=true"
+      ],
+      "error": "Expected values to be strictly equal:\n+ actual - expected\n\n+ '+.openai.com'\n- 'api.openai.com'\n"
+    },
+    {
+      "file": "releases/v14.3/src/ios/v14.3-clashmi-domestic-protocol-r1.js",
+      "mode": "dual-stack",
+      "key": "+.openai.com",
+      "servers": [
+        "tls://dns.alidns.com:853#OpenAI 服务&disable-reuse=true",
+        "tls://dot.pub:853#OpenAI 服务&disable-reuse=true"
+      ],
+      "error": "Expected values to be strictly equal:\n+ actual - expected\n\n+ '+.openai.com'\n- 'api.openai.com'\n"
+    },
+    {
+      "file": "releases/v14.3/src/macos/v14.3-macos-flclash.js",
+      "mode": "auto",
+      "key": "+.openai.com",
+      "servers": [
+        "tls://dns.alidns.com:853#OpenAI 服务&disable-reuse=true",
+        "tls://dot.pub:853#OpenAI 服务&disable-reuse=true"
+      ],
+      "error": "Expected values to be strictly equal:\n+ actual - expected\n\n+ '+.openai.com'\n- 'api.openai.com'\n"
+    },
+    {
+      "file": "releases/v14.3/src/macos/v14.3-macos-flclash.js",
+      "mode": "dual-stack",
+      "key": "+.openai.com",
+      "servers": [
+        "tls://dns.alidns.com:853#OpenAI 服务&disable-reuse=true",
+        "tls://dot.pub:853#OpenAI 服务&disable-reuse=true"
+      ],
+      "error": "Expected values to be strictly equal:\n+ actual - expected\n\n+ '+.openai.com'\n- 'api.openai.com'\n"
+    },
+    {
+      "file": "releases/v14.3/src/macos/v14.3-macos-clashmi.js",
+      "mode": "auto",
+      "key": "+.openai.com",
+      "servers": [
+        "tls://dns.alidns.com:853#OpenAI 服务&disable-reuse=true",
+        "tls://dot.pub:853#OpenAI 服务&disable-reuse=true"
+      ],
+      "error": "Expected values to be strictly equal:\n+ actual - expected\n\n+ '+.openai.com'\n- 'api.openai.com'\n"
+    },
+    {
+      "file": "releases/v14.3/src/macos/v14.3-macos-clashmi.js",
+      "mode": "dual-stack",
+      "key": "+.openai.com",
+      "servers": [
+        "tls://dns.alidns.com:853#OpenAI 服务&disable-reuse=true",
+        "tls://dot.pub:853#OpenAI 服务&disable-reuse=true"
+      ],
+      "error": "Expected values to be strictly equal:\n+ actual - expected\n\n+ '+.openai.com'\n- 'api.openai.com'\n"
+    },
+    {
+      "file": "releases/v14.3/src/clash-verge/v14.3-clash-verge.js",
+      "mode": "auto",
+      "key": "+.openai.com",
+      "servers": [
+        "tls://dns.alidns.com:853#OpenAI 服务&disable-reuse=true",
+        "tls://dot.pub:853#OpenAI 服务&disable-reuse=true"
+      ],
+      "error": "Expected values to be strictly equal:\n+ actual - expected\n\n+ '+.openai.com'\n- 'api.openai.com'\n"
+    },
+    {
+      "file": "releases/v14.3/src/clash-verge/v14.3-clash-verge.js",
+      "mode": "dual-stack",
+      "key": "+.openai.com",
+      "servers": [
+        "tls://dns.alidns.com:853#OpenAI 服务&disable-reuse=true",
+        "tls://dot.pub:853#OpenAI 服务&disable-reuse=true"
+      ],
+      "error": "Expected values to be strictly equal:\n+ actual - expected\n\n+ '+.openai.com'\n- 'api.openai.com'\n"
+    }
+  ],
+  "sourceRef": "0ee7e5730eb2e25eacb6f806fddb3ade9f006ed5",
+  "sources": {
+    "releases/v14.3/src/windows/v14.3-windows-flclash.js": "aacb395fac17e0270795b4e4dd25155b16eee60856c9d042629f19e8b8e964db",
+    "releases/v14.3/src/android/v14.3-android-flclash.js": "bae34dea55538855c7e9131223ee649c1974c22016b5478ae42bddeb2832c9ab",
+    "releases/v14.3/src/ios/v14.3-clashmi-domestic-protocol-r1.js": "38714fdd433bd93e76e6c32503d898bb41fc4beea12a5170b67a3aeddbeea72a",
+    "releases/v14.3/src/macos/v14.3-macos-flclash.js": "3db8feac19cab4849d77ef1a643d14633abb7c7bdaff8506677f720f4dbfb905",
+    "releases/v14.3/src/macos/v14.3-macos-clashmi.js": "bdbf4b1694b4260dbda8fecad847f967c252f5114e651f7601a8b5259e50f428",
+    "releases/v14.3/src/clash-verge/v14.3-clash-verge.js": "5f7b8f7ac0f92df0e06097f090c185eccb7db141e535ddcc77fcbb38f3cb1a1c",
+    "releases/v14.3-ipv4-only/src/windows/v14.3-windows-flclash-ipv4-only.js": "1518a645480e83d0e739e5757c632eb4fd2e506968268f2619353e31dac72e65",
+    "releases/v14.3-ipv4-only/src/android/v14.3-android-flclash-ipv4-only.js": "16f0d64993c348e2b8821c8cb9b585e3e8c1bd9998e9c21658cb76acdf11e661",
+    "releases/v14.3-ipv4-only/src/ios/v14.3-clashmi-domestic-protocol-r1-ipv4-only.js": "904f41c3fa3c4ceb1283ac437e9adf16ae1ceb8724839d4fbf0504f9c2ecf4de",
+    "releases/v14.3-ipv4-only/src/macos/v14.3-macos-flclash-ipv4-only.js": "09abd63d63a794f5326409b398c8997202465a798ad8841f0dcce4257aa6f75d",
+    "releases/v14.3-ipv4-only/src/macos/v14.3-macos-clashmi-ipv4-only.js": "3c436d9e519d9eaa624aaf5505b8a43da93c30114f2e14ec5bae6c299b323c41",
+    "releases/v14.3-ipv4-only/src/clash-verge/v14.3-clash-verge-ipv4-only.js": "0a76d05114ddfafd7f4a920b6151a25c81441f40edc76d3038cc222c6bc428e1"
+  },
+  "testSHA256": "0728c177e95a0fef65112e53758c8893dfcb0582d1c1606ddd6eb3822becfc52",
+  "modelSHA256": "890f18cd4ff60ec7e3a39d2b40490d36b3238240d67e660e4f7654ec0d30a468",
+  "scope": "Ordered Mihomo policy segments; positive and old-order counterexample. Native transport evidence is separate."
+}

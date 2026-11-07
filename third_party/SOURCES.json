@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "releaseTag": "v14.3.0-rc.5",
-  "correspondingSource": "https://github.com/ffdm12138/RouteWeaver/tree/v14.3.0-rc.5",
+  "releaseTag": "v14.3.0-rc.13",
+  "correspondingSource": "https://github.com/ffdm12138/RouteWeaver/tree/v14.3.0-rc.13",
   "rootLicenseScope": "Original RouteWeaver contributions only; upstream data and excerpts retain their own terms.",
   "licenses": [
     {
@@ -193,6 +193,14 @@
       "file": "releases/v14.3/research/flclash-core-integration/patch-files.json",
       "sha256": "328974f37b98372363dc365ca65345fc944a677416f7716d1940cfa93069feea",
       "scope": "Actual FlClash 0.9.0/Mihomo branch and exact modifications; complete source and locked dependencies accompany optional binary assets"
+    },
+    {
+      "file": "releases/v14.3/validation/cloud-rule-audit/upstream.json",
+      "sha256": "7483a2d479d2dc092f297f50cfa0e11a9896853acc82eb9c3b35553d3f716a20",
+      "candidateRevisions": [
+        "7226545410c4dbb3854a5235803a26d86a298072"
+      ],
+      "scope": "Review-only OpenAI/Anthropic/Douyin/CN snapshots; runtime pins unchanged; GPL-3.0 rule data"
     }
   ],
   "transformations": [
@@ -201,5 +209,9 @@
     "Reviewed embedded subset selection",
     "Removal of duplicate domestic Shadowrocket rows"
   ],
-  "runtimeSourceChangedForPublication": false
+  "runtimeSourceChangedForPublication": false,
+  "historicalSourceRelease": {
+    "releaseTag": "v14.3.0-rc.5",
+    "correspondingSource": "https://github.com/ffdm12138/RouteWeaver/tree/v14.3.0-rc.5"
+  }
 }

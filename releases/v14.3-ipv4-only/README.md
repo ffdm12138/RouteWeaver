@@ -8,7 +8,7 @@
 
 # V14.3 独立纯 IPv4 版
 
-当前公开预发布为 [v14.3.0-ipv4-only-rc.3](https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-ipv4-only-rc.3)。活动链的探测间隔 3 秒，超时 3 秒。每个客户端在本目录使用一份独立导入文件。
+当前公开预发布为 [v14.3.0-ipv4-only-rc.4](https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-ipv4-only-rc.4)。活动链的探测间隔 3 秒，超时 3 秒。每个客户端在本目录使用一份独立导入文件。
 
 本机直连目标、连接代理服务器都限定 IPv4。代理服务器往后的出口与远端 DNS 地址族由服务器决定。三档备用按同一纯 IPv4 配置拨号。
 

@@ -1,0 +1,147 @@
+{
+  "revision": "domestic-resilience-r1",
+  "edition": "public",
+  "status": "FAIL",
+  "core": {
+    "sha256": "d5097d4ea34f2975a7a7188dac9554d6b309c2abbf21a94c0a4111aca23bb8d0"
+  },
+  "quickJS": {
+    "sha256": "e2051274a1d7599d131d45b96c7cc53519a9009bf43a802b922f73031d3d3b4b"
+  },
+  "runnerSHA256": "a06ab7c95afafca7d4ec38965f831d760c1102aa8bf8ab6c06c8fb5510966699",
+  "hostSHA256": "a02cbf358822c5e7fbcf7d6b4497c3f49ed43e2e95f68485c9bd6e10c2a82ce2",
+  "scope": "Windows isolated stock core; loopback transport substitution; no mobile frontend, VPN or live client",
+  "deviceAcceptance": "NOT_RUN",
+  "tracks": {
+    "main": {
+      "windows": {
+        "file": "releases/v14.3/src/windows/v14.3-windows-flclash.js",
+        "sourceSHA256": "eee417ae617cbb004621dac71e2763f4bd256f7a589c7a90dbeb5df0089b2c32",
+        "coreChecks": 26,
+        "quickJSChecks": 2
+      },
+      "android": {
+        "file": "releases/v14.3/src/android/v14.3-android-flclash.js",
+        "sourceSHA256": "730ad118388b743f60f28e43b5500672ebf339e2b4f362adaa4a0c3e7af8dbf0",
+        "coreChecks": 26,
+        "quickJSChecks": 2
+      },
+      "clashmi": {
+        "file": "releases/v14.3/src/ios/v14.3-clashmi-domestic-protocol-r1.js",
+        "sourceSHA256": "1060a7b23e26a5cc85dd56368110df8842d9645f4ce332fe0b296e9f7e5892c3",
+        "coreChecks": 26,
+        "quickJSChecks": 2
+      },
+      "shadowrocket": {
+        "file": "releases/v14.3/src/ios/v14.3-shadowrocket.conf",
+        "sourceSHA256": "e0220fd31d1394a90cdd4d4ff3e4bc0ebf7daa762c68b192ef627eb53379bbfc",
+        "feature": "SOURCE_MODEL_ONLY_DEVICE_NOT_RUN"
+      },
+      "macosFlClash": {
+        "file": "releases/v14.3/src/macos/v14.3-macos-flclash.js",
+        "sourceSHA256": "fab2698de44c05f43605dcb4e2a339f4051bb48ae4520d3bc10163d2bfe7e8c3",
+        "coreChecks": 26,
+        "quickJSChecks": 2
+      },
+      "macosClashMi": {
+        "file": "releases/v14.3/src/macos/v14.3-macos-clashmi.js",
+        "sourceSHA256": "d246c3fdd107b2a55bd7763709dace13fef2ca8dfc4e980ae0feaa0288769bba",
+        "coreChecks": 26,
+        "quickJSChecks": 2
+      },
+      "clashVerge": {
+        "file": "releases/v14.3/src/clash-verge/v14.3-clash-verge.js",
+        "sourceSHA256": "43cb7f2a2653b70c217bd22c893d1d494b0a3df8c1cdef5b4701ffb1516dd988",
+        "coreChecks": 26,
+        "quickJSChecks": 2
+      }
+    },
+    "ipv4-only": {
+      "windows": {
+        "file": "releases/v14.3-ipv4-only/src/windows/v14.3-windows-flclash-ipv4-only.js",
+        "sourceSHA256": "740dd90a4890d986335d1f96df75d19f688c1e19e63616da5efecbcd654f094d",
+        "coreChecks": 26,
+        "quickJSChecks": 2
+      },
+      "android": {
+        "file": "releases/v14.3-ipv4-only/src/android/v14.3-android-flclash-ipv4-only.js",
+        "sourceSHA256": "65d21b3cb0157b7e974b4d24d05ce2a12f3994228fd2d2f13428430c094793b5"
+      }
+    }
+  },
+  "checks": [
+    "quickjs_node_parity",
+    "quickjs_idempotence",
+    "native_accepts_original_dns_mode_and_empty_providers",
+    "native_accepts_real_response_phase",
+    "empty_provider_tcp:api.amemv.com",
+    "empty_provider_tcp:v5.douyinvod.com",
+    "empty_provider_tcp:p3.douyinpic.com",
+    "empty_provider_tcp:szextshort.weixin.qq.com",
+    "empty_provider_tcp:apd-pcdnwxlogin.teg.tencent-cloud.net",
+    "empty_provider_tcp:openaifoundation.org",
+    "domestic_udp_A",
+    "generic_stun_stays_on_distinct_catchall",
+    "fallback_to_B",
+    "fallback_to_C",
+    "fallback_to_D",
+    "domestic_udp_D",
+    "recover_C",
+    "recover_B",
+    "recover_A",
+    "domestic_dns_single",
+    "domestic_dns_public",
+    "domestic_dns_direct",
+    "openai_mode_correct_encrypted_dns_selected_group",
+    "domestic_explicit_DIRECT_tcp",
+    "unsupported_udp_rejected",
+    "all_backups_REJECT_no_direct_rescue"
+  ],
+  "results": [
+    {
+      "track": "main",
+      "client": "windows",
+      "checks": 26,
+      "seconds": 17.407
+    },
+    {
+      "track": "main",
+      "client": "android",
+      "checks": 26,
+      "seconds": 17.359
+    },
+    {
+      "track": "main",
+      "client": "clashmi",
+      "checks": 26,
+      "seconds": 17.328
+    },
+    {
+      "track": "main",
+      "client": "macosFlClash",
+      "checks": 26,
+      "seconds": 17.141
+    },
+    {
+      "track": "main",
+      "client": "macosClashMi",
+      "checks": 26,
+      "seconds": 17.515
+    },
+    {
+      "track": "main",
+      "client": "clashVerge",
+      "checks": 26,
+      "seconds": 17.235
+    },
+    {
+      "track": "ipv4-only",
+      "client": "windows",
+      "checks": 26,
+      "seconds": 17.078
+    }
+  ],
+  "error": "Traceback (most recent call last):\n  File \"<workspace>\\tools\\replay-resilience.py\", line 213, in main\n    checks = run_case(args.core, file, 'auto' if track == 'main' else 'ipv4-local', engine, home / f'case-{count}')\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<workspace>\\tools\\replay-resilience.py\", line 135, in run_case\n    via('A', host); checks.append('empty_provider_tcp:' + host)\n    ^^^^^^^^^^^^^^\n  File \"<workspace>\\tools\\replay-resilience.py\", line 114, in via\n    assert N['http_request'](mixed, host, origin.server_address[1]) == b'AUDIT_OK'\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<workspace>\\tools\\native-architecture.py\", line 191, in http_request\n    raw = tunnel(mixed, host, port)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<workspace>\\tools\\native-architecture.py\", line 183, in tunnel\n    sock = socket.create_connection(('127.0.0.1', mixed), timeout=3)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<user-home>\\AppData\\Roaming\\uv\\python\\cpython-3.12.12-windows-x86_64-none\\Lib\\socket.py\", line 865, in create_connection\n    raise exceptions[0]\n  File \"<user-home>\\AppData\\Roaming\\uv\\python\\cpython-3.12.12-windows-x86_64-none\\Lib\\socket.py\", line 850, in create_connection\n    sock.connect(sa)\nConnectionRefusedError: [WinError 10061] 由于目标计算机积极拒绝，无法连接。\n",
+  "rawReceiptSHA256": "7684946c2646524808399de05bbe1442173411709848d2ae007b000bbe8eebf3",
+  "diagnosis": "Synthetic mixed port failed its UDP bind with Windows access error; TCP-only free-port allocation was inadequate. New runner verifies both TCP and UDP before use; script bytes unchanged."
+}

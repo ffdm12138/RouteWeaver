@@ -1,0 +1,21 @@
+{
+  "revision": "domestic-resilience-r1",
+  "date": "2026-11-07",
+  "sourceIds": ["v12r-domain-douyin"],
+  "suffixes": ["wechat.com", "weixin.com", "servicewechat.com", "weixinbridge.com", "weixinsxy.com", "wechatpay.com"],
+  "exactHosts": [
+    "apd-pcdnwxlogin.teg.tencent-cloud.net",
+    "apd-pcdnwxstat.teg.tencent-cloud.net",
+    "dig.bdurl.net",
+    "ecom-normal-m.ecombdapi.com",
+    "ecom5-normal-lf.ecombdapi.com",
+    "ma3-normal-lf.zijieapi.com",
+    "lf9-effect-302-ncdn.byteeffecttos.com",
+    "n98-lf-effect-302-sub.byteeffecttos.com",
+    "live-player-log-service.bytedance.com",
+    "lf-dy-sourcecdn-tos.bytegecko.com",
+    "lf-webcast-gr-sourcecdn.bytegecko.com"
+  ],
+  "review": "Existing pinned domestic classification only; shared infrastructure is restricted to exact observed hosts. No parent-wide ByteDance, Tencent Cloud or CDN exception.",
+  "policy": "Ordinary TCP, UDP and DNS follow the domestic selector after company/private/STUN guards; no forced DIRECT or process exception."
+}

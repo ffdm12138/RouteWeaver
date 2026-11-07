@@ -1,0 +1,237 @@
+{
+  "revision": "company-audit-r1",
+  "status": "FAIL",
+  "checks": 504,
+  "failed": 28,
+  "scope": "OFFLINE_ALL_REMOTE_PROVIDERS_EMPTY_NOT_DEVICE_ACCEPTANCE",
+  "sources": {
+    "releases/v14.3/src/windows/v14.3-windows-flclash.js": "83915d449bdd6edf868f92b896fb0b7995dc778c34e1599a15d982ed69c985f7",
+    "releases/v14.3/src/android/v14.3-android-flclash.js": "16dab28beb7618d7721a23bfe8e03c4235424affc7e30b19957276de5c34df91",
+    "releases/v14.3/src/ios/v14.3-clashmi-domestic-protocol-r1.js": "c4184d7aae59584b399a9f723d9d6febc2ea83febb165c7d036d0c82a3a01079",
+    "releases/v14.3/src/ios/v14.3-shadowrocket.conf": "d1a45561dc1419ea070bcd70fca6bed60909e81d6d513dbc7ccd96fff4abb648",
+    "releases/v14.3/src/macos/v14.3-macos-flclash.js": "0d590d063ca00b71fdd9f34bde8f2471447162e68e99fe1dc03f3c63c524433b",
+    "releases/v14.3/src/macos/v14.3-macos-clashmi.js": "dd188c1a41610f58b5b0064ad762368d84edc6f14231f60c4a05c86ab8539c84",
+    "releases/v14.3/src/clash-verge/v14.3-clash-verge.js": "3a182adf5c48b22900428dbd6d5364c58474ce7708dbfc35fccafdd6e1f670f8",
+    "releases/v14.3-ipv4-only/src/windows/v14.3-windows-flclash-ipv4-only.js": "94cbaa34ff9cc439499133518471c0dd4031799cbc8b2a7056f5980fe775c59d",
+    "releases/v14.3-ipv4-only/src/android/v14.3-android-flclash-ipv4-only.js": "86868a8ab8d24988f9f87f2a70218b10ffafea813dc8ec912b836ab6cfc54d99",
+    "releases/v14.3-ipv4-only/src/ios/v14.3-clashmi-domestic-protocol-r1-ipv4-only.js": "b1d6ba11db5c9a4db490da73ae5640627ad319200c99f887159ce816d2b2c86b",
+    "releases/v14.3-ipv4-only/src/ios/v14.3-shadowrocket-ipv4-only.conf": "5fcab7dd10ea9c13ee9af197ba6a5203e13b7d3ee0d76d72b2f26deb123b2b19",
+    "releases/v14.3-ipv4-only/src/macos/v14.3-macos-flclash-ipv4-only.js": "9d1605649f9e90645a887a7a5d859c56612a49b09154ee709fecf8938b096b42",
+    "releases/v14.3-ipv4-only/src/macos/v14.3-macos-clashmi-ipv4-only.js": "9cadea03ca32f106d5412bf6a4e6f2983030d6257c2b02be15bdd5d6470a25d6",
+    "releases/v14.3-ipv4-only/src/clash-verge/v14.3-clash-verge-ipv4-only.js": "75cbae5fdc4ad74aa9793efca3639ced4d2a591e9b8ae6278cf11fed5fda2f08"
+  },
+  "testSHA256": "13dc367cce6ecb454fc055b59d3e6e62bb816b53da23c7cf4be3cfe347e2099b",
+  "observations": {
+    "OpenAI 服务": [
+      "api.openai.com",
+      "auth.openai.com",
+      "chatgpt.com",
+      "ws.chatgpt.com",
+      "oaistatic.com",
+      "oaiusercontent.com",
+      "oaistatsig.com",
+      "cdn.openaimerge.com",
+      "openaifoundation.org",
+      "www.openaifoundation.org"
+    ],
+    "Anthropic 服务": [
+      "anthropic.com",
+      "api.anthropic.com",
+      "statsig.anthropic.com",
+      "claude.ai",
+      "claude.com",
+      "claudeusercontent.com",
+      "claudemcpclient.com",
+      "claudemcpcontent.com"
+    ],
+    "公共基础服务": [
+      "ct.sendgrid.net",
+      "intercom.io",
+      "intercomcdn.com",
+      "cdn.workos.com",
+      "forwarder.workos.com",
+      "frontend-apps-multi-region.workos.com",
+      "setup.workos.com",
+      "images.workoscdn.com",
+      "workos.imgix.net",
+      "js.stripe.com",
+      "challenges.cloudflare.com",
+      "o207216.ingest.sentry.io",
+      "o33249.ingest.sentry.io",
+      "rum.browser-intake-datadoghq.com"
+    ],
+    "苹果国际": [
+      "humb.apple.com"
+    ]
+  },
+  "failures": [
+    {
+      "file": "releases/v14.3/src/windows/v14.3-windows-flclash.js",
+      "host": "openaifoundation.org",
+      "expected": "OpenAI 服务",
+      "error": "Expected values to be strictly equal:\n+ actual - expected\n\n+ '漏网之鱼'\n- 'OpenAI 服务'\n"
+    },
+    {
+      "file": "releases/v14.3/src/windows/v14.3-windows-flclash.js",
+      "host": "www.openaifoundation.org",
+      "expected": "OpenAI 服务",
+      "error": "Expected values to be strictly equal:\n+ actual - expected\n\n+ '漏网之鱼'\n- 'OpenAI 服务'\n"
+    },
+    {
+      "file": "releases/v14.3/src/android/v14.3-android-flclash.js",
+      "host": "openaifoundation.org",
+      "expected": "OpenAI 服务",
+      "error": "Expected values to be strictly equal:\n+ actual - expected\n\n+ '漏网之鱼'\n- 'OpenAI 服务'\n"
+    },
+    {
+      "file": "releases/v14.3/src/android/v14.3-android-flclash.js",
+      "host": "www.openaifoundation.org",
+      "expected": "OpenAI 服务",
+      "error": "Expected values to be strictly equal:\n+ actual - expected\n\n+ '漏网之鱼'\n- 'OpenAI 服务'\n"
+    },
+    {
+      "file": "releases/v14.3/src/ios/v14.3-clashmi-domestic-protocol-r1.js",
+      "host": "openaifoundation.org",
+      "expected": "OpenAI 服务",
+      "error": "Expected values to be strictly equal:\n+ actual - expected\n\n+ '漏网之鱼'\n- 'OpenAI 服务'\n"
+    },
+    {
+      "file": "releases/v14.3/src/ios/v14.3-clashmi-domestic-protocol-r1.js",
+      "host": "www.openaifoundation.org",
+      "expected": "OpenAI 服务",
+      "error": "Expected values to be strictly equal:\n+ actual - expected\n\n+ '漏网之鱼'\n- 'OpenAI 服务'\n"
+    },
+    {
+      "file": "releases/v14.3/src/ios/v14.3-shadowrocket.conf",
+      "host": "openaifoundation.org",
+      "expected": "OpenAI 服务",
+      "error": "Expected values to be strictly equal:\n+ actual - expected\n\n+ '漏网之鱼'\n- 'OpenAI 服务'\n"
+    },
+    {
+      "file": "releases/v14.3/src/ios/v14.3-shadowrocket.conf",
+      "host": "www.openaifoundation.org",
+      "expected": "OpenAI 服务",
+      "error": "Expected values to be strictly equal:\n+ actual - expected\n\n+ '漏网之鱼'\n- 'OpenAI 服务'\n"
+    },
+    {
+      "file": "releases/v14.3/src/macos/v14.3-macos-flclash.js",
+      "host": "openaifoundation.org",
+      "expected": "OpenAI 服务",
+      "error": "Expected values to be strictly equal:\n+ actual - expected\n\n+ '漏网之鱼'\n- 'OpenAI 服务'\n"
+    },
+    {
+      "file": "releases/v14.3/src/macos/v14.3-macos-flclash.js",
+      "host": "www.openaifoundation.org",
+      "expected": "OpenAI 服务",
+      "error": "Expected values to be strictly equal:\n+ actual - expected\n\n+ '漏网之鱼'\n- 'OpenAI 服务'\n"
+    },
+    {
+      "file": "releases/v14.3/src/macos/v14.3-macos-clashmi.js",
+      "host": "openaifoundation.org",
+      "expected": "OpenAI 服务",
+      "error": "Expected values to be strictly equal:\n+ actual - expected\n\n+ '漏网之鱼'\n- 'OpenAI 服务'\n"
+    },
+    {
+      "file": "releases/v14.3/src/macos/v14.3-macos-clashmi.js",
+      "host": "www.openaifoundation.org",
+      "expected": "OpenAI 服务",
+      "error": "Expected values to be strictly equal:\n+ actual - expected\n\n+ '漏网之鱼'\n- 'OpenAI 服务'\n"
+    },
+    {
+      "file": "releases/v14.3/src/clash-verge/v14.3-clash-verge.js",
+      "host": "openaifoundation.org",
+      "expected": "OpenAI 服务",
+      "error": "Expected values to be strictly equal:\n+ actual - expected\n\n+ '漏网之鱼'\n- 'OpenAI 服务'\n"
+    },
+    {
+      "file": "releases/v14.3/src/clash-verge/v14.3-clash-verge.js",
+      "host": "www.openaifoundation.org",
+      "expected": "OpenAI 服务",
+      "error": "Expected values to be strictly equal:\n+ actual - expected\n\n+ '漏网之鱼'\n- 'OpenAI 服务'\n"
+    },
+    {
+      "file": "releases/v14.3-ipv4-only/src/windows/v14.3-windows-flclash-ipv4-only.js",
+      "host": "openaifoundation.org",
+      "expected": "OpenAI 服务",
+      "error": "Expected values to be strictly equal:\n+ actual - expected\n\n+ '漏网之鱼'\n- 'OpenAI 服务'\n"
+    },
+    {
+      "file": "releases/v14.3-ipv4-only/src/windows/v14.3-windows-flclash-ipv4-only.js",
+      "host": "www.openaifoundation.org",
+      "expected": "OpenAI 服务",
+      "error": "Expected values to be strictly equal:\n+ actual - expected\n\n+ '漏网之鱼'\n- 'OpenAI 服务'\n"
+    },
+    {
+      "file": "releases/v14.3-ipv4-only/src/android/v14.3-android-flclash-ipv4-only.js",
+      "host": "openaifoundation.org",
+      "expected": "OpenAI 服务",
+      "error": "Expected values to be strictly equal:\n+ actual - expected\n\n+ '漏网之鱼'\n- 'OpenAI 服务'\n"
+    },
+    {
+      "file": "releases/v14.3-ipv4-only/src/android/v14.3-android-flclash-ipv4-only.js",
+      "host": "www.openaifoundation.org",
+      "expected": "OpenAI 服务",
+      "error": "Expected values to be strictly equal:\n+ actual - expected\n\n+ '漏网之鱼'\n- 'OpenAI 服务'\n"
+    },
+    {
+      "file": "releases/v14.3-ipv4-only/src/ios/v14.3-clashmi-domestic-protocol-r1-ipv4-only.js",
+      "host": "openaifoundation.org",
+      "expected": "OpenAI 服务",
+      "error": "Expected values to be strictly equal:\n+ actual - expected\n\n+ '漏网之鱼'\n- 'OpenAI 服务'\n"
+    },
+    {
+      "file": "releases/v14.3-ipv4-only/src/ios/v14.3-clashmi-domestic-protocol-r1-ipv4-only.js",
+      "host": "www.openaifoundation.org",
+      "expected": "OpenAI 服务",
+      "error": "Expected values to be strictly equal:\n+ actual - expected\n\n+ '漏网之鱼'\n- 'OpenAI 服务'\n"
+    },
+    {
+      "file": "releases/v14.3-ipv4-only/src/ios/v14.3-shadowrocket-ipv4-only.conf",
+      "host": "openaifoundation.org",
+      "expected": "OpenAI 服务",
+      "error": "Expected values to be strictly equal:\n+ actual - expected\n\n+ '漏网之鱼'\n- 'OpenAI 服务'\n"
+    },
+    {
+      "file": "releases/v14.3-ipv4-only/src/ios/v14.3-shadowrocket-ipv4-only.conf",
+      "host": "www.openaifoundation.org",
+      "expected": "OpenAI 服务",
+      "error": "Expected values to be strictly equal:\n+ actual - expected\n\n+ '漏网之鱼'\n- 'OpenAI 服务'\n"
+    },
+    {
+      "file": "releases/v14.3-ipv4-only/src/macos/v14.3-macos-flclash-ipv4-only.js",
+      "host": "openaifoundation.org",
+      "expected": "OpenAI 服务",
+      "error": "Expected values to be strictly equal:\n+ actual - expected\n\n+ '漏网之鱼'\n- 'OpenAI 服务'\n"
+    },
+    {
+      "file": "releases/v14.3-ipv4-only/src/macos/v14.3-macos-flclash-ipv4-only.js",
+      "host": "www.openaifoundation.org",
+      "expected": "OpenAI 服务",
+      "error": "Expected values to be strictly equal:\n+ actual - expected\n\n+ '漏网之鱼'\n- 'OpenAI 服务'\n"
+    },
+    {
+      "file": "releases/v14.3-ipv4-only/src/macos/v14.3-macos-clashmi-ipv4-only.js",
+      "host": "openaifoundation.org",
+      "expected": "OpenAI 服务",
+      "error": "Expected values to be strictly equal:\n+ actual - expected\n\n+ '漏网之鱼'\n- 'OpenAI 服务'\n"
+    },
+    {
+      "file": "releases/v14.3-ipv4-only/src/macos/v14.3-macos-clashmi-ipv4-only.js",
+      "host": "www.openaifoundation.org",
+      "expected": "OpenAI 服务",
+      "error": "Expected values to be strictly equal:\n+ actual - expected\n\n+ '漏网之鱼'\n- 'OpenAI 服务'\n"
+    },
+    {
+      "file": "releases/v14.3-ipv4-only/src/clash-verge/v14.3-clash-verge-ipv4-only.js",
+      "host": "openaifoundation.org",
+      "expected": "OpenAI 服务",
+      "error": "Expected values to be strictly equal:\n+ actual - expected\n\n+ '漏网之鱼'\n- 'OpenAI 服务'\n"
+    },
+    {
+      "file": "releases/v14.3-ipv4-only/src/clash-verge/v14.3-clash-verge-ipv4-only.js",
+      "host": "www.openaifoundation.org",
+      "expected": "OpenAI 服务",
+      "error": "Expected values to be strictly equal:\n+ actual - expected\n\n+ '漏网之鱼'\n- 'OpenAI 服务'\n"
+    }
+  ]
+}

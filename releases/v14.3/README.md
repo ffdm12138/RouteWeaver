@@ -15,7 +15,7 @@
 以下涉及 rc.5 的接入记录只认证原版本，不认证 rc.6 自动能力。
 
 
-当前公开预发布为 [v14.3.0-rc.12](https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-rc.12)。活动链的探测间隔 3 秒，超时 3 秒。各客户端使用以下对应文件。
+当前公开预发布为 [v14.3.0-rc.13](https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-rc.13)。活动链的探测间隔 3 秒，超时 3 秒。各客户端使用以下对应文件。
 
 | 客户端 | 入口 |
 |---|---|

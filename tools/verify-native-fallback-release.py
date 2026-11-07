@@ -49,6 +49,27 @@ def verify_source(root):
         assets[tags[track]] = files
     if not receipt['checks']:
         raise ValueError('Empty core replay inventory')
+    if candidate['revision'] == 'domestic-resilience-r1':
+        if receipt['runnerSHA256'] != sha(root / 'tools/replay-resilience.py') or receipt['hostSHA256'] != sha(root / 'tools/stock-core-host.py'):
+            raise ValueError('Stale isolated replay runner')
+        checks = [
+            ('domestic-resilience/after.json', 'tools/test-domestic-resilience.cjs'),
+            ('domestic-resilience/dns-order.json', 'tools/test-dns-policy-order.cjs'),
+            ('domestic-resilience/quickjs.json', 'tools/check-quickjs.py'),
+            ('domestic-resilience/regression.json', 'tools/verify-resilience.py'),
+            ('cloud-rule-audit/after.json', 'tools/test-company-audit.cjs'),
+        ]
+        expected = {file: sha(root / file) for entries in tracks.values() for file in entries.values()}
+        for name, runner in checks:
+            report = read(root / 'releases/v14.3/validation' / name)
+            if report['status'] != 'PASS' or report['testSHA256'] != sha(root / runner):
+                raise ValueError('Failed or stale current validation: ' + name)
+            subset = {file: digest for file, digest in expected.items() if name != 'domestic-resilience/dns-order.json' or file.endswith('.js')}
+            if report['sources'] != subset:
+                raise ValueError('Stale source bindings: ' + name)
+        dns = read(root / 'releases/v14.3/validation/domestic-resilience/dns-order.json')
+        if dns['modelSHA256'] != sha(root / 'releases/v14.3/tests/domain-index.cjs'):
+            raise ValueError('Stale DNS model evidence')
     return assets
 
 
@@ -62,9 +83,11 @@ def verify_static():
         verify_source(snapshot)
         suites = runpy.run_path(str(snapshot / 'tools/run-architecture-audit.py'))['SUITES']
         commands = [*suites['build'], ['node', 'tools/test-native-fallback.cjs'],
+                    ['node', 'tools/test-company-audit.cjs'], ['node', 'tools/test-dns-policy-order.cjs'],
                     *suites['regression'], *suites['platform']]
         for command in commands:
             subprocess.run(command, cwd=snapshot, check=True, timeout=90)
+        subprocess.run(['node', 'tools/test-domestic-resilience.cjs'], cwd=snapshot, check=True, timeout=900)
         with ThreadPoolExecutor(max_workers=2) as pool:
             runs = [pool.submit(subprocess.run, command, cwd=snapshot, check=True, timeout=480)
                     for command in suites['static'] + suites['macos']]

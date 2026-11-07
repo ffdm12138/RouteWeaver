@@ -1,0 +1,300 @@
+{
+  "revision": "domestic-resilience-r1",
+  "scope": "OFFLINE_MODELS_NOT_DEVICE_ACCEPTANCE",
+  "edition": "public",
+  "status": "FAIL",
+  "checks": 55224,
+  "failed": 23040,
+  "stages": {
+    "full": 26,
+    "empty": 26,
+    "partial": 26,
+    "restored": 26
+  },
+  "sources": {
+    "releases/v14.3/src/windows/v14.3-windows-flclash.js": "aacb395fac17e0270795b4e4dd25155b16eee60856c9d042629f19e8b8e964db",
+    "releases/v14.3/src/android/v14.3-android-flclash.js": "bae34dea55538855c7e9131223ee649c1974c22016b5478ae42bddeb2832c9ab",
+    "releases/v14.3/src/ios/v14.3-clashmi-domestic-protocol-r1.js": "38714fdd433bd93e76e6c32503d898bb41fc4beea12a5170b67a3aeddbeea72a",
+    "releases/v14.3/src/ios/v14.3-shadowrocket.conf": "36b83e9069308567c9497eb4a1902536c78572c6786bbb4d712cb976148c6088",
+    "releases/v14.3/src/macos/v14.3-macos-flclash.js": "3db8feac19cab4849d77ef1a643d14633abb7c7bdaff8506677f720f4dbfb905",
+    "releases/v14.3/src/macos/v14.3-macos-clashmi.js": "bdbf4b1694b4260dbda8fecad847f967c252f5114e651f7601a8b5259e50f428",
+    "releases/v14.3/src/clash-verge/v14.3-clash-verge.js": "5f7b8f7ac0f92df0e06097f090c185eccb7db141e535ddcc77fcbb38f3cb1a1c",
+    "releases/v14.3-ipv4-only/src/windows/v14.3-windows-flclash-ipv4-only.js": "1518a645480e83d0e739e5757c632eb4fd2e506968268f2619353e31dac72e65",
+    "releases/v14.3-ipv4-only/src/android/v14.3-android-flclash-ipv4-only.js": "16f0d64993c348e2b8821c8cb9b585e3e8c1bd9998e9c21658cb76acdf11e661",
+    "releases/v14.3-ipv4-only/src/ios/v14.3-clashmi-domestic-protocol-r1-ipv4-only.js": "904f41c3fa3c4ceb1283ac437e9adf16ae1ceb8724839d4fbf0504f9c2ecf4de",
+    "releases/v14.3-ipv4-only/src/ios/v14.3-shadowrocket-ipv4-only.conf": "d4cda5ec99460cce07fa2fb8d886c2b0e1038ebff515b793d0adeb0aea425bc2",
+    "releases/v14.3-ipv4-only/src/macos/v14.3-macos-flclash-ipv4-only.js": "09abd63d63a794f5326409b398c8997202465a798ad8841f0dcce4257aa6f75d",
+    "releases/v14.3-ipv4-only/src/macos/v14.3-macos-clashmi-ipv4-only.js": "3c436d9e519d9eaa624aaf5505b8a43da93c30114f2e14ec5bae6c299b323c41",
+    "releases/v14.3-ipv4-only/src/clash-verge/v14.3-clash-verge-ipv4-only.js": "0a76d05114ddfafd7f4a920b6151a25c81441f40edc76d3038cc222c6bc428e1"
+  },
+  "sizes": [
+    {
+      "client": "windows",
+      "mode": "auto",
+      "scriptBytes": 126568,
+      "configBytes": 179570
+    },
+    {
+      "client": "windows",
+      "mode": "dual-stack",
+      "scriptBytes": 126568,
+      "configBytes": 178300
+    },
+    {
+      "client": "windows",
+      "mode": "ipv4-local",
+      "scriptBytes": 126568,
+      "configBytes": 238645
+    },
+    {
+      "client": "android",
+      "mode": "auto",
+      "scriptBytes": 126654,
+      "configBytes": 179381
+    },
+    {
+      "client": "android",
+      "mode": "dual-stack",
+      "scriptBytes": 126654,
+      "configBytes": 178111
+    },
+    {
+      "client": "android",
+      "mode": "ipv4-local",
+      "scriptBytes": 126654,
+      "configBytes": 238501
+    },
+    {
+      "client": "clashmi",
+      "mode": "auto",
+      "scriptBytes": 129676,
+      "configBytes": 180469
+    },
+    {
+      "client": "clashmi",
+      "mode": "dual-stack",
+      "scriptBytes": 129676,
+      "configBytes": 179198
+    },
+    {
+      "client": "clashmi",
+      "mode": "ipv4-local",
+      "scriptBytes": 129676,
+      "configBytes": 239502
+    },
+    {
+      "client": "macosFlClash",
+      "mode": "auto",
+      "scriptBytes": 128363,
+      "configBytes": 179853
+    },
+    {
+      "client": "macosFlClash",
+      "mode": "dual-stack",
+      "scriptBytes": 128363,
+      "configBytes": 178583
+    },
+    {
+      "client": "macosFlClash",
+      "mode": "ipv4-local",
+      "scriptBytes": 128363,
+      "configBytes": 238928
+    },
+    {
+      "client": "macosClashMi",
+      "mode": "auto",
+      "scriptBytes": 129678,
+      "configBytes": 180467
+    },
+    {
+      "client": "macosClashMi",
+      "mode": "dual-stack",
+      "scriptBytes": 129678,
+      "configBytes": 179196
+    },
+    {
+      "client": "macosClashMi",
+      "mode": "ipv4-local",
+      "scriptBytes": 129678,
+      "configBytes": 239500
+    },
+    {
+      "client": "clashVerge",
+      "mode": "auto",
+      "scriptBytes": 128929,
+      "configBytes": 180148
+    },
+    {
+      "client": "clashVerge",
+      "mode": "dual-stack",
+      "scriptBytes": 128929,
+      "configBytes": 178877
+    },
+    {
+      "client": "clashVerge",
+      "mode": "ipv4-local",
+      "scriptBytes": 128929,
+      "configBytes": 239223
+    },
+    {
+      "client": "windows",
+      "mode": "ipv4-only",
+      "scriptBytes": 120467,
+      "configBytes": 238997
+    },
+    {
+      "client": "android",
+      "mode": "ipv4-only",
+      "scriptBytes": 120429,
+      "configBytes": 238853
+    },
+    {
+      "client": "clashmi",
+      "mode": "ipv4-only",
+      "scriptBytes": 122658,
+      "configBytes": 239854
+    },
+    {
+      "client": "macosFlClash",
+      "mode": "ipv4-only",
+      "scriptBytes": 122224,
+      "configBytes": 239280
+    },
+    {
+      "client": "macosClashMi",
+      "mode": "ipv4-only",
+      "scriptBytes": 122656,
+      "configBytes": 239852
+    },
+    {
+      "client": "clashVerge",
+      "mode": "ipv4-only",
+      "scriptBytes": 122405,
+      "configBytes": 239421
+    }
+  ],
+  "testSHA256": "7643ad0eaa62b327fa874c242b448bb1a911ac904594cd19c7ec0e811bbd5d53",
+  "dataSHA256": "e9b69ec8f63de96fc106ca8240e2e0564a62b5529549e12892c02759eef74420",
+  "failures": [
+    {
+      "name": "windows:auto:empty:dns:api.amemv.com",
+      "error": "Expected values to be strictly deep-equal:\n+ actual - expected\n\n  [\n+   '漏网之鱼'\n-   '国内网站'\n  ]\n"
+    },
+    {
+      "name": "windows:auto:empty:TCP:api.amemv.com",
+      "error": "Expected values to be strictly equal:\n\n'漏网之鱼' !== '国内网站'\n"
+    },
+    {
+      "name": "windows:auto:empty:UDP:api.amemv.com",
+      "error": "Expected values to be strictly equal:\n\n'漏网之鱼' !== '国内网站'\n"
+    },
+    {
+      "name": "windows:auto:empty:dns:v5.douyinvod.com",
+      "error": "Expected values to be strictly deep-equal:\n+ actual - expected\n\n  [\n+   '漏网之鱼'\n-   '国内网站'\n  ]\n"
+    },
+    {
+      "name": "windows:auto:empty:TCP:v5.douyinvod.com",
+      "error": "Expected values to be strictly equal:\n\n'漏网之鱼' !== '国内网站'\n"
+    },
+    {
+      "name": "windows:auto:empty:UDP:v5.douyinvod.com",
+      "error": "Expected values to be strictly equal:\n\n'漏网之鱼' !== '国内网站'\n"
+    },
+    {
+      "name": "windows:auto:empty:dns:p3.douyinpic.com",
+      "error": "Expected values to be strictly deep-equal:\n+ actual - expected\n\n  [\n+   '漏网之鱼'\n-   '国内网站'\n  ]\n"
+    },
+    {
+      "name": "windows:auto:empty:TCP:p3.douyinpic.com",
+      "error": "Expected values to be strictly equal:\n\n'漏网之鱼' !== '国内网站'\n"
+    },
+    {
+      "name": "windows:auto:empty:UDP:p3.douyinpic.com",
+      "error": "Expected values to be strictly equal:\n\n'漏网之鱼' !== '国内网站'\n"
+    },
+    {
+      "name": "windows:auto:empty:dns:v3.douyinstatic.com",
+      "error": "Expected values to be strictly deep-equal:\n+ actual - expected\n\n  [\n+   '漏网之鱼'\n-   '国内网站'\n  ]\n"
+    },
+    {
+      "name": "windows:auto:empty:TCP:v3.douyinstatic.com",
+      "error": "Expected values to be strictly equal:\n\n'漏网之鱼' !== '国内网站'\n"
+    },
+    {
+      "name": "windows:auto:empty:UDP:v3.douyinstatic.com",
+      "error": "Expected values to be strictly equal:\n\n'漏网之鱼' !== '国内网站'\n"
+    },
+    {
+      "name": "windows:auto:empty:dns:video.idouyinvod.com",
+      "error": "Expected values to be strictly deep-equal:\n+ actual - expected\n\n  [\n+   '漏网之鱼'\n-   '国内网站'\n  ]\n"
+    },
+    {
+      "name": "windows:auto:empty:TCP:video.idouyinvod.com",
+      "error": "Expected values to be strictly equal:\n\n'漏网之鱼' !== '国内网站'\n"
+    },
+    {
+      "name": "windows:auto:empty:UDP:video.idouyinvod.com",
+      "error": "Expected values to be strictly equal:\n\n'漏网之鱼' !== '国内网站'\n"
+    },
+    {
+      "name": "windows:auto:empty:dns:servicewechat.com",
+      "error": "Expected values to be strictly deep-equal:\n+ actual - expected\n\n  [\n+   '漏网之鱼'\n-   '国内网站'\n  ]\n"
+    },
+    {
+      "name": "windows:auto:empty:TCP:servicewechat.com",
+      "error": "Expected values to be strictly equal:\n\n'漏网之鱼' !== '国内网站'\n"
+    },
+    {
+      "name": "windows:auto:empty:UDP:servicewechat.com",
+      "error": "Expected values to be strictly equal:\n\n'漏网之鱼' !== '国内网站'\n"
+    },
+    {
+      "name": "windows:auto:empty:dns:apd-pcdnwxlogin.teg.tencent-cloud.net",
+      "error": "Expected values to be strictly deep-equal:\n+ actual - expected\n\n  [\n+   '漏网之鱼'\n-   '国内网站'\n  ]\n"
+    },
+    {
+      "name": "windows:auto:empty:TCP:apd-pcdnwxlogin.teg.tencent-cloud.net",
+      "error": "Expected values to be strictly equal:\n\n'漏网之鱼' !== '国内网站'\n"
+    },
+    {
+      "name": "windows:auto:empty:UDP:apd-pcdnwxlogin.teg.tencent-cloud.net",
+      "error": "Expected values to be strictly equal:\n\n'漏网之鱼' !== '国内网站'\n"
+    },
+    {
+      "name": "windows:auto:empty:dns:lf-dy-sourcecdn-tos.bytegecko.com",
+      "error": "Expected values to be strictly deep-equal:\n+ actual - expected\n\n  [\n+   '漏网之鱼'\n-   '国内网站'\n  ]\n"
+    },
+    {
+      "name": "windows:auto:empty:TCP:lf-dy-sourcecdn-tos.bytegecko.com",
+      "error": "Expected values to be strictly equal:\n\n'漏网之鱼' !== '国内网站'\n"
+    },
+    {
+      "name": "windows:auto:empty:UDP:lf-dy-sourcecdn-tos.bytegecko.com",
+      "error": "Expected values to be strictly equal:\n\n'漏网之鱼' !== '国内网站'\n"
+    },
+    {
+      "name": "windows:auto:empty:dns:apd-pcdnwxstat.teg.tencent-cloud.net",
+      "error": "Expected values to be strictly deep-equal:\n+ actual - expected\n\n  [\n+   '漏网之鱼'\n-   '国内网站'\n  ]\n"
+    },
+    {
+      "name": "windows:auto:empty:TCP:apd-pcdnwxstat.teg.tencent-cloud.net",
+      "error": "Expected values to be strictly equal:\n\n'漏网之鱼' !== '国内网站'\n"
+    },
+    {
+      "name": "windows:auto:empty:UDP:apd-pcdnwxstat.teg.tencent-cloud.net",
+      "error": "Expected values to be strictly equal:\n\n'漏网之鱼' !== '国内网站'\n"
+    },
+    {
+      "name": "windows:auto:empty:dns:dig.bdurl.net",
+      "error": "Expected values to be strictly deep-equal:\n+ actual - expected\n\n  [\n+   '漏网之鱼'\n-   '国内网站'\n  ]\n"
+    },
+    {
+      "name": "windows:auto:empty:TCP:dig.bdurl.net",
+      "error": "Expected values to be strictly equal:\n\n'漏网之鱼' !== '国内网站'\n"
+    },
+    {
+      "name": "windows:auto:empty:UDP:dig.bdurl.net",
+      "error": "Expected values to be strictly equal:\n\n'漏网之鱼' !== '国内网站'\n"
+    }
+  ]
+}

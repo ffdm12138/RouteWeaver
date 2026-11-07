@@ -28,7 +28,7 @@
     },
     {
       "file": "tools/lib/compile-entries.cjs",
-      "sha256": "6f74354a3eb41325be043fcd0067647eebd0c9cdbfd7fa354e68636618831332"
+      "sha256": "c094c1e30019598b8aa24a04386b35990298a3128efddeddab0083f14de5bf8c"
     },
     {
       "file": "tools/lib/render-runtime.cjs",
@@ -36,7 +36,7 @@
     },
     {
       "file": "tools/lib/reviewed-policy.cjs",
-      "sha256": "fede3d21c30cfb52c223177d5bfea36a87ca2e8b0a4610bac84b579802828ce7"
+      "sha256": "a3eb547c648923040ee07e8f6f48799b0acbe134fa0869dc3330c5ef26d12352"
     },
     {
       "file": "tools/clashmi-adapter.js",
@@ -156,11 +156,11 @@
     },
     {
       "file": "runtime/shared/v14ValidateDomainTables.js.in",
-      "sha256": "8229ca16fb8d5a32d6bc63473e3459b88ee92017c46458e3ec8e69f95628c825"
+      "sha256": "ee028e3419753312b6b99d6970b8032aba198c873cbdcd940cd2f6bd836eb941"
     },
     {
       "file": "runtime/shared/main.js.in",
-      "sha256": "5e1f4fb60e89283526e54f6bfc401d065ced5e4d9757747ae6b76d3ce0b19617"
+      "sha256": "8336f279f5f2587794bc55f1690fc3c8f5c50102185cd413ef05cda5fd11e005"
     },
     {
       "file": "runtime/platforms/android/layout.json",
@@ -176,7 +176,7 @@
     },
     {
       "file": "runtime/platforms/android/main.js.in",
-      "sha256": "f566f2e68d1c07185ea50a0313d55b3680fb60011cd1ab0dc6098d688764d5f2"
+      "sha256": "25f37aae5cbcbfdaa49944f71f8721eca9c521db9868beff46505052a3e8e71b"
     },
     {
       "file": "tools/validate-azure-async.cjs",
@@ -207,10 +207,10 @@
     {
       "platform": "clashVerge",
       "file": "src/clash-verge/v14.3-clash-verge.js",
-      "sha256": "5f7b8f7ac0f92df0e06097f090c185eccb7db141e535ddcc77fcbb38f3cb1a1c",
-      "bytes": 128929,
-      "generatedConfigBytes": 180306,
-      "inlineRows": 819,
+      "sha256": "43cb7f2a2653b70c217bd22c893d1d494b0a3df8c1cdef5b4701ffb1516dd988",
+      "bytes": 128182,
+      "generatedConfigBytes": 182188,
+      "inlineRows": 908,
       "remoteSources": 30
     }
   ],

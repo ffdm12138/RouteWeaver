@@ -1,0 +1,38 @@
+{
+  "date": "2026-11-07",
+  "purpose": "Review-only candidates; no live provider URL changed",
+  "sources": [
+    {
+      "name": "openai",
+      "commit": "7226545410c4dbb3854a5235803a26d86a298072",
+      "url": "https://github.com/MetaCubeX/meta-rules-dat/blob/7226545410c4dbb3854a5235803a26d86a298072/geo/geosite/classical/openai.yaml",
+      "file": "openai.yaml",
+      "sha256": "2315cd1154777394a565fed9ade3cad9e65329025d5bc667102143d87ebe9d74",
+      "bytes": 1031
+    },
+    {
+      "name": "anthropic",
+      "commit": "7226545410c4dbb3854a5235803a26d86a298072",
+      "url": "https://github.com/MetaCubeX/meta-rules-dat/blob/7226545410c4dbb3854a5235803a26d86a298072/geo/geosite/classical/anthropic.yaml",
+      "file": "anthropic.yaml",
+      "sha256": "e3c4c91e89b17904594f214de49efe747b668704ad91ec5e832aaf83b87f4370",
+      "bytes": 672
+    },
+    {
+      "name": "douyin",
+      "commit": "7226545410c4dbb3854a5235803a26d86a298072",
+      "url": "https://github.com/MetaCubeX/meta-rules-dat/blob/7226545410c4dbb3854a5235803a26d86a298072/geo/geosite/classical/douyin.yaml",
+      "file": "douyin.yaml",
+      "sha256": "05adddd7142fb4238054a40c78ad3955e10bae77c09f7d6a4531ca8893871759",
+      "bytes": 2496
+    },
+    {
+      "name": "cn",
+      "commit": "7226545410c4dbb3854a5235803a26d86a298072",
+      "url": "https://github.com/MetaCubeX/meta-rules-dat/blob/7226545410c4dbb3854a5235803a26d86a298072/geo/geosite/classical/cn.yaml",
+      "file": "cn.yaml",
+      "sha256": "d5607a5405a296bd656b0363c0e500a3d23f042ac1e414b5f59574206f479b8f",
+      "bytes": 3596787
+    }
+  ]
+}

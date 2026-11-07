@@ -5,7 +5,7 @@ function v14ValidateDomainTables() {
         typeof snapshot.payloadText !== "string" || !snapshot.payloadText)
       v14Fail("无效内嵌分类器：" + tag);
     for (const row of snapshot.payloadText.split("\n")) {
-      if (snapshot.behavior === "domain" ? !/^\+\.[a-z0-9._-]+$/.test(row) :
+      if (snapshot.behavior === "domain" ? !/^(?:\+\.)?[a-z0-9._-]+$/.test(row) :
           !/^(?:DOMAIN|DOMAIN-SUFFIX),[^,\s]+$/.test(row) && !row.startsWith("DOMAIN-REGEX,"))
         v14Fail("无效内嵌域名规则：" + tag);
     }

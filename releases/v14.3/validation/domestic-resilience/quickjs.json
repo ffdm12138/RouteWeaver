@@ -1,0 +1,1709 @@
+{
+  "revision": "domestic-resilience-r1",
+  "status": "PASS",
+  "scope": "Real Windows QuickJS bridge; desktop timings do not establish iOS timeout resolution",
+  "quickJSSHA256": "e2051274a1d7599d131d45b96c7cc53519a9009bf43a802b922f73031d3d3b4b",
+  "testSHA256": "78841efd017c1918b62343086ba513047e475eabc8e6f7b4485388b05901ea97",
+  "contractSHA256": "8021c57c498e9ef942a1c0f3734a13c1e463fb2541de5769cb5f2687cc5f3efc",
+  "sources": {
+    "releases/v14.3/src/windows/v14.3-windows-flclash.js": "eee417ae617cbb004621dac71e2763f4bd256f7a589c7a90dbeb5df0089b2c32",
+    "releases/v14.3/src/android/v14.3-android-flclash.js": "730ad118388b743f60f28e43b5500672ebf339e2b4f362adaa4a0c3e7af8dbf0",
+    "releases/v14.3/src/ios/v14.3-clashmi-domestic-protocol-r1.js": "1060a7b23e26a5cc85dd56368110df8842d9645f4ce332fe0b296e9f7e5892c3",
+    "releases/v14.3/src/ios/v14.3-shadowrocket.conf": "e0220fd31d1394a90cdd4d4ff3e4bc0ebf7daa762c68b192ef627eb53379bbfc",
+    "releases/v14.3/src/macos/v14.3-macos-flclash.js": "fab2698de44c05f43605dcb4e2a339f4051bb48ae4520d3bc10163d2bfe7e8c3",
+    "releases/v14.3/src/macos/v14.3-macos-clashmi.js": "d246c3fdd107b2a55bd7763709dace13fef2ca8dfc4e980ae0feaa0288769bba",
+    "releases/v14.3/src/clash-verge/v14.3-clash-verge.js": "43cb7f2a2653b70c217bd22c893d1d494b0a3df8c1cdef5b4701ffb1516dd988",
+    "releases/v14.3-ipv4-only/src/windows/v14.3-windows-flclash-ipv4-only.js": "740dd90a4890d986335d1f96df75d19f688c1e19e63616da5efecbcd654f094d",
+    "releases/v14.3-ipv4-only/src/android/v14.3-android-flclash-ipv4-only.js": "65d21b3cb0157b7e974b4d24d05ce2a12f3994228fd2d2f13428430c094793b5",
+    "releases/v14.3-ipv4-only/src/ios/v14.3-clashmi-domestic-protocol-r1-ipv4-only.js": "c5be0c19d9b241f99c0e9aeadb3e5ed4533620eb593ce148b20de9f381bfa705",
+    "releases/v14.3-ipv4-only/src/ios/v14.3-shadowrocket-ipv4-only.conf": "d88ca1232691de9e3b23eb8d3d0c2dd7fb647007a07165f21f651a1b9b883286",
+    "releases/v14.3-ipv4-only/src/macos/v14.3-macos-flclash-ipv4-only.js": "6ce348183cbeb6e9ca57d2fbd9782de653761cb92748196821f048c2e5aedbe7",
+    "releases/v14.3-ipv4-only/src/macos/v14.3-macos-clashmi-ipv4-only.js": "59e051ab06f3e1af98d5b79427708b72b24341c29e3f3de38921d98e9ed7f8ed",
+    "releases/v14.3-ipv4-only/src/clash-verge/v14.3-clash-verge-ipv4-only.js": "260289272cb3872c18e8d36a758c4fad6c414af2800bb647d6fd358bf146a877"
+  },
+  "checks": [
+    {
+      "id": "windows:auto:minimal",
+      "status": "PASS"
+    },
+    {
+      "id": "windows:auto:serialized-object",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "windows:auto:provider-only",
+      "status": "PASS"
+    },
+    {
+      "id": "windows:auto:mixed-and-inline-provider",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "windows:auto:explicit-node-families",
+      "status": "PASS"
+    },
+    {
+      "id": "windows:auto:unicode-and-quoted-node",
+      "status": "PASS"
+    },
+    {
+      "id": "windows:auto:preserve-input-fields",
+      "status": "PASS"
+    },
+    {
+      "id": "windows:auto:sniffer-and-LAN-exclusions",
+      "status": "PASS"
+    },
+    {
+      "id": "windows:auto:inherited-TUN-foreign-fields",
+      "status": "PASS"
+    },
+    {
+      "id": "windows:auto:provider-explicit-expression",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "windows:auto:duplicate-node-rejected",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "windows:auto:reserved-node-rejected",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "windows:auto:cyclic-dialer-rejected",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "windows:auto:missing-provider-rejected",
+      "status": "PASS"
+    },
+    {
+      "id": "windows:auto:invalid-root-null",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "windows:auto:invalid-root-array",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "windows:auto:invalid-root-string",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "windows:auto:invalid-network-mode",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "windows:dual-stack:minimal",
+      "status": "PASS"
+    },
+    {
+      "id": "windows:dual-stack:serialized-object",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "windows:dual-stack:provider-only",
+      "status": "PASS"
+    },
+    {
+      "id": "windows:dual-stack:mixed-and-inline-provider",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "windows:dual-stack:explicit-node-families",
+      "status": "PASS"
+    },
+    {
+      "id": "windows:dual-stack:unicode-and-quoted-node",
+      "status": "PASS"
+    },
+    {
+      "id": "windows:dual-stack:preserve-input-fields",
+      "status": "PASS"
+    },
+    {
+      "id": "windows:dual-stack:sniffer-and-LAN-exclusions",
+      "status": "PASS"
+    },
+    {
+      "id": "windows:dual-stack:inherited-TUN-foreign-fields",
+      "status": "PASS"
+    },
+    {
+      "id": "windows:dual-stack:provider-explicit-expression",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "windows:dual-stack:duplicate-node-rejected",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "windows:dual-stack:reserved-node-rejected",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "windows:dual-stack:cyclic-dialer-rejected",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "windows:dual-stack:missing-provider-rejected",
+      "status": "PASS"
+    },
+    {
+      "id": "windows:dual-stack:invalid-root-null",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "windows:dual-stack:invalid-root-array",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "windows:dual-stack:invalid-root-string",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "windows:dual-stack:invalid-network-mode",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "windows:ipv4-local:minimal",
+      "status": "PASS"
+    },
+    {
+      "id": "windows:ipv4-local:serialized-object",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "windows:ipv4-local:provider-only",
+      "status": "PASS"
+    },
+    {
+      "id": "windows:ipv4-local:mixed-and-inline-provider",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "windows:ipv4-local:explicit-node-families",
+      "status": "PASS"
+    },
+    {
+      "id": "windows:ipv4-local:unicode-and-quoted-node",
+      "status": "PASS"
+    },
+    {
+      "id": "windows:ipv4-local:preserve-input-fields",
+      "status": "PASS"
+    },
+    {
+      "id": "windows:ipv4-local:sniffer-and-LAN-exclusions",
+      "status": "PASS"
+    },
+    {
+      "id": "windows:ipv4-local:inherited-TUN-foreign-fields",
+      "status": "PASS"
+    },
+    {
+      "id": "windows:ipv4-local:provider-explicit-expression",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "windows:ipv4-local:duplicate-node-rejected",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "windows:ipv4-local:reserved-node-rejected",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "windows:ipv4-local:cyclic-dialer-rejected",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "windows:ipv4-local:missing-provider-rejected",
+      "status": "PASS"
+    },
+    {
+      "id": "windows:ipv4-local:invalid-root-null",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "windows:ipv4-local:invalid-root-array",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "windows:ipv4-local:invalid-root-string",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "windows:ipv4-local:invalid-network-mode",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "android:auto:minimal",
+      "status": "PASS"
+    },
+    {
+      "id": "android:auto:serialized-object",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "android:auto:provider-only",
+      "status": "PASS"
+    },
+    {
+      "id": "android:auto:mixed-and-inline-provider",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "android:auto:explicit-node-families",
+      "status": "PASS"
+    },
+    {
+      "id": "android:auto:unicode-and-quoted-node",
+      "status": "PASS"
+    },
+    {
+      "id": "android:auto:preserve-input-fields",
+      "status": "PASS"
+    },
+    {
+      "id": "android:auto:sniffer-and-LAN-exclusions",
+      "status": "PASS"
+    },
+    {
+      "id": "android:auto:inherited-TUN-foreign-fields",
+      "status": "PASS"
+    },
+    {
+      "id": "android:auto:provider-explicit-expression",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "android:auto:duplicate-node-rejected",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "android:auto:reserved-node-rejected",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "android:auto:cyclic-dialer-rejected",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "android:auto:missing-provider-rejected",
+      "status": "PASS"
+    },
+    {
+      "id": "android:auto:invalid-root-null",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "android:auto:invalid-root-array",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "android:auto:invalid-root-string",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "android:auto:invalid-network-mode",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "android:dual-stack:minimal",
+      "status": "PASS"
+    },
+    {
+      "id": "android:dual-stack:serialized-object",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "android:dual-stack:provider-only",
+      "status": "PASS"
+    },
+    {
+      "id": "android:dual-stack:mixed-and-inline-provider",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "android:dual-stack:explicit-node-families",
+      "status": "PASS"
+    },
+    {
+      "id": "android:dual-stack:unicode-and-quoted-node",
+      "status": "PASS"
+    },
+    {
+      "id": "android:dual-stack:preserve-input-fields",
+      "status": "PASS"
+    },
+    {
+      "id": "android:dual-stack:sniffer-and-LAN-exclusions",
+      "status": "PASS"
+    },
+    {
+      "id": "android:dual-stack:inherited-TUN-foreign-fields",
+      "status": "PASS"
+    },
+    {
+      "id": "android:dual-stack:provider-explicit-expression",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "android:dual-stack:duplicate-node-rejected",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "android:dual-stack:reserved-node-rejected",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "android:dual-stack:cyclic-dialer-rejected",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "android:dual-stack:missing-provider-rejected",
+      "status": "PASS"
+    },
+    {
+      "id": "android:dual-stack:invalid-root-null",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "android:dual-stack:invalid-root-array",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "android:dual-stack:invalid-root-string",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "android:dual-stack:invalid-network-mode",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "android:ipv4-local:minimal",
+      "status": "PASS"
+    },
+    {
+      "id": "android:ipv4-local:serialized-object",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "android:ipv4-local:provider-only",
+      "status": "PASS"
+    },
+    {
+      "id": "android:ipv4-local:mixed-and-inline-provider",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "android:ipv4-local:explicit-node-families",
+      "status": "PASS"
+    },
+    {
+      "id": "android:ipv4-local:unicode-and-quoted-node",
+      "status": "PASS"
+    },
+    {
+      "id": "android:ipv4-local:preserve-input-fields",
+      "status": "PASS"
+    },
+    {
+      "id": "android:ipv4-local:sniffer-and-LAN-exclusions",
+      "status": "PASS"
+    },
+    {
+      "id": "android:ipv4-local:inherited-TUN-foreign-fields",
+      "status": "PASS"
+    },
+    {
+      "id": "android:ipv4-local:provider-explicit-expression",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "android:ipv4-local:duplicate-node-rejected",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "android:ipv4-local:reserved-node-rejected",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "android:ipv4-local:cyclic-dialer-rejected",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "android:ipv4-local:missing-provider-rejected",
+      "status": "PASS"
+    },
+    {
+      "id": "android:ipv4-local:invalid-root-null",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "android:ipv4-local:invalid-root-array",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "android:ipv4-local:invalid-root-string",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "android:ipv4-local:invalid-network-mode",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "clashmi:auto:minimal",
+      "status": "PASS"
+    },
+    {
+      "id": "clashmi:auto:serialized-object",
+      "status": "PASS"
+    },
+    {
+      "id": "clashmi:auto:provider-only",
+      "status": "PASS"
+    },
+    {
+      "id": "clashmi:auto:mixed-and-inline-provider",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "clashmi:auto:explicit-node-families",
+      "status": "PASS"
+    },
+    {
+      "id": "clashmi:auto:unicode-and-quoted-node",
+      "status": "PASS"
+    },
+    {
+      "id": "clashmi:auto:preserve-input-fields",
+      "status": "PASS"
+    },
+    {
+      "id": "clashmi:auto:sniffer-and-LAN-exclusions",
+      "status": "PASS"
+    },
+    {
+      "id": "clashmi:auto:inherited-TUN-foreign-fields",
+      "status": "PASS"
+    },
+    {
+      "id": "clashmi:auto:provider-explicit-expression",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "clashmi:auto:duplicate-node-rejected",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "clashmi:auto:reserved-node-rejected",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "clashmi:auto:cyclic-dialer-rejected",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "clashmi:auto:missing-provider-rejected",
+      "status": "PASS"
+    },
+    {
+      "id": "clashmi:auto:invalid-root-null",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "clashmi:auto:invalid-root-array",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "clashmi:auto:invalid-root-string",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "clashmi:auto:invalid-network-mode",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "clashmi:dual-stack:minimal",
+      "status": "PASS"
+    },
+    {
+      "id": "clashmi:dual-stack:serialized-object",
+      "status": "PASS"
+    },
+    {
+      "id": "clashmi:dual-stack:provider-only",
+      "status": "PASS"
+    },
+    {
+      "id": "clashmi:dual-stack:mixed-and-inline-provider",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "clashmi:dual-stack:explicit-node-families",
+      "status": "PASS"
+    },
+    {
+      "id": "clashmi:dual-stack:unicode-and-quoted-node",
+      "status": "PASS"
+    },
+    {
+      "id": "clashmi:dual-stack:preserve-input-fields",
+      "status": "PASS"
+    },
+    {
+      "id": "clashmi:dual-stack:sniffer-and-LAN-exclusions",
+      "status": "PASS"
+    },
+    {
+      "id": "clashmi:dual-stack:inherited-TUN-foreign-fields",
+      "status": "PASS"
+    },
+    {
+      "id": "clashmi:dual-stack:provider-explicit-expression",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "clashmi:dual-stack:duplicate-node-rejected",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "clashmi:dual-stack:reserved-node-rejected",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "clashmi:dual-stack:cyclic-dialer-rejected",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "clashmi:dual-stack:missing-provider-rejected",
+      "status": "PASS"
+    },
+    {
+      "id": "clashmi:dual-stack:invalid-root-null",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "clashmi:dual-stack:invalid-root-array",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "clashmi:dual-stack:invalid-root-string",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "clashmi:dual-stack:invalid-network-mode",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "clashmi:ipv4-local:minimal",
+      "status": "PASS"
+    },
+    {
+      "id": "clashmi:ipv4-local:serialized-object",
+      "status": "PASS"
+    },
+    {
+      "id": "clashmi:ipv4-local:provider-only",
+      "status": "PASS"
+    },
+    {
+      "id": "clashmi:ipv4-local:mixed-and-inline-provider",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "clashmi:ipv4-local:explicit-node-families",
+      "status": "PASS"
+    },
+    {
+      "id": "clashmi:ipv4-local:unicode-and-quoted-node",
+      "status": "PASS"
+    },
+    {
+      "id": "clashmi:ipv4-local:preserve-input-fields",
+      "status": "PASS"
+    },
+    {
+      "id": "clashmi:ipv4-local:sniffer-and-LAN-exclusions",
+      "status": "PASS"
+    },
+    {
+      "id": "clashmi:ipv4-local:inherited-TUN-foreign-fields",
+      "status": "PASS"
+    },
+    {
+      "id": "clashmi:ipv4-local:provider-explicit-expression",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "clashmi:ipv4-local:duplicate-node-rejected",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "clashmi:ipv4-local:reserved-node-rejected",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "clashmi:ipv4-local:cyclic-dialer-rejected",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "clashmi:ipv4-local:missing-provider-rejected",
+      "status": "PASS"
+    },
+    {
+      "id": "clashmi:ipv4-local:invalid-root-null",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "clashmi:ipv4-local:invalid-root-array",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "clashmi:ipv4-local:invalid-root-string",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "clashmi:ipv4-local:invalid-network-mode",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "macosFlClash:auto:minimal",
+      "status": "PASS"
+    },
+    {
+      "id": "macosFlClash:auto:serialized-object",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "macosFlClash:auto:provider-only",
+      "status": "PASS"
+    },
+    {
+      "id": "macosFlClash:auto:mixed-and-inline-provider",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "macosFlClash:auto:explicit-node-families",
+      "status": "PASS"
+    },
+    {
+      "id": "macosFlClash:auto:unicode-and-quoted-node",
+      "status": "PASS"
+    },
+    {
+      "id": "macosFlClash:auto:preserve-input-fields",
+      "status": "PASS"
+    },
+    {
+      "id": "macosFlClash:auto:sniffer-and-LAN-exclusions",
+      "status": "PASS"
+    },
+    {
+      "id": "macosFlClash:auto:inherited-TUN-foreign-fields",
+      "status": "PASS"
+    },
+    {
+      "id": "macosFlClash:auto:provider-explicit-expression",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "macosFlClash:auto:duplicate-node-rejected",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "macosFlClash:auto:reserved-node-rejected",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "macosFlClash:auto:cyclic-dialer-rejected",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "macosFlClash:auto:missing-provider-rejected",
+      "status": "PASS"
+    },
+    {
+      "id": "macosFlClash:auto:invalid-root-null",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "macosFlClash:auto:invalid-root-array",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "macosFlClash:auto:invalid-root-string",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "macosFlClash:auto:invalid-network-mode",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "macosFlClash:dual-stack:minimal",
+      "status": "PASS"
+    },
+    {
+      "id": "macosFlClash:dual-stack:serialized-object",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "macosFlClash:dual-stack:provider-only",
+      "status": "PASS"
+    },
+    {
+      "id": "macosFlClash:dual-stack:mixed-and-inline-provider",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "macosFlClash:dual-stack:explicit-node-families",
+      "status": "PASS"
+    },
+    {
+      "id": "macosFlClash:dual-stack:unicode-and-quoted-node",
+      "status": "PASS"
+    },
+    {
+      "id": "macosFlClash:dual-stack:preserve-input-fields",
+      "status": "PASS"
+    },
+    {
+      "id": "macosFlClash:dual-stack:sniffer-and-LAN-exclusions",
+      "status": "PASS"
+    },
+    {
+      "id": "macosFlClash:dual-stack:inherited-TUN-foreign-fields",
+      "status": "PASS"
+    },
+    {
+      "id": "macosFlClash:dual-stack:provider-explicit-expression",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "macosFlClash:dual-stack:duplicate-node-rejected",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "macosFlClash:dual-stack:reserved-node-rejected",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "macosFlClash:dual-stack:cyclic-dialer-rejected",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "macosFlClash:dual-stack:missing-provider-rejected",
+      "status": "PASS"
+    },
+    {
+      "id": "macosFlClash:dual-stack:invalid-root-null",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "macosFlClash:dual-stack:invalid-root-array",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "macosFlClash:dual-stack:invalid-root-string",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "macosFlClash:dual-stack:invalid-network-mode",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "macosFlClash:ipv4-local:minimal",
+      "status": "PASS"
+    },
+    {
+      "id": "macosFlClash:ipv4-local:serialized-object",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "macosFlClash:ipv4-local:provider-only",
+      "status": "PASS"
+    },
+    {
+      "id": "macosFlClash:ipv4-local:mixed-and-inline-provider",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "macosFlClash:ipv4-local:explicit-node-families",
+      "status": "PASS"
+    },
+    {
+      "id": "macosFlClash:ipv4-local:unicode-and-quoted-node",
+      "status": "PASS"
+    },
+    {
+      "id": "macosFlClash:ipv4-local:preserve-input-fields",
+      "status": "PASS"
+    },
+    {
+      "id": "macosFlClash:ipv4-local:sniffer-and-LAN-exclusions",
+      "status": "PASS"
+    },
+    {
+      "id": "macosFlClash:ipv4-local:inherited-TUN-foreign-fields",
+      "status": "PASS"
+    },
+    {
+      "id": "macosFlClash:ipv4-local:provider-explicit-expression",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "macosFlClash:ipv4-local:duplicate-node-rejected",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "macosFlClash:ipv4-local:reserved-node-rejected",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "macosFlClash:ipv4-local:cyclic-dialer-rejected",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "macosFlClash:ipv4-local:missing-provider-rejected",
+      "status": "PASS"
+    },
+    {
+      "id": "macosFlClash:ipv4-local:invalid-root-null",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "macosFlClash:ipv4-local:invalid-root-array",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "macosFlClash:ipv4-local:invalid-root-string",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "macosFlClash:ipv4-local:invalid-network-mode",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "macosClashMi:auto:minimal",
+      "status": "PASS"
+    },
+    {
+      "id": "macosClashMi:auto:serialized-object",
+      "status": "PASS"
+    },
+    {
+      "id": "macosClashMi:auto:provider-only",
+      "status": "PASS"
+    },
+    {
+      "id": "macosClashMi:auto:mixed-and-inline-provider",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "macosClashMi:auto:explicit-node-families",
+      "status": "PASS"
+    },
+    {
+      "id": "macosClashMi:auto:unicode-and-quoted-node",
+      "status": "PASS"
+    },
+    {
+      "id": "macosClashMi:auto:preserve-input-fields",
+      "status": "PASS"
+    },
+    {
+      "id": "macosClashMi:auto:sniffer-and-LAN-exclusions",
+      "status": "PASS"
+    },
+    {
+      "id": "macosClashMi:auto:inherited-TUN-foreign-fields",
+      "status": "PASS"
+    },
+    {
+      "id": "macosClashMi:auto:provider-explicit-expression",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "macosClashMi:auto:duplicate-node-rejected",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "macosClashMi:auto:reserved-node-rejected",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "macosClashMi:auto:cyclic-dialer-rejected",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "macosClashMi:auto:missing-provider-rejected",
+      "status": "PASS"
+    },
+    {
+      "id": "macosClashMi:auto:invalid-root-null",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "macosClashMi:auto:invalid-root-array",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "macosClashMi:auto:invalid-root-string",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "macosClashMi:auto:invalid-network-mode",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "macosClashMi:dual-stack:minimal",
+      "status": "PASS"
+    },
+    {
+      "id": "macosClashMi:dual-stack:serialized-object",
+      "status": "PASS"
+    },
+    {
+      "id": "macosClashMi:dual-stack:provider-only",
+      "status": "PASS"
+    },
+    {
+      "id": "macosClashMi:dual-stack:mixed-and-inline-provider",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "macosClashMi:dual-stack:explicit-node-families",
+      "status": "PASS"
+    },
+    {
+      "id": "macosClashMi:dual-stack:unicode-and-quoted-node",
+      "status": "PASS"
+    },
+    {
+      "id": "macosClashMi:dual-stack:preserve-input-fields",
+      "status": "PASS"
+    },
+    {
+      "id": "macosClashMi:dual-stack:sniffer-and-LAN-exclusions",
+      "status": "PASS"
+    },
+    {
+      "id": "macosClashMi:dual-stack:inherited-TUN-foreign-fields",
+      "status": "PASS"
+    },
+    {
+      "id": "macosClashMi:dual-stack:provider-explicit-expression",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "macosClashMi:dual-stack:duplicate-node-rejected",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "macosClashMi:dual-stack:reserved-node-rejected",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "macosClashMi:dual-stack:cyclic-dialer-rejected",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "macosClashMi:dual-stack:missing-provider-rejected",
+      "status": "PASS"
+    },
+    {
+      "id": "macosClashMi:dual-stack:invalid-root-null",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "macosClashMi:dual-stack:invalid-root-array",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "macosClashMi:dual-stack:invalid-root-string",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "macosClashMi:dual-stack:invalid-network-mode",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "macosClashMi:ipv4-local:minimal",
+      "status": "PASS"
+    },
+    {
+      "id": "macosClashMi:ipv4-local:serialized-object",
+      "status": "PASS"
+    },
+    {
+      "id": "macosClashMi:ipv4-local:provider-only",
+      "status": "PASS"
+    },
+    {
+      "id": "macosClashMi:ipv4-local:mixed-and-inline-provider",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "macosClashMi:ipv4-local:explicit-node-families",
+      "status": "PASS"
+    },
+    {
+      "id": "macosClashMi:ipv4-local:unicode-and-quoted-node",
+      "status": "PASS"
+    },
+    {
+      "id": "macosClashMi:ipv4-local:preserve-input-fields",
+      "status": "PASS"
+    },
+    {
+      "id": "macosClashMi:ipv4-local:sniffer-and-LAN-exclusions",
+      "status": "PASS"
+    },
+    {
+      "id": "macosClashMi:ipv4-local:inherited-TUN-foreign-fields",
+      "status": "PASS"
+    },
+    {
+      "id": "macosClashMi:ipv4-local:provider-explicit-expression",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "macosClashMi:ipv4-local:duplicate-node-rejected",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "macosClashMi:ipv4-local:reserved-node-rejected",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "macosClashMi:ipv4-local:cyclic-dialer-rejected",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "macosClashMi:ipv4-local:missing-provider-rejected",
+      "status": "PASS"
+    },
+    {
+      "id": "macosClashMi:ipv4-local:invalid-root-null",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "macosClashMi:ipv4-local:invalid-root-array",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "macosClashMi:ipv4-local:invalid-root-string",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "macosClashMi:ipv4-local:invalid-network-mode",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "clashVerge:auto:minimal",
+      "status": "PASS"
+    },
+    {
+      "id": "clashVerge:auto:serialized-object",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "clashVerge:auto:provider-only",
+      "status": "PASS"
+    },
+    {
+      "id": "clashVerge:auto:mixed-and-inline-provider",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "clashVerge:auto:explicit-node-families",
+      "status": "PASS"
+    },
+    {
+      "id": "clashVerge:auto:unicode-and-quoted-node",
+      "status": "PASS"
+    },
+    {
+      "id": "clashVerge:auto:preserve-input-fields",
+      "status": "PASS"
+    },
+    {
+      "id": "clashVerge:auto:sniffer-and-LAN-exclusions",
+      "status": "PASS"
+    },
+    {
+      "id": "clashVerge:auto:inherited-TUN-foreign-fields",
+      "status": "PASS"
+    },
+    {
+      "id": "clashVerge:auto:provider-explicit-expression",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "clashVerge:auto:duplicate-node-rejected",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "clashVerge:auto:reserved-node-rejected",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "clashVerge:auto:cyclic-dialer-rejected",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "clashVerge:auto:missing-provider-rejected",
+      "status": "PASS"
+    },
+    {
+      "id": "clashVerge:auto:invalid-root-null",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "clashVerge:auto:invalid-root-array",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "clashVerge:auto:invalid-root-string",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "clashVerge:auto:invalid-network-mode",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "clashVerge:dual-stack:minimal",
+      "status": "PASS"
+    },
+    {
+      "id": "clashVerge:dual-stack:serialized-object",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "clashVerge:dual-stack:provider-only",
+      "status": "PASS"
+    },
+    {
+      "id": "clashVerge:dual-stack:mixed-and-inline-provider",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "clashVerge:dual-stack:explicit-node-families",
+      "status": "PASS"
+    },
+    {
+      "id": "clashVerge:dual-stack:unicode-and-quoted-node",
+      "status": "PASS"
+    },
+    {
+      "id": "clashVerge:dual-stack:preserve-input-fields",
+      "status": "PASS"
+    },
+    {
+      "id": "clashVerge:dual-stack:sniffer-and-LAN-exclusions",
+      "status": "PASS"
+    },
+    {
+      "id": "clashVerge:dual-stack:inherited-TUN-foreign-fields",
+      "status": "PASS"
+    },
+    {
+      "id": "clashVerge:dual-stack:provider-explicit-expression",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "clashVerge:dual-stack:duplicate-node-rejected",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "clashVerge:dual-stack:reserved-node-rejected",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "clashVerge:dual-stack:cyclic-dialer-rejected",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "clashVerge:dual-stack:missing-provider-rejected",
+      "status": "PASS"
+    },
+    {
+      "id": "clashVerge:dual-stack:invalid-root-null",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "clashVerge:dual-stack:invalid-root-array",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "clashVerge:dual-stack:invalid-root-string",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "clashVerge:dual-stack:invalid-network-mode",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "clashVerge:ipv4-local:minimal",
+      "status": "PASS"
+    },
+    {
+      "id": "clashVerge:ipv4-local:serialized-object",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "clashVerge:ipv4-local:provider-only",
+      "status": "PASS"
+    },
+    {
+      "id": "clashVerge:ipv4-local:mixed-and-inline-provider",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "clashVerge:ipv4-local:explicit-node-families",
+      "status": "PASS"
+    },
+    {
+      "id": "clashVerge:ipv4-local:unicode-and-quoted-node",
+      "status": "PASS"
+    },
+    {
+      "id": "clashVerge:ipv4-local:preserve-input-fields",
+      "status": "PASS"
+    },
+    {
+      "id": "clashVerge:ipv4-local:sniffer-and-LAN-exclusions",
+      "status": "PASS"
+    },
+    {
+      "id": "clashVerge:ipv4-local:inherited-TUN-foreign-fields",
+      "status": "PASS"
+    },
+    {
+      "id": "clashVerge:ipv4-local:provider-explicit-expression",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "clashVerge:ipv4-local:duplicate-node-rejected",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "clashVerge:ipv4-local:reserved-node-rejected",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "clashVerge:ipv4-local:cyclic-dialer-rejected",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "clashVerge:ipv4-local:missing-provider-rejected",
+      "status": "PASS"
+    },
+    {
+      "id": "clashVerge:ipv4-local:invalid-root-null",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "clashVerge:ipv4-local:invalid-root-array",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "clashVerge:ipv4-local:invalid-root-string",
+      "status": "EXPECTED_REJECTION_MATCH"
+    },
+    {
+      "id": "clashVerge:ipv4-local:invalid-network-mode",
+      "status": "EXPECTED_REJECTION_MATCH"
+    }
+  ],
+  "performance": [
+    {
+      "track": "main",
+      "client": "windows",
+      "nodes": 1,
+      "quickJSms": 37.53,
+      "scriptBytes": 125799,
+      "configBytes": 181478
+    },
+    {
+      "track": "main",
+      "client": "windows",
+      "nodes": 50,
+      "quickJSms": 46.28,
+      "scriptBytes": 125799,
+      "configBytes": 226604
+    },
+    {
+      "track": "main",
+      "client": "windows",
+      "nodes": 500,
+      "quickJSms": 153.75,
+      "scriptBytes": 125799,
+      "configBytes": 656954
+    },
+    {
+      "track": "main",
+      "client": "windows",
+      "nodes": 2000,
+      "quickJSms": 816.85,
+      "scriptBytes": 125799,
+      "configBytes": 2129954
+    },
+    {
+      "track": "main",
+      "client": "android",
+      "nodes": 1,
+      "quickJSms": 36.66,
+      "scriptBytes": 125516,
+      "configBytes": 181289
+    },
+    {
+      "track": "main",
+      "client": "android",
+      "nodes": 50,
+      "quickJSms": 45.62,
+      "scriptBytes": 125516,
+      "configBytes": 226415
+    },
+    {
+      "track": "main",
+      "client": "android",
+      "nodes": 500,
+      "quickJSms": 157.95,
+      "scriptBytes": 125516,
+      "configBytes": 656765
+    },
+    {
+      "track": "main",
+      "client": "android",
+      "nodes": 2000,
+      "quickJSms": 834.82,
+      "scriptBytes": 125516,
+      "configBytes": 2129765
+    },
+    {
+      "track": "main",
+      "client": "clashmi",
+      "nodes": 1,
+      "quickJSms": 37.99,
+      "scriptBytes": 128538,
+      "configBytes": 182377
+    },
+    {
+      "track": "main",
+      "client": "clashmi",
+      "nodes": 50,
+      "quickJSms": 47.88,
+      "scriptBytes": 128538,
+      "configBytes": 227503
+    },
+    {
+      "track": "main",
+      "client": "clashmi",
+      "nodes": 500,
+      "quickJSms": 165.11,
+      "scriptBytes": 128538,
+      "configBytes": 657853
+    },
+    {
+      "track": "main",
+      "client": "clashmi",
+      "nodes": 2000,
+      "quickJSms": 845.6,
+      "scriptBytes": 128538,
+      "configBytes": 2130853
+    },
+    {
+      "track": "main",
+      "client": "macosFlClash",
+      "nodes": 1,
+      "quickJSms": 37.36,
+      "scriptBytes": 127594,
+      "configBytes": 181761
+    },
+    {
+      "track": "main",
+      "client": "macosFlClash",
+      "nodes": 50,
+      "quickJSms": 45.92,
+      "scriptBytes": 127594,
+      "configBytes": 226887
+    },
+    {
+      "track": "main",
+      "client": "macosFlClash",
+      "nodes": 500,
+      "quickJSms": 160.91,
+      "scriptBytes": 127594,
+      "configBytes": 657237
+    },
+    {
+      "track": "main",
+      "client": "macosFlClash",
+      "nodes": 2000,
+      "quickJSms": 865.15,
+      "scriptBytes": 127594,
+      "configBytes": 2130237
+    },
+    {
+      "track": "main",
+      "client": "macosClashMi",
+      "nodes": 1,
+      "quickJSms": 37.31,
+      "scriptBytes": 128540,
+      "configBytes": 182375
+    },
+    {
+      "track": "main",
+      "client": "macosClashMi",
+      "nodes": 50,
+      "quickJSms": 45.54,
+      "scriptBytes": 128540,
+      "configBytes": 227501
+    },
+    {
+      "track": "main",
+      "client": "macosClashMi",
+      "nodes": 500,
+      "quickJSms": 159.02,
+      "scriptBytes": 128540,
+      "configBytes": 657851
+    },
+    {
+      "track": "main",
+      "client": "macosClashMi",
+      "nodes": 2000,
+      "quickJSms": 885.61,
+      "scriptBytes": 128540,
+      "configBytes": 2130851
+    },
+    {
+      "track": "main",
+      "client": "clashVerge",
+      "nodes": 1,
+      "quickJSms": 41.3,
+      "scriptBytes": 128160,
+      "configBytes": 182056
+    },
+    {
+      "track": "main",
+      "client": "clashVerge",
+      "nodes": 50,
+      "quickJSms": 53.69,
+      "scriptBytes": 128160,
+      "configBytes": 227182
+    },
+    {
+      "track": "main",
+      "client": "clashVerge",
+      "nodes": 500,
+      "quickJSms": 188.04,
+      "scriptBytes": 128160,
+      "configBytes": 657532
+    },
+    {
+      "track": "main",
+      "client": "clashVerge",
+      "nodes": 2000,
+      "quickJSms": 950.85,
+      "scriptBytes": 128160,
+      "configBytes": 2130532
+    },
+    {
+      "track": "ipv4-only",
+      "client": "windows",
+      "nodes": 1,
+      "quickJSms": 66.3,
+      "scriptBytes": 119646,
+      "configBytes": 240945
+    },
+    {
+      "track": "ipv4-only",
+      "client": "windows",
+      "nodes": 50,
+      "quickJSms": 78.72,
+      "scriptBytes": 119646,
+      "configBytes": 287051
+    },
+    {
+      "track": "ipv4-only",
+      "client": "windows",
+      "nodes": 500,
+      "quickJSms": 212.99,
+      "scriptBytes": 119646,
+      "configBytes": 726401
+    },
+    {
+      "track": "ipv4-only",
+      "client": "windows",
+      "nodes": 2000,
+      "quickJSms": 982.69,
+      "scriptBytes": 119646,
+      "configBytes": 2229401
+    },
+    {
+      "track": "ipv4-only",
+      "client": "android",
+      "nodes": 1,
+      "quickJSms": 65.47,
+      "scriptBytes": 119273,
+      "configBytes": 240801
+    },
+    {
+      "track": "ipv4-only",
+      "client": "android",
+      "nodes": 50,
+      "quickJSms": 73.44,
+      "scriptBytes": 119273,
+      "configBytes": 286907
+    },
+    {
+      "track": "ipv4-only",
+      "client": "android",
+      "nodes": 500,
+      "quickJSms": 194.18,
+      "scriptBytes": 119273,
+      "configBytes": 726257
+    },
+    {
+      "track": "ipv4-only",
+      "client": "android",
+      "nodes": 2000,
+      "quickJSms": 911.35,
+      "scriptBytes": 119273,
+      "configBytes": 2229257
+    },
+    {
+      "track": "ipv4-only",
+      "client": "clashmi",
+      "nodes": 1,
+      "quickJSms": 63.64,
+      "scriptBytes": 121502,
+      "configBytes": 241802
+    },
+    {
+      "track": "ipv4-only",
+      "client": "clashmi",
+      "nodes": 50,
+      "quickJSms": 74.34,
+      "scriptBytes": 121502,
+      "configBytes": 287908
+    },
+    {
+      "track": "ipv4-only",
+      "client": "clashmi",
+      "nodes": 500,
+      "quickJSms": 195.94,
+      "scriptBytes": 121502,
+      "configBytes": 727258
+    },
+    {
+      "track": "ipv4-only",
+      "client": "clashmi",
+      "nodes": 2000,
+      "quickJSms": 886.93,
+      "scriptBytes": 121502,
+      "configBytes": 2230258
+    },
+    {
+      "track": "ipv4-only",
+      "client": "macosFlClash",
+      "nodes": 1,
+      "quickJSms": 60.95,
+      "scriptBytes": 121403,
+      "configBytes": 241228
+    },
+    {
+      "track": "ipv4-only",
+      "client": "macosFlClash",
+      "nodes": 50,
+      "quickJSms": 70.04,
+      "scriptBytes": 121403,
+      "configBytes": 287334
+    },
+    {
+      "track": "ipv4-only",
+      "client": "macosFlClash",
+      "nodes": 500,
+      "quickJSms": 190.07,
+      "scriptBytes": 121403,
+      "configBytes": 726684
+    },
+    {
+      "track": "ipv4-only",
+      "client": "macosFlClash",
+      "nodes": 2000,
+      "quickJSms": 925.95,
+      "scriptBytes": 121403,
+      "configBytes": 2229684
+    },
+    {
+      "track": "ipv4-only",
+      "client": "macosClashMi",
+      "nodes": 1,
+      "quickJSms": 66.32,
+      "scriptBytes": 121500,
+      "configBytes": 241800
+    },
+    {
+      "track": "ipv4-only",
+      "client": "macosClashMi",
+      "nodes": 50,
+      "quickJSms": 72.33,
+      "scriptBytes": 121500,
+      "configBytes": 287906
+    },
+    {
+      "track": "ipv4-only",
+      "client": "macosClashMi",
+      "nodes": 500,
+      "quickJSms": 188.03,
+      "scriptBytes": 121500,
+      "configBytes": 727256
+    },
+    {
+      "track": "ipv4-only",
+      "client": "macosClashMi",
+      "nodes": 2000,
+      "quickJSms": 896.65,
+      "scriptBytes": 121500,
+      "configBytes": 2230256
+    },
+    {
+      "track": "ipv4-only",
+      "client": "clashVerge",
+      "nodes": 1,
+      "quickJSms": 59.51,
+      "scriptBytes": 121584,
+      "configBytes": 241369
+    },
+    {
+      "track": "ipv4-only",
+      "client": "clashVerge",
+      "nodes": 50,
+      "quickJSms": 68.59,
+      "scriptBytes": 121584,
+      "configBytes": 287475
+    },
+    {
+      "track": "ipv4-only",
+      "client": "clashVerge",
+      "nodes": 500,
+      "quickJSms": 177.96,
+      "scriptBytes": 121584,
+      "configBytes": 726825
+    },
+    {
+      "track": "ipv4-only",
+      "client": "clashVerge",
+      "nodes": 2000,
+      "quickJSms": 871.42,
+      "scriptBytes": 121584,
+      "configBytes": 2229825
+    }
+  ],
+  "deviceAcceptance": "NOT_RUN"
+}

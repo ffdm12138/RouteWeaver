@@ -1,0 +1,167 @@
+{
+  "revision": "domestic-resilience-r1",
+  "status": "FAIL",
+  "scope": "CURRENT_SOURCE_OFFLINE_NOT_DEVICE_ACCEPTANCE",
+  "sources": {
+    "releases/v14.3/src/windows/v14.3-windows-flclash.js": "dd2a0af092c12dd037b19834fcca07131d77deda44e8060347795b5f46bc9224",
+    "releases/v14.3/src/android/v14.3-android-flclash.js": "12ee7be6c615af20c464e61108dc2e1520baba1b4d2bfc3ebce9f261ffbd6869",
+    "releases/v14.3/src/ios/v14.3-clashmi-domestic-protocol-r1.js": "00ce8d4a92a2fa2a957ebd2da4173470292df23e2661af839cf186206beee366",
+    "releases/v14.3/src/ios/v14.3-shadowrocket.conf": "e0220fd31d1394a90cdd4d4ff3e4bc0ebf7daa762c68b192ef627eb53379bbfc",
+    "releases/v14.3/src/macos/v14.3-macos-flclash.js": "75b4044438655013c4ae256599848503cfff1b488ddea765a8e09caf12d99a92",
+    "releases/v14.3/src/macos/v14.3-macos-clashmi.js": "477f1ce5f025641b668225d10f75f17af4f8aca2fd4e60d97d8445d665247529",
+    "releases/v14.3/src/clash-verge/v14.3-clash-verge.js": "2798bc20792b09900283835011de518966355620a544fc802000fc9855785675",
+    "releases/v14.3-ipv4-only/src/windows/v14.3-windows-flclash-ipv4-only.js": "d0b43ba36b61e4555a06a18ab2561151d9908a91dd009923ddfdf67d82dfbb9a",
+    "releases/v14.3-ipv4-only/src/android/v14.3-android-flclash-ipv4-only.js": "782c3089dcb274bc387df109544c41436f65b465193a3ad9e7df88d5188032c9",
+    "releases/v14.3-ipv4-only/src/ios/v14.3-clashmi-domestic-protocol-r1-ipv4-only.js": "b35668c87ab6998b4af08d46cdf0dcaf7fbd8788e754f46bb876242e1dadcc43",
+    "releases/v14.3-ipv4-only/src/ios/v14.3-shadowrocket-ipv4-only.conf": "d88ca1232691de9e3b23eb8d3d0c2dd7fb647007a07165f21f651a1b9b883286",
+    "releases/v14.3-ipv4-only/src/macos/v14.3-macos-flclash-ipv4-only.js": "7bbe9957dbbb80e154504a98a6255e8e8b146b8dd267cfdbdff86cde109e4dc1",
+    "releases/v14.3-ipv4-only/src/macos/v14.3-macos-clashmi-ipv4-only.js": "049da635cae2d7faef8ac02cc68dc3bc82a427b64aba3313ed3e74d7f5497167",
+    "releases/v14.3-ipv4-only/src/clash-verge/v14.3-clash-verge-ipv4-only.js": "f4965ea623cacf42980b29b3959866f39d1eace2ec35886b80cfff677568695a"
+  },
+  "results": [
+    {
+      "command": [
+        "node",
+        "releases/v14.3/tools/build-all.cjs",
+        "--check"
+      ],
+      "status": "PASS",
+      "exitCode": 0,
+      "stdout": "{\"status\":\"SHARED_SINGLE_ENTRY_GENERATION_PASS\",\"javascriptEntries\":6,\"nativeEntries\":1,\"runtimeRevision\":\"shared-runtime-r1\",\"mode\":\"one-file-per-client\"}\n{\"status\":\"SHADOWROCKET_LEAN_GENERATION_PASS\",\"bytes\":1780239,\"beforeBytes\":6168748,\"rules\":{\"before\":116974,\"after\":5112,\"removedDominated\":488},\"dnsRows\":9890,\"remoteSources\":15,\"nativeAcceptance\":\"NOT_RUN\"}\n{\"status\":\"SHARED_SINGLE_ENTRY_GENERATION_PASS\",\"javascriptEntries\":6,\"nativeEntries\":1,\"runtimeRevision\":\"shared-runtime-r1\",\"mode\":\"one-file-per-client\"}\n{\"status\":\"SHARED_SINGLE_ENTRY_GENERATION_PASS\",\"javascriptEntries\":6,\"nativeEntries\":1,\"runtimeRevision\":\"shared-runtime-r1\",\"mode\":\"one-file-per-client\"}\n{\"status\":\"SHARED_SINGLE_ENTRY_GENERATION_PASS\",\"javascriptEntries\":6,\"nativeEntries\":1,\"runtimeRevision\":\"shared-runtime-r1\",\"mode\":\"one-file-per-client\"}\n",
+      "stderr": "",
+      "seconds": 3.859
+    },
+    {
+      "command": [
+        "node",
+        "tools/build-ipv4-only.cjs",
+        "--check"
+      ],
+      "status": "PASS",
+      "exitCode": 0,
+      "stdout": "{\"status\":\"IPV4_ONLY_GENERATION_PASS\",\"flavor\":\"public\",\"entries\":7,\"check\":true}\n",
+      "stderr": "",
+      "seconds": 0.094
+    },
+    {
+      "command": [
+        "node",
+        "tools/test-native-fallback.cjs"
+      ],
+      "status": "PASS",
+      "exitCode": 0,
+      "stdout": "{\"status\":\"PASS\",\"cases\":72}\n",
+      "stderr": "",
+      "seconds": 2.969
+    },
+    {
+      "command": [
+        "node",
+        "tools/test-company-audit.cjs"
+      ],
+      "status": "PASS",
+      "exitCode": 0,
+      "stdout": "{\"status\":\"PASS\",\"checks\":504,\"failed\":0,\"failures\":[]}\n",
+      "stderr": "",
+      "seconds": 0.375
+    },
+    {
+      "command": [
+        "node",
+        "tools/test-architecture.cjs"
+      ],
+      "status": "PASS",
+      "exitCode": 0,
+      "stdout": "{\"status\":\"PASS\",\"passed\":160,\"failed\":0,\"failures\":[]}\n",
+      "stderr": "",
+      "seconds": 2.515
+    },
+    {
+      "command": [
+        "node",
+        "releases/v14.3/tests/clash-verge.cjs"
+      ],
+      "status": "PASS",
+      "exitCode": 0,
+      "stdout": "{\"status\":\"CLASH_VERGE_STATIC_PASS\",\"checks\":10}\n",
+      "stderr": "",
+      "seconds": 0.344
+    },
+    {
+      "command": [
+        "node",
+        "releases/v14.3/tests/shadowrocket-lean.cjs"
+      ],
+      "status": "PASS",
+      "exitCode": 0,
+      "stdout": "{\"status\":\"SHADOWROCKET_LEAN_STATIC_PASS_NATIVE_PENDING\",\"checks\":5,\"metrics\":{\"routingHosts\":232528,\"tcp\":232528,\"udp\":232528,\"businessDNS\":9129,\"criticalDomesticDNS\":6,\"coldRouting\":36,\"protectedFlows\":9},\"failures\":[],\"nativeAcceptance\":\"NOT_RUN\"}\n",
+      "stderr": "",
+      "seconds": 19.469
+    },
+    {
+      "command": [
+        "node",
+        "releases/v14.3/tests/network-compat.cjs"
+      ],
+      "status": "PASS",
+      "exitCode": 0,
+      "stdout": "{\"status\":\"NETWORK_COMPAT_STATIC_PASS\",\"checks\":73}\n",
+      "stderr": "",
+      "seconds": 3.375
+    },
+    {
+      "command": [
+        "node",
+        "tools/test-ipv4-only.cjs"
+      ],
+      "status": "PASS",
+      "exitCode": 0,
+      "stdout": "{\"status\":\"IPV4_ONLY_STATIC_BUSINESS_PARITY_PASS\",\"flavor\":\"public\",\"checks\":67,\"engines\":[]}\n",
+      "stderr": "",
+      "seconds": 2.047
+    },
+    {
+      "command": [
+        "node",
+        "releases/v14.3/tests/static.cjs"
+      ],
+      "status": "FAIL",
+      "exitCode": 1,
+      "stdout": "{\"platform\":\"desktop\",\"fullInventoryHosts\":233398,\"normalRouting\":233398,\"normalDNS\":233398,\"criticalColdRouting\":4592,\"criticalColdDNS\":1148,\"existingCases\":917}\n{\"platform\":\"android\",\"fullInventoryHosts\":233398,\"normalRouting\":233398,\"normalDNS\":233398,\"criticalColdRouting\":4592,\"criticalColdDNS\":1148,\"existingCases\":917}\n{\"platform\":\"clashmi\",\"fullInventoryHosts\":233398,\"normalRouting\":233398,\"normalDNS\":233398,\"criticalColdRouting\":4592,\"criticalColdDNS\":1148,\"existingCases\":917}\n{\"status\":\"FAIL\",\"checks\":21,\"failures\":[{\"name\":\"desktop:all-domain-inventories-full-remote-same-routing-and-DNS\",\"error\":\"AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal: + actual - expected  + [ +   { +     after: 'OpenAI 服务', +     before: '漏网之鱼', +     host: 'openaifoundation.org',\"},{\"name\":\"desktop:critical-domains-with-all-remote-files-empty\",\"error\":\"AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal: + actual - expected  + [ +   { +     after: 'OpenAI 服务', +     before: '漏网之鱼', +     host: 'openaifoundation.org',\"},{\"name\":\"android:all-domain-inventories-full-remote-same-routing-and-DNS\",\"error\":\"AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal: + actual - expected  + [ +   { +     after: 'OpenAI 服务', +     before: '漏网之鱼', +     host: 'openaifoundation.org',\"},{\"name\":\"android:critical-domains-with-all-remote-files-empty\",\"error\":\"AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal: + actual - expected  + [ +   { +     after: 'OpenAI 服务', +     before: '漏网之鱼', +     host: 'openaifoundation.org',\"},{\"name\":\"clashmi:all-domain-inventories-full-remote-same-routing-and-DNS\",\"error\":\"AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal: + actual - expected  + [ +   { +     after: 'OpenAI 服务', +     before: '漏网之鱼', +     host: 'openaifoundation.org',\"},{\"name\":\"clashmi:critical-domains-with-all-remote-files-empty\",\"error\":\"AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal: + actual - expected  + [ +   { +     after: 'OpenAI 服务', +     before: '漏网之鱼', +     host: 'openaifoundation.org',\"}],\"normalMismatches\":[{\"platform\":\"desktop\",\"host\":\"openaifoundation.org\",\"before\":\"漏网之鱼\",\"after\":\"OpenAI 服务\",\"rule\":\"RULE-SET,v14-core-1d436d47,OpenAI 服务\",\"member\":\"DOMAIN-SUFFIX,openaifoundation.org\"},{\"platform\":\"desktop\",\"host\":\"openaifoundation.org\",\"beforeDNS\":[\"漏网之鱼\"],\"afterDNS\":[\"OpenAI 服务\"],\"key\":\"rule-set:v14-core-1d436d47\"},{\"platform\":\"desktop\",\"host\":\"review-probe.openaifoundation.org\",\"before\":\"漏网之鱼\",\"after\":\"OpenAI 服务\",\"rule\":\"RULE-SET,v14-core-1d436d47,OpenAI 服务\",\"member\":\"DOMAIN-SUFFIX,openaifoundation.org\"},{\"platform\":\"desktop\",\"host\":\"review-probe.openaifoundation.org\",\"beforeDNS\":[\"漏网之鱼\"],\"afterDNS\":[\"OpenAI 服务\"],\"key\":\"rule-set:v14-core-1d436d47\"},{\"platform\":\"android\",\"host\":\"openaifoundation.org\",\"before\":\"漏网之鱼\",\"after\":\"OpenAI 服务\",\"rule\":\"RULE-SET,v14-core-1d436d47,OpenAI 服务\",\"member\":\"DOMAIN-SUFFIX,openaifoundation.org\"},{\"platform\":\"android\",\"host\":\"openaifoundation.org\",\"beforeDNS\":[\"漏网之鱼\"],\"afterDNS\":[\"OpenAI 服务\"],\"key\":\"rule-set:v14-core-1d436d47\"},{\"platform\":\"android\",\"host\":\"review-probe.openaifoundation.org\",\"before\":\"漏网之鱼\",\"after\":\"OpenAI 服务\",\"rule\":\"RULE-SET,v14-core-1d436d47,OpenAI 服务\",\"member\":\"DOMAIN-SUFFIX,openaifoundation.org\"},{\"platform\":\"android\",\"host\":\"review-probe.openaifoundation.org\",\"beforeDNS\":[\"漏网之鱼\"],\"afterDNS\":[\"OpenAI 服务\"],\"key\":\"rule-set:v14-core-1d436d47\"},{\"platform\":\"clashmi\",\"host\":\"openaifoundation.org\",\"before\":\"漏网之鱼\",\"after\":\"OpenAI 服务\",\"rule\":\"RULE-SET,v14-core-1d436d47,OpenAI 服务\",\"member\":\"DOMAIN-SUFFIX,openaifoundation.org\"},{\"platform\":\"clashmi\",\"host\":\"openaifoundation.org\",\"beforeDNS\":[\"漏网之鱼\"],\"afterDNS\":[\"OpenAI 服务\"],\"key\":\"rule-set:v14-core-1d436d47\"},{\"platform\":\"clashmi\",\"host\":\"review-probe.openaifoundation.org\",\"before\":\"漏网之鱼\",\"after\":\"OpenAI 服务\",\"rule\":\"RULE-SET,v14-core-1d436d47,OpenAI 服务\",\"member\":\"DOMAIN-SUFFIX,openaifoundation.org\"},{\"platform\":\"clashmi\",\"host\":\"review-probe.openaifoundation.org\",\"beforeDNS\":[\"漏网之鱼\"],\"afterDNS\":[\"OpenAI 服务\"],\"key\":\"rule-set:v14-core-1d436d47\"}],\"coldMismatches\":[{\"platform\":\"desktop\",\"host\":\"openaifoundation.org\",\"protocol\":\"TCP\",\"supported\":true,\"before\":\"漏网之鱼\",\"after\":\"OpenAI 服务\",\"rule\":\"RULE-SET,v14-core-1d436d47,OpenAI 服务\"},{\"platform\":\"desktop\",\"host\":\"openaifoundation.org\",\"protocol\":\"TCP\",\"supported\":false,\"before\":\"漏网之鱼\",\"after\":\"OpenAI 服务\",\"rule\":\"RULE-SET,v14-core-1d436d47,OpenAI 服务\"},{\"platform\":\"desktop\",\"host\":\"openaifoundation.org\",\"protocol\":\"UDP\",\"supported\":true,\"before\":\"漏网之鱼\",\"after\":\"OpenAI 服务\",\"rule\":\"RULE-SET,v14-core-1d436d47,OpenAI 服务\"},{\"platform\":\"desktop\",\"host\":\"openaifoundation.org\",\"beforeDNS\":[\"漏网之鱼\"],\"afterDNS\":[\"OpenAI 服务\"],\"key\":\"rule-set:v14-core-1d436d47\"},{\"platform\":\"desktop\",\"host\":\"critical-probe.openaifoundation.org\",\"protocol\":\"TCP\",\"supported\":true,\"before\":\"漏网之鱼\",\"after\":\"OpenAI 服务\",\"rule\":\"RULE-SET,v14-core-1d436d47,OpenAI 服务\"},{\"platform\":\"desktop\",\"host\":\"critical-probe.openaifoundation.org\",\"protocol\":\"TCP\",\"supported\":false,\"before\":\"漏网之鱼\",\"after\":\"OpenAI 服务\",\"rule\":\"RULE-SET,v14-core-1d436d47,OpenAI 服务\"},{\"platform\":\"desktop\",\"host\":\"critical-probe.openaifoundation.org\",\"protocol\":\"UDP\",\"supported\":true,\"before\":\"漏网之鱼\",\"after\":\"OpenAI 服务\",\"rule\":\"RULE-SET,v14-core-1d436d47,OpenAI 服务\"},{\"platform\":\"desktop\",\"host\":\"critical-probe.openaifoundation.org\",\"beforeDNS\":[\"漏网之鱼\"],\"afterDNS\":[\"OpenAI 服务\"],\"key\":\"rule-set:v14-core-1d436d47\"},{\"platform\":\"android\",\"host\":\"openaifoundation.org\",\"protocol\":\"TCP\",\"supported\":true,\"before\":\"漏网之鱼\",\"after\":\"OpenAI 服务\",\"rule\":\"RULE-SET,v14-core-1d436d47,OpenAI 服务\"},{\"platform\":\"android\",\"host\":\"openaifoundation.org\",\"protocol\":\"TCP\",\"supported\":false,\"before\":\"漏网之鱼\",\"after\":\"OpenAI 服务\",\"rule\":\"RULE-SET,v14-core-1d436d47,OpenAI 服务\"},{\"platform\":\"android\",\"host\":\"openaifoundation.org\",\"protocol\":\"UDP\",\"supported\":true,\"before\":\"漏网之鱼\",\"after\":\"OpenAI 服务\",\"rule\":\"RULE-SET,v14-core-1d436d47,OpenAI 服务\"},{\"platform\":\"android\",\"host\":\"openaifoundation.org\",\"beforeDNS\":[\"漏网之鱼\"],\"afterDNS\":[\"OpenAI 服务\"],\"key\":\"rule-set:v14-core-1d436d47\"},{\"platform\":\"android\",\"host\":\"critical-probe.openaifoundation.org\",\"protocol\":\"TCP\",\"supported\":true,\"before\":\"漏网之鱼\",\"after\":\"OpenAI 服务\",\"rule\":\"RULE-SET,v14-core-1d436d47,OpenAI 服务\"},{\"platform\":\"android\",\"host\":\"critical-probe.openaifoundation.org\",\"protocol\":\"TCP\",\"supported\":false,\"before\":\"漏网之鱼\",\"after\":\"OpenAI 服务\",\"rule\":\"RULE-SET,v14-core-1d436d47,OpenAI 服务\"},{\"platform\":\"android\",\"host\":\"critical-probe.openaifoundation.org\",\"protocol\":\"UDP\",\"supported\":true,\"before\":\"漏网之鱼\",\"after\":\"OpenAI 服务\",\"rule\":\"RULE-SET,v14-core-1d436d47,OpenAI 服务\"},{\"platform\":\"android\",\"host\":\"critical-probe.openaifoundation.org\",\"beforeDNS\":[\"漏网之鱼\"],\"afterDNS\":[\"OpenAI 服务\"],\"key\":\"rule-set:v14-core-1d436d47\"}]}\n",
+      "stderr": "",
+      "seconds": 140.375
+    },
+    {
+      "command": [
+        "node",
+        "releases/v14.3/tests/macos-static.cjs"
+      ],
+      "status": "PASS",
+      "exitCode": 0,
+      "stdout": "{\"platform\":\"macos-flclash\",\"fullInventoryHosts\":233120,\"normalRouting\":233120,\"normalDNS\":233120,\"existingCases\":917}\n{\"platform\":\"macos-clashmi\",\"fullInventoryHosts\":233120,\"normalRouting\":233120,\"normalDNS\":233120,\"existingCases\":917}\n{\"status\":\"MACOS_STATIC_PASS\",\"checks\":11,\"failures\":[]}\n",
+      "stderr": "",
+      "seconds": 81.703
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools/tests",
+        "-p",
+        "test_*.py"
+      ],
+      "status": "PASS",
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": ".......................................\n----------------------------------------------------------------------\nRan 39 tests in 1.971s\n\nOK\n",
+      "seconds": 2.281
+    }
+  ],
+  "testSHA256": "d8f3fb49c8a4e2cd5ad5163ce2341b06f36f83b8a9d18707c814ac9d8a5dd0a4",
+  "temporaryCopyCleaned": true,
+  "rawReceiptSHA256": "fe7dc2d4bdd0ac662ca7237f34108ac704a3434357448e3de3298976efab45ed",
+  "privacy": "Runtime interpreter and temporary workspace paths redacted; raw receipt retained privately"
+}

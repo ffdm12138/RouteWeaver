@@ -1,0 +1,176 @@
+{
+  "revision": "domestic-resilience-r1",
+  "status": "PASS",
+  "scope": "CURRENT_SOURCE_OFFLINE_NOT_DEVICE_ACCEPTANCE",
+  "sources": {
+    "releases/v14.3/src/windows/v14.3-windows-flclash.js": "eee417ae617cbb004621dac71e2763f4bd256f7a589c7a90dbeb5df0089b2c32",
+    "releases/v14.3/src/android/v14.3-android-flclash.js": "730ad118388b743f60f28e43b5500672ebf339e2b4f362adaa4a0c3e7af8dbf0",
+    "releases/v14.3/src/ios/v14.3-clashmi-domestic-protocol-r1.js": "1060a7b23e26a5cc85dd56368110df8842d9645f4ce332fe0b296e9f7e5892c3",
+    "releases/v14.3/src/ios/v14.3-shadowrocket.conf": "e0220fd31d1394a90cdd4d4ff3e4bc0ebf7daa762c68b192ef627eb53379bbfc",
+    "releases/v14.3/src/macos/v14.3-macos-flclash.js": "fab2698de44c05f43605dcb4e2a339f4051bb48ae4520d3bc10163d2bfe7e8c3",
+    "releases/v14.3/src/macos/v14.3-macos-clashmi.js": "d246c3fdd107b2a55bd7763709dace13fef2ca8dfc4e980ae0feaa0288769bba",
+    "releases/v14.3/src/clash-verge/v14.3-clash-verge.js": "43cb7f2a2653b70c217bd22c893d1d494b0a3df8c1cdef5b4701ffb1516dd988",
+    "releases/v14.3-ipv4-only/src/windows/v14.3-windows-flclash-ipv4-only.js": "740dd90a4890d986335d1f96df75d19f688c1e19e63616da5efecbcd654f094d",
+    "releases/v14.3-ipv4-only/src/android/v14.3-android-flclash-ipv4-only.js": "65d21b3cb0157b7e974b4d24d05ce2a12f3994228fd2d2f13428430c094793b5",
+    "releases/v14.3-ipv4-only/src/ios/v14.3-clashmi-domestic-protocol-r1-ipv4-only.js": "c5be0c19d9b241f99c0e9aeadb3e5ed4533620eb593ce148b20de9f381bfa705",
+    "releases/v14.3-ipv4-only/src/ios/v14.3-shadowrocket-ipv4-only.conf": "d88ca1232691de9e3b23eb8d3d0c2dd7fb647007a07165f21f651a1b9b883286",
+    "releases/v14.3-ipv4-only/src/macos/v14.3-macos-flclash-ipv4-only.js": "6ce348183cbeb6e9ca57d2fbd9782de653761cb92748196821f048c2e5aedbe7",
+    "releases/v14.3-ipv4-only/src/macos/v14.3-macos-clashmi-ipv4-only.js": "59e051ab06f3e1af98d5b79427708b72b24341c29e3f3de38921d98e9ed7f8ed",
+    "releases/v14.3-ipv4-only/src/clash-verge/v14.3-clash-verge-ipv4-only.js": "260289272cb3872c18e8d36a758c4fad6c414af2800bb647d6fd358bf146a877"
+  },
+  "results": [
+    {
+      "command": [
+        "node",
+        "releases/v14.3/tools/build-all.cjs",
+        "--check"
+      ],
+      "status": "PASS",
+      "exitCode": 0,
+      "stdout": "{\"status\":\"SHARED_SINGLE_ENTRY_GENERATION_PASS\",\"javascriptEntries\":6,\"nativeEntries\":1,\"runtimeRevision\":\"shared-runtime-r1\",\"mode\":\"one-file-per-client\"}\n{\"status\":\"SHADOWROCKET_LEAN_GENERATION_PASS\",\"bytes\":1780239,\"beforeBytes\":6168748,\"rules\":{\"before\":116974,\"after\":5112,\"removedDominated\":488},\"dnsRows\":9890,\"remoteSources\":15,\"nativeAcceptance\":\"NOT_RUN\"}\n{\"status\":\"SHARED_SINGLE_ENTRY_GENERATION_PASS\",\"javascriptEntries\":6,\"nativeEntries\":1,\"runtimeRevision\":\"shared-runtime-r1\",\"mode\":\"one-file-per-client\"}\n{\"status\":\"SHARED_SINGLE_ENTRY_GENERATION_PASS\",\"javascriptEntries\":6,\"nativeEntries\":1,\"runtimeRevision\":\"shared-runtime-r1\",\"mode\":\"one-file-per-client\"}\n{\"status\":\"SHARED_SINGLE_ENTRY_GENERATION_PASS\",\"javascriptEntries\":6,\"nativeEntries\":1,\"runtimeRevision\":\"shared-runtime-r1\",\"mode\":\"one-file-per-client\"}\n",
+      "stderr": "",
+      "seconds": 5.156
+    },
+    {
+      "command": [
+        "node",
+        "tools/build-ipv4-only.cjs",
+        "--check"
+      ],
+      "status": "PASS",
+      "exitCode": 0,
+      "stdout": "{\"status\":\"IPV4_ONLY_GENERATION_PASS\",\"flavor\":\"public\",\"entries\":7,\"check\":true}\n",
+      "stderr": "",
+      "seconds": 0.125
+    },
+    {
+      "command": [
+        "node",
+        "tools/test-native-fallback.cjs"
+      ],
+      "status": "PASS",
+      "exitCode": 0,
+      "stdout": "{\"status\":\"PASS\",\"cases\":72}\n",
+      "stderr": "",
+      "seconds": 3.156
+    },
+    {
+      "command": [
+        "node",
+        "tools/test-company-audit.cjs"
+      ],
+      "status": "PASS",
+      "exitCode": 0,
+      "stdout": "{\"status\":\"PASS\",\"checks\":504,\"failed\":0,\"failures\":[]}\n",
+      "stderr": "",
+      "seconds": 0.453
+    },
+    {
+      "command": [
+        "node",
+        "tools/test-dns-policy-order.cjs"
+      ],
+      "status": "PASS",
+      "exitCode": 0,
+      "stdout": "{\"status\":\"PASS\",\"checks\":36}\n",
+      "stderr": "",
+      "seconds": 0.766
+    },
+    {
+      "command": [
+        "node",
+        "tools/test-architecture.cjs"
+      ],
+      "status": "PASS",
+      "exitCode": 0,
+      "stdout": "{\"status\":\"PASS\",\"passed\":160,\"failed\":0,\"failures\":[]}\n",
+      "stderr": "",
+      "seconds": 2.922
+    },
+    {
+      "command": [
+        "node",
+        "releases/v14.3/tests/clash-verge.cjs"
+      ],
+      "status": "PASS",
+      "exitCode": 0,
+      "stdout": "{\"status\":\"CLASH_VERGE_STATIC_PASS\",\"checks\":10}\n",
+      "stderr": "",
+      "seconds": 0.375
+    },
+    {
+      "command": [
+        "node",
+        "releases/v14.3/tests/shadowrocket-lean.cjs"
+      ],
+      "status": "PASS",
+      "exitCode": 0,
+      "stdout": "{\"status\":\"SHADOWROCKET_LEAN_STATIC_PASS_NATIVE_PENDING\",\"checks\":5,\"metrics\":{\"routingHosts\":232528,\"tcp\":232528,\"udp\":232528,\"businessDNS\":9129,\"criticalDomesticDNS\":6,\"coldRouting\":36,\"protectedFlows\":9},\"failures\":[],\"nativeAcceptance\":\"NOT_RUN\"}\n",
+      "stderr": "",
+      "seconds": 17.234
+    },
+    {
+      "command": [
+        "node",
+        "releases/v14.3/tests/network-compat.cjs"
+      ],
+      "status": "PASS",
+      "exitCode": 0,
+      "stdout": "{\"status\":\"NETWORK_COMPAT_STATIC_PASS\",\"checks\":73}\n",
+      "stderr": "",
+      "seconds": 3.75
+    },
+    {
+      "command": [
+        "node",
+        "tools/test-ipv4-only.cjs"
+      ],
+      "status": "PASS",
+      "exitCode": 0,
+      "stdout": "{\"status\":\"IPV4_ONLY_STATIC_BUSINESS_PARITY_PASS\",\"flavor\":\"public\",\"checks\":67,\"engines\":[]}\n",
+      "stderr": "",
+      "seconds": 2.328
+    },
+    {
+      "command": [
+        "node",
+        "releases/v14.3/tests/static.cjs"
+      ],
+      "status": "PASS",
+      "exitCode": 0,
+      "stdout": "{\"platform\":\"desktop\",\"fullInventoryHosts\":233398,\"normalRouting\":233398,\"normalDNS\":233398,\"criticalColdRouting\":4592,\"criticalColdDNS\":1148,\"existingCases\":917}\n{\"platform\":\"android\",\"fullInventoryHosts\":233398,\"normalRouting\":233398,\"normalDNS\":233398,\"criticalColdRouting\":4592,\"criticalColdDNS\":1148,\"existingCases\":917}\n{\"platform\":\"clashmi\",\"fullInventoryHosts\":233398,\"normalRouting\":233398,\"normalDNS\":233398,\"criticalColdRouting\":4592,\"criticalColdDNS\":1148,\"existingCases\":917}\n{\"status\":\"BALANCED_STATIC_PASS\",\"checks\":27,\"failures\":[],\"normalMismatches\":[],\"coldMismatches\":[]}\n",
+      "stderr": "",
+      "seconds": 95.547
+    },
+    {
+      "command": [
+        "node",
+        "releases/v14.3/tests/macos-static.cjs"
+      ],
+      "status": "PASS",
+      "exitCode": 0,
+      "stdout": "{\"platform\":\"macos-flclash\",\"fullInventoryHosts\":233120,\"normalRouting\":233120,\"normalDNS\":233120,\"existingCases\":917}\n{\"platform\":\"macos-clashmi\",\"fullInventoryHosts\":233120,\"normalRouting\":233120,\"normalDNS\":233120,\"existingCases\":917}\n{\"status\":\"MACOS_STATIC_PASS\",\"checks\":11,\"failures\":[]}\n",
+      "stderr": "",
+      "seconds": 60.985
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools/tests",
+        "-p",
+        "test_*.py"
+      ],
+      "status": "PASS",
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": ".......................................\n----------------------------------------------------------------------\nRan 39 tests in 1.959s\n\nOK\n",
+      "seconds": 2.25
+    }
+  ],
+  "testSHA256": "e31eaef7c8c5f6f2f5ebd5c6b88c7898bf8a46c4aac92ed50b14454dbd3b2bda",
+  "temporaryCopyCleaned": true
+}

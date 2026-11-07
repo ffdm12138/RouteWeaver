@@ -1,0 +1,13 @@
+{
+  "revision": "company-audit-r1",
+  "date": "2026-11-07",
+  "additions": [
+    {
+      "group": "OpenAI 服务",
+      "row": "DOMAIN-SUFFIX,openaifoundation.org",
+      "evidence": "https://openai.com/foundation/",
+      "observation": "Official OpenAI URL redirects to https://openaifoundation.org/; company website, not an API or shared CDN. Absent from both current inline rules and the inspected upstream OpenAI candidate."
+    }
+  ],
+  "policy": "Only positively verified additions. Upstream lookalikes and shared infrastructure are not promoted by name alone."
+}

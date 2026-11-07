@@ -19,7 +19,8 @@ const sources=oldManifest.ruleSets.map(p=>{
  return {id:e.id,url:e.url,file:prefix+e.file,sha256:e.sha256,classifier:{file:prefix+e.classifier.file,sha256:e.classifier.sha256},uses:p.uses};
 });
 const cnSource=sources.find(s=>s.id==='sr-06'),cnRows=new Set(fs.readFileSync(local(cnSource.classifier.file),'utf8').split(/\r?\n/));
-const critical=new Set(data.domestic.concat(policy.embedded.cn.payloadText.split('\n').map(s=>s.slice(2)),['cn']).map(h=>'DOMAIN-SUFFIX,'+h));
+const critical=new Set(data.domestic.concat(['cn']).map(h=>'DOMAIN-SUFFIX,'+h).concat(
+ policy.embedded.cn.payloadText.split('\n').map(s=>s.startsWith('+.')?'DOMAIN-SUFFIX,'+s.slice(2):'DOMAIN,'+s)));
 const all=section('Rule'),kept=[],domestic=[],geographic=[];let removed=0;
 for(const rule of all){
  const a=split(rule),tail=a.at(-1)==='no-resolve'?-2:-1,group=a.at(tail),match=a.slice(0,tail).join(',');
@@ -30,15 +31,36 @@ for(const rule of all){
  }else kept.push(rule);
 }
 assert.ok(removed>100000,'Full duplicate domestic table was not removed');
+// Exact shared-CDN hosts may have existed only under a broad remote parent.
+// Add the reviewed critical rows explicitly instead of relying on old literals.
+const existingDomestic=new Set(domestic);
+for(const match of critical){
+ const host=split(match)[1];
+ if(host!=='cn'&&beforeRoute(host).group!=='国内网站')continue;
+ const rule=match+',国内网站';if(!existingDomestic.has(rule))domestic.push(rule);
+}
+const companySupplement=read('data/rules/company-supplement.json');
+kept.unshift(...companySupplement.additions.map(a=>a.row+','+a.group));
 const guard=kept.findIndex(r=>r==='AND,((PROTOCOL,UDP),(NOT,((PROTOCOL,TCP)))),漏网之鱼');assert.ok(guard>=0);
 const udpStun=[];for(const port of data.settings.stunPorts)udpStun.push('AND,((PROTOCOL,UDP),(DST-PORT,'+port+')),漏网之鱼');
 for(const host of data.stunNames)udpStun.push('AND,((PROTOCOL,UDP),(DOMAIN-WILDCARD,'+host+')),漏网之鱼');
-const rules=[...kept.slice(0,guard),...udpStun,...domestic,kept[guard],...geographic,...kept.slice(guard+1)];
+const uncompressedRules=[...kept.slice(0,guard),...udpStun,...domestic,kept[guard],...geographic,...kept.slice(guard+1)];
+// Remove only rows already dominated by an earlier literal suffix with the
+// identical group. No provider, wildcard or cross-group precedence is inferred.
+const priorSuffixes=new Map(), redundantRules=[];
+const rules=uncompressedRules.filter(row=>{
+ const [kind,host,group]=split(row);if(!['DOMAIN','DOMAIN-SUFFIX'].includes(kind))return true;
+ const labels=host.split('.');
+ if(labels.some((_,i)=>priorSuffixes.get(labels.slice(i).join('.'))===group)){redundantRules.push(row);return false;}
+ if(kind==='DOMAIN-SUFFIX'&&!priorSuffixes.has(host))priorSuffixes.set(host,group);
+ return true;
+});
 assert.equal(rules.at(-1),'FINAL,漏网之鱼');
 
 const hosts=new Map(section('Host').map(row=>{const at=row.indexOf('=');return [row.slice(0,at).trim(),row.slice(at+1).trim()];}));
 const defaultDNS=before.config.general['dns-server'];
 const valueFor=group=>'server:'+data.settings.bootstrapDns.slice(0,0).concat(['https://dns.alidns.com/dns-query','https://doh.pub/dns-query']).map(u=>group==='DIRECT'?u:u+'#proxy='+encodeURIComponent(group)).join(',');
+const stunDNS='server:https://dns.alidns.com/dns-query#proxy='+encodeURIComponent('漏网之鱼');
 const put=(key,value)=>{if(!hosts.has(key))hosts.set(key,value);};
 // Preserve local/private and resolver-name policies before the new .cn DNS declaration.
 for(const rows of [policy.embedded.private.payloadText.split('\n'),policy.embedded['category-doh'].payloadText.split('\n')])for(const row of rows){
@@ -47,13 +69,14 @@ for(const rows of [policy.embedded.private.payloadText.split('\n'),policy.embedd
  if(kind==='DOMAIN-SUFFIX')put('*.'+host,'server:'+beforeDNS('dns-scope-probe.'+host).servers.join(','));
 }
 for(const host of data.stunNames)put(host,valueFor('漏网之鱼'));
+for(const a of companySupplement.additions){const [kind,host]=split(a.row);put(host,valueFor(a.group));if(kind==='DOMAIN-SUFFIX')put('*.'+host,valueFor(a.group));}
 const domesticDNSKeys=[];
 for(const match of critical){
- const host=match.slice('DOMAIN-SUFFIX,'.length);
+ const [kind,host]=split(match);
  if(beforeRoute(host).group!=='国内网站'&&host!=='cn')continue;
- for(const key of [host,'*.'+host]){put(key,valueFor('国内网站'));domesticDNSKeys.push(key);}
+ for(const key of kind==='DOMAIN'?[host]:[host,'*.'+host]){put(key,valueFor('国内网站'));domesticDNSKeys.push(key);}
  // Keep generic named STUN on the fallback, without taking company-owned roots.
- if(host!=='cn')for(const name of ['stun','turn'])for(const key of [name+'.'+host,'*.'+name+'.'+host,name+'.*.'+host,'*.'+name+'.*.'+host])put(key,valueFor('漏网之鱼'));
+ if(host!=='cn'&&kind==='DOMAIN-SUFFIX')for(const name of ['stun','turn'])for(const key of [name+'.'+host,'*.'+name+'.'+host,name+'.*.'+host,'*.'+name+'.*.'+host])put(key,stunDNS);
 }
 const nonFinite=[...hosts.keys()].filter(k=>k.includes('*')&&!/^\*\.[^*]+$/.test(k));
 const protectedTails=nonFinite.map(k=>k.split('.').filter(x=>!x.includes('*')).join('.')).filter(Boolean);
@@ -80,7 +103,7 @@ const contractPath=fs.existsSync(path.resolve(root,'../../CURRENT_RELEASE.json')
 const manifest={version:'14.3',date:'2026-10-13',revision:'shadowrocket-lean-r1',domesticProtocolRevision:'domestic-protocol-r1',
  status:'GENERATED_NATIVE_ACCEPTANCE_PENDING',file,sha256:crypto.createHash('sha256').update(output).digest('hex'),bytes:Buffer.byteLength(output),
  before:{file:sourceFile,sha256:sha(local(sourceFile)),bytes:Buffer.byteLength(oldText)},
- rules:{before:all.length,after:rules.length,removedDuplicateCNRows:removed,criticalDomesticRules:[...critical]},
+ rules:{before:all.length,after:rules.length,removedDuplicateCNRows:removed,removedDominatedLiteralRows:redundantRules,criticalDomesticRules:[...critical]},
  dns:{beforeHostRows:before.config.hosts.length,afterHostRows:outputHosts.length,removedRedundantRows:eliminated.length,
   redundantRowCertificates:eliminated,domesticLiteralKeys:domesticDNSKeys,
   fullBusinessTable:'RETAINED',fullDomesticDNS:'NATIVE_DIRECT_OR_SELECTED_PROXY_REMOTE_RESOLUTION_REQUIRES_DEVICE_ACCEPTANCE',
@@ -92,4 +115,4 @@ const manifest={version:'14.3',date:'2026-10-13',revision:'shadowrocket-lean-r1'
 const text=JSON.stringify(manifest,null,2)+'\n';
 if(process.argv.includes('--check')){assert.equal(fs.readFileSync(local(file),'utf8'),output);assert.equal(fs.readFileSync(local('metadata/shadowrocket-lean.json'),'utf8'),text);}
 else {fs.writeFileSync(local(file),output);fs.writeFileSync(local('metadata/shadowrocket-lean.json'),text);}
-console.log(JSON.stringify({status:'SHADOWROCKET_LEAN_GENERATION_PASS',bytes:manifest.bytes,beforeBytes:manifest.before.bytes,rules:manifest.rules,dnsRows:manifest.dns.afterHostRows,remoteSources:sources.length,nativeAcceptance:'NOT_RUN'}));
+console.log(JSON.stringify({status:'SHADOWROCKET_LEAN_GENERATION_PASS',bytes:manifest.bytes,beforeBytes:manifest.before.bytes,rules:{before:all.length,after:rules.length,removedDominated:redundantRules.length},dnsRows:manifest.dns.afterHostRows,remoteSources:sources.length,nativeAcceptance:'NOT_RUN'}));

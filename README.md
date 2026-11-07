@@ -1,11 +1,13 @@
 # RouteWeaver
 
+当前修订 `domestic-resilience-r1`：补齐关键国内离线规则、核对公司与共享依赖，修复 API DNS 策略顺序。[审核与验证范围](docs/reports/v14.3/云端规则审核与离线修复.md)。跨端真机仍待验证。
+
 跨平台分流覆写，按客户端选择对应入口。每个网络版本都提供六份 Mihomo JS 和一份 Shadowrocket 原生配置。本目录是独立公开版源码。
 
 | 版本 | 本地入口 | GitHub 预发布 |
 |---|---|---|
-| 支持 IPv6 的主版 | [各客户端导入文件](releases/v14.3/README.md) | [主版 v14.3.0-rc.12](https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-rc.12) |
-| 纯 IPv4 版 | [各客户端导入文件](releases/v14.3-ipv4-only/README.md) | [纯 IPv4 v14.3.0-ipv4-only-rc.3](https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-ipv4-only-rc.3) |
+| 支持 IPv6 的主版 | [各客户端导入文件](releases/v14.3/README.md) | [主版 v14.3.0-rc.13](https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-rc.13) |
+| 纯 IPv4 版 | [各客户端导入文件](releases/v14.3-ipv4-only/README.md) | [纯 IPv4 v14.3.0-ipv4-only-rc.4](https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-ipv4-only-rc.4) |
 
 六份 Mihomo JS 在两条发布线使用相同的三档原生故障转移。规则模式下在原组选择 A，再手选所需的三个备用，按 A → 1 → 2 → 3 选路。活动链探测间隔 3 秒，超时 3 秒。 [故障转移说明](docs/guides/故障转移.md)
 

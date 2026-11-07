@@ -6,25 +6,25 @@
   "compatibilityRevision": "api-real-ip-r1",
   "directory": "releases/v14.3",
   "documentation": "docs/README.md",
-  "report": "docs/reports/v14.3/全架构审计与修复.md",
-  "status": "CURRENT_SOURCE_STATIC_LIMITED_NATIVE_PASS_DEVICE_PENDING",
+  "report": "docs/reports/v14.3/云端规则审核与离线修复.md",
+  "status": "CURRENT_SOURCE_AND_ISOLATED_CORE_PASS_DEVICE_NOT_RUN",
   "apiDohRevision": "api-doh-egress-r1",
   "apiDohReport": "docs/reports/v14.3/API真实解析DNS出口修复.md",
   "apiDohScope": "api.openai.com real-answer exception kept; DNS moved from group DoT/853 to the same group's DoH/443 in six JS entries and six ipv4-only entries",
-  "apiDohNativeAcceptance": "NOT_RUN_NO_REPLAY_CORE_IN_SESSION",
+  "apiDohNativeAcceptance": "CURRENT_ORDERED_POLICY_REPLAY_SEE_DOMESTIC_RESILIENCE_RECEIPT",
   "apiDohPriorReceipts": "BOUND_TO_FROZEN_PRE_CHANGE_SNAPSHOT",
   "appleLogin541": "UNRESOLVED_BROWSER_RETEST_NOT_RUN",
   "openAIConnectivity": "API_REAL_IP_A0_SOURCE_STATIC_PASS_DOH_443; BROWSER_TUN_RETEST_PENDING",
-  "windows": "AUTO_CORE_LOOPBACK_PASS_NOT_DEPLOYED_PREVIOUS_MANUAL_MODE_RETAINED",
-  "android": "CONFIG_LOCAL_CORE_PASS_VPNSERVICE_NOT_RUN",
-  "shadowrocket": "LEAN_SOURCE_MODEL_PASS_NATIVE_NOT_RUN",
-  "clashmi": "CONFIG_SOURCE_LOCAL_CORE_PASS_NETWORKEXTENSION_NOT_RUN",
+  "windows": "CURRENT_SOURCE_AND_ISOLATED_CHECKS_SEPARATE_DEVICE_NOT_RUN",
+  "android": "CURRENT_SOURCE_AND_ISOLATED_CHECKS_SEPARATE_DEVICE_NOT_RUN",
+  "shadowrocket": "CURRENT_SOURCE_AND_ISOLATED_CHECKS_SEPARATE_DEVICE_NOT_RUN",
+  "clashmi": "CURRENT_SOURCE_AND_ISOLATED_CHECKS_SEPARATE_DEVICE_NOT_RUN",
   "platformRevision": "domestic-protocol-r1",
   "clashmiReport": "docs/reports/v14.3/IPv6回退与兼容入口.md",
   "clashmiUserObservedVersion": "1.0.30.1605 ios",
   "clashmiBridge": "OBJECT_RETURN_SOURCE_LOCAL_CORE_PASS_DEVICE_RETEST_PENDING",
   "ipv6Transport": "NOT_RUN_ENVIRONMENT_IN_CURRENT_DNS_REPLAY",
-  "clientDeployment": "MAINTAINER_WINDOWS_FLCLASH_ONLY",
+  "clientDeployment": "NOT_MODIFIED_THIS_REVISION",
   "publicSelectors": [
     "高纯净度AI用",
     "高网速视频用"
@@ -34,7 +34,7 @@
   "runtimeFloatingManagedSources": 0,
   "layoutRevision": 8,
   "packages": "dist/v14.3",
-  "workDirectory": ".work",
+  "workDirectory": "SYSTEM_TEMPORARY_DIRECTORY",
   "entries": {
     "windows": "releases/v14.3/src/windows/v14.3-windows-flclash.js",
     "android": "releases/v14.3/src/android/v14.3-android-flclash.js",
@@ -46,19 +46,18 @@
   },
   "classificationRevision": "review-fixes-r1",
   "reviewClosedDate": "2026-10-12",
-  "embeddedDomainRows": 309,
-  "embeddedDomesticSuffixes": 51,
+  "embeddedDomesticSuffixes": 128,
   "latestReviewedSources": 54,
   "appleUserSmoke": "USER_REPORTED_WINDOWS_LOGIN_SUCCESS_AFTER_APPLE_INLINE_R1_ROOT_CAUSE_UNRESOLVED",
   "nativeManagedSources": 30,
   "legacyShadowrocketManagedSources": 21,
   "inlineProviderRows": {
-    "windows": 819,
-    "android": 819,
-    "clashmi": 819,
-    "macosFlClash": 819,
-    "macosClashMi": 819,
-    "clashVerge": 819
+    "windows": 908,
+    "android": 908,
+    "clashmi": 908,
+    "macosFlClash": 908,
+    "macosClashMi": 908,
+    "clashVerge": 908
   },
   "latestNativeCandidates": 30,
   "legacyRelease": "archive/v14.2-before-balanced-r1-20261012/releases/v14.2",
@@ -70,9 +69,9 @@
   "macosRevision": "macos-r1",
   "macosDelivery": "releases/v14.3/metadata/macos-delivery.json",
   "macosReport": "docs/reports/v14.3/MacBook适配.md",
-  "macos": "CONFIG_SOURCE_WINDOWS_LOCAL_CORE_PASS_MAC_DEVICE_NOT_RUN",
+  "macos": "CURRENT_SOURCE_AND_ISOLATED_CHECKS_SEPARATE_DEVICE_NOT_RUN",
   "distribution": "public",
-  "releaseTag": "v14.3.0-rc.9",
+  "releaseTag": "v14.3.0-rc.13",
   "personalRulesIncluded": false,
   "networkCompatibilityRevision": "ipv6-fallback-r2",
   "networkCompatibility": "releases/v14.3/metadata/network-compat-delivery.json",
@@ -124,14 +123,11 @@
       "clientDeployment": false,
       "wholeDeviceIPv4Requires": "APP_OS_IPV6_BLOCK_AND_IPV4_SYSTEM_DNS",
       "shadowrocket": "NODE_IPV4_PINNING_REQUIRED_NATIVE_NOT_RUN",
-      "publicReleaseTag": "v14.3.0-ipv4-only-rc.1",
-      "publicReleaseURL": "https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-ipv4-only-rc.1",
-      "publicReleaseCommit": "2efd002317ff84e2d6352176fafa5c7b47f203ab",
-      "publicReleaseAssets": 15,
-      "publicReleaseStatus": "PUBLISHED_PRE_RELEASE",
-      "publicReleaseCI": "https://github.com/ffdm12138/RouteWeaver/actions/runs/38997320216",
-      "publicReleaseRemoteSHA256": "ALL_15_ANONYMOUS_DOWNLOADS_MATCH",
-      "priorReleasesPreserved": 6
+      "priorReleasesPreserved": 6,
+      "publicReleaseTag": "v14.3.0-ipv4-only-rc.4",
+      "publicReleaseURL": "https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-ipv4-only-rc.4",
+      "publicReleaseStatus": "PRE_RELEASE_SOURCE_DEVICE_NOT_RUN",
+      "publicReleaseAssets": 8
     }
   },
   "nativeEvidenceSnapshot": "validation/inputs/api-doh-before/manifest.json",
@@ -142,10 +138,13 @@
     "reason": "Chromium classifies every usable IPv6 Fake-IP prefix as local network"
   },
   "nativeFallback": {
-    "revision": "native-fallback-r3",
+    "revision": "domestic-resilience-r1",
     "guide": "docs/guides/故障转移.md",
-    "verification": "releases/v14.3/validation/proxy-failover/native-fallback-r3.json",
-    "releaseTags": {"main": "v14.3.0-rc.12", "ipv4-only": "v14.3.0-ipv4-only-rc.3"},
+    "verification": "releases/v14.3/validation/domestic-resilience/native.json",
+    "releaseTags": {
+      "main": "v14.3.0-rc.13",
+      "ipv4-only": "v14.3.0-ipv4-only-rc.4"
+    },
     "deviceAcceptance": "NOT_RUN"
   },
   "proxyFailover": {
@@ -207,5 +206,39 @@
     "nativeCore": "Mihomo v1.19.33 isolated only",
     "deviceAcceptance": "NOT_VERIFIED",
     "legacyEvidence": "HISTORICAL_ONLY_NOT_REISSUED"
-  }
+  },
+  "historicalPublicationMetadata": {
+    "releaseTag": "v14.3.0-rc.9",
+    "ipv4-only": {
+      "publicReleaseTag": "v14.3.0-ipv4-only-rc.1",
+      "publicReleaseURL": "https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-ipv4-only-rc.1",
+      "publicReleaseCommit": "2efd002317ff84e2d6352176fafa5c7b47f203ab",
+      "publicReleaseAssets": 15,
+      "publicReleaseStatus": "PUBLISHED_PRE_RELEASE",
+      "publicReleaseCI": "https://github.com/ffdm12138/RouteWeaver/actions/runs/38997320216",
+      "publicReleaseRemoteSHA256": "ALL_15_ANONYMOUS_DOWNLOADS_MATCH"
+    }
+  },
+  "currentRevision": "domestic-resilience-r1",
+  "publicReleaseTag": "v14.3.0-rc.13",
+  "publicReleaseURL": "https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-rc.13",
+  "publicReleaseStatus": "PRE_RELEASE_SOURCE_DEVICE_NOT_RUN",
+  "publicReleaseAssets": 8,
+  "embeddedDomesticExactHosts": 11,
+  "cloudRuleAudit": {
+    "revision": "cloud-rule-audit-r1",
+    "verification": "releases/v14.3/validation/cloud-rule-audit/review.json",
+    "managedSources": 45,
+    "candidateSets": 4,
+    "runtimeSourceChanged": false
+  },
+  "offlineResilience": {
+    "revision": "domestic-resilience-r1",
+    "verification": "releases/v14.3/validation/domestic-resilience/after.json",
+    "companyVerification": "releases/v14.3/validation/cloud-rule-audit/after.json",
+    "dnsOrderVerification": "releases/v14.3/validation/domestic-resilience/dns-order.json",
+    "deviceAcceptance": "NOT_RUN"
+  },
+  "historicalEmbeddedDomainRows": 309,
+  "embeddedCompanyRows": 482
 }

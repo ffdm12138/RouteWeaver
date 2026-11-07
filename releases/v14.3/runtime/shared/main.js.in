@@ -257,6 +257,8 @@ function main(input) {
     for (const d of service.seeds) if (service.name !== V14_SHARED_INFRA.name || d !== "webpubsub.azure.com")
       if (dnsPolicy["+." + d] === undefined) dnsPolicy["+." + d] = servers;
   }
+  // Exact API DoH override must precede Mihomo rule-set trie boundaries.
+  dnsPolicy["api.openai.com"] = V14.apiRealDns.map(url => url + "#" + groupName("OpenAI 服务"));
   dnsPolicy["rule-set:" + cdnGuardName] = v14DnsFor(groupName("公共基础服务"));
   for (const logical of ["OpenAI 服务", "Anthropic 服务", "公共基础服务", "谷歌服务", "微软生态"])
     dnsPolicy["rule-set:" + coreNames.get(logical)] = v14DnsFor(groupName(logical));
@@ -289,7 +291,6 @@ function main(input) {
   // it over DoH/443 instead of the shared DoT/853 policy: 853 is blocked on
   // some carriers and node providers, which turned this host into SERVFAIL
   // while every Fake-IP name kept working.
-  dnsPolicy["api.openai.com"] = V14.apiRealDns.map(url => url + "#" + groupName("OpenAI 服务"));
   const oldDns = v14Object(config.dns) ? config.dns : {};
   config.dns = Object.assign({}, oldDns, {
     enable: true, ipv6: true, "enhanced-mode": "fake-ip", "fake-ip-range": "198.18.0.1/16",

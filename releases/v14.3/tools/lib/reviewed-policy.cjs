@@ -41,6 +41,23 @@ for(const s of services)for(const host of enhancements[s.name]||[]){
 const domesticCandidates=['baidu.com','bdstatic.com','bdimg.com','qq.com','qpic.cn','gtimg.com','weixin.qq.com','taobao.com','tmall.com','alicdn.com','alipay.com','jd.com','360buyimg.com','weibo.com','weibo.cn','sina.com.cn','zhihu.com','zhimg.com','163.com','126.com','127.net','netease.com','douban.com','doubanio.com','amap.com','autonavi.com','meituan.com','dianping.com','ele.me','ctrip.com','qunar.com','csdn.net','gitee.com','mi.com','xiaomi.com','10010.com','10086.cn','10086.com','189.cn','iqiyi.com','youku.com','pinduoduo.com','pddpic.com','suning.com','360.cn','360.com','sogou.com','sohu.com','bcebos.com','xiaohongshu.com','xhscdn.com'];
 const domestic=[];
 for(const host of domesticCandidates){const actual=baselineFixture.route(baselineModel,{host,protocol:'TCP',port:443}).group;if(actual==='国内网站'){domestic.push(host);decisions.push({group:'国内网站',domain:host,decision:'KEEP_REVIEWED_PARENT'});}else decisions.push({group:'国内网站',domain:host,decision:'OMIT_NOT_IN_REVIEWED_GROUP',actual});}
+const resilience=read('data/rules/domestic-resilience.json');
+const domainRows=new Set(domestic.map(h=>'+.'+h));
+const addReviewed=(host,suffix,source)=>{
+  assert.match(host,/^[a-z0-9.-]+$/);
+  const actual=baselineFixture.route(baselineModel,{host,protocol:'TCP',port:443}).group;
+  assert.equal(actual,'国内网站','Unreviewed domestic addition: '+host);
+  domainRows.add((suffix?'+.':'')+host);
+  decisions.push({group:'国内网站',domain:host,match:suffix?'suffix':'exact',decision:'KEEP_OFFLINE_REVIEWED',source});
+};
+for(const id of resilience.sourceIds){
+  const source=lock.sources.find(s=>s.id===id);assert.ok(source,'Missing resilience source '+id);
+  for(const row of fs.readFileSync(local(source.classifier.file),'utf8').trim().split(/\r?\n/)){
+    const [kind,host]=row.split(',');assert.equal(kind,'DOMAIN-SUFFIX');addReviewed(host,true,id);
+  }
+}
+for(const host of resilience.suffixes)addReviewed(host,true,'reviewed-domestic-parent');
+for(const host of resilience.exactHosts)addReviewed(host,false,'reviewed-domestic-exact');
 const core={};
 for(const [group,rows]of Object.entries(fullCore.groups)){
   if(['OpenAI 服务','Anthropic 服务','公共基础服务'].includes(group)){core[group]=rows.slice();continue;}
@@ -49,16 +66,22 @@ for(const [group,rows]of Object.entries(fullCore.groups)){
   // Country-domain and acquired-brand inventories stay in the remote full table.
   core[group]=rows.filter(r=>{const[k,h]=r.split(',');return k==='DOMAIN'||k==='DOMAIN-REGEX'||k==='DOMAIN-SUFFIX'&&parents.has(h);});
 }
+const supplement=read('data/rules/company-supplement.json');
+for(const addition of supplement.additions){
+ assert.ok(core[addition.group]);assert.match(addition.row,/^DOMAIN(?:-SUFFIX)?,[a-z0-9.-]+$/);
+ if(!core[addition.group].includes(addition.row))core[addition.group].push(addition.row);
+}
 const embedded={
   private:{behavior:'classical',payloadText:reviewed.groups.private.payload.join('\n')},
   'category-doh':{behavior:'classical',payloadText:reviewed.groups['category-doh'].payload.join('\n')},
-  cn:{behavior:'domain',payloadText:domestic.map(h=>'+.'+h).join('\n')}
+  cn:{behavior:'domain',payloadText:[...domainRows].join('\n')}
 };
 const pins=Object.fromEntries(lock.sources.map(s=>[s.url.replace(/\/[a-f0-9]{40}\//,'/meta/'),s.url]));
 const selected={version:'14.3',date:'2026-10-12',revision:'balanced-r1',scope:'Reviewed service parent domains, exact CDN/auth/Voice tenants, small private/DoH safety tables and bounded domestic parents; complete domain/IP inventories remain remote',
   domesticProtocolRevision:'domestic-protocol-r1',domesticProtocolAuthorization:'User selected reviewed domestic domain TCP/UDP/DNS following the domestic selector on 2026-10-13; unknown public IP UDP and generic STUN remain protected',
   core,services,embedded,decisions,limits:{maxScriptBytes:131072,maxGeneratedConfigBytes:196608},
-  inputs:['data/rules/company-core.json','data/rules/business-services.json','data/rules/domestic-direct.json','data/rules/safety-classifiers.json','data/rule-sources.lock.json',baseline+'manifest.json'].map(file=>({file,sha256:sha(file)}))};
+  resilienceRevision:resilience.revision,
+  inputs:['data/rules/company-core.json','data/rules/business-services.json','data/rules/domestic-direct.json','data/rules/domestic-resilience.json','data/rules/company-supplement.json','data/rules/safety-classifiers.json','data/rule-sources.lock.json',baseline+'manifest.json'].map(file=>({file,sha256:sha(file)}))};
 const selectedText=JSON.stringify(selected,null,2)+'\n';
 return {selected,selectedText,lock,before,baseline,core,services,embedded,pins};
 };

@@ -1,0 +1,68 @@
+{
+  "revision": "company-audit-r1",
+  "status": "PASS",
+  "checks": 504,
+  "failed": 0,
+  "scope": "OFFLINE_ALL_REMOTE_PROVIDERS_EMPTY_NOT_DEVICE_ACCEPTANCE",
+  "sources": {
+    "releases/v14.3/src/windows/v14.3-windows-flclash.js": "eee417ae617cbb004621dac71e2763f4bd256f7a589c7a90dbeb5df0089b2c32",
+    "releases/v14.3/src/android/v14.3-android-flclash.js": "730ad118388b743f60f28e43b5500672ebf339e2b4f362adaa4a0c3e7af8dbf0",
+    "releases/v14.3/src/ios/v14.3-clashmi-domestic-protocol-r1.js": "1060a7b23e26a5cc85dd56368110df8842d9645f4ce332fe0b296e9f7e5892c3",
+    "releases/v14.3/src/ios/v14.3-shadowrocket.conf": "e0220fd31d1394a90cdd4d4ff3e4bc0ebf7daa762c68b192ef627eb53379bbfc",
+    "releases/v14.3/src/macos/v14.3-macos-flclash.js": "fab2698de44c05f43605dcb4e2a339f4051bb48ae4520d3bc10163d2bfe7e8c3",
+    "releases/v14.3/src/macos/v14.3-macos-clashmi.js": "d246c3fdd107b2a55bd7763709dace13fef2ca8dfc4e980ae0feaa0288769bba",
+    "releases/v14.3/src/clash-verge/v14.3-clash-verge.js": "43cb7f2a2653b70c217bd22c893d1d494b0a3df8c1cdef5b4701ffb1516dd988",
+    "releases/v14.3-ipv4-only/src/windows/v14.3-windows-flclash-ipv4-only.js": "740dd90a4890d986335d1f96df75d19f688c1e19e63616da5efecbcd654f094d",
+    "releases/v14.3-ipv4-only/src/android/v14.3-android-flclash-ipv4-only.js": "65d21b3cb0157b7e974b4d24d05ce2a12f3994228fd2d2f13428430c094793b5",
+    "releases/v14.3-ipv4-only/src/ios/v14.3-clashmi-domestic-protocol-r1-ipv4-only.js": "c5be0c19d9b241f99c0e9aeadb3e5ed4533620eb593ce148b20de9f381bfa705",
+    "releases/v14.3-ipv4-only/src/ios/v14.3-shadowrocket-ipv4-only.conf": "d88ca1232691de9e3b23eb8d3d0c2dd7fb647007a07165f21f651a1b9b883286",
+    "releases/v14.3-ipv4-only/src/macos/v14.3-macos-flclash-ipv4-only.js": "6ce348183cbeb6e9ca57d2fbd9782de653761cb92748196821f048c2e5aedbe7",
+    "releases/v14.3-ipv4-only/src/macos/v14.3-macos-clashmi-ipv4-only.js": "59e051ab06f3e1af98d5b79427708b72b24341c29e3f3de38921d98e9ed7f8ed",
+    "releases/v14.3-ipv4-only/src/clash-verge/v14.3-clash-verge-ipv4-only.js": "260289272cb3872c18e8d36a758c4fad6c414af2800bb647d6fd358bf146a877"
+  },
+  "testSHA256": "13dc367cce6ecb454fc055b59d3e6e62bb816b53da23c7cf4be3cfe347e2099b",
+  "observations": {
+    "OpenAI 服务": [
+      "api.openai.com",
+      "auth.openai.com",
+      "chatgpt.com",
+      "ws.chatgpt.com",
+      "oaistatic.com",
+      "oaiusercontent.com",
+      "oaistatsig.com",
+      "cdn.openaimerge.com",
+      "openaifoundation.org",
+      "www.openaifoundation.org"
+    ],
+    "Anthropic 服务": [
+      "anthropic.com",
+      "api.anthropic.com",
+      "statsig.anthropic.com",
+      "claude.ai",
+      "claude.com",
+      "claudeusercontent.com",
+      "claudemcpclient.com",
+      "claudemcpcontent.com"
+    ],
+    "公共基础服务": [
+      "ct.sendgrid.net",
+      "intercom.io",
+      "intercomcdn.com",
+      "cdn.workos.com",
+      "forwarder.workos.com",
+      "frontend-apps-multi-region.workos.com",
+      "setup.workos.com",
+      "images.workoscdn.com",
+      "workos.imgix.net",
+      "js.stripe.com",
+      "challenges.cloudflare.com",
+      "o207216.ingest.sentry.io",
+      "o33249.ingest.sentry.io",
+      "rum.browser-intake-datadoghq.com"
+    ],
+    "苹果国际": [
+      "humb.apple.com"
+    ]
+  },
+  "failures": []
+}

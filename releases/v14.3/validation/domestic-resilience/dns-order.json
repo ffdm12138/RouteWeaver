@@ -1,0 +1,25 @@
+{
+  "revision": "domestic-resilience-r1",
+  "status": "PASS",
+  "checks": 36,
+  "failed": 0,
+  "failures": [],
+  "sourceRef": null,
+  "sources": {
+    "releases/v14.3/src/windows/v14.3-windows-flclash.js": "eee417ae617cbb004621dac71e2763f4bd256f7a589c7a90dbeb5df0089b2c32",
+    "releases/v14.3/src/android/v14.3-android-flclash.js": "730ad118388b743f60f28e43b5500672ebf339e2b4f362adaa4a0c3e7af8dbf0",
+    "releases/v14.3/src/ios/v14.3-clashmi-domestic-protocol-r1.js": "1060a7b23e26a5cc85dd56368110df8842d9645f4ce332fe0b296e9f7e5892c3",
+    "releases/v14.3/src/macos/v14.3-macos-flclash.js": "fab2698de44c05f43605dcb4e2a339f4051bb48ae4520d3bc10163d2bfe7e8c3",
+    "releases/v14.3/src/macos/v14.3-macos-clashmi.js": "d246c3fdd107b2a55bd7763709dace13fef2ca8dfc4e980ae0feaa0288769bba",
+    "releases/v14.3/src/clash-verge/v14.3-clash-verge.js": "43cb7f2a2653b70c217bd22c893d1d494b0a3df8c1cdef5b4701ffb1516dd988",
+    "releases/v14.3-ipv4-only/src/windows/v14.3-windows-flclash-ipv4-only.js": "740dd90a4890d986335d1f96df75d19f688c1e19e63616da5efecbcd654f094d",
+    "releases/v14.3-ipv4-only/src/android/v14.3-android-flclash-ipv4-only.js": "65d21b3cb0157b7e974b4d24d05ce2a12f3994228fd2d2f13428430c094793b5",
+    "releases/v14.3-ipv4-only/src/ios/v14.3-clashmi-domestic-protocol-r1-ipv4-only.js": "c5be0c19d9b241f99c0e9aeadb3e5ed4533620eb593ce148b20de9f381bfa705",
+    "releases/v14.3-ipv4-only/src/macos/v14.3-macos-flclash-ipv4-only.js": "6ce348183cbeb6e9ca57d2fbd9782de653761cb92748196821f048c2e5aedbe7",
+    "releases/v14.3-ipv4-only/src/macos/v14.3-macos-clashmi-ipv4-only.js": "59e051ab06f3e1af98d5b79427708b72b24341c29e3f3de38921d98e9ed7f8ed",
+    "releases/v14.3-ipv4-only/src/clash-verge/v14.3-clash-verge-ipv4-only.js": "260289272cb3872c18e8d36a758c4fad6c414af2800bb647d6fd358bf146a877"
+  },
+  "testSHA256": "0728c177e95a0fef65112e53758c8893dfcb0582d1c1606ddd6eb3822becfc52",
+  "modelSHA256": "890f18cd4ff60ec7e3a39d2b40490d36b3238240d67e660e4f7654ec0d30a468",
+  "scope": "Ordered Mihomo policy segments; positive and old-order counterexample. Native transport evidence is separate."
+}

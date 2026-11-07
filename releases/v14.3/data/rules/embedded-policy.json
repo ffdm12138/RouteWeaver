@@ -17,7 +17,8 @@
       "DOMAIN-SUFFIX,sora.com",
       "DOMAIN,chatgpt-async-webps-prod-eastus-1.webpubsub.azure.com",
       "DOMAIN,chatgpt-async-webps-prod-eastus-17.webpubsub.azure.com",
-      "DOMAIN,chatgpt-async-webps-prod-eastus-23.webpubsub.azure.com"
+      "DOMAIN,chatgpt-async-webps-prod-eastus-23.webpubsub.azure.com",
+      "DOMAIN-SUFFIX,openaifoundation.org"
     ],
     "Anthropic 服务": [
       "DOMAIN,servd-anthropic-website.b-cdn.net",
@@ -1051,7 +1052,7 @@
     },
     "cn": {
       "behavior": "domain",
-      "payloadText": "+.baidu.com\n+.bdstatic.com\n+.bdimg.com\n+.qq.com\n+.qpic.cn\n+.gtimg.com\n+.weixin.qq.com\n+.taobao.com\n+.tmall.com\n+.alicdn.com\n+.alipay.com\n+.jd.com\n+.360buyimg.com\n+.weibo.com\n+.weibo.cn\n+.sina.com.cn\n+.zhihu.com\n+.zhimg.com\n+.163.com\n+.126.com\n+.127.net\n+.netease.com\n+.douban.com\n+.doubanio.com\n+.amap.com\n+.autonavi.com\n+.meituan.com\n+.dianping.com\n+.ele.me\n+.ctrip.com\n+.qunar.com\n+.csdn.net\n+.gitee.com\n+.mi.com\n+.xiaomi.com\n+.10010.com\n+.10086.cn\n+.10086.com\n+.189.cn\n+.iqiyi.com\n+.youku.com\n+.pinduoduo.com\n+.pddpic.com\n+.suning.com\n+.360.cn\n+.360.com\n+.sogou.com\n+.sohu.com\n+.bcebos.com\n+.xiaohongshu.com\n+.xhscdn.com"
+      "payloadText": "+.baidu.com\n+.bdstatic.com\n+.bdimg.com\n+.qq.com\n+.qpic.cn\n+.gtimg.com\n+.weixin.qq.com\n+.taobao.com\n+.tmall.com\n+.alicdn.com\n+.alipay.com\n+.jd.com\n+.360buyimg.com\n+.weibo.com\n+.weibo.cn\n+.sina.com.cn\n+.zhihu.com\n+.zhimg.com\n+.163.com\n+.126.com\n+.127.net\n+.netease.com\n+.douban.com\n+.doubanio.com\n+.amap.com\n+.autonavi.com\n+.meituan.com\n+.dianping.com\n+.ele.me\n+.ctrip.com\n+.qunar.com\n+.csdn.net\n+.gitee.com\n+.mi.com\n+.xiaomi.com\n+.10010.com\n+.10086.cn\n+.10086.com\n+.189.cn\n+.iqiyi.com\n+.youku.com\n+.pinduoduo.com\n+.pddpic.com\n+.suning.com\n+.360.cn\n+.360.com\n+.sogou.com\n+.sohu.com\n+.bcebos.com\n+.xiaohongshu.com\n+.xhscdn.com\n+.activity-wbsj.com\n+.aihst8.com\n+.amemv.cn\n+.amemv.com\n+.amemv.net\n+.awemeughun.com\n+.awemeuglang.com\n+.awemeugsoul.com\n+.awemeugwave.com\n+.betastar.cn\n+.boxdouyin.com\n+.cookicut.com\n+.douyin.com\n+.douyinact.com\n+.douyinact.net\n+.douyincdn.com\n+.douyinfe.com\n+.douyinliving.com\n+.douyinmusicpromotion.com\n+.douyinpic.com\n+.douyinstatic.com\n+.douyinvod.com\n+.duoshan.com\n+.huoshan.com\n+.huoshancdn.com\n+.huoshangroup.com\n+.huoshanimg.com\n+.huoshanlive.com\n+.huoshanparty.com\n+.huoshanstatic.com\n+.huoshante8.com\n+.huoshanvideo.cn\n+.huoshanvideo.net\n+.huoshanvod.com\n+.huoshanxiaoshipin.cn\n+.huoshanxiaoshipin.net\n+.huoshanzhibo.cn\n+.huoshanzhibo.com\n+.huoshanzhibo.net\n+.hypercachenode.com\n+.idouyinliving.com\n+.idouyinpic.com\n+.idouyinstatic.com\n+.idouyinvod.com\n+.iesdouyin.com\n+.iesdouyin.net\n+.ieshuodong.cn\n+.ieshuodong.net\n+.ihst8.com\n+.ihuoshanimg.com\n+.ihuoshanlive.com\n+.ihuoshanstatic.com\n+.ihuoshanvod.com\n+.kolbuyer.cn\n+.nextvid.net\n+.ppkankan01.com\n+.qishui.cn\n+.qishui.com\n+.qishuimusic.cn\n+.supercachenet.com\n+.supercachenode.com\n+.ultracachenode.com\n+.woaihuoshan.com\n+.wohst8.com\n+.douyinec.com\n+.douyinpay.com\n+.ulpay.com\n+.lifexue.com\n+.open-douyin.com\n+.qishui.com.cn\n+.qishuimusic.com.cn\n+.wechat.com\n+.weixin.com\n+.servicewechat.com\n+.weixinbridge.com\n+.weixinsxy.com\n+.wechatpay.com\napd-pcdnwxlogin.teg.tencent-cloud.net\napd-pcdnwxstat.teg.tencent-cloud.net\ndig.bdurl.net\necom-normal-m.ecombdapi.com\necom5-normal-lf.ecombdapi.com\nma3-normal-lf.zijieapi.com\nlf9-effect-302-ncdn.byteeffecttos.com\nn98-lf-effect-302-sub.byteeffecttos.com\nlive-player-log-service.bytedance.com\nlf-dy-sourcecdn-tos.bytegecko.com\nlf-webcast-gr-sourcecdn.bytegecko.com"
     }
   },
   "decisions": [
@@ -1420,12 +1421,629 @@
       "group": "国内网站",
       "domain": "xhscdn.com",
       "decision": "KEEP_REVIEWED_PARENT"
+    },
+    {
+      "group": "国内网站",
+      "domain": "activity-wbsj.com",
+      "match": "suffix",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "v12r-domain-douyin"
+    },
+    {
+      "group": "国内网站",
+      "domain": "aihst8.com",
+      "match": "suffix",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "v12r-domain-douyin"
+    },
+    {
+      "group": "国内网站",
+      "domain": "amemv.cn",
+      "match": "suffix",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "v12r-domain-douyin"
+    },
+    {
+      "group": "国内网站",
+      "domain": "amemv.com",
+      "match": "suffix",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "v12r-domain-douyin"
+    },
+    {
+      "group": "国内网站",
+      "domain": "amemv.net",
+      "match": "suffix",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "v12r-domain-douyin"
+    },
+    {
+      "group": "国内网站",
+      "domain": "awemeughun.com",
+      "match": "suffix",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "v12r-domain-douyin"
+    },
+    {
+      "group": "国内网站",
+      "domain": "awemeuglang.com",
+      "match": "suffix",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "v12r-domain-douyin"
+    },
+    {
+      "group": "国内网站",
+      "domain": "awemeugsoul.com",
+      "match": "suffix",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "v12r-domain-douyin"
+    },
+    {
+      "group": "国内网站",
+      "domain": "awemeugwave.com",
+      "match": "suffix",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "v12r-domain-douyin"
+    },
+    {
+      "group": "国内网站",
+      "domain": "betastar.cn",
+      "match": "suffix",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "v12r-domain-douyin"
+    },
+    {
+      "group": "国内网站",
+      "domain": "boxdouyin.com",
+      "match": "suffix",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "v12r-domain-douyin"
+    },
+    {
+      "group": "国内网站",
+      "domain": "cookicut.com",
+      "match": "suffix",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "v12r-domain-douyin"
+    },
+    {
+      "group": "国内网站",
+      "domain": "douyin.com",
+      "match": "suffix",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "v12r-domain-douyin"
+    },
+    {
+      "group": "国内网站",
+      "domain": "douyinact.com",
+      "match": "suffix",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "v12r-domain-douyin"
+    },
+    {
+      "group": "国内网站",
+      "domain": "douyinact.net",
+      "match": "suffix",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "v12r-domain-douyin"
+    },
+    {
+      "group": "国内网站",
+      "domain": "douyincdn.com",
+      "match": "suffix",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "v12r-domain-douyin"
+    },
+    {
+      "group": "国内网站",
+      "domain": "douyinfe.com",
+      "match": "suffix",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "v12r-domain-douyin"
+    },
+    {
+      "group": "国内网站",
+      "domain": "douyinliving.com",
+      "match": "suffix",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "v12r-domain-douyin"
+    },
+    {
+      "group": "国内网站",
+      "domain": "douyinmusicpromotion.com",
+      "match": "suffix",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "v12r-domain-douyin"
+    },
+    {
+      "group": "国内网站",
+      "domain": "douyinpic.com",
+      "match": "suffix",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "v12r-domain-douyin"
+    },
+    {
+      "group": "国内网站",
+      "domain": "douyinstatic.com",
+      "match": "suffix",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "v12r-domain-douyin"
+    },
+    {
+      "group": "国内网站",
+      "domain": "douyinvod.com",
+      "match": "suffix",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "v12r-domain-douyin"
+    },
+    {
+      "group": "国内网站",
+      "domain": "duoshan.com",
+      "match": "suffix",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "v12r-domain-douyin"
+    },
+    {
+      "group": "国内网站",
+      "domain": "huoshan.com",
+      "match": "suffix",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "v12r-domain-douyin"
+    },
+    {
+      "group": "国内网站",
+      "domain": "huoshancdn.com",
+      "match": "suffix",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "v12r-domain-douyin"
+    },
+    {
+      "group": "国内网站",
+      "domain": "huoshangroup.com",
+      "match": "suffix",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "v12r-domain-douyin"
+    },
+    {
+      "group": "国内网站",
+      "domain": "huoshanimg.com",
+      "match": "suffix",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "v12r-domain-douyin"
+    },
+    {
+      "group": "国内网站",
+      "domain": "huoshanlive.com",
+      "match": "suffix",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "v12r-domain-douyin"
+    },
+    {
+      "group": "国内网站",
+      "domain": "huoshanparty.com",
+      "match": "suffix",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "v12r-domain-douyin"
+    },
+    {
+      "group": "国内网站",
+      "domain": "huoshanstatic.com",
+      "match": "suffix",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "v12r-domain-douyin"
+    },
+    {
+      "group": "国内网站",
+      "domain": "huoshante8.com",
+      "match": "suffix",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "v12r-domain-douyin"
+    },
+    {
+      "group": "国内网站",
+      "domain": "huoshanvideo.cn",
+      "match": "suffix",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "v12r-domain-douyin"
+    },
+    {
+      "group": "国内网站",
+      "domain": "huoshanvideo.net",
+      "match": "suffix",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "v12r-domain-douyin"
+    },
+    {
+      "group": "国内网站",
+      "domain": "huoshanvod.com",
+      "match": "suffix",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "v12r-domain-douyin"
+    },
+    {
+      "group": "国内网站",
+      "domain": "huoshanxiaoshipin.cn",
+      "match": "suffix",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "v12r-domain-douyin"
+    },
+    {
+      "group": "国内网站",
+      "domain": "huoshanxiaoshipin.net",
+      "match": "suffix",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "v12r-domain-douyin"
+    },
+    {
+      "group": "国内网站",
+      "domain": "huoshanzhibo.cn",
+      "match": "suffix",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "v12r-domain-douyin"
+    },
+    {
+      "group": "国内网站",
+      "domain": "huoshanzhibo.com",
+      "match": "suffix",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "v12r-domain-douyin"
+    },
+    {
+      "group": "国内网站",
+      "domain": "huoshanzhibo.net",
+      "match": "suffix",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "v12r-domain-douyin"
+    },
+    {
+      "group": "国内网站",
+      "domain": "hypercachenode.com",
+      "match": "suffix",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "v12r-domain-douyin"
+    },
+    {
+      "group": "国内网站",
+      "domain": "idouyinliving.com",
+      "match": "suffix",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "v12r-domain-douyin"
+    },
+    {
+      "group": "国内网站",
+      "domain": "idouyinpic.com",
+      "match": "suffix",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "v12r-domain-douyin"
+    },
+    {
+      "group": "国内网站",
+      "domain": "idouyinstatic.com",
+      "match": "suffix",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "v12r-domain-douyin"
+    },
+    {
+      "group": "国内网站",
+      "domain": "idouyinvod.com",
+      "match": "suffix",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "v12r-domain-douyin"
+    },
+    {
+      "group": "国内网站",
+      "domain": "iesdouyin.com",
+      "match": "suffix",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "v12r-domain-douyin"
+    },
+    {
+      "group": "国内网站",
+      "domain": "iesdouyin.net",
+      "match": "suffix",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "v12r-domain-douyin"
+    },
+    {
+      "group": "国内网站",
+      "domain": "ieshuodong.cn",
+      "match": "suffix",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "v12r-domain-douyin"
+    },
+    {
+      "group": "国内网站",
+      "domain": "ieshuodong.net",
+      "match": "suffix",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "v12r-domain-douyin"
+    },
+    {
+      "group": "国内网站",
+      "domain": "ihst8.com",
+      "match": "suffix",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "v12r-domain-douyin"
+    },
+    {
+      "group": "国内网站",
+      "domain": "ihuoshanimg.com",
+      "match": "suffix",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "v12r-domain-douyin"
+    },
+    {
+      "group": "国内网站",
+      "domain": "ihuoshanlive.com",
+      "match": "suffix",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "v12r-domain-douyin"
+    },
+    {
+      "group": "国内网站",
+      "domain": "ihuoshanstatic.com",
+      "match": "suffix",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "v12r-domain-douyin"
+    },
+    {
+      "group": "国内网站",
+      "domain": "ihuoshanvod.com",
+      "match": "suffix",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "v12r-domain-douyin"
+    },
+    {
+      "group": "国内网站",
+      "domain": "kolbuyer.cn",
+      "match": "suffix",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "v12r-domain-douyin"
+    },
+    {
+      "group": "国内网站",
+      "domain": "nextvid.net",
+      "match": "suffix",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "v12r-domain-douyin"
+    },
+    {
+      "group": "国内网站",
+      "domain": "ppkankan01.com",
+      "match": "suffix",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "v12r-domain-douyin"
+    },
+    {
+      "group": "国内网站",
+      "domain": "qishui.cn",
+      "match": "suffix",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "v12r-domain-douyin"
+    },
+    {
+      "group": "国内网站",
+      "domain": "qishui.com",
+      "match": "suffix",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "v12r-domain-douyin"
+    },
+    {
+      "group": "国内网站",
+      "domain": "qishuimusic.cn",
+      "match": "suffix",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "v12r-domain-douyin"
+    },
+    {
+      "group": "国内网站",
+      "domain": "supercachenet.com",
+      "match": "suffix",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "v12r-domain-douyin"
+    },
+    {
+      "group": "国内网站",
+      "domain": "supercachenode.com",
+      "match": "suffix",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "v12r-domain-douyin"
+    },
+    {
+      "group": "国内网站",
+      "domain": "ultracachenode.com",
+      "match": "suffix",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "v12r-domain-douyin"
+    },
+    {
+      "group": "国内网站",
+      "domain": "woaihuoshan.com",
+      "match": "suffix",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "v12r-domain-douyin"
+    },
+    {
+      "group": "国内网站",
+      "domain": "wohst8.com",
+      "match": "suffix",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "v12r-domain-douyin"
+    },
+    {
+      "group": "国内网站",
+      "domain": "douyinec.com",
+      "match": "suffix",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "v12r-domain-douyin"
+    },
+    {
+      "group": "国内网站",
+      "domain": "douyinpay.com",
+      "match": "suffix",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "v12r-domain-douyin"
+    },
+    {
+      "group": "国内网站",
+      "domain": "ulpay.com",
+      "match": "suffix",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "v12r-domain-douyin"
+    },
+    {
+      "group": "国内网站",
+      "domain": "lifexue.com",
+      "match": "suffix",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "v12r-domain-douyin"
+    },
+    {
+      "group": "国内网站",
+      "domain": "open-douyin.com",
+      "match": "suffix",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "v12r-domain-douyin"
+    },
+    {
+      "group": "国内网站",
+      "domain": "qishui.com.cn",
+      "match": "suffix",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "v12r-domain-douyin"
+    },
+    {
+      "group": "国内网站",
+      "domain": "qishuimusic.com.cn",
+      "match": "suffix",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "v12r-domain-douyin"
+    },
+    {
+      "group": "国内网站",
+      "domain": "wechat.com",
+      "match": "suffix",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "reviewed-domestic-parent"
+    },
+    {
+      "group": "国内网站",
+      "domain": "weixin.com",
+      "match": "suffix",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "reviewed-domestic-parent"
+    },
+    {
+      "group": "国内网站",
+      "domain": "servicewechat.com",
+      "match": "suffix",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "reviewed-domestic-parent"
+    },
+    {
+      "group": "国内网站",
+      "domain": "weixinbridge.com",
+      "match": "suffix",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "reviewed-domestic-parent"
+    },
+    {
+      "group": "国内网站",
+      "domain": "weixinsxy.com",
+      "match": "suffix",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "reviewed-domestic-parent"
+    },
+    {
+      "group": "国内网站",
+      "domain": "wechatpay.com",
+      "match": "suffix",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "reviewed-domestic-parent"
+    },
+    {
+      "group": "国内网站",
+      "domain": "apd-pcdnwxlogin.teg.tencent-cloud.net",
+      "match": "exact",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "reviewed-domestic-exact"
+    },
+    {
+      "group": "国内网站",
+      "domain": "apd-pcdnwxstat.teg.tencent-cloud.net",
+      "match": "exact",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "reviewed-domestic-exact"
+    },
+    {
+      "group": "国内网站",
+      "domain": "dig.bdurl.net",
+      "match": "exact",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "reviewed-domestic-exact"
+    },
+    {
+      "group": "国内网站",
+      "domain": "ecom-normal-m.ecombdapi.com",
+      "match": "exact",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "reviewed-domestic-exact"
+    },
+    {
+      "group": "国内网站",
+      "domain": "ecom5-normal-lf.ecombdapi.com",
+      "match": "exact",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "reviewed-domestic-exact"
+    },
+    {
+      "group": "国内网站",
+      "domain": "ma3-normal-lf.zijieapi.com",
+      "match": "exact",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "reviewed-domestic-exact"
+    },
+    {
+      "group": "国内网站",
+      "domain": "lf9-effect-302-ncdn.byteeffecttos.com",
+      "match": "exact",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "reviewed-domestic-exact"
+    },
+    {
+      "group": "国内网站",
+      "domain": "n98-lf-effect-302-sub.byteeffecttos.com",
+      "match": "exact",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "reviewed-domestic-exact"
+    },
+    {
+      "group": "国内网站",
+      "domain": "live-player-log-service.bytedance.com",
+      "match": "exact",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "reviewed-domestic-exact"
+    },
+    {
+      "group": "国内网站",
+      "domain": "lf-dy-sourcecdn-tos.bytegecko.com",
+      "match": "exact",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "reviewed-domestic-exact"
+    },
+    {
+      "group": "国内网站",
+      "domain": "lf-webcast-gr-sourcecdn.bytegecko.com",
+      "match": "exact",
+      "decision": "KEEP_OFFLINE_REVIEWED",
+      "source": "reviewed-domestic-exact"
     }
   ],
   "limits": {
     "maxScriptBytes": 131072,
     "maxGeneratedConfigBytes": 196608
   },
+  "resilienceRevision": "domestic-resilience-r1",
   "inputs": [
     {
       "file": "data/rules/company-core.json",
@@ -1438,6 +2056,14 @@
     {
       "file": "data/rules/domestic-direct.json",
       "sha256": "47d44654b24b595fe4930e40c94e494a9f812b19811c6e8ab7504357c823b435"
+    },
+    {
+      "file": "data/rules/domestic-resilience.json",
+      "sha256": "e9b69ec8f63de96fc106ca8240e2e0564a62b5529549e12892c02759eef74420"
+    },
+    {
+      "file": "data/rules/company-supplement.json",
+      "sha256": "3c1d8769333feaf17ad57e835403ce135777af29fb442a457857ae034e87cd50"
     },
     {
       "file": "data/rules/safety-classifiers.json",
