@@ -10,7 +10,7 @@
   "status": "CURRENT_SOURCE_AND_ISOLATED_CORE_PASS_DEVICE_NOT_RUN",
   "apiDohRevision": "api-doh-egress-r1",
   "apiDohReport": "docs/reports/v14.3/API真实解析DNS出口修复.md",
-  "apiDohScope": "api.openai.com real-answer exception kept; DNS moved from group DoT/853 to the same group's DoH/443 in six JS entries and six ipv4-only entries",
+  "apiDohScope": "Ordered api.openai.com real-answer DoH/443 exception in six main JS entries in auto/dual-stack; ipv4-local and ipv4-only keep their existing Fake-IP and group-encrypted DNS contract",
   "apiDohNativeAcceptance": "CURRENT_ORDERED_POLICY_REPLAY_SEE_DOMESTIC_RESILIENCE_RECEIPT",
   "apiDohPriorReceipts": "BOUND_TO_FROZEN_PRE_CHANGE_SNAPSHOT",
   "appleLogin541": "UNRESOLVED_BROWSER_RETEST_NOT_RUN",
@@ -29,7 +29,7 @@
     "高纯净度AI用",
     "高网速视频用"
   ],
-  "masterSelection": "manual-node-only-no-DIRECT-no-url-test-no-fallback",
+  "masterSelection": "visible-selectors-manual-node-only-no-DIRECT-no-url-test; hidden-controlled-fallback-A-1-2-3",
   "managedRemoteSources": 45,
   "runtimeFloatingManagedSources": 0,
   "layoutRevision": 8,
@@ -126,8 +126,12 @@
       "priorReleasesPreserved": 6,
       "publicReleaseTag": "v14.3.0-ipv4-only-rc.4",
       "publicReleaseURL": "https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-ipv4-only-rc.4",
-      "publicReleaseStatus": "PRE_RELEASE_SOURCE_DEVICE_NOT_RUN",
-      "publicReleaseAssets": 8
+      "publicReleaseStatus": "PUBLISHED_PRE_RELEASE_DEVICE_NOT_RUN",
+      "publicReleaseAssets": 8,
+      "publicReleaseCommit": "0109a6283538911a2051d0015dc6088c78102555",
+      "publicationManifest": "harness/releases/v14.3.0-ipv4-only-rc.4.json",
+      "publicReleaseCI": "https://github.com/ffdm12138/RouteWeaver/actions/runs/42382299248",
+      "publicReleaseRemoteSHA256": "ALL_8_ANONYMOUS_DOWNLOADS_MATCH"
     }
   },
   "nativeEvidenceSnapshot": "validation/inputs/api-doh-before/manifest.json",
@@ -222,7 +226,7 @@
   "currentRevision": "domestic-resilience-r1",
   "publicReleaseTag": "v14.3.0-rc.13",
   "publicReleaseURL": "https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-rc.13",
-  "publicReleaseStatus": "PRE_RELEASE_SOURCE_DEVICE_NOT_RUN",
+  "publicReleaseStatus": "PUBLISHED_PRE_RELEASE_DEVICE_NOT_RUN",
   "publicReleaseAssets": 8,
   "embeddedDomesticExactHosts": 11,
   "cloudRuleAudit": {
@@ -240,5 +244,9 @@
     "deviceAcceptance": "NOT_RUN"
   },
   "historicalEmbeddedDomainRows": 309,
-  "embeddedCompanyRows": 482
+  "embeddedCompanyRows": 482,
+  "publicReleaseCommit": "0109a6283538911a2051d0015dc6088c78102555",
+  "publicationManifest": "harness/releases/v14.3.0-rc.13.json",
+  "publicReleaseCI": "https://github.com/ffdm12138/RouteWeaver/actions/runs/42382291132",
+  "publicReleaseRemoteSHA256": "ALL_8_ANONYMOUS_DOWNLOADS_MATCH"
 }
