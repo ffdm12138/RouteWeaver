@@ -160,3 +160,7 @@ Windows FlClash 主版与纯 IPv4 入口增加可选原生描述。两种口味�
 两轨 Mihomo JS 从共用源码生成。前两档的跳过选项把新连接交给后续手选备用。两种发行口味各通过 72 项故障转移配置检查与 12 份脚本的原装 FlClash 隔离回放，每份 38 项。本地候选回执绑定导入文件、核心及回放工具 SHA-256。实机状态为 NOT_RUN。 [当前验收](../docs/status/当前验收.md)
 
 公开版主版 rc.14 与纯 IPv4 rc.5 绑定提交 `a62092d0589d977da8c7f12d026d491b3e26f6df`。Windows 和 Ubuntu 的源码、JS 引擎与发布附件 CI 均通过，16 个附件的匿名下载 SHA-256 全部匹配。 [主版发布回执](releases/v14.3.0-rc.14.json) · [纯 IPv4 发布回执](releases/v14.3.0-ipv4-only-rc.5.json)
+
+## 2026-11-10 · darwin-tun-r1 Mac 自动路由
+
+主版 rc.15 与纯 IPv4 rc.6 发布到 `87393e37db2621d4f5fb8bc4931345ebde0ba8ee`。两套源码共 28 份入口完成配置复审。Windows 和 Ubuntu 的源码、真实引擎和发布附件作业全部成功，16 个附件匿名下载哈希匹配。Mac 实机接管和微信发图待设备验证。 [主版发布回执](releases/v14.3.0-rc.15.json) · [纯 IPv4 发布回执](releases/v14.3.0-ipv4-only-rc.6.json)
