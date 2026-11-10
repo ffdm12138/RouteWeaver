@@ -144,10 +144,10 @@
   "nativeFallback": {
     "revision": "backup-slot-skip-r1",
     "guide": "docs/guides/故障转移.md",
-    "verification": "releases/v14.3/validation/proxy-failover/backup-slot-skip-r1.json",
+    "verification": "releases/v14.3/validation/proxy-failover/darwin-tun-r1.json",
     "releaseTags": {
-      "main": "v14.3.0-rc.14",
-      "ipv4-only": "v14.3.0-ipv4-only-rc.5"
+      "main": "v14.3.0-rc.15",
+      "ipv4-only": "v14.3.0-ipv4-only-rc.6"
     },
     "deviceAcceptance": "NOT_RUN"
   },
@@ -223,7 +223,17 @@
       "publicReleaseRemoteSHA256": "ALL_15_ANONYMOUS_DOWNLOADS_MATCH"
     }
   },
-  "currentRevision": "backup-slot-skip-r1",
+  "currentRevision": "darwin-tun-r1",
+  "macosFlClashTun": {
+    "revision": "darwin-tun-r1",
+    "guide": "docs/guides/macOS-FlClash故障小本子.md",
+    "regression": "releases/v14.3/validation/darwin-tun-regression.json",
+    "domesticMediaVerification": "releases/v14.3/validation/domestic-resilience/darwin-tun-r1.json",
+    "quickJSVerification": "releases/v14.3/validation/domestic-resilience/darwin-tun-quickjs.json",
+    "syntheticMediaPathVerification": "releases/v14.3/validation/domestic-resilience/darwin-tun-media-path.json",
+    "crossPlatformAudit": "docs/reports/v14.3/两轨七端复审与微信媒体链路.md",
+    "deviceAcceptance": "NOT_RUN"
+  },
   "publicReleaseTag": "v14.3.0-rc.14",
   "publicReleaseURL": "https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-rc.14",
   "publicReleaseStatus": "PUBLISHED_PRE_RELEASE_DEVICE_NOT_RUN",

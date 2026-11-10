@@ -1194,6 +1194,7 @@ function v14NetworkModeBase(input) {
   delete prepared["routing-mark"];
   if (prepared["interface-name"] && !/^(?:en|bridge|bond|ppp)[0-9]+$/.test(prepared["interface-name"])) delete prepared["interface-name"];
   const config = v14MacOSBase(prepared);
+  delete config.tun["route-address"];
   const marker = config["x-v14-generated"];
   marker.platform = "macos-flclash";
   marker.platformRevision = "macos-r1";
@@ -1271,7 +1272,6 @@ function v14IPv4LocalMain(input) {
     config.dns["nameserver-policy"][key] = v14IPv4LocalResolver(config.dns["nameserver-policy"][key]);
   if (!v14Object(config.tun)) config.tun = {};
   config.tun["inet6-address"] = ["fdfe:dcba:9876::1/126"];
-  config.tun["route-address"] = ["0.0.0.0/0", "::/0"];
   v14RecoverNetworkDestination(config);
   const marker = config["x-v14-generated"];
   marker.networkMode = "ipv4-local";
@@ -1373,7 +1373,6 @@ function main(input, profileName) {
   config.rules = first.concat(guard, hostRejects, original);
   delete config.tun["inet6-address"];
   delete config.tun["inet6-route-address"];
-  config.tun["route-address"] = ["0.0.0.0/0", "::/0"];
 
   const marker = config["x-v14-generated"];
   marker.networkMode = "ipv4-only";

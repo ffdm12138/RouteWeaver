@@ -4,6 +4,9 @@
 const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict');
 const {render}=require('./render-runtime.cjs');
 function replaceOnce(code,needle,value){assert.equal(code.split(needle).length,2,'Client adapter anchor: '+needle);return code.replace(needle,value);}
+function omitExplicitTunRouteAddress(code) {
+ return replaceOnce(code, '  config.tun["route-address"] = ["0.0.0.0/0", "::/0"];\n', '');
+}
 function renameMain(code,name){assert.equal((code.match(/^function main\(input(?:, profileName)?\)/gm)||[]).length,1);return code.replace('function main(','function '+name+'(');}
 function networkModes(raw,adapter,acceptSerializedInput=false,autoAdapter=""){
  const base=renameMain(raw,'v14NetworkModeBase');
@@ -68,8 +71,9 @@ function compile(root){
   {platform:'macosFlClash',client:'FlClash',file:'src/macos/v14.3-macos-flclash.js',raw:macFlClash},
   {platform:'macosClashMi',client:'Clash Mi',file:'src/macos/v14.3-macos-clashmi.js',raw:macClashMi},
   {platform:'clashVerge',file:'src/clash-verge/v14.3-clash-verge.js',raw:verge}
- ].map(entry=>({...entry,code:networkModes(entry.raw,optional,
+ ].map(entry=>({...entry,code:networkModes(entry.raw,
+  entry.platform === 'macosFlClash' ? omitExplicitTunRouteAddress(optional) : optional,
   ['clashmi','macosClashMi'].includes(entry.platform),read('tools/auto-local-adapter.js'))}));
  return {policy,vps,entries,inputs:[...new Set(inputs)]};
 }
-module.exports={compile,networkModes,renameMain};
+module.exports={compile,networkModes,renameMain,omitExplicitTunRouteAddress};

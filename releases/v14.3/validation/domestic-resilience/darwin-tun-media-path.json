@@ -1,0 +1,445 @@
+{
+  "status": "PASS",
+  "edition": "public",
+  "scope": "SYNTHETIC_FAKE_IP_TO_DIRECT_HTTP_WITH_WINDOWS_STOCK_CORE_TUN_DISABLED",
+  "host": "szfile.weixin.qq.com",
+  "coreSHA256": "d5097d4ea34f2975a7a7188dac9554d6b309c2abbf21a94c0a4111aca23bb8d0",
+  "quickJSSHA256": "e2051274a1d7599d131d45b96c7cc53519a9009bf43a802b922f73031d3d3b4b",
+  "testedJSFiles": 12,
+  "modes": 24,
+  "cases": [
+    {
+      "track": "main",
+      "client": "windows",
+      "mode": "auto",
+      "sourceSHA256": "f9fb3e46cf0ec333da59e1672f01d0b6c8e5e7c9fb52050e89279cd3b7bfbed4",
+      "samples": [
+        {
+          "fakeDnsMs": 0.63,
+          "httpResponseMs": 9.58,
+          "domesticUpstreamQueries": 2
+        },
+        {
+          "fakeDnsMs": 0.44,
+          "httpResponseMs": 3.61,
+          "domesticUpstreamQueries": 2
+        }
+      ]
+    },
+    {
+      "track": "main",
+      "client": "windows",
+      "mode": "dual-stack",
+      "sourceSHA256": "f9fb3e46cf0ec333da59e1672f01d0b6c8e5e7c9fb52050e89279cd3b7bfbed4",
+      "samples": [
+        {
+          "fakeDnsMs": 0.77,
+          "httpResponseMs": 4.33,
+          "domesticUpstreamQueries": 2
+        },
+        {
+          "fakeDnsMs": 0.35,
+          "httpResponseMs": 28.16,
+          "domesticUpstreamQueries": 2
+        }
+      ]
+    },
+    {
+      "track": "main",
+      "client": "windows",
+      "mode": "ipv4-local",
+      "sourceSHA256": "f9fb3e46cf0ec333da59e1672f01d0b6c8e5e7c9fb52050e89279cd3b7bfbed4",
+      "samples": [
+        {
+          "fakeDnsMs": 0.97,
+          "httpResponseMs": 4.07,
+          "domesticUpstreamQueries": 1
+        },
+        {
+          "fakeDnsMs": 0.44,
+          "httpResponseMs": 3.87,
+          "domesticUpstreamQueries": 1
+        }
+      ]
+    },
+    {
+      "track": "main",
+      "client": "android",
+      "mode": "auto",
+      "sourceSHA256": "34697bf99399c98dde0ab771fa3c35f6f9829834abd9e132f97f18abb98fe29f",
+      "samples": [
+        {
+          "fakeDnsMs": 1.28,
+          "httpResponseMs": 23.32,
+          "domesticUpstreamQueries": 2
+        },
+        {
+          "fakeDnsMs": 0.39,
+          "httpResponseMs": 16.26,
+          "domesticUpstreamQueries": 2
+        }
+      ]
+    },
+    {
+      "track": "main",
+      "client": "android",
+      "mode": "dual-stack",
+      "sourceSHA256": "34697bf99399c98dde0ab771fa3c35f6f9829834abd9e132f97f18abb98fe29f",
+      "samples": [
+        {
+          "fakeDnsMs": 1.13,
+          "httpResponseMs": 5.31,
+          "domesticUpstreamQueries": 2
+        },
+        {
+          "fakeDnsMs": 0.39,
+          "httpResponseMs": 3.31,
+          "domesticUpstreamQueries": 2
+        }
+      ]
+    },
+    {
+      "track": "main",
+      "client": "android",
+      "mode": "ipv4-local",
+      "sourceSHA256": "34697bf99399c98dde0ab771fa3c35f6f9829834abd9e132f97f18abb98fe29f",
+      "samples": [
+        {
+          "fakeDnsMs": 0.64,
+          "httpResponseMs": 3.3,
+          "domesticUpstreamQueries": 1
+        },
+        {
+          "fakeDnsMs": 0.32,
+          "httpResponseMs": 2.73,
+          "domesticUpstreamQueries": 1
+        }
+      ]
+    },
+    {
+      "track": "main",
+      "client": "clashmi",
+      "mode": "auto",
+      "sourceSHA256": "adc4788cfe4b5b208b16fbb3cbd09e71cc631659b0d41fcb46d886729dc6d29c",
+      "samples": [
+        {
+          "fakeDnsMs": 0.65,
+          "httpResponseMs": 22.65,
+          "domesticUpstreamQueries": 2
+        },
+        {
+          "fakeDnsMs": 0.38,
+          "httpResponseMs": 15.76,
+          "domesticUpstreamQueries": 2
+        }
+      ]
+    },
+    {
+      "track": "main",
+      "client": "clashmi",
+      "mode": "dual-stack",
+      "sourceSHA256": "adc4788cfe4b5b208b16fbb3cbd09e71cc631659b0d41fcb46d886729dc6d29c",
+      "samples": [
+        {
+          "fakeDnsMs": 1.53,
+          "httpResponseMs": 8.37,
+          "domesticUpstreamQueries": 2
+        },
+        {
+          "fakeDnsMs": 0.59,
+          "httpResponseMs": 18.26,
+          "domesticUpstreamQueries": 2
+        }
+      ]
+    },
+    {
+      "track": "main",
+      "client": "clashmi",
+      "mode": "ipv4-local",
+      "sourceSHA256": "adc4788cfe4b5b208b16fbb3cbd09e71cc631659b0d41fcb46d886729dc6d29c",
+      "samples": [
+        {
+          "fakeDnsMs": 0.97,
+          "httpResponseMs": 4.58,
+          "domesticUpstreamQueries": 1
+        },
+        {
+          "fakeDnsMs": 0.48,
+          "httpResponseMs": 3.56,
+          "domesticUpstreamQueries": 1
+        }
+      ]
+    },
+    {
+      "track": "main",
+      "client": "macosFlClash",
+      "mode": "auto",
+      "sourceSHA256": "367d68912f7b454067e9402a0a33c1a9ed7e3eda1bcfa7643850e55b3266596b",
+      "samples": [
+        {
+          "fakeDnsMs": 1.11,
+          "httpResponseMs": 6.1,
+          "domesticUpstreamQueries": 2
+        },
+        {
+          "fakeDnsMs": 0.52,
+          "httpResponseMs": 14.93,
+          "domesticUpstreamQueries": 2
+        }
+      ]
+    },
+    {
+      "track": "main",
+      "client": "macosFlClash",
+      "mode": "dual-stack",
+      "sourceSHA256": "367d68912f7b454067e9402a0a33c1a9ed7e3eda1bcfa7643850e55b3266596b",
+      "samples": [
+        {
+          "fakeDnsMs": 0.86,
+          "httpResponseMs": 17.3,
+          "domesticUpstreamQueries": 2
+        },
+        {
+          "fakeDnsMs": 0.43,
+          "httpResponseMs": 30.5,
+          "domesticUpstreamQueries": 2
+        }
+      ]
+    },
+    {
+      "track": "main",
+      "client": "macosFlClash",
+      "mode": "ipv4-local",
+      "sourceSHA256": "367d68912f7b454067e9402a0a33c1a9ed7e3eda1bcfa7643850e55b3266596b",
+      "samples": [
+        {
+          "fakeDnsMs": 1.19,
+          "httpResponseMs": 5.82,
+          "domesticUpstreamQueries": 1
+        },
+        {
+          "fakeDnsMs": 0.54,
+          "httpResponseMs": 3.81,
+          "domesticUpstreamQueries": 1
+        }
+      ]
+    },
+    {
+      "track": "main",
+      "client": "macosClashMi",
+      "mode": "auto",
+      "sourceSHA256": "dc9ad3896c3c1c37354731e3ab41410f497754bc36ec3685885643c8f447fbec",
+      "samples": [
+        {
+          "fakeDnsMs": 0.94,
+          "httpResponseMs": 20.72,
+          "domesticUpstreamQueries": 2
+        },
+        {
+          "fakeDnsMs": 0.62,
+          "httpResponseMs": 15.04,
+          "domesticUpstreamQueries": 2
+        }
+      ]
+    },
+    {
+      "track": "main",
+      "client": "macosClashMi",
+      "mode": "dual-stack",
+      "sourceSHA256": "dc9ad3896c3c1c37354731e3ab41410f497754bc36ec3685885643c8f447fbec",
+      "samples": [
+        {
+          "fakeDnsMs": 1.21,
+          "httpResponseMs": 29.84,
+          "domesticUpstreamQueries": 2
+        },
+        {
+          "fakeDnsMs": 0.65,
+          "httpResponseMs": 15.17,
+          "domesticUpstreamQueries": 2
+        }
+      ]
+    },
+    {
+      "track": "main",
+      "client": "macosClashMi",
+      "mode": "ipv4-local",
+      "sourceSHA256": "dc9ad3896c3c1c37354731e3ab41410f497754bc36ec3685885643c8f447fbec",
+      "samples": [
+        {
+          "fakeDnsMs": 0.89,
+          "httpResponseMs": 5.07,
+          "domesticUpstreamQueries": 1
+        },
+        {
+          "fakeDnsMs": 0.58,
+          "httpResponseMs": 20.2,
+          "domesticUpstreamQueries": 1
+        }
+      ]
+    },
+    {
+      "track": "main",
+      "client": "clashVerge",
+      "mode": "auto",
+      "sourceSHA256": "5a97fadca9c2a2754a11eeaf6c257c12c5ef2663d7e929b82c48d9d1c9b7f8c7",
+      "samples": [
+        {
+          "fakeDnsMs": 0.9,
+          "httpResponseMs": 20.2,
+          "domesticUpstreamQueries": 2
+        },
+        {
+          "fakeDnsMs": 0.42,
+          "httpResponseMs": 14.87,
+          "domesticUpstreamQueries": 2
+        }
+      ]
+    },
+    {
+      "track": "main",
+      "client": "clashVerge",
+      "mode": "dual-stack",
+      "sourceSHA256": "5a97fadca9c2a2754a11eeaf6c257c12c5ef2663d7e929b82c48d9d1c9b7f8c7",
+      "samples": [
+        {
+          "fakeDnsMs": 0.87,
+          "httpResponseMs": 29.11,
+          "domesticUpstreamQueries": 2
+        },
+        {
+          "fakeDnsMs": 0.51,
+          "httpResponseMs": 3.68,
+          "domesticUpstreamQueries": 2
+        }
+      ]
+    },
+    {
+      "track": "main",
+      "client": "clashVerge",
+      "mode": "ipv4-local",
+      "sourceSHA256": "5a97fadca9c2a2754a11eeaf6c257c12c5ef2663d7e929b82c48d9d1c9b7f8c7",
+      "samples": [
+        {
+          "fakeDnsMs": 0.96,
+          "httpResponseMs": 28.47,
+          "domesticUpstreamQueries": 1
+        },
+        {
+          "fakeDnsMs": 0.8,
+          "httpResponseMs": 15.21,
+          "domesticUpstreamQueries": 1
+        }
+      ]
+    },
+    {
+      "track": "ipv4-only",
+      "client": "windows",
+      "mode": "ipv4-only",
+      "sourceSHA256": "111b0d165590888a69b443ed7c8b89253252d7cf16c602f0ad705b0bc85fdf2e",
+      "samples": [
+        {
+          "fakeDnsMs": 0.84,
+          "httpResponseMs": 4.48,
+          "domesticUpstreamQueries": 1
+        },
+        {
+          "fakeDnsMs": 0.53,
+          "httpResponseMs": 3.75,
+          "domesticUpstreamQueries": 1
+        }
+      ]
+    },
+    {
+      "track": "ipv4-only",
+      "client": "android",
+      "mode": "ipv4-only",
+      "sourceSHA256": "69ff381b604e9230821d4155a6d251ecf3a64b9a62e49e02a5ac37f8819a886d",
+      "samples": [
+        {
+          "fakeDnsMs": 0.82,
+          "httpResponseMs": 26.92,
+          "domesticUpstreamQueries": 1
+        },
+        {
+          "fakeDnsMs": 0.61,
+          "httpResponseMs": 14.72,
+          "domesticUpstreamQueries": 1
+        }
+      ]
+    },
+    {
+      "track": "ipv4-only",
+      "client": "clashmi",
+      "mode": "ipv4-only",
+      "sourceSHA256": "3c8ed7eec11944a38a7324e9b6d0afc87fc20602de48d35f6b63b4706f388a31",
+      "samples": [
+        {
+          "fakeDnsMs": 0.87,
+          "httpResponseMs": 4.38,
+          "domesticUpstreamQueries": 1
+        },
+        {
+          "fakeDnsMs": 0.79,
+          "httpResponseMs": 4.63,
+          "domesticUpstreamQueries": 1
+        }
+      ]
+    },
+    {
+      "track": "ipv4-only",
+      "client": "macosFlClash",
+      "mode": "ipv4-only",
+      "sourceSHA256": "2082a956bcc0b5b5581693130ccc4c5f18c5460f6db7f00e85a5abb276761268",
+      "samples": [
+        {
+          "fakeDnsMs": 0.78,
+          "httpResponseMs": 4.57,
+          "domesticUpstreamQueries": 1
+        },
+        {
+          "fakeDnsMs": 0.61,
+          "httpResponseMs": 14.45,
+          "domesticUpstreamQueries": 1
+        }
+      ]
+    },
+    {
+      "track": "ipv4-only",
+      "client": "macosClashMi",
+      "mode": "ipv4-only",
+      "sourceSHA256": "05a0c097b4ae80bf79ed70ca72875ba6b97f8dcfab23be6be690eea76e90b744",
+      "samples": [
+        {
+          "fakeDnsMs": 0.75,
+          "httpResponseMs": 29.39,
+          "domesticUpstreamQueries": 1
+        },
+        {
+          "fakeDnsMs": 0.61,
+          "httpResponseMs": 3.98,
+          "domesticUpstreamQueries": 1
+        }
+      ]
+    },
+    {
+      "track": "ipv4-only",
+      "client": "clashVerge",
+      "mode": "ipv4-only",
+      "sourceSHA256": "a9eb42131db384ddbca6b682788ac3c18fd455b4af4f905c4b528ed6ff4ec967",
+      "samples": [
+        {
+          "fakeDnsMs": 0.72,
+          "httpResponseMs": 3.86,
+          "domesticUpstreamQueries": 1
+        },
+        {
+          "fakeDnsMs": 0.42,
+          "httpResponseMs": 3.25,
+          "domesticUpstreamQueries": 1
+        }
+      ]
+    }
+  ],
+  "deviceAcceptance": "NOT_RUN"
+}

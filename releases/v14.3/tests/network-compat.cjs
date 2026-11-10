@@ -13,7 +13,21 @@ for(const entry of manifest.entries.filter(e=>e.file.endsWith('.js'))){
  check(entry.platform+':defaults-and-explicit-family',()=>{assert.equal(normal.proxies.find(p=>p.name==='Domain')['ip-version'],'ipv4-prefer');assert.equal(normal.proxies.find(p=>p.name==='Explicit')['ip-version'],'ipv6');assert.ok(!normal.proxies.find(p=>p.name==='Literal6')['ip-version']);assert.ok(!normal.proxies.find(p=>p.name==='Literal4')['ip-version']);assert.ok(normal['proxy-providers'].Lab.override['override-expr'].some(e=>e.includes('ipv4-prefer')));});
  check(entry.platform+':provider-explicit-expression-preserved',()=>{const x=input();x['proxy-providers'].Lab.override={'override-expr':['del(.["ip-version"])']};const g=generate(entry.source,x);assert.ok(!g['proxy-providers'].Lab.override['override-expr'].some(e=>e.includes('ipv4-prefer')));});
  check(entry.platform+':idempotence',()=>{for(const mode of ['auto','dual-stack','ipv4-local']){const file=entry.file,a=generate(file,input(),mode),b=generate(file,a,mode),c=generate(file,b,mode);assert.ok(JSON.stringify(b)===JSON.stringify(a),file+' second run differs');assert.ok(JSON.stringify(c)===JSON.stringify(b),file+' third run differs');}});
- check(entry.platform+':compat-dns-and-capture',()=>{assert.equal(normal['x-v14-generated'].networkMode,'dual-stack');assert.equal(compat['x-v14-generated'].networkMode,'ipv4-local');assert.equal(compat.ipv6,true);assert.equal(compat.dns.ipv6,false);assert.ok(!('fake-ip-range6' in compat.dns));assert.deepEqual(compat.tun['route-address'],['0.0.0.0/0','::/0']);assert.ok(compat.tun['inet6-address'].length);assert.deepEqual(compat['proxy-groups'],normal['proxy-groups']);assert.deepEqual(compat.rules,normal.rules);});
+ check(entry.platform+':compat-dns-and-capture',()=>{
+  assert.equal(normal['x-v14-generated'].networkMode,'dual-stack');
+  assert.equal(compat['x-v14-generated'].networkMode,'ipv4-local');
+  assert.equal(compat.ipv6,true);
+  assert.equal(compat.dns.ipv6,false);
+  assert.ok(!('fake-ip-range6' in compat.dns));
+  if (entry.platform === 'macosFlClash') {
+   for (const config of [automatic, normal, compat]) assert.ok(!Object.hasOwn(config.tun, 'route-address'));
+  } else {
+   assert.deepEqual(compat.tun['route-address'],['0.0.0.0/0','::/0']);
+  }
+  assert.ok(compat.tun['inet6-address'].length);
+  assert.deepEqual(compat['proxy-groups'],normal['proxy-groups']);
+  assert.deepEqual(compat.rules,normal.rules);
+ });
  check(entry.platform+':public-literals-preserve-original-policy',()=>{const n={...base,config:normal,rules:normal.rules},m={...base,config:compat,rules:compat.rules};for(const ip of ['2409:8c74:f100:e10:28::','2001:db8::42','64:ff9b::808:808'])for(const protocol of ['TCP','UDP']){const flow={ip,protocol,port:443,inType:'TUN'};assert.equal(f.route(m,flow).policy,f.route(n,flow).policy);}});
  check(entry.platform+':internal-DNS-filters-keep-egress-and-bootstrap',()=>{const strip=s=>typeof s==='string'?s.replace(/&?disable-(?:ipv6|qtype-64|qtype-65)=true/g,'').replace(/#$/,''):s;for(const key of ['nameserver','fallback','direct-nameserver'])assert.deepEqual(compat.dns[key].map(strip),normal.dns[key]);for(const [key,values]of Object.entries(compat.dns['nameserver-policy'])){assert.deepEqual(values.map(strip),normal.dns['nameserver-policy'][key]);if(!values.includes('system'))for(const s of values)for(const flag of ['disable-ipv6=true','disable-qtype-64=true','disable-qtype-65=true'])assert.ok(s.includes(flag));}for(const key of ['default-nameserver','proxy-server-nameserver','proxy-server-nameserver-policy','direct-nameserver-follow-policy'])assert.deepEqual(compat.dns[key],normal.dns[key]);});
  check(entry.platform+':TLS-QUIC-recovery',()=>{for(const protocol of ['TLS','QUIC']){assert.equal(compat.sniffer.sniff[protocol]['override-destination'],true);assert.deepEqual(compat.sniffer.sniff[protocol].ports,normal.sniffer.sniff[protocol].ports);}assert.equal(compat.sniffer['override-destination'],false);assert.ok(Buffer.byteLength(JSON.stringify(compat))<=262144,'Optional configuration exceeds 256 KiB budget');});

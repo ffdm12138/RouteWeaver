@@ -1312,6 +1312,8 @@ function v14NetworkModeBase(input) {
   // Preserve an explicit Mac physical interface, but remove migrated Windows names.
   if (prepared["interface-name"] && !/^(?:en|bridge|bond|ppp)[0-9]+$/.test(prepared["interface-name"])) delete prepared["interface-name"];
   const config = v14MacOSBase(prepared);
+  // Let Darwin auto-route add more specific prefixes alongside the physical default route.
+  delete config.tun["route-address"];
   const marker = config["x-v14-generated"];
   marker.platform = "macos-flclash";
   marker.platformRevision = "macos-r1";
@@ -1410,7 +1412,6 @@ function v14IPv4LocalMain(input) {
   // enabling VPN or taking ownership of the app's file descriptor.
   if (!v14Object(config.tun)) config.tun = {};
   config.tun["inet6-address"] = ["fdfe:dcba:9876::1/126"];
-  config.tun["route-address"] = ["0.0.0.0/0", "::/0"];
   v14RecoverNetworkDestination(config);
   const marker = config["x-v14-generated"];
   marker.networkMode = "ipv4-local";

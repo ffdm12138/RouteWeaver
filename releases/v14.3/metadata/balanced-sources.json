@@ -70,7 +70,7 @@
     },
     {
       "file": "tools/lib/compile-entries.cjs",
-      "sha256": "c094c1e30019598b8aa24a04386b35990298a3128efddeddab0083f14de5bf8c"
+      "sha256": "1a0c5a5d5a8abfdab8a68151bde1f7f0c86b5033c780730f1007220d8cbd464e"
     },
     {
       "file": "tools/lib/render-runtime.cjs",
@@ -86,7 +86,7 @@
     },
     {
       "file": "tools/macos-flclash-adapter.js",
-      "sha256": "15862ccc2eb0f24ff4ac0337f2ac96e8353b33fc4e0afa3b4ac528d3abce583d"
+      "sha256": "cca0e006f47ee27d9d873765cc613afd5d91303161c73a0820dba48d85ff6bed"
     },
     {
       "file": "tools/clash-verge-adapter.js",

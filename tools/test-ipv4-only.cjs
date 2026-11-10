@@ -20,13 +20,25 @@ for(const [platform,entry]of Object.entries(manifest.entries)){
   check(platform+':native-conf',()=>{assert.match(source,/^ipv6 = false\r?$/m);assert.match(source,/^prefer-ipv6 = false\r?$/m);assert.match(source,/^IP-CIDR6,::\/0,REJECT,no-resolve\r?$/m);const old=fs.readFileSync(path.join(root,entry.source),'utf8').split('[Rule]')[1];assert.equal(source.split('[Rule]')[1].replace(/\r?\nIP-CIDR6,::\/0,REJECT,no-resolve/,''),old);});
   continue;
  }
- for(const [label,input]of cases){
+ const platformCases = platform === 'macosFlClash' ? cases.concat([['inherited-macos-default-routes', {
+  ...good(), tun: {enable: true, 'auto-route': true, 'route-address': ['0.0.0.0/0', '::/0'],
+   'inet4-route-address': ['0.0.0.0/0'], 'inet6-route-address': ['::/0']}
+ }]]) : cases;
+ for(const [label,input]of platformCases){
   const program='var console={log:function(){}};\n'+source+'\n(function(){try{const a=main('+JSON.stringify(input)+',"synthetic profile");const b=main(JSON.parse(JSON.stringify(a)),"synthetic profile");return JSON.stringify({ok:true,value:a,idempotent:JSON.stringify(a)===JSON.stringify(b)});}catch(e){return JSON.stringify({ok:false,error:String(e.message||e)});}})()';
   const expected=JSON.parse(vm.runInNewContext(program,{}, {timeout:5000}));programs.push({id:platform+':'+label,code:program,expected});
   check(platform+':'+label,()=>{
    const valid=!['null','array','string'].includes(label)&&(label!=='serialized'||['clashmi','macosClashMi'].includes(platform));assert.equal(expected.ok,valid,expected.error);
    if(!valid)return;assert.equal(expected.idempotent,true,platform+':'+label+' not idempotent');
    const c=expected.value;assert.equal(c.ipv6,false);assert.equal(c.dns.ipv6,false);assert.equal(c.dns['use-system-hosts'],false);assert.ok(!c.dns['fake-ip-range6']);assert.ok(!c['routeweaver-local-family']);assert.equal(c['x-v14-generated'].networkMode,'ipv4-only');assert.ok(!c['x-v14-generated'].automaticNetworkCapability);
+   if (platform === 'macosFlClash') {
+    for (const key of ['route-address', 'inet4-route-address', 'inet6-route-address']) {
+     assert.ok(!Object.hasOwn(c.tun, key), key);
+    }
+    assert.equal(c.tun.enable, input.tun.enable);
+    assert.equal(c.tun['auto-route'], input.tun['auto-route']);
+    assert.equal(c.tun['strict-route'], true);
+   }
    for(const node of c.proxies)assert.equal(node['ip-version'],'ipv4');
    for(const p of Object.values(c['proxy-providers'])){assert.equal(p.override['ip-version'],'ipv4');assert.equal(p.override['override-expr'].at(-1),'.["ip-version"] = "ipv4"');for(const n of p.payload||[])assert.equal(n['ip-version'],'ipv4');}
    for(const key of ['nameserver','direct-nameserver','default-nameserver','proxy-server-nameserver'])for(const s of c.dns[key])assert.ok(s.includes('disable-ipv6=true')&&s.includes('disable-qtype-65=true'));

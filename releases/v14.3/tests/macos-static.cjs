@@ -41,7 +41,22 @@ for(const platform of Object.keys(f.entries)){
   check(platform+':client-specific-tunnel-object-bridge-and-input-immutability',()=>{
     const input={proxies:[{name:'Mac synthetic node',type:'socks5',server:'192.0.2.1',port:1080,udp:true}],tun:{enable:false,'auto-route':false,device:'Mihomo','file-descriptor':123,'auto-redirect':true,'include-package':['test.synthetic.app'],'route-exclude-address':['fc00::/7']},extension:{tun:{excludeLocalNetworks:true}},'interface-name':'Ethernet','routing-mark':123,android:true};
     const frozen=structuredClone(input),config=f.generate(platform,input);assert.deepEqual(input,frozen);
-    assert.equal(config.ipv6,true);assert.equal(config.dns.ipv6,true);assert.deepEqual(config.tun['route-address'],['0.0.0.0/0','::/0']);assert.ok(config.tun['dns-hijack'].includes('any:53')&&config.tun['dns-hijack'].includes('tcp://any:53'));assert.ok(!config.extension&&!config['routing-mark']);
+    assert.equal(config.ipv6,true);assert.equal(config.dns.ipv6,true);assert.ok(config.tun['dns-hijack'].includes('any:53')&&config.tun['dns-hijack'].includes('tcp://any:53'));assert.ok(!config.extension&&!config['routing-mark']);
+    if (platform === 'macos-flclash') {
+      const oldRoutes = ['route-address', 'inet4-route-address', 'inet6-route-address'];
+      const upgraded = f.generate(platform, {...input, tun: {...input.tun, enable: true, 'auto-route': true,
+        'route-address': ['0.0.0.0/0', '::/0'], 'inet4-route-address': ['0.0.0.0/0'], 'inet6-route-address': ['::/0']}});
+      for (const key of oldRoutes) {
+        assert.ok(!Object.hasOwn(config.tun, key), key);
+        assert.ok(!Object.hasOwn(upgraded.tun, key), key);
+      }
+      assert.equal(upgraded.tun.enable, true);
+      assert.equal(upgraded.tun['auto-route'], true);
+      assert.equal(upgraded.tun['strict-route'], true);
+      assert.deepEqual(f.generate(platform, upgraded), upgraded);
+    } else {
+      assert.deepEqual(config.tun['route-address'], ['0.0.0.0/0', '::/0']);
+    }
     if(platform==='macos-flclash'){assert.equal(config.tun.enable,false);assert.equal(config.tun['auto-route'],false);assert.equal(config.tun['auto-detect-interface'],true);assert.ok(!config.tun.device&&!config.tun['file-descriptor']&&!config.tun['include-package']&&!config.android);const valid=f.generate(platform,{...input,tun:{enable:true,'auto-route':true,device:'utun23',stack:'mixed'},'interface-name':'en0'});assert.equal(valid.tun.device,'utun23');assert.equal(valid['interface-name'],'en0');assert.equal(valid.tun.enable,true);}
     else{assert.equal(config.tun.enable,true);assert.equal(config.tun.stack,'gvisor');assert.equal(config.tun.mtu,1280);assert.equal(config.tun['auto-detect-interface'],false);assert.ok(!config.tun.device&&!config.tun['file-descriptor']);assert.equal(config['x-v14-generated'].platform,'clashmi-macos');assert.deepEqual(f.generate(platform,JSON.stringify(input)),config);}
     assert.deepEqual(f.generate(platform,config),config);

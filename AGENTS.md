@@ -28,6 +28,7 @@
 - 远程规则固定已审核提交。先保存候选、哈希和分类差异，再审核采用；不得改为浮动来源。
 - 固定输入、原始源码、失败反例和既有回执保留原字节。`.gitattributes` 不转换行尾；不要批量格式化 `validation/inputs/`。
 - 修改后执行生成、静态及必要的隔离核心实验。源码、本机核心、包回放与真实设备验收分别报告，不相互替代。
+- 修改 Mac FlClash 的 TUN 或网络模式时，按 [macOS FlClash 故障小本子](docs/guides/macOS-FlClash故障小本子.md) 核对 App 最终配置，并回归主版与纯 IPv4 版。
 - 不放入真实订阅、节点密码、私钥、运行中控制器凭证。不要替换运行客户端或改系统网络。
 - 当前双轨使用 `python -B tools/verify-native-fallback-release.py --static` 检查已暂存的公开源码。历史包的复验见 `docs/maintenance/开源与发布.md`。
 - `dist/<version>/` 为本地构建输出，仍不进 Git；上游许可和来源随每个发布包附带。<!-- TEMP_LIFECYCLE_20261023 --> 不再新建持久 `.work/`、修改前快照或日期工作树。当前 v14.3 打包的解压复验使用系统 `TemporaryDirectory`，正常结束和 Python 异常后自动收尾；固定 `dist/v14.3/package-verification.json` 保存本次解压复验成功/失败、对应包 SHA 与关键命令 stdout/stderr。清理完成后 `freshExtraction` 为 null；若清理失败，仅记录实际仍存在的临时目录并明确报错。

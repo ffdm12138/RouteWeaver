@@ -19,19 +19,21 @@
 
 Mac 适配修订 **macos-r1**，业务合同仍为 **domestic-protocol-r1**。Apple Silicon 和 Intel 使用同一份 JS，区别由客户端及其核心二进制处理。
 
-| 客户端 | 导入文件 | 字节 |
-|---|---|---:|
-| FlClash macOS | [v14.3-macos-flclash.js](../../releases/v14.3/src/macos/v14.3-macos-flclash.js) | 119,250 |
-| Clash Mi macOS | [v14.3-macos-clashmi.js](../../releases/v14.3/src/macos/v14.3-macos-clashmi.js) | 120,237 |
+| 客户端 | 主版 | 纯 IPv4 版 |
+| --- | --- | --- |
+| FlClash macOS | [FlClash 主版](../../releases/v14.3/src/macos/v14.3-macos-flclash.js) | [FlClash 纯 IPv4](../../releases/v14.3-ipv4-only/src/macos/v14.3-macos-flclash-ipv4-only.js) |
+| Clash Mi macOS | [Clash Mi 主版](../../releases/v14.3/src/macos/v14.3-macos-clashmi.js) | [Clash Mi 纯 IPv4](../../releases/v14.3-ipv4-only/src/macos/v14.3-macos-clashmi-ipv4-only.js) |
 
-两份文件独立运行，不读取项目目录；保留自己的节点订阅，将对应 JS 用作该订阅的覆写。标准合成输入生成 26 个项目策略组。公司、共享服务、国内网站、DNS/UDP 跟组、API 真实地址解析、IPv6、手动节点选择及固定远程来源均与现版一致。
+每个入口都可独立导入。保留自己的节点订阅，将所选版本的 JS 用作该订阅的覆写。策略组、DNS 和地址族行为按所选版本生效。
 
 ## FlClash
 
-1. 导入自己的订阅，再在其 JS 覆写中导入 `v14.3-macos-flclash.js`，保存并使该订阅使用这份覆写。
+遇到 TUN 路由、系统 DNS 或微信媒体故障时，参照 [macOS FlClash 故障小本子](macOS-FlClash故障小本子.md)。
+
+1. 导入自己的订阅，再从上表选对应的 FlClash JS，保存并使该订阅使用这份覆写。
 2. 使用规则模式，开启核心 IPv6；需要全系统接管时开启 TUN 和自动路由，按应用提示授权 TUN 服务。JS 保留客户端的 TUN 开关和自动路由开关。
 3. 为「高纯净度AI用」「高网速视频用」各手动选一个可用节点。首个公共组也是规则下载出口，初始 REJECT 时需要先选节点。
-4. 检查生成配置保留 `dns.ipv6: true`、UDP/TCP 53 劫持、`route-address: [0.0.0.0/0, '::/0']`、业务 DNS 策略及项目策略组。规则成功下载或已有有效缓存后才具备完整长尾覆盖。
+4. 在 App 合并后的配置中确认 `tun.auto-route: true`，自定义路由留空，由 Darwin 核心建立更具体的接管网段。按所用模式核对 `dns.ipv6`、业务 DNS 策略和策略组，并分别检查 UDP/TCP 53 是否由 App 接管。规则成功下载或已有有效缓存后才具备完整长尾覆盖。
 
 适配会移除跨平台遗留的 Windows/Linux TUN 名称、文件描述符和不适用的 Linux/Android 参数；有效的 `utun数字` 与 Mac 物理出口 `en数字` 等显式配置保留。未指定设备名时由 Mihomo 选择空闲的 utun 编号，避免固定占用 utun0。出口网卡自动检测开启，Wi-Fi/有线切换仍须实机检查。[Mihomo v1.19.31 实现](https://github.com/MetaCubeX/mihomo/blob/v1.19.31/listener/sing_tun/server.go)
 

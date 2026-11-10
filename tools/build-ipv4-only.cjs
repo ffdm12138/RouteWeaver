@@ -1,13 +1,15 @@
 'use strict';
 // Separate additive release. Never writes to the existing auto/dual-stack entry.
 const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto'),assert=require('node:assert/strict');
+const compilerFile='releases/v14.3/tools/lib/compile-entries.cjs';
+const {omitExplicitTunRouteAddress}=require('../'+compilerFile);
 const root=path.resolve(__dirname,'..'),target='releases/v14.3-ipv4-only';
 const sha=b=>crypto.createHash('sha256').update(b).digest('hex');
 const read=file=>fs.readFileSync(path.join(root,file));
 const current=JSON.parse(read('CURRENT_RELEASE.json'));
 const check=process.argv.includes('--check');
 const runtime=read('tools/ipv4-only-runtime.js').toString('utf8').replaceAll('\r\n','\n');
-const inputs=['CURRENT_RELEASE.json','tools/build-ipv4-only.cjs','tools/ipv4-only-runtime.js'];
+const inputs=['CURRENT_RELEASE.json','tools/build-ipv4-only.cjs','tools/ipv4-only-runtime.js',compilerFile];
 const entries={};
 function emit(file,bytes){
   const dest=path.join(root,file);
@@ -22,9 +24,10 @@ for(const [platform,source]of Object.entries(current.entries)){
     assert.equal((text.match(/^function main\(input, profileName\)/gm)||[]).length,1);
     const auto=text.indexOf('// Auto requires a native core implementing auto-local-family-r1.');
     assert.ok(auto>0&&text.indexOf('function main(input, profileName)',auto)>auto,'Network adapter layout changed');
+    const platformRuntime=platform === 'macosFlClash' ? omitExplicitTunRouteAddress(runtime) : runtime;
     code='// RouteWeaver IPv4-only standalone entry; ipv4-only-r1.\n'+text.slice(0,auto).replace('const ROUTEWEAVER_DEFAULT_NETWORK_MODE = "auto";','')+
       '\nfunction rw4BaseMain(input, profileName) { return v14IPv4LocalMain(input, profileName); }\n'+
-      '\nconst RW4_ACCEPT_SERIALIZED = '+['clashmi','macosClashMi'].includes(platform)+';\n'+runtime;
+      '\nconst RW4_ACCEPT_SERIALIZED = '+['clashmi','macosClashMi'].includes(platform)+';\n'+platformRuntime;
   }else{
     assert.match(text,/^ipv6 = true$/m);
     code='# IPv4-only variant; node DNS IPv6 MUST also be disabled in Shadowrocket.\n'+

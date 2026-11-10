@@ -41,10 +41,10 @@
     },
     "macosFlClash": {
       "file": "releases/v14.3-ipv4-only/src/macos/v14.3-macos-flclash-ipv4-only.js",
-      "sha256": "1469b2bd78a76e65a34e431f222bbac5888239b954b9d315de2341d778d0a270",
-      "bytes": 121878,
+      "sha256": "2082a956bcc0b5b5581693130ccc4c5f18c5460f6db7f00e85a5abb276761268",
+      "bytes": 121806,
       "source": "releases/v14.3/src/macos/v14.3-macos-flclash.js",
-      "sourceSHA256": "2dff2bcc2189751f1bc1c179ba6312dcdb8727b0396d3e28c79321c923a6c89b",
+      "sourceSHA256": "367d68912f7b454067e9402a0a33c1a9ed7e3eda1bcfa7643850e55b3266596b",
       "status": "GENERATED_NATIVE_REPLAY_DEVICE_PENDING"
     },
     "macosClashMi": {
@@ -67,11 +67,15 @@
   "inputs": [
     {
       "file": "tools/build-ipv4-only.cjs",
-      "sha256": "8cb5a11a1d1f0a62dff50b95d1dc08d0999f1508c41c52056660c08e40580c53"
+      "sha256": "017db391a5d9a66af738924ad3216faf2d4ce52cf0c60727bbcf86043fa09e49"
     },
     {
       "file": "tools/ipv4-only-runtime.js",
       "sha256": "19a4b7aa7735dddd85d9df82aae1f9f10d2ef4e5ece85c833ea94212a043eb6f"
+    },
+    {
+      "file": "releases/v14.3/tools/lib/compile-entries.cjs",
+      "sha256": "1a0c5a5d5a8abfdab8a68151bde1f7f0c86b5033c780730f1007220d8cbd464e"
     },
     {
       "file": "releases/v14.3/src/windows/v14.3-windows-flclash.js",
@@ -91,7 +95,7 @@
     },
     {
       "file": "releases/v14.3/src/macos/v14.3-macos-flclash.js",
-      "sha256": "2dff2bcc2189751f1bc1c179ba6312dcdb8727b0396d3e28c79321c923a6c89b"
+      "sha256": "367d68912f7b454067e9402a0a33c1a9ed7e3eda1bcfa7643850e55b3266596b"
     },
     {
       "file": "releases/v14.3/src/macos/v14.3-macos-clashmi.js",
