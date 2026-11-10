@@ -11,9 +11,9 @@
       "platform": "macosFlClash",
       "client": "FlClash",
       "file": "src/macos/v14.3-macos-flclash.js",
-      "sha256": "fab2698de44c05f43605dcb4e2a339f4051bb48ae4520d3bc10163d2bfe7e8c3",
-      "bytes": 127616,
-      "generatedConfigBytes": 181893,
+      "sha256": "2dff2bcc2189751f1bc1c179ba6312dcdb8727b0396d3e28c79321c923a6c89b",
+      "bytes": 128249,
+      "generatedConfigBytes": 182365,
       "inlineRows": 908,
       "remoteSources": 30
     },
@@ -21,9 +21,9 @@
       "platform": "macosClashMi",
       "client": "Clash Mi",
       "file": "src/macos/v14.3-macos-clashmi.js",
-      "sha256": "d246c3fdd107b2a55bd7763709dace13fef2ca8dfc4e980ae0feaa0288769bba",
-      "bytes": 128562,
-      "generatedConfigBytes": 182507,
+      "sha256": "dc9ad3896c3c1c37354731e3ab41410f497754bc36ec3685885643c8f447fbec",
+      "bytes": 129195,
+      "generatedConfigBytes": 182979,
       "inlineRows": 908,
       "remoteSources": 29
     }
@@ -88,7 +88,7 @@
     },
     {
       "file": "runtime/shared/v14NativeFallback.js.in",
-      "sha256": "0b4c8d4e5299e721aacafc5efa11e4a7ffcfd511f63eda715544fb40b1ada9ca"
+      "sha256": "5478831b4798915f428c5911ad8cd82de1f38a848084832db233478d1756d15a"
     },
     {
       "file": "runtime/platforms/desktop/layout.json",

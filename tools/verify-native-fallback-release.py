@@ -28,7 +28,7 @@ def verify_source(root):
 
     tracks = {'main': release['entries'], 'ipv4-only': release['variants']['ipv4-only']['entries']}
     tags = candidate['releaseTags']
-    if set(tags) != set(tracks) or len(set(tags.values())) != 2:
+    if tags is not None and (set(tags) != set(tracks) or len(set(tags.values())) != 2):
         raise ValueError('Expected two distinct track tags')
     assets = {}
     for track, entries in tracks.items():
@@ -46,12 +46,25 @@ def verify_source(root):
             files[path.name] = (path, proof['sourceSHA256'])
         if len(files) != 7:
             raise ValueError('Duplicate asset basename')
-        assets[tags[track]] = files
+        if tags is not None:
+            assets[tags[track]] = files
     if not receipt['checks']:
         raise ValueError('Empty core replay inventory')
-    if candidate['revision'] == 'domestic-resilience-r1':
+    if candidate['revision'] in ('domestic-resilience-r1', 'backup-slot-skip-r1'):
         if receipt['runnerSHA256'] != sha(root / 'tools/replay-resilience.py') or receipt['hostSHA256'] != sha(root / 'tools/stock-core-host.py'):
             raise ValueError('Stale isolated replay runner')
+    if candidate['revision'] == 'backup-slot-skip-r1':
+        required = {
+            'skip_tier1_first_connection_uses_tier2',
+            'skip_tiers1_and2_first_connection_uses_tier3',
+            'reload_legacy_reject_skips_to_tier3',
+            'reload_removed_primary_and_tier1_uses_tier2',
+            'reload_removed_primary_and_first_two_tiers_uses_tier3',
+            'reload_removed_primary_and_all_backups_rejects',
+        }
+        if not required.issubset(receipt['checks']):
+            raise ValueError('Missing backup-slot skip replay')
+    if candidate['revision'] == 'domestic-resilience-r1':
         checks = [
             ('domestic-resilience/after.json', 'tools/test-domestic-resilience.cjs'),
             ('domestic-resilience/dns-order.json', 'tools/test-dns-policy-order.cjs'),
@@ -119,8 +132,8 @@ def main():
     args = parser.parse_args()
     inventory = verify_source(ROOT)
     directory = args.assets or args.stage
-    if directory and args.tag not in inventory:
-        parser.error('Specify the release tag for the requested asset directory')
+    if (directory or args.tag) and args.tag not in inventory:
+        parser.error('Specify a release tag configured for this candidate')
     if args.static:
         verify_static()
     if directory:

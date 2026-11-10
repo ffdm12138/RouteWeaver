@@ -1139,7 +1139,9 @@ function v14NativeFallback(config, poolName, policies) {
       name = label + " [原生" + (i > 1 ? "-" + i : "") + "]";
     }
     occupied.add(name);
-    groups.push({name, ...fields});
+    const group = {name, ...fields};
+    groups.push(group);
+    byName.set(name, group);
     marker.groups.push(name);
     return name;
   }
@@ -1147,16 +1149,27 @@ function v14NativeFallback(config, poolName, policies) {
     type: "select", proxies: pool.proxies.slice(), "default-selected": "REJECT", "empty-fallback": "REJECT",
   };
   const backups = [1, 2, 3].map(slot => addGroup("故障转移" + slot, manual));
-  function addFallback(label, primary) {
+  function addFallback(label, members) {
     return addGroup(label, {
-      type: "fallback", proxies: [primary, ...backups], hidden: true,
+      type: "fallback", proxies: members, hidden: true,
       url: V14.testUrl + "#routeweaver-failover", interval: 3, timeout: 3000, lazy: true,
       "expected-status": 204, "empty-fallback": "REJECT",
     });
   }
-  const choices = new Map(pool.proxies.filter(name => name !== "REJECT")
-    .map(name => [name, addFallback(name + " ↻", name)]));
-  const missing = addFallback("主节点缺失 · 已选备用", "REJECT");
+  const nodes = pool.proxies.filter(name => name !== "REJECT");
+  const skips = [
+    addFallback("跳过本档（1）", backups.slice(1)),
+    addGroup("跳过本档（2）", {
+      type: "select", proxies: [backups[2]], hidden: true, "empty-fallback": "REJECT",
+    }),
+  ];
+  for (const [index, skip] of skips.entries()) {
+    const group = byName.get(backups[index]);
+    group.proxies = [skip, ...nodes];
+    group["default-selected"] = skip;
+  }
+  const choices = new Map(nodes.map(name => [name, addFallback(name + " ↻", [name, ...backups])]));
+  const missing = addFallback("主节点缺失 · 已选备用", ["REJECT", ...backups]);
   for (const policy of policies) {
     const group = byName.get(policy);
     group.proxies = [missing, ...group.proxies.map(name => choices.get(name) || name)];

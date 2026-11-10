@@ -154,3 +154,7 @@ Windows FlClash 主版与纯 IPv4 入口增加可选原生描述。两种口味�
 [主版发布回执](releases/v14.3.0-rc.13.json) · [纯 IPv4 发布回执](releases/v14.3.0-ipv4-only-rc.4.json) · [源码 CI](https://github.com/ffdm12138/RouteWeaver/actions/runs/42381569705)
 
 发布后补记纠正 API DoH 元数据范围，明确 ipv4-local/ipv4-only 保持既有 Fake-IP 合同，并区分公共组可见手选入口与内部受控回退链。补记不改变已发布入口字节或标签。
+
+## 2026-11-10 · backup-slot-skip-r1 备用档跳过
+
+两轨 Mihomo JS 从共用源码生成。前两档的跳过选项把新连接交给后续手选备用。两种发行口味各通过 72 项故障转移配置检查与 12 份脚本的原装 FlClash 隔离回放，每份 38 项。本地候选回执绑定导入文件、核心及回放工具 SHA-256。实机状态为 NOT_RUN。 [当前验收](../docs/status/当前验收.md)

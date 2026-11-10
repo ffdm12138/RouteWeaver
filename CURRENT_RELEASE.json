@@ -142,12 +142,12 @@
     "reason": "Chromium classifies every usable IPv6 Fake-IP prefix as local network"
   },
   "nativeFallback": {
-    "revision": "domestic-resilience-r1",
+    "revision": "backup-slot-skip-r1",
     "guide": "docs/guides/故障转移.md",
-    "verification": "releases/v14.3/validation/domestic-resilience/native.json",
+    "verification": "releases/v14.3/validation/proxy-failover/backup-slot-skip-r1.json",
     "releaseTags": {
-      "main": "v14.3.0-rc.13",
-      "ipv4-only": "v14.3.0-ipv4-only-rc.4"
+      "main": "v14.3.0-rc.14",
+      "ipv4-only": "v14.3.0-ipv4-only-rc.5"
     },
     "deviceAcceptance": "NOT_RUN"
   },
@@ -223,7 +223,7 @@
       "publicReleaseRemoteSHA256": "ALL_15_ANONYMOUS_DOWNLOADS_MATCH"
     }
   },
-  "currentRevision": "domestic-resilience-r1",
+  "currentRevision": "backup-slot-skip-r1",
   "publicReleaseTag": "v14.3.0-rc.13",
   "publicReleaseURL": "https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-rc.13",
   "publicReleaseStatus": "PUBLISHED_PRE_RELEASE_DEVICE_NOT_RUN",

@@ -64,7 +64,7 @@
     },
     {
       "file": "runtime/shared/v14NativeFallback.js.in",
-      "sha256": "0b4c8d4e5299e721aacafc5efa11e4a7ffcfd511f63eda715544fb40b1ada9ca"
+      "sha256": "5478831b4798915f428c5911ad8cd82de1f38a848084832db233478d1756d15a"
     },
     {
       "file": "runtime/platforms/desktop/layout.json",
@@ -207,9 +207,9 @@
     {
       "platform": "clashVerge",
       "file": "src/clash-verge/v14.3-clash-verge.js",
-      "sha256": "43cb7f2a2653b70c217bd22c893d1d494b0a3df8c1cdef5b4701ffb1516dd988",
-      "bytes": 128182,
-      "generatedConfigBytes": 182188,
+      "sha256": "5a97fadca9c2a2754a11eeaf6c257c12c5ef2663d7e929b82c48d9d1c9b7f8c7",
+      "bytes": 128815,
+      "generatedConfigBytes": 182660,
       "inlineRows": 908,
       "remoteSources": 30
     }

@@ -23,8 +23,9 @@ for (const {entries, modes} of tracks) {
     const source = fs.readFileSync(path.join(root, file), 'utf8');
     assert.ok(Buffer.byteLength(source) <= 131072, file);
     const inputs = [
-      {proxies: ['Primary', 'Primary ↻', '故障转移1', '主节点缺失 · 已选备用', ...Array.from(
-        {length: 59}, (_, i) => 'Node ' + i,
+      {proxies: ['Primary', 'Primary ↻', '故障转移1', '主节点缺失 · 已选备用',
+        '跳过本档（1）', '跳过本档（2）', ...Array.from(
+        {length: 57}, (_, i) => 'Node ' + i,
       )].map(node)},
       {'proxy-providers': {feed: {type: 'inline', payload: [node('Provider')]}}},
       {proxies: [node('Primary')], 'proxy-providers': {feed: {type: 'file', path: './fixture.yaml'}}},
@@ -53,21 +54,25 @@ for (const {entries, modes} of tracks) {
       assert.equal(groups.size, candidate['proxy-groups'].length);
       const pool = original['proxy-groups'].find(group => group.name === '高纯净度AI用');
       const slots = ['故障转移1 [原生]', '故障转移2', '故障转移3'];
+      const skip1 = '跳过本档（1） [原生]';
+      const skip2 = '跳过本档（2） [原生]';
       const added = candidate['proxy-groups'].slice(original['proxy-groups'].length);
       assert.deepEqual(added.filter(g => !g.hidden).map(g => g.name), slots);
-      for (const name of slots) {
+      for (const [index, name] of slots.entries()) {
+        const first = [skip1, skip2, 'REJECT'][index];
         const group = groups.get(name);
         assert.equal(group.type, 'select');
-        assert.equal(group['default-selected'], 'REJECT');
+        assert.equal(group['default-selected'], first);
         assert.equal(group['empty-fallback'], 'REJECT');
-        assert.deepEqual(group.proxies, pool.proxies);
+        assert.deepEqual(group.proxies, [first, ...pool.proxies.filter(name => name !== 'REJECT')]);
         assert.equal(group.use, undefined);
       }
+      assert.deepEqual(groups.get(skip2), {
+        name: skip2, type: 'select', proxies: [slots[2]], hidden: true, 'empty-fallback': 'REJECT',
+      });
+      assert.equal(groups.get(skip1).hidden, true);
       const aliases = new Map();
-      for (const fallback of added.filter(g => g.hidden)) {
-        const [primary, ...backups] = fallback.proxies;
-        assert.equal(aliases.has(primary), false, 'share one chain per primary');
-        aliases.set(primary, fallback.name);
+      for (const fallback of added.filter(g => g.hidden && g.name !== skip2)) {
         assert.equal(fallback.type, 'fallback');
         assert.equal(fallback.interval, 3);
         assert.equal(fallback.timeout, 3000);
@@ -75,8 +80,15 @@ for (const {entries, modes} of tracks) {
         assert.equal(fallback['empty-fallback'], 'REJECT');
         assert.equal(fallback.lazy, true);
         assert.match(fallback.url, /^https:\/\/.+#routeweaver-failover$/);
-        assert.deepEqual(backups, slots);
         assert.ok(!fixture.proxies.some(node => node.name === fallback.name));
+        if (fallback.name === skip1) {
+          assert.deepEqual(fallback.proxies, slots.slice(1));
+          continue;
+        }
+        const [primary, ...backups] = fallback.proxies;
+        assert.equal(aliases.has(primary), false, 'share one chain per primary');
+        aliases.set(primary, fallback.name);
+        assert.deepEqual(backups, slots);
       }
       assert.deepEqual([...aliases.keys()].sort(), pool.proxies.slice().sort());
       assert.equal(aliases.get('Primary'), 'Primary ↻ [原生]');

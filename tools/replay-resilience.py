@@ -117,13 +117,28 @@ def run_case(core, file, mode, engine, directory):
         def choose(group, name):
             result = child.call('proxy.select', {'group-name': group, 'proxy-name': name})
             assert not result.get('message'), (group, name, result)
-        for slot, name in enumerate(['B', 'C', 'D'], 1):
-            choose('故障转移' + str(slot), name)
+        slots = ['故障转移' + str(slot) for slot in range(1, 4)]
+        backups = dict(zip(slots, ['B', 'C', 'D']))
+        defaults = {group['name']: group['default-selected'] for group in cfg['proxy-groups']
+                    if group['name'] in slots}
+        for slot, name in backups.items():
+            choose(slot, name)
         choose('漏网之鱼', 'X ↻'); choose('国内网站', 'A ↻'); choose('OpenAI 服务', 'A ↻')
-        def via(expected, host='api.amemv.com'):
+        def tcp_paths(prior, ports):
+            return [k for k, v in relays.items()
+                    if any(e[0] == 'TCP' and e[2] in ports for e in v.events[prior[k]:])]
+        def via(expected, host='api.amemv.com', *, blocked=False):
             prior = {k: len(v.events) for k, v in relays.items()}
-            assert N['http_request'](mixed, host, origin.server_address[1]) == b'AUDIT_OK'
-            actual = [k for k, v in relays.items() if any(e[0] == 'TCP' and e[2] == origin.server_address[1] for e in v.events[prior[k]:])]
+            hits = len(origin.hits)
+            try:
+                response = N['http_request'](mixed, host, origin.server_address[1])
+            except (OSError, EOFError, StopIteration):
+                if not blocked:
+                    raise
+                assert len(origin.hits) == hits, ('blocked flow reached origin', host)
+            else:
+                assert not blocked and response == b'AUDIT_OK', (host, expected, response)
+            actual = tcp_paths(prior, {origin.server_address[1]})
             assert actual == ([expected] if expected else []), (host, actual, expected)
             return True
         def probe(name):
@@ -142,6 +157,16 @@ def run_case(core, file, mode, engine, directory):
                 except socket.timeout: answer = b''
                 assert answer.endswith(b'ACK:PING') if expected else not answer
             assert [k for k, v in relays.items() if len(v.udp.events) > prior[k]] == ([expected] if expected else [])
+        def dns_via(host, expected, ports):
+            child.call('dns.clearCache')
+            prior = {k: len(v.events) for k, v in relays.items()}
+            answer = N['dns_answers'](dns, host, 1)
+            assert answer == [F['ANSWER']], (host, answer)
+            actual = tcp_paths(prior, ports)
+            assert actual == ([expected] if expected else []), ('DNS egress', host, actual, expected)
+        dot_port = dot.server_address[1]
+        https_port = https.server_address[1]
+        api_port = https_port if 'api.openai.com' in original['dns']['nameserver-policy'] else dot_port
         for host in ['api.amemv.com', 'v5.douyinvod.com', 'p3.douyinpic.com', 'szextshort.weixin.qq.com', 'apd-pcdnwxlogin.teg.tencent-cloud.net', 'openaifoundation.org']:
             via('A', host); checks.append('empty_provider_tcp:' + host)
         udp('A'); checks.append('domestic_udp_A')
@@ -153,38 +178,69 @@ def run_case(core, file, mode, engine, directory):
             F['wait_until'](lambda: via(expected), seconds=10)
             checks.append('fallback_to_' + expected)
         udp('D'); checks.append('domestic_udp_D')
-        for name in ['C', 'B', 'A']:
+        relays['D'].state = 'down'; probe('D')
+        F['wait_until'](lambda: via('A', blocked=True), seconds=10)
+        checks.append('all_selected_nodes_down_only_attempts_primary')
+        for name in ['D', 'C', 'B', 'A']:
             relays[name].state = 'up'; probe(name)
             F['wait_until'](lambda: via(name), seconds=10)
             checks.append('recover_' + name)
-        # Fresh DNS labels and explicit cache clear make selector changes visible.
+        relays['A'].state = 'down'; probe('A')
+        F['wait_until'](lambda: via('B'), seconds=10)
+        choose(slots[0], defaults[slots[0]])
+        via('C')
+        checks.append('skip_tier1_first_connection_uses_tier2')
+        choose(slots[1], defaults[slots[1]])
+        via('D')
+        checks.append('skip_tiers1_and2_first_connection_uses_tier3')
+        udp('D'); checks.append('skipped_tiers_udp_D')
+        dns_via('skip.amemv.com', 'D', {dot_port})
+        checks.append('skipped_tiers_domestic_dot_D')
+        dns_via('api.openai.com', 'D', {api_port})
+        checks.append('skipped_tiers_openai_encrypted_dns_D')
+
         for label, selection, expected in [('single', 'B ↻', 'B'), ('public', '高纯净度AI用', 'C'), ('direct', 'DIRECT', None)]:
             choose('高纯净度AI用', 'C ↻'); choose('国内网站', selection)
-            child.call('dns.clearCache')
-            prior = {k: len(v.events) for k, v in relays.items()}
-            answer = N['dns_answers'](dns, label + '.amemv.com', 1)
-            assert answer == [F['ANSWER']], (label, answer, {k:v.events[prior[k]:] for k,v in relays.items()})
-            actual = [k for k, v in relays.items() if any(e[0] == 'TCP' and e[2] in [dot.server_address[1], https.server_address[1]] for e in v.events[prior[k]:])]
-            assert actual == ([expected] if expected else []), ('DNS egress', label, actual)
+            dns_via(label + '.amemv.com', expected, {dot_port, https_port})
             checks.append('domestic_dns_' + label)
-        choose('OpenAI 服务', 'B ↻'); child.call('dns.clearCache')
-        prior = {k:len(v.events) for k,v in relays.items()}
-        assert N['dns_answers'](dns, 'api.openai.com', 1) == [F['ANSWER']]
-        api_port = https.server_address[1] if 'api.openai.com' in original['dns']['nameserver-policy'] else dot.server_address[1]
-        actual = [k for k,v in relays.items() if any(e[0]=='TCP' and e[2]==api_port for e in v.events[prior[k]:])]
-        assert actual == ['B'], ('DOH', actual, {k:v.events[prior[k]:] for k,v in relays.items()})
+        choose('OpenAI 服务', 'B ↻')
+        dns_via('api.openai.com', 'B', {api_port})
         checks.append('openai_mode_correct_encrypted_dns_selected_group')
         choose('国内网站', 'DIRECT'); cfg['hosts']['direct.amemv.com'] = '127.0.0.1'; save(); child.call('config.setup', {'selected-map': {'国内网站': 'DIRECT'}})
         via(None, 'direct.amemv.com'); checks.append('domestic_explicit_DIRECT_tcp')
         choose('国内网站', 'NoUDP ↻'); udp(None); checks.append('unsupported_udp_rejected')
         # No unselected X and no DIRECT may rescue a failed selected chain.
         choose('国内网站', 'A ↻')
-        for slot in range(1, 4): choose('故障转移' + str(slot), 'REJECT')
-        relays['A'].state = 'down'; probe('A')
-        try: via('A')
-        except (OSError, EOFError, StopIteration): pass
-        else: raise AssertionError('failed primary reached origin')
-        checks.append('all_backups_REJECT_no_direct_rescue')
+        for slot, default in defaults.items():
+            choose(slot, default)
+        probe('A')
+        F['wait_until'](lambda: via('A', blocked=True), seconds=10)
+        checks.append('all_backups_disabled_only_attempts_primary')
+
+        selected = {'国内网站': 'A ↻', 'OpenAI 服务': 'A ↻', '漏网之鱼': 'X ↻', **backups}
+        def reload_without(removed, saved):
+            updated = generate(file, mode, [node for node in nodes if node['name'] not in removed], engine)
+            cfg['proxies'], cfg['proxy-groups'] = updated['proxies'], updated['proxy-groups']
+            save()
+            child.call('config.setup', {'selected-map': saved})
+        reload_without({'A'}, {**selected, slots[0]: 'REJECT', slots[1]: 'REJECT'})
+        F['wait_until'](lambda: via('D'), seconds=10)
+        checks.append('reload_legacy_reject_skips_to_tier3')
+        reload_without({'A', 'B'}, selected)
+        F['wait_until'](lambda: via('C'), seconds=10)
+        checks.append('reload_removed_primary_and_tier1_uses_tier2')
+        reload_without({'A', 'B', 'C'}, selected)
+        F['wait_until'](lambda: via('D'), seconds=10)
+        udp('D')
+        dns_via('reload.amemv.com', 'D', {dot_port})
+        dns_via('api.openai.com', 'D', {api_port})
+        checks.append('reload_removed_primary_and_first_two_tiers_uses_tier3')
+        choose('国内网站', 'REJECT')
+        via(None, blocked=True)
+        checks.append('explicit_REJECT_still_blocks')
+        reload_without({'A', 'B', 'C', 'D'}, selected)
+        via(None, blocked=True)
+        checks.append('reload_removed_primary_and_all_backups_rejects')
         return checks
 
 
@@ -196,7 +252,7 @@ def main():
     parser.add_argument('--limit', type=int)
     args = parser.parse_args()
     current = json.loads((ROOT / 'CURRENT_RELEASE.json').read_text(encoding='utf-8'))
-    result = {'revision': 'domestic-resilience-r1', 'edition': 'personal' if current.get('vpsDirectRevision') else 'public',
+    result = {'revision': current['nativeFallback']['revision'], 'edition': 'personal' if current.get('vpsDirectRevision') else 'public',
               'status': 'FAIL', 'core': {'sha256': sha(args.core)}, 'quickJS': {'sha256': sha(args.quickjs)},
               'runnerSHA256': sha(__file__), 'hostSHA256': sha(ROOT / 'tools/stock-core-host.py'),
               'scope': 'Windows isolated stock core; loopback transport substitution; no mobile frontend, VPN or live client',

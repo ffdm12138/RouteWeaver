@@ -1,6 +1,6 @@
 # RouteWeaver
 
-当前修订 `domestic-resilience-r1`：补齐关键国内离线规则、核对公司与共享依赖，修复 API DNS 策略顺序。[审核与验证范围](docs/reports/v14.3/云端规则审核与离线修复.md)。跨端真机仍待验证。
+当前本地候选 `backup-slot-skip-r1` 支持前两档备用节点消失后继续走后档。GitHub 下载对应已发布的 rc.13 和纯 IPv4 rc.4。 [故障转移说明](docs/guides/故障转移.md)
 
 跨平台分流覆写，按客户端选择对应入口。每个网络版本都提供六份 Mihomo JS 和一份 Shadowrocket 原生配置。本目录是独立公开版源码。
 
@@ -28,8 +28,8 @@
 ## 文档与验证
 
 - [使用与维护文档](docs/README.md) · [需求](docs/需求.md) · [当前验收](docs/status/当前验收.md) · [变更记录](CHANGELOG.md)
-- [当前文件与两轨标签](CURRENT_RELEASE.json) · [开源与发布流程](docs/maintenance/开源与发布.md)
+- [当前文件与发布记录](CURRENT_RELEASE.json) · [开源与发布流程](docs/maintenance/开源与发布.md)
 
-原装 Windows FlClash 0.9.3 的隔离回放覆盖两轨六个 JS 入口的 TCP、UDP、DoH、DoT 及各档切换。各端实际导入界面与 TUN/VPN 单独验收。Shadowrocket 两轨继续提供原生配置，其三档回退仍待实机验证。 [隔离回执](releases/v14.3/validation/proxy-failover/native-fallback-r3.json)
+原装 Windows FlClash 0.9.3 的隔离回放覆盖两轨六个 JS 入口的订阅刷新、TCP、UDP、DoH 和 DoT。各端导入界面与 TUN/VPN 待实机验收。 [隔离回执](releases/v14.3/validation/proxy-failover/backup-slot-skip-r1.json)
 
 原创内容采用 [MIT](LICENSE)，上游规则与历史可选核心使用各自的许可。 [第三方声明](THIRD_PARTY_NOTICES.md)
