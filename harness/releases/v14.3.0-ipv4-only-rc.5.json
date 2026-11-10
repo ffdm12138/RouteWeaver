@@ -1,0 +1,150 @@
+{
+  "tag": "v14.3.0-ipv4-only-rc.5",
+  "releaseUrl": "https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-ipv4-only-rc.5",
+  "prerelease": true,
+  "status": "PASS_PUBLISHED_ASSETS_AND_CI",
+  "sourceCommit": "a62092d0589d977da8c7f12d026d491b3e26f6df",
+  "remoteTagCommit": "a62092d0589d977da8c7f12d026d491b3e26f6df",
+  "publishedAtUTC": "2026-11-10T07:08:58Z",
+  "verifiedAtUTC": "2026-11-10T07:16:17.113111+00:00",
+  "anonymousDownloads": "ALL_MATCH",
+  "assets": [
+    {
+      "name": "SHA256SUMS.txt",
+      "bytes": 711,
+      "sha256": "a256591cd4a55c1abde91156ec789e65503149486c88a4f6b793c73becc2dcf0",
+      "url": "https://github.com/ffdm12138/RouteWeaver/releases/download/v14.3.0-ipv4-only-rc.5/SHA256SUMS.txt",
+      "githubDigest": "sha256:a256591cd4a55c1abde91156ec789e65503149486c88a4f6b793c73becc2dcf0"
+    },
+    {
+      "name": "v14.3-android-flclash-ipv4-only.js",
+      "bytes": 119748,
+      "sha256": "69ff381b604e9230821d4155a6d251ecf3a64b9a62e49e02a5ac37f8819a886d",
+      "url": "https://github.com/ffdm12138/RouteWeaver/releases/download/v14.3.0-ipv4-only-rc.5/v14.3-android-flclash-ipv4-only.js",
+      "githubDigest": "sha256:69ff381b604e9230821d4155a6d251ecf3a64b9a62e49e02a5ac37f8819a886d"
+    },
+    {
+      "name": "v14.3-clash-verge-ipv4-only.js",
+      "bytes": 122059,
+      "sha256": "a9eb42131db384ddbca6b682788ac3c18fd455b4af4f905c4b528ed6ff4ec967",
+      "url": "https://github.com/ffdm12138/RouteWeaver/releases/download/v14.3.0-ipv4-only-rc.5/v14.3-clash-verge-ipv4-only.js",
+      "githubDigest": "sha256:a9eb42131db384ddbca6b682788ac3c18fd455b4af4f905c4b528ed6ff4ec967"
+    },
+    {
+      "name": "v14.3-clashmi-domestic-protocol-r1-ipv4-only.js",
+      "bytes": 121977,
+      "sha256": "3c8ed7eec11944a38a7324e9b6d0afc87fc20602de48d35f6b63b4706f388a31",
+      "url": "https://github.com/ffdm12138/RouteWeaver/releases/download/v14.3.0-ipv4-only-rc.5/v14.3-clashmi-domestic-protocol-r1-ipv4-only.js",
+      "githubDigest": "sha256:3c8ed7eec11944a38a7324e9b6d0afc87fc20602de48d35f6b63b4706f388a31"
+    },
+    {
+      "name": "v14.3-macos-clashmi-ipv4-only.js",
+      "bytes": 121975,
+      "sha256": "05a0c097b4ae80bf79ed70ca72875ba6b97f8dcfab23be6be690eea76e90b744",
+      "url": "https://github.com/ffdm12138/RouteWeaver/releases/download/v14.3.0-ipv4-only-rc.5/v14.3-macos-clashmi-ipv4-only.js",
+      "githubDigest": "sha256:05a0c097b4ae80bf79ed70ca72875ba6b97f8dcfab23be6be690eea76e90b744"
+    },
+    {
+      "name": "v14.3-macos-flclash-ipv4-only.js",
+      "bytes": 121878,
+      "sha256": "1469b2bd78a76e65a34e431f222bbac5888239b954b9d315de2341d778d0a270",
+      "url": "https://github.com/ffdm12138/RouteWeaver/releases/download/v14.3.0-ipv4-only-rc.5/v14.3-macos-flclash-ipv4-only.js",
+      "githubDigest": "sha256:1469b2bd78a76e65a34e431f222bbac5888239b954b9d315de2341d778d0a270"
+    },
+    {
+      "name": "v14.3-shadowrocket-ipv4-only.conf",
+      "bytes": 1780299,
+      "sha256": "d88ca1232691de9e3b23eb8d3d0c2dd7fb647007a07165f21f651a1b9b883286",
+      "url": "https://github.com/ffdm12138/RouteWeaver/releases/download/v14.3.0-ipv4-only-rc.5/v14.3-shadowrocket-ipv4-only.conf",
+      "githubDigest": "sha256:d88ca1232691de9e3b23eb8d3d0c2dd7fb647007a07165f21f651a1b9b883286"
+    },
+    {
+      "name": "v14.3-windows-flclash-ipv4-only.js",
+      "bytes": 120121,
+      "sha256": "111b0d165590888a69b443ed7c8b89253252d7cf16c602f0ad705b0bc85fdf2e",
+      "url": "https://github.com/ffdm12138/RouteWeaver/releases/download/v14.3.0-ipv4-only-rc.5/v14.3-windows-flclash-ipv4-only.js",
+      "githubDigest": "sha256:111b0d165590888a69b443ed7c8b89253252d7cf16c602f0ad705b0bc85fdf2e"
+    }
+  ],
+  "deviceAcceptance": "NOT_RUN",
+  "liveClientChanges": "NONE_BY_THIS_TASK",
+  "remoteMainAtVerification": "a62092d0589d977da8c7f12d026d491b3e26f6df",
+  "mainCI": {
+    "conclusion": "success",
+    "event": "push",
+    "headBranch": "main",
+    "headSha": "a62092d0589d977da8c7f12d026d491b3e26f6df",
+    "jobs": [
+      {
+        "name": "verify (ubuntu-24.04)",
+        "id": 129682834534,
+        "state": "success"
+      },
+      {
+        "name": "verify (windows-latest)",
+        "id": 129682835006,
+        "state": "success"
+      },
+      {
+        "name": "javascript-engines (ubuntu-latest, routeweaver-engine-check)",
+        "id": 129682835023,
+        "state": "success"
+      },
+      {
+        "name": "javascript-engines (windows-latest, routeweaver-engine-check.exe)",
+        "id": 129682835094,
+        "state": "success"
+      },
+      {
+        "name": "bound-release",
+        "id": 129682836484,
+        "state": "skipped"
+      }
+    ],
+    "status": "completed",
+    "url": "https://github.com/ffdm12138/RouteWeaver/actions/runs/42772346312"
+  },
+  "releaseCI": {
+    "conclusion": "success",
+    "event": "release",
+    "headBranch": "v14.3.0-ipv4-only-rc.5",
+    "headSha": "a62092d0589d977da8c7f12d026d491b3e26f6df",
+    "jobs": [
+      {
+        "name": "javascript-engines (ubuntu-latest, routeweaver-engine-check)",
+        "id": 129685789655,
+        "state": "success"
+      },
+      {
+        "name": "javascript-engines (windows-latest, routeweaver-engine-check.exe)",
+        "id": 129685789738,
+        "state": "success"
+      },
+      {
+        "name": "bound-release (ubuntu-24.04)",
+        "id": 129685789963,
+        "state": "success"
+      },
+      {
+        "name": "verify (ubuntu-24.04)",
+        "id": 129685790023,
+        "state": "success"
+      },
+      {
+        "name": "bound-release (windows-latest)",
+        "id": 129685790399,
+        "state": "success"
+      },
+      {
+        "name": "verify (windows-latest)",
+        "id": 129685790920,
+        "state": "success"
+      }
+    ],
+    "status": "completed",
+    "url": "https://github.com/ffdm12138/RouteWeaver/actions/runs/42773268952"
+  },
+  "assetDownloadVerifiedAtUTC": "2026-11-10T07:10:25.620540+00:00",
+  "recordType": "POST_PUBLICATION_RECEIPT_NO_ENTRY_CHANGES",
+  "verificationMethod": "Anonymous HTTPS downloads; exact candidate inventory and SHA256SUMS; GitHub asset digests; completed Windows/Linux source, real-engine and attachment CI"
+}
