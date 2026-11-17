@@ -1,6 +1,9 @@
 'use strict';
-const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict'),base=require('./fixture.cjs');
+const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict'),base=require('./current-fixture.cjs');
 const entries={'macos-flclash':'src/macos/v14.3-macos-flclash.js','macos-clashmi':'src/macos/v14.3-macos-clashmi.js'};
+const {processRules}=require('../tools/lib/tailscale-policy.cjs');
+const tailscaleProcessRules=new Set(Object.values(processRules).flat().map(rule=>rule+',DIRECT'));
+const businessRules=rules=>rules.filter(rule=>!tailscaleProcessRules.has(rule));
 function generate(platform,input){
   assert.ok(entries[platform],platform);const ctx=vm.createContext({console:{log(){}}});
   vm.runInContext(fs.readFileSync(base.local(entries[platform]),'utf8'),ctx,{filename:entries[platform],timeout:3000});
@@ -8,8 +11,8 @@ function generate(platform,input){
 }
 function load(platform){
   const canonical=base.load(platform==='macos-flclash'?'desktop':'clashmi'),config=generate(platform);
-  assert.deepEqual(config.rules,canonical.rules,'Mac routing changed');
+  assert.deepEqual(businessRules(config.rules),businessRules(canonical.rules),'Mac business routing changed');
   assert.deepEqual(config['rule-providers'],canonical.config['rule-providers'],'Mac providers changed');
   return {...canonical,platform,config,rules:config.rules};
 }
-module.exports={...base,entries,generate,load};
+module.exports={...base,entries,generate,load,businessRules};

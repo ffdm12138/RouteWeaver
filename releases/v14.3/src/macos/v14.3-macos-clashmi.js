@@ -1,12 +1,21 @@
 // One current entry; set the default below, or use x-routeweaver.network-mode in the input. Auto requires the matching native core; JS alone cannot inspect physical egress.
 const ROUTEWEAVER_DEFAULT_NETWORK_MODE = "auto";
-// Clash Mi macOS V14.3: main(config) returns an OBJECT; macos-r1.
-// Small standalone overwrite: critical parents and safety guards inline; complete reviewed rules are remote.
-// Mihomo V14.3 android — 2026-10-12; balanced-r1.
-// Company rules precede geographic shortcuts; DNS uses the same group.
-// Unknown public UDP is proxied or rejected, including arbitrary WebRTC ports.
-// Private LAN and the explicit manual DIRECT list are intentional exceptions.
-// TUN/VPN capture still requires client settings and device verification.
+const V14_TAILSCALE = {"publicDomain":"tailscale.com","tailnetDomain":"ts.net","tailnetNetworks":["100.64.0.0/10","fd7a:115c:a1e0::/48"],"publicNetworks":"192.200.0.0/24 199.165.136.0/24 2606:b740:49::/48 2606:b740:1::/48 199.38.181.104/32 2607:f740:f::bc/128 209.177.145.120/32 2607:f740:f::3eb/128 199.38.181.93/32 2607:f740:f::afd/128 199.38.181.103/32 2607:f740:f::e19/128 209.177.145.118/32 2607:f740:f::ed2/128 199.38.181.71/32 2607:f740:f::5c9/128 192.73.252.65/32 2607:f740:0:3f::287/128 192.73.252.134/32 2607:f740:0:3f::44c/128 208.111.34.178/32 2607:f740:0:3f::f4/128 172.237.72.43/32 2600:3c15::2000:6cff:fee4:d799/128 172.237.72.8/32 2600:3c15::2000:53ff:fe48:a668/128 172.237.72.79/32 2600:3c15::2000:adff:fe08:6fab/128 172.237.66.30/32 2600:3c15::2000:3dff:fe44:50aa/128 185.40.234.219/32 2a00:dd80:20::a25/128 185.40.234.113/32 2a00:dd80:20::8f/128 185.40.234.77/32 2a00:dd80:20::bcf/128 185.40.234.53/32 2a00:dd80:20::8a6/128 185.40.234.176/32 2a00:dd80:20::e67/128 185.178.202.33/32 2a00:dd80:20::ae2/128 185.178.202.101/32 2a00:dd80:20::af9/128 172.105.179.230/32 2400:8907::2000:ceff:fe8d:4f4e/128 172.105.166.103/32 2400:8907::2000:ccff:fe1f:80da/128 172.105.169.57/32 2400:8907::2000:2fff:fea7:57f4/128 172.236.162.33/32 2600:3c16::2000:4aff:febf:b61/128 172.236.162.40/32 2600:3c16::2000:74ff:fe05:5fa3/128 172.236.162.42/32 2600:3c16::2000:80ff:fef0:6f28/128 172.238.6.180/32 2600:3c18::2000:60ff:fe0f:6e83/128 172.238.6.34/32 2600:3c18::2000:acff:fe8e:3ed5/128 172.238.6.179/32 2600:3c18::2000:3fff:fe80:3ebd/128 172.237.28.183/32 2600:3c18::2000:b1ff:fea9:4560/128 176.58.92.144/32 2a00:dd80:3a::b33/128 176.58.88.183/32 2a00:dd80:3a::dfa/128 176.58.92.254/32 2a00:dd80:3a::ed/128 209.177.156.94/32 2607:f740:100::c05/128 192.73.248.83/32 2607:f740:100::359/128 209.177.156.197/32 2607:f740:100::cad/128 192.73.240.161/32 2607:f740:14::61c/128 192.73.240.121/32 2607:f740:14::40c/128 192.73.240.132/32 2607:f740:14::500/128 172.237.61.194/32 2600:3c0d::2000:d2ff:fe43:1790/128 172.237.61.197/32 2600:3c0d::2000:3bff:fe44:6166/128 172.237.61.190/32 2600:3c0d::2000:62ff:febe:2e67/128 209.177.158.246/32 2607:f740:e::811/128 209.177.158.15/32 2607:f740:e::b17/128 199.38.182.118/32 2607:f740:e::4c8/128 192.73.242.187/32 2607:f740:16::640/128 192.73.242.28/32 2607:f740:16::5c/128 192.73.242.204/32 2607:f740:16::c23/128 176.58.93.248/32 2a00:dd80:3c::807/128 176.58.93.147/32 2a00:dd80:3c::b09/128 176.58.93.154/32 2a00:dd80:3c::3d5/128 102.67.165.90/32 2c0f:edb0:0:10::963/128 102.67.165.185/32 2c0f:edb0:0:10::b59/128 102.67.165.36/32 2c0f:edb0:0:10::599/128 192.73.243.135/32 2607:f740:17::476/128 192.73.243.229/32 2607:f740:17::4e4/128 192.73.243.141/32 2607:f740:17::475/128 192.73.244.245/32 2607:f740:c::646/128 208.111.40.12/32 2607:f740:c::10/128 208.111.40.216/32 2607:f740:c::e1b/128 176.58.90.147/32 2a00:dd80:3e::363/128 176.58.90.207/32 2a00:dd80:3e::c19/128 176.58.90.104/32 2a00:dd80:3e::f2e/128 45.159.97.144/32 2a00:dd80:14:10::335/128 45.159.97.61/32 2a00:dd80:14:10::20/128 45.159.97.233/32 2a00:dd80:14:10::34a/128 103.6.84.152/32 2403:2500:8000:1::ef6/128 205.147.105.30/32 2403:2500:8000:1::5fb/128 205.147.105.78/32 2403:2500:8000:1::e9a/128 162.248.221.199/32 2607:f740:50::1d1/128 162.248.221.215/32 2607:f740:50::f10/128 162.248.221.248/32 2607:f740:50::ca4/128 45.159.98.196/32 2a00:dd80:40:100::316/128 45.159.98.253/32 2a00:dd80:40:100::3f/128 45.159.98.145/32 2a00:dd80:40:100::211/128 185.34.3.232/32 2a00:dd80:3f:100::76f/128 185.34.3.207/32 2a00:dd80:3f:100::a50/128 185.34.3.75/32 2a00:dd80:3f:100::97e/128 208.83.234.151/32 2001:19f0:c000:c586:5400:04ff:fe26:2ba6/128 208.83.233.233/32 2001:19f0:c000:c591:5400:04ff:fe26:2c5f/128 208.72.155.133/32 2001:19f0:c000:c564:5400:04ff:fe26:2ba8/128 102.67.167.245/32 2c0f:edb0:2000:1::2e9/128 102.67.167.37/32 2c0f:edb0:2000:1::2c7/128 102.67.167.188/32 2c0f:edb0:2000:1::188/128 167.235.72.200/32 2a01:4f8:1c1c:47b6::1/128 49.12.193.137/32 2a01:4f8:1c1c:5c70::1/128 49.13.204.141/32 2a01:4f8:1c0c:7d06::1/128 5.161.218.233/32 2a01:4ff:f0:3db9::1/128 178.156.152.91/32 2a01:4ff:f0:3913::1/128 178.156.152.106/32 2a01:4ff:f0:3c8e::1/128 178.156.134.232/32 2a01:4ff:f0:28d4::1/128 65.109.143.62/32 2a01:4f9:c012:d55c::1/128 95.217.2.165/32 2a01:4f9:c012:cd74::1/128 157.180.28.32/32 2a01:4f9:c012:2e5b::1/128 46.62.141.44/32 2a01:4f9:c014:f18e::1/128","processRules":[]};
+function v14AddTailscaleRules(config, add) {
+  add("DOMAIN-SUFFIX," + V14_TAILSCALE.publicDomain, "DIRECT");
+  add("DOMAIN-SUFFIX," + V14_TAILSCALE.tailnetDomain, "DIRECT");
+  for (const match of V14_TAILSCALE.processRules) add(match, "DIRECT");
+  if (V14_TAILSCALE.processRules.length && config["find-process-mode"] !== "always")
+    config["find-process-mode"] = "strict";
+
+  const sets = config["rule-providers"], base = "v14-tailscale-public-ips";
+  let name = base, index = 1;
+  while (Object.prototype.hasOwnProperty.call(sets, name)) name = base + "-" + (++index);
+  sets[name] = {type: "inline", behavior: "ipcidr", payload: V14_TAILSCALE.publicNetworks.split(" ")};
+  add("RULE-SET," + name, "DIRECT", true);
+  return name;
+}
+
 const V14 = Object.freeze({
   version: "14.3",
   ruleInterval: 86400, // seconds; native core timer, not a JS timer
@@ -14,10 +23,7 @@ const V14 = Object.freeze({
   testUrl: "https://www.gstatic.com/generate_204",
   testInterval: 600,
   providerInterval: 3600,
-  // WebRTC STUN is a separate destination; route known generic STUN through fallback.
-  // This cannot identify the site that initiated the WebRTC request.
   stunPorts: ["3478", "5349", "19302-19309"],
-  // Whole STUN/TURN labels avoid matching unrelated names such as stunning.cn.
   stunHostPatterns: ["stun.*", "*.stun.*", "turn.*", "*.turn.*"],
   domesticStunDns: ["stun.chat.bilibili.com", "stun.hitv.com"],
   stunDns: ["stun.l.google.com", "stun.services.mozilla.com", "stun.cloudflare.com"],
@@ -31,11 +37,7 @@ const V14 = Object.freeze({
     "https://223.6.6.6/dns-query#DIRECT",
   ],
   bootstrapDns: ["https://223.5.5.5/dns-query", "https://223.6.6.6/dns-query"],
-  // An upstream reachable directly in China and through ordinary proxy nodes.
   groupDnsUrls: ["tls://dns.alidns.com:853", "tls://dot.pub:853"],
-  // The one name outside Fake-IP (see fake-ip-filter) must return a real
-  // answer, so it cannot ride the DoT/853 policy: a carrier or node that drops
-  // 853 turns it into SERVFAIL. Same reviewed upstreams, DoH on 443.
   apiRealDns: ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"],
 });
 
@@ -45,9 +47,6 @@ const V14_PRIVATE_IPS = [
   "127.0.0.0/8", "10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16", "169.254.0.0/16", "100.64.0.0/10",
   "::1/128", "fc00::/7", "fe80::/10",
 ];
-// China-hosted services are fixed DIRECT. TikTok remains a distinct overseas
-// selector; broad ByteDance and international Microsoft/Google domains are absent.
-// These are deliberately bounded additions from the user's Mojie profile.
 const V14_DOMESTIC_SETS = ["douyin", "apple@cn", "google@cn", "microsoft@cn", "steam@cn"];
 const V14_DOMESTIC_SEEDS = [
   "douyin.com",
@@ -73,7 +72,6 @@ const V14_DOMESTIC_SEEDS = [
   "baidustatic.com",
   "didi-labs.com"
 ];
-// Immutable approved application DNS destinations; core resolver dialing is independent.
 const V14_EXTERNAL_DNS_RULES = [
   "DOMAIN,dns.adguard.com",
   "DOMAIN,dns.adguard-dns.com",
@@ -204,23 +202,12 @@ const V14_EXTERNAL_DNS_RULES = [
   "DOMAIN-SUFFIX,nextdns.io"
 ];
 
-// Google Play can use a .cn API and a separate download CDN. Match both
-// before the generic .cn / CN-IP DIRECT rules, and keep their DNS on the
-// same selectable Google exit.
 const V14_GOOGLE_PLAY_DELIVERY_SEEDS = [
   "googleapis.cn", "xn--ngstr-lra8j.com", "gvt1.com", "gvt2.com", "gvt3.com",
 ];
 
-// CN IP classification is a managed remote MRS provider below, not a frozen JS snapshot.
-// Existing private ranges, Voice endpoints and Telegram dedicated ranges remain embedded.
 
-// OpenAI's published ChatGPT Voice IPv4 list (created 2026-03-26).
-// Downloaded and compared on 2026-10-10: all 23 prefixes unchanged.
-// Refresh from the official list when it changes; unknown UDP uses
-// the no-DIRECT 漏网之鱼 group rather than falling through to DIRECT.
 const V14_OPENAI_VOICE_HOSTS = ["chatgpt.livekit.cloud", "host.livekit.cloud", "turn.livekit.cloud"];
-// Dynamic LiveKit names do not identify the tenant. Keep known exact hosts
-// and official Voice IPs above this safe fallback, across TCP and UDP.
 const V14_UNIDENTIFIED_VOICE_SUFFIXES = ["chatgpt.livekit.cloud", "host.livekit.cloud", "turn.livekit.cloud"];
 const V14_OPENAI_VOICE_IPV4 = [
   "102.37.57.54/32", "13.71.25.29/32", "135.220.40.201/32", "172.203.39.49/32",
@@ -231,11 +218,8 @@ const V14_OPENAI_VOICE_IPV4 = [
   "68.155.152.41/32", "72.146.20.246/32", "74.248.148.7/32",
 ];
 
-// One selectable group per company. Earlier entries win over later domains.
 const V14_SERVICES = [{"name":"OpenAI 服务","sets":[],"seeds":["openai.com","chatgpt.com","chat.com","sora.com","oaistatic.com","oaistatsig.com","oaiusercontent.com","chatgpt.site"],"exact":["chatgpt.livekit.cloud","host.livekit.cloud","turn.livekit.cloud","openaiapi-site.azureedge.net","openaiassets.blob.core.windows.net","openaicom-api-bdcpf8c6d2e9atf6.z01.azurefd.net","openaicom.imgix.net","openaicomproductionae4b.blob.core.windows.net","production-openaicom-storage.azureedge.net","cdn.openaimerge.com","openai.qualtrics.com","openai.com.cdn.cloudflare.net","chatgpt-async-webps-prod-eastus-1.webpubsub.azure.com","chatgpt-async-webps-prod-eastus-17.webpubsub.azure.com","chatgpt-async-webps-prod-eastus-23.webpubsub.azure.com"]},{"name":"Anthropic 服务","sets":["anthropic"],"seeds":["anthropic.com","claude.ai","claude.com","claudeusercontent.com","clau.de","claudemcpclient.com","claudemcpcontent.com"]},{"name":"谷歌服务","sets":["google-gemini","youtube","google"],"seeds":["gemini.google.com","aistudio.google.com","generativelanguage.googleapis.com","notebooklm.google.com","notebooklm.google","deepmind.google","generativeai.google","ai.google.dev","jules.google","google.com","googleapis.com","googleapis.cn","gstatic.com","googleusercontent.com","gmail.com","google.com.hk","google.co.jp","google.co.uk","google.com.tw","google.com.sg","youtube.com","youtu.be","googlevideo.com","ytimg.com","youtube-nocookie.com","ggpht.com","gvt1.com","gvt2.com","gvt3.com","xn--ngstr-lra8j.com","android.com","googleplay.com","google-analytics.com","googlezip.net","pki.goog","recaptcha.net","doubleclick.net","googlesyndication.com","googleadservices.com","googletagmanager.com","firebase.google.com","googlecloud.com","cloud.google.com","waze.com","fitbit.com","nest.com","blogger.com","blogspot.com","withgoogle.com"]},{"name":"OpenRouter","sets":[],"seeds":["openrouter.ai"]},{"name":"Perplexity","sets":[],"seeds":["perplexity.ai","perplexity.com","pplx.ai"],"exact":["ppl-ai-file-upload.s3.amazonaws.com","pplx-res.cloudinary.com"]},{"name":"Hugging Face","sets":[],"seeds":["huggingface.co","hf.co","hf.space"]},{"name":"xAI","sets":[],"seeds":["x.ai","grok.com","grok.me"]},{"name":"Netflix","sets":["netflix"],"ips":["netflix"],"seeds":["netflix.com","nflxvideo.net","nflximg.net","nflxext.com","nflxso.net","nflximg.com","netflix.net"]},{"name":"Disney+","sets":["disney"],"seeds":["disneyplus.com","dssott.com","bamgrid.com"],"exact":["hses.akamaized.net","hses1.akamaized.net","hses2.akamaized.net","hses3.akamaized.net","hses4.akamaized.net","hses5.akamaized.net","hses6.akamaized.net","hses7.akamaized.net"]},{"name":"Spotify","sets":["spotify"],"seeds":["spotify.com","scdn.co","spotifycdn.com","spotifycdn.net"]},{"name":"Telegram","sets":["telegram"],"ips":["telegram"],"seeds":["telegram.org","t.me","telegra.ph","cdn-telegram.org","telegram.me","tdesktop.com","telegram-cdn.org"]},{"name":"Discord","sets":["discord"],"seeds":["discord.com","discord.gg","discordapp.com","discordapp.net","discord.media","discordapp.io","discordcdn.com"]},{"name":"TikTok","sets":["tiktok"],"seeds":["tiktok.com","tiktokcdn.com","tiktokv.com","tiktokcdn-us.com","byteoversea.com","ibytedtos.com","musical.ly","muscdn.com","capcut.com","larksuite.com","trae.ai","tiktokd.net"]},{"name":"Twitter","sets":["twitter"],"ips":["twitter"],"seeds":["x.com","twitter.com","twimg.com","t.co","tweetdeck.com"]},{"name":"Meta 服务","sets":["meta"],"seeds":["facebook.com","fb.com","fb.me","fbcdn.net","fbsbx.com","messenger.com","instagram.com","cdninstagram.com","whatsapp.com","whatsapp.net","threads.net","threads.com","meta.com","meta.ai","oculus.com","wa.me"]},{"name":"Steam","sets":["steam"],"seeds":["steamcontent.com","dl.steam.clngaa.com","st.dl.bscstorage.net","st.dl.eccdnx.com","st.dl.pinyuncloud.com","steampowered.com","steamcommunity.com","steamstatic.com","steamserver.net","steamusercontent.com","s.team","steam-chat.com"],"exact":["steamcdn-a.akamaihd.net","steampipe.akamaized.net","steampipe-partner.akamaized.net"]},{"name":"Epic Games","sets":["epicgames"],"seeds":["epicgames.com","epicgames.dev","epicgamescdn.com","fortnite.com","unrealengine.com"],"exact":["epicgames-download0.akamaized.net","epicgames-download1.akamaized.net","epicgames-download2.akamaized.net","epicgames-download3.akamaized.net","epicgames-download4.akamaized.net","epicgames-download5.akamaized.net","epicgames-download6.akamaized.net","epicgames-download7.akamaized.net","epicgames-download8.akamaized.net","epicgames-download9.akamaized.net","cdn0-epicgames-0.file.myqcloud.com","cdn0-epicgames-1.file.myqcloud.com","cdn0-epicgames-17.file.myqcloud.com","cdn0-epicgames-23.file.myqcloud.com","cdn0-epicgames-999.file.myqcloud.com","cdn1-epicgames-0.file.myqcloud.com","cdn1-epicgames-1.file.myqcloud.com","cdn1-epicgames-17.file.myqcloud.com","cdn1-epicgames-23.file.myqcloud.com","cdn1-epicgames-999.file.myqcloud.com","cdn2-epicgames-0.file.myqcloud.com","cdn2-epicgames-1.file.myqcloud.com","cdn2-epicgames-17.file.myqcloud.com","cdn2-epicgames-23.file.myqcloud.com","cdn2-epicgames-999.file.myqcloud.com","cdn3-epicgames-0.file.myqcloud.com","cdn3-epicgames-1.file.myqcloud.com","cdn3-epicgames-17.file.myqcloud.com","cdn3-epicgames-23.file.myqcloud.com","cdn3-epicgames-999.file.myqcloud.com","cdn4-epicgames-0.file.myqcloud.com","cdn4-epicgames-1.file.myqcloud.com","cdn4-epicgames-17.file.myqcloud.com","cdn4-epicgames-23.file.myqcloud.com","cdn4-epicgames-999.file.myqcloud.com","cdn5-epicgames-0.file.myqcloud.com","cdn5-epicgames-1.file.myqcloud.com","cdn5-epicgames-17.file.myqcloud.com","cdn5-epicgames-23.file.myqcloud.com","cdn5-epicgames-999.file.myqcloud.com","cdn6-epicgames-0.file.myqcloud.com","cdn6-epicgames-1.file.myqcloud.com","cdn6-epicgames-17.file.myqcloud.com","cdn6-epicgames-23.file.myqcloud.com","cdn6-epicgames-999.file.myqcloud.com","cdn7-epicgames-0.file.myqcloud.com","cdn7-epicgames-1.file.myqcloud.com","cdn7-epicgames-17.file.myqcloud.com","cdn7-epicgames-23.file.myqcloud.com","cdn7-epicgames-999.file.myqcloud.com","cdn8-epicgames-0.file.myqcloud.com","cdn8-epicgames-1.file.myqcloud.com","cdn8-epicgames-17.file.myqcloud.com","cdn8-epicgames-23.file.myqcloud.com","cdn8-epicgames-999.file.myqcloud.com","cdn9-epicgames-0.file.myqcloud.com","cdn9-epicgames-1.file.myqcloud.com","cdn9-epicgames-17.file.myqcloud.com","cdn9-epicgames-23.file.myqcloud.com","cdn9-epicgames-999.file.myqcloud.com","epicgames-download0-0.file.myqcloud.com","epicgames-download0-1.file.myqcloud.com","epicgames-download0-17.file.myqcloud.com","epicgames-download0-23.file.myqcloud.com","epicgames-download0-999.file.myqcloud.com","epicgames-download1-0.file.myqcloud.com","epicgames-download1-1.file.myqcloud.com","epicgames-download1-17.file.myqcloud.com","epicgames-download1-23.file.myqcloud.com","epicgames-download1-999.file.myqcloud.com","epicgames-download2-0.file.myqcloud.com","epicgames-download2-1.file.myqcloud.com","epicgames-download2-17.file.myqcloud.com","epicgames-download2-23.file.myqcloud.com","epicgames-download2-999.file.myqcloud.com","epicgames-download3-0.file.myqcloud.com","epicgames-download3-1.file.myqcloud.com","epicgames-download3-17.file.myqcloud.com","epicgames-download3-23.file.myqcloud.com","epicgames-download3-999.file.myqcloud.com","epicgames-download4-0.file.myqcloud.com","epicgames-download4-1.file.myqcloud.com","epicgames-download4-17.file.myqcloud.com","epicgames-download4-23.file.myqcloud.com","epicgames-download4-999.file.myqcloud.com","epicgames-download5-0.file.myqcloud.com","epicgames-download5-1.file.myqcloud.com","epicgames-download5-17.file.myqcloud.com","epicgames-download5-23.file.myqcloud.com","epicgames-download5-999.file.myqcloud.com","epicgames-download6-0.file.myqcloud.com","epicgames-download6-1.file.myqcloud.com","epicgames-download6-17.file.myqcloud.com","epicgames-download6-23.file.myqcloud.com","epicgames-download6-999.file.myqcloud.com","epicgames-download7-0.file.myqcloud.com","epicgames-download7-1.file.myqcloud.com","epicgames-download7-17.file.myqcloud.com","epicgames-download7-23.file.myqcloud.com","epicgames-download7-999.file.myqcloud.com","epicgames-download8-0.file.myqcloud.com","epicgames-download8-1.file.myqcloud.com","epicgames-download8-17.file.myqcloud.com","epicgames-download8-23.file.myqcloud.com","epicgames-download8-999.file.myqcloud.com","epicgames-download9-0.file.myqcloud.com","epicgames-download9-1.file.myqcloud.com","epicgames-download9-17.file.myqcloud.com","epicgames-download9-23.file.myqcloud.com","epicgames-download9-999.file.myqcloud.com"]},{"name":"微软生态","sets":["microsoft","linkedin","linkedin"],"seeds":["microsoft.com","microsoftonline.com","microsoftstore.com","windows.com","windowsupdate.com","update.microsoft.com","office.com","office.net","office365.com","live.com","aka.ms","onedrive.com","sharepoint.com","msftconnecttest.com","msftncsi.com","bing.com","copilot.microsoft.com","copilot.bing.com","githubcopilot.com","github.com","githubusercontent.com","githubassets.com","microsoftazure.com","msn.com","skype.com","linkedin.com","licdn.com","xbox.com","xboxlive.com"],"exact":["go.microsoft.com","download.microsoft.com","download.windowsupdate.com","software.download.prss.microsoft.com","dl.delivery.mp.microsoft.com","fe3.delivery.mp.microsoft.com","storeedgefd.dsx.mp.microsoft.com","bingsettingssearch.trafficmanager.net","dtlgalleryint.cloudapp.net","poshtestgallery.cloudapp.net","psg-int-centralus.cloudapp.net","psg-int-eastus.cloudapp.net","vscode-sync-insiders.trafficmanager.net","vscode-sync.trafficmanager.net"]},{"name":"苹果国际","sets":["apple"],"seeds":["apple.com","apple.com.cn","aaplimg.com","icloud.com","icloud-content.com","apple-cloudkit.com","mzstatic.com","cdn-apple.com","apple-dns.net","itunes.com","appstore.com","apple-dns.cn"],"exact":["swcdn.apple.com","swdist.apple.com","swdownload.apple.com","swscan.apple.com","oscdn.apple.com","osrecovery.apple.com","updates.cdn-apple.com","updates-http.cdn-apple.com","gdmf-ados.apple.com","gsra.apple.com","wkms-public.apple.com","fcs-keys-pub-prod.cdn-apple.com"]},{"name":"哔哩国际","sets":["bilibili"],"seeds":["bilibili.com","bilivideo.com","hdslb.com","bilibili.tv","biliintl.com","b23.tv"]}];
 
-// Shared web dependencies have their own selector. Domain rules cannot infer
-// which top-level site requested them, so keep these out of company groups.
 const V14_SHARED_INFRA = {
   "name": "公共基础服务",
   "sets": [],
@@ -316,19 +300,15 @@ const V14_SHARED_INFRA = {
 };
 
 
-// Immutable company classifiers, generated from data/rules/company-core.json.
 const V14_CDN_SHARED_GUARDS = [
   "DOMAIN-REGEX,^cdn.*-epicgames-.*\\.file\\.myqcloud\\.com$",
   "DOMAIN-REGEX,^epicgames-download.*-.*\\.file\\.myqcloud\\.com$"
 ];
 
-// Generated reviewed domain snapshots; standalone clients need no local files.
 const V14_REVIEWED_DOMAINS = {"private":{"behavior":"classical","payloadText":"DOMAIN,instant.arubanetworks.com\nDOMAIN,setmeup.arubanetworks.com\nDOMAIN,asusrouter.com\nDOMAIN,router.asus.com\nDOMAIN,www.asusrouter.com\nDOMAIN,oasisauth.h3c.com\nDOMAIN,routerlogin.com\nDOMAIN,www.routerlogin.com\nDOMAIN,tplogin.cn\nDOMAIN,miwifi.com\nDOMAIN,www.miwifi.com\nDOMAIN,local.adguard.org\nDOMAIN-SUFFIX,internal\nDOMAIN-SUFFIX,localdomain\nDOMAIN-SUFFIX,example\nDOMAIN-SUFFIX,invalid\nDOMAIN-SUFFIX,localhost\nDOMAIN-SUFFIX,test\nDOMAIN-SUFFIX,local\nDOMAIN-SUFFIX,lan\nDOMAIN-SUFFIX,router.ctc\nDOMAIN-SUFFIX,my.router\nDOMAIN-SUFFIX,home.arpa\nDOMAIN-SUFFIX,zte.home\nDOMAIN-SUFFIX,tplinkwifi.net\nDOMAIN-SUFFIX,tendawifi.com\nDOMAIN-SUFFIX,plex.direct\nDOMAIN-SUFFIX,hiwifi.com\nDOMAIN-SUFFIX,phicomm.me\nDOMAIN-SUFFIX,peiluyou.com\nDOMAIN-SUFFIX,ts.net\nDOMAIN-SUFFIX,leike.cc\nDOMAIN-SUFFIX,127.in-addr.arpa\nDOMAIN-SUFFIX,10.in-addr.arpa\nDOMAIN-SUFFIX,82.100.in-addr.arpa\nDOMAIN-SUFFIX,93.100.in-addr.arpa\nDOMAIN-SUFFIX,29.172.in-addr.arpa\nDOMAIN-SUFFIX,30.172.in-addr.arpa\nDOMAIN-SUFFIX,31.172.in-addr.arpa\nDOMAIN-SUFFIX,16.172.in-addr.arpa\nDOMAIN-SUFFIX,17.172.in-addr.arpa\nDOMAIN-SUFFIX,27.172.in-addr.arpa\nDOMAIN-SUFFIX,168.192.in-addr.arpa\nDOMAIN-SUFFIX,254.169.in-addr.arpa\nDOMAIN-SUFFIX,18.172.in-addr.arpa\nDOMAIN-SUFFIX,localhost.ptlogin2.qq.com\nDOMAIN-SUFFIX,localhost.sec.qq.com\nDOMAIN-SUFFIX,19.172.in-addr.arpa\nDOMAIN-SUFFIX,20.172.in-addr.arpa\nDOMAIN-SUFFIX,21.172.in-addr.arpa\nDOMAIN-SUFFIX,22.172.in-addr.arpa\nDOMAIN-SUFFIX,d.f.ip6.arpa\nDOMAIN-SUFFIX,64.100.in-addr.arpa\nDOMAIN-SUFFIX,65.100.in-addr.arpa\nDOMAIN-SUFFIX,66.100.in-addr.arpa\nDOMAIN-SUFFIX,67.100.in-addr.arpa\nDOMAIN-SUFFIX,68.100.in-addr.arpa\nDOMAIN-SUFFIX,69.100.in-addr.arpa\nDOMAIN-SUFFIX,70.100.in-addr.arpa\nDOMAIN-SUFFIX,71.100.in-addr.arpa\nDOMAIN-SUFFIX,72.100.in-addr.arpa\nDOMAIN-SUFFIX,73.100.in-addr.arpa\nDOMAIN-SUFFIX,74.100.in-addr.arpa\nDOMAIN-SUFFIX,75.100.in-addr.arpa\nDOMAIN-SUFFIX,76.100.in-addr.arpa\nDOMAIN-SUFFIX,77.100.in-addr.arpa\nDOMAIN-SUFFIX,78.100.in-addr.arpa\nDOMAIN-SUFFIX,79.100.in-addr.arpa\nDOMAIN-SUFFIX,80.100.in-addr.arpa\nDOMAIN-SUFFIX,81.100.in-addr.arpa\nDOMAIN-SUFFIX,26.172.in-addr.arpa\nDOMAIN-SUFFIX,83.100.in-addr.arpa\nDOMAIN-SUFFIX,84.100.in-addr.arpa\nDOMAIN-SUFFIX,85.100.in-addr.arpa\nDOMAIN-SUFFIX,86.100.in-addr.arpa\nDOMAIN-SUFFIX,87.100.in-addr.arpa\nDOMAIN-SUFFIX,88.100.in-addr.arpa\nDOMAIN-SUFFIX,89.100.in-addr.arpa\nDOMAIN-SUFFIX,90.100.in-addr.arpa\nDOMAIN-SUFFIX,91.100.in-addr.arpa\nDOMAIN-SUFFIX,92.100.in-addr.arpa\nDOMAIN-SUFFIX,28.172.in-addr.arpa\nDOMAIN-SUFFIX,94.100.in-addr.arpa\nDOMAIN-SUFFIX,95.100.in-addr.arpa\nDOMAIN-SUFFIX,96.100.in-addr.arpa\nDOMAIN-SUFFIX,97.100.in-addr.arpa\nDOMAIN-SUFFIX,98.100.in-addr.arpa\nDOMAIN-SUFFIX,99.100.in-addr.arpa\nDOMAIN-SUFFIX,100.100.in-addr.arpa\nDOMAIN-SUFFIX,101.100.in-addr.arpa\nDOMAIN-SUFFIX,102.100.in-addr.arpa\nDOMAIN-SUFFIX,103.100.in-addr.arpa\nDOMAIN-SUFFIX,104.100.in-addr.arpa\nDOMAIN-SUFFIX,105.100.in-addr.arpa\nDOMAIN-SUFFIX,106.100.in-addr.arpa\nDOMAIN-SUFFIX,107.100.in-addr.arpa\nDOMAIN-SUFFIX,108.100.in-addr.arpa\nDOMAIN-SUFFIX,109.100.in-addr.arpa\nDOMAIN-SUFFIX,110.100.in-addr.arpa\nDOMAIN-SUFFIX,111.100.in-addr.arpa\nDOMAIN-SUFFIX,112.100.in-addr.arpa\nDOMAIN-SUFFIX,113.100.in-addr.arpa\nDOMAIN-SUFFIX,114.100.in-addr.arpa\nDOMAIN-SUFFIX,115.100.in-addr.arpa\nDOMAIN-SUFFIX,116.100.in-addr.arpa\nDOMAIN-SUFFIX,117.100.in-addr.arpa\nDOMAIN-SUFFIX,118.100.in-addr.arpa\nDOMAIN-SUFFIX,119.100.in-addr.arpa\nDOMAIN-SUFFIX,120.100.in-addr.arpa\nDOMAIN-SUFFIX,121.100.in-addr.arpa\nDOMAIN-SUFFIX,122.100.in-addr.arpa\nDOMAIN-SUFFIX,123.100.in-addr.arpa\nDOMAIN-SUFFIX,124.100.in-addr.arpa\nDOMAIN-SUFFIX,125.100.in-addr.arpa\nDOMAIN-SUFFIX,126.100.in-addr.arpa\nDOMAIN-SUFFIX,127.100.in-addr.arpa\nDOMAIN-SUFFIX,25.172.in-addr.arpa\nDOMAIN-SUFFIX,24.172.in-addr.arpa\nDOMAIN-SUFFIX,23.172.in-addr.arpa\nDOMAIN-SUFFIX,b.e.f.ip6.arpa\nDOMAIN-SUFFIX,a.e.f.ip6.arpa\nDOMAIN-SUFFIX,9.e.f.ip6.arpa\nDOMAIN-SUFFIX,8.e.f.ip6.arpa\nDOMAIN-SUFFIX,113.0.203.in-addr.arpa\nDOMAIN-SUFFIX,100.51.198.in-addr.arpa\nDOMAIN-SUFFIX,2.0.192.in-addr.arpa\nDOMAIN-SUFFIX,kis.v2.scr.kaspersky-labs.com\nDOMAIN-SUFFIX,255.255.255.255.in-addr.arpa\nDOMAIN-SUFFIX,8.b.d.0.1.0.0.2.ip6.arpa\nDOMAIN-SUFFIX,1.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.ip6.arpa\nDOMAIN-REGEX,^[a-z]([a-z0-9-]{0,61}[a-z0-9])?$"},"category-doh":{"behavior":"classical","payloadText":"DOMAIN,dns.adguard.com\nDOMAIN,dns.adguard-dns.com\nDOMAIN,family.adguard-dns.com\nDOMAIN,unfiltered.adguard-dns.com\nDOMAIN,dns.alidns.com\nDOMAIN,doh.dns.apple.com\nDOMAIN,dns.caliph.dev\nDOMAIN,dns.bebasid.com\nDOMAIN,antivirus.bebasid.com\nDOMAIN,internetsehat.bebasid.com\nDOMAIN,dns.cfiec.net\nDOMAIN,doh.cleanbrowsing.org\nDOMAIN,one.one.one.one\nDOMAIN,dns.cloudflare.com\nDOMAIN,freedns.controld.com\nDOMAIN,dns.decloudus.com\nDOMAIN,futuredns.eu.org\nDOMAIN,dns.de.futuredns.eu.org\nDOMAIN,dns.us.futuredns.eu.org\nDOMAIN,doh.dns.sb\nDOMAIN,doh.sb\nDOMAIN,dns.sb\nDOMAIN,de-dus.doh.sb\nDOMAIN,de-fra.doh.sb\nDOMAIN,nl-ams.doh.sb\nDOMAIN,uk-lon.doh.sb\nDOMAIN,ee-tll.doh.sb\nDOMAIN,jp-kix.doh.sb\nDOMAIN,jp-nrt.doh.sb\nDOMAIN,hk-hkg.doh.sb\nDOMAIN,au-syd.doh.sb\nDOMAIN,us-chi.doh.sb\nDOMAIN,us-nyc.doh.sb\nDOMAIN,us-sjc.doh.sb\nDOMAIN,in-blr.doh.sb\nDOMAIN,sg-sin.doh.sb\nDOMAIN,kr-sel.doh.sb\nDOMAIN,ru-mow.doh.sb\nDOMAIN,ca-yyz.doh.sb\nDOMAIN,de-ber.doh.sb\nDOMAIN,doh.pub\nDOMAIN,dns.pub\nDOMAIN,sm2.doh.pub\nDOMAIN,zero.dns0.eu\nDOMAIN,dns.google\nDOMAIN,ordns.he.net\nDOMAIN,dns.mullvad.net\nDOMAIN,adblock.dns.mullvad.net\nDOMAIN,base.dns.mullvad.net\nDOMAIN,extended.dns.mullvad.net\nDOMAIN,family.dns.mullvad.net\nDOMAIN,all.dns.mullvad.net\nDOMAIN,ada.openbld.net\nDOMAIN,ric.openbld.net\nDOMAIN,dns.quad9.net\nDOMAIN,dns10.quad9.net\nDOMAIN,dns11.quad9.net\nDOMAIN,doh.qis.io\nDOMAIN,dns.rabbitdns.org\nDOMAIN,security.rabbitdns.org\nDOMAIN,family.rabbitdns.org\nDOMAIN,basic.rethinkdns.com\nDOMAIN,doh.360.cn\nDOMAIN,dns.surfsharkdns.com\nDOMAIN,v.recipes\nDOMAIN,wikimedia-dns.org\nDOMAIN,doh.applied-privacy.net\nDOMAIN,private.canadianshield.cira.ca\nDOMAIN,protected.canadianshield.cira.ca\nDOMAIN,family.canadianshield.cira.ca\nDOMAIN,dns.comss.one\nDOMAIN,router.comss.one\nDOMAIN,odvr.nic.cz\nDOMAIN,dns.digitale-gesellschaft.ch\nDOMAIN,dns-doh.dnsforfamily.com\nDOMAIN,protective.joindns4.eu\nDOMAIN,child.joindns4.eu\nDOMAIN,noads.joindns4.eu\nDOMAIN,child-noads.joindns4.eu\nDOMAIN,unfiltered.joindns4.eu\nDOMAIN,kaitain.restena.lu\nDOMAIN,public.dns.iij.jp\nDOMAIN,dns.jupitrdns.com\nDOMAIN,doh.libredns.gr\nDOMAIN,doh-pure.onedns.net\nDOMAIN,doh.onedns.net\nDOMAIN,dns.switch.ch\nDOMAIN,dns.twnic.tw\nDOMAIN,resolver.dnsprivacy.org.uk\nDOMAIN,dns.seia.io\nDOMAIN,secondary.dns.seia.io\nDOMAIN,common.dot.dns.yandex.net\nDOMAIN,safe.dot.dns.yandex.net\nDOMAIN,family.dot.dns.yandex.net\nDOMAIN,dns.shaw.ca\nDOMAIN,doh.xfinity.com\nDOMAIN,doh.nl.ahadns.net\nDOMAIN,doh.la.ahadns.net\nDOMAIN,dns.arapurayil.com\nDOMAIN,dandelionsprout.asuscomm.com\nDOMAIN,dnsforge.de\nDOMAIN,dns.dnswarden.com\nDOMAIN,doh.ffmuc.net\nDOMAIN,ibksturm.synology.me\nDOMAIN,resolver-eu.lelux.fi\nDOMAIN,dns.marbledfennec.net\nDOMAIN,dns.oszx.co\nDOMAIN,dns.pumplex.com\nDOMAIN,doh.tiarap.org\nDOMAIN,doh.tiar.app\nDOMAIN,jp.tiarap.org\nDOMAIN,jp.tiar.app\nDOMAIN,rx.techomespace.com\nDOMAIN,public.ns.nwps.fi\nDOMAIN,kids.ns.nwps.fi\nDOMAIN,dns.astracat.ru\nDOMAIN,frd4wvnobp.cloudflare-gateway.com\nDOMAIN,dnsguard.pub\nDOMAIN,doh.18bit.cn\nDOMAIN,5u35p8m9i7.cloudflare-gateway.com\nDOMAIN,dns.malw.link\nDOMAIN,dns.mafioznik.xyz\nDOMAIN,dns.geohide.ru\nDOMAIN,xbox-dns.ru\nDOMAIN-SUFFIX,opendns.com\nDOMAIN-SUFFIX,cloudflare-dns.com\nDOMAIN-SUFFIX,nextdns.io"},"cn":{"behavior":"domain","payloadText":"+.baidu.com\n+.bdstatic.com\n+.bdimg.com\n+.qq.com\n+.qpic.cn\n+.gtimg.com\n+.weixin.qq.com\n+.taobao.com\n+.tmall.com\n+.alicdn.com\n+.alipay.com\n+.jd.com\n+.360buyimg.com\n+.weibo.com\n+.weibo.cn\n+.sina.com.cn\n+.zhihu.com\n+.zhimg.com\n+.163.com\n+.126.com\n+.127.net\n+.netease.com\n+.douban.com\n+.doubanio.com\n+.amap.com\n+.autonavi.com\n+.meituan.com\n+.dianping.com\n+.ele.me\n+.ctrip.com\n+.qunar.com\n+.csdn.net\n+.gitee.com\n+.mi.com\n+.xiaomi.com\n+.10010.com\n+.10086.cn\n+.10086.com\n+.189.cn\n+.iqiyi.com\n+.youku.com\n+.pinduoduo.com\n+.pddpic.com\n+.suning.com\n+.360.cn\n+.360.com\n+.sogou.com\n+.sohu.com\n+.bcebos.com\n+.xiaohongshu.com\n+.xhscdn.com\n+.activity-wbsj.com\n+.aihst8.com\n+.amemv.cn\n+.amemv.com\n+.amemv.net\n+.awemeughun.com\n+.awemeuglang.com\n+.awemeugsoul.com\n+.awemeugwave.com\n+.betastar.cn\n+.boxdouyin.com\n+.cookicut.com\n+.douyin.com\n+.douyinact.com\n+.douyinact.net\n+.douyincdn.com\n+.douyinfe.com\n+.douyinliving.com\n+.douyinmusicpromotion.com\n+.douyinpic.com\n+.douyinstatic.com\n+.douyinvod.com\n+.duoshan.com\n+.huoshan.com\n+.huoshancdn.com\n+.huoshangroup.com\n+.huoshanimg.com\n+.huoshanlive.com\n+.huoshanparty.com\n+.huoshanstatic.com\n+.huoshante8.com\n+.huoshanvideo.cn\n+.huoshanvideo.net\n+.huoshanvod.com\n+.huoshanxiaoshipin.cn\n+.huoshanxiaoshipin.net\n+.huoshanzhibo.cn\n+.huoshanzhibo.com\n+.huoshanzhibo.net\n+.hypercachenode.com\n+.idouyinliving.com\n+.idouyinpic.com\n+.idouyinstatic.com\n+.idouyinvod.com\n+.iesdouyin.com\n+.iesdouyin.net\n+.ieshuodong.cn\n+.ieshuodong.net\n+.ihst8.com\n+.ihuoshanimg.com\n+.ihuoshanlive.com\n+.ihuoshanstatic.com\n+.ihuoshanvod.com\n+.kolbuyer.cn\n+.nextvid.net\n+.ppkankan01.com\n+.qishui.cn\n+.qishui.com\n+.qishuimusic.cn\n+.supercachenet.com\n+.supercachenode.com\n+.ultracachenode.com\n+.woaihuoshan.com\n+.wohst8.com\n+.douyinec.com\n+.douyinpay.com\n+.ulpay.com\n+.lifexue.com\n+.open-douyin.com\n+.qishui.com.cn\n+.qishuimusic.com.cn\n+.wechat.com\n+.weixin.com\n+.servicewechat.com\n+.weixinbridge.com\n+.weixinsxy.com\n+.wechatpay.com\napd-pcdnwxlogin.teg.tencent-cloud.net\napd-pcdnwxstat.teg.tencent-cloud.net\ndig.bdurl.net\necom-normal-m.ecombdapi.com\necom5-normal-lf.ecombdapi.com\nma3-normal-lf.zijieapi.com\nlf9-effect-302-ncdn.byteeffecttos.com\nn98-lf-effect-302-sub.byteeffecttos.com\nlive-player-log-service.bytedance.com\nlf-dy-sourcecdn-tos.bytegecko.com\nlf-webcast-gr-sourcecdn.bytegecko.com"}};
 
 const V14_COMPANY_CORE = {"OpenAI 服务":["DOMAIN-SUFFIX,oaiusercontent.com","DOMAIN-SUFFIX,chatgpt.com","DOMAIN-SUFFIX,chatgpt.site","DOMAIN-SUFFIX,oaistatic.com","DOMAIN-SUFFIX,oaistatsig.com","DOMAIN-SUFFIX,chat.com","DOMAIN-SUFFIX,openai.com","DOMAIN-SUFFIX,sora.com","DOMAIN,chatgpt-async-webps-prod-eastus-1.webpubsub.azure.com","DOMAIN,chatgpt-async-webps-prod-eastus-17.webpubsub.azure.com","DOMAIN,chatgpt-async-webps-prod-eastus-23.webpubsub.azure.com","DOMAIN-SUFFIX,openaifoundation.org"],"Anthropic 服务":["DOMAIN,servd-anthropic-website.b-cdn.net","DOMAIN-SUFFIX,anthropic.com","DOMAIN-SUFFIX,clau.de","DOMAIN-SUFFIX,claude.ai","DOMAIN-SUFFIX,claude.com","DOMAIN-SUFFIX,claude.dev","DOMAIN-SUFFIX,claudemcpclient.com","DOMAIN-SUFFIX,claudemcpcontent.com","DOMAIN-SUFFIX,claudeusercontent.com"],"谷歌服务":["DOMAIN,ai.google.dev","DOMAIN,alkalicore-pa.clients6.google.com","DOMAIN,alkalimakersuite-pa.clients6.google.com","DOMAIN,webchannel-alkalimakersuite-pa.clients6.google.com","DOMAIN,geminiweb-pa.clients.google.com","DOMAIN,geminiweb-pa.clients6.google.com","DOMAIN,cloudaicompanion.googleapis.com","DOMAIN,cloudcode-pa.googleapis.com","DOMAIN,daily-cloudcode-pa.googleapis.com","DOMAIN,notebooklm-pa.googleapis.com","DOMAIN,notebooklm.googleapis.com","DOMAIN,antigravity-pa.googleapis.com","DOMAIN,antigravity.googleapis.com","DOMAIN-SUFFIX,deepmind.google","DOMAIN-SUFFIX,generativeai.google","DOMAIN-SUFFIX,jules.google","DOMAIN-SUFFIX,notebooklm.google","DOMAIN-SUFFIX,gemini.google.com","DOMAIN-SUFFIX,notebooklm.google.com","DOMAIN-SUFFIX,aistudio.google.com","DOMAIN-SUFFIX,generativelanguage.googleapis.com","DOMAIN,yt3.googleusercontent.com","DOMAIN-SUFFIX,ytimg.com","DOMAIN-SUFFIX,youtu.be","DOMAIN-SUFFIX,youtube-nocookie.com","DOMAIN-SUFFIX,ggpht.com","DOMAIN-SUFFIX,youtube.com","DOMAIN-SUFFIX,googlevideo.com","DOMAIN,google-ohttp-relay-safebrowsing.fastly-edge.com","DOMAIN,firebase.googleapis.com","DOMAIN,firebaseappcheck.googleapis.com","DOMAIN,firebaseappdistribution.googleapis.com","DOMAIN,firebaseapptesters.googleapis.com","DOMAIN,firebasedynamiclinks-ipv4.googleapis.com","DOMAIN,firebasedynamiclinks-ipv6.googleapis.com","DOMAIN,firebasedynamiclinks.googleapis.com","DOMAIN,firebaseinappmessaging.googleapis.com","DOMAIN,firebaseinstallations.googleapis.com","DOMAIN,firebaselogging-pa.googleapis.com","DOMAIN,firebaselogging.googleapis.com","DOMAIN,firebaseperusertopics-pa.googleapis.com","DOMAIN,firebaseremoteconfig.googleapis.com","DOMAIN,scholar.google.ae","DOMAIN,scholar.google.at","DOMAIN,scholar.google.be","DOMAIN,scholar.google.bg","DOMAIN,scholar.google.ca","DOMAIN,scholar.google.cat","DOMAIN,scholar.google.ch","DOMAIN,scholar.google.cl","DOMAIN,scholar.google.cn","DOMAIN,scholar.google.co.cr","DOMAIN,scholar.google.co.id","DOMAIN,scholar.google.co.il","DOMAIN,scholar.google.co.in","DOMAIN,scholar.google.co.jp","DOMAIN,scholar.google.co.kr","DOMAIN,scholar.google.co.nz","DOMAIN,scholar.google.co.th","DOMAIN,scholar.google.co.uk","DOMAIN,scholar.google.co.ve","DOMAIN,scholar.google.co.za","DOMAIN,scholar.google.com","DOMAIN,scholar.google.com.ar","DOMAIN,scholar.google.com.au","DOMAIN,scholar.google.com.bo","DOMAIN,scholar.google.com.br","DOMAIN,scholar.google.com.co","DOMAIN,scholar.google.com.cu","DOMAIN,scholar.google.com.do","DOMAIN,scholar.google.com.ec","DOMAIN,scholar.google.com.eg","DOMAIN,scholar.google.com.gt","DOMAIN,scholar.google.com.hk","DOMAIN,scholar.google.com.ly","DOMAIN,scholar.google.com.mx","DOMAIN,scholar.google.com.my","DOMAIN,scholar.google.com.ni","DOMAIN,scholar.google.com.pa","DOMAIN,scholar.google.com.pe","DOMAIN,scholar.google.com.ph","DOMAIN,scholar.google.com.pk","DOMAIN,scholar.google.com.pr","DOMAIN,scholar.google.com.py","DOMAIN,scholar.google.com.sg","DOMAIN,scholar.google.com.sv","DOMAIN,scholar.google.com.tr","DOMAIN,scholar.google.com.tw","DOMAIN,scholar.google.com.ua","DOMAIN,scholar.google.com.uy","DOMAIN,scholar.google.com.vn","DOMAIN,scholar.google.cz","DOMAIN,scholar.google.de","DOMAIN,scholar.google.dk","DOMAIN,scholar.google.es","DOMAIN,scholar.google.fi","DOMAIN,scholar.google.fr","DOMAIN,scholar.google.gr","DOMAIN,scholar.google.hn","DOMAIN,scholar.google.hr","DOMAIN,scholar.google.hu","DOMAIN,scholar.google.is","DOMAIN,scholar.google.it","DOMAIN,scholar.google.li","DOMAIN,scholar.google.lt","DOMAIN,scholar.google.lu","DOMAIN,scholar.google.lv","DOMAIN,scholar.google.nl","DOMAIN,scholar.google.no","DOMAIN,scholar.google.pl","DOMAIN,scholar.google.pt","DOMAIN,scholar.google.ro","DOMAIN,scholar.google.ru","DOMAIN,scholar.google.se","DOMAIN,scholar.google.si","DOMAIN,scholar.google.sk","DOMAIN,scholar.googleusercontent.com","DOMAIN,scholar.l.google.com","DOMAIN,publicca.googleapis.com","DOMAIN,preprod-publicca.googleapis.com","DOMAIN,clients1.google.com","DOMAIN,pki.google.com","DOMAIN,android.googlesource.com","DOMAIN,alt7-mtalk.google.com","DOMAIN,alt8-mtalk.google.com","DOMAIN,mtalk-dev.google.com","DOMAIN,mtalk-staging.google.com","DOMAIN,mtalk4.google.com","DOMAIN-SUFFIX,google.com","DOMAIN-SUFFIX,blogger.com","DOMAIN-SUFFIX,blogspot.com","DOMAIN-SUFFIX,android.com","DOMAIN-SUFFIX,fitbit.com","DOMAIN-SUFFIX,gmail.com","DOMAIN-SUFFIX,googleapis.cn","DOMAIN-SUFFIX,googleapis.com","DOMAIN-SUFFIX,googleusercontent.com","DOMAIN-SUFFIX,googlezip.net","DOMAIN-SUFFIX,gstatic.com","DOMAIN-SUFFIX,gvt1.com","DOMAIN-SUFFIX,gvt2.com","DOMAIN-SUFFIX,gvt3.com","DOMAIN-SUFFIX,nest.com","DOMAIN-SUFFIX,waze.com","DOMAIN-SUFFIX,withgoogle.com","DOMAIN-SUFFIX,googleplay.com","DOMAIN-SUFFIX,xn--ngstr-lra8j.com","DOMAIN-SUFFIX,google.com.tw","DOMAIN-SUFFIX,google.com.sg","DOMAIN-SUFFIX,google.com.hk","DOMAIN-SUFFIX,google.co.uk","DOMAIN-SUFFIX,google.co.jp","DOMAIN-SUFFIX,doubleclick.net","DOMAIN-SUFFIX,google-analytics.com","DOMAIN-SUFFIX,googleadservices.com","DOMAIN-SUFFIX,googlesyndication.com","DOMAIN-SUFFIX,googletagmanager.com","DOMAIN,analytics.google.com","DOMAIN,recaptcha-cn.net","DOMAIN,recaptcha.net","DOMAIN,www.recaptcha-cn.net","DOMAIN,www.recaptcha.net","DOMAIN,2mdn-cn.net","DOMAIN,2mdn.net","DOMAIN,admob-cn.com","DOMAIN,adservice.google.com","DOMAIN,app-analytics-services.com","DOMAIN,app-measurement-cn.com","DOMAIN,app-measurement.com","DOMAIN,apps5.oingo.com","DOMAIN,avail.googleflights.net","DOMAIN,beacons.gcp.gvt2.com","DOMAIN,beacons.gvt2.com","DOMAIN,beacons2.gvt2.com","DOMAIN,beacons3.gvt2.com","DOMAIN,c.admob.com","DOMAIN,c.android.clients.google.com","DOMAIN,cache-management-prod.google.com","DOMAIN,cache.pack.google.com","DOMAIN,checkin.gstatic.com","DOMAIN,clickserve.cc-dt.com","DOMAIN,clickserve.dartsearch.net","DOMAIN,clickserver.googleads.com","DOMAIN,clientservices.googleapis.com","DOMAIN,cn.widevine.com","DOMAIN,connectivitycheck.gstatic.com","DOMAIN,csi.gstatic.com","DOMAIN,dartsearch-cn.net","DOMAIN,dg-meta.video.google.com","DOMAIN,dl.google.com","DOMAIN,dl.l.google.com","DOMAIN,doubleclick-cn.net","DOMAIN,doubleclick.net","DOMAIN,download.mlcc.google.com","DOMAIN,download.tensorflow.google.com","DOMAIN,fontfiles.googleapis.com","DOMAIN,fonts.googleapis.com","DOMAIN,fonts.gstatic.com","DOMAIN,g0.gstatic.com","DOMAIN,g1.gstatic.com","DOMAIN,g2.gstatic.com","DOMAIN,g3.gstatic.com","DOMAIN,gonglchuangl.net","DOMAIN,gongyichuangyi.net","DOMAIN,google-analytics-cn.com","DOMAIN,google-analytics.com","DOMAIN,googleadservices-cn.com","DOMAIN,googleadservices.com","DOMAIN,googleanalytics.com","DOMAIN,googleapis-cn.com","DOMAIN,googleapps-cn.com","DOMAIN,googleflights-cn.net","DOMAIN,googleoptimize-cn.com","DOMAIN,googleoptimize.com","DOMAIN,googlesyndication-cn.com","DOMAIN,googlesyndication.com","DOMAIN,googletagmanager-cn.com","DOMAIN,googletagmanager.com","DOMAIN,googletagservices-cn.com","DOMAIN,googletagservices.com","DOMAIN,googletraveladservices-cn.com","DOMAIN,googletraveladservices.com","DOMAIN,googlevads-cn.com","DOMAIN,gstatic-cn.com","DOMAIN,gstaticadssl.l.google.com","DOMAIN,gtm.oasisfeng.com","DOMAIN,imasdk.googleapis.com","DOMAIN,pagead-googlehosted.l.google.com","DOMAIN,performanceparameters.googleapis.com","DOMAIN,prod-controlbe.floonet.goog","DOMAIN,prod-databe.floonet.goog","DOMAIN,prod.databe.floonet.goog","DOMAIN,qiao-cn.com","DOMAIN,qpx.googleflights.net","DOMAIN,redirector.bdn.dev","DOMAIN,redirector.c.chat.google.com","DOMAIN,redirector.c.mail.google.com","DOMAIN,redirector.c.pack.google.com","DOMAIN,redirector.c.youtubeeducation.com","DOMAIN,redirector.gcpcdn.gvt1.com","DOMAIN,redirector.gvt1.com","DOMAIN,redirector.offline-maps.gvt1.com","DOMAIN,redirector.snap.gvt1.com","DOMAIN,redirector.xn--ngstr-lra8j.com","DOMAIN,safebrowsing-cache.google.com","DOMAIN,safebrowsing.googleapis.com","DOMAIN,service.urchin.com","DOMAIN,ssl-google-analytics.l.google.com","DOMAIN,ssl.gstatic.com","DOMAIN,staging-controlbe.floonet.goog","DOMAIN,staging-databe.floonet.goog","DOMAIN,staging.databe.floonet.goog","DOMAIN,tac.googleapis.com","DOMAIN,tools.google.com","DOMAIN,update.googleapis.com","DOMAIN,wear.googleapis.com","DOMAIN,www-google-analytics.l.google.com","DOMAIN,www-googletagmanager.l.google.com","DOMAIN,www.destinationurl.com","DOMAIN,www.gstatic.com","DOMAIN,www.pxcc.com","DOMAIN,crashlyticsreports-pa.googleapis.com","DOMAIN,firebase-settings.crashlytics.com","DOMAIN,update.crashlytics.com","DOMAIN-REGEX,^r+[0-9]+(---|\\.)sn-(2x3|ni5|j5o)\\w{5}\\.xn--ngstr-lra8j\\.com$","DOMAIN-REGEX,^r+[0-9]+(---|\\.)sn-(2x3|ni5|j5o)\\w{5}\\.googlevideo\\.com$","DOMAIN,redirector.c.play.google.com","DOMAIN,pki-goog.l.google.com","DOMAIN,c.pki.goog","DOMAIN,i.pki.goog","DOMAIN,o.pki.goog","DOMAIN,crl.pki.goog","DOMAIN,crls.pki.goog","DOMAIN,ocsp.pki.goog","DOMAIN,alt1-mtalk.google.com","DOMAIN,alt2-mtalk.google.com","DOMAIN,alt3-mtalk.google.com","DOMAIN,alt4-mtalk.google.com","DOMAIN,alt5-mtalk.google.com","DOMAIN,alt6-mtalk.google.com","DOMAIN,mtalk.google.com"],"微软生态":["DOMAIN,img-prod-cms-rt-microsoft-com.akamaized.net","DOMAIN,img-s-msn-com.akamaized.net","DOMAIN,mwf-service.akamaized.net","DOMAIN,officecdn-microsoft-com.akamaized.net","DOMAIN,statics-marketingsites-eas-ms-com.akamaized.net","DOMAIN,statics-marketingsites-eus-ms-com.akamaized.net","DOMAIN,statics-marketingsites-wcus-ms-com.akamaized.net","DOMAIN,copilot-proxy.githubusercontent.com","DOMAIN,copilot-workspace.githubnext.com","DOMAIN,az764295.vo.msecnd.net","DOMAIN,bingsettingssearch.trafficmanager.net","DOMAIN,default.exp-tas.com","DOMAIN,developer.microsoft.com","DOMAIN,dtlgalleryint.cloudapp.net","DOMAIN,packages.microsoft.com","DOMAIN,poshtestgallery.cloudapp.net","DOMAIN,psg-int-centralus.cloudapp.net","DOMAIN,psg-int-eastus.cloudapp.net","DOMAIN,rink.hockeyapp.net","DOMAIN,vscode-sync-insiders.trafficmanager.net","DOMAIN,vscode-sync.trafficmanager.net","DOMAIN,vscode.search.windows.net","DOMAIN,vsmarketplacebadge.apphb.com","DOMAIN,crl.microsoft.com","DOMAIN,mscrl.microsoft.com","DOMAIN,ocsp.microsoft.com","DOMAIN,oneocsp.microsoft.com","DOMAIN,www.microsoft.com","DOMAIN,azure.microsoft.com","DOMAIN,azuremarketplace.microsoft.com","DOMAIN,location.microsoft.com","DOMAIN-SUFFIX,microsoft.com","DOMAIN-SUFFIX,github.com","DOMAIN-SUFFIX,aka.ms","DOMAIN-SUFFIX,live.com","DOMAIN-SUFFIX,microsoftonline.com","DOMAIN-SUFFIX,microsoftstore.com","DOMAIN-SUFFIX,msftconnecttest.com","DOMAIN-SUFFIX,msftncsi.com","DOMAIN-SUFFIX,office.com","DOMAIN-SUFFIX,office.net","DOMAIN-SUFFIX,office365.com","DOMAIN-SUFFIX,sharepoint.com","DOMAIN-SUFFIX,skype.com","DOMAIN-SUFFIX,windows.com","DOMAIN-SUFFIX,windowsupdate.com","DOMAIN-SUFFIX,githubassets.com","DOMAIN-SUFFIX,githubusercontent.com","DOMAIN-SUFFIX,githubcopilot.com","DOMAIN-SUFFIX,msn.com","DOMAIN-SUFFIX,onedrive.com","DOMAIN-SUFFIX,xbox.com","DOMAIN-SUFFIX,xboxlive.com","DOMAIN-SUFFIX,bing.com","DOMAIN,azuremigrate.download.prss.microsoft.com","DOMAIN,azuremigratetest.download.prss.microsoft.com","DOMAIN,azurestackhub.download.prss.microsoft.com","DOMAIN,azurestackhubuat.download.prss.microsoft.com","DOMAIN,b.c2r.ts.cdn.office.net","DOMAIN,cbdstest.download.prss.microsoft.com","DOMAIN,cn.windowssearch.com","DOMAIN,collaborate.download.prss.microsoft.com","DOMAIN,collaborateppe.download.prss.microsoft.com","DOMAIN,ctldl.windowsupdate.com","DOMAIN,download.microsoft.com","DOMAIN,dreamspark.download.prss.microsoft.com","DOMAIN,dreamsparkuat.download.prss.microsoft.com","DOMAIN,f.c2r.ts.cdn.office.net","DOMAIN,itacademy.download.prss.microsoft.com","DOMAIN,itacademyuat.download.prss.microsoft.com","DOMAIN,lex.download.prss.microsoft.com","DOMAIN,lexuat.download.prss.microsoft.com","DOMAIN,mbs.download.prss.microsoft.com","DOMAIN,mpnbenefits.download.prss.microsoft.com","DOMAIN,mpnbenefitsrtl.download.prss.microsoft.com","DOMAIN,mpnbenefitsrtluat.download.prss.microsoft.com","DOMAIN,msdn.download.prss.microsoft.com","DOMAIN,msdprod-ad.download.prss.microsoft.com","DOMAIN,msproduct.download.prss.microsoft.com","DOMAIN,myvs.download.prss.microsoft.com","DOMAIN,oemsoc.download.prss.microsoft.com","DOMAIN,oemsocuat.download.prss.microsoft.com","DOMAIN,officecdn.microsoft.com","DOMAIN,officemkt.download.prss.microsoft.com","DOMAIN,officemktuat.download.prss.microsoft.com","DOMAIN,osrelease.download.prss.microsoft.com","DOMAIN,rsm.download.prss.microsoft.com","DOMAIN,sdx.microsoft.com","DOMAIN,shell.cdn.office.net","DOMAIN,software.download.prss.microsoft.com","DOMAIN,statics.teams.cdn.office.net","DOMAIN,storecorefulfillment.download.prss.microsoft.com","DOMAIN,storeedge.microsoft.com","DOMAIN,storeedgefd.dsx.mp.microsoft.com","DOMAIN,surface.download.prss.microsoft.com","DOMAIN,surface.downloads.prss.microsoft.com","DOMAIN,vlportal.download.prss.microsoft.com","DOMAIN,volic.download.prss.microsoft.com","DOMAIN,vscode.download.prss.microsoft.com","DOMAIN,vz.download.prss.microsoft.com","DOMAIN,windbg.download.prss.microsoft.com","DOMAIN,copilot-telemetry-service.githubusercontent.com","DOMAIN,copilot-telemetry.githubusercontent.com","DOMAIN,download.visualstudio.microsoft.com","DOMAIN,bj1.api.bing.com","DOMAIN,e122475.dscg.akamaiedge.net","DOMAIN,licdn.cn.cdn20.com","DOMAIN,linkedin.sc.omtrdc.net","DOMAIN-SUFFIX,licdn.com","DOMAIN-SUFFIX,linkedin.com"],"公共基础服务":["DOMAIN-SUFFIX,workos.com","DOMAIN-SUFFIX,workoscdn.com","DOMAIN-SUFFIX,stripe.com","DOMAIN-SUFFIX,stripe.network","DOMAIN-SUFFIX,browser-intake-datadoghq.com","DOMAIN-SUFFIX,sentry.io","DOMAIN-SUFFIX,intercom.io","DOMAIN-SUFFIX,intercomcdn.com","DOMAIN-SUFFIX,ct.sendgrid.net","DOMAIN-SUFFIX,auth0.com","DOMAIN-SUFFIX,livekit.cloud","DOMAIN-SUFFIX,cdn.cloudflare.net","DOMAIN-SUFFIX,cloudflare.com","DOMAIN-SUFFIX,webpubsub.azure.com","DOMAIN-SUFFIX,blob.core.windows.net","DOMAIN-SUFFIX,azurewebsites.net","DOMAIN-SUFFIX,azurestaticapps.net","DOMAIN-SUFFIX,azureedge.net","DOMAIN-SUFFIX,azurefd.net","DOMAIN-SUFFIX,appspot.com","DOMAIN-SUFFIX,firebaseio.com","DOMAIN-SUFFIX,firebaseapp.com","DOMAIN-SUFFIX,run.app","DOMAIN-SUFFIX,pages.dev","DOMAIN-SUFFIX,workers.dev","DOMAIN-SUFFIX,r2.dev","DOMAIN-SUFFIX,cloudfront.net","DOMAIN-SUFFIX,amazonaws.com","DOMAIN-SUFFIX,cloudinary.com","DOMAIN-SUFFIX,imgix.net","DOMAIN-SUFFIX,arkoselabs.com","DOMAIN-SUFFIX,usefathom.com","DOMAIN-SUFFIX,sendgrid.net","DOMAIN-SUFFIX,qualtrics.com","DOMAIN-SUFFIX,github.io","DOMAIN-SUFFIX,githubpreview.dev","DOMAIN,challenges.cloudflare.com","DOMAIN,workos.imgix.net","DOMAIN-SUFFIX,cloudapp.net","DOMAIN-SUFFIX,cloudapp.azure.com","DOMAIN-SUFFIX,azure-api.net","DOMAIN-SUFFIX,azurecontainer.io","DOMAIN-SUFFIX,trafficmanager.net","DOMAIN-SUFFIX,azurecr.io","DOMAIN-SUFFIX,cosmos.azure.com","DOMAIN-SUFFIX,documents.azure.com","DOMAIN-SUFFIX,vault.azure.net","DOMAIN-SUFFIX,azmk8s.io","DOMAIN-SUFFIX,servicebus.windows.net","DOMAIN-SUFFIX,database.windows.net","DOMAIN-SUFFIX,file.core.windows.net","DOMAIN-SUFFIX,queue.core.windows.net","DOMAIN-SUFFIX,table.core.windows.net","DOMAIN-SUFFIX,web.core.windows.net","DOMAIN-SUFFIX,dfs.core.windows.net","DOMAIN-SUFFIX,chinacloudapp.cn","DOMAIN-SUFFIX,blob.core.chinacloudapi.cn","DOMAIN-SUFFIX,queue.core.chinacloudapi.cn","DOMAIN-SUFFIX,table.core.chinacloudapi.cn","DOMAIN-SUFFIX,dfs.core.chinacloudapi.cn","DOMAIN-SUFFIX,database.chinacloudapi.cn","DOMAIN-SUFFIX,servicebus.chinacloudapi.cn","DOMAIN-SUFFIX,vault.azure.cn","DOMAIN-SUFFIX,azure-api.cn","DOMAIN-SUFFIX,cloudfunctions.net","DOMAIN-SUFFIX,storage.googleapis.com","DOMAIN-SUFFIX,content-storage.googleapis.com","DOMAIN-SUFFIX,storage.cloud.google.com","DOMAIN-SUFFIX,storage.mtls.googleapis.com","DOMAIN-SUFFIX,storage.mtls.cloud.google.com"]};
 
-// Display order is independent of V14_SERVICES' routing precedence.
-// Unlisted services keep their relative order after these pinned groups.
 const V14_PINNED_GROUPS = [
   "高纯净度AI用", "高网速视频用", "自动选择", "公共基础服务", "漏网之鱼", "国内网站",
   "OpenAI 服务", "Anthropic 服务", "谷歌服务", "微软生态",
@@ -337,8 +317,6 @@ const V14_PINNED_GROUPS = [
 const V14_GROUP_ORDER = V14_PINNED_GROUPS.concat(
   V14_SERVICES.map(s => s.name).filter(name => !V14_PINNED_GROUPS.includes(name)));
 
-// Telegram official CIDR snapshot, retrieved 2026-09-24 via the web reader.
-// Source: https://core.telegram.org/resources/cidr.txt
 const V14_TELEGRAM_CIDRS = ["91.108.56.0/22", "91.108.4.0/22", "91.108.8.0/22", "91.108.16.0/22", "91.108.12.0/22", "149.154.160.0/20", "91.105.192.0/23", "91.108.20.0/22", "185.76.151.0/24", "2001:b28:f23d::/48", "2001:b28:f23f::/48", "2001:67c:4e8::/48", "2001:b28:f23c::/48", "2a0a:f280::/32"];
 
 function v14Fail(message) { throw new Error("V14: " + message); }
@@ -357,7 +335,6 @@ function v14Ipv6Literal(s) {
 function v14Transport(p) { return !V14_NOT_NODES.has(String(p.type || "").toLowerCase()); }
 function v14DnsFor(group) { return V14.groupDnsUrls.map(url => url + "#" + group + "&disable-reuse=true"); }
 
-// Shared V14 candidate validation. No network I/O and no node wrappers.
 function v14Strings(xs, owner) {
   if (xs == null) return [];
   if (!Array.isArray(xs) || xs.some(x => typeof x !== "string")) v14Fail(owner + " 必须是字符串数组。");
@@ -369,8 +346,6 @@ function v14Target(rule) {
   return fields[fields.length - (fields[fields.length - 1] === "no-resolve" ? 2 : 1)].trim();
 }
 function v14InboundGuard(config) {
-  // A retained inbound with its own policy skips the company/DNS/UDP rules.
-  // Reject incompatible inputs before returning any generated configuration.
   if (config.listeners != null && !Array.isArray(config.listeners)) v14Fail("listeners 必须是数组。");
   for (const l of (config.listeners || [])) {
     if (!v14Object(l)) v14Fail("存在无效 listener。");
@@ -386,8 +361,6 @@ function v14InboundGuard(config) {
 }
 
 function v14KeepLegacy(config, retain, android) {
-  // Preserve the dependency closure of non-generated sub-rules and custom
-  // inbounds. Never preserve an object while discarding its dependencies.
   const subs = config["sub-rules"] == null ? {} : config["sub-rules"];
   const oldSets = config["rule-providers"] == null ? {} : config["rule-providers"];
   if (!v14Object(subs) || !v14Object(oldSets)) v14Fail("sub-rules/rule-providers 必须是对象。");
@@ -406,7 +379,6 @@ function v14KeepLegacy(config, retain, android) {
     if (android && set.behavior === "classical" && set.type !== "inline")
       v14Fail("Android 无法静态排除外部 classical rule-provider 中的 Geo 依赖：" + name);
     setState.set(name, 1); keptSets[name] = v14Copy(set);
-    // Our previous generated download selector is rebuilt later in main().
     if (!v14ManagedSource(name, set)) retain(set.proxy, "rule-provider " + name);
     if (set.type === "inline") {
       for (const item of v14Strings(set.payload, "rule-provider " + name + ".payload")) {
@@ -450,7 +422,6 @@ function v14KeepLegacy(config, retain, android) {
   for (const [name, owner] of v14AuxRefs(config)) setRef(name, owner);
   return keptSets;
 }
-// Address-family defaults affect the connection to a node, not its remote exit.
 const V14_NODE_FAMILY_DEFAULT = '(select(.["ip-version"] == null and ((.server // "") | contains(":")) == false and ((.server // "") | test("^[0-9.]+$")) == false) | .["ip-version"]) = "ipv4-prefer"';
 function v14NetworkDefaults(config) {
   for (const node of config.proxies || []) {
@@ -460,7 +431,6 @@ function v14NetworkDefaults(config) {
   for (const provider of Object.values(config["proxy-providers"] || {})) {
     const override = provider.override;
     const expressions = (override["override-expr"] || []).filter(x => x !== V14_NODE_FAMILY_DEFAULT);
-    // A user expression which removes or assigns the field is an explicit choice.
     if (!expressions.some(x => /ip-version/i.test(x))) expressions.push(V14_NODE_FAMILY_DEFAULT);
     if (expressions.length) override["override-expr"] = expressions;
     else delete override["override-expr"];
@@ -473,13 +443,9 @@ function v14NetworkDefaults(config) {
 }
 
 function v14ProviderGuard(provider, name, retain, warnings, upgradingFromV13) {
-  // V13 appended two commands to every provider. Remove that exact suffix on
-  // upgrade; never erase user-defined custom expressions or dialer references.
   const formerBlock6 = '(select((.server // "") | contains(":")) | .type) = "reject"';
   const formerForce4 = '.["ip-version"] = "ipv4"';
   const o = provider.override;
-  // Provider exclude-type acts on raw mappings, before override-expr.
-  // Hide and reject a mapping that a custom expression turns into a bypass.
   const guardName = '(select(.type == "direct" or .type == "compatible" or .type == "pass" or .type == "pass-rule" or .type == "dns" or .type == "rematch" or .type == "reject" or .type == "reject-drop" or .type == "reject-no-drop") | .name) = "@v14-nontransport:" + .name';
   const guardType = '(select((.name // "") | contains("@v14-nontransport:")) | .type) = "reject"';
   const expressions = v14Strings(o["override-expr"], "provider " + name + ".override.override-expr").filter(e => e !== guardName && e !== guardType && e !== V14_NODE_FAMILY_DEFAULT);
@@ -511,9 +477,6 @@ function v14GraphCheck(config, warnings) {
   const providers = config["proxy-providers"] || {};
   const edges = new Map(), state = new Map();
   const providerId = n => "\u0000provider:" + n;
-  // Only use the portable regexp subset for supplementary static checks.
-  // Native fields remain untouched. Nonportable patterns are explicitly
-  // recorded as unverified, not approximated as a successful runtime check.
   function match(pattern, text, owner) {
     if (!pattern) return true;
     if (typeof pattern !== "string") v14Fail(owner + " 正则必须是字符串。");
@@ -560,8 +523,6 @@ function v14GraphCheck(config, warnings) {
         continue;
       }
       for (const [index, raw] of (pd.payload || []).entries()) {
-        // With no custom expressions or name transforms, provider/group name
-        // filters can be checked without approximating the effective names.
         if (match(pd.filter, raw.name, source + ".filter") !== true) continue;
         if (pd["exclude-filter"] && match(pd["exclude-filter"], raw.name, source + ".exclude-filter") !== false) continue;
         if (String(pd["exclude-type"] || "").toLowerCase().split("|").includes(String(raw.type).toLowerCase())) continue;
@@ -579,9 +540,6 @@ function v14GraphCheck(config, warnings) {
     }
     edges.set(name, v14Unique(refs));
   }
-  // A provider marker records membership for bootstrap-cycle detection.
-  // Concrete inline node edges above respect each referencing group's filter.
-  // Do not conflate all provider payload nodes into every filtered group.
   for (const name of Object.keys(providers)) edges.set(providerId(name), []);
   function walk(n, path) {
     if (V14_BUILTINS.has(n)) return;
@@ -614,12 +572,7 @@ function v14GraphCheck(config, warnings) {
   for (const [name, p] of Object.entries(config["rule-providers"] || {})) dialable(p.proxy, "rule-provider " + name + ".proxy", new Set());
 }
 
-// V14 Android managed rule sources (shared V14 data format). This is a compiler, not a runtime network client.
-// Full classical domain sets preserve DOMAIN-REGEX/DOMAIN-KEYWORD. The large
-// CN domain set (domain/full entries in the checked upstream) and IP sets use MRS.
-// No generated matcher needs a local GEOSITE.dat/GEOIP.dat/Country.mmdb file.
 const V14_RULE_ROOT = "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/";
-// DIRECT boundaries change only with an explicitly reviewed release.
 const V14_DIRECT_RULE_PINS = {"https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/private.yaml":"https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/private.yaml","https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/category-doh.yaml":"https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/category-doh.yaml","https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/douyin.yaml":"https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/douyin.yaml","https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/apple@cn.yaml":"https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/apple@cn.yaml","https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/google@cn.yaml":"https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/google@cn.yaml","https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/microsoft@cn.yaml":"https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/microsoft@cn.yaml","https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/steam@cn.yaml":"https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/steam@cn.yaml","https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.mrs":"https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/cn.mrs","https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/netflix.yaml":"https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/netflix.yaml","https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/disney.yaml":"https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/disney.yaml","https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/spotify.yaml":"https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/spotify.yaml","https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/telegram.yaml":"https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/telegram.yaml","https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/discord.yaml":"https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/discord.yaml","https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/tiktok.yaml":"https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/tiktok.yaml","https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/twitter.yaml":"https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/twitter.yaml","https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/meta.yaml":"https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/meta.yaml","https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/steam.yaml":"https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/steam.yaml","https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/epicgames.yaml":"https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/epicgames.yaml","https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/apple.yaml":"https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/apple.yaml","https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/bilibili.yaml":"https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/bilibili.yaml","https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/netflix.mrs":"https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geoip/netflix.mrs","https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/telegram.mrs":"https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geoip/telegram.mrs","https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/twitter.mrs":"https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geoip/twitter.mrs","https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.mrs":"https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geoip/cn.mrs","https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/anthropic.yaml":"https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/anthropic.yaml","https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/google-gemini.yaml":"https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/google-gemini.yaml","https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/youtube.yaml":"https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/youtube.yaml","https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/google.mrs":"https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/google.mrs","https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/microsoft.mrs":"https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/microsoft.mrs","https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/linkedin.yaml":"https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/b4d414227a182c5bc954283e4a83ee176dad671b/geo/geosite/classical/linkedin.yaml"};
 const V14_DOMAIN_TAGS = new Set(["private", "category-doh", "cn"].concat(
   V14_DOMESTIC_SETS, ...V14_SERVICES.map(s => s.sets)));
@@ -649,8 +602,6 @@ function v14ManagedSource(name, provider) {
   }
   return null;
 }
-// Auxiliary rule-set dependencies must not disappear when old top-level rules
-// are replaced. These fields are native Mihomo matchers / TUN address sets.
 function v14AuxRefs(config) {
   const out = [];
   for (const key of ["force-domain", "skip-domain", "skip-src-address", "skip-dst-address"]) {
@@ -663,8 +614,6 @@ function v14AuxRefs(config) {
   }
   return out;
 }
-// Parenthesis-aware rule walker. Plain DOMAIN-REGEX payloads are left byte-for-
-// byte unchanged; a regex containing the word "GEOSITE" is not a Geo matcher.
 function v14WalkRule(text, atom, owner) {
   if (typeof text !== "string" || !text.trim()) v14Fail(owner + " 含无效规则。");
   const lead = /^\s*([A-Za-z0-9-]+)\s*(?:,|$)/.exec(text);
@@ -713,8 +662,6 @@ function v14WalkRule(text, atom, owner) {
 function v14RuleRegistry(config, downloadProxy) {
   const sets = config["rule-providers"];
   const byKey = new Map(), generated = new Map();
-  // Only recognize our canonical sources. A user provider with the same name
-  // but different content is never overwritten.
   for (const [name, p] of Object.entries(sets)) {
     const s = v14ManagedSource(name, p);
     if (s && !byKey.has(s.kind + ":" + s.tag)) byKey.set(s.kind + ":" + s.tag, name);
@@ -729,8 +676,6 @@ function v14RuleRegistry(config, downloadProxy) {
       byKey.set(key, name);
     }
     if (!generated.has(name)) {
-      // URL + kind identify the cache, NOT patch version or runtime group name.
-      // Naming collisions do not cause two distinct sources to share a file.
       const path = "./ruleset/v12-managed/" + s.kind + "-" + s.tag.replace(/@/g, "_at_") + "-" + v14Hash(s.url) + "." + s.format;
       sets[name] = { type: "http", behavior: s.behavior, format: s.format, url: s.url,
         path, interval: V14.ruleInterval, proxy: downloadProxy, "size-limit": V14.ruleSizeLimit };
@@ -768,8 +713,6 @@ function v14RuleRegistry(config, downloadProxy) {
     return text;
   }
   function finish() {
-    // Main rules were emitted directly as RULE-SET; this also migrates retained
-    // legacy sub-rules, including nested logical conditions, in their old order.
     config.rules = config.rules.map(r => v14WalkRule(r, convertAtom, "rules"));
     for (const [name, rules] of Object.entries(config["sub-rules"] || {}))
       config["sub-rules"][name] = rules.map(r => v14WalkRule(r, convertAtom, "sub-rules." + name));
@@ -785,13 +728,11 @@ function v14RuleRegistry(config, downloadProxy) {
       }
       config.dns[field] = result;
     }
-    // Providers retained by an old sub-rule or sniffer may already be ours.
     for (const [name, p] of Object.entries(sets)) {
       const src = v14ManagedSource(name, p);
       if (src) {
         const selected = ref(src.kind, src.tag);
         if (selected !== name) {
-          // Alias required by a preserved external reference: own cache filename.
           sets[name] = {...sets[selected], path: "./ruleset/v12-managed/alias-" + v14Hash(name) + "-" + v14Hash(src.url) + "." + src.format};
           generated.set(name, {...src, name, path: sets[name].path, proxy: downloadProxy});
         }
@@ -807,9 +748,6 @@ function v14RuleRegistry(config, downloadProxy) {
           }, "rule-provider " + name);
       }
     }
-    // DNS bootstrap and DIRECT remain untouched. Stop automatic local Geo file
-    // updates in the produced core configuration; this does not control UI geo
-    // downloads a client application might independently choose to perform.
     config["geo-auto-update"] = false;
     for (const k of ["geox-url", "geo-update-interval", "geodata-mode", "geodata-loader", "geosite-matcher"]) delete config[k];
     for (const r of config.rules) v14WalkRule(r, verifyAtom, "rules");
@@ -929,9 +867,6 @@ function v14ClashMiBase(input) {
     if (provider.type === "http" && (typeof provider.url !== "string" || !/^https?:\/\//i.test(provider.url))) v14Fail("HTTP provider 缺少有效 URL：" + name);
     if (provider.type === "file" && !provider.path) v14Fail("file provider 缺少 path：" + name);
     if (provider.type === "inline" && (!Array.isArray(provider.payload) || !provider.payload.length)) v14Fail("inline provider 缺少 payload：" + name);
-    // A missing or retired bootstrap policy is not permission to use DIRECT.
-    // Explicit provider.proxy=DIRECT remains an intentional control-plane choice.
-    // Cached providers remain usable; a first download needs an explicit route.
     if (!provider.proxy || generatedGroups.has(provider.proxy) || generatedProxies.has(provider.proxy)) provider.proxy = "REJECT";
     if (provider.type === "http" && provider.proxy === "REJECT")
       warnings.push("provider " + name + " 的引导出口为 REJECT；需要首次下载时明确设置 provider.proxy，绝不静默直连。");
@@ -939,8 +874,6 @@ function v14ClashMiBase(input) {
     provider.override = Object.assign({}, v14Object(provider.override) ? provider.override : {});
     if (upgradingFromV13 && provider.override["ip-version"] === "ipv4") delete provider.override["ip-version"];
     retain(provider.override["dialer-proxy"], "provider override " + name);
-    // Filter provider members before explicit selector sentinels are added.
-    // Group-level exclusion would also remove business DIRECT and public REJECT.
     provider["exclude-type"] = v14Unique(String(provider["exclude-type"] || "").split("|").filter(Boolean).concat(
       ["Direct", "Compatible", "Pass", "PassRule", "pass-rule", "Dns", "Rematch", "Reject", "RejectDrop", "reject-drop", "RejectNoDrop", "reject-no-drop"])).join("|");
     v14ProviderGuard(provider, name, retain, warnings, upgradingFromV13);
@@ -954,13 +887,11 @@ function v14ClashMiBase(input) {
   }
   const keptGroups = Array.from(retained, name => oldGroupMap.get(name));
   for (const g of keptGroups) {
-    // Keep native include/filter semantics. Do not expand into explicit proxies.
     g.hidden = true;
   }
 
   const occupied = new Set([...V14_BUILTINS, ...nodeNames, ...providerNames, ...retained]);
   const logicalGroups = V14_GROUP_ORDER;
-  // Preserve previously generated names so stored selector choices survive upgrades.
   const previousGroupNames = new Map();
   for (const actual of generatedGroups) {
     const logical = actual.replace(/ \[V(?:12|13|14)(?:-\d+)?\]$/, "");
@@ -1011,12 +942,10 @@ function v14ClashMiBase(input) {
     embeddedNames.set(tag, name); return name;
   }
   function addDomainSet(tag, policy) {
-    // Keep the old priority. Reviewed baseline first, remote additions next.
     if (V14_REVIEWED_DOMAINS[tag]) add("RULE-SET," + embeddedDomainSet(tag), policy);
     add("RULE-SET," + ruleSet("domain", tag), policy);
   }
 
-  // Inline providers are immutable, require no download, and also drive DNS.
   const coreNames = new Map();
   for (const [logical, payload] of Object.entries(V14_COMPANY_CORE)) {
     const base = "v14-core-" + v14Hash(logical), sets = config["rule-providers"];
@@ -1036,6 +965,7 @@ function v14ClashMiBase(input) {
     emitted.add(key); rules.push(match + "," + policy + suffix);
     if (policy !== "DIRECT" && policy !== "REJECT") rules.push(match + ",REJECT" + suffix);
   }
+  const tailscalePublicProvider = v14AddTailscaleRules(config, add);
   for (const d of V14.privateNames) add("DOMAIN-SUFFIX," + d, "DIRECT");
   for (const d of V14.manualDirect) add("DOMAIN-SUFFIX," + d, "DIRECT");
   for (const d of V14.manualProxy) add("DOMAIN-SUFFIX," + d, groupName("高纯净度AI用"));
@@ -1043,8 +973,6 @@ function v14ClashMiBase(input) {
   for (const match of V14_EXTERNAL_DNS_RULES) add(match, "REJECT");
   for (const d of V14_GOOGLE_PLAY_DELIVERY_SEEDS) add("DOMAIN-SUFFIX," + d, groupName("谷歌服务"));
   for (const host of V14_OPENAI_VOICE_HOSTS) add("DOMAIN," + host, groupName("OpenAI 服务"));
-  // Reviewed exact Azure tenants below precede the generic shared suffix.
-  // Dedicated company hosts on third-party infrastructure remain precise.
   for (const service of V14_SERVICES) for (const d of service.exact || []) add("DOMAIN," + d, groupName(service.name));
   add("RULE-SET," + cdnGuardName, groupName("公共基础服务"));
   for (const suffix of V14_UNIDENTIFIED_VOICE_SUFFIXES) add("DOMAIN-SUFFIX," + suffix, groupName("公共基础服务"));
@@ -1055,22 +983,18 @@ function v14ClashMiBase(input) {
     if (coreNames.has(service.name)) add("RULE-SET," + coreNames.get(service.name), policy);
     for (const tag of service.sets) addDomainSet(tag, policy);
   }
-  // Shared infrastructure must win over broad cloud-provider ownership lists.
   emitService(V14_SHARED_INFRA);
   for (const service of V14_SERVICES) emitService(service);
   for (const ip of V14_OPENAI_VOICE_IPV4) add("IP-CIDR," + ip, groupName("OpenAI 服务"), true);
   for (const ip of V14_TELEGRAM_CIDRS) add((ip.includes(":") ? "IP-CIDR6," : "IP-CIDR,") + ip, groupName("Telegram"), true);
   for (const service of V14_SERVICES) for (const tag of service.ips || [])
     add("RULE-SET," + ruleSet("ip", tag), groupName(service.name), true);
-  // Known corporate domains win even with private/ULA destination metadata.
-  for (const ip of V14_PRIVATE_IPS) add((ip.includes(":") ? "IP-CIDR6," : "IP-CIDR,") + ip, "DIRECT", true);
+  for (const ip of V14_TAILSCALE.tailnetNetworks.concat(V14_PRIVATE_IPS))
+    add((ip.includes(":") ? "IP-CIDR6," : "IP-CIDR,") + ip, "DIRECT", true);
   addDomainSet("private", "DIRECT");
-  // Unknown domestic STUN servers are protected, without stealing Google's.
   for (const host of V14.domesticStunDns)
     if (!V14_SERVICES.some(s => s.seeds.some(d => host === d || host.endsWith("."+d))))
       add("DOMAIN," + host, groupName("漏网之鱼"));
-  // Corporate/LAN/manual rules above retain priority. Recognisable generic
-  // STUN stays protected before domestic domain classifications.
   for (const network of ["TCP", "UDP"]) {
     for (const port of V14.stunPorts) add("AND,((NETWORK," + network + "),(DST-PORT," + port + "),(NOT,((IN-TYPE,INNER))))", groupName("漏网之鱼"));
     for (const host of V14.stunHostPatterns) add("AND,((NETWORK," + network + "),(DOMAIN-WILDCARD," + host + "),(NOT,((IN-TYPE,INNER))))", groupName("漏网之鱼"));
@@ -1080,12 +1004,13 @@ function v14ClashMiBase(input) {
   for (const tag of V14_DOMESTIC_SETS) addDomainSet(tag, domesticPolicy);
   addDomainSet("cn", domesticPolicy);
   add("DOMAIN-SUFFIX,cn", domesticPolicy);
-  // Unclassified IP-only public UDP cannot reach geographic TCP shortcuts.
   add("AND,((NETWORK,UDP),(NOT,((IN-TYPE,INNER))))", groupName("漏网之鱼"));
   add("RULE-SET," + ruleSet("ip", "cn"), domesticPolicy, true);
   add("MATCH", groupName("漏网之鱼")); config.rules = rules; config.mode = "rule";
 
   const dnsPolicy = {};
+  dnsPolicy["+." + V14_TAILSCALE.publicDomain] = V14.directDns.slice();
+  dnsPolicy["+." + V14_TAILSCALE.tailnetDomain] = ["system"];
   for (const d of V14.privateNames) dnsPolicy["+." + d] = ["system"];
   for (const d of V14.manualDirect) dnsPolicy["+." + d] = V14.directDns.slice();
   for (const d of V14.manualProxy) dnsPolicy["+." + d] = v14DnsFor(groupName("高纯净度AI用"));
@@ -1097,12 +1022,9 @@ function v14ClashMiBase(input) {
   for (const service of [V14_SHARED_INFRA].concat(V14_SERVICES)) {
     const servers = v14DnsFor(groupName(service.name));
     for (const d of service.exact || []) dnsPolicy[d] = servers;
-    // Specific shared Storage names must beat broad google.com/googleapis.com
-    // literals. Exact WebPubSub exceptions override the shared namespace policy.
     for (const d of service.seeds) if (service.name !== V14_SHARED_INFRA.name || d !== "webpubsub.azure.com")
       if (dnsPolicy["+." + d] === undefined) dnsPolicy["+." + d] = servers;
   }
-  // Exact API DoH override must precede Mihomo rule-set trie boundaries.
   dnsPolicy["api.openai.com"] = V14.apiRealDns.map(url => url + "#" + groupName("OpenAI 服务"));
   dnsPolicy["rule-set:" + cdnGuardName] = v14DnsFor(groupName("公共基础服务"));
   for (const logical of ["OpenAI 服务", "Anthropic 服务", "公共基础服务", "谷歌服务", "微软生态"])
@@ -1112,15 +1034,10 @@ function v14ClashMiBase(input) {
       if (V14_REVIEWED_DOMAINS[tag]) dnsPolicy["rule-set:" + embeddedDomainSet(tag)] = v14DnsFor(groupName(service.name));
       dnsPolicy["rule-set:" + ruleSet("domain", tag)] = v14DnsFor(groupName(service.name));
     }
-  // Existing corporate literals and rule-set policies above win. The
-  // reviewed domestic domain inventories now use the same selectable egress.
-  // Name-only STUN protection cannot identify a hidden protocol on an ordinary host.
   let stunDNSSet = "v14-generic-stun-domain-guard", stunDNSIndex = 1;
   while (config["rule-providers"][stunDNSSet]) stunDNSSet = "v14-generic-stun-domain-guard-" + (++stunDNSIndex);
   config["rule-providers"][stunDNSSet] = {type:"inline", behavior:"classical", payload:V14.stunHostPatterns.map(d=>"DOMAIN-WILDCARD,"+d)};
   dnsPolicy["rule-set:" + stunDNSSet] = v14DnsFor(groupName("漏网之鱼"));
-  // Preserve existing local/private-name fallback unless an earlier corporate
-  // policy or explicit system/manual literal already identifies it.
   dnsPolicy["rule-set:" + embeddedDomainSet("private")] = v14DnsFor(groupName("漏网之鱼"));
   dnsPolicy["rule-set:" + embeddedDomainSet("category-doh")] = v14DnsFor(groupName("漏网之鱼"));
   let domesticSeedsSet = "v14-domestic-protocol-seeds", domesticSetIndex = 1;
@@ -1131,16 +1048,11 @@ function v14ClashMiBase(input) {
     if (V14_REVIEWED_DOMAINS[tag]) dnsPolicy["rule-set:" + embeddedDomainSet(tag)] = v14DnsFor(domesticPolicy);
     dnsPolicy["rule-set:" + ruleSet("domain", tag)] = v14DnsFor(domesticPolicy);
   }
-  // Real API answers must use the selected OpenAI group's DoH/443 on every
-  // platform. Other Fake-IP names retain the existing group-affine policy.
   const oldDns = v14Object(config.dns) ? config.dns : {};
   config.dns = Object.assign({}, oldDns, {
     enable: true, ipv6: true, "fake-ip-range6": oldDns["fake-ip-range6"] || "fdfe:dcba:9876::1/64", "enhanced-mode": "fake-ip", "fake-ip-range": "198.18.0.1/16",
     "fake-ip-filter-mode": "blacklist",
-    // Chromium treats the IPv6 Fake-IP ULA as local network access. Return
-    // real A/AAAA for this public API; nameserver-policy still uses OpenAI's
-    // chosen group, and the existing company rules retain fail-closed routing.
-    "fake-ip-filter": V14.privateNames.map(d => "+." + d).concat(["api.openai.com"]), "use-hosts": true,
+    "fake-ip-filter": V14.privateNames.concat(V14_TAILSCALE.tailnetDomain).map(d => "+." + d).concat(["api.openai.com"]), "use-hosts": true,
     "use-system-hosts": true, "respect-rules": false, "prefer-h3": false,
     "default-nameserver": V14.bootstrapDns.slice(), "proxy-server-nameserver": V14.nodeDns.slice(),
     nameserver: v14DnsFor(groupName("漏网之鱼")), fallback: [], "nameserver-policy": dnsPolicy,
@@ -1152,8 +1064,6 @@ function v14ClashMiBase(input) {
 
   config.ipv6 = true;
   config.profile = Object.assign({}, v14Object(config.profile) ? config.profile : {}, { "store-selected": true, "store-fake-ip": true });
-  // Android FlClash/VpnService owns the actual TUN file descriptor, routes,
-  // DNS hijack and IPv6 OS routes. Preserve the client-managed TUN object; core DNS/IPv6 are enabled above.
   const oldSniffer = v14Object(config.sniffer) ? config.sniffer : {};
   config.sniffer = Object.assign({}, oldSniffer, { enable: true, "force-dns-mapping": true,
     "parse-pure-ip": true, "override-destination": false,
@@ -1164,19 +1074,16 @@ function v14ClashMiBase(input) {
   });
 
   const ruleSources = managedRules.finish();
-  // Guard against regressions when sharing code with the desktop build.
   for (const key of ["tun", "allow-lan", "bind-address", "mixed-port", "external-controller", "secret", "authentication"]) {
     if (JSON.stringify(config[key]) !== JSON.stringify(input[key]))
       v14Fail("Android 平台字段不应由覆写改动：" + key);
   }
   const ipv6DeviceWarning = "V14.2 已开启核心双栈；请同时在 FlClash Android 开启 IPv6，确保 VpnService 接管 IPv6 路由。";
   const priorMarker = input["x-v14-generated"];
-  // Keep this device reminder on replay; generated core flags cannot certify VpnService.
   if (input.ipv6 === false || (input.dns || {}).ipv6 === false ||
       (v14Object(priorMarker) && priorMarker.version === V14.version &&
        Array.isArray(priorMarker.validationWarnings) && priorMarker.validationWarnings.includes(ipv6DeviceWarning)))
     warnings.push(ipv6DeviceWarning);
-  // Check the relationships that caused V11 to fail at runtime.
   const allGroups = new Map(config["proxy-groups"].map(g => [g.name, g]));
   if (allGroups.size !== config["proxy-groups"].length) v14Fail("代理组名称冲突。");
   const known = new Set([...V14_BUILTINS, ...nodeNames, ...allGroups.keys()]);
@@ -1207,7 +1114,7 @@ function v14ClashMiBase(input) {
   config["x-v14-generated"] = { version: V14.version, revision: "domestic-selector-r1-20261010", routingRevision: "domestic-selector-r1-20261010", compatibilityRevision: "api-real-ip-r1-20261010", groups: groups.map(g => g.name), proxies: [],
     platform: "android",
     ruleDataMode: "critical-inline-pinned-full-remote-no-local-geo",
-    ruleProviders: ruleSources.map(s => s.name), ruleSources,
+    ruleProviders: ruleSources.map(s => s.name), ruleSources, tailscalePublicProvider,
     auditRepairRevision: "balanced-r1", domesticProtocolRevision: "domestic-protocol-r1",
     embeddedDomainClassifiers: Array.from(embeddedNames, ([tag, provider]) => ({tag, provider, records: V14_REVIEWED_DOMAINS[tag].payloadText.split("\n").length})),
     immutableCompanyCore: Array.from(coreNames, ([group, provider]) => ({group, provider, records: V14_COMPANY_CORE[group].length})),
@@ -1259,7 +1166,6 @@ function v14NativeFallback(config, poolName, policies) {
   };
   const backups = [1, 2, 3].map(slot => addGroup("故障转移" + slot, manual));
   function addFallback(label, members) {
-    // The URL fragment gives this probe a separate cache key on the same HTTPS endpoint.
     return addGroup(label, {
       type: "fallback", proxies: members, hidden: true,
       url: V14.testUrl + "#routeweaver-failover", interval: 3, timeout: 3000, lazy: true,
@@ -1273,16 +1179,12 @@ function v14NativeFallback(config, poolName, policies) {
       type: "select", proxies: [backups[2]], hidden: true, "empty-fallback": "REJECT",
     }),
   ];
-  // An invalid saved choice falls back to the first member. Delegate to the
-  // remaining tiers even while the outer group still considers this slot alive.
   for (const [index, skip] of skips.entries()) {
     const group = byName.get(backups[index]);
     group.proxies = [skip, ...nodes];
     group["default-selected"] = skip;
   }
   const choices = new Map(nodes.map(name => [name, addFallback(name + " ↻", [name, ...backups])]));
-  // A missing saved selection resolves to the first member. With no healthy
-  // backup this shared chain resolves to its own first member, REJECT.
   const missing = addFallback("主节点缺失 · 已选备用", ["REJECT", ...backups]);
   for (const policy of policies) {
     const group = byName.get(policy);
@@ -1292,14 +1194,10 @@ function v14NativeFallback(config, poolName, policies) {
   }
 }
 
-// App entry point: Clash Mi evaluates main(decodedYaml) with flutter_js.
-// Return the config object. The client owns JSON/YAML serialization.
 function v14NetworkModeBase(input) {
   if (typeof input === "string") input = JSON.parse(input);
   if (!v14Object(input)) v14Fail("Clash Mi 覆写输入必须是配置对象。");
   const prepared = v14Copy(input);
-  // The app supplies the actual NetworkExtension file descriptor after JS.
-  // Rebuild routing before collecting dependencies from obsolete bypass sets.
   prepared.tun = {
     enable: true,
     stack: "gvisor",
@@ -1312,8 +1210,6 @@ function v14NetworkModeBase(input) {
     "route-address": ["0.0.0.0/0", "::/0"],
     "dns-hijack": ["any:53", "tcp://any:53"]
   };
-  // Do not inherit subscription-specific native extension routes or appended
-  // DIRECT rules. The app's own final patch and UI switches need separate QA.
   delete prepared.extension;
   delete prepared["interface-name"];
   delete prepared["routing-mark"];
@@ -1348,8 +1244,6 @@ function v14NetworkModeBase(input) {
     "Clash Mi 请选追加不覆写、规则模式、核心 IPv6 开启，并关闭应用 TUN 覆写与追加 Apple 推送直连规则。",
     "macOS includeAllNetworks/enforceRoutes 及 VPN 排除项由应用设置控制；源码和本机 Mihomo 不证明实机接管。"
   ]));
-  // Stabilise only document-level key order. DNS rule-set policy precedence
-  // depends on insertion order and must not be sorted recursively.
   const document = {};
   for (const key of Object.keys(config).sort()) document[key] = config[key];
   return document;
@@ -1395,9 +1289,11 @@ function v14RecoverNetworkDestination(config) {
   const destinations = v14Strings(config.sniffer["skip-dst-address"], "sniffer.skip-dst-address");
   const domains = v14Strings(config.sniffer["skip-domain"], "sniffer.skip-domain");
   const marker = config["x-v14-generated"];
+  if (marker.tailscalePublicProvider) explicitIPs.push("rule-set:" + marker.tailscalePublicProvider);
   const privateSet = marker.embeddedDomainClassifiers.find(row => row.tag === "private");
   if (!privateSet || !config["rule-providers"][privateSet.provider]) v14Fail("Missing inline private domain classifier");
-  const extraDomains = V14.privateNames.map(name => "+." + name).concat("rule-set:" + privateSet.provider);
+  const extraDomains = V14.privateNames.concat(V14_TAILSCALE.tailnetDomain).map(name => "+." + name)
+    .concat("rule-set:" + privateSet.provider);
   config.sniffer["skip-dst-address"] = v14Unique(destinations.concat(explicitIPs));
   config.sniffer["skip-domain"] = v14Unique(domains.concat(extraDomains));
   marker.networkRecovery = {revision: "owned-exclusions-r1",

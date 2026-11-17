@@ -9,103 +9,117 @@
   "entries": {
     "windows": {
       "file": "releases/v14.3-ipv4-only/src/windows/v14.3-windows-flclash-ipv4-only.js",
-      "sha256": "111b0d165590888a69b443ed7c8b89253252d7cf16c602f0ad705b0bc85fdf2e",
-      "bytes": 120121,
+      "sha256": "e593572a1dac9e4edb0a51d76b81289a4980a4fda7a4703b002263a00d40fedb",
+      "bytes": 125826,
       "source": "releases/v14.3/src/windows/v14.3-windows-flclash.js",
-      "sourceSHA256": "f9fb3e46cf0ec333da59e1672f01d0b6c8e5e7c9fb52050e89279cd3b7bfbed4",
+      "sourceSHA256": "5819328fe3ae8609ae71a68f5500f5d126dd455620e985ad354d3c4c767f3bcf",
       "status": "GENERATED_NATIVE_REPLAY_DEVICE_PENDING"
     },
     "android": {
       "file": "releases/v14.3-ipv4-only/src/android/v14.3-android-flclash-ipv4-only.js",
-      "sha256": "69ff381b604e9230821d4155a6d251ecf3a64b9a62e49e02a5ac37f8819a886d",
-      "bytes": 119748,
+      "sha256": "145a153bb20ffc4c3bd8e0d65b3726f380922ee3cbdca9dc0db7dbe7e4c960f2",
+      "bytes": 125394,
       "source": "releases/v14.3/src/android/v14.3-android-flclash.js",
-      "sourceSHA256": "34697bf99399c98dde0ab771fa3c35f6f9829834abd9e132f97f18abb98fe29f",
+      "sourceSHA256": "5041ce89a320048ae7ecaef01111aa4d98dbf8130e4b70269a02cb580bf186d9",
       "status": "GENERATED_NATIVE_REPLAY_DEVICE_PENDING"
     },
     "clashmi": {
       "file": "releases/v14.3-ipv4-only/src/ios/v14.3-clashmi-domestic-protocol-r1-ipv4-only.js",
-      "sha256": "3c8ed7eec11944a38a7324e9b6d0afc87fc20602de48d35f6b63b4706f388a31",
-      "bytes": 121977,
+      "sha256": "12296c9eb2fbcc91de834b4c3ab7c044ee64afa77cba63617149de696c0a7fb5",
+      "bytes": 127591,
       "source": "releases/v14.3/src/ios/v14.3-clashmi-domestic-protocol-r1.js",
-      "sourceSHA256": "adc4788cfe4b5b208b16fbb3cbd09e71cc631659b0d41fcb46d886729dc6d29c",
+      "sourceSHA256": "709fdeefb5f620527fc92d65d4a13f50c8b0698299b4c94d59588a8c287c4dbe",
       "status": "GENERATED_NATIVE_REPLAY_DEVICE_PENDING"
     },
     "shadowrocket": {
       "file": "releases/v14.3-ipv4-only/src/ios/v14.3-shadowrocket-ipv4-only.conf",
-      "sha256": "d88ca1232691de9e3b23eb8d3d0c2dd7fb647007a07165f21f651a1b9b883286",
-      "bytes": 1780299,
+      "sha256": "2925cdce941928146c073f6cd9f6dfb4388e2bf474788c849dd3ceae7a4c7035",
+      "bytes": 1789935,
       "source": "releases/v14.3/src/ios/v14.3-shadowrocket.conf",
-      "sourceSHA256": "e0220fd31d1394a90cdd4d4ff3e4bc0ebf7daa762c68b192ef627eb53379bbfc",
+      "sourceSHA256": "c79e3a874d88410e8cb3974ad46417e58ebc7ab2aeec99f5fd3326b800d0c619",
       "status": "CONFIG_ONLY_NODE_IPV4_PINNING_AND_DEVICE_CHECK_REQUIRED"
     },
     "macosFlClash": {
       "file": "releases/v14.3-ipv4-only/src/macos/v14.3-macos-flclash-ipv4-only.js",
-      "sha256": "2082a956bcc0b5b5581693130ccc4c5f18c5460f6db7f00e85a5abb276761268",
-      "bytes": 121806,
+      "sha256": "2d3a9b603b58c26f064d038a54166a3605fa9567af1073096a43f53cc4800977",
+      "bytes": 127631,
       "source": "releases/v14.3/src/macos/v14.3-macos-flclash.js",
-      "sourceSHA256": "367d68912f7b454067e9402a0a33c1a9ed7e3eda1bcfa7643850e55b3266596b",
+      "sourceSHA256": "0490b0851139077511ead538bed13b8b12776a98223f516ca2627ecbe7a471f2",
       "status": "GENERATED_NATIVE_REPLAY_DEVICE_PENDING"
     },
     "macosClashMi": {
       "file": "releases/v14.3-ipv4-only/src/macos/v14.3-macos-clashmi-ipv4-only.js",
-      "sha256": "05a0c097b4ae80bf79ed70ca72875ba6b97f8dcfab23be6be690eea76e90b744",
-      "bytes": 121975,
+      "sha256": "7d42fb0564354a359ec9edd54ba93ed582916ffddd7879ab505a803b87c025b6",
+      "bytes": 127589,
       "source": "releases/v14.3/src/macos/v14.3-macos-clashmi.js",
-      "sourceSHA256": "dc9ad3896c3c1c37354731e3ab41410f497754bc36ec3685885643c8f447fbec",
+      "sourceSHA256": "74779aea1703ded22dbf2b0d6a052747a8e576f62a2cbf9a1d9fd71d66f2afed",
       "status": "GENERATED_NATIVE_REPLAY_DEVICE_PENDING"
     },
     "clashVerge": {
       "file": "releases/v14.3-ipv4-only/src/clash-verge/v14.3-clash-verge-ipv4-only.js",
-      "sha256": "a9eb42131db384ddbca6b682788ac3c18fd455b4af4f905c4b528ed6ff4ec967",
-      "bytes": 122059,
+      "sha256": "6b529d02ccfb5faeb86e860671c04c3cb834e88ec6a83333555128e98164ce2a",
+      "bytes": 127764,
       "source": "releases/v14.3/src/clash-verge/v14.3-clash-verge.js",
-      "sourceSHA256": "5a97fadca9c2a2754a11eeaf6c257c12c5ef2663d7e929b82c48d9d1c9b7f8c7",
+      "sourceSHA256": "ba30dd542b43d7c1cf13c691ba4a9bd90018027099a9fd8b44828e6cd4826c9a",
       "status": "GENERATED_NATIVE_REPLAY_DEVICE_PENDING"
     }
   },
   "inputs": [
     {
       "file": "tools/build-ipv4-only.cjs",
-      "sha256": "017db391a5d9a66af738924ad3216faf2d4ce52cf0c60727bbcf86043fa09e49"
+      "sha256": "40b9a6965f8cbdbe3c61bdd8fb3990652cc79d217ed36415c890e7a69686bcf7"
     },
     {
       "file": "tools/ipv4-only-runtime.js",
-      "sha256": "19a4b7aa7735dddd85d9df82aae1f9f10d2ef4e5ece85c833ea94212a043eb6f"
+      "sha256": "2d0d5453414151393aa1442128f367ed515f3b14a9e5eef1af323bd2d36feaf5"
     },
     {
       "file": "releases/v14.3/tools/lib/compile-entries.cjs",
-      "sha256": "1a0c5a5d5a8abfdab8a68151bde1f7f0c86b5033c780730f1007220d8cbd464e"
+      "sha256": "6c383069c0646f6e0a8eda1cb22a8de8366e5849439691d596435f164ad33bf2"
+    },
+    {
+      "file": "releases/v14.3/tools/lib/tailscale-policy.cjs",
+      "sha256": "2502faa83ec8d23d9344fb3e2bb6c1a6b9092193f660e6ecad55f0b5790a3eac"
+    },
+    {
+      "file": "releases/v14.3/data/rules/tailscale-derp-map.json",
+      "sha256": "0c8d3433db696e18e26a1ce8464c1c29d75963ecf81b28e280341bfd323cdb3a"
     },
     {
       "file": "releases/v14.3/src/windows/v14.3-windows-flclash.js",
-      "sha256": "f9fb3e46cf0ec333da59e1672f01d0b6c8e5e7c9fb52050e89279cd3b7bfbed4"
+      "sha256": "5819328fe3ae8609ae71a68f5500f5d126dd455620e985ad354d3c4c767f3bcf"
     },
     {
       "file": "releases/v14.3/src/android/v14.3-android-flclash.js",
-      "sha256": "34697bf99399c98dde0ab771fa3c35f6f9829834abd9e132f97f18abb98fe29f"
+      "sha256": "5041ce89a320048ae7ecaef01111aa4d98dbf8130e4b70269a02cb580bf186d9"
     },
     {
       "file": "releases/v14.3/src/ios/v14.3-clashmi-domestic-protocol-r1.js",
-      "sha256": "adc4788cfe4b5b208b16fbb3cbd09e71cc631659b0d41fcb46d886729dc6d29c"
+      "sha256": "709fdeefb5f620527fc92d65d4a13f50c8b0698299b4c94d59588a8c287c4dbe"
     },
     {
       "file": "releases/v14.3/src/ios/v14.3-shadowrocket.conf",
-      "sha256": "e0220fd31d1394a90cdd4d4ff3e4bc0ebf7daa762c68b192ef627eb53379bbfc"
+      "sha256": "c79e3a874d88410e8cb3974ad46417e58ebc7ab2aeec99f5fd3326b800d0c619"
     },
     {
       "file": "releases/v14.3/src/macos/v14.3-macos-flclash.js",
-      "sha256": "367d68912f7b454067e9402a0a33c1a9ed7e3eda1bcfa7643850e55b3266596b"
+      "sha256": "0490b0851139077511ead538bed13b8b12776a98223f516ca2627ecbe7a471f2"
     },
     {
       "file": "releases/v14.3/src/macos/v14.3-macos-clashmi.js",
-      "sha256": "dc9ad3896c3c1c37354731e3ab41410f497754bc36ec3685885643c8f447fbec"
+      "sha256": "74779aea1703ded22dbf2b0d6a052747a8e576f62a2cbf9a1d9fd71d66f2afed"
     },
     {
       "file": "releases/v14.3/src/clash-verge/v14.3-clash-verge.js",
-      "sha256": "5a97fadca9c2a2754a11eeaf6c257c12c5ef2663d7e929b82c48d9d1c9b7f8c7"
+      "sha256": "ba30dd542b43d7c1cf13c691ba4a9bd90018027099a9fd8b44828e6cd4826c9a"
     }
   ],
+  "tailscaleDerpSource": {
+    "file": "data/rules/tailscale-derp-map.json",
+    "url": "https://controlplane.tailscale.com/derpmap/default",
+    "sha256": "0c8d3433db696e18e26a1ce8464c1c29d75963ecf81b28e280341bfd323cdb3a",
+    "reviewedOn": "2026-11-17"
+  },
   "systemDNS": "SYSTEM_DNS_MUST_BE_IPV4_OR_CONFIGURE_x-routeweaver.ipv4-lan-dns",
   "deviceAcceptance": "NOT_RUN",
   "clientDeployment": false,

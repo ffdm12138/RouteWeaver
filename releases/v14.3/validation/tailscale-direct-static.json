@@ -1,0 +1,30 @@
+{
+  "status": "PASS",
+  "entries": 14,
+  "configurations": 24,
+  "derpSource": {
+    "file": "data/rules/tailscale-derp-map.json",
+    "url": "https://controlplane.tailscale.com/derpmap/default",
+    "sha256": "0c8d3433db696e18e26a1ce8464c1c29d75963ecf81b28e280341bfd323cdb3a",
+    "reviewedOn": "2026-11-17"
+  },
+  "testSHA256": "3d3df6b4df5fbf1e2af7ffeeba4112118b0020e1e3c395c473b8201a7a95ce8f",
+  "modelSHA256": "950e23cccb75bba24beb945ac55cfb32931859a7e5a9d447eedd6be2fc519b8f",
+  "deviceAcceptance": "NOT_RUN",
+  "files": {
+    "releases/v14.3/src/windows/v14.3-windows-flclash.js": "5819328fe3ae8609ae71a68f5500f5d126dd455620e985ad354d3c4c767f3bcf",
+    "releases/v14.3/src/android/v14.3-android-flclash.js": "5041ce89a320048ae7ecaef01111aa4d98dbf8130e4b70269a02cb580bf186d9",
+    "releases/v14.3/src/ios/v14.3-clashmi-domestic-protocol-r1.js": "709fdeefb5f620527fc92d65d4a13f50c8b0698299b4c94d59588a8c287c4dbe",
+    "releases/v14.3/src/ios/v14.3-shadowrocket.conf": "c79e3a874d88410e8cb3974ad46417e58ebc7ab2aeec99f5fd3326b800d0c619",
+    "releases/v14.3/src/macos/v14.3-macos-flclash.js": "0490b0851139077511ead538bed13b8b12776a98223f516ca2627ecbe7a471f2",
+    "releases/v14.3/src/macos/v14.3-macos-clashmi.js": "74779aea1703ded22dbf2b0d6a052747a8e576f62a2cbf9a1d9fd71d66f2afed",
+    "releases/v14.3/src/clash-verge/v14.3-clash-verge.js": "ba30dd542b43d7c1cf13c691ba4a9bd90018027099a9fd8b44828e6cd4826c9a",
+    "releases/v14.3-ipv4-only/src/windows/v14.3-windows-flclash-ipv4-only.js": "e593572a1dac9e4edb0a51d76b81289a4980a4fda7a4703b002263a00d40fedb",
+    "releases/v14.3-ipv4-only/src/android/v14.3-android-flclash-ipv4-only.js": "145a153bb20ffc4c3bd8e0d65b3726f380922ee3cbdca9dc0db7dbe7e4c960f2",
+    "releases/v14.3-ipv4-only/src/ios/v14.3-clashmi-domestic-protocol-r1-ipv4-only.js": "12296c9eb2fbcc91de834b4c3ab7c044ee64afa77cba63617149de696c0a7fb5",
+    "releases/v14.3-ipv4-only/src/ios/v14.3-shadowrocket-ipv4-only.conf": "2925cdce941928146c073f6cd9f6dfb4388e2bf474788c849dd3ceae7a4c7035",
+    "releases/v14.3-ipv4-only/src/macos/v14.3-macos-flclash-ipv4-only.js": "2d3a9b603b58c26f064d038a54166a3605fa9567af1073096a43f53cc4800977",
+    "releases/v14.3-ipv4-only/src/macos/v14.3-macos-clashmi-ipv4-only.js": "7d42fb0564354a359ec9edd54ba93ed582916ffddd7879ab505a803b87c025b6",
+    "releases/v14.3-ipv4-only/src/clash-verge/v14.3-clash-verge-ipv4-only.js": "6b529d02ccfb5faeb86e860671c04c3cb834e88ec6a83333555128e98164ce2a"
+  }
+}

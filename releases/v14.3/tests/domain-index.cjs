@@ -1,11 +1,11 @@
 'use strict';
 // Finite domain-only audit index. Cross-checked against fixture routeSlow/DNS.
-const f=require('./fixture.cjs');
+const f=require('./current-fixture.cjs');
 function indexRoute(fixture){
  const exact=new Map(),suffix=new Map(),other=[];let order=0;
  const add=(map,k,v)=>{if(!map.has(k))map.set(k,[]);const rows=map.get(k);if(!rows.some(r=>r.group===v.group))rows.push(v);};
- function emit(row,group,outer){const [kind,value]=f.split(row),r={order:order++,group,rule:outer,member:row};if(kind==='RULE-SET'){for(const member of fixture.sources.get(value))emit(member,group,outer);return;}if(kind==='DOMAIN')add(exact,value.toLowerCase(),r);else if(kind==='DOMAIN-SUFFIX')add(suffix,value.toLowerCase(),r);else if(!['IP-CIDR','IP-CIDR6','IP-ASN','USER-AGENT'].includes(kind)){const regex=kind==='DOMAIN-REGEX'?new RegExp(value.replace(/^\(\?i\)/,''),value.startsWith('(?i)')?'i':''):null;other.push({...r,test:regex?flow=>regex.test(flow.host):flow=>f.matches(row,flow,fixture)});}}
- for(const row of fixture.rules){const a=f.split(row),offset=a.at(-1)==='no-resolve'?-2:-1;emit(a.slice(0,offset).join(','),a.at(offset),row);}
+ function emit(row,group,outer){const [kind,value]=f.split(f.cidrRule(row)),r={order:order++,group,rule:outer,member:row};if(kind==='RULE-SET'){for(const member of fixture.sources.get(value))emit(member,group,outer);return;}if(kind==='DOMAIN')add(exact,value.toLowerCase(),r);else if(kind==='DOMAIN-SUFFIX')add(suffix,value.toLowerCase(),r);else if(!['IP-CIDR','IP-CIDR6','IP-ASN','USER-AGENT'].includes(kind)){const regex=kind==='DOMAIN-REGEX'?new RegExp(value.replace(/^\(\?i\)/,''),value.startsWith('(?i)')?'i':''):null;other.push({...r,test:regex?flow=>regex.test(flow.host):flow=>f.matches(row,flow,fixture)});}}
+ for(const row of fixture.rules){if(row.startsWith('PROCESS-'))continue;const a=f.split(row),offset=a.at(-1)==='no-resolve'?-2:-1;emit(a.slice(0,offset).join(','),a.at(offset),row);}
  return (host,protocol='TCP',udpSupported=true)=>{const flow={host,port:443,protocol},allowed=r=>protocol!=='UDP'||udpSupported||fixture.platform==='shadowrocket'||['DIRECT','REJECT','国内网站'].includes(r.group);let best;
   const consider=r=>{if(allowed(r)&&(!best||r.order<best.order))best=r;};for(const r of exact.get(host)||[])consider(r);const labels=host.split('.');for(let i=0;i<labels.length;i++)for(const r of suffix.get(labels.slice(i).join('.'))||[])consider(r);
   for(const r of other){if(best&&r.order>=best.order)break;if(allowed(r)&&r.test(flow))consider(r);}if(protocol==='UDP'&&!udpSupported&&fixture.platform==='shadowrocket'&&!['DIRECT','REJECT'].includes(best.group))best={...best,group:'REJECT'};

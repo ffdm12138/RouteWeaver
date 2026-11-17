@@ -164,3 +164,9 @@ Windows FlClash 主版与纯 IPv4 入口增加可选原生描述。两种口味�
 ## 2026-11-10 · darwin-tun-r1 Mac 自动路由
 
 主版 rc.15 与纯 IPv4 rc.6 发布到 `87393e37db2621d4f5fb8bc4931345ebde0ba8ee`。两套源码共 28 份入口完成配置复审。Windows 和 Ubuntu 的源码、真实引擎和发布附件作业全部成功，16 个附件匿名下载哈希匹配。Mac 实机接管和微信发图待设备验证。 [主版发布回执](releases/v14.3.0-rc.15.json) · [纯 IPv4 发布回执](releases/v14.3.0-ipv4-only-rc.6.json)
+
+## 2026-11-17 · 公开版 Tailscale 直连
+
+主版和纯 IPv4 版的 14 份入口通过生成、规则和幂等检查。Windows FlClash 隔离核心的 160 项回环测试覆盖 DERP、STUN、尾网地址、进程名及公网 UDP 和公司规则反例。尾网回放使用官方示例地址。回执绑定导入文件和核心的 SHA-256，实际 TUN/VPN 和 MagicDNS 待设备验收。 [当前验收](../docs/status/当前验收.md)
+
+当前 12 份 Mihomo 导入文件各通过 38 项隔离故障转移与引擎对照检查。 [公开源码候选回执](../releases/v14.3/validation/proxy-failover/tailscale-direct-r1.json)

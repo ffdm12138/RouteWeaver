@@ -1,6 +1,6 @@
 'use strict';
 const fs=require('node:fs'),vm=require('node:vm'),cp=require('node:child_process'),assert=require('node:assert/strict');
-const f=require('./macos-fixture.cjs'),base=require('./fixture.cjs'),index=require('./domain-index.cjs'),cases=require('./cases.cjs').cases;
+const f=require('./macos-fixture.cjs'),base=require('./current-fixture.cjs'),index=require('./domain-index.cjs'),cases=require('./cases.cjs').cases;
 const report={version:'14.3',date:'2026-10-14',revision:'macos-r1',domesticProtocolRevision:'domestic-protocol-r1',status:'RUNNING',scope:'Exact routing/DNS/selector/provider equivalence to current Windows/iOS entries, finite complete domains, upgrade/idempotence and platform guards; Mac apps/TUN NOT_RUN',checks:[],failures:[],platforms:[],sourceFiles:[],clientDeployment:false,deviceAcceptance:'NOT_RUN'};
 function check(name,fn){try{fn();report.checks.push(name);}catch(e){report.failures.push({name,error:e.stack});}}
 check('deterministic-generation-size-and-source-binding',()=>{
@@ -11,9 +11,11 @@ check('deterministic-generation-size-and-source-binding',()=>{
 });
 for(const platform of Object.keys(f.entries)){
   const reference=base.load(platform==='macos-flclash'?'desktop':'clashmi'),model=f.load(platform),metrics={platform,fullInventoryHosts:0,normalRouting:0,normalDNS:0,existingCases:0};
+  reference.rules=f.businessRules(reference.rules);
+  model.rules=f.businessRules(model.rules);
   check(platform+':exact-business-DNS-UDP-selectors-and-fixed-provider-equivalence',()=>{
     const current=structuredClone(model.config),before=structuredClone(reference.config);
-    for(const c of [current,before]){delete c.tun;delete c['x-v14-generated'];}
+    for(const c of [current,before]){delete c.tun;delete c['x-v14-generated'];c.rules=f.businessRules(c.rules);}
     assert.deepEqual(current,before);
     assert.equal(model.config['proxy-groups'].filter(group=>!group.hidden).length,29);
     for(const name of ['高纯净度AI用','高网速视频用']){const group=model.config['proxy-groups'].find(g=>g.name===name);assert.equal(group.type,'select');assert.ok(!group.proxies.includes('DIRECT'));assert.equal(group['default-selected'],'REJECT');}

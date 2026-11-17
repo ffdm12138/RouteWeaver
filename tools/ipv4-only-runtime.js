@@ -119,7 +119,8 @@ function main(input, profileName) {
     if (!Array.isArray(lanDNS) || !lanDNS.length || lanDNS.some(s => !rw4ValidLanDNS(s)))
       v14Fail("ipv4-lan-dns 必须是非空的 IPv4 DNS 地址数组。");
     for (const [key, values] of Object.entries(config.dns["nameserver-policy"]))
-      if (Array.isArray(values) && values.includes("system")) config.dns["nameserver-policy"][key] = rw4Resolver(lanDNS);
+      if (key !== "+." + V14_TAILSCALE.tailnetDomain && Array.isArray(values) && values.includes("system"))
+        config.dns["nameserver-policy"][key] = rw4Resolver(lanDNS);
   }
   return config;
 }

@@ -1,5 +1,5 @@
 'use strict';
-const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),assert=require('node:assert/strict'),f=require('./fixture.cjs');
+const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),assert=require('node:assert/strict'),f=require('./current-fixture.cjs');
 const manifest=JSON.parse(fs.readFileSync(f.local('metadata/network-compat.json'),'utf8')),rows=[];
 function generate(file,input,mode){if(mode)input={...input,"x-routeweaver":{"network-mode":mode}};const ctx=vm.createContext({console:{log(){}}});vm.runInContext(fs.readFileSync(f.local(file),'utf8'),ctx);return JSON.parse(JSON.stringify(ctx.main(input)));}
 function check(name,fn){fn();rows.push({name,status:'PASS'});}

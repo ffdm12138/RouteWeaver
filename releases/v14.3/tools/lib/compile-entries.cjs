@@ -3,6 +3,7 @@
 // Generated scripts perform no filesystem access and require no package at runtime.
 const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict');
 const {render}=require('./render-runtime.cjs');
+const {loadTailscalePolicy,processRules}=require('./tailscale-policy.cjs');
 function replaceOnce(code,needle,value){assert.equal(code.split(needle).length,2,'Client adapter anchor: '+needle);return code.replace(needle,value);}
 function omitExplicitTunRouteAddress(code) {
  return replaceOnce(code, '  config.tun["route-address"] = ["0.0.0.0/0", "::/0"];\n', '');
@@ -30,6 +31,8 @@ ${acceptSerializedInput?'  if (typeof input === "string") { try { input = JSON.p
 function compile(root){
  const read=n=>fs.readFileSync(path.join(root,n),'utf8');
  const policy=require('./reviewed-policy.cjs')(root),{core,services,embedded,pins}=policy;
+ const tailscale=loadTailscalePolicy(root);
+ const tailscaleRuntime='runtime/shared/v14Tailscale.js.in';
  const directFile='data/rules/manual-direct-ip.json';
  const vps=fs.existsSync(path.join(root,directFile))?JSON.parse(read(directFile)):null;
  if(vps)assert.equal(vps.rule,'IP-CIDR,'+vps.address+',DIRECT,no-resolve');
@@ -41,6 +44,7 @@ function compile(root){
  const inputs=['tools/lib/compile-entries.cjs','tools/lib/render-runtime.cjs','tools/lib/reviewed-policy.cjs','tools/clashmi-adapter.js','tools/macos-flclash-adapter.js','tools/clash-verge-adapter.js','tools/ipv4-local-adapter.js','tools/auto-local-adapter.js','data/client-capabilities.json',...(vps?[directFile]:[])];
  const fallbackFile='runtime/shared/v14NativeFallback.js.in',fallback=read(fallbackFile);
  inputs.push(fallbackFile);
+ inputs.push(tailscaleRuntime,'tools/lib/tailscale-policy.cjs',tailscale.source.file);
  const shared={};
  for(const platform of ['desktop','android']){
   const file='runtime/platforms/'+platform+'/layout.json',layout=JSON.parse(read(file));inputs.push(file,layout.preamble);
@@ -71,9 +75,19 @@ function compile(root){
   {platform:'macosFlClash',client:'FlClash',file:'src/macos/v14.3-macos-flclash.js',raw:macFlClash},
   {platform:'macosClashMi',client:'Clash Mi',file:'src/macos/v14.3-macos-clashmi.js',raw:macClashMi},
   {platform:'clashVerge',file:'src/clash-verge/v14.3-clash-verge.js',raw:verge}
- ].map(entry=>({...entry,code:networkModes(entry.raw,
-  entry.platform === 'macosFlClash' ? omitExplicitTunRouteAddress(optional) : optional,
-  ['clashmi','macosClashMi'].includes(entry.platform),read('tools/auto-local-adapter.js'))}));
- return {policy,vps,entries,inputs:[...new Set(inputs)]};
+ ].map(entry=>{
+  const runtimePolicy={
+    publicDomain:tailscale.publicDomain,tailnetDomain:tailscale.tailnetDomain,
+    tailnetNetworks:tailscale.tailnetNetworks,publicNetworks:tailscale.publicNetworks.join(' '),
+    processRules:processRules[entry.platform]||[],
+  };
+  // Keep the authoring templates readable within the standalone script budget.
+  const base=entry.raw.replace(/^[\t ]*\/\/[^\r\n]*(?:\r?\n|$)/gm,'');
+  const raw='const V14_TAILSCALE = '+JSON.stringify(runtimePolicy)+';\n'+read(tailscaleRuntime)+'\n'+base;
+  return {...entry,code:networkModes(raw,
+    entry.platform === 'macosFlClash' ? omitExplicitTunRouteAddress(optional) : optional,
+    ['clashmi','macosClashMi'].includes(entry.platform),read('tools/auto-local-adapter.js'))};
+ });
+ return {policy,vps,tailscale,entries,inputs:[...new Set(inputs)]};
 }
 module.exports={compile,networkModes,renameMain,omitExplicitTunRouteAddress};

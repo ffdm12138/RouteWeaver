@@ -95,7 +95,7 @@ def verify_static():
                        cwd=ROOT, check=True, timeout=60)
         verify_source(snapshot)
         suites = runpy.run_path(str(snapshot / 'tools/run-architecture-audit.py'))['SUITES']
-        commands = [*suites['build'], ['node', 'tools/test-native-fallback.cjs'],
+        commands = [*suites['build'], ['node', 'tools/test-native-fallback.cjs'], ['node', 'tools/test-tailscale-direct.cjs'],
                     ['node', 'tools/test-company-audit.cjs'], ['node', 'tools/test-dns-policy-order.cjs'],
                     *suites['regression'], *suites['platform']]
         for command in commands:

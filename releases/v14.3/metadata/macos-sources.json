@@ -11,20 +11,20 @@
       "platform": "macosFlClash",
       "client": "FlClash",
       "file": "src/macos/v14.3-macos-flclash.js",
-      "sha256": "367d68912f7b454067e9402a0a33c1a9ed7e3eda1bcfa7643850e55b3266596b",
-      "bytes": 128324,
-      "generatedConfigBytes": 182328,
-      "inlineRows": 908,
+      "sha256": "0490b0851139077511ead538bed13b8b12776a98223f516ca2627ecbe7a471f2",
+      "bytes": 125009,
+      "generatedConfigBytes": 187706,
+      "inlineRows": 1102,
       "remoteSources": 30
     },
     {
       "platform": "macosClashMi",
       "client": "Clash Mi",
       "file": "src/macos/v14.3-macos-clashmi.js",
-      "sha256": "dc9ad3896c3c1c37354731e3ab41410f497754bc36ec3685885643c8f447fbec",
-      "bytes": 129195,
-      "generatedConfigBytes": 182979,
-      "inlineRows": 908,
+      "sha256": "74779aea1703ded22dbf2b0d6a052747a8e576f62a2cbf9a1d9fd71d66f2afed",
+      "bytes": 125041,
+      "generatedConfigBytes": 188088,
+      "inlineRows": 1102,
       "remoteSources": 29
     }
   ],
@@ -48,11 +48,11 @@
     },
     {
       "file": "tools/lib/build-entries.cjs",
-      "sha256": "3a11aaf16a0da9cb672c6d109258033b657ad2114676ddc532eaed3f9221ee4c"
+      "sha256": "90304e489fb5c71d409a140f2117dc9fefa11b426092a92a71ae177f4e78f07f"
     },
     {
       "file": "tools/lib/compile-entries.cjs",
-      "sha256": "1a0c5a5d5a8abfdab8a68151bde1f7f0c86b5033c780730f1007220d8cbd464e"
+      "sha256": "6c383069c0646f6e0a8eda1cb22a8de8366e5849439691d596435f164ad33bf2"
     },
     {
       "file": "tools/lib/render-runtime.cjs",
@@ -76,7 +76,7 @@
     },
     {
       "file": "tools/ipv4-local-adapter.js",
-      "sha256": "4aa4e573c34f709d512a25ba561dfb3e474ba370cc688d536d7e6b3981fde837"
+      "sha256": "a23578a6500b440876255745e01297d5f178db84cf9447383942121345b031ab"
     },
     {
       "file": "tools/auto-local-adapter.js",
@@ -89,6 +89,18 @@
     {
       "file": "runtime/shared/v14NativeFallback.js.in",
       "sha256": "5478831b4798915f428c5911ad8cd82de1f38a848084832db233478d1756d15a"
+    },
+    {
+      "file": "runtime/shared/v14Tailscale.js.in",
+      "sha256": "84c584f3653e113880664d69d571c4a1e4d09ebc18d34c3491301955b892404e"
+    },
+    {
+      "file": "tools/lib/tailscale-policy.cjs",
+      "sha256": "2502faa83ec8d23d9344fb3e2bb6c1a6b9092193f660e6ecad55f0b5790a3eac"
+    },
+    {
+      "file": "data/rules/tailscale-derp-map.json",
+      "sha256": "0c8d3433db696e18e26a1ce8464c1c29d75963ecf81b28e280341bfd323cdb3a"
     },
     {
       "file": "runtime/platforms/desktop/layout.json",
@@ -184,7 +196,7 @@
     },
     {
       "file": "runtime/shared/main.js.in",
-      "sha256": "8336f279f5f2587794bc55f1690fc3c8f5c50102185cd413ef05cda5fd11e005"
+      "sha256": "87a7f311843ee5f18cdf86e36484ef3af70ac59add40e74e043e6af179b4a5d1"
     },
     {
       "file": "runtime/platforms/android/layout.json",
@@ -200,7 +212,7 @@
     },
     {
       "file": "runtime/platforms/android/main.js.in",
-      "sha256": "25f37aae5cbcbfdaa49944f71f8721eca9c521db9868beff46505052a3e8e71b"
+      "sha256": "63f18523243054a63e54e332f19695b5c86013de92f76264284065d422919f57"
     },
     {
       "file": "tools/validate-azure-async.cjs",

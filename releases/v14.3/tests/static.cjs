@@ -1,6 +1,6 @@
 'use strict';
 const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),assert=require('node:assert/strict'),cp=require('node:child_process');
-const f=require('./fixture.cjs'),index=require('./domain-index.cjs'),old=require('../validation/inputs/v14.2-baseline/tests/fixture.cjs'),cases=require('./cases.cjs').cases;
+const f=require('./current-fixture.cjs'),index=require('./domain-index.cjs'),old=require('../validation/inputs/v14.2-baseline/tests/fixture.cjs'),cases=require('./cases.cjs').cases;
 const domestic=require('./domestic-contract.cjs');
 const read=n=>JSON.parse(fs.readFileSync(f.local(n),'utf8')),report={version:'14.3',date:'2026-10-12',revision:'balanced-r1',status:'RUNNING',scope:'Finite full reviewed inventories, critical empty/partial providers, metadata and object bridge; native core/device are separate',checks:[],failures:[],platforms:[],sourceFiles:[]};
 const check=(name,fn)=>{try{fn();report.checks.push(name);}catch(e){report.failures.push({name,error:e.stack});}};
@@ -12,8 +12,12 @@ check('deterministic-standalone-generation-and-size-budget',()=>{cp.execFileSync
 const baseline=old.load('android'),originalRoute=index.indexRoute(baseline),originalDNS=index.indexDNS(baseline);
 const reviewedChanges=read('data/rules/company-supplement.json').additions;
 function revisedCompany(host){return reviewedChanges.find(a=>{const[k,h]=f.split(a.row);return host===h||k==='DOMAIN-SUFFIX'&&host.endsWith('.'+h);})?.group;}
-const baselineRoute=(host,protocol='TCP',supported=true)=>{const group=revisedCompany(host);return group?{group,policy:protocol==='UDP'&&!supported?'REJECT':group}:originalRoute(host,protocol,supported);};
-const baselineDNS=host=>{const group=revisedCompany(host);return group?{groups:[group]}:originalDNS(host);};
+const tailscaleDNS=host=>{
+ if(host==='ts.net'||host.endsWith('.ts.net'))return 'system';
+ if(host==='tailscale.com'||host.endsWith('.tailscale.com'))return 'DIRECT';
+};
+const baselineRoute=(host,protocol='TCP',supported=true)=>{if(tailscaleDNS(host))return {group:'DIRECT',policy:'DIRECT'};const group=revisedCompany(host);return group?{group,policy:protocol==='UDP'&&!supported?'REJECT':group}:originalRoute(host,protocol,supported);};
+const baselineDNS=host=>{const group=tailscaleDNS(host)||revisedCompany(host);return group?{groups:[group]}:originalDNS(host);};
 const hosts=new Set();
 function hostRows(rows){for(const row of rows){const[k,h]=f.split(row);if(k==='DOMAIN'||k==='DOMAIN-SUFFIX'){hosts.add(h.toLowerCase());hosts.add('review-probe.'+h.toLowerCase());}}}
 for(const rows of baseline.sources.values())hostRows(rows);
@@ -22,6 +26,7 @@ for(const s of policy.services)hostRows([...s.seeds.map(h=>'DOMAIN-SUFFIX,'+h),.
 for(const rows of Object.values(policy.core))hostRows(rows);
 const extras=['unknown-balanced.example.net','api.openai.com.evil.example.net','apple.com.evil.example.net','tenant.blob.core.windows.net','tenant.cloudfunctions.net','tenant.storage.googleapis.com','storage.googleapis.com','chatgpt-async-webps-prod-eastus-99.webpubsub.azure.com','child.chatgpt-async-webps-prod-eastus-1.webpubsub.azure.com','tenant.workos.com','stun.unknown-balanced.example.net'];
 for(const h of extras)hosts.add(h);
+for(const h of ['tailscale.com','controlplane.tailscale.com','peer.example-tailnet.ts.net'])hosts.add(h);
 function empty(model,only){return {...model,sources:new Map([...model.sources].map(([name,rows])=>[name,model.config['rule-providers'][name].type!=='inline'&&(!only||only.has(name))?[]:rows]))};}
 for(const platform of ['desktop','android','clashmi']){
  const model=f.load(platform),normal=index.indexRoute(model),dns=index.indexDNS(model),cold=empty(model),coldRoute=index.indexRoute(cold),coldDNS=index.indexDNS(cold),metrics={platform,fullInventoryHosts:hosts.size,normalRouting:0,normalDNS:0,criticalColdRouting:0,criticalColdDNS:0,existingCases:0};
@@ -34,7 +39,17 @@ for(const platform of ['desktop','android','clashmi']){
  check(platform+':critical-domains-with-all-remote-files-empty',()=>{const mismatches=[];for(const host of critical){for(const protocol of ['TCP','UDP'])for(const supported of [true,false]){const expected=domestic.expectedRoute(host,protocol,supported,baselineRoute),actual=coldRoute(host,protocol,supported);if(expected.policy!==actual.policy&&mismatches.length<24)mismatches.push({host,protocol,supported,before:expected.policy,after:actual.policy,rule:actual.rule});metrics.criticalColdRouting++;}const a={groups:domestic.expectedDNS(host,baselineRoute,baselineDNS)},b=coldDNS(host);if(JSON.stringify(a.groups)!==JSON.stringify(b.groups)&&mismatches.length<24)mismatches.push({host,beforeDNS:a.groups,afterDNS:b.groups,key:b.key});metrics.criticalColdDNS++;}report.coldMismatches=(report.coldMismatches||[]).concat(mismatches.map(x=>({platform,...x})));assert.deepEqual(mismatches,[]);});
  check(platform+':business-table-loss-does-not-expose-domestic-DIRECT-on-critical-hosts',()=>{const missing=new Set(lock.sources.filter(s=>s.id.startsWith('v12r-domain-')&&!['cn','private','category-doh','douyin','apple_at_cn','google_at_cn','microsoft_at_cn','steam_at_cn'].includes(s.id.slice(12))).map(s=>s.id)),partial=empty(model,missing),route=index.indexRoute(partial);for(const host of critical){const expected=baselineRoute(host);if(!['DIRECT','国内网站','漏网之鱼','REJECT'].includes(expected.group))assert.equal(route(host).group,expected.group,host);}});
  // The native-fallback suite compares selector changes against the same base.
- check(platform+':same-transport-DNS-upstreams-and-inbound-config',()=>{const before=old.generate(platform==='desktop'?'desktop':'android'),after=f.generate(platform);assert.equal(after['routeweaver-local-family'],'auto');for(const c of [before,after]){delete c['routeweaver-local-family'];delete c['proxy-groups'];delete c.sniffer;delete c.rules;delete c['rule-providers'];delete c['x-v14-generated'];delete c.dns['nameserver-policy'];}if(platform==='clashmi'){for(const k of ['tun','extension','interface-name','routing-mark','find-process-mode','allow-lan','bind-address']){delete before[k];delete after[k];}delete before.dns.listen;delete after.dns.listen;before.android=false;delete before.android;delete after.android;}assert.deepEqual(after,before);});
+ check(platform+':same-transport-DNS-upstreams-and-inbound-config',()=>{
+  const before=old.generate(platform==='desktop'?'desktop':'android'),after=f.generate(platform);
+  assert.equal(after['routeweaver-local-family'],'auto');
+  assert.equal(after['find-process-mode'],platform==='clashmi'?'off':'strict');
+  assert.equal(after.dns['fake-ip-filter'].filter(domain=>domain==='+.ts.net').length,1);
+  after.dns['fake-ip-filter']=after.dns['fake-ip-filter'].filter(domain=>domain!=='+.ts.net');
+  if(platform!=='clashmi')delete after['find-process-mode'];
+  for(const c of [before,after]){delete c['routeweaver-local-family'];delete c['proxy-groups'];delete c.sniffer;delete c.rules;delete c['rule-providers'];delete c['x-v14-generated'];delete c.dns['nameserver-policy'];}
+  if(platform==='clashmi'){for(const k of ['tun','extension','interface-name','routing-mark','find-process-mode','allow-lan','bind-address']){delete before[k];delete after[k];}delete before.dns.listen;delete after.dns.listen;before.android=false;delete before.android;delete after.android;}
+  assert.deepEqual(after,before);
+ });
  check(platform+':three-pass-idempotence-and-upgrade-from-full-V14.2',()=>{const now=f.generate(platform);assert.deepEqual(f.generate(platform,now),now);assert.deepEqual(f.generate(platform,f.generate(platform,now)),now);const previous=old.generate(platform==='desktop'?'desktop':'android');assert.deepEqual(f.generate(platform,previous),now);});
  check(platform+':selectors-fixed-cache-and-proxy-failure-contract',()=>{const c=model.config;assert.equal(c['x-v14-generated'].version,'14.3');for(const name of ['高纯净度AI用','高网速视频用']){const g=c['proxy-groups'].find(g=>g.name===name);assert.equal(g.type,'select');assert.equal(g['default-selected'],'REJECT');assert.equal(g['empty-fallback'],'REJECT');assert.ok(!g.proxies.includes('DIRECT')&&!g.proxies.includes('自动选择'));}assert.equal(c.rules.at(-1),'MATCH,REJECT');assert.equal(c.rules.at(-2),'MATCH,漏网之鱼');for(const p of Object.values(c['rule-providers']).filter(p=>p.type==='http')){assert.equal(p.interval,86400);assert.equal(p.proxy,'高纯净度AI用');assert.match(p.path,/v12-managed/);}assert.deepEqual(c.dns.fallback,[]);assert.equal(c.dns['direct-nameserver-follow-policy'],true);});
  report.platforms.push(metrics);console.log(JSON.stringify(metrics));

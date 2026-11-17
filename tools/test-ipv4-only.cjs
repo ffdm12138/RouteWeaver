@@ -48,7 +48,11 @@ for(const [platform,entry]of Object.entries(manifest.entries)){
    assert.deepEqual(c['proxy-groups'],baseline['proxy-groups']);assert.deepEqual(c['rule-providers'],baseline['rule-providers']);assert.deepEqual(c['x-v14-generated'].ruleSources,baseline['x-v14-generated'].ruleSources);
    assert.deepEqual(c.rules.filter(s=>s!=='IP-CIDR6,::/0,REJECT,no-resolve'&&!['DOMAIN,six.test,REJECT','DOMAIN,alias.test,REJECT','DOMAIN-SUFFIX,v6.test,REJECT'].includes(s)),baseline.rules);
    if(label==='hosts'){assert.deepEqual(c.hosts['both.test'],['192.0.2.1']);assert.ok(c.rules.includes('DOMAIN,six.test,REJECT'));assert.ok(c.rules.includes('DOMAIN,alias.test,REJECT'));}
-   if(label==='LAN-dns')assert.ok(!Object.values(c.dns['nameserver-policy']).flat().includes('system'));
+   if(label==='LAN-dns'){
+    const {['+.ts.net']:magicDNS,...lanPolicies}=c.dns['nameserver-policy'];
+    assert.deepEqual(magicDNS,['system']);
+    assert.ok(!Object.values(lanPolicies).flat().includes('system'));
+   }
   });
  }
 }

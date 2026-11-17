@@ -1,5 +1,21 @@
 // RouteWeaver IPv4-only standalone entry; ipv4-only-r1.
 
+const V14_TAILSCALE = {"publicDomain":"tailscale.com","tailnetDomain":"ts.net","tailnetNetworks":["100.64.0.0/10","fd7a:115c:a1e0::/48"],"publicNetworks":"192.200.0.0/24 199.165.136.0/24 2606:b740:49::/48 2606:b740:1::/48 199.38.181.104/32 2607:f740:f::bc/128 209.177.145.120/32 2607:f740:f::3eb/128 199.38.181.93/32 2607:f740:f::afd/128 199.38.181.103/32 2607:f740:f::e19/128 209.177.145.118/32 2607:f740:f::ed2/128 199.38.181.71/32 2607:f740:f::5c9/128 192.73.252.65/32 2607:f740:0:3f::287/128 192.73.252.134/32 2607:f740:0:3f::44c/128 208.111.34.178/32 2607:f740:0:3f::f4/128 172.237.72.43/32 2600:3c15::2000:6cff:fee4:d799/128 172.237.72.8/32 2600:3c15::2000:53ff:fe48:a668/128 172.237.72.79/32 2600:3c15::2000:adff:fe08:6fab/128 172.237.66.30/32 2600:3c15::2000:3dff:fe44:50aa/128 185.40.234.219/32 2a00:dd80:20::a25/128 185.40.234.113/32 2a00:dd80:20::8f/128 185.40.234.77/32 2a00:dd80:20::bcf/128 185.40.234.53/32 2a00:dd80:20::8a6/128 185.40.234.176/32 2a00:dd80:20::e67/128 185.178.202.33/32 2a00:dd80:20::ae2/128 185.178.202.101/32 2a00:dd80:20::af9/128 172.105.179.230/32 2400:8907::2000:ceff:fe8d:4f4e/128 172.105.166.103/32 2400:8907::2000:ccff:fe1f:80da/128 172.105.169.57/32 2400:8907::2000:2fff:fea7:57f4/128 172.236.162.33/32 2600:3c16::2000:4aff:febf:b61/128 172.236.162.40/32 2600:3c16::2000:74ff:fe05:5fa3/128 172.236.162.42/32 2600:3c16::2000:80ff:fef0:6f28/128 172.238.6.180/32 2600:3c18::2000:60ff:fe0f:6e83/128 172.238.6.34/32 2600:3c18::2000:acff:fe8e:3ed5/128 172.238.6.179/32 2600:3c18::2000:3fff:fe80:3ebd/128 172.237.28.183/32 2600:3c18::2000:b1ff:fea9:4560/128 176.58.92.144/32 2a00:dd80:3a::b33/128 176.58.88.183/32 2a00:dd80:3a::dfa/128 176.58.92.254/32 2a00:dd80:3a::ed/128 209.177.156.94/32 2607:f740:100::c05/128 192.73.248.83/32 2607:f740:100::359/128 209.177.156.197/32 2607:f740:100::cad/128 192.73.240.161/32 2607:f740:14::61c/128 192.73.240.121/32 2607:f740:14::40c/128 192.73.240.132/32 2607:f740:14::500/128 172.237.61.194/32 2600:3c0d::2000:d2ff:fe43:1790/128 172.237.61.197/32 2600:3c0d::2000:3bff:fe44:6166/128 172.237.61.190/32 2600:3c0d::2000:62ff:febe:2e67/128 209.177.158.246/32 2607:f740:e::811/128 209.177.158.15/32 2607:f740:e::b17/128 199.38.182.118/32 2607:f740:e::4c8/128 192.73.242.187/32 2607:f740:16::640/128 192.73.242.28/32 2607:f740:16::5c/128 192.73.242.204/32 2607:f740:16::c23/128 176.58.93.248/32 2a00:dd80:3c::807/128 176.58.93.147/32 2a00:dd80:3c::b09/128 176.58.93.154/32 2a00:dd80:3c::3d5/128 102.67.165.90/32 2c0f:edb0:0:10::963/128 102.67.165.185/32 2c0f:edb0:0:10::b59/128 102.67.165.36/32 2c0f:edb0:0:10::599/128 192.73.243.135/32 2607:f740:17::476/128 192.73.243.229/32 2607:f740:17::4e4/128 192.73.243.141/32 2607:f740:17::475/128 192.73.244.245/32 2607:f740:c::646/128 208.111.40.12/32 2607:f740:c::10/128 208.111.40.216/32 2607:f740:c::e1b/128 176.58.90.147/32 2a00:dd80:3e::363/128 176.58.90.207/32 2a00:dd80:3e::c19/128 176.58.90.104/32 2a00:dd80:3e::f2e/128 45.159.97.144/32 2a00:dd80:14:10::335/128 45.159.97.61/32 2a00:dd80:14:10::20/128 45.159.97.233/32 2a00:dd80:14:10::34a/128 103.6.84.152/32 2403:2500:8000:1::ef6/128 205.147.105.30/32 2403:2500:8000:1::5fb/128 205.147.105.78/32 2403:2500:8000:1::e9a/128 162.248.221.199/32 2607:f740:50::1d1/128 162.248.221.215/32 2607:f740:50::f10/128 162.248.221.248/32 2607:f740:50::ca4/128 45.159.98.196/32 2a00:dd80:40:100::316/128 45.159.98.253/32 2a00:dd80:40:100::3f/128 45.159.98.145/32 2a00:dd80:40:100::211/128 185.34.3.232/32 2a00:dd80:3f:100::76f/128 185.34.3.207/32 2a00:dd80:3f:100::a50/128 185.34.3.75/32 2a00:dd80:3f:100::97e/128 208.83.234.151/32 2001:19f0:c000:c586:5400:04ff:fe26:2ba6/128 208.83.233.233/32 2001:19f0:c000:c591:5400:04ff:fe26:2c5f/128 208.72.155.133/32 2001:19f0:c000:c564:5400:04ff:fe26:2ba8/128 102.67.167.245/32 2c0f:edb0:2000:1::2e9/128 102.67.167.37/32 2c0f:edb0:2000:1::2c7/128 102.67.167.188/32 2c0f:edb0:2000:1::188/128 167.235.72.200/32 2a01:4f8:1c1c:47b6::1/128 49.12.193.137/32 2a01:4f8:1c1c:5c70::1/128 49.13.204.141/32 2a01:4f8:1c0c:7d06::1/128 5.161.218.233/32 2a01:4ff:f0:3db9::1/128 178.156.152.91/32 2a01:4ff:f0:3913::1/128 178.156.152.106/32 2a01:4ff:f0:3c8e::1/128 178.156.134.232/32 2a01:4ff:f0:28d4::1/128 65.109.143.62/32 2a01:4f9:c012:d55c::1/128 95.217.2.165/32 2a01:4f9:c012:cd74::1/128 157.180.28.32/32 2a01:4f9:c012:2e5b::1/128 46.62.141.44/32 2a01:4f9:c014:f18e::1/128","processRules":["PROCESS-NAME,com.tailscale.ipn"]};
+function v14AddTailscaleRules(config, add) {
+  add("DOMAIN-SUFFIX," + V14_TAILSCALE.publicDomain, "DIRECT");
+  add("DOMAIN-SUFFIX," + V14_TAILSCALE.tailnetDomain, "DIRECT");
+  for (const match of V14_TAILSCALE.processRules) add(match, "DIRECT");
+  if (V14_TAILSCALE.processRules.length && config["find-process-mode"] !== "always")
+    config["find-process-mode"] = "strict";
+
+  const sets = config["rule-providers"], base = "v14-tailscale-public-ips";
+  let name = base, index = 1;
+  while (Object.prototype.hasOwnProperty.call(sets, name)) name = base + "-" + (++index);
+  sets[name] = {type: "inline", behavior: "ipcidr", payload: V14_TAILSCALE.publicNetworks.split(" ")};
+  add("RULE-SET," + name, "DIRECT", true);
+  return name;
+}
+
 const V14 = Object.freeze({
   version: "14.3",
   ruleInterval: 86400, // seconds; native core timer, not a JS timer
@@ -949,6 +965,7 @@ function v14NetworkModeBase(input) {
     emitted.add(key); rules.push(match + "," + policy + suffix);
     if (policy !== "DIRECT" && policy !== "REJECT") rules.push(match + ",REJECT" + suffix);
   }
+  const tailscalePublicProvider = v14AddTailscaleRules(config, add);
   for (const d of V14.privateNames) add("DOMAIN-SUFFIX," + d, "DIRECT");
   for (const d of V14.manualDirect) add("DOMAIN-SUFFIX," + d, "DIRECT");
   for (const d of V14.manualProxy) add("DOMAIN-SUFFIX," + d, groupName("高纯净度AI用"));
@@ -972,7 +989,8 @@ function v14NetworkModeBase(input) {
   for (const ip of V14_TELEGRAM_CIDRS) add((ip.includes(":") ? "IP-CIDR6," : "IP-CIDR,") + ip, groupName("Telegram"), true);
   for (const service of V14_SERVICES) for (const tag of service.ips || [])
     add("RULE-SET," + ruleSet("ip", tag), groupName(service.name), true);
-  for (const ip of V14_PRIVATE_IPS) add((ip.includes(":") ? "IP-CIDR6," : "IP-CIDR,") + ip, "DIRECT", true);
+  for (const ip of V14_TAILSCALE.tailnetNetworks.concat(V14_PRIVATE_IPS))
+    add((ip.includes(":") ? "IP-CIDR6," : "IP-CIDR,") + ip, "DIRECT", true);
   addDomainSet("private", "DIRECT");
   for (const host of V14.domesticStunDns)
     if (!V14_SERVICES.some(s => s.seeds.some(d => host === d || host.endsWith("."+d))))
@@ -991,6 +1009,8 @@ function v14NetworkModeBase(input) {
   add("MATCH", groupName("漏网之鱼")); config.rules = rules; config.mode = "rule";
 
   const dnsPolicy = {};
+  dnsPolicy["+." + V14_TAILSCALE.publicDomain] = V14.directDns.slice();
+  dnsPolicy["+." + V14_TAILSCALE.tailnetDomain] = ["system"];
   for (const d of V14.privateNames) dnsPolicy["+." + d] = ["system"];
   for (const d of V14.manualDirect) dnsPolicy["+." + d] = V14.directDns.slice();
   for (const d of V14.manualProxy) dnsPolicy["+." + d] = v14DnsFor(groupName("高纯净度AI用"));
@@ -1032,7 +1052,7 @@ function v14NetworkModeBase(input) {
   config.dns = Object.assign({}, oldDns, {
     enable: true, ipv6: true, "fake-ip-range6": oldDns["fake-ip-range6"] || "fdfe:dcba:9876::1/64", "enhanced-mode": "fake-ip", "fake-ip-range": "198.18.0.1/16",
     "fake-ip-filter-mode": "blacklist",
-    "fake-ip-filter": V14.privateNames.map(d => "+." + d).concat(["api.openai.com"]), "use-hosts": true,
+    "fake-ip-filter": V14.privateNames.concat(V14_TAILSCALE.tailnetDomain).map(d => "+." + d).concat(["api.openai.com"]), "use-hosts": true,
     "use-system-hosts": true, "respect-rules": false, "prefer-h3": false,
     "default-nameserver": V14.bootstrapDns.slice(), "proxy-server-nameserver": V14.nodeDns.slice(),
     nameserver: v14DnsFor(groupName("漏网之鱼")), fallback: [], "nameserver-policy": dnsPolicy,
@@ -1094,7 +1114,7 @@ function v14NetworkModeBase(input) {
   config["x-v14-generated"] = { version: V14.version, revision: "domestic-selector-r1-20261010", routingRevision: "domestic-selector-r1-20261010", compatibilityRevision: "api-real-ip-r1-20261010", groups: groups.map(g => g.name), proxies: [],
     platform: "android",
     ruleDataMode: "critical-inline-pinned-full-remote-no-local-geo",
-    ruleProviders: ruleSources.map(s => s.name), ruleSources,
+    ruleProviders: ruleSources.map(s => s.name), ruleSources, tailscalePublicProvider,
     auditRepairRevision: "balanced-r1", domesticProtocolRevision: "domestic-protocol-r1",
     embeddedDomainClassifiers: Array.from(embeddedNames, ([tag, provider]) => ({tag, provider, records: V14_REVIEWED_DOMAINS[tag].payloadText.split("\n").length})),
     immutableCompanyCore: Array.from(coreNames, ([group, provider]) => ({group, provider, records: V14_COMPANY_CORE[group].length})),
@@ -1204,9 +1224,11 @@ function v14RecoverNetworkDestination(config) {
   const destinations = v14Strings(config.sniffer["skip-dst-address"], "sniffer.skip-dst-address");
   const domains = v14Strings(config.sniffer["skip-domain"], "sniffer.skip-domain");
   const marker = config["x-v14-generated"];
+  if (marker.tailscalePublicProvider) explicitIPs.push("rule-set:" + marker.tailscalePublicProvider);
   const privateSet = marker.embeddedDomainClassifiers.find(row => row.tag === "private");
   if (!privateSet || !config["rule-providers"][privateSet.provider]) v14Fail("Missing inline private domain classifier");
-  const extraDomains = V14.privateNames.map(name => "+." + name).concat("rule-set:" + privateSet.provider);
+  const extraDomains = V14.privateNames.concat(V14_TAILSCALE.tailnetDomain).map(name => "+." + name)
+    .concat("rule-set:" + privateSet.provider);
   config.sniffer["skip-dst-address"] = v14Unique(destinations.concat(explicitIPs));
   config.sniffer["skip-domain"] = v14Unique(domains.concat(extraDomains));
   marker.networkRecovery = {revision: "owned-exclusions-r1",
@@ -1364,7 +1386,8 @@ function main(input, profileName) {
     if (!Array.isArray(lanDNS) || !lanDNS.length || lanDNS.some(s => !rw4ValidLanDNS(s)))
       v14Fail("ipv4-lan-dns 必须是非空的 IPv4 DNS 地址数组。");
     for (const [key, values] of Object.entries(config.dns["nameserver-policy"]))
-      if (Array.isArray(values) && values.includes("system")) config.dns["nameserver-policy"][key] = rw4Resolver(lanDNS);
+      if (key !== "+." + V14_TAILSCALE.tailnetDomain && Array.isArray(values) && values.includes("system"))
+        config.dns["nameserver-policy"][key] = rw4Resolver(lanDNS);
   }
   return config;
 }

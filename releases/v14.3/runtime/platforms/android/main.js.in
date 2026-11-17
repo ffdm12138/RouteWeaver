@@ -178,6 +178,7 @@ function main(input) {
     emitted.add(key); rules.push(match + "," + policy + suffix);
     if (policy !== "DIRECT" && policy !== "REJECT") rules.push(match + ",REJECT" + suffix);
   }
+  const tailscalePublicProvider = v14AddTailscaleRules(config, add);
   for (const d of V14.privateNames) add("DOMAIN-SUFFIX," + d, "DIRECT");
   for (const d of V14.manualDirect) add("DOMAIN-SUFFIX," + d, "DIRECT");
   for (const d of V14.manualProxy) add("DOMAIN-SUFFIX," + d, groupName("高纯净度AI用"));
@@ -205,7 +206,8 @@ function main(input) {
   for (const service of V14_SERVICES) for (const tag of service.ips || [])
     add("RULE-SET," + ruleSet("ip", tag), groupName(service.name), true);
   // Known corporate domains win even with private/ULA destination metadata.
-  for (const ip of V14_PRIVATE_IPS) add((ip.includes(":") ? "IP-CIDR6," : "IP-CIDR,") + ip, "DIRECT", true);
+  for (const ip of V14_TAILSCALE.tailnetNetworks.concat(V14_PRIVATE_IPS))
+    add((ip.includes(":") ? "IP-CIDR6," : "IP-CIDR,") + ip, "DIRECT", true);
   addDomainSet("private", "DIRECT");
   // Unknown domestic STUN servers are protected, without stealing Google's.
   for (const host of V14.domesticStunDns)
@@ -228,6 +230,8 @@ function main(input) {
   add("MATCH", groupName("漏网之鱼")); config.rules = rules; config.mode = "rule";
 
   const dnsPolicy = {};
+  dnsPolicy["+." + V14_TAILSCALE.publicDomain] = V14.directDns.slice();
+  dnsPolicy["+." + V14_TAILSCALE.tailnetDomain] = ["system"];
   for (const d of V14.privateNames) dnsPolicy["+." + d] = ["system"];
   for (const d of V14.manualDirect) dnsPolicy["+." + d] = V14.directDns.slice();
   for (const d of V14.manualProxy) dnsPolicy["+." + d] = v14DnsFor(groupName("高纯净度AI用"));
@@ -282,7 +286,7 @@ function main(input) {
     // Chromium treats the IPv6 Fake-IP ULA as local network access. Return
     // real A/AAAA for this public API; nameserver-policy still uses OpenAI's
     // chosen group, and the existing company rules retain fail-closed routing.
-    "fake-ip-filter": V14.privateNames.map(d => "+." + d).concat(["api.openai.com"]), "use-hosts": true,
+    "fake-ip-filter": V14.privateNames.concat(V14_TAILSCALE.tailnetDomain).map(d => "+." + d).concat(["api.openai.com"]), "use-hosts": true,
     "use-system-hosts": true, "respect-rules": false, "prefer-h3": false,
     "default-nameserver": V14.bootstrapDns.slice(), "proxy-server-nameserver": V14.nodeDns.slice(),
     nameserver: v14DnsFor(groupName("漏网之鱼")), fallback: [], "nameserver-policy": dnsPolicy,
@@ -349,7 +353,7 @@ function main(input) {
   config["x-v14-generated"] = { version: V14.version, revision: "domestic-selector-r1-20261010", routingRevision: "domestic-selector-r1-20261010", compatibilityRevision: "api-real-ip-r1-20261010", groups: groups.map(g => g.name), proxies: [],
     platform: "android",
     ruleDataMode: "critical-inline-pinned-full-remote-no-local-geo",
-    ruleProviders: ruleSources.map(s => s.name), ruleSources,
+    ruleProviders: ruleSources.map(s => s.name), ruleSources, tailscalePublicProvider,
     auditRepairRevision: "balanced-r1", domesticProtocolRevision: "domestic-protocol-r1"{{DIRECT_RULE_MARKER}},
     embeddedDomainClassifiers: Array.from(embeddedNames, ([tag, provider]) => ({tag, provider, records: V14_REVIEWED_DOMAINS[tag].payloadText.split("\n").length})),
     immutableCompanyCore: Array.from(coreNames, ([group, provider]) => ({group, provider, records: V14_COMPANY_CORE[group].length})),

@@ -12,6 +12,10 @@ const lock=read(prefix+'data/rule-sources.lock.json'),oldManifest=read(prefix+'m
 const source=fs.readFileSync(local('src/android/v14.3-android-flclash.js'),'utf8'),ctx=vm.createContext({console:{log(){}}});vm.runInContext(source,ctx);
 const data=JSON.parse(vm.runInContext('JSON.stringify({settings:V14,domestic:V14_DOMESTIC_SEEDS,stunNames:V14.stunHostPatterns})',ctx));
 const policy=read('data/rules/embedded-policy.json');assert.equal(policy.domesticProtocolRevision,'domestic-protocol-r1');
+const tailscale=require('./lib/tailscale-policy.cjs').loadTailscalePolicy(root);
+const tailscaleIP=network=>(network.includes(':')?'IP-CIDR6,':'IP-CIDR,')+network+',DIRECT,no-resolve';
+const tailscaleRules=[tailscale.publicDomain,tailscale.tailnetDomain].map(domain=>'DOMAIN-SUFFIX,'+domain+',DIRECT')
+ .concat(tailscale.publicNetworks.map(tailscaleIP));
 function section(name){return oldText.split('['+name+']')[1].split(/\r?\n\[/)[0].split(/\r?\n/).map(s=>s.trim()).filter(s=>s&&!s.startsWith('#'));}
 const split=require('../tests/fixture.cjs').split;
 const sources=oldManifest.ruleSets.map(p=>{
@@ -41,10 +45,13 @@ for(const match of critical){
 }
 const companySupplement=read('data/rules/company-supplement.json');
 kept.unshift(...companySupplement.additions.map(a=>a.row+','+a.group));
+const tailnetStart=kept.indexOf(tailscaleIP(tailscale.tailnetNetworks[0]));
+assert.ok(tailnetStart>=0,'Missing Shadowrocket private address anchor');
+kept.splice(tailnetStart,1,...tailscale.tailnetNetworks.map(tailscaleIP));
 const guard=kept.findIndex(r=>r==='AND,((PROTOCOL,UDP),(NOT,((PROTOCOL,TCP)))),漏网之鱼');assert.ok(guard>=0);
 const udpStun=[];for(const port of data.settings.stunPorts)udpStun.push('AND,((PROTOCOL,UDP),(DST-PORT,'+port+')),漏网之鱼');
 for(const host of data.stunNames)udpStun.push('AND,((PROTOCOL,UDP),(DOMAIN-WILDCARD,'+host+')),漏网之鱼');
-const uncompressedRules=[...kept.slice(0,guard),...udpStun,...domestic,kept[guard],...geographic,...kept.slice(guard+1)];
+const uncompressedRules=[...tailscaleRules,...kept.slice(0,guard),...udpStun,...domestic,kept[guard],...geographic,...kept.slice(guard+1)];
 // Remove only rows already dominated by an earlier literal suffix with the
 // identical group. No provider, wildcard or cross-group precedence is inferred.
 const priorSuffixes=new Map(), redundantRules=[];
@@ -62,6 +69,8 @@ const defaultDNS=before.config.general['dns-server'];
 const valueFor=group=>'server:'+data.settings.bootstrapDns.slice(0,0).concat(['https://dns.alidns.com/dns-query','https://doh.pub/dns-query']).map(u=>group==='DIRECT'?u:u+'#proxy='+encodeURIComponent(group)).join(',');
 const stunDNS='server:https://dns.alidns.com/dns-query#proxy='+encodeURIComponent('漏网之鱼');
 const put=(key,value)=>{if(!hosts.has(key))hosts.set(key,value);};
+for(const domain of [tailscale.publicDomain,'*.'+tailscale.publicDomain])hosts.set(domain,valueFor('DIRECT'));
+for(const domain of [tailscale.tailnetDomain,'*.'+tailscale.tailnetDomain])hosts.set(domain,'server:system');
 // Preserve local/private and resolver-name policies before the new .cn DNS declaration.
 for(const rows of [policy.embedded.private.payloadText.split('\n'),policy.embedded['category-doh'].payloadText.split('\n')])for(const row of rows){
  const [kind,host]=split(row);if(!['DOMAIN','DOMAIN-SUFFIX'].includes(kind))continue;
@@ -102,6 +111,7 @@ const file='src/ios/v14.3-shadowrocket.conf';
 const contractPath=fs.existsSync(path.resolve(root,'../../CURRENT_RELEASE.json'))?path.resolve(root,'../../docs/需求.md'):local('docs/需求.md');
 const manifest={version:'14.3',date:'2026-10-13',revision:'shadowrocket-lean-r1',domesticProtocolRevision:'domestic-protocol-r1',
  status:'GENERATED_NATIVE_ACCEPTANCE_PENDING',file,sha256:crypto.createHash('sha256').update(output).digest('hex'),bytes:Buffer.byteLength(output),
+ tailscaleDerpSource:tailscale.source,
  before:{file:sourceFile,sha256:sha(local(sourceFile)),bytes:Buffer.byteLength(oldText)},
  rules:{before:all.length,after:rules.length,removedDuplicateCNRows:removed,removedDominatedLiteralRows:redundantRules,criticalDomesticRules:[...critical]},
  dns:{beforeHostRows:before.config.hosts.length,afterHostRows:outputHosts.length,removedRedundantRows:eliminated.length,
@@ -110,7 +120,7 @@ const manifest={version:'14.3',date:'2026-10-13',revision:'shadowrocket-lean-r1'
   standaloneDomesticDNSAffinity:'NOT_NATIVE_VERIFIED'},
  groups:section('Proxy Group').map(r=>r.split(' = ')[0]),sources,
  sourceContract:{file:'docs/需求.md',sha256:sha(contractPath)},
- inputs:['tools/build-shadowrocket-lean.cjs','src/android/v14.3-android-flclash.js','data/rules/embedded-policy.json',prefix+'manifest.json',prefix+'metadata/shadowrocket-sources.json',prefix+'data/rule-sources.lock.json'].map(file=>({file,sha256:sha(local(file))})),
+ inputs:['tools/build-shadowrocket-lean.cjs','tools/lib/tailscale-policy.cjs',tailscale.source.file,'src/android/v14.3-android-flclash.js','data/rules/embedded-policy.json',prefix+'manifest.json',prefix+'metadata/shadowrocket-sources.json',prefix+'data/rule-sources.lock.json'].map(file=>({file,sha256:sha(local(file))})),
  clientDeployment:false,nativeCompilation:'NOT_RUN',nativeDNSAffinity:'NOT_RUN',deviceAcceptance:'NOT_RUN'};
 const text=JSON.stringify(manifest,null,2)+'\n';
 if(process.argv.includes('--check')){assert.equal(fs.readFileSync(local(file),'utf8'),output);assert.equal(fs.readFileSync(local('metadata/shadowrocket-lean.json'),'utf8'),text);}

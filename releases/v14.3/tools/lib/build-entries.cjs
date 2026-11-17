@@ -3,7 +3,7 @@ const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),cryp
 const hash=b=>crypto.createHash('sha256').update(b).digest('hex');
 function build(root,check){
  const read=n=>fs.readFileSync(path.join(root,n),'utf8'),sha=n=>hash(fs.readFileSync(path.join(root,n)));
- const generated=require('./compile-entries.cjs').compile(root),{policy,vps,entries,inputs}=generated;
+ const generated=require('./compile-entries.cjs').compile(root),{policy,vps,tailscale,entries,inputs}=generated;
  const metadata=[];
  for(const entry of entries){
   const ctx=vm.createContext({console:{log(){}}});vm.runInContext(entry.code,ctx,{timeout:3000});
@@ -16,6 +16,7 @@ function build(root,check){
  const balanced={version:'14.3',date:'2026-10-16',revision:'balanced-r1',runtimeRevision:'shared-runtime-r1',entryRevision:'single-entry-r1',status:'GENERATED_DEVICE_PENDING',limits:policy.selected.limits,
   entries:metadata.filter(e=>['windows','android','clashmi'].includes(e.platform)),...(vps?{vpsDirectRevision:vps.revision}:{}),domesticProtocolRevision:'domestic-protocol-r1',
   baselineManifest:{file:policy.baseline+'manifest.json',sha256:sha(policy.baseline+'manifest.json')},policy:{file:'data/rules/embedded-policy.json',sha256:hash(policy.selectedText)},
+  tailscaleDerpSource:tailscale.source,
   inputs:sourceInputs,clientDeployment:false,appJavaScriptCore:'NOT_RUN',iOSMemory:'NOT_RUN',deviceAcceptance:'NOT_RUN'};
  const mac={version:'14.3',date:'2026-10-16',revision:'macos-r1',runtimeRevision:'shared-runtime-r1',entryRevision:'single-entry-r1',domesticProtocolRevision:'domestic-protocol-r1',status:'MACOS_GENERATED_DEVICE_PENDING',
   entries:metadata.filter(e=>e.platform.startsWith('macos')),scope:'Thin Darwin/NetworkExtension adapters, shared business/DNS/UDP and in-file network mode selection',
@@ -24,6 +25,7 @@ function build(root,check){
  const sr='src/ios/v14.3-shadowrocket.conf';
  const network={revision:'ipv6-fallback-r2',repairRevision:'http-recovery-r1',entryRevision:'single-entry-r1',date:'2026-10-16',status:'SOURCE_MODELS_NATIVE_DEVICE_PENDING',defaultMode:'auto',compatibilityMode:'ipv4-local',automaticPhysicalNetworkDetection:'REQUIRES_MATCHING_NATIVE_CORE',automaticNetworkRevision:'auto-local-family-r1',
   option:{field:'x-routeweaver.network-mode',defaultConstant:'ROUTEWEAVER_DEFAULT_NETWORK_MODE',choices:['auto','dual-stack','ipv4-local']},
+  tailscaleDerpSource:tailscale.source,
   inputs:sourceInputs,entries:[...metadata.map(e=>({platform:e.platform,source:e.file,file:e.file,sha256:e.sha256,bytes:e.bytes,modes:['auto','dual-stack','ipv4-local']})),{platform:'shadowrocket',source:sr,file:sr,sha256:sha(sr),bytes:Buffer.byteLength(read(sr)),modes:['native-ipv4-prefer']}],
   shadowrocketLimit:'One native conf with IPv4 preference and IPv6 retained; no equivalent Mihomo upstream filters, hostname recovery or custom core patch',deviceAcceptance:'NOT_RUN'};
  const outputs=[...entries.map(e=>[e.file,e.code]),['data/rules/embedded-policy.json',policy.selectedText],...Object.entries({'metadata/balanced-sources.json':balanced,'metadata/macos-sources.json':mac,'metadata/clash-verge-sources.json':verge,'metadata/network-compat.json':network}).map(([file,value])=>[file,JSON.stringify(value,null,2)+'\n'])];

@@ -53,7 +53,7 @@ for(const [platform,file]of Object.entries(manifest.entries)){
   check(platform+':reject-invalid-lan-dns:'+address,()=>assert.throws(()=>generate4({...good(),tun:{enable:false},'x-routeweaver':{'ipv4-lan-dns':[address]}})));
  check(platform+':valid-lan-dns',()=>{const c=generate4({...good(),'x-routeweaver':{'ipv4-lan-dns':['192.168.1.1','tcp://127.0.0.1:5353']}});assert.ok(c.dns['nameserver-policy']['+.lan'].every(x=>x.includes('disable-ipv6=true')));});
 }
-const fixture=require(path.join(root,'releases/v14.3/tests/fixture.cjs'));
+const fixture=require(path.join(root,'releases/v14.3/tests/current-fixture.cjs'));
 for(const platform of ['desktop','android','clashmi','clash-verge']){
  const f=fixture.load(platform);
  for(const [name,flow,expected]of [

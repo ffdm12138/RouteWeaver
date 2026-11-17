@@ -1,0 +1,217 @@
+{
+  "revision": "backup-slot-skip-r1",
+  "edition": "public",
+  "status": "PASS_ISOLATED_STOCK_CORE",
+  "core": {
+    "sha256": "d5097d4ea34f2975a7a7188dac9554d6b309c2abbf21a94c0a4111aca23bb8d0"
+  },
+  "quickJS": {
+    "sha256": "e2051274a1d7599d131d45b96c7cc53519a9009bf43a802b922f73031d3d3b4b"
+  },
+  "runnerSHA256": "43f5f9c9e56d979170b85513e5672eb22830030647946bd99935327c5400a9ff",
+  "hostSHA256": "a02cbf358822c5e7fbcf7d6b4497c3f49ed43e2e95f68485c9bd6e10c2a82ce2",
+  "scope": "Windows isolated stock core; loopback transport substitution; no mobile frontend, VPN or live client",
+  "deviceAcceptance": "NOT_RUN",
+  "tracks": {
+    "main": {
+      "windows": {
+        "file": "releases/v14.3/src/windows/v14.3-windows-flclash.js",
+        "sourceSHA256": "5819328fe3ae8609ae71a68f5500f5d126dd455620e985ad354d3c4c767f3bcf",
+        "coreChecks": 38,
+        "quickJSChecks": 2
+      },
+      "android": {
+        "file": "releases/v14.3/src/android/v14.3-android-flclash.js",
+        "sourceSHA256": "5041ce89a320048ae7ecaef01111aa4d98dbf8130e4b70269a02cb580bf186d9",
+        "coreChecks": 38,
+        "quickJSChecks": 2
+      },
+      "clashmi": {
+        "file": "releases/v14.3/src/ios/v14.3-clashmi-domestic-protocol-r1.js",
+        "sourceSHA256": "709fdeefb5f620527fc92d65d4a13f50c8b0698299b4c94d59588a8c287c4dbe",
+        "coreChecks": 38,
+        "quickJSChecks": 2
+      },
+      "shadowrocket": {
+        "file": "releases/v14.3/src/ios/v14.3-shadowrocket.conf",
+        "sourceSHA256": "c79e3a874d88410e8cb3974ad46417e58ebc7ab2aeec99f5fd3326b800d0c619",
+        "feature": "SOURCE_MODEL_ONLY_DEVICE_NOT_RUN"
+      },
+      "macosFlClash": {
+        "file": "releases/v14.3/src/macos/v14.3-macos-flclash.js",
+        "sourceSHA256": "0490b0851139077511ead538bed13b8b12776a98223f516ca2627ecbe7a471f2",
+        "coreChecks": 38,
+        "quickJSChecks": 2
+      },
+      "macosClashMi": {
+        "file": "releases/v14.3/src/macos/v14.3-macos-clashmi.js",
+        "sourceSHA256": "74779aea1703ded22dbf2b0d6a052747a8e576f62a2cbf9a1d9fd71d66f2afed",
+        "coreChecks": 38,
+        "quickJSChecks": 2
+      },
+      "clashVerge": {
+        "file": "releases/v14.3/src/clash-verge/v14.3-clash-verge.js",
+        "sourceSHA256": "ba30dd542b43d7c1cf13c691ba4a9bd90018027099a9fd8b44828e6cd4826c9a",
+        "coreChecks": 38,
+        "quickJSChecks": 2
+      }
+    },
+    "ipv4-only": {
+      "windows": {
+        "file": "releases/v14.3-ipv4-only/src/windows/v14.3-windows-flclash-ipv4-only.js",
+        "sourceSHA256": "e593572a1dac9e4edb0a51d76b81289a4980a4fda7a4703b002263a00d40fedb",
+        "coreChecks": 38,
+        "quickJSChecks": 2
+      },
+      "android": {
+        "file": "releases/v14.3-ipv4-only/src/android/v14.3-android-flclash-ipv4-only.js",
+        "sourceSHA256": "145a153bb20ffc4c3bd8e0d65b3726f380922ee3cbdca9dc0db7dbe7e4c960f2",
+        "coreChecks": 38,
+        "quickJSChecks": 2
+      },
+      "clashmi": {
+        "file": "releases/v14.3-ipv4-only/src/ios/v14.3-clashmi-domestic-protocol-r1-ipv4-only.js",
+        "sourceSHA256": "12296c9eb2fbcc91de834b4c3ab7c044ee64afa77cba63617149de696c0a7fb5",
+        "coreChecks": 38,
+        "quickJSChecks": 2
+      },
+      "shadowrocket": {
+        "file": "releases/v14.3-ipv4-only/src/ios/v14.3-shadowrocket-ipv4-only.conf",
+        "sourceSHA256": "2925cdce941928146c073f6cd9f6dfb4388e2bf474788c849dd3ceae7a4c7035",
+        "feature": "SOURCE_MODEL_ONLY_DEVICE_NOT_RUN"
+      },
+      "macosFlClash": {
+        "file": "releases/v14.3-ipv4-only/src/macos/v14.3-macos-flclash-ipv4-only.js",
+        "sourceSHA256": "2d3a9b603b58c26f064d038a54166a3605fa9567af1073096a43f53cc4800977",
+        "coreChecks": 38,
+        "quickJSChecks": 2
+      },
+      "macosClashMi": {
+        "file": "releases/v14.3-ipv4-only/src/macos/v14.3-macos-clashmi-ipv4-only.js",
+        "sourceSHA256": "7d42fb0564354a359ec9edd54ba93ed582916ffddd7879ab505a803b87c025b6",
+        "coreChecks": 38,
+        "quickJSChecks": 2
+      },
+      "clashVerge": {
+        "file": "releases/v14.3-ipv4-only/src/clash-verge/v14.3-clash-verge-ipv4-only.js",
+        "sourceSHA256": "6b529d02ccfb5faeb86e860671c04c3cb834e88ec6a83333555128e98164ce2a",
+        "coreChecks": 38,
+        "quickJSChecks": 2
+      }
+    }
+  },
+  "checks": [
+    "quickjs_node_parity",
+    "quickjs_idempotence",
+    "native_accepts_original_dns_mode_and_empty_providers",
+    "native_accepts_real_response_phase",
+    "empty_provider_tcp:api.amemv.com",
+    "empty_provider_tcp:v5.douyinvod.com",
+    "empty_provider_tcp:p3.douyinpic.com",
+    "empty_provider_tcp:szextshort.weixin.qq.com",
+    "empty_provider_tcp:apd-pcdnwxlogin.teg.tencent-cloud.net",
+    "empty_provider_tcp:openaifoundation.org",
+    "domestic_udp_A",
+    "generic_stun_stays_on_distinct_catchall",
+    "fallback_to_B",
+    "fallback_to_C",
+    "fallback_to_D",
+    "domestic_udp_D",
+    "all_selected_nodes_down_only_attempts_primary",
+    "recover_D",
+    "recover_C",
+    "recover_B",
+    "recover_A",
+    "skip_tier1_first_connection_uses_tier2",
+    "skip_tiers1_and2_first_connection_uses_tier3",
+    "skipped_tiers_udp_D",
+    "skipped_tiers_domestic_dot_D",
+    "skipped_tiers_openai_encrypted_dns_D",
+    "domestic_dns_single",
+    "domestic_dns_public",
+    "domestic_dns_direct",
+    "openai_mode_correct_encrypted_dns_selected_group",
+    "domestic_explicit_DIRECT_tcp",
+    "unsupported_udp_rejected",
+    "all_backups_disabled_only_attempts_primary",
+    "reload_legacy_reject_skips_to_tier3",
+    "reload_removed_primary_and_tier1_uses_tier2",
+    "reload_removed_primary_and_first_two_tiers_uses_tier3",
+    "explicit_REJECT_still_blocks",
+    "reload_removed_primary_and_all_backups_rejects"
+  ],
+  "results": [
+    {
+      "track": "main",
+      "client": "windows",
+      "checks": 38,
+      "seconds": 33.453
+    },
+    {
+      "track": "main",
+      "client": "android",
+      "checks": 38,
+      "seconds": 33.609
+    },
+    {
+      "track": "main",
+      "client": "clashmi",
+      "checks": 38,
+      "seconds": 33.625
+    },
+    {
+      "track": "main",
+      "client": "macosFlClash",
+      "checks": 38,
+      "seconds": 33.688
+    },
+    {
+      "track": "main",
+      "client": "macosClashMi",
+      "checks": 38,
+      "seconds": 33.734
+    },
+    {
+      "track": "main",
+      "client": "clashVerge",
+      "checks": 38,
+      "seconds": 33.578
+    },
+    {
+      "track": "ipv4-only",
+      "client": "windows",
+      "checks": 38,
+      "seconds": 34.203
+    },
+    {
+      "track": "ipv4-only",
+      "client": "android",
+      "checks": 38,
+      "seconds": 34.047
+    },
+    {
+      "track": "ipv4-only",
+      "client": "clashmi",
+      "checks": 38,
+      "seconds": 34.0
+    },
+    {
+      "track": "ipv4-only",
+      "client": "macosFlClash",
+      "checks": 38,
+      "seconds": 34.11
+    },
+    {
+      "track": "ipv4-only",
+      "client": "macosClashMi",
+      "checks": 38,
+      "seconds": 34.172
+    },
+    {
+      "track": "ipv4-only",
+      "client": "clashVerge",
+      "checks": 38,
+      "seconds": 34.14
+    }
+  ]
+}

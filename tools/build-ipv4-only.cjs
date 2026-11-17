@@ -4,12 +4,14 @@ const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypt
 const compilerFile='releases/v14.3/tools/lib/compile-entries.cjs';
 const {omitExplicitTunRouteAddress}=require('../'+compilerFile);
 const root=path.resolve(__dirname,'..'),target='releases/v14.3-ipv4-only';
+const base='releases/v14.3',tailscalePolicyFile=base+'/tools/lib/tailscale-policy.cjs';
+const tailscale=require('../'+tailscalePolicyFile).loadTailscalePolicy(path.join(root,base));
 const sha=b=>crypto.createHash('sha256').update(b).digest('hex');
 const read=file=>fs.readFileSync(path.join(root,file));
 const current=JSON.parse(read('CURRENT_RELEASE.json'));
 const check=process.argv.includes('--check');
 const runtime=read('tools/ipv4-only-runtime.js').toString('utf8').replaceAll('\r\n','\n');
-const inputs=['CURRENT_RELEASE.json','tools/build-ipv4-only.cjs','tools/ipv4-only-runtime.js',compilerFile];
+const inputs=['CURRENT_RELEASE.json','tools/build-ipv4-only.cjs','tools/ipv4-only-runtime.js',compilerFile,tailscalePolicyFile,base+'/'+tailscale.source.file];
 const entries={};
 function emit(file,bytes){
   const dest=path.join(root,file);
@@ -52,6 +54,7 @@ const manifest={version:'14.3-ipv4-only',revision:'ipv4-only-r1',date:'2026-10-1
   flavor:current.vpsDirectRevision?'personal':'public',baseVersion:current.version,
   requestedScope:'IPv4 local DIRECT and local connection to proxies; proxy onward family unconstrained',
   entryMapSHA256:sha(JSON.stringify(current.entries)),entries,inputs:sourceInputs,
+  tailscaleDerpSource:tailscale.source,
   systemDNS:'SYSTEM_DNS_MUST_BE_IPV4_OR_CONFIGURE_x-routeweaver.ipv4-lan-dns',
   deviceAcceptance:'NOT_RUN',clientDeployment:false,originalEntriesModified:false};
 emit(target+'/MANIFEST.json',JSON.stringify(manifest,null,2)+'\n');

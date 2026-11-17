@@ -38,9 +38,11 @@ function v14RecoverNetworkDestination(config) {
   const destinations = v14Strings(config.sniffer["skip-dst-address"], "sniffer.skip-dst-address");
   const domains = v14Strings(config.sniffer["skip-domain"], "sniffer.skip-domain");
   const marker = config["x-v14-generated"];
+  if (marker.tailscalePublicProvider) explicitIPs.push("rule-set:" + marker.tailscalePublicProvider);
   const privateSet = marker.embeddedDomainClassifiers.find(row => row.tag === "private");
   if (!privateSet || !config["rule-providers"][privateSet.provider]) v14Fail("Missing inline private domain classifier");
-  const extraDomains = V14.privateNames.map(name => "+." + name).concat("rule-set:" + privateSet.provider);
+  const extraDomains = V14.privateNames.concat(V14_TAILSCALE.tailnetDomain).map(name => "+." + name)
+    .concat("rule-set:" + privateSet.provider);
   config.sniffer["skip-dst-address"] = v14Unique(destinations.concat(explicitIPs));
   config.sniffer["skip-domain"] = v14Unique(domains.concat(extraDomains));
   marker.networkRecovery = {revision: "owned-exclusions-r1",

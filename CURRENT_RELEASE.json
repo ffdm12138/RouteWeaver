@@ -141,14 +141,18 @@
     "dual-stack/auto": "real A/AAAA over the OpenAI group DoH/443",
     "reason": "Chromium classifies every usable IPv6 Fake-IP prefix as local network"
   },
+  "tailscaleDirect": {
+    "revision": "tailscale-direct-r1",
+    "derpSource": "releases/v14.3/data/rules/tailscale-derp-map.json",
+    "staticVerification": "releases/v14.3/validation/tailscale-direct-static.json",
+    "isolatedCoreVerification": "releases/v14.3/validation/tailscale-direct-core.json",
+    "deviceAcceptance": "NOT_RUN"
+  },
   "nativeFallback": {
     "revision": "backup-slot-skip-r1",
     "guide": "docs/guides/故障转移.md",
-    "verification": "releases/v14.3/validation/proxy-failover/darwin-tun-r1.json",
-    "releaseTags": {
-      "main": "v14.3.0-rc.15",
-      "ipv4-only": "v14.3.0-ipv4-only-rc.6"
-    },
+    "verification": "releases/v14.3/validation/proxy-failover/tailscale-direct-r1.json",
+    "releaseTags": null,
     "deviceAcceptance": "NOT_RUN"
   },
   "proxyFailover": {

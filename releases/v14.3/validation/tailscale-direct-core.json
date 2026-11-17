@@ -1,0 +1,1030 @@
+{
+  "status": "PASS",
+  "scope": "Windows isolated FlClash core, loopback transport",
+  "deviceAcceptance": "NOT_RUN",
+  "coreSHA256": "d5097d4ea34f2975a7a7188dac9554d6b309c2abbf21a94c0a4111aca23bb8d0",
+  "runnerSHA256": "5011aeb1132f452daabdd4fd434d9389db153dd919897d218c18f35ad02c40d4",
+  "hostSHA256": "a02cbf358822c5e7fbcf7d6b4497c3f49ed43e2e95f68485c9bd6e10c2a82ce2",
+  "entries": {
+    "releases/v14.3/src/windows/v14.3-windows-flclash.js": {
+      "sha256": "5819328fe3ae8609ae71a68f5500f5d126dd455620e985ad354d3c4c767f3bcf",
+      "checks": [
+        [
+          "TCP",
+          "controlplane.tailscale.com",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "TCP",
+          "log.tailscale.com",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "TCP",
+          "192.200.0.112",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "TCP",
+          "172.237.28.183",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "205.147.105.78",
+          3478,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "2403:2500:8000:1::e9a",
+          3478,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "100.101.102.103",
+          41641,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "fd7a:115c:a1e0::21",
+          41641,
+          "Fixture Direct"
+        ],
+        [
+          "TCP",
+          "peer.example-tailnet.ts.net",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "198.51.100.77",
+          3478,
+          "Fixture Proxy"
+        ],
+        [
+          "UDP",
+          "198.51.100.77",
+          41641,
+          "Fixture Proxy"
+        ],
+        [
+          "TCP",
+          "chatgpt.com",
+          443,
+          "Fixture Company"
+        ],
+        [
+          "UDP",
+          "stun.l.google.com",
+          3478,
+          "Fixture Company"
+        ],
+        [
+          "UDP",
+          "198.51.100.77",
+          41641,
+          "Fixture Direct via tailscaled.exe"
+        ]
+      ]
+    },
+    "releases/v14.3/src/android/v14.3-android-flclash.js": {
+      "sha256": "5041ce89a320048ae7ecaef01111aa4d98dbf8130e4b70269a02cb580bf186d9",
+      "checks": [
+        [
+          "TCP",
+          "controlplane.tailscale.com",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "TCP",
+          "log.tailscale.com",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "TCP",
+          "192.200.0.112",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "TCP",
+          "172.237.28.183",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "205.147.105.78",
+          3478,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "2403:2500:8000:1::e9a",
+          3478,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "100.101.102.103",
+          41641,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "fd7a:115c:a1e0::21",
+          41641,
+          "Fixture Direct"
+        ],
+        [
+          "TCP",
+          "peer.example-tailnet.ts.net",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "198.51.100.77",
+          3478,
+          "Fixture Proxy"
+        ],
+        [
+          "UDP",
+          "198.51.100.77",
+          41641,
+          "Fixture Proxy"
+        ],
+        [
+          "TCP",
+          "chatgpt.com",
+          443,
+          "Fixture Company"
+        ],
+        [
+          "UDP",
+          "stun.l.google.com",
+          3478,
+          "Fixture Company"
+        ]
+      ]
+    },
+    "releases/v14.3/src/ios/v14.3-clashmi-domestic-protocol-r1.js": {
+      "sha256": "709fdeefb5f620527fc92d65d4a13f50c8b0698299b4c94d59588a8c287c4dbe",
+      "checks": [
+        [
+          "TCP",
+          "controlplane.tailscale.com",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "TCP",
+          "log.tailscale.com",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "TCP",
+          "192.200.0.112",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "TCP",
+          "172.237.28.183",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "205.147.105.78",
+          3478,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "2403:2500:8000:1::e9a",
+          3478,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "100.101.102.103",
+          41641,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "fd7a:115c:a1e0::21",
+          41641,
+          "Fixture Direct"
+        ],
+        [
+          "TCP",
+          "peer.example-tailnet.ts.net",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "198.51.100.77",
+          3478,
+          "Fixture Proxy"
+        ],
+        [
+          "UDP",
+          "198.51.100.77",
+          41641,
+          "Fixture Proxy"
+        ],
+        [
+          "TCP",
+          "chatgpt.com",
+          443,
+          "Fixture Company"
+        ],
+        [
+          "UDP",
+          "stun.l.google.com",
+          3478,
+          "Fixture Company"
+        ]
+      ]
+    },
+    "releases/v14.3/src/macos/v14.3-macos-flclash.js": {
+      "sha256": "0490b0851139077511ead538bed13b8b12776a98223f516ca2627ecbe7a471f2",
+      "checks": [
+        [
+          "TCP",
+          "controlplane.tailscale.com",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "TCP",
+          "log.tailscale.com",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "TCP",
+          "192.200.0.112",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "TCP",
+          "172.237.28.183",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "205.147.105.78",
+          3478,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "2403:2500:8000:1::e9a",
+          3478,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "100.101.102.103",
+          41641,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "fd7a:115c:a1e0::21",
+          41641,
+          "Fixture Direct"
+        ],
+        [
+          "TCP",
+          "peer.example-tailnet.ts.net",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "198.51.100.77",
+          3478,
+          "Fixture Proxy"
+        ],
+        [
+          "UDP",
+          "198.51.100.77",
+          41641,
+          "Fixture Proxy"
+        ],
+        [
+          "TCP",
+          "chatgpt.com",
+          443,
+          "Fixture Company"
+        ],
+        [
+          "UDP",
+          "stun.l.google.com",
+          3478,
+          "Fixture Company"
+        ]
+      ]
+    },
+    "releases/v14.3/src/macos/v14.3-macos-clashmi.js": {
+      "sha256": "74779aea1703ded22dbf2b0d6a052747a8e576f62a2cbf9a1d9fd71d66f2afed",
+      "checks": [
+        [
+          "TCP",
+          "controlplane.tailscale.com",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "TCP",
+          "log.tailscale.com",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "TCP",
+          "192.200.0.112",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "TCP",
+          "172.237.28.183",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "205.147.105.78",
+          3478,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "2403:2500:8000:1::e9a",
+          3478,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "100.101.102.103",
+          41641,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "fd7a:115c:a1e0::21",
+          41641,
+          "Fixture Direct"
+        ],
+        [
+          "TCP",
+          "peer.example-tailnet.ts.net",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "198.51.100.77",
+          3478,
+          "Fixture Proxy"
+        ],
+        [
+          "UDP",
+          "198.51.100.77",
+          41641,
+          "Fixture Proxy"
+        ],
+        [
+          "TCP",
+          "chatgpt.com",
+          443,
+          "Fixture Company"
+        ],
+        [
+          "UDP",
+          "stun.l.google.com",
+          3478,
+          "Fixture Company"
+        ]
+      ]
+    },
+    "releases/v14.3/src/clash-verge/v14.3-clash-verge.js": {
+      "sha256": "ba30dd542b43d7c1cf13c691ba4a9bd90018027099a9fd8b44828e6cd4826c9a",
+      "checks": [
+        [
+          "TCP",
+          "controlplane.tailscale.com",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "TCP",
+          "log.tailscale.com",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "TCP",
+          "192.200.0.112",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "TCP",
+          "172.237.28.183",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "205.147.105.78",
+          3478,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "2403:2500:8000:1::e9a",
+          3478,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "100.101.102.103",
+          41641,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "fd7a:115c:a1e0::21",
+          41641,
+          "Fixture Direct"
+        ],
+        [
+          "TCP",
+          "peer.example-tailnet.ts.net",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "198.51.100.77",
+          3478,
+          "Fixture Proxy"
+        ],
+        [
+          "UDP",
+          "198.51.100.77",
+          41641,
+          "Fixture Proxy"
+        ],
+        [
+          "TCP",
+          "chatgpt.com",
+          443,
+          "Fixture Company"
+        ],
+        [
+          "UDP",
+          "stun.l.google.com",
+          3478,
+          "Fixture Company"
+        ],
+        [
+          "UDP",
+          "198.51.100.77",
+          41641,
+          "Fixture Direct via tailscaled.exe"
+        ]
+      ]
+    },
+    "releases/v14.3-ipv4-only/src/windows/v14.3-windows-flclash-ipv4-only.js": {
+      "sha256": "e593572a1dac9e4edb0a51d76b81289a4980a4fda7a4703b002263a00d40fedb",
+      "checks": [
+        [
+          "TCP",
+          "controlplane.tailscale.com",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "TCP",
+          "log.tailscale.com",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "TCP",
+          "192.200.0.112",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "TCP",
+          "172.237.28.183",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "205.147.105.78",
+          3478,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "2403:2500:8000:1::e9a",
+          3478,
+          "REJECT"
+        ],
+        [
+          "UDP",
+          "100.101.102.103",
+          41641,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "fd7a:115c:a1e0::21",
+          41641,
+          "REJECT"
+        ],
+        [
+          "TCP",
+          "peer.example-tailnet.ts.net",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "198.51.100.77",
+          3478,
+          "Fixture Proxy"
+        ],
+        [
+          "UDP",
+          "198.51.100.77",
+          41641,
+          "Fixture Proxy"
+        ],
+        [
+          "TCP",
+          "chatgpt.com",
+          443,
+          "Fixture Company"
+        ],
+        [
+          "UDP",
+          "stun.l.google.com",
+          3478,
+          "Fixture Company"
+        ],
+        [
+          "UDP",
+          "198.51.100.77",
+          41641,
+          "Fixture Direct via tailscaled.exe"
+        ]
+      ]
+    },
+    "releases/v14.3-ipv4-only/src/android/v14.3-android-flclash-ipv4-only.js": {
+      "sha256": "145a153bb20ffc4c3bd8e0d65b3726f380922ee3cbdca9dc0db7dbe7e4c960f2",
+      "checks": [
+        [
+          "TCP",
+          "controlplane.tailscale.com",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "TCP",
+          "log.tailscale.com",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "TCP",
+          "192.200.0.112",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "TCP",
+          "172.237.28.183",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "205.147.105.78",
+          3478,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "2403:2500:8000:1::e9a",
+          3478,
+          "REJECT"
+        ],
+        [
+          "UDP",
+          "100.101.102.103",
+          41641,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "fd7a:115c:a1e0::21",
+          41641,
+          "REJECT"
+        ],
+        [
+          "TCP",
+          "peer.example-tailnet.ts.net",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "198.51.100.77",
+          3478,
+          "Fixture Proxy"
+        ],
+        [
+          "UDP",
+          "198.51.100.77",
+          41641,
+          "Fixture Proxy"
+        ],
+        [
+          "TCP",
+          "chatgpt.com",
+          443,
+          "Fixture Company"
+        ],
+        [
+          "UDP",
+          "stun.l.google.com",
+          3478,
+          "Fixture Company"
+        ]
+      ]
+    },
+    "releases/v14.3-ipv4-only/src/ios/v14.3-clashmi-domestic-protocol-r1-ipv4-only.js": {
+      "sha256": "12296c9eb2fbcc91de834b4c3ab7c044ee64afa77cba63617149de696c0a7fb5",
+      "checks": [
+        [
+          "TCP",
+          "controlplane.tailscale.com",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "TCP",
+          "log.tailscale.com",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "TCP",
+          "192.200.0.112",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "TCP",
+          "172.237.28.183",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "205.147.105.78",
+          3478,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "2403:2500:8000:1::e9a",
+          3478,
+          "REJECT"
+        ],
+        [
+          "UDP",
+          "100.101.102.103",
+          41641,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "fd7a:115c:a1e0::21",
+          41641,
+          "REJECT"
+        ],
+        [
+          "TCP",
+          "peer.example-tailnet.ts.net",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "198.51.100.77",
+          3478,
+          "Fixture Proxy"
+        ],
+        [
+          "UDP",
+          "198.51.100.77",
+          41641,
+          "Fixture Proxy"
+        ],
+        [
+          "TCP",
+          "chatgpt.com",
+          443,
+          "Fixture Company"
+        ],
+        [
+          "UDP",
+          "stun.l.google.com",
+          3478,
+          "Fixture Company"
+        ]
+      ]
+    },
+    "releases/v14.3-ipv4-only/src/macos/v14.3-macos-flclash-ipv4-only.js": {
+      "sha256": "2d3a9b603b58c26f064d038a54166a3605fa9567af1073096a43f53cc4800977",
+      "checks": [
+        [
+          "TCP",
+          "controlplane.tailscale.com",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "TCP",
+          "log.tailscale.com",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "TCP",
+          "192.200.0.112",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "TCP",
+          "172.237.28.183",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "205.147.105.78",
+          3478,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "2403:2500:8000:1::e9a",
+          3478,
+          "REJECT"
+        ],
+        [
+          "UDP",
+          "100.101.102.103",
+          41641,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "fd7a:115c:a1e0::21",
+          41641,
+          "REJECT"
+        ],
+        [
+          "TCP",
+          "peer.example-tailnet.ts.net",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "198.51.100.77",
+          3478,
+          "Fixture Proxy"
+        ],
+        [
+          "UDP",
+          "198.51.100.77",
+          41641,
+          "Fixture Proxy"
+        ],
+        [
+          "TCP",
+          "chatgpt.com",
+          443,
+          "Fixture Company"
+        ],
+        [
+          "UDP",
+          "stun.l.google.com",
+          3478,
+          "Fixture Company"
+        ]
+      ]
+    },
+    "releases/v14.3-ipv4-only/src/macos/v14.3-macos-clashmi-ipv4-only.js": {
+      "sha256": "7d42fb0564354a359ec9edd54ba93ed582916ffddd7879ab505a803b87c025b6",
+      "checks": [
+        [
+          "TCP",
+          "controlplane.tailscale.com",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "TCP",
+          "log.tailscale.com",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "TCP",
+          "192.200.0.112",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "TCP",
+          "172.237.28.183",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "205.147.105.78",
+          3478,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "2403:2500:8000:1::e9a",
+          3478,
+          "REJECT"
+        ],
+        [
+          "UDP",
+          "100.101.102.103",
+          41641,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "fd7a:115c:a1e0::21",
+          41641,
+          "REJECT"
+        ],
+        [
+          "TCP",
+          "peer.example-tailnet.ts.net",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "198.51.100.77",
+          3478,
+          "Fixture Proxy"
+        ],
+        [
+          "UDP",
+          "198.51.100.77",
+          41641,
+          "Fixture Proxy"
+        ],
+        [
+          "TCP",
+          "chatgpt.com",
+          443,
+          "Fixture Company"
+        ],
+        [
+          "UDP",
+          "stun.l.google.com",
+          3478,
+          "Fixture Company"
+        ]
+      ]
+    },
+    "releases/v14.3-ipv4-only/src/clash-verge/v14.3-clash-verge-ipv4-only.js": {
+      "sha256": "6b529d02ccfb5faeb86e860671c04c3cb834e88ec6a83333555128e98164ce2a",
+      "checks": [
+        [
+          "TCP",
+          "controlplane.tailscale.com",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "TCP",
+          "log.tailscale.com",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "TCP",
+          "192.200.0.112",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "TCP",
+          "172.237.28.183",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "205.147.105.78",
+          3478,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "2403:2500:8000:1::e9a",
+          3478,
+          "REJECT"
+        ],
+        [
+          "UDP",
+          "100.101.102.103",
+          41641,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "fd7a:115c:a1e0::21",
+          41641,
+          "REJECT"
+        ],
+        [
+          "TCP",
+          "peer.example-tailnet.ts.net",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "198.51.100.77",
+          3478,
+          "Fixture Proxy"
+        ],
+        [
+          "UDP",
+          "198.51.100.77",
+          41641,
+          "Fixture Proxy"
+        ],
+        [
+          "TCP",
+          "chatgpt.com",
+          443,
+          "Fixture Company"
+        ],
+        [
+          "UDP",
+          "stun.l.google.com",
+          3478,
+          "Fixture Company"
+        ],
+        [
+          "UDP",
+          "198.51.100.77",
+          41641,
+          "Fixture Direct via tailscaled.exe"
+        ]
+      ]
+    }
+  }
+}

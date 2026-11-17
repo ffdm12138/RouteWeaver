@@ -1,0 +1,14 @@
+function v14AddTailscaleRules(config, add) {
+  add("DOMAIN-SUFFIX," + V14_TAILSCALE.publicDomain, "DIRECT");
+  add("DOMAIN-SUFFIX," + V14_TAILSCALE.tailnetDomain, "DIRECT");
+  for (const match of V14_TAILSCALE.processRules) add(match, "DIRECT");
+  if (V14_TAILSCALE.processRules.length && config["find-process-mode"] !== "always")
+    config["find-process-mode"] = "strict";
+
+  const sets = config["rule-providers"], base = "v14-tailscale-public-ips";
+  let name = base, index = 1;
+  while (Object.prototype.hasOwnProperty.call(sets, name)) name = base + "-" + (++index);
+  sets[name] = {type: "inline", behavior: "ipcidr", payload: V14_TAILSCALE.publicNetworks.split(" ")};
+  add("RULE-SET," + name, "DIRECT", true);
+  return name;
+}

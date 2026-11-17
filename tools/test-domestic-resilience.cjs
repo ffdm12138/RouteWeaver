@@ -4,7 +4,7 @@
 const fs = require('node:fs'), path = require('node:path'), vm = require('node:vm');
 const crypto = require('node:crypto'), assert = require('node:assert/strict');
 const root = path.resolve(__dirname, '..'), releaseRoot = path.join(root, 'releases/v14.3');
-const f = require(path.join(releaseRoot, 'tests/fixture.cjs'));
+const f = require(path.join(releaseRoot, 'tests/current-fixture.cjs'));
 const read = file => JSON.parse(fs.readFileSync(path.join(root, file), 'utf8'));
 const hash = file => crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
 const release = read('CURRENT_RELEASE.json');

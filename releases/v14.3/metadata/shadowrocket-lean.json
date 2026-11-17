@@ -5,8 +5,14 @@
   "domesticProtocolRevision": "domestic-protocol-r1",
   "status": "GENERATED_NATIVE_ACCEPTANCE_PENDING",
   "file": "src/ios/v14.3-shadowrocket.conf",
-  "sha256": "e0220fd31d1394a90cdd4d4ff3e4bc0ebf7daa762c68b192ef627eb53379bbfc",
-  "bytes": 1780239,
+  "sha256": "c79e3a874d88410e8cb3974ad46417e58ebc7ab2aeec99f5fd3326b800d0c619",
+  "bytes": 1789875,
+  "tailscaleDerpSource": {
+    "file": "data/rules/tailscale-derp-map.json",
+    "url": "https://controlplane.tailscale.com/derpmap/default",
+    "sha256": "0c8d3433db696e18e26a1ce8464c1c29d75963ecf81b28e280341bfd323cdb3a",
+    "reviewedOn": "2026-11-17"
+  },
   "before": {
     "file": "validation/inputs/v14.2-baseline/src/ios/v14.2-shadowrocket.conf",
     "sha256": "4813040cc00845c0d0cfda47123194598dce6d6d89e4b5e8a377f3ac516774f9",
@@ -14,7 +20,7 @@
   },
   "rules": {
     "before": 116974,
-    "after": 5112,
+    "after": 5308,
     "removedDuplicateCNRows": 111400,
     "removedDominatedLiteralRows": [
       "DOMAIN-SUFFIX,firebase.google.com,谷歌服务",
@@ -486,6 +492,7 @@
       "DOMAIN,itunes.apple.com,苹果国际",
       "DOMAIN,itunesconnect.apple.com,苹果国际",
       "DOMAIN,osxapps.itunes.g.aaplimg.com,苹果国际",
+      "DOMAIN-SUFFIX,ts.net,DIRECT",
       "DOMAIN-SUFFIX,feishu.cn,国内网站",
       "DOMAIN-SUFFIX,amemv.cn,国内网站",
       "DOMAIN-SUFFIX,betastar.cn,国内网站",
@@ -671,8 +678,8 @@
   },
   "dns": {
     "beforeHostRows": 9130,
-    "afterHostRows": 9890,
-    "removedRedundantRows": 1046,
+    "afterHostRows": 9894,
+    "removedRedundantRows": 1044,
     "redundantRowCertificates": [
       {
         "key": "go.microsoft.com",
@@ -3411,14 +3418,6 @@
         "parent": "default"
       },
       {
-        "key": "ts.net",
-        "parent": "default"
-      },
-      {
-        "key": "*.ts.net",
-        "parent": "default"
-      },
-      {
         "key": "leike.cc",
         "parent": "default"
       },
@@ -5462,16 +5461,24 @@
   ],
   "sourceContract": {
     "file": "docs/需求.md",
-    "sha256": "9f758b6a38358cf78deef3c81faf01868a06eb4dc2529259acb3306cbdc2a79c"
+    "sha256": "e4fffeae38f76a315450851f32195dd64d693b0ed796f443fbcae58847ee2847"
   },
   "inputs": [
     {
       "file": "tools/build-shadowrocket-lean.cjs",
-      "sha256": "be9782e0429435dfb1519acb7812197530b00b7d5fa7439c931a544689635631"
+      "sha256": "ded6176549e6614db9c60e363d471aebab636c6b67cb5b8fd6ab61dcc4a1404d"
+    },
+    {
+      "file": "tools/lib/tailscale-policy.cjs",
+      "sha256": "2502faa83ec8d23d9344fb3e2bb6c1a6b9092193f660e6ecad55f0b5790a3eac"
+    },
+    {
+      "file": "data/rules/tailscale-derp-map.json",
+      "sha256": "0c8d3433db696e18e26a1ce8464c1c29d75963ecf81b28e280341bfd323cdb3a"
     },
     {
       "file": "src/android/v14.3-android-flclash.js",
-      "sha256": "34697bf99399c98dde0ab771fa3c35f6f9829834abd9e132f97f18abb98fe29f"
+      "sha256": "5041ce89a320048ae7ecaef01111aa4d98dbf8130e4b70269a02cb580bf186d9"
     },
     {
       "file": "data/rules/embedded-policy.json",
