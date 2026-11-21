@@ -176,3 +176,7 @@ Windows FlClash 主版与纯 IPv4 入口增加可选原生描述。两种口味�
 公开版主版 rc.16 与纯 IPv4 rc.7 均绑定 `e37d818767668c5937f09f72ff33c0a4fb370378`。两轨共 14 份入口通过生成核对和 60,866 项分流模型检查，12 份 JS 通过 480 项原装 Windows 核心回放，另有 40 项 Windows 微信进程检查通过。两轨各八个附件的匿名下载 SHA-256 均匹配，Windows 与 Ubuntu 的源码和发布 CI 全部通过。微信实际发图与各平台 TUN/VPN 待设备验收。 [主版回执](releases/v14.3.0-rc.16.json) · [纯 IPv4 回执](releases/v14.3.0-ipv4-only-rc.7.json)
 
 发布规范已登记每次交付完成验证后自动推送并发布公开版的持续授权。
+
+## 2026-11-21 · 国内域名与业务组默认值
+
+本发行口味两轨 14 份入口通过 62,348 项分流模型检查，12 个 JS 入口通过 624 项隔离 Windows 核心检查。公开版 `v14.3.0-rc.17` 与 `v14.3.0-ipv4-only-rc.8` 绑定 `478468bb74904b61d4e14bb97198b1f9274fa8c4`。Windows、Ubuntu 的源码和发布 CI 通过，16 个附件的匿名下载 SHA-256 均匹配。客户端与 TUN/VPN 待实机验收。 [主版回执](releases/v14.3.0-rc.17.json) · [纯 IPv4 回执](releases/v14.3.0-ipv4-only-rc.8.json)

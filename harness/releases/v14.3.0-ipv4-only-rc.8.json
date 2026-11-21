@@ -1,0 +1,150 @@
+{
+  "tag": "v14.3.0-ipv4-only-rc.8",
+  "releaseUrl": "https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-ipv4-only-rc.8",
+  "prerelease": true,
+  "sourceCommit": "478468bb74904b61d4e14bb97198b1f9274fa8c4",
+  "remoteTagCommit": "478468bb74904b61d4e14bb97198b1f9274fa8c4",
+  "publishedAtUTC": "2026-11-21T13:43:40Z",
+  "assets": [
+    {
+      "name": "SHA256SUMS.txt",
+      "bytes": 711,
+      "sha256": "c830f93842289b8bb97eda41bc28b6580ec2566b3a40ebfc4285277c5b64e90f",
+      "url": "https://github.com/ffdm12138/RouteWeaver/releases/download/v14.3.0-ipv4-only-rc.8/SHA256SUMS.txt",
+      "githubDigest": "sha256:c830f93842289b8bb97eda41bc28b6580ec2566b3a40ebfc4285277c5b64e90f"
+    },
+    {
+      "name": "v14.3-android-flclash-ipv4-only.js",
+      "bytes": 127308,
+      "sha256": "98724c0352ab859e852a414935a256e80dae899f87cf75548829ffcfae52c798",
+      "url": "https://github.com/ffdm12138/RouteWeaver/releases/download/v14.3.0-ipv4-only-rc.8/v14.3-android-flclash-ipv4-only.js",
+      "githubDigest": "sha256:98724c0352ab859e852a414935a256e80dae899f87cf75548829ffcfae52c798"
+    },
+    {
+      "name": "v14.3-clash-verge-ipv4-only.js",
+      "bytes": 129687,
+      "sha256": "5124a21df47d1b410fe3e4430513cdf5156850342a194ce44533ab657fd37536",
+      "url": "https://github.com/ffdm12138/RouteWeaver/releases/download/v14.3.0-ipv4-only-rc.8/v14.3-clash-verge-ipv4-only.js",
+      "githubDigest": "sha256:5124a21df47d1b410fe3e4430513cdf5156850342a194ce44533ab657fd37536"
+    },
+    {
+      "name": "v14.3-clashmi-domestic-protocol-r1-ipv4-only.js",
+      "bytes": 129489,
+      "sha256": "eef7bcb0a84c351b9c450c6f7dd9b22a1fc6dfe988fc8350add14afc4dd0aff3",
+      "url": "https://github.com/ffdm12138/RouteWeaver/releases/download/v14.3.0-ipv4-only-rc.8/v14.3-clashmi-domestic-protocol-r1-ipv4-only.js",
+      "githubDigest": "sha256:eef7bcb0a84c351b9c450c6f7dd9b22a1fc6dfe988fc8350add14afc4dd0aff3"
+    },
+    {
+      "name": "v14.3-macos-clashmi-ipv4-only.js",
+      "bytes": 129487,
+      "sha256": "cd755b762bd687ea63ecbde67d4bc58096025a5e3956c59a8344f7ffbc3b50d2",
+      "url": "https://github.com/ffdm12138/RouteWeaver/releases/download/v14.3.0-ipv4-only-rc.8/v14.3-macos-clashmi-ipv4-only.js",
+      "githubDigest": "sha256:cd755b762bd687ea63ecbde67d4bc58096025a5e3956c59a8344f7ffbc3b50d2"
+    },
+    {
+      "name": "v14.3-macos-flclash-ipv4-only.js",
+      "bytes": 129537,
+      "sha256": "1a57e1bcb0e9fdad6e28305fda587255bd1a2051aacab08e798b5ec666748e49",
+      "url": "https://github.com/ffdm12138/RouteWeaver/releases/download/v14.3.0-ipv4-only-rc.8/v14.3-macos-flclash-ipv4-only.js",
+      "githubDigest": "sha256:1a57e1bcb0e9fdad6e28305fda587255bd1a2051aacab08e798b5ec666748e49"
+    },
+    {
+      "name": "v14.3-shadowrocket-ipv4-only.conf",
+      "bytes": 1798647,
+      "sha256": "d5811db3d5759b6bae53c50da3e28142af09db2542b9733f346a7417665077fc",
+      "url": "https://github.com/ffdm12138/RouteWeaver/releases/download/v14.3.0-ipv4-only-rc.8/v14.3-shadowrocket-ipv4-only.conf",
+      "githubDigest": "sha256:d5811db3d5759b6bae53c50da3e28142af09db2542b9733f346a7417665077fc"
+    },
+    {
+      "name": "v14.3-windows-flclash-ipv4-only.js",
+      "bytes": 127749,
+      "sha256": "9be409ac10a5b48dfe36d3871212302f9788928369b345d2575857ec3dff22fd",
+      "url": "https://github.com/ffdm12138/RouteWeaver/releases/download/v14.3.0-ipv4-only-rc.8/v14.3-windows-flclash-ipv4-only.js",
+      "githubDigest": "sha256:9be409ac10a5b48dfe36d3871212302f9788928369b345d2575857ec3dff22fd"
+    }
+  ],
+  "assetDownloadVerifiedAtUTC": "2026-11-21T13:44:21.342982+00:00",
+  "anonymousDownloads": "ALL_MATCH",
+  "remoteMainAtVerification": "478468bb74904b61d4e14bb97198b1f9274fa8c4",
+  "status": "PASS_PUBLISHED_ASSETS_AND_CI",
+  "verifiedAtUTC": "2026-11-21T13:50:18.069623+00:00",
+  "deviceAcceptance": "NOT_RUN",
+  "liveClientChanges": false,
+  "mainCI": {
+    "conclusion": "success",
+    "databaseId": 44909473706,
+    "event": "push",
+    "headBranch": "main",
+    "headSha": "478468bb74904b61d4e14bb97198b1f9274fa8c4",
+    "status": "completed",
+    "url": "https://github.com/ffdm12138/RouteWeaver/actions/runs/44909473706",
+    "jobs": [
+      {
+        "name": "javascript-engines (windows-latest, routeweaver-engine-check.exe)",
+        "id": 136861998748,
+        "state": "success"
+      },
+      {
+        "name": "javascript-engines (ubuntu-latest, routeweaver-engine-check)",
+        "id": 136861998939,
+        "state": "success"
+      },
+      {
+        "name": "verify (ubuntu-24.04)",
+        "id": 136861998940,
+        "state": "success"
+      },
+      {
+        "name": "verify (windows-latest)",
+        "id": 136861998965,
+        "state": "success"
+      },
+      {
+        "name": "bound-release",
+        "id": 136861999938,
+        "state": "skipped"
+      }
+    ]
+  },
+  "releaseCI": {
+    "conclusion": "success",
+    "databaseId": 44910295253,
+    "event": "release",
+    "headBranch": "v14.3.0-ipv4-only-rc.8",
+    "headSha": "478468bb74904b61d4e14bb97198b1f9274fa8c4",
+    "status": "completed",
+    "url": "https://github.com/ffdm12138/RouteWeaver/actions/runs/44910295253",
+    "jobs": [
+      {
+        "name": "bound-release (ubuntu-24.04)",
+        "id": 136864472906,
+        "state": "success"
+      },
+      {
+        "name": "verify (windows-latest)",
+        "id": 136864473163,
+        "state": "success"
+      },
+      {
+        "name": "javascript-engines (ubuntu-latest, routeweaver-engine-check)",
+        "id": 136864473178,
+        "state": "success"
+      },
+      {
+        "name": "javascript-engines (windows-latest, routeweaver-engine-check.exe)",
+        "id": 136864473201,
+        "state": "success"
+      },
+      {
+        "name": "verify (ubuntu-24.04)",
+        "id": 136864473227,
+        "state": "success"
+      },
+      {
+        "name": "bound-release (windows-latest)",
+        "id": 136864473264,
+        "state": "success"
+      }
+    ]
+  }
+}
