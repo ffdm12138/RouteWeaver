@@ -1,0 +1,146 @@
+{
+  "tag": "v14.3.0-ipv4-only-rc.10",
+  "releaseUrl": "https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-ipv4-only-rc.10",
+  "prerelease": true,
+  "sourceCommit": "af31a759921281410e1545a3d066066718dce563",
+  "remoteTagCommit": "af31a759921281410e1545a3d066066718dce563",
+  "publishedAtUTC": "2026-11-21T18:43:31Z",
+  "assets": [
+    {
+      "name": "SHA256SUMS.txt",
+      "bytes": 809,
+      "sha256": "1800c4d95c12f9f9a832dd45c09282b8f44096254e28f0b12a566eb3b4670151",
+      "url": "https://github.com/ffdm12138/RouteWeaver/releases/download/v14.3.0-ipv4-only-rc.10/SHA256SUMS.txt",
+      "githubDigest": "sha256:1800c4d95c12f9f9a832dd45c09282b8f44096254e28f0b12a566eb3b4670151"
+    },
+    {
+      "name": "v14.3-android-flclash-ipv4-only.js",
+      "bytes": 127448,
+      "sha256": "975231eaa3658475a4b872e4c54f99c569cb66a35ae5496f4afd5fcb5a2051e1",
+      "url": "https://github.com/ffdm12138/RouteWeaver/releases/download/v14.3.0-ipv4-only-rc.10/v14.3-android-flclash-ipv4-only.js",
+      "githubDigest": "sha256:975231eaa3658475a4b872e4c54f99c569cb66a35ae5496f4afd5fcb5a2051e1"
+    },
+    {
+      "name": "v14.3-clash-verge-ipv4-only.js",
+      "bytes": 129827,
+      "sha256": "5b8cd2471a84cdf23216a57760d7fd15189085c612d117e92be0d4b3c04e68e2",
+      "url": "https://github.com/ffdm12138/RouteWeaver/releases/download/v14.3.0-ipv4-only-rc.10/v14.3-clash-verge-ipv4-only.js",
+      "githubDigest": "sha256:5b8cd2471a84cdf23216a57760d7fd15189085c612d117e92be0d4b3c04e68e2"
+    },
+    {
+      "name": "v14.3-clashmi-domestic-protocol-r1-ipv4-only.js",
+      "bytes": 129629,
+      "sha256": "f18edfe3a4a2def3962a69342a9df9f07a40e12e9826eaf1670135b63887fc48",
+      "url": "https://github.com/ffdm12138/RouteWeaver/releases/download/v14.3.0-ipv4-only-rc.10/v14.3-clashmi-domestic-protocol-r1-ipv4-only.js",
+      "githubDigest": "sha256:f18edfe3a4a2def3962a69342a9df9f07a40e12e9826eaf1670135b63887fc48"
+    },
+    {
+      "name": "v14.3-macos-clashmi-ipv4-only.js",
+      "bytes": 129627,
+      "sha256": "696bb71e540a932ee216a4bfdf3040a922c218e8017a392b440cd8daee32a16b",
+      "url": "https://github.com/ffdm12138/RouteWeaver/releases/download/v14.3.0-ipv4-only-rc.10/v14.3-macos-clashmi-ipv4-only.js",
+      "githubDigest": "sha256:696bb71e540a932ee216a4bfdf3040a922c218e8017a392b440cd8daee32a16b"
+    },
+    {
+      "name": "v14.3-macos-flclash-ipv4-only.js",
+      "bytes": 129677,
+      "sha256": "14df889f4724aeaa3a6214d8e956568243b9dd23d0b1f288de402cd8bdff3a8c",
+      "url": "https://github.com/ffdm12138/RouteWeaver/releases/download/v14.3.0-ipv4-only-rc.10/v14.3-macos-flclash-ipv4-only.js",
+      "githubDigest": "sha256:14df889f4724aeaa3a6214d8e956568243b9dd23d0b1f288de402cd8bdff3a8c"
+    },
+    {
+      "name": "v14.3-projectclash-ipv4-only.js",
+      "bytes": 129531,
+      "sha256": "2c9e42140641e205dc52440f9b003e82141c4552140f14f6bc78c381b1dc9cef",
+      "url": "https://github.com/ffdm12138/RouteWeaver/releases/download/v14.3.0-ipv4-only-rc.10/v14.3-projectclash-ipv4-only.js",
+      "githubDigest": "sha256:2c9e42140641e205dc52440f9b003e82141c4552140f14f6bc78c381b1dc9cef"
+    },
+    {
+      "name": "v14.3-shadowrocket-ipv4-only.conf",
+      "bytes": 1800073,
+      "sha256": "bf26a572ee3a86080d119c2e2aaaa3b9480a581e3ae0fe338c86fbec1d1d3010",
+      "url": "https://github.com/ffdm12138/RouteWeaver/releases/download/v14.3.0-ipv4-only-rc.10/v14.3-shadowrocket-ipv4-only.conf",
+      "githubDigest": "sha256:bf26a572ee3a86080d119c2e2aaaa3b9480a581e3ae0fe338c86fbec1d1d3010"
+    },
+    {
+      "name": "v14.3-windows-flclash-ipv4-only.js",
+      "bytes": 127889,
+      "sha256": "74129ef69403f6ffab9e04c7da47cf53efb6a5cc60b6635e9eb2d648534da06a",
+      "url": "https://github.com/ffdm12138/RouteWeaver/releases/download/v14.3.0-ipv4-only-rc.10/v14.3-windows-flclash-ipv4-only.js",
+      "githubDigest": "sha256:74129ef69403f6ffab9e04c7da47cf53efb6a5cc60b6635e9eb2d648534da06a"
+    }
+  ],
+  "assetDownloadVerifiedAtUTC": "2026-11-21T18:44:17.654687+00:00",
+  "anonymousDownloads": "ALL_MATCH",
+  "deviceAcceptance": "NOT_RUN",
+  "liveClientChanges": false,
+  "remoteMainAtVerification": "af31a759921281410e1545a3d066066718dce563",
+  "status": "PASS_PUBLISHED_ASSETS_AND_CI",
+  "verifiedAtUTC": "2026-11-21T18:54:01.056884+00:00",
+  "mainCI": {
+    "conclusion": "success",
+    "databaseId": 44936484904,
+    "url": "https://github.com/ffdm12138/RouteWeaver/actions/runs/44936484904",
+    "jobs": [
+      {
+        "name": "verify (windows-latest)",
+        "conclusion": "success"
+      },
+      {
+        "name": "verify (ubuntu-24.04)",
+        "conclusion": "success"
+      },
+      {
+        "name": "projectclash-javascriptcore",
+        "conclusion": "success"
+      },
+      {
+        "name": "javascript-engines (ubuntu-latest, routeweaver-engine-check)",
+        "conclusion": "success"
+      },
+      {
+        "name": "javascript-engines (windows-latest, routeweaver-engine-check.exe)",
+        "conclusion": "success"
+      },
+      {
+        "name": "bound-release",
+        "conclusion": "skipped"
+      }
+    ]
+  },
+  "releaseCI": {
+    "conclusion": "success",
+    "databaseId": 44937076651,
+    "url": "https://github.com/ffdm12138/RouteWeaver/actions/runs/44937076651",
+    "jobs": [
+      {
+        "name": "bound-release (windows-latest)",
+        "conclusion": "success"
+      },
+      {
+        "name": "javascript-engines (ubuntu-latest, routeweaver-engine-check)",
+        "conclusion": "success"
+      },
+      {
+        "name": "bound-release (ubuntu-24.04)",
+        "conclusion": "success"
+      },
+      {
+        "name": "verify (windows-latest)",
+        "conclusion": "success"
+      },
+      {
+        "name": "verify (ubuntu-24.04)",
+        "conclusion": "success"
+      },
+      {
+        "name": "projectclash-javascriptcore",
+        "conclusion": "success"
+      },
+      {
+        "name": "javascript-engines (windows-latest, routeweaver-engine-check.exe)",
+        "conclusion": "success"
+      }
+    ]
+  }
+}

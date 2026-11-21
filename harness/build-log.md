@@ -180,3 +180,9 @@ Windows FlClash 主版与纯 IPv4 入口增加可选原生描述。两种口味�
 ## 2026-11-21 · 国内域名与业务组默认值
 
 本发行口味两轨 14 份入口通过 62,348 项分流模型检查，12 个 JS 入口通过 624 项隔离 Windows 核心检查。公开版 `v14.3.0-rc.17` 与 `v14.3.0-ipv4-only-rc.8` 绑定 `478468bb74904b61d4e14bb97198b1f9274fa8c4`。Windows、Ubuntu 的源码和发布 CI 通过，16 个附件的匿名下载 SHA-256 均匹配。客户端与 TUN/VPN 待实机验收。 [主版回执](releases/v14.3.0-rc.17.json) · [纯 IPv4 回执](releases/v14.3.0-ipv4-only-rc.8.json)
+
+## 2026-11-22 · ProjectClash 覆写
+
+ProjectClash 主版和纯 IPv4 版从当前共享规则生成，覆盖 iPhone、iPad、Mac 和 Apple TV。固定内核回环测试每份脚本通过 66 项，包含 TCP、UDP、DoH、DoT、三档切换及订阅刷新后的历史选择恢复。Apple App 和 VPN 接管待实机验收。 [导入说明](../docs/guides/ProjectClash使用说明.md) · [内核回执](../releases/v14.3/validation/projectclash-r1.json)
+
+公开主版 v14.3.0-rc.19 与纯 IPv4 版 v14.3.0-ipv4-only-rc.10 绑定 `af31a759921281410e1545a3d066066718dce563`。Windows、Ubuntu 的源码和发布 CI 以及 macOS JavaScriptCore 检查均通过。18 个附件的匿名下载与发布 SHA-256 相符。 [主版发布回执](releases/v14.3.0-rc.19.json) · [纯 IPv4 发布回执](releases/v14.3.0-ipv4-only-rc.10.json)
