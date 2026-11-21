@@ -170,3 +170,9 @@ Windows FlClash 主版与纯 IPv4 入口增加可选原生描述。两种口味�
 主版和纯 IPv4 版的 14 份入口通过生成、规则和幂等检查。Windows FlClash 隔离核心的 160 项回环测试覆盖 DERP、STUN、尾网地址、进程名及公网 UDP 和公司规则反例。尾网回放使用官方示例地址。回执绑定导入文件和核心的 SHA-256，实际 TUN/VPN 和 MagicDNS 待设备验收。 [当前验收](../docs/status/当前验收.md)
 
 当前 12 份 Mihomo 导入文件各通过 38 项隔离故障转移与引擎对照检查。 [公开源码候选回执](../releases/v14.3/validation/proxy-failover/tailscale-direct-r1.json)
+
+## 2026-11-21 · 微信发图优化公开预发布
+
+公开版主版 rc.16 与纯 IPv4 rc.7 均绑定 `e37d818767668c5937f09f72ff33c0a4fb370378`。两轨共 14 份入口通过生成核对和 60,866 项分流模型检查，12 份 JS 通过 480 项原装 Windows 核心回放，另有 40 项 Windows 微信进程检查通过。两轨各八个附件的匿名下载 SHA-256 均匹配，Windows 与 Ubuntu 的源码和发布 CI 全部通过。微信实际发图与各平台 TUN/VPN 待设备验收。 [主版回执](releases/v14.3.0-rc.16.json) · [纯 IPv4 回执](releases/v14.3.0-ipv4-only-rc.7.json)
+
+发布规范已登记每次交付完成验证后自动推送并发布公开版的持续授权。

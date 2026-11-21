@@ -1,0 +1,147 @@
+{
+  "tag": "v14.3.0-rc.16",
+  "releaseUrl": "https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-rc.16",
+  "prerelease": true,
+  "sourceCommit": "e37d818767668c5937f09f72ff33c0a4fb370378",
+  "remoteTagCommit": "e37d818767668c5937f09f72ff33c0a4fb370378",
+  "publishedAtUTC": "2026-11-21T12:11:58Z",
+  "assets": [
+    {
+      "name": "SHA256SUMS.txt",
+      "bytes": 641,
+      "sha256": "be49e994c1467f0ddfe24dbba87ec06c40f5b1c0cfa639bf1ec22955c2a5a2fa",
+      "url": "https://github.com/ffdm12138/RouteWeaver/releases/download/v14.3.0-rc.16/SHA256SUMS.txt",
+      "githubDigest": "sha256:be49e994c1467f0ddfe24dbba87ec06c40f5b1c0cfa639bf1ec22955c2a5a2fa"
+    },
+    {
+      "name": "v14.3-android-flclash.js",
+      "bytes": 123956,
+      "sha256": "3f5115fce915254fdeea23992328eb9e0a09dd4383d1dd9cfa2ac192164553f8",
+      "url": "https://github.com/ffdm12138/RouteWeaver/releases/download/v14.3.0-rc.16/v14.3-android-flclash.js",
+      "githubDigest": "sha256:3f5115fce915254fdeea23992328eb9e0a09dd4383d1dd9cfa2ac192164553f8"
+    },
+    {
+      "name": "v14.3-clash-verge.js",
+      "bytes": 126335,
+      "sha256": "37286102c382045b15592687792ad04b48f824f976706b3b6e9b7d31eb86a119",
+      "url": "https://github.com/ffdm12138/RouteWeaver/releases/download/v14.3.0-rc.16/v14.3-clash-verge.js",
+      "githubDigest": "sha256:37286102c382045b15592687792ad04b48f824f976706b3b6e9b7d31eb86a119"
+    },
+    {
+      "name": "v14.3-clashmi-domestic-protocol-r1.js",
+      "bytes": 126266,
+      "sha256": "5124b9362e4e01922dd49a08e332ec49475362ab60598a883f37d40ceb9070ed",
+      "url": "https://github.com/ffdm12138/RouteWeaver/releases/download/v14.3.0-rc.16/v14.3-clashmi-domestic-protocol-r1.js",
+      "githubDigest": "sha256:5124b9362e4e01922dd49a08e332ec49475362ab60598a883f37d40ceb9070ed"
+    },
+    {
+      "name": "v14.3-macos-clashmi.js",
+      "bytes": 126264,
+      "sha256": "459ad17b380ccc7babc984cb670e191f536dd99311980f85861806b254cb059a",
+      "url": "https://github.com/ffdm12138/RouteWeaver/releases/download/v14.3.0-rc.16/v14.3-macos-clashmi.js",
+      "githubDigest": "sha256:459ad17b380ccc7babc984cb670e191f536dd99311980f85861806b254cb059a"
+    },
+    {
+      "name": "v14.3-macos-flclash.js",
+      "bytes": 126240,
+      "sha256": "293a293a9cf6fb1f533e01a7b2ca5edc9646529160f82493a5c395f31d15e3a8",
+      "url": "https://github.com/ffdm12138/RouteWeaver/releases/download/v14.3.0-rc.16/v14.3-macos-flclash.js",
+      "githubDigest": "sha256:293a293a9cf6fb1f533e01a7b2ca5edc9646529160f82493a5c395f31d15e3a8"
+    },
+    {
+      "name": "v14.3-shadowrocket.conf",
+      "bytes": 1797384,
+      "sha256": "fd055ff1620487ab7c9947a5d19a312087ba5abfff3c650a19723c093393d85d",
+      "url": "https://github.com/ffdm12138/RouteWeaver/releases/download/v14.3.0-rc.16/v14.3-shadowrocket.conf",
+      "githubDigest": "sha256:fd055ff1620487ab7c9947a5d19a312087ba5abfff3c650a19723c093393d85d"
+    },
+    {
+      "name": "v14.3-windows-flclash.js",
+      "bytes": 124397,
+      "sha256": "25252d8763b69944d4674a98e4ac666918ced21e8dd50fbf6f6851c290cc279c",
+      "url": "https://github.com/ffdm12138/RouteWeaver/releases/download/v14.3.0-rc.16/v14.3-windows-flclash.js",
+      "githubDigest": "sha256:25252d8763b69944d4674a98e4ac666918ced21e8dd50fbf6f6851c290cc279c"
+    }
+  ],
+  "assetDownloadVerifiedAtUTC": "2026-11-21T12:12:52.156621+00:00",
+  "anonymousDownloads": "ALL_MATCH",
+  "remoteMainAtVerification": "e37d818767668c5937f09f72ff33c0a4fb370378",
+  "status": "PASS_PUBLISHED_ASSETS_AND_CI",
+  "verifiedAtUTC": "2026-11-21T12:19:18.492629+00:00",
+  "deviceAcceptance": "NOT_RUN",
+  "liveClientChanges": false,
+  "mainCI": {
+    "conclusion": "success",
+    "databaseId": 44902101200,
+    "event": "push",
+    "headBranch": "main",
+    "headSha": "e37d818767668c5937f09f72ff33c0a4fb370378",
+    "status": "completed",
+    "url": "https://github.com/ffdm12138/RouteWeaver/actions/runs/44902101200",
+    "jobs": [
+      {
+        "name": "javascript-engines (windows-latest, routeweaver-engine-check.exe)",
+        "id": 136839958868,
+        "state": "success"
+      },
+      {
+        "name": "javascript-engines (ubuntu-latest, routeweaver-engine-check)",
+        "id": 136839959110,
+        "state": "success"
+      },
+      {
+        "name": "verify (windows-latest)",
+        "id": 136839959120,
+        "state": "success"
+      },
+      {
+        "name": "verify (ubuntu-24.04)",
+        "id": 136839959767,
+        "state": "success"
+      }
+    ]
+  },
+  "releaseCI": {
+    "conclusion": "success",
+    "databaseId": 44902699887,
+    "event": "release",
+    "headBranch": "v14.3.0-rc.16",
+    "headSha": "e37d818767668c5937f09f72ff33c0a4fb370378",
+    "status": "completed",
+    "url": "https://github.com/ffdm12138/RouteWeaver/actions/runs/44902699887",
+    "jobs": [
+      {
+        "name": "verify (ubuntu-24.04)",
+        "id": 136841752056,
+        "state": "success"
+      },
+      {
+        "name": "javascript-engines (windows-latest, routeweaver-engine-check.exe)",
+        "id": 136841752274,
+        "state": "success"
+      },
+      {
+        "name": "javascript-engines (ubuntu-latest, routeweaver-engine-check)",
+        "id": 136841752301,
+        "state": "success"
+      },
+      {
+        "name": "verify (windows-latest)",
+        "id": 136841752316,
+        "state": "success"
+      },
+      {
+        "name": "bound-release (windows-latest)",
+        "id": 136841752326,
+        "state": "success"
+      },
+      {
+        "name": "bound-release (ubuntu-24.04)",
+        "id": 136841752364,
+        "state": "success"
+      }
+    ]
+  },
+  "recordType": "PUBLICATION_VERIFICATION",
+  "verificationMethod": "Anonymous HTTPS asset download, SHA-256, remote tag and exact-commit Actions jobs"
+}
