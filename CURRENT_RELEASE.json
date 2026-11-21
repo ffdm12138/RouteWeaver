@@ -124,13 +124,13 @@
       "wholeDeviceIPv4Requires": "APP_OS_IPV6_BLOCK_AND_IPV4_SYSTEM_DNS",
       "shadowrocket": "NODE_IPV4_PINNING_REQUIRED_NATIVE_NOT_RUN",
       "priorReleasesPreserved": 6,
-      "publicReleaseTag": "v14.3.0-ipv4-only-rc.8",
-      "publicReleaseURL": "https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-ipv4-only-rc.8",
+      "publicReleaseTag": "v14.3.0-ipv4-only-rc.9",
+      "publicReleaseURL": "https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-ipv4-only-rc.9",
       "publicReleaseStatus": "PUBLISHED_PRE_RELEASE_DEVICE_NOT_RUN",
       "publicReleaseAssets": 8,
-      "publicReleaseCommit": "478468bb74904b61d4e14bb97198b1f9274fa8c4",
-      "publicationManifest": "harness/releases/v14.3.0-ipv4-only-rc.8.json",
-      "publicReleaseCI": "https://github.com/ffdm12138/RouteWeaver/actions/runs/44910295253",
+      "publicReleaseCommit": "2222291926c8ab4b428d5e1149dcf1d2b2f9fca6",
+      "publicationManifest": "harness/releases/v14.3.0-ipv4-only-rc.9.json",
+      "publicReleaseCI": "https://github.com/ffdm12138/RouteWeaver/actions/runs/44921428936",
       "publicReleaseRemoteSHA256": "ALL_8_ANONYMOUS_DOWNLOADS_MATCH"
     }
   },
@@ -257,8 +257,8 @@
     "crossPlatformAudit": "docs/reports/v14.3/两轨七端复审与微信媒体链路.md",
     "deviceAcceptance": "NOT_RUN"
   },
-  "publicReleaseTag": "v14.3.0-rc.17",
-  "publicReleaseURL": "https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-rc.17",
+  "publicReleaseTag": "v14.3.0-rc.18",
+  "publicReleaseURL": "https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-rc.18",
   "publicReleaseStatus": "PUBLISHED_PRE_RELEASE_DEVICE_NOT_RUN",
   "publicReleaseAssets": 8,
   "embeddedDomesticExactHosts": 11,
@@ -278,8 +278,8 @@
   },
   "historicalEmbeddedDomainRows": 309,
   "embeddedCompanyRows": 482,
-  "publicReleaseCommit": "478468bb74904b61d4e14bb97198b1f9274fa8c4",
-  "publicationManifest": "harness/releases/v14.3.0-rc.17.json",
-  "publicReleaseCI": "https://github.com/ffdm12138/RouteWeaver/actions/runs/44910295241",
+  "publicReleaseCommit": "2222291926c8ab4b428d5e1149dcf1d2b2f9fca6",
+  "publicationManifest": "harness/releases/v14.3.0-rc.18.json",
+  "publicReleaseCI": "https://github.com/ffdm12138/RouteWeaver/actions/runs/44921419172",
   "publicReleaseRemoteSHA256": "ALL_8_ANONYMOUS_DOWNLOADS_MATCH"
 }
