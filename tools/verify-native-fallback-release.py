@@ -64,6 +64,18 @@ def verify_source(root):
         }
         if not required.issubset(receipt['checks']):
             raise ValueError('Missing backup-slot skip replay')
+    if release.get('currentRevision') == 'youtube-apt-routing-r1':
+        required = {
+            'video_egress_tcp_udp_dns:rr4---sn-oguelnsr.googlevideo.com',
+            'video_egress_tcp_udp_dns:archive.ubuntu.com',
+            'video_egress_tcp_udp_dns:security.ubuntu.com',
+            'google_egress_tcp_udp_dns:geminiweb-pa.clients6.google.com',
+            'google_egress_tcp_udp_dns:accounts.youtube.com',
+            'google_egress_tcp_udp_dns:youtube.googleapis.com',
+            'youtube_unsupported_udp_rejected',
+        }
+        if not required.issubset(receipt['checks']):
+            raise ValueError('Missing YouTube, Ubuntu APT or protected Google egress replay')
     if candidate['revision'] == 'domestic-resilience-r1':
         checks = [
             ('domestic-resilience/after.json', 'tools/test-domestic-resilience.cjs'),

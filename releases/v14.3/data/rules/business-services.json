@@ -9,6 +9,7 @@
     "OpenAI 服务": "高纯净度AI用",
     "Anthropic 服务": "高纯净度AI用",
     "谷歌服务": "高纯净度AI用",
+    "YouTube": "高网速视频用",
     "微软生态": "高纯净度AI用",
     "Steam": "DIRECT",
     "Epic Games": "DIRECT",
@@ -77,6 +78,30 @@
       ]
     },
     {
+      "name": "YouTube",
+      "sets": [],
+      "seeds": [
+        "youtube.com",
+        "youtu.be",
+        "googlevideo.com",
+        "ytimg.com",
+        "youtube-nocookie.com"
+      ],
+      "exact": [
+        "youtubei.googleapis.com"
+      ]
+    },
+    {
+      "name": "高网速视频用",
+      "sets": [],
+      "seeds": [
+        "archive.ubuntu.com",
+        "security.ubuntu.com",
+        "ports.ubuntu.com",
+        "old-releases.ubuntu.com"
+      ]
+    },
+    {
       "name": "谷歌服务",
       "sets": [
         "google-gemini",
@@ -104,11 +129,6 @@
         "google.co.uk",
         "google.com.tw",
         "google.com.sg",
-        "youtube.com",
-        "youtu.be",
-        "googlevideo.com",
-        "ytimg.com",
-        "youtube-nocookie.com",
         "ggpht.com",
         "gvt1.com",
         "gvt2.com",
@@ -133,6 +153,9 @@
         "blogger.com",
         "blogspot.com",
         "withgoogle.com"
+      ],
+      "exact": [
+        "accounts.youtube.com"
       ]
     },
     {

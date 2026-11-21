@@ -8,14 +8,25 @@ const stunPort=port=>Number(port)===3478||Number(port)===5349||Number(port)>=193
 const known=(host,beforeRoute)=>!!host&&!net.isIP(host)&&!stunName(host)&&beforeRoute(host).group==='国内网站';
 const mediaDirect=(host,beforeRoute)=>mediaHost(host)&&!stunName(host)&&
  ['DIRECT','国内网站','漏网之鱼'].includes(beforeRoute(host).group);
+function addedServiceGroup(host){
+ if(host==='accounts.youtube.com')return '谷歌服务';
+ if(host==='youtubei.googleapis.com'||['youtube.com','youtu.be','googlevideo.com','ytimg.com','youtube-nocookie.com']
+   .some(domain=>host===domain||host.endsWith('.'+domain)))return 'YouTube';
+ if(['archive.ubuntu.com','security.ubuntu.com','ports.ubuntu.com','old-releases.ubuntu.com']
+   .some(domain=>host===domain||host.endsWith('.'+domain)))return '高网速视频用';
+}
 function expectedRoute(host,protocol,supported,beforeRoute){
+ const group=addedServiceGroup(host);
+ if(group)return {group,policy:protocol==='UDP'&&!supported?'REJECT':group};
  const old=beforeRoute(host,protocol,supported);
  if(mediaDirect(host,beforeRoute))return {group:'DIRECT',policy:'DIRECT'};
  return protocol==='UDP'&&known(host,beforeRoute)?{group:'国内网站',policy:'DIRECT'}:old;
 }
 function expectedDNS(host,beforeRoute,beforeDNS){
+ const group=addedServiceGroup(host);
+ if(group)return [group];
  const old=beforeDNS(host);
  if(mediaDirect(host,beforeRoute))return ['DIRECT'];
  return known(host,beforeRoute)&&old.groups.length===1&&old.groups[0]==='漏网之鱼'?['国内网站']:old.groups;
 }
-module.exports={known,mediaHost,mediaDirect,stunName,stunPort,expectedRoute,expectedDNS};
+module.exports={known,mediaHost,mediaDirect,stunName,stunPort,addedServiceGroup,expectedRoute,expectedDNS};

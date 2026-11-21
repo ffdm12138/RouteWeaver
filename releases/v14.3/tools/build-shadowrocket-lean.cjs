@@ -12,6 +12,12 @@ const lock=read(prefix+'data/rule-sources.lock.json'),oldManifest=read(prefix+'m
 const source=fs.readFileSync(local('src/android/v14.3-android-flclash.js'),'utf8'),ctx=vm.createContext({console:{log(){}}});vm.runInContext(source,ctx);
 const data=JSON.parse(vm.runInContext('JSON.stringify({settings:V14,domestic:V14_DOMESTIC_SEEDS,stunNames:V14.stunHostPatterns,selectorDefaults:V14_SELECTOR_DEFAULTS})',ctx));
 const policy=read('data/rules/embedded-policy.json');assert.equal(policy.domesticProtocolRevision,'domestic-protocol-r1');
+const splitServices=policy.services.filter(service=>['YouTube','高网速视频用'].includes(service.name));
+assert.equal(splitServices.length,2);
+const youtube=splitServices.find(service=>service.name==='YouTube');
+const matchesSuffix=(host,suffix)=>host===suffix||host.endsWith('.'+suffix);
+const googleExceptions=policy.services.find(service=>service.name==='谷歌服务').exact
+ .filter(host=>youtube.seeds.some(suffix=>matchesSuffix(host,suffix)));
 const authorizedSuffixes=new Set(policy.authorizedDomesticSuffixes);
 const isDomestic=host=>host==='cn'||authorizedSuffixes.has(host)||beforeRoute(host).group==='国内网站';
 const wechatFile='data/rules/wechat-media.json',wechatDomains=read(wechatFile);
@@ -32,6 +38,8 @@ const critical=new Set(data.domestic.concat(['cn']).map(h=>'DOMAIN-SUFFIX,'+h).c
 const all=section('Rule'),kept=[],domestic=[],geographic=[];let removed=0;
 for(const rule of all){
  const a=split(rule),tail=a.at(-1)==='no-resolve'?-2:-1,group=a.at(tail),match=a.slice(0,tail).join(',');
+ if(group==='谷歌服务'&&['DOMAIN','DOMAIN-SUFFIX'].includes(a[0])&&
+    youtube.seeds.some(suffix=>matchesSuffix(a[1],suffix))&&!googleExceptions.includes(a[1]))continue;
  if(group==='国内网站'&&cnRows.has(match)&&!critical.has(match)){removed++;continue;}
  if(group==='国内网站'){
   const e=a[0]==='RULE-SET'?sources.find(s=>s.url===a[1]):null;
@@ -49,6 +57,13 @@ for(const match of critical){
 }
 const companySupplement=read('data/rules/company-supplement.json');
 kept.unshift(...companySupplement.additions.map(a=>a.row+','+a.group));
+const firstGoogleRule=kept.findIndex(rule=>split(rule).at(-1)==='谷歌服务');
+assert.ok(firstGoogleRule>=0,'Missing Shadowrocket Google rules');
+kept.splice(firstGoogleRule,0,...googleExceptions.map(host=>'DOMAIN,'+host+',谷歌服务'),
+ ...splitServices.flatMap(service=>[
+  ...(service.exact||[]).map(host=>'DOMAIN,'+host+','+service.name),
+  ...service.seeds.map(host=>'DOMAIN-SUFFIX,'+host+','+service.name),
+ ]));
 const tailnetStart=kept.indexOf(tailscaleIP(tailscale.tailnetNetworks[0]));
 assert.ok(tailnetStart>=0,'Missing Shadowrocket private address anchor');
 kept.splice(tailnetStart,1,...tailscale.tailnetNetworks.map(tailscaleIP));
@@ -84,6 +99,15 @@ for(const rows of [policy.embedded.private.payloadText.split('\n'),policy.embedd
 }
 for(const host of data.stunNames)put(host,valueFor('漏网之鱼'));
 for(const a of companySupplement.additions){const [kind,host]=split(a.row);put(host,valueFor(a.group));if(kind==='DOMAIN-SUFFIX')put('*.'+host,valueFor(a.group));}
+for(const service of splitServices){
+ const servers=valueFor(service.name);
+ for(const key of hosts.keys()){
+  if(service.seeds.some(suffix=>matchesSuffix(key.replace(/^\*\./,''),suffix)))hosts.set(key,servers);
+ }
+ for(const host of service.exact||[])hosts.set(host,servers);
+ for(const host of service.seeds){hosts.set(host,servers);hosts.set('*.'+host,servers);}
+}
+for(const host of googleExceptions)hosts.set(host,valueFor('谷歌服务'));
 const domesticDNSKeys=[];
 for(const match of critical){
  const [kind,host]=split(match);
@@ -106,15 +130,24 @@ for(const [key,value]of hosts){
  for(let i=1;i<labels.length;i++){const candidate='*.'+labels.slice(i).join('.');if(hosts.get(candidate)?.startsWith('server:')){inherited=hosts.get(candidate).slice(7);parent=candidate;break;}}
  if(value.slice(7)===inherited)eliminated.push({key,parent});else outputHosts.push([key,value]);
 }
-const header=['# V14.3 Shadowrocket — 2026-10-13; shadowrocket-lean-r1 / domestic-protocol-r1',
- '# 自包含业务 DNS；完整国内规则远程拉取固定审核提交；不是 V14.2 全量内嵌副本。',
- '# 先保留节点订阅，再导入配置，路由选择“配置”，两个公共组手动选节点。',
- '# 已审核国内域名普通 TCP/UDP 跟随国内组；未知 IP UDP 和通用 STUN 保持代理/拒绝。',
- '# 业务与关键国内 Host DNS 显式跟组；其余国内 DNS 依赖原生 DIRECT DNS / 所选节点远端解析。',
- '# Shadowrocket 原生编译、完整国内 DNS 切换和 iOS VPN 接管仍待实机验收。'];
-header.push('# auto-local-family-r1: Mihomo native extension is unavailable in this conf; IPv6 stays enabled with native IPv4 preference.');
+const header=['# RouteWeaver v14.3 Shadowrocket',
+ '# 保留订阅，选择「配置」路由和公共组节点。',
+ '# IPv6 已启用，iOS VPN 和 DNS 待实机验证。'];
 const general=section('General').concat('always-real-ip = '+wechatPatterns.join(','));
-const groups=section('Proxy Group').map(row=>{
+const groupRows=section('Proxy Group').map(row=>row.replace(/\(\?i\)\^\(\?!\(\?:([^)]*)\)\$\)/,(_,names)=>{
+ let reserved=names.split('|').concat('YouTube');
+ for(const suffix of ['服务','国际']){
+  const matching=reserved.filter(name=>name.endsWith(suffix));
+  reserved=reserved.filter(name=>!name.endsWith(suffix));
+  reserved.push('(?:'+matching.map(name=>name.slice(0,-suffix.length)).join('|')+')'+suffix);
+ }
+ return '(?i)^(?!(?:'+reserved.join('|')+')$)';
+}));
+const googleGroupIndex=groupRows.findIndex(row=>row.startsWith('谷歌服务 = '));
+const videoSelector=groupRows.find(row=>row.startsWith('Netflix = '));
+assert.ok(googleGroupIndex>=0&&videoSelector,'Missing Shadowrocket video selector template');
+groupRows.splice(googleGroupIndex+1,0,videoSelector.replace(/^Netflix /,'YouTube '));
+const groups=groupRows.map(row=>{
  const [name,options]=row.split(' = ',2);
  if(!Object.hasOwn(data.selectorDefaults,name))return row;
  const preferred=data.selectorDefaults[name];

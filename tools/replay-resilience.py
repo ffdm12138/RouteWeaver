@@ -212,6 +212,22 @@ def run_case(core, file, mode, engine, directory):
         for host in VIDEO_DEFAULT_HOSTS:
             via('B', host)
             checks.append('fresh_business_default_video:' + host)
+        for host in ('www.youtube.com', 'rr4---sn-oguelnsr.googlevideo.com', 'youtubei.googleapis.com',
+                     'archive.ubuntu.com', 'cn.archive.ubuntu.com', 'security.ubuntu.com', 'ports.ubuntu.com'):
+            via('B', host)
+            udp('B', host)
+            dns_via(host, 'B', {dot_port, https_port})
+            checks.append('video_egress_tcp_udp_dns:' + host)
+        choose('YouTube', 'NoUDP ↻')
+        udp(None, 'r1---sn-audit.googlevideo.com')
+        checks.append('youtube_unsupported_udp_rejected')
+        for host in ('gemini.google.com', 'geminiweb-pa.clients6.google.com', 'gemini.gstatic.com',
+                     'accounts.youtube.com', 'youtube.googleapis.com', 'workspacevideo-pa.clients6.google.com'):
+            via('A', host)
+            udp('A', host)
+            dns_via(host, 'A', {dot_port, https_port})
+            checks.append('google_egress_tcp_udp_dns:' + host)
+        choose('YouTube', '高网速视频用')
         for host in (DOMESTIC_DOMAIN, DOMESTIC_CHILD):
             via(None, host)
         dns_via('dns-probe.' + DOMESTIC_DOMAIN, None, {dot_port, https_port})

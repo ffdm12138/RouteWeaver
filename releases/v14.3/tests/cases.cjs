@@ -5,7 +5,9 @@ function add(name,target,port,protocol,policy,options={},dnsGroup){cases.push({n
 const owned={
   'OpenAI 服务':['chatgpt.com','api.openai.com','oaistatic.com','oaiusercontent.com','sora.com','chatgpt.livekit.cloud','host.livekit.cloud','turn.livekit.cloud','openai.qualtrics.com','openaiassets.blob.core.windows.net','chatgpt-async-webps-prod-eastus-1.webpubsub.azure.com'],
   'Anthropic 服务':['api.anthropic.com','claude.ai','claude.com','claude.dev','claudeusercontent.com','servd-anthropic-website.b-cdn.net'],
-  '谷歌服务':['gemini.google.com','aistudio.google.com','generativelanguage.googleapis.com','antigravity.google','notebook.google','google.com','google.cn','stun.l.google.com','youtube.com','googlevideo.com','recaptcha.net','googleapis.cn','xn--ngstr-lra8j.com'],
+  '谷歌服务':['gemini.google.com','geminiweb-pa.clients6.google.com','gemini.gstatic.com','aistudio.google.com','generativelanguage.googleapis.com','antigravity.google','notebook.google','google.com','google.cn','stun.l.google.com','accounts.google.com','accounts.youtube.com','youtube.googleapis.com','workspacevideo-pa.clients6.google.com','gvt1.com','gvt2.com','ggpht.com','recaptcha.net','googleapis.cn','xn--ngstr-lra8j.com'],
+  'YouTube':['youtube.com','www.youtube.com','youtu.be','googlevideo.com','rr4---sn-oguelnsr.googlevideo.com','i.ytimg.com','www.youtube-nocookie.com','youtubei.googleapis.com'],
+  '高网速视频用':['archive.ubuntu.com','cn.archive.ubuntu.com','security.ubuntu.com','ports.ubuntu.com','old-releases.ubuntu.com'],
   '微软生态':['copilot.microsoft.com','github.com','githubcopilot.com','officecdn.microsoft.com','download.microsoft.com','login.microsoftonline.com','linkedin.com',
     'bingsettingssearch.trafficmanager.net','dtlgalleryint.cloudapp.net','poshtestgallery.cloudapp.net','psg-int-centralus.cloudapp.net','psg-int-eastus.cloudapp.net','vscode-sync-insiders.trafficmanager.net','vscode-sync.trafficmanager.net'],
   'Steam':['steamserver.net','steampowered.com','dl.steam.clngaa.com'],
@@ -17,6 +19,9 @@ for(const [group,hosts]of Object.entries(owned))for(const host of hosts){
   for(const port of [443,3478,49000])add('company-'+host+'-udp-'+port,host,port,'UDP',group);
   add('company-no-udp-'+host,host,49000,'UDP','REJECT',{udpSupported:false},group);
 }
+for(const host of owned['高网速视频用'])add('ubuntu-apt-http-'+host,host,80,'TCP','高网速视频用');
+for(const host of ['ubuntu.com','ppa.launchpadcontent.net','archive.ubuntu.com.example.net','googlevideo.com.example.net'])
+  add('download-suffix-boundary-'+host,host,443,'TCP','漏网之鱼');
 const shared=['challenges.cloudflare.com','stun.cloudflare.com','tenant.auth0.com','anthropic.auth0.com','r1.host.livekit.cloud','r1.turn.livekit.cloud','other-tenant.livekit.cloud','api.workos.com','js.stripe.com','o33249.ingest.sentry.io','browser-intake-datadoghq.com','mail.sendgrid.net','a.b.ct.sendgrid.net','another.webpubsub.azure.com','chatgpt-async-webps-dev-eastus-1.webpubsub.azure.com','tenant.blob.core.windows.net','tenant.azurewebsites.net','tenant.appspot.com','tenant.firebaseio.com','foo.pages.dev','bucket.s3.amazonaws.com','foo.cloudfront.net','foo.github.io','client-api.arkoselabs.com','cdn.usefathom.com'];
 for(const host of shared){for(const protocol of ['TCP','UDP'])add('shared-'+host+'-'+protocol,host,49000,protocol,'公共基础服务');add('shared-no-udp-'+host,host,49000,'UDP','REJECT',{udpSupported:false},'公共基础服务');}
 // Independent business expectations: customer resource names do not identify

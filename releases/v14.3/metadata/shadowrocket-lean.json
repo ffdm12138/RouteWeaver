@@ -5,8 +5,8 @@
   "domesticProtocolRevision": "domestic-protocol-r1",
   "status": "GENERATED_NATIVE_ACCEPTANCE_PENDING",
   "file": "src/ios/v14.3-shadowrocket.conf",
-  "sha256": "0a9b459ee4bd18ff6551fd37f7244c6b13669de5074b10736378c38b73e8ba20",
-  "bytes": 1798587,
+  "sha256": "a9376cc3b9215cdbab50cf565350b85a1b74434c5fa9d2af1ad9c6d5a36e80bf",
+  "bytes": 1799888,
   "tailscaleDerpSource": {
     "file": "data/rules/tailscale-derp-map.json",
     "url": "https://controlplane.tailscale.com/derpmap/default",
@@ -20,7 +20,7 @@
   },
   "rules": {
     "before": 116974,
-    "after": 5323,
+    "after": 5329,
     "removedDuplicateCNRows": 111400,
     "removedDominatedLiteralRows": [
       "DOMAIN-SUFFIX,firebase.google.com,谷歌服务",
@@ -60,7 +60,6 @@
       "DOMAIN-SUFFIX,youtubei.googleapis.com,谷歌服务",
       "DOMAIN-SUFFIX,youtube-ui.l.google.com,谷歌服务",
       "DOMAIN-SUFFIX,wide-youtube.l.google.com,谷歌服务",
-      "DOMAIN-SUFFIX,ads.youtube.com,谷歌服务",
       "DOMAIN,firebase.googleapis.com,谷歌服务",
       "DOMAIN,firebaseappcheck.googleapis.com,谷歌服务",
       "DOMAIN,firebaseappdistribution.googleapis.com,谷歌服务",
@@ -679,8 +678,8 @@
   },
   "dns": {
     "beforeHostRows": 9130,
-    "afterHostRows": 9978,
-    "removedRedundantRows": 1040,
+    "afterHostRows": 9988,
+    "removedRedundantRows": 1039,
     "redundantRowCertificates": [
       {
         "key": "go.microsoft.com",
@@ -1132,10 +1131,6 @@
       },
       {
         "key": "*.youtubeembeddedplayer.googleapis.com",
-        "parent": "*.googleapis.com"
-      },
-      {
-        "key": "youtubei.googleapis.com",
         "parent": "*.googleapis.com"
       },
       {
@@ -5156,6 +5151,7 @@
     "OpenAI 服务",
     "Anthropic 服务",
     "谷歌服务",
+    "YouTube",
     "微软生态",
     "Steam",
     "Epic Games",
@@ -5448,12 +5444,12 @@
   ],
   "sourceContract": {
     "file": "docs/需求.md",
-    "sha256": "f52c42f5340830240bc4d0988f99d607ccfb50d482a23dd79aecde8d03a08edd"
+    "sha256": "127a44e063409981ed6dffa69cc66234023ff99e95415b2b46c882b5db39a4ce"
   },
   "inputs": [
     {
       "file": "tools/build-shadowrocket-lean.cjs",
-      "sha256": "acf50b1f8ed13c098dff97da0a3ad83ab358c1e09fa4b125b5888fa98eea0c9f"
+      "sha256": "19b6c8ed06b83df4ec30427edcff97e323ba5046cbe9b547177a0fc0f7578d1a"
     },
     {
       "file": "tools/lib/tailscale-policy.cjs",
@@ -5469,11 +5465,11 @@
     },
     {
       "file": "src/android/v14.3-android-flclash.js",
-      "sha256": "d53d031081d301be96cf17ddf52161554dae397c33e1d7494f654a0e8bce13d9"
+      "sha256": "c52824060ad376085e2f60e630089e33bd3dad219f66722e08a04a108170de8e"
     },
     {
       "file": "data/rules/embedded-policy.json",
-      "sha256": "6d65b197283796105b886af118495ca8056186912e7b53ac764ee22c9de42ee3"
+      "sha256": "ad765b126d1977e0543cac6c85277b7b76935c97b018a07455bc78fbdc231f84"
     },
     {
       "file": "validation/inputs/v14.2-baseline/manifest.json",

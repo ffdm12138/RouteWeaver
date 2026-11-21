@@ -71,7 +71,7 @@
   "macosReport": "docs/reports/v14.3/MacBook适配.md",
   "macos": "CURRENT_SOURCE_AND_ISOLATED_CHECKS_SEPARATE_DEVICE_NOT_RUN",
   "distribution": "public",
-  "releaseTag": "v14.3.0-rc.17",
+  "releaseTag": "v14.3.0-rc.18",
   "personalRulesIncluded": false,
   "networkCompatibilityRevision": "ipv6-fallback-r2",
   "networkCompatibility": "releases/v14.3/metadata/network-compat-delivery.json",
@@ -151,10 +151,10 @@
   "nativeFallback": {
     "revision": "backup-slot-skip-r1",
     "guide": "docs/guides/故障转移.md",
-    "verification": "releases/v14.3/validation/proxy-failover/domestic-policy-defaults-r1.json",
+    "verification": "releases/v14.3/validation/proxy-failover/youtube-apt-routing-r1.json",
     "releaseTags": {
-      "main": "v14.3.0-rc.17",
-      "ipv4-only": "v14.3.0-ipv4-only-rc.8"
+      "main": "v14.3.0-rc.18",
+      "ipv4-only": "v14.3.0-ipv4-only-rc.9"
     },
     "deviceAcceptance": "NOT_RUN"
   },
@@ -230,7 +230,7 @@
       "publicReleaseRemoteSHA256": "ALL_15_ANONYMOUS_DOWNLOADS_MATCH"
     }
   },
-  "currentRevision": "wechat-media-r1",
+  "currentRevision": "youtube-apt-routing-r1",
   "domesticPolicyDefaults": {
     "revision": "domestic-policy-defaults-r1",
     "domainSuffix": "19212021.xyz",

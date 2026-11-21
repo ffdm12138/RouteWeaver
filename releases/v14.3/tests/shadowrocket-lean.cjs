@@ -26,7 +26,16 @@ const report={version:'14.3',date:'2026-10-13',revision:manifest.revision,domest
 function check(name,body){try{body();report.checks.push({name,status:'PASS'});}catch(e){report.failures.push({name,error:e.stack});report.checks.push({name,status:'FAIL'});}}
 check('size-groups-fixed-sources-and-general-settings',()=>{
  assert.equal(f.sha(f.local(manifest.file)),manifest.sha256);assert.equal(Buffer.byteLength(raw),manifest.bytes);assert.ok(manifest.bytes<1800000&&manifest.bytes<manifest.before.bytes*0.3);
- assert.equal(manifest.groups.length,26);assert.equal(sources.size,15);assert.equal(section('Proxy Group').length,26);
+ assert.equal(manifest.groups.length,27);assert.equal(sources.size,15);assert.equal(section('Proxy Group').length,27);
+ assert.match(section('Proxy Group').find(row=>row.startsWith('YouTube = ')),/^YouTube = select,高网速视频用,.*policy-select-name=高网速视频用,/);
+ for(const row of section('Proxy Group')){
+  const prefix='policy-regex-filter=';
+  const filter=f.split(row).find(field=>field.startsWith(prefix));
+  const pattern=new RegExp(filter.slice(prefix.length).replace(/^\(\?i\)/,''),'i');
+  for(const name of ['DIRECT','REJECT','PROXY',...manifest.groups])assert.equal(pattern.test(name),false,name);
+  assert.equal(pattern.test('Tokyo YouTube 01'),true);
+  assert.equal(pattern.test('剩余流量 10GB'),false);
+ }
  const {'always-real-ip': realIP,...general}=current.config.general;
  assert.deepEqual(general,before.config.general);
  assert.deepEqual(realIP.split(','),require('../data/rules/wechat-media.json').flatMap(domain=>[domain,'*.'+domain]));
@@ -39,7 +48,7 @@ check('all-reviewed-domain-TCP-preserved-and-ordinary-UDP-follows-domestic',()=>
  }assert.deepEqual(mismatches,[]);
 });
 check('business-Host-DNS-preserved-except-authorized-domestic-keys',()=>{
- const mismatches=[];for(const host of businessDNSHosts){const a=dns(before,host),b=dns(current,host);const expected=contract.mediaDirect(host,oldRoute)?['DIRECT']:a.groups;if(JSON.stringify(expected)!==JSON.stringify(b.groups)&&(!contract.known(host,oldRoute)||contract.mediaDirect(host,oldRoute))&&mismatches.length<12)mismatches.push({host,expected,after:b});report.metrics.businessDNS++;}assert.deepEqual(mismatches,[]);
+ const mismatches=[];for(const host of businessDNSHosts){const a=dns(before,host),b=dns(current,host);const group=contract.addedServiceGroup(host),expected=group?[group]:contract.mediaDirect(host,oldRoute)?['DIRECT']:a.groups;if(JSON.stringify(expected)!==JSON.stringify(b.groups)&&(group||!contract.known(host,oldRoute)||contract.mediaDirect(host,oldRoute))&&mismatches.length<12)mismatches.push({host,expected,after:b});report.metrics.businessDNS++;}assert.deepEqual(mismatches,[]);
 });
 const cold={...current,sources:new Map([...sources.keys()].map(k=>[k,[]]))};
 check('critical-domestic-WeChat-selector-and-DNS-affinity',()=>{

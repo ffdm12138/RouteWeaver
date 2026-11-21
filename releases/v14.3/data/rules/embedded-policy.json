@@ -54,12 +54,7 @@
       "DOMAIN-SUFFIX,aistudio.google.com",
       "DOMAIN-SUFFIX,generativelanguage.googleapis.com",
       "DOMAIN,yt3.googleusercontent.com",
-      "DOMAIN-SUFFIX,ytimg.com",
-      "DOMAIN-SUFFIX,youtu.be",
-      "DOMAIN-SUFFIX,youtube-nocookie.com",
       "DOMAIN-SUFFIX,ggpht.com",
-      "DOMAIN-SUFFIX,youtube.com",
-      "DOMAIN-SUFFIX,googlevideo.com",
       "DOMAIN,google-ohttp-relay-safebrowsing.fastly-edge.com",
       "DOMAIN,firebase.googleapis.com",
       "DOMAIN,firebaseappcheck.googleapis.com",
@@ -547,6 +542,30 @@
       ]
     },
     {
+      "name": "YouTube",
+      "sets": [],
+      "seeds": [
+        "youtube.com",
+        "youtu.be",
+        "googlevideo.com",
+        "ytimg.com",
+        "youtube-nocookie.com"
+      ],
+      "exact": [
+        "youtubei.googleapis.com"
+      ]
+    },
+    {
+      "name": "高网速视频用",
+      "sets": [],
+      "seeds": [
+        "archive.ubuntu.com",
+        "security.ubuntu.com",
+        "ports.ubuntu.com",
+        "old-releases.ubuntu.com"
+      ]
+    },
+    {
       "name": "谷歌服务",
       "sets": [
         "google-gemini",
@@ -574,11 +593,6 @@
         "google.co.uk",
         "google.com.tw",
         "google.com.sg",
-        "youtube.com",
-        "youtu.be",
-        "googlevideo.com",
-        "ytimg.com",
-        "youtube-nocookie.com",
         "ggpht.com",
         "gvt1.com",
         "gvt2.com",
@@ -603,6 +617,9 @@
         "blogger.com",
         "blogspot.com",
         "withgoogle.com"
+      ],
+      "exact": [
+        "accounts.youtube.com"
       ]
     },
     {
@@ -2060,7 +2077,7 @@
     },
     {
       "file": "data/rules/business-services.json",
-      "sha256": "bb7d723691acbfd1e578e95ba9905803d3bcd02ec549b213063b25ec41503de3"
+      "sha256": "40414713f3e75e8f1ab8d3e0adcac2603ea6c64fd2050651a586eb45cc1fd974"
     },
     {
       "file": "data/rules/domestic-direct.json",

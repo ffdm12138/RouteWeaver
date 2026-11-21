@@ -11,7 +11,7 @@ check('52-fresh-pinned-downloads-plus-two-domain-MRS-and-classifier-bindings',()
 check('deterministic-standalone-generation-and-size-budget',()=>{cp.execFileSync(process.execPath,[f.local('tools/build-balanced.cjs'),'--check'],{cwd:f.root,windowsHide:true});for(const e of manifest.entries){assert.equal(f.sha(f.local(e.file)),e.sha256);assert.ok(fs.statSync(f.local(e.file)).size<=131072);assert.ok(e.generatedConfigBytes<=196608);const code=fs.readFileSync(f.local(e.file),'utf8');assert.ok(!/\brequire\s*\(|\bfetch\s*\(|\bsetInterval\s*\(/.test(code));new vm.Script(code);}assert.ok(!fs.existsSync(f.local('src/ios/v14.3-clashmi.js')),'obsolete alias must not be distributed');assert.ok(!policy.embedded.cn.payloadText.includes('+.0000f0deb5f4e6c3.com'));});
 const baseline=old.load('android'),originalRoute=index.indexRoute(baseline),originalDNS=index.indexDNS(baseline);
 const reviewedChanges=read('data/rules/company-supplement.json').additions;
-function revisedCompany(host){return reviewedChanges.find(a=>{const[k,h]=f.split(a.row);return host===h||k==='DOMAIN-SUFFIX'&&host.endsWith('.'+h);})?.group;}
+function revisedCompany(host){return domestic.addedServiceGroup(host)||reviewedChanges.find(a=>{const[k,h]=f.split(a.row);return host===h||k==='DOMAIN-SUFFIX'&&host.endsWith('.'+h);})?.group;}
 const tailscaleDNS=host=>{
  if(host==='ts.net'||host.endsWith('.ts.net'))return 'system';
  if(host==='tailscale.com'||host.endsWith('.tailscale.com'))return 'DIRECT';
