@@ -42,6 +42,13 @@ const domesticCandidates=['baidu.com','bdstatic.com','bdimg.com','qq.com','qpic.
 const domestic=[];
 for(const host of domesticCandidates){const actual=baselineFixture.route(baselineModel,{host,protocol:'TCP',port:443}).group;if(actual==='国内网站'){domestic.push(host);decisions.push({group:'国内网站',domain:host,decision:'KEEP_REVIEWED_PARENT'});}else decisions.push({group:'国内网站',domain:host,decision:'OMIT_NOT_IN_REVIEWED_GROUP',actual});}
 const resilience=read('data/rules/domestic-resilience.json');
+const authorizedDomesticSuffixes=resilience.authorizedSuffixes;
+const domesticSeeds=read('data/rules/domestic-direct.json').domains.concat(authorizedDomesticSuffixes);
+assert.equal(new Set(domesticSeeds).size,domesticSeeds.length,'Duplicate local domestic suffix');
+for(const host of authorizedDomesticSuffixes){
+  assert.match(host,/^(?:[a-z0-9-]+\.)+[a-z0-9-]+$/);
+  decisions.push({group:'国内网站',domain:host,match:'suffix',decision:'ADD_USER_APPROVED_SUFFIX'});
+}
 const domainRows=new Set(domestic.map(h=>'+.'+h));
 const addReviewed=(host,suffix,source)=>{
   assert.match(host,/^[a-z0-9.-]+$/);
@@ -80,8 +87,8 @@ const pins=Object.fromEntries(lock.sources.map(s=>[s.url.replace(/\/[a-f0-9]{40}
 const selected={version:'14.3',date:'2026-10-12',revision:'balanced-r1',scope:'Reviewed service parent domains, exact CDN/auth/Voice tenants, small private/DoH safety tables and bounded domestic parents; complete domain/IP inventories remain remote',
   domesticProtocolRevision:'domestic-protocol-r1',domesticProtocolAuthorization:'User selected reviewed domestic domain TCP/UDP/DNS following the domestic selector on 2026-10-13; unknown public IP UDP and generic STUN remain protected',
   core,services,embedded,decisions,limits:{maxScriptBytes:131072,maxGeneratedConfigBytes:196608},
-  resilienceRevision:resilience.revision,
+  resilienceRevision:resilience.revision,authorizedDomesticSuffixes,
   inputs:['data/rules/company-core.json','data/rules/business-services.json','data/rules/domestic-direct.json','data/rules/domestic-resilience.json','data/rules/company-supplement.json','data/rules/safety-classifiers.json','data/rule-sources.lock.json',baseline+'manifest.json'].map(file=>({file,sha256:sha(file)}))};
 const selectedText=JSON.stringify(selected,null,2)+'\n';
-return {selected,selectedText,lock,before,baseline,core,services,embedded,pins};
+return {selected,selectedText,lock,before,baseline,core,services,embedded,pins,domesticSeeds,selectorDefaults:business.selectorDefaults};
 };

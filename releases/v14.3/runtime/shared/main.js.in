@@ -141,11 +141,13 @@ function main(input) {
   groups.sort((a,b) => logicalGroups.indexOf(Array.from(groupNames).find(([,name])=>name===a.name)[0]) - logicalGroups.indexOf(Array.from(groupNames).find(([,name])=>name===b.name)[0]));
   const business = logicalGroups.filter(name => !["高纯净度AI用", "高网速视频用", "自动选择"].includes(name));
   for (const logical of business) {
-    const choices = [groupName("高纯净度AI用"), groupName("高网速视频用")].concat(logical === "漏网之鱼" ? [] : ["DIRECT"]);
-    if (logical === "国内网站") choices.unshift("REJECT"); // Missing stored node must reject; first install still defaults to DIRECT.
-    if (["Netflix", "Disney+", "Spotify", "哔哩国际"].includes(logical)) [choices[0],choices[1]] = [choices[1],choices[0]];
+    const preferred = V14_SELECTOR_DEFAULTS[logical];
+    const choices = [groupName("高纯净度AI用"), groupName("高网速视频用")];
+    if (preferred === "高网速视频用") choices.reverse();
+    if (logical !== "漏网之鱼") choices.push("DIRECT");
+    if (preferred === "DIRECT") choices.unshift("REJECT"); // Reject an unavailable saved node before considering any direct option.
     groups.push({ name: groupName(logical), type: "select", proxies: choices.concat(rawNodeNames), ...providerGroupFields,
-      "default-selected": logical === "国内网站" ? "DIRECT" : choices[0], "empty-fallback": "REJECT" });
+      "default-selected": preferred === "DIRECT" ? preferred : groupName(preferred), "empty-fallback": "REJECT" });
   }
   config["proxy-groups"] = groups.concat(keptGroups);
   config["proxy-providers"] = providers;

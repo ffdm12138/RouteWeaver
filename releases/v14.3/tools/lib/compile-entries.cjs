@@ -48,9 +48,10 @@ function compile(root){
  // Compact the generated service data to leave room for the native fallback
  // runtime within the standalone script budget.
  const values={CORE:JSON.stringify(core),SERVICES:JSON.stringify(services),EMBEDDED:JSON.stringify(embedded),PINS:JSON.stringify(pins),
+  DOMESTIC_SEEDS:JSON.stringify(policy.domesticSeeds,null,2), SELECTOR_DEFAULTS:JSON.stringify(policy.selectorDefaults),
   DIRECT_RULE_INITIALIZER:vps?'  // Explicit user-authorized IPv4 exception, all protocols/ports, before all other rules.\n  const rules = ['+JSON.stringify(vps.rule)+', "DOMAIN,v14-runtime-check.invalid,REJECT"], emitted = new Set(['+JSON.stringify('IP-CIDR,'+vps.address+',no-resolve')+']);':'  const rules = ["DOMAIN,v14-runtime-check.invalid,REJECT"], emitted = new Set();',
   DIRECT_RULE_MARKER:vps?', vpsDirectRevision: '+JSON.stringify(vps.revision):''};
- const inputs=['tools/lib/compile-entries.cjs','tools/lib/render-runtime.cjs','tools/lib/reviewed-policy.cjs','tools/clashmi-adapter.js','tools/macos-flclash-adapter.js','tools/clash-verge-adapter.js','tools/ipv4-local-adapter.js','tools/auto-local-adapter.js','data/client-capabilities.json',...(vps?[directFile]:[])];
+ const inputs=['tools/lib/compile-entries.cjs','tools/lib/render-runtime.cjs','tools/lib/reviewed-policy.cjs','data/rules/business-services.json','data/rules/domestic-direct.json','data/rules/domestic-resilience.json','tools/clashmi-adapter.js','tools/macos-flclash-adapter.js','tools/clash-verge-adapter.js','tools/ipv4-local-adapter.js','tools/auto-local-adapter.js','data/client-capabilities.json',...(vps?[directFile]:[])];
  const fallbackFile='runtime/shared/v14NativeFallback.js.in',fallback=read(fallbackFile);
  inputs.push(fallbackFile);
  inputs.push(tailscaleRuntime,'tools/lib/tailscale-policy.cjs',tailscale.source.file);

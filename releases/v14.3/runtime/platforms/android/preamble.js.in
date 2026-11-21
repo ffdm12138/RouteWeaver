@@ -46,30 +46,7 @@ const V14_PRIVATE_IPS = [
 // selector; broad ByteDance and international Microsoft/Google domains are absent.
 // These are deliberately bounded additions from the user's Mojie profile.
 const V14_DOMESTIC_SETS = ["douyin", "apple@cn", "google@cn", "microsoft@cn", "steam@cn"];
-const V14_DOMESTIC_SEEDS = [
-  "douyin.com",
-  "douyincdn.com",
-  "jianying.com",
-  "jimeng.com",
-  "toutiao.com",
-  "ixigua.com",
-  "feishu.cn",
-  "volcengine.com",
-  "bilibili.com",
-  "bilivideo.com",
-  "hdslb.com",
-  "dl.steam.clngaa.com",
-  "st.dl.bscstorage.net",
-  "st.dl.eccdnx.com",
-  "st.dl.pinyuncloud.com",
-  "prts.plus",
-  "cnbeta.com",
-  "cnbetacdn.com",
-  "easou.com",
-  "mob.com",
-  "baidustatic.com",
-  "didi-labs.com"
-];
+const V14_DOMESTIC_SEEDS = {{DOMESTIC_SEEDS}};
 // Immutable approved application DNS destinations; core resolver dialing is independent.
 const V14_EXTERNAL_DNS_RULES = [
   "DOMAIN,dns.adguard.com",
@@ -230,6 +207,7 @@ const V14_OPENAI_VOICE_IPV4 = [
 
 // One selectable group per company. Earlier entries win over later domains.
 const V14_SERVICES = {{SERVICES}};
+const V14_SELECTOR_DEFAULTS = {{SELECTOR_DEFAULTS}};
 
 // Shared web dependencies have their own selector. Domain rules cannot infer
 // which top-level site requested them, so keep these out of company groups.

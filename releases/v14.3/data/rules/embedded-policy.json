@@ -1424,6 +1424,12 @@
     },
     {
       "group": "国内网站",
+      "domain": "19212021.xyz",
+      "match": "suffix",
+      "decision": "ADD_USER_APPROVED_SUFFIX"
+    },
+    {
+      "group": "国内网站",
       "domain": "activity-wbsj.com",
       "match": "suffix",
       "decision": "KEEP_OFFLINE_REVIEWED",
@@ -2044,6 +2050,9 @@
     "maxGeneratedConfigBytes": 196608
   },
   "resilienceRevision": "domestic-resilience-r1",
+  "authorizedDomesticSuffixes": [
+    "19212021.xyz"
+  ],
   "inputs": [
     {
       "file": "data/rules/company-core.json",
@@ -2051,7 +2060,7 @@
     },
     {
       "file": "data/rules/business-services.json",
-      "sha256": "6fddabd1e91a404bc7362b776ed72c943d6bf6a09d0f7367a8541820055ddd2f"
+      "sha256": "bb7d723691acbfd1e578e95ba9905803d3bcd02ec549b213063b25ec41503de3"
     },
     {
       "file": "data/rules/domestic-direct.json",
@@ -2059,7 +2068,7 @@
     },
     {
       "file": "data/rules/domestic-resilience.json",
-      "sha256": "e9b69ec8f63de96fc106ca8240e2e0564a62b5529549e12892c02759eef74420"
+      "sha256": "c2cd89bda7b9deb2170825d8fc66627bf6c2450870e14bcce0db538c4bf6d9a6"
     },
     {
       "file": "data/rules/company-supplement.json",

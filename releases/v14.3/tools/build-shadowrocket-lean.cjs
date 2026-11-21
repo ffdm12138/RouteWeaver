@@ -10,8 +10,10 @@ const old=require('../validation/inputs/v14.2-baseline/tests/fixture.cjs'),index
 const beforeRoute=index.indexRoute(before),beforeDNS=index.indexDNS(before);
 const lock=read(prefix+'data/rule-sources.lock.json'),oldManifest=read(prefix+'metadata/shadowrocket-sources.json');
 const source=fs.readFileSync(local('src/android/v14.3-android-flclash.js'),'utf8'),ctx=vm.createContext({console:{log(){}}});vm.runInContext(source,ctx);
-const data=JSON.parse(vm.runInContext('JSON.stringify({settings:V14,domestic:V14_DOMESTIC_SEEDS,stunNames:V14.stunHostPatterns})',ctx));
+const data=JSON.parse(vm.runInContext('JSON.stringify({settings:V14,domestic:V14_DOMESTIC_SEEDS,stunNames:V14.stunHostPatterns,selectorDefaults:V14_SELECTOR_DEFAULTS})',ctx));
 const policy=read('data/rules/embedded-policy.json');assert.equal(policy.domesticProtocolRevision,'domestic-protocol-r1');
+const authorizedSuffixes=new Set(policy.authorizedDomesticSuffixes);
+const isDomestic=host=>host==='cn'||authorizedSuffixes.has(host)||beforeRoute(host).group==='国内网站';
 const wechatFile='data/rules/wechat-media.json',wechatDomains=read(wechatFile);
 const wechatPatterns=wechatDomains.flatMap(domain=>[domain,'*.'+domain]);
 const tailscale=require('./lib/tailscale-policy.cjs').loadTailscalePolicy(root);
@@ -42,7 +44,7 @@ assert.ok(removed>100000,'Full duplicate domestic table was not removed');
 const existingDomestic=new Set(domestic);
 for(const match of critical){
  const host=split(match)[1];
- if(host!=='cn'&&beforeRoute(host).group!=='国内网站')continue;
+ if(!isDomestic(host))continue;
  const rule=match+',国内网站';if(!existingDomestic.has(rule))domestic.push(rule);
 }
 const companySupplement=read('data/rules/company-supplement.json');
@@ -85,7 +87,7 @@ for(const a of companySupplement.additions){const [kind,host]=split(a.row);put(h
 const domesticDNSKeys=[];
 for(const match of critical){
  const [kind,host]=split(match);
- if(beforeRoute(host).group!=='国内网站'&&host!=='cn')continue;
+ if(!isDomestic(host))continue;
  for(const key of kind==='DOMAIN'?[host]:[host,'*.'+host]){put(key,valueFor('国内网站'));domesticDNSKeys.push(key);}
  // Keep generic named STUN on the fallback, without taking company-owned roots.
  if(host!=='cn'&&kind==='DOMAIN-SUFFIX')for(const name of ['stun','turn'])for(const key of [name+'.'+host,'*.'+name+'.'+host,name+'.*.'+host,'*.'+name+'.*.'+host])put(key,stunDNS);
@@ -112,7 +114,24 @@ const header=['# V14.3 Shadowrocket — 2026-10-13; shadowrocket-lean-r1 / domes
  '# Shadowrocket 原生编译、完整国内 DNS 切换和 iOS VPN 接管仍待实机验收。'];
 header.push('# auto-local-family-r1: Mihomo native extension is unavailable in this conf; IPv6 stays enabled with native IPv4 preference.');
 const general=section('General').concat('always-real-ip = '+wechatPatterns.join(','));
-const output=header.join('\n')+'\n\n[General]\n'+general.join('\n')+'\n\n[Proxy Group]\n'+section('Proxy Group').join('\n')+'\n\n[Rule]\n'+rules.join('\n')+'\n\n[Host]\n'+outputHosts.map(([k,v])=>k+' = '+v).join('\n')+'\n';
+const groups=section('Proxy Group').map(row=>{
+ const [name,options]=row.split(' = ',2);
+ if(!Object.hasOwn(data.selectorDefaults,name))return row;
+ const preferred=data.selectorDefaults[name];
+ const fields=split(options), member=fields.indexOf(preferred);
+ const selection=fields.findIndex(field=>field.startsWith('policy-select-name='));
+ assert.ok(fields[0]==='select'&&member>0&&selection>0,name);
+ fields[selection]='policy-select-name='+preferred;
+ if(preferred==='DIRECT'){
+  // Use the domestic selector's reject-first fallback and explicit default name.
+  if(fields[1]!=='REJECT')fields.splice(1,0,'REJECT');
+ }else{
+  fields.splice(member,1);
+  fields.splice(1,0,preferred);
+ }
+ return name+' = '+fields.join(',');
+});
+const output=header.join('\n')+'\n\n[General]\n'+general.join('\n')+'\n\n[Proxy Group]\n'+groups.join('\n')+'\n\n[Rule]\n'+rules.join('\n')+'\n\n[Host]\n'+outputHosts.map(([k,v])=>k+' = '+v).join('\n')+'\n';
 assert.ok(Buffer.byteLength(output)<1800000,'Self-contained DNS budget exceeded');
 const file='src/ios/v14.3-shadowrocket.conf';
 const contractPath=fs.existsSync(path.resolve(root,'../../CURRENT_RELEASE.json'))?path.resolve(root,'../../docs/需求.md'):local('docs/需求.md');
@@ -125,7 +144,7 @@ const manifest={version:'14.3',date:'2026-10-13',revision:'shadowrocket-lean-r1'
   redundantRowCertificates:eliminated,domesticLiteralKeys:domesticDNSKeys,
   fullBusinessTable:'RETAINED',fullDomesticDNS:'NATIVE_DIRECT_OR_SELECTED_PROXY_REMOTE_RESOLUTION_REQUIRES_DEVICE_ACCEPTANCE',
   standaloneDomesticDNSAffinity:'NOT_NATIVE_VERIFIED'},
- groups:section('Proxy Group').map(r=>r.split(' = ')[0]),sources,
+ groups:groups.map(r=>r.split(' = ')[0]),sources,
  sourceContract:{file:'docs/需求.md',sha256:sha(contractPath)},
  inputs:['tools/build-shadowrocket-lean.cjs','tools/lib/tailscale-policy.cjs',tailscale.source.file,wechatFile,'src/android/v14.3-android-flclash.js','data/rules/embedded-policy.json',prefix+'manifest.json',prefix+'metadata/shadowrocket-sources.json',prefix+'data/rule-sources.lock.json'].map(file=>({file,sha256:sha(local(file))})),
  clientDeployment:false,nativeCompilation:'NOT_RUN',nativeDNSAffinity:'NOT_RUN',deviceAcceptance:'NOT_RUN'};

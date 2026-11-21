@@ -21,6 +21,10 @@ F = runpy.run_path(str(ROOT / 'tools/test-proxy-failover.py'))
 N = F['HELPERS']
 sha = lambda p: hashlib.sha256(Path(p).read_bytes()).hexdigest()
 MEDIA_HOST = 'szextshort.weixin.qq.com'
+DOMESTIC_DOMAIN = '19212021.xyz'
+DOMESTIC_CHILD = 'edge.' + DOMESTIC_DOMAIN
+DIRECT_DEFAULT_HOSTS = ('store.steampowered.com', 'www.epicgames.com', 'www.apple.com', 'b23.tv')
+VIDEO_DEFAULT_HOSTS = ('t.me', 'www.tiktok.com', 'x.com', 'discord.com')
 MEDIA_QNAME = b''.join(bytes([len(label)]) + label.encode('ascii') for label in MEDIA_HOST.split('.')) + b'\0'
 
 
@@ -103,7 +107,7 @@ def run_case(core, file, mode, engine, directory):
         for name, provider in cfg['rule-providers'].items():
             if provider['type'] != 'inline':
                 cfg['rule-providers'][name] = {'type': 'inline', 'behavior': provider['behavior'], 'payload': []}
-        cfg['hosts'] = {F['RESOLVER']: '127.0.0.1', F['CANARY']: '127.0.0.1'}
+        cfg['hosts'] = dict.fromkeys((F['RESOLVER'], F['CANARY'], *DIRECT_DEFAULT_HOSTS), '127.0.0.1')
         bootstrap_url = f'udp://127.0.0.1:{bootstrap.server_address[1]}'
         cfg['dns'].update({'listen': f'127.0.0.1:{dns}', 'use-system-hosts': False,
                            'default-nameserver': [bootstrap_url], 'proxy-server-nameserver': [bootstrap_url],
@@ -143,6 +147,9 @@ def run_case(core, file, mode, engine, directory):
         checks.append('wechat_real_ipv4_with_ordinary_fakeip_and_filtered_aaaa_https')
         # Encrypted DNS egress must observe upstream queries, so this phase uses
         # real responses. Fake-IP configuration acceptance is a separate check.
+        # Direct dials resolve to the loopback origin only after route selection.
+        # Static hosts for the new domestic names would trigger the private-IP rule.
+        cfg['dns']['direct-nameserver-follow-policy'] = False
         cfg['dns']['enhanced-mode'] = 'redir-host'; save(); child.call('config.setup')
         checks.append('native_accepts_real_response_phase')
         def choose(group, name):
@@ -152,9 +159,6 @@ def run_case(core, file, mode, engine, directory):
         backups = dict(zip(slots, ['B', 'C', 'D']))
         defaults = {group['name']: group['default-selected'] for group in cfg['proxy-groups']
                     if group['name'] in slots}
-        for slot, name in backups.items():
-            choose(slot, name)
-        choose('漏网之鱼', 'X ↻'); choose('国内网站', 'A ↻'); choose('OpenAI 服务', 'A ↻')
         def tcp_paths(prior, ports):
             return [k for k, v in relays.items()
                     if any(e[0] == 'TCP' and e[2] in ports for e in v.events[prior[k]:])]
@@ -198,6 +202,31 @@ def run_case(core, file, mode, engine, directory):
         dot_port = dot.server_address[1]
         https_port = https.server_address[1]
         api_port = https_port if 'api.openai.com' in original['dns']['nameserver-policy'] else dot_port
+        via(None, 'api.openai.com', blocked=True)
+        checks.append('unconfigured_public_selectors_reject')
+        choose('高纯净度AI用', 'A ↻')
+        choose('高网速视频用', 'B ↻')
+        for host in DIRECT_DEFAULT_HOSTS:
+            via(None, host)
+            checks.append('fresh_business_default_direct:' + host)
+        for host in VIDEO_DEFAULT_HOSTS:
+            via('B', host)
+            checks.append('fresh_business_default_video:' + host)
+        for host in (DOMESTIC_DOMAIN, DOMESTIC_CHILD):
+            via(None, host)
+        dns_via('dns-probe.' + DOMESTIC_DOMAIN, None, {dot_port, https_port})
+        checks.append('domestic_suffix_apex_child_and_dns_default_direct')
+        choose('Steam', '高纯净度AI用')
+        via('A', DIRECT_DEFAULT_HOSTS[0])
+        checks.append('direct_default_can_be_manually_switched_to_proxy')
+        for slot, name in backups.items():
+            choose(slot, name)
+        choose('漏网之鱼', 'X ↻'); choose('国内网站', 'A ↻'); choose('OpenAI 服务', 'A ↻')
+        via('A', DOMESTIC_CHILD)
+        udp('A', DOMESTIC_CHILD)
+        dns_via('dns-probe.' + DOMESTIC_DOMAIN, 'A', {dot_port, https_port})
+        udp('X', 'stun.' + DOMESTIC_DOMAIN)
+        checks.append('domestic_suffix_follows_proxy_for_tcp_udp_dns_and_protects_stun')
         for host in ['api.amemv.com', 'v5.douyinvod.com', 'p3.douyinpic.com', 'apd-pcdnwxlogin.teg.tencent-cloud.net', 'openaifoundation.org']:
             via('A', host); checks.append('empty_provider_tcp:' + host)
         via(None, MEDIA_HOST); checks.append('wechat_tcp_direct_even_with_domestic_proxy')

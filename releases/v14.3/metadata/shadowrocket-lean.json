@@ -5,8 +5,8 @@
   "domesticProtocolRevision": "domestic-protocol-r1",
   "status": "GENERATED_NATIVE_ACCEPTANCE_PENDING",
   "file": "src/ios/v14.3-shadowrocket.conf",
-  "sha256": "fd055ff1620487ab7c9947a5d19a312087ba5abfff3c650a19723c093393d85d",
-  "bytes": 1797384,
+  "sha256": "0a9b459ee4bd18ff6551fd37f7244c6b13669de5074b10736378c38b73e8ba20",
+  "bytes": 1798587,
   "tailscaleDerpSource": {
     "file": "data/rules/tailscale-derp-map.json",
     "url": "https://controlplane.tailscale.com/derpmap/default",
@@ -20,7 +20,7 @@
   },
   "rules": {
     "before": 116974,
-    "after": 5322,
+    "after": 5323,
     "removedDuplicateCNRows": 111400,
     "removedDominatedLiteralRows": [
       "DOMAIN-SUFFIX,firebase.google.com,谷歌服务",
@@ -536,6 +536,7 @@
       "DOMAIN-SUFFIX,mob.com",
       "DOMAIN-SUFFIX,baidustatic.com",
       "DOMAIN-SUFFIX,didi-labs.com",
+      "DOMAIN-SUFFIX,19212021.xyz",
       "DOMAIN-SUFFIX,cn",
       "DOMAIN-SUFFIX,baidu.com",
       "DOMAIN-SUFFIX,bdstatic.com",
@@ -678,7 +679,7 @@
   },
   "dns": {
     "beforeHostRows": 9130,
-    "afterHostRows": 9968,
+    "afterHostRows": 9978,
     "removedRedundantRows": 1040,
     "redundantRowCertificates": [
       {
@@ -4873,6 +4874,8 @@
       "*.baidustatic.com",
       "didi-labs.com",
       "*.didi-labs.com",
+      "19212021.xyz",
+      "*.19212021.xyz",
       "cn",
       "*.cn",
       "baidu.com",
@@ -5445,12 +5448,12 @@
   ],
   "sourceContract": {
     "file": "docs/需求.md",
-    "sha256": "6085d3e8b8059f035e99a9458afdb221506d12f8a7b53445130ba265d92c7989"
+    "sha256": "f52c42f5340830240bc4d0988f99d607ccfb50d482a23dd79aecde8d03a08edd"
   },
   "inputs": [
     {
       "file": "tools/build-shadowrocket-lean.cjs",
-      "sha256": "630a43713b09d421d07b185aac8898831116cc52bcf3b89694c1589bc6600898"
+      "sha256": "acf50b1f8ed13c098dff97da0a3ad83ab358c1e09fa4b125b5888fa98eea0c9f"
     },
     {
       "file": "tools/lib/tailscale-policy.cjs",
@@ -5466,11 +5469,11 @@
     },
     {
       "file": "src/android/v14.3-android-flclash.js",
-      "sha256": "3f5115fce915254fdeea23992328eb9e0a09dd4383d1dd9cfa2ac192164553f8"
+      "sha256": "d53d031081d301be96cf17ddf52161554dae397c33e1d7494f654a0e8bce13d9"
     },
     {
       "file": "data/rules/embedded-policy.json",
-      "sha256": "a0252e08c80e4ed9ae43c2b2f96c2d5f81596f2261319a06e6e25e8c88439dac"
+      "sha256": "6d65b197283796105b886af118495ca8056186912e7b53ac764ee22c9de42ee3"
     },
     {
       "file": "validation/inputs/v14.2-baseline/manifest.json",

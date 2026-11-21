@@ -71,7 +71,7 @@
   "macosReport": "docs/reports/v14.3/MacBook适配.md",
   "macos": "CURRENT_SOURCE_AND_ISOLATED_CHECKS_SEPARATE_DEVICE_NOT_RUN",
   "distribution": "public",
-  "releaseTag": "v14.3.0-rc.16",
+  "releaseTag": "v14.3.0-rc.17",
   "personalRulesIncluded": false,
   "networkCompatibilityRevision": "ipv6-fallback-r2",
   "networkCompatibility": "releases/v14.3/metadata/network-compat-delivery.json",
@@ -151,10 +151,10 @@
   "nativeFallback": {
     "revision": "backup-slot-skip-r1",
     "guide": "docs/guides/故障转移.md",
-    "verification": "releases/v14.3/validation/proxy-failover/wechat-media-r1.json",
+    "verification": "releases/v14.3/validation/proxy-failover/domestic-policy-defaults-r1.json",
     "releaseTags": {
-      "main": "v14.3.0-rc.16",
-      "ipv4-only": "v14.3.0-ipv4-only-rc.7"
+      "main": "v14.3.0-rc.17",
+      "ipv4-only": "v14.3.0-ipv4-only-rc.8"
     },
     "deviceAcceptance": "NOT_RUN"
   },
@@ -231,6 +231,14 @@
     }
   },
   "currentRevision": "wechat-media-r1",
+  "domesticPolicyDefaults": {
+    "revision": "domestic-policy-defaults-r1",
+    "domainSuffix": "19212021.xyz",
+    "selectorDefaults": "releases/v14.3/data/rules/business-services.json",
+    "staticVerification": "releases/v14.3/validation/domestic-resilience/domestic-policy-defaults-r1.json",
+    "isolatedCoreVerification": "releases/v14.3/validation/proxy-failover/domestic-policy-defaults-r1.json",
+    "deviceAcceptance": "NOT_RUN"
+  },
   "wechatMedia": {
     "revision": "wechat-media-r1",
     "domains": "releases/v14.3/data/rules/wechat-media.json",

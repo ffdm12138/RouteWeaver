@@ -3,6 +3,7 @@
   "date": "2026-11-07",
   "sourceIds": ["v12r-domain-douyin"],
   "suffixes": ["wechat.com", "weixin.com", "servicewechat.com", "weixinbridge.com", "weixinsxy.com", "wechatpay.com"],
+  "authorizedSuffixes": ["19212021.xyz"],
   "exactHosts": [
     "apd-pcdnwxlogin.teg.tencent-cloud.net",
     "apd-pcdnwxstat.teg.tencent-cloud.net",

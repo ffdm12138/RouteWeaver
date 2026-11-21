@@ -1,6 +1,6 @@
 # RouteWeaver
 
-当前修订 `wechat-media-r1` 为微信媒体域名提供真实解析和直连例外。下表提供公开预发布附件。 [微信发图优化](docs/guides/微信发图优化.md)
+当前版本把 `19212021.xyz` 及其子域名归入「国内网站」，并统一各客户端首次导入的业务组默认值。 [业务组默认值](docs/需求.md) · [微信发图优化](docs/guides/微信发图优化.md)
 
 跨平台分流覆写，按客户端选择对应入口。每个网络版本都提供六份 Mihomo JS 和一份 Shadowrocket 原生配置。本目录是独立公开版源码。
 
@@ -8,8 +8,8 @@
 
 | 版本 | 本地入口 | GitHub 预发布 |
 |---|---|---|
-| 支持 IPv6 的主版 | [各客户端导入文件](releases/v14.3/README.md) | [主版 v14.3.0-rc.16](https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-rc.16) |
-| 纯 IPv4 版 | [各客户端导入文件](releases/v14.3-ipv4-only/README.md) | [纯 IPv4 v14.3.0-ipv4-only-rc.7](https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-ipv4-only-rc.7) |
+| 支持 IPv6 的主版 | [各客户端导入文件](releases/v14.3/README.md) | [主版 v14.3.0-rc.17](https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-rc.17) |
+| 纯 IPv4 版 | [各客户端导入文件](releases/v14.3-ipv4-only/README.md) | [纯 IPv4 v14.3.0-ipv4-only-rc.8](https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-ipv4-only-rc.8) |
 
 六份 Mihomo JS 在两条发布线使用相同的三档原生故障转移。规则模式下在原组选择 A，再手选所需的三个备用，按 A → 1 → 2 → 3 选路。活动链探测间隔 3 秒，超时 3 秒。 [故障转移说明](docs/guides/故障转移.md)
 

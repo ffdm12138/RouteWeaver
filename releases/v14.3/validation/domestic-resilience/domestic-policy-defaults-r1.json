@@ -1,0 +1,180 @@
+{
+  "revision": "domestic-policy-defaults-r1",
+  "scope": "OFFLINE_MODELS_NOT_DEVICE_ACCEPTANCE",
+  "edition": "public",
+  "status": "PASS",
+  "checks": 62348,
+  "failed": 0,
+  "stages": {
+    "full": 26,
+    "empty": 26,
+    "partial": 26,
+    "restored": 26
+  },
+  "sources": {
+    "releases/v14.3/src/windows/v14.3-windows-flclash.js": "db40cfa6b289fa660457573ef17f42087a36df15396dc31c6d5cf1633ae19545",
+    "releases/v14.3/src/android/v14.3-android-flclash.js": "d53d031081d301be96cf17ddf52161554dae397c33e1d7494f654a0e8bce13d9",
+    "releases/v14.3/src/ios/v14.3-clashmi-domestic-protocol-r1.js": "5a0972223ab3c53c0305dd12ae49bf60994a38381cb965d73e2898b3027536f6",
+    "releases/v14.3/src/ios/v14.3-shadowrocket.conf": "0a9b459ee4bd18ff6551fd37f7244c6b13669de5074b10736378c38b73e8ba20",
+    "releases/v14.3/src/macos/v14.3-macos-flclash.js": "a65e51c978d537879e4a60099c7ab2cdc8cf3782a9cf351e88a0f7011a93c839",
+    "releases/v14.3/src/macos/v14.3-macos-clashmi.js": "58ff62051a4b97046f8c474443c2c6915494375266f5052804aead3e64f808cf",
+    "releases/v14.3/src/clash-verge/v14.3-clash-verge.js": "e941a81b2391705c4df6dc02fc04deb1006733b2dabad1fb144f630849f05cd8",
+    "releases/v14.3-ipv4-only/src/windows/v14.3-windows-flclash-ipv4-only.js": "9be409ac10a5b48dfe36d3871212302f9788928369b345d2575857ec3dff22fd",
+    "releases/v14.3-ipv4-only/src/android/v14.3-android-flclash-ipv4-only.js": "98724c0352ab859e852a414935a256e80dae899f87cf75548829ffcfae52c798",
+    "releases/v14.3-ipv4-only/src/ios/v14.3-clashmi-domestic-protocol-r1-ipv4-only.js": "eef7bcb0a84c351b9c450c6f7dd9b22a1fc6dfe988fc8350add14afc4dd0aff3",
+    "releases/v14.3-ipv4-only/src/ios/v14.3-shadowrocket-ipv4-only.conf": "d5811db3d5759b6bae53c50da3e28142af09db2542b9733f346a7417665077fc",
+    "releases/v14.3-ipv4-only/src/macos/v14.3-macos-flclash-ipv4-only.js": "1a57e1bcb0e9fdad6e28305fda587255bd1a2051aacab08e798b5ec666748e49",
+    "releases/v14.3-ipv4-only/src/macos/v14.3-macos-clashmi-ipv4-only.js": "cd755b762bd687ea63ecbde67d4bc58096025a5e3956c59a8344f7ffbc3b50d2",
+    "releases/v14.3-ipv4-only/src/clash-verge/v14.3-clash-verge-ipv4-only.js": "5124a21df47d1b410fe3e4430513cdf5156850342a194ce44533ab657fd37536"
+  },
+  "sizes": [
+    {
+      "client": "windows",
+      "mode": "auto",
+      "scriptBytes": 125155,
+      "configBytes": 191565
+    },
+    {
+      "client": "windows",
+      "mode": "dual-stack",
+      "scriptBytes": 125155,
+      "configBytes": 190219
+    },
+    {
+      "client": "windows",
+      "mode": "ipv4-local",
+      "scriptBytes": 125155,
+      "configBytes": 250764
+    },
+    {
+      "client": "android",
+      "mode": "auto",
+      "scriptBytes": 124714,
+      "configBytes": 191217
+    },
+    {
+      "client": "android",
+      "mode": "dual-stack",
+      "scriptBytes": 124714,
+      "configBytes": 189871
+    },
+    {
+      "client": "android",
+      "mode": "ipv4-local",
+      "scriptBytes": 124714,
+      "configBytes": 250461
+    },
+    {
+      "client": "clashmi",
+      "mode": "auto",
+      "scriptBytes": 127024,
+      "configBytes": 192142
+    },
+    {
+      "client": "clashmi",
+      "mode": "dual-stack",
+      "scriptBytes": 127024,
+      "configBytes": 190795
+    },
+    {
+      "client": "clashmi",
+      "mode": "ipv4-local",
+      "scriptBytes": 127024,
+      "configBytes": 251299
+    },
+    {
+      "client": "macosFlClash",
+      "mode": "auto",
+      "scriptBytes": 126998,
+      "configBytes": 191844
+    },
+    {
+      "client": "macosFlClash",
+      "mode": "dual-stack",
+      "scriptBytes": 126998,
+      "configBytes": 190498
+    },
+    {
+      "client": "macosFlClash",
+      "mode": "ipv4-local",
+      "scriptBytes": 126998,
+      "configBytes": 251043
+    },
+    {
+      "client": "macosClashMi",
+      "mode": "auto",
+      "scriptBytes": 127022,
+      "configBytes": 192140
+    },
+    {
+      "client": "macosClashMi",
+      "mode": "dual-stack",
+      "scriptBytes": 127022,
+      "configBytes": 190793
+    },
+    {
+      "client": "macosClashMi",
+      "mode": "ipv4-local",
+      "scriptBytes": 127022,
+      "configBytes": 251297
+    },
+    {
+      "client": "clashVerge",
+      "mode": "auto",
+      "scriptBytes": 127093,
+      "configBytes": 192143
+    },
+    {
+      "client": "clashVerge",
+      "mode": "dual-stack",
+      "scriptBytes": 127093,
+      "configBytes": 190796
+    },
+    {
+      "client": "clashVerge",
+      "mode": "ipv4-local",
+      "scriptBytes": 127093,
+      "configBytes": 251342
+    },
+    {
+      "client": "windows",
+      "mode": "ipv4-only",
+      "scriptBytes": 127749,
+      "configBytes": 251116
+    },
+    {
+      "client": "android",
+      "mode": "ipv4-only",
+      "scriptBytes": 127308,
+      "configBytes": 250813
+    },
+    {
+      "client": "clashmi",
+      "mode": "ipv4-only",
+      "scriptBytes": 129489,
+      "configBytes": 251651
+    },
+    {
+      "client": "macosFlClash",
+      "mode": "ipv4-only",
+      "scriptBytes": 129537,
+      "configBytes": 251395
+    },
+    {
+      "client": "macosClashMi",
+      "mode": "ipv4-only",
+      "scriptBytes": 129487,
+      "configBytes": 251649
+    },
+    {
+      "client": "clashVerge",
+      "mode": "ipv4-only",
+      "scriptBytes": 129687,
+      "configBytes": 251540
+    }
+  ],
+  "testSHA256": "a795ddfb31c25b910e94a38823738fff289cc8ad3d5ca8da7c4929227a19413a",
+  "dataSHA256": "c2cd89bda7b9deb2170825d8fc66627bf6c2450870e14bcce0db538c4bf6d9a6",
+  "mediaDomainsSHA256": "b041e63cc178060fd545a0bc8ef8952b7b85fcaf034b0defc32112e79edf0551",
+  "failures": []
+}

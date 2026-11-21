@@ -16,6 +16,15 @@ const mediaProcessNames = {
   android: ['com.tencent.mm'], macosFlClash: ['WeChat'],
 };
 const review = read('releases/v14.3/data/rules/domestic-resilience.json');
+const newDomain = '19212021.xyz';
+assert.ok(review.authorizedSuffixes.includes(newDomain));
+const authorizedHosts = new Set(review.authorizedSuffixes.flatMap(h => [h, 'edge.' + h, 'nested.edge.' + h]));
+const businessDefaults = {
+  DIRECT: ['国内网站', 'Steam', 'Epic Games', '苹果国际', '哔哩国际'],
+  '高网速视频用': ['Telegram', 'TikTok', 'Twitter', 'Discord', 'Netflix', 'Disney+', 'Spotify'],
+  '高纯净度AI用': ['公共基础服务', '漏网之鱼', 'OpenAI 服务', 'Anthropic 服务', '谷歌服务', '微软生态',
+    'OpenRouter', 'Perplexity', 'Hugging Face', 'xAI', 'Meta 服务'],
+};
 const locks = [...read('releases/v14.3/data/rule-sources.lock.json').sources,
   ...read('releases/v14.3/validation/inputs/v14.2-baseline/data/rule-sources.lock.json').sources];
 const rawRows = file => fs.readFileSync(file, 'utf8').split(/\r?\n/).map(s => s.trim()).filter(s => s && !s.startsWith('#'));
@@ -44,7 +53,7 @@ const sourceProbes = review.sourceIds.flatMap(id => {
     return [domain, 'media.' + domain];
   });
 });
-const hosts = [...new Set([...observed, ...sourceProbes, ...review.suffixes.concat(mediaDomains).flatMap(h => [h, 'media.' + h])])];
+const hosts = [...new Set([...authorizedHosts, ...observed, ...sourceProbes, ...review.suffixes.concat(mediaDomains).flatMap(h => [h, 'media.' + h])])];
 const sources = {}, failures = [], counts = {}, sizes = [];
 let checks = 0;
 function check(name, body) {
@@ -59,13 +68,14 @@ const entries = [
 for (const entry of entries) {
   const file = path.join(root, entry.file), source = fs.readFileSync(file, 'utf8');
   sources[entry.file] = hash(file);
-  let config, rules, providers, platform = entry.client;
+  let config, rules, providers, groups, platform = entry.client;
   if (entry.file.endsWith('.js')) {
     const input = {proxies: [{name: 'Synthetic', type: 'socks5', server: '127.0.0.1', port: 1080, udp: true}],
       'x-routeweaver': {'network-mode': entry.mode === 'ipv4-only' ? 'ipv4-local' : entry.mode}};
     const ctx = vm.createContext({input, console: {log() {}}});
     config = JSON.parse(JSON.stringify(vm.runInContext(source + '\nmain(input)', ctx, {timeout: 5000})));
     rules = config.rules;
+    groups = new Map(config['proxy-groups'].map(group => [group.name, group]));
     providers = Object.entries(config['rule-providers']).map(([name, p]) => ({name, remote: p.type !== 'inline',
       rows: p.type === 'inline' ? p.behavior === 'domain' ? p.payload.map(s => s.startsWith('+.')
         ? 'DOMAIN-SUFFIX,' + s.slice(2) : 'DOMAIN,' + s) : p.payload : remoteRows(p.url)}));
@@ -76,9 +86,27 @@ for (const entry of entries) {
     const pairs = rows => rows.map(s => { const i = s.indexOf('='); return [s.slice(0, i).trim(), s.slice(i + 1).trim()]; });
     config = {general: Object.fromEntries(pairs(section('General'))), hosts: pairs(section('Host'))};
     rules = section('Rule');
+    groups = new Map(pairs(section('Proxy Group')).map(([name, fields]) => [name, f.split(fields)]));
     providers = [...new Set(rules.filter(r => r.startsWith('RULE-SET,')).map(r => f.split(r)[1]))]
       .map(url => ({name: url, remote: true, rows: remoteRows(url)}));
   }
+  check(entry.client + ':' + entry.mode + ':selector-defaults', () => {
+    for (const [preferred, names] of Object.entries({...businessDefaults, REJECT: ['高纯净度AI用', '高网速视频用']})) {
+      for (const name of names) {
+        const group = groups.get(name);
+        const direct = preferred === 'DIRECT';
+        if (platform === 'shadowrocket') {
+          assert.ok(group.includes('policy-select-name=' + preferred) && group.includes(preferred), name);
+          assert.equal(group[1], direct ? 'REJECT' : preferred, name);
+        } else {
+          assert.equal(group['default-selected'], preferred, name);
+          assert.ok(group.proxies.includes(preferred), name);
+          assert.equal(group['empty-fallback'], 'REJECT', name);
+          if (direct) assert.match(group.proxies[0], /^主节点缺失 · 已选备用/, name);
+        }
+      }
+    }
+  });
   check(entry.client + ':' + entry.mode + ':media-config', () => {
     if (platform === 'shadowrocket') {
       assert.deepEqual(config.general['always-real-ip'].split(','), mediaDomains.flatMap(h => [h, '*.' + h]));
@@ -120,6 +148,12 @@ for (const entry of entries) {
         });
       }
     }
+    for (const host of ['not-' + newDomain, newDomain + '.example.net']) {
+      check(label + ':suffix-boundary:' + host, () => {
+        assert.equal(f.route(model, {host, protocol: 'TCP', port: 443}).group, '漏网之鱼');
+        assert.deepEqual(dnsPolicyFor(host).groups, ['漏网之鱼']);
+      });
+    }
     for (const host of ['www.tiktok.com', 'api.openai.com', 'www.google.com', 'challenges.cloudflare.com']) {
       check(label + ':company:' + host, () => {
         assert.notEqual(f.route(model, {host, port: 443, protocol: 'UDP'}).group, '国内网站');
@@ -133,14 +167,16 @@ for (const entry of entries) {
     for (const flow of [{host: 'stun.amemv.com', protocol: 'UDP', port: 443},
       {host: 'stun.qpic.cn', protocol: 'UDP', port: 443}, {host: 'mmbiz.qpic.cn', protocol: 'UDP', port: 3478},
       {host: 'api.amemv.com', protocol: 'UDP', port: 3478},
+      {host: 'stun.' + newDomain, protocol: 'UDP', port: 443},
+      {host: 'edge.' + newDomain, protocol: 'UDP', port: 3478},
       {ip: '203.0.113.17', protocol: 'UDP', port: 443}, {ip: '2001:db8::17', protocol: 'UDP', port: 443}])
       check(label + ':guard:' + JSON.stringify(flow), () => assert.equal(f.route(model, flow).group,
         entry.mode === 'ipv4-only' && flow.ip?.includes(':') ? 'REJECT' : '漏网之鱼'));
-    for (const host of ['stun.amemv.com', 'stun.qpic.cn'])
+    for (const host of ['stun.amemv.com', 'stun.qpic.cn', 'stun.' + newDomain])
       check(label + ':stun-dns:' + host, () => assert.deepEqual(dnsPolicyFor(host).groups, ['漏网之鱼']));
   }
 }
-const result = {revision: 'wechat-media-r1', scope: 'OFFLINE_MODELS_NOT_DEVICE_ACCEPTANCE',
+const result = {revision: 'domestic-policy-defaults-r1', scope: 'OFFLINE_MODELS_NOT_DEVICE_ACCEPTANCE',
   edition: release.vpsDirectRevision ? 'personal' : 'public', status: failures.length ? 'FAIL' : 'PASS',
   checks, failed: failures.length, stages: counts, sources, sizes,
   testSHA256: hash(__filename), dataSHA256: hash(path.join(releaseRoot, 'data/rules/domestic-resilience.json')),
