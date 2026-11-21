@@ -6,6 +6,7 @@
 
 # 文档索引
 
+- [ProjectClash](guides/ProjectClash使用说明.md) · iPhone、iPad、Mac 和 Apple TV 的导入与验收。
 - [策略组故障转移](guides/故障转移.md) · 两轨的原生三档回退、探测时序、升级和验收。
 - [微信发图优化](guides/微信发图优化.md) · 媒体真实解析、直连范围和各客户端验证。
 

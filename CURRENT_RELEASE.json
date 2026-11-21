@@ -44,6 +44,18 @@
     "macosClashMi": "releases/v14.3/src/macos/v14.3-macos-clashmi.js",
     "clashVerge": "releases/v14.3/src/clash-verge/v14.3-clash-verge.js"
   },
+  "projectClash": {
+    "revision": "projectclash-r1",
+    "entries": {
+      "main": "releases/v14.3/src/projectclash/v14.3-projectclash.js",
+      "ipv4-only": "releases/v14.3-ipv4-only/src/projectclash/v14.3-projectclash-ipv4-only.js"
+    },
+    "guide": "docs/guides/ProjectClash使用说明.md",
+    "reviewedClientCommit": "f84db6a964505c9f8592cc2dd1b16a25454b3dd7",
+    "reviewedCoreCommit": "c8f2fc1d58bf9ac856a0bf161bc9489591821f45",
+    "verification": "releases/v14.3/validation/projectclash-r1.json",
+    "deviceAcceptance": "NOT_RUN"
+  },
   "classificationRevision": "review-fixes-r1",
   "reviewClosedDate": "2026-10-12",
   "embeddedDomesticSuffixes": 128,
@@ -71,7 +83,7 @@
   "macosReport": "docs/reports/v14.3/MacBook适配.md",
   "macos": "CURRENT_SOURCE_AND_ISOLATED_CHECKS_SEPARATE_DEVICE_NOT_RUN",
   "distribution": "public",
-  "releaseTag": "v14.3.0-rc.18",
+  "releaseTag": "v14.3.0-rc.19",
   "personalRulesIncluded": false,
   "networkCompatibilityRevision": "ipv6-fallback-r2",
   "networkCompatibility": "releases/v14.3/metadata/network-compat-delivery.json",
@@ -153,8 +165,8 @@
     "guide": "docs/guides/故障转移.md",
     "verification": "releases/v14.3/validation/proxy-failover/youtube-apt-routing-r1.json",
     "releaseTags": {
-      "main": "v14.3.0-rc.18",
-      "ipv4-only": "v14.3.0-ipv4-only-rc.9"
+      "main": "v14.3.0-rc.19",
+      "ipv4-only": "v14.3.0-ipv4-only-rc.10"
     },
     "deviceAcceptance": "NOT_RUN"
   },

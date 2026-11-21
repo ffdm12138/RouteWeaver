@@ -1,17 +1,17 @@
 # RouteWeaver
 
-当前版本把 `19212021.xyz` 及其子域名归入「国内网站」，并统一各客户端首次导入的业务组默认值。 [业务组默认值](docs/需求.md) · [微信发图优化](docs/guides/微信发图优化.md)
+当前版本新增 ProjectClash 覆写，支持在 iPhone、iPad、Mac 和 Apple TV 绑定同一份脚本。 [ProjectClash 使用说明](docs/guides/ProjectClash使用说明.md)
 
-跨平台分流覆写，按客户端选择对应入口。每个网络版本都提供六份 Mihomo JS 和一份 Shadowrocket 原生配置。本目录是独立公开版源码。
+跨平台分流覆写，按客户端选择对应入口。每个网络版本都提供七份 JS 和一份 Shadowrocket 原生配置。本目录是独立公开版源码。
 
 ## 版本与下载
 
 | 版本 | 本地入口 | GitHub 预发布 |
 |---|---|---|
-| 支持 IPv6 的主版 | [各客户端导入文件](releases/v14.3/README.md) | [主版 v14.3.0-rc.18](https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-rc.18) |
-| 纯 IPv4 版 | [各客户端导入文件](releases/v14.3-ipv4-only/README.md) | [纯 IPv4 v14.3.0-ipv4-only-rc.9](https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-ipv4-only-rc.9) |
+| 支持 IPv6 的主版 | [各客户端导入文件](releases/v14.3/README.md) | [主版 v14.3.0-rc.19](https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-rc.19) |
+| 纯 IPv4 版 | [各客户端导入文件](releases/v14.3-ipv4-only/README.md) | [纯 IPv4 v14.3.0-ipv4-only-rc.10](https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-ipv4-only-rc.10) |
 
-六份 Mihomo JS 在两条发布线使用相同的三档原生故障转移。规则模式下在原组选择 A，再手选所需的三个备用，按 A → 1 → 2 → 3 选路。活动链探测间隔 3 秒，超时 3 秒。 [故障转移说明](docs/guides/故障转移.md)
+两条发布线的 JS 都支持三档原生故障转移。规则模式下在原组选择 A，再手选所需的三个备用，按 A → 1 → 2 → 3 选路。活动链探测间隔 3 秒，超时 3 秒。 [故障转移说明](docs/guides/故障转移.md)
 
 ## 主版快速导入
 
@@ -24,6 +24,7 @@
 | macOS FlClash | [v14.3-macos-flclash.js](releases/v14.3/src/macos/v14.3-macos-flclash.js) | [说明](docs/guides/MacBook使用说明.md) |
 | macOS Clash Mi | [v14.3-macos-clashmi.js](releases/v14.3/src/macos/v14.3-macos-clashmi.js) | [说明](docs/guides/MacBook使用说明.md) |
 | Windows Clash Verge Rev | [v14.3-clash-verge.js](releases/v14.3/src/clash-verge/v14.3-clash-verge.js) | [说明](docs/guides/ClashVerge使用说明.md) |
+| ProjectClash（iPhone、iPad、Mac、Apple TV） | [v14.3-projectclash.js](releases/v14.3/src/projectclash/v14.3-projectclash.js) | [说明](docs/guides/ProjectClash使用说明.md) |
 
 主版默认请求 auto，实际自动判断需要匹配的原生核心。用原装核心且本地无 IPv6 出口时，可手动选同一份 JS 的 `ipv4-local` 模式。需要限制核心的本地连接和节点拨号都使用 IPv4 时，导入纯 IPv4 版。两种模式的设备接管设置分别核对。 [网络模式与设备设置](docs/guides/IPv4兼容模式.md)
 
@@ -32,6 +33,6 @@
 - [使用与维护文档](docs/README.md) · [需求](docs/需求.md) · [当前验收](docs/status/当前验收.md) · [变更记录](CHANGELOG.md)
 - [当前文件与发布记录](CURRENT_RELEASE.json) · [开源与发布流程](docs/maintenance/开源与发布.md)
 
-原装 Windows FlClash 0.9.3 的隔离回放覆盖两轨六个 JS 入口的订阅刷新、TCP、UDP、DoH 和 DoT。各端导入界面与 TUN/VPN 待实机验收。 [隔离回执](releases/v14.3/validation/proxy-failover/backup-slot-skip-r1.json)
+原装 Windows FlClash 0.9.3 和固定 ProjectClash 内核的隔离回放覆盖订阅刷新、TCP、UDP、DoH 和 DoT。各端导入界面与 TUN/VPN 待实机验收。 [FlClash 回执](releases/v14.3/validation/proxy-failover/youtube-apt-routing-r1.json) · [ProjectClash 回执](releases/v14.3/validation/projectclash-r1.json)
 
 原创内容采用 [MIT](LICENSE)，上游规则与历史可选核心使用各自的许可。 [第三方声明](THIRD_PARTY_NOTICES.md)

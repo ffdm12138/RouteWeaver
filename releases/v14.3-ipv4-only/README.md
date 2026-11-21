@@ -1,4 +1,4 @@
-> **纯 IPv4 版**。六份 Mihomo JS 支持三档原生故障转移。 [使用说明](../../docs/guides/故障转移.md)
+> **纯 IPv4 版**。七份 JS 支持三档原生故障转移。 [使用说明](../../docs/guides/故障转移.md)
 
 <!-- ARCHITECTURE_AUDIT_CURRENT:BEGIN -->
 > **历史架构审计基线 architecture-audit-r1（2026-11-01）**。两轨七客户端的当时源码、有限静态清单及隔离 Windows 核心已验证；跨端设备、原生 auto 能力和真实 AI 账号任务未验收。
@@ -23,10 +23,11 @@
 | macOS FlClash | [Mac FlClash JS](src/macos/v14.3-macos-flclash-ipv4-only.js) |
 | macOS Clash Mi | [Mac Clash Mi JS](src/macos/v14.3-macos-clashmi-ipv4-only.js) |
 | iOS Shadowrocket | [Shadowrocket conf](src/ios/v14.3-shadowrocket-ipv4-only.conf) |
+| ProjectClash（iPhone、iPad、Mac、Apple TV） | [ProjectClash JS](src/projectclash/v14.3-projectclash-ipv4-only.js) · [导入说明](../../docs/guides/ProjectClash使用说明.md) |
 
 ## Mihomo JS 行为
 
-六份 JS 强制 `ipv6: false`、`dns.ipv6: false`，移除 IPv6 Fake-IP 池和 TUN IPv6 接口地址。原节点、内联节点和 provider 刷新成员统一使用 `ip-version: ipv4`；provider 的强制表达式放在原表达式之后，原来显式写的 IPv6 地址族也被覆盖。此入口始终执行纯 IPv4，订阅携带 auto／dual-stack 字段也不能切回旧模式。无需 rc.6 的自动地址族扩展核心；需要支持现有 provider override-expr 的核心。
+JS 强制 `ipv6: false`、`dns.ipv6: false`，移除 IPv6 Fake-IP 池和 TUN IPv6 接口地址。原节点、内联节点和 provider 刷新成员统一使用 `ip-version: ipv4`，且强制表达式在原 provider 表达式后执行。入口始终执行纯 IPv4，需要核心支持 provider override-expr。
 
 业务 DNS、直连 DNS 和节点引导 DNS 均过滤 AAAA/SVCB/HTTPS，保留解析服务器与策略组。首段增加不触发解析的 IPv6 全地址拒绝，阻止到达核心的 IPv6 字面量 TCP/UDP；显式 hosts 的双栈列表保留 IPv4，IPv6-only 映射和关联别名拒绝。系统 hosts 不再读取，避免未受覆写管理的 IPv6 映射重新引入 IPv6。
 

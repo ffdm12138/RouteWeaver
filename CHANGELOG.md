@@ -1,3 +1,8 @@
+## v14.3.0-rc.19 / v14.3.0-ipv4-only-rc.10 · ProjectClash
+
+- 新增 iPhone、iPad、Mac 和 Apple TV 可共用的 ProjectClash 覆写。两轨继承 YouTube 播放与 Ubuntu APT 分流、微信媒体、Tailscale、业务 DNS 和三档故障转移。
+- 在 ProjectClash 固定内核中验证 TCP、UDP、DoH、DoT 和订阅刷新，使用内核的 UDP 不支持即拒绝策略。 [导入说明](docs/guides/ProjectClash使用说明.md)
+
 ## v14.3.0-rc.17 / v14.3.0-ipv4-only-rc.8 · 国内后缀和业务组默认值
 
 - `19212021.xyz` 及其子域名的普通 TCP、UDP 和 DNS 跟随「国内网站」，默认 DIRECT。

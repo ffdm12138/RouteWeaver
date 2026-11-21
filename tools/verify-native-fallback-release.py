@@ -17,6 +17,37 @@ ROOT = Path(__file__).resolve().parents[1]
 SUMS = 'SHA256SUMS.txt'
 
 
+def projectclash_assets(root, candidate, edition):
+    receipt = read(checked_path(root, candidate['verification']))
+    if (receipt['status'] != 'PASS_ISOLATED_PROJECTCLASH_CORE' or receipt['edition'] != edition
+            or receipt['revision'] != candidate['revision'] or receipt['core']['commit'] != candidate['reviewedCoreCommit']):
+        raise ValueError('Missing or incompatible ProjectClash replay')
+    for file, digest in receipt['harness'].items():
+        if sha(checked_path(root, file)) != digest:
+            raise ValueError('Stale ProjectClash replay harness: ' + file)
+    required = {
+        'wechat_real_ipv4_with_ordinary_fakeip_and_filtered_aaaa_https',
+        'video_egress_tcp_udp_dns:rr4---sn-oguelnsr.googlevideo.com',
+        'video_egress_tcp_udp_dns:archive.ubuntu.com',
+        'google_egress_tcp_udp_dns:accounts.youtube.com',
+        'youtube_unsupported_udp_rejected',
+        'fallback_to_D',
+        'reload_legacy_reject_skips_to_tier3',
+        'reload_removed_primary_and_all_backups_rejects',
+        'openai_mode_correct_encrypted_dns_selected_group',
+    }
+    assets = {}
+    for track, file in candidate['entries'].items():
+        source = checked_path(root, file)
+        proof = receipt['tracks'][track]
+        if proof['file'] != file or sha(source) != proof['sha256'] or not required.issubset(proof['checks']):
+            raise ValueError('Stale or incomplete ProjectClash evidence: ' + file)
+        assets[track] = (source, proof['sha256'])
+    if set(assets) != {'main', 'ipv4-only'}:
+        raise ValueError('Expected one ProjectClash entry per track')
+    return assets
+
+
 def verify_source(root):
     release = read(root / 'CURRENT_RELEASE.json')
     candidate = release['nativeFallback']
@@ -27,6 +58,7 @@ def verify_source(root):
         raise ValueError('Missing or incompatible native fallback evidence')
 
     tracks = {'main': release['entries'], 'ipv4-only': release['variants']['ipv4-only']['entries']}
+    projectclash = projectclash_assets(root, release['projectClash'], edition)
     tags = candidate['releaseTags']
     if tags is not None and (set(tags) != set(tracks) or len(set(tags.values())) != 2):
         raise ValueError('Expected two distinct track tags')
@@ -46,6 +78,10 @@ def verify_source(root):
             files[path.name] = (path, proof['sourceSHA256'])
         if len(files) != 7:
             raise ValueError('Duplicate asset basename')
+        path, digest = projectclash[track]
+        if path.name in files:
+            raise ValueError('Duplicate ProjectClash asset basename')
+        files[path.name] = (path, digest)
         if tags is not None:
             assets[tags[track]] = files
     if not receipt['checks']:
@@ -107,7 +143,8 @@ def verify_static():
                        cwd=ROOT, check=True, timeout=60)
         verify_source(snapshot)
         suites = runpy.run_path(str(snapshot / 'tools/run-architecture-audit.py'))['SUITES']
-        commands = [*suites['build'], ['node', 'tools/test-native-fallback.cjs'], ['node', 'tools/test-tailscale-direct.cjs'],
+        commands = [*suites['build'], ['node', 'tools/build-projectclash.cjs', '--check'], ['node', 'tools/test-projectclash.cjs'],
+                    ['node', 'tools/test-native-fallback.cjs'], ['node', 'tools/test-tailscale-direct.cjs'],
                     ['node', 'tools/test-company-audit.cjs'], ['node', 'tools/test-dns-policy-order.cjs'],
                     *suites['regression'], *suites['platform']]
         for command in commands:

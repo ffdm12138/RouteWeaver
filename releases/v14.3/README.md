@@ -1,4 +1,4 @@
-> **支持 IPv6 的主版**。六份 Mihomo JS 支持三档原生故障转移。 [使用说明](../../docs/guides/故障转移.md)
+> **支持 IPv6 的主版**。七份 JS 支持三档原生故障转移。 [使用说明](../../docs/guides/故障转移.md)
 
 <!-- ARCHITECTURE_AUDIT_CURRENT:BEGIN -->
 > **历史架构审计基线 architecture-audit-r1（2026-11-01）**。两轨七客户端的当时源码、有限静态清单及隔离 Windows 核心已验证；跨端设备、原生 auto 能力和真实 AI 账号任务未验收。
@@ -26,6 +26,7 @@
 | macOS FlClash | [v14.3-macos-flclash.js](src/macos/v14.3-macos-flclash.js) |
 | macOS Clash Mi | [v14.3-macos-clashmi.js](src/macos/v14.3-macos-clashmi.js) |
 | Windows Clash Verge Rev | [v14.3-clash-verge.js](src/clash-verge/v14.3-clash-verge.js) |
+| ProjectClash（iPhone、iPad、Mac、Apple TV） | [v14.3-projectclash.js](src/projectclash/v14.3-projectclash.js) · [导入说明](../../docs/guides/ProjectClash使用说明.md) |
 
 JS 默认请求 auto，需要匹配的原生核心；同一文件保留 dual-stack/ipv4-local，详见[自动模式](../../docs/guides/自动网络模式.md)及[显式兼容](../../docs/guides/IPv4兼容模式.md)。保持应用严格路由、核心 IPv6 与完整接管；Clash Verge 的 GUI 后置字段按 [说明](../../docs/guides/ClashVerge使用说明.md)核对。
 
