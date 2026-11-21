@@ -16,6 +16,19 @@ function v14AddTailscaleRules(config, add) {
   return name;
 }
 
+const V14_WECHAT_DOMAINS = ["weixin.qq.com","wx.qq.com","wxs.qq.com","wxapp.tc.qq.com","vweixinf.tc.qq.com","vweixinthumb.tc.qq.com","wechat.com","weixin.com","servicewechat.com","weixinbridge.com","weixinsxy.com","wx.gtimg.com","qpic.cn","qlogo.cn"];
+const V14_WECHAT_PROCESSES = ["Weixin.exe","WeChat.exe"];
+const V14_WECHAT_PATTERNS = V14_WECHAT_DOMAINS.map(domain => "+." + domain);
+
+function v14AddWeChatRules(config, add) {
+  for (const domain of V14_WECHAT_DOMAINS) add("DOMAIN-SUFFIX," + domain, "DIRECT");
+  // The process exception covers IPv4 literals after company, LAN and STUN rules.
+  for (const name of V14_WECHAT_PROCESSES)
+    add("AND,((DOMAIN-REGEX,^$),(IP-CIDR,0.0.0.0/0,no-resolve),(PROCESS-NAME," + name + "))", "DIRECT");
+  if (V14_WECHAT_PROCESSES.length && config["find-process-mode"] !== "always")
+    config["find-process-mode"] = "strict";
+}
+
 const V14 = Object.freeze({
   version: "14.3",
   ruleInterval: 86400,
@@ -1005,6 +1018,7 @@ function v14NetworkModeBase(input) {
     for (const port of V14.stunPorts) add("AND,((NETWORK," + network + "),(DST-PORT," + port + "),(NOT,((IN-TYPE,INNER))))", groupName("漏网之鱼"));
     for (const host of V14.stunHostPatterns) add("AND,((NETWORK," + network + "),(DOMAIN-WILDCARD," + host + "),(NOT,((IN-TYPE,INNER))))", groupName("漏网之鱼"));
   }
+  v14AddWeChatRules(config, add);
   const domesticPolicy = groupName("国内网站");
   for (const d of V14_DOMESTIC_SEEDS) add("DOMAIN-SUFFIX," + d, domesticPolicy);
   for (const tag of V14_DOMESTIC_SETS) addDomainSet(tag, domesticPolicy);
@@ -1046,6 +1060,9 @@ function v14NetworkModeBase(input) {
   dnsPolicy["rule-set:" + stunDNSSet] = v14DnsFor(groupName("漏网之鱼"));
   dnsPolicy["rule-set:" + embeddedDomainSet("private")] = v14DnsFor(groupName("漏网之鱼"));
   dnsPolicy["rule-set:" + embeddedDomainSet("category-doh")] = v14DnsFor(groupName("漏网之鱼"));
+  const wechatDns = v14IPv4LocalResolver(V14.directDns);
+  for (const pattern of V14_WECHAT_PATTERNS)
+    if (!Object.prototype.hasOwnProperty.call(dnsPolicy, pattern)) dnsPolicy[pattern] = wechatDns;
   let domesticSeedsSet = "v14-domestic-protocol-seeds", domesticSetIndex = 1;
   while (config["rule-providers"][domesticSeedsSet]) domesticSeedsSet = "v14-domestic-protocol-seeds-" + (++domesticSetIndex);
   config["rule-providers"][domesticSeedsSet] = {type:"inline", behavior:"classical", payload:V14_DOMESTIC_SEEDS.concat(["cn"]).map(d=>"DOMAIN-SUFFIX,"+d)};
@@ -1058,7 +1075,7 @@ function v14NetworkModeBase(input) {
   config.dns = Object.assign({}, oldDns, {
     enable: true, ipv6: true, "enhanced-mode": "fake-ip", "fake-ip-range": "198.18.0.1/16",
     "fake-ip-range6": "fdfe:dcba:9876::1/64", "fake-ip-filter-mode": "blacklist",
-    "fake-ip-filter": V14.privateNames.concat(V14_TAILSCALE.tailnetDomain).map(d => "+." + d).concat(["api.openai.com"]), "use-hosts": true,
+    "fake-ip-filter": V14.privateNames.concat(V14_TAILSCALE.tailnetDomain).map(d => "+." + d).concat(["api.openai.com"], V14_WECHAT_PATTERNS), "use-hosts": true,
     "use-system-hosts": true, "respect-rules": false, "prefer-h3": false,
     "default-nameserver": V14.bootstrapDns.slice(), "proxy-server-nameserver": V14.nodeDns.slice(),
     nameserver: v14DnsFor(groupName("漏网之鱼")), fallback: [], "nameserver-policy": dnsPolicy,
@@ -1082,6 +1099,7 @@ function v14NetworkModeBase(input) {
   const oldSniffer = v14Object(config.sniffer) ? config.sniffer : {};
   config.sniffer = Object.assign({}, oldSniffer, { enable: true, "force-dns-mapping": true,
     "parse-pure-ip": true, "override-destination": false,
+    "skip-domain": v14Unique(v14Strings(oldSniffer["skip-domain"], "sniffer.skip-domain").concat(V14_WECHAT_PATTERNS)),
     sniff: Object.assign({}, v14Object(oldSniffer.sniff) ? oldSniffer.sniff : {}, {
       HTTP: { ports: [80, "8080-8880"], "override-destination": false },
       TLS: { ports: [443, 8443] }, QUIC: { ports: [443, 8443] },

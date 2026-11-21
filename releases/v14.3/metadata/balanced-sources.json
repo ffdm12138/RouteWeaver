@@ -13,27 +13,27 @@
     {
       "platform": "windows",
       "file": "src/windows/v14.3-windows-flclash.js",
-      "sha256": "5819328fe3ae8609ae71a68f5500f5d126dd455620e985ad354d3c4c767f3bcf",
-      "bytes": 123149,
-      "generatedConfigBytes": 187333,
+      "sha256": "25252d8763b69944d4674a98e4ac666918ced21e8dd50fbf6f6851c290cc279c",
+      "bytes": 124397,
+      "generatedConfigBytes": 191621,
       "inlineRows": 1102,
       "remoteSources": 30
     },
     {
       "platform": "android",
       "file": "src/android/v14.3-android-flclash.js",
-      "sha256": "5041ce89a320048ae7ecaef01111aa4d98dbf8130e4b70269a02cb580bf186d9",
-      "bytes": 122717,
-      "generatedConfigBytes": 187071,
+      "sha256": "3f5115fce915254fdeea23992328eb9e0a09dd4383d1dd9cfa2ac192164553f8",
+      "bytes": 123956,
+      "generatedConfigBytes": 191273,
       "inlineRows": 1102,
       "remoteSources": 29
     },
     {
       "platform": "clashmi",
       "file": "src/ios/v14.3-clashmi-domestic-protocol-r1.js",
-      "sha256": "709fdeefb5f620527fc92d65d4a13f50c8b0698299b4c94d59588a8c287c4dbe",
-      "bytes": 125043,
-      "generatedConfigBytes": 188090,
+      "sha256": "5124b9362e4e01922dd49a08e332ec49475362ab60598a883f37d40ceb9070ed",
+      "bytes": 126266,
+      "generatedConfigBytes": 192198,
       "inlineRows": 1102,
       "remoteSources": 29
     }
@@ -76,7 +76,7 @@
     },
     {
       "file": "tools/lib/compile-entries.cjs",
-      "sha256": "6c383069c0646f6e0a8eda1cb22a8de8366e5849439691d596435f164ad33bf2"
+      "sha256": "5182c43b312e1f6bb16a0cf1483adf969fcd31432225fee6bd38f0fa05a9cff7"
     },
     {
       "file": "tools/lib/render-runtime.cjs",
@@ -125,6 +125,14 @@
     {
       "file": "data/rules/tailscale-derp-map.json",
       "sha256": "0c8d3433db696e18e26a1ce8464c1c29d75963ecf81b28e280341bfd323cdb3a"
+    },
+    {
+      "file": "data/rules/wechat-media.json",
+      "sha256": "b041e63cc178060fd545a0bc8ef8952b7b85fcaf034b0defc32112e79edf0551"
+    },
+    {
+      "file": "runtime/shared/v14WeChat.js.in",
+      "sha256": "376f2147712485b00e2e1021d13906677f27035b8de05590b1948e6fd338b062"
     },
     {
       "file": "runtime/platforms/desktop/layout.json",
@@ -220,7 +228,7 @@
     },
     {
       "file": "runtime/shared/main.js.in",
-      "sha256": "87a7f311843ee5f18cdf86e36484ef3af70ac59add40e74e043e6af179b4a5d1"
+      "sha256": "6e30194c4aa202c663516b2aa80d1367fec7ab6bc4110cfe7f89e9e10edf65d3"
     },
     {
       "file": "runtime/platforms/android/layout.json",
@@ -236,7 +244,7 @@
     },
     {
       "file": "runtime/platforms/android/main.js.in",
-      "sha256": "63f18523243054a63e54e332f19695b5c86013de92f76264284065d422919f57"
+      "sha256": "617e760a360d6ca4da7bc758d8872d46f645351e91c72dc832f7a69a424f3b1c"
     },
     {
       "file": "tools/validate-azure-async.cjs",

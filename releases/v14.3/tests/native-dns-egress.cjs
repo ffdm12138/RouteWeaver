@@ -52,7 +52,13 @@ async function main(){
     Object.assign(config,{'mixed-port':await freePort(),port:0,'socks-port':0,'redir-port':0,'tproxy-port':0,'bind-address':'127.0.0.1','allow-lan':false,'external-controller':'127.0.0.1:'+apiPort,secret,'log-level':'debug',tun:{enable:false},sniffer:{enable:false},profile:{'store-selected':false,'store-fake-ip':false}});
     config.proxies=[{name:'AI-v4',type:'socks5',server:'127.0.0.1',port:aPort,udp:true},{name:videoLabel,type:'socks5',server:hasIPv6?'::1':'127.0.0.1',port:bPort,udp:true},{name:'Dead',type:'socks5',server:'127.0.0.1',port:await freePort(),udp:true}];config['proxy-providers']={};
     config['proxy-groups']=fixture.config['proxy-groups'].map(g=>({name:g.name,type:'select','empty-fallback':'REJECT',proxies:g.name==='自动选择'?['AI-v4']:['高纯净度AI用','高网速视频用'].includes(g.name)?['AI-v4',videoLabel,'Dead']:['高纯净度AI用','高网速视频用','DIRECT','AI-v4',videoLabel]}));
-    const testResolver=s=>{const hash=s.indexOf('#'),group=hash<0?'DIRECT':s.slice(hash+1).split('&')[0],host=group==='DIRECT'&&hasIPv6?'[::1]':'127.0.0.1';return s.startsWith('tls://')?'tls://'+host+':'+dotPort+'#'+group+'&disable-reuse=true&skip-cert-verify=true':'https://'+host+':'+dohPort+'/dns-query#'+group+'&skip-cert-verify=true';};
+    const testResolver=s=>{
+      const [group='DIRECT',...params]=(s.split('#')[1]||'DIRECT').split('&');
+      const host=group==='DIRECT'&&hasIPv6?'[::1]':'127.0.0.1';
+      const resolver=s.startsWith('tls://')?'tls://'+host+':'+dotPort+'#'+group+'&disable-reuse=true':'https://'+host+':'+dohPort+'/dns-query#'+group;
+      const filters=params.filter(param=>param.startsWith('disable-ipv6=')||param.startsWith('disable-qtype-'));
+      return [resolver,'skip-cert-verify=true',...filters].join('&');
+    };
     const dns=config.dns;dns.listen='127.0.0.1:'+dnsPort;dns['enhanced-mode']='redir-host';dns['use-hosts']=false;dns['use-system-hosts']=false;delete dns.hosts;delete config.hosts;
     for(const key of ['nameserver','fallback','default-nameserver','proxy-server-nameserver','direct-nameserver'])if(dns[key])dns[key]=[...new Set(dns[key].map(testResolver))];
     for(const key of Object.keys(dns['nameserver-policy']))dns['nameserver-policy'][key]=[...new Set(dns['nameserver-policy'][key].map(testResolver))];
@@ -106,7 +112,7 @@ async function main(){
         for(const type of [1,28]){await api('POST','/cache/dns/flush');const start=observed.length,b=await requestDNS(dnsPort,host,type);assert.ok((b.readUInt16BE(2)&15)!==0||b.readUInt16BE(6)===0);assert.equal(observed.slice(start).filter(e=>e.host===host).length,0,'CDN DNS fell back DIRECT');results.push({name:'r5-cdn-failed-node-no-DIRECT',host,group,type:type===1?'A':'AAAA',expected:'FAIL_CLOSED',noUpstreamQuery:true});}
       }
       await api('PUT','/proxies/'+encodeURIComponent('高纯净度AI用'),{name:'AI-v4'});
-      const tests=[['openai','chatgpt.com','OpenAI 服务'],['anthropic','claude.ai','Anthropic 服务'],['gemini','gemini.google.com','谷歌服务'],['youtube','youtube.com','谷歌服务'],['google-cn','google.cn','谷歌服务'],['microsoft','officecdn.microsoft.com','微软生态'],['shared','auth0.com','公共基础服务'],['shared-google','appspot.com','公共基础服务'],['shared-azure','blob.core.windows.net','公共基础服务'],['steam','steamserver.net','Steam'],['stun-google','stun.l.google.com','谷歌服务'],['reviewed-cn-suffix','ordinary-business-test.cn','国内网站'],['wechat','weixin.qq.com','国内网站'],['wechat-cdn','qpic.cn','国内网站'],['domestic-baidu','baidu.com','国内网站'],['unknown-udp-cn','stun.example.cn','漏网之鱼']];
+      const tests=[['openai','chatgpt.com','OpenAI 服务'],['anthropic','claude.ai','Anthropic 服务'],['gemini','gemini.google.com','谷歌服务'],['youtube','youtube.com','谷歌服务'],['google-cn','google.cn','谷歌服务'],['microsoft','officecdn.microsoft.com','微软生态'],['shared','auth0.com','公共基础服务'],['shared-google','appspot.com','公共基础服务'],['shared-azure','blob.core.windows.net','公共基础服务'],['steam','steamserver.net','Steam'],['stun-google','stun.l.google.com','谷歌服务'],['reviewed-cn-suffix','ordinary-business-test.cn','国内网站'],['domestic-baidu','baidu.com','国内网站'],['unknown-udp-cn','stun.example.cn','漏网之鱼']];
       tests.push(...cloudTenants.map(domain=>['reviewed-cloud-'+domain,domain,'公共基础服务']),['placeholder-undefined','foo.undefined','漏网之鱼'],['placeholder-null','foo.null','漏网之鱼']);
       // Each group is switched independently; a unique hostname avoids DNS cache
       // reuse. Connection: close avoids claiming existing DoH sessions migrate.
@@ -140,11 +146,18 @@ async function main(){
       await api('PUT','/proxies/'+encodeURIComponent('高纯净度AI用'),{name:'Dead'});for(const type of [1,28]){const host='failed-'+type+'-'+platform+'.chatgpt.com',start=observed.length,b=await requestDNS(dnsPort,host,type);assert.ok((b.readUInt16BE(2)&15)!==0||b.readUInt16BE(6)===0,'DNS succeeded despite failed node');assert.equal(observed.slice(start).filter(q=>q.host===host).length,0,'Failed DNS leaked to another/DIRECT resolver');assert.equal((await api('GET','/proxies/'+encodeURIComponent('高纯净度AI用'))).now,'Dead');results.push({name:'node-failure-'+type,host,type:type===1?'A':'AAAA',expected:'FAIL_CLOSED',selectedNodePreserved:true,noUpstreamQuery:true});}
       // New domestic-domain DNS must fail closed on the chosen dead proxy.
       await api('PUT','/proxies/'+encodeURIComponent('国内网站'),{name:'高纯净度AI用'});
-      for(const host of ['failed-domestic.weixin.qq.com','failed-domestic.baidu.com'])for(const type of [1,28]){
+      for(const host of ['failed-domestic.qq.com','failed-domestic.baidu.com'])for(const type of [1,28]){
         const start=observed.length,b=await requestDNS(dnsPort,host,type);
         assert.ok((b.readUInt16BE(2)&15)!==0||b.readUInt16BE(6)===0);
         assert.equal(observed.slice(start).filter(q=>q.host===host).length,0,'Domestic DNS fell back to DIRECT');
         results.push({name:'domestic-protocol-dns-dead-node',host,type:type===1?'A':'AAAA',expected:'FAIL_CLOSED',noUpstreamQuery:true});
+      }
+      for(const host of ['media.weixin.qq.com','mmbiz.qpic.cn']){
+        const start=observed.length,a=await requestDNS(dnsPort,host,1),aaaa=await requestDNS(dnsPort,host,28);
+        const events=observed.slice(start).filter(query=>query.host===host);
+        assert.ok(a.readUInt16BE(6)>0);assert.equal(aaaa.readUInt16BE(6),0);
+        assert.ok(events.length&&events.every(query=>query.type===1&&query.via==='DIRECT'));
+        results.push({name:'wechat-media-direct-dns',host,expected:'DIRECT',observed:events});
       }
       await api('PUT','/proxies/'+encodeURIComponent('国内网站'),{name:'DIRECT'});
       // Exercise the production Fake-IP mode, rather than inferring browser

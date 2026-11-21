@@ -1,0 +1,1270 @@
+{
+  "status": "PASS",
+  "scope": "Windows isolated FlClash core, loopback transport",
+  "deviceAcceptance": "NOT_RUN",
+  "coreSHA256": "d5097d4ea34f2975a7a7188dac9554d6b309c2abbf21a94c0a4111aca23bb8d0",
+  "runnerSHA256": "22015f9fd48dc495d01c99d27d3f7839bf9e59ba577230fa90336d66221db640",
+  "hostSHA256": "a02cbf358822c5e7fbcf7d6b4497c3f49ed43e2e95f68485c9bd6e10c2a82ce2",
+  "entries": {
+    "releases/v14.3/src/windows/v14.3-windows-flclash.js": {
+      "sha256": "25252d8763b69944d4674a98e4ac666918ced21e8dd50fbf6f6851c290cc279c",
+      "checks": [
+        [
+          "TCP",
+          "controlplane.tailscale.com",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "TCP",
+          "log.tailscale.com",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "TCP",
+          "192.200.0.112",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "TCP",
+          "172.237.28.183",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "205.147.105.78",
+          3478,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "2403:2500:8000:1::e9a",
+          3478,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "100.101.102.103",
+          41641,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "fd7a:115c:a1e0::21",
+          41641,
+          "Fixture Direct"
+        ],
+        [
+          "TCP",
+          "peer.example-tailnet.ts.net",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "198.51.100.77",
+          3478,
+          "Fixture Proxy"
+        ],
+        [
+          "UDP",
+          "198.51.100.77",
+          41641,
+          "Fixture Proxy"
+        ],
+        [
+          "TCP",
+          "chatgpt.com",
+          443,
+          "Fixture Company"
+        ],
+        [
+          "UDP",
+          "stun.l.google.com",
+          3478,
+          "Fixture Company"
+        ],
+        [
+          "UDP",
+          "198.51.100.77",
+          41641,
+          "Fixture Direct via tailscaled.exe"
+        ],
+        [
+          "TCP",
+          "198.51.100.77",
+          443,
+          "Fixture Direct via Weixin.exe"
+        ],
+        [
+          "UDP",
+          "198.51.100.77",
+          443,
+          "Fixture Direct via Weixin.exe"
+        ],
+        [
+          "UDP",
+          "198.51.100.77",
+          3478,
+          "Fixture Proxy via Weixin.exe"
+        ],
+        [
+          "TCP",
+          "unclassified.example.net",
+          443,
+          "Fixture Proxy via Weixin.exe"
+        ],
+        [
+          "UDP",
+          "2001:db8::77",
+          443,
+          "Fixture Proxy via Weixin.exe"
+        ],
+        [
+          "TCP",
+          "198.51.100.77",
+          443,
+          "Fixture Direct via WeChat.exe"
+        ],
+        [
+          "UDP",
+          "198.51.100.77",
+          443,
+          "Fixture Direct via WeChat.exe"
+        ],
+        [
+          "UDP",
+          "198.51.100.77",
+          3478,
+          "Fixture Proxy via WeChat.exe"
+        ],
+        [
+          "TCP",
+          "unclassified.example.net",
+          443,
+          "Fixture Proxy via WeChat.exe"
+        ],
+        [
+          "UDP",
+          "2001:db8::77",
+          443,
+          "Fixture Proxy via WeChat.exe"
+        ]
+      ]
+    },
+    "releases/v14.3/src/android/v14.3-android-flclash.js": {
+      "sha256": "3f5115fce915254fdeea23992328eb9e0a09dd4383d1dd9cfa2ac192164553f8",
+      "checks": [
+        [
+          "TCP",
+          "controlplane.tailscale.com",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "TCP",
+          "log.tailscale.com",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "TCP",
+          "192.200.0.112",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "TCP",
+          "172.237.28.183",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "205.147.105.78",
+          3478,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "2403:2500:8000:1::e9a",
+          3478,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "100.101.102.103",
+          41641,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "fd7a:115c:a1e0::21",
+          41641,
+          "Fixture Direct"
+        ],
+        [
+          "TCP",
+          "peer.example-tailnet.ts.net",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "198.51.100.77",
+          3478,
+          "Fixture Proxy"
+        ],
+        [
+          "UDP",
+          "198.51.100.77",
+          41641,
+          "Fixture Proxy"
+        ],
+        [
+          "TCP",
+          "chatgpt.com",
+          443,
+          "Fixture Company"
+        ],
+        [
+          "UDP",
+          "stun.l.google.com",
+          3478,
+          "Fixture Company"
+        ]
+      ]
+    },
+    "releases/v14.3/src/ios/v14.3-clashmi-domestic-protocol-r1.js": {
+      "sha256": "5124b9362e4e01922dd49a08e332ec49475362ab60598a883f37d40ceb9070ed",
+      "checks": [
+        [
+          "TCP",
+          "controlplane.tailscale.com",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "TCP",
+          "log.tailscale.com",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "TCP",
+          "192.200.0.112",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "TCP",
+          "172.237.28.183",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "205.147.105.78",
+          3478,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "2403:2500:8000:1::e9a",
+          3478,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "100.101.102.103",
+          41641,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "fd7a:115c:a1e0::21",
+          41641,
+          "Fixture Direct"
+        ],
+        [
+          "TCP",
+          "peer.example-tailnet.ts.net",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "198.51.100.77",
+          3478,
+          "Fixture Proxy"
+        ],
+        [
+          "UDP",
+          "198.51.100.77",
+          41641,
+          "Fixture Proxy"
+        ],
+        [
+          "TCP",
+          "chatgpt.com",
+          443,
+          "Fixture Company"
+        ],
+        [
+          "UDP",
+          "stun.l.google.com",
+          3478,
+          "Fixture Company"
+        ]
+      ]
+    },
+    "releases/v14.3/src/macos/v14.3-macos-flclash.js": {
+      "sha256": "293a293a9cf6fb1f533e01a7b2ca5edc9646529160f82493a5c395f31d15e3a8",
+      "checks": [
+        [
+          "TCP",
+          "controlplane.tailscale.com",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "TCP",
+          "log.tailscale.com",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "TCP",
+          "192.200.0.112",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "TCP",
+          "172.237.28.183",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "205.147.105.78",
+          3478,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "2403:2500:8000:1::e9a",
+          3478,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "100.101.102.103",
+          41641,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "fd7a:115c:a1e0::21",
+          41641,
+          "Fixture Direct"
+        ],
+        [
+          "TCP",
+          "peer.example-tailnet.ts.net",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "198.51.100.77",
+          3478,
+          "Fixture Proxy"
+        ],
+        [
+          "UDP",
+          "198.51.100.77",
+          41641,
+          "Fixture Proxy"
+        ],
+        [
+          "TCP",
+          "chatgpt.com",
+          443,
+          "Fixture Company"
+        ],
+        [
+          "UDP",
+          "stun.l.google.com",
+          3478,
+          "Fixture Company"
+        ]
+      ]
+    },
+    "releases/v14.3/src/macos/v14.3-macos-clashmi.js": {
+      "sha256": "459ad17b380ccc7babc984cb670e191f536dd99311980f85861806b254cb059a",
+      "checks": [
+        [
+          "TCP",
+          "controlplane.tailscale.com",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "TCP",
+          "log.tailscale.com",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "TCP",
+          "192.200.0.112",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "TCP",
+          "172.237.28.183",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "205.147.105.78",
+          3478,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "2403:2500:8000:1::e9a",
+          3478,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "100.101.102.103",
+          41641,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "fd7a:115c:a1e0::21",
+          41641,
+          "Fixture Direct"
+        ],
+        [
+          "TCP",
+          "peer.example-tailnet.ts.net",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "198.51.100.77",
+          3478,
+          "Fixture Proxy"
+        ],
+        [
+          "UDP",
+          "198.51.100.77",
+          41641,
+          "Fixture Proxy"
+        ],
+        [
+          "TCP",
+          "chatgpt.com",
+          443,
+          "Fixture Company"
+        ],
+        [
+          "UDP",
+          "stun.l.google.com",
+          3478,
+          "Fixture Company"
+        ]
+      ]
+    },
+    "releases/v14.3/src/clash-verge/v14.3-clash-verge.js": {
+      "sha256": "37286102c382045b15592687792ad04b48f824f976706b3b6e9b7d31eb86a119",
+      "checks": [
+        [
+          "TCP",
+          "controlplane.tailscale.com",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "TCP",
+          "log.tailscale.com",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "TCP",
+          "192.200.0.112",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "TCP",
+          "172.237.28.183",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "205.147.105.78",
+          3478,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "2403:2500:8000:1::e9a",
+          3478,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "100.101.102.103",
+          41641,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "fd7a:115c:a1e0::21",
+          41641,
+          "Fixture Direct"
+        ],
+        [
+          "TCP",
+          "peer.example-tailnet.ts.net",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "198.51.100.77",
+          3478,
+          "Fixture Proxy"
+        ],
+        [
+          "UDP",
+          "198.51.100.77",
+          41641,
+          "Fixture Proxy"
+        ],
+        [
+          "TCP",
+          "chatgpt.com",
+          443,
+          "Fixture Company"
+        ],
+        [
+          "UDP",
+          "stun.l.google.com",
+          3478,
+          "Fixture Company"
+        ],
+        [
+          "UDP",
+          "198.51.100.77",
+          41641,
+          "Fixture Direct via tailscaled.exe"
+        ],
+        [
+          "TCP",
+          "198.51.100.77",
+          443,
+          "Fixture Direct via Weixin.exe"
+        ],
+        [
+          "UDP",
+          "198.51.100.77",
+          443,
+          "Fixture Direct via Weixin.exe"
+        ],
+        [
+          "UDP",
+          "198.51.100.77",
+          3478,
+          "Fixture Proxy via Weixin.exe"
+        ],
+        [
+          "TCP",
+          "unclassified.example.net",
+          443,
+          "Fixture Proxy via Weixin.exe"
+        ],
+        [
+          "UDP",
+          "2001:db8::77",
+          443,
+          "Fixture Proxy via Weixin.exe"
+        ],
+        [
+          "TCP",
+          "198.51.100.77",
+          443,
+          "Fixture Direct via WeChat.exe"
+        ],
+        [
+          "UDP",
+          "198.51.100.77",
+          443,
+          "Fixture Direct via WeChat.exe"
+        ],
+        [
+          "UDP",
+          "198.51.100.77",
+          3478,
+          "Fixture Proxy via WeChat.exe"
+        ],
+        [
+          "TCP",
+          "unclassified.example.net",
+          443,
+          "Fixture Proxy via WeChat.exe"
+        ],
+        [
+          "UDP",
+          "2001:db8::77",
+          443,
+          "Fixture Proxy via WeChat.exe"
+        ]
+      ]
+    },
+    "releases/v14.3-ipv4-only/src/windows/v14.3-windows-flclash-ipv4-only.js": {
+      "sha256": "56f9087d9ab0294fb3fbc68cc457c970de2a2e61a47648eefbb4f8041a880872",
+      "checks": [
+        [
+          "TCP",
+          "controlplane.tailscale.com",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "TCP",
+          "log.tailscale.com",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "TCP",
+          "192.200.0.112",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "TCP",
+          "172.237.28.183",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "205.147.105.78",
+          3478,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "2403:2500:8000:1::e9a",
+          3478,
+          "REJECT"
+        ],
+        [
+          "UDP",
+          "100.101.102.103",
+          41641,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "fd7a:115c:a1e0::21",
+          41641,
+          "REJECT"
+        ],
+        [
+          "TCP",
+          "peer.example-tailnet.ts.net",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "198.51.100.77",
+          3478,
+          "Fixture Proxy"
+        ],
+        [
+          "UDP",
+          "198.51.100.77",
+          41641,
+          "Fixture Proxy"
+        ],
+        [
+          "TCP",
+          "chatgpt.com",
+          443,
+          "Fixture Company"
+        ],
+        [
+          "UDP",
+          "stun.l.google.com",
+          3478,
+          "Fixture Company"
+        ],
+        [
+          "UDP",
+          "198.51.100.77",
+          41641,
+          "Fixture Direct via tailscaled.exe"
+        ],
+        [
+          "TCP",
+          "198.51.100.77",
+          443,
+          "Fixture Direct via Weixin.exe"
+        ],
+        [
+          "UDP",
+          "198.51.100.77",
+          443,
+          "Fixture Direct via Weixin.exe"
+        ],
+        [
+          "UDP",
+          "198.51.100.77",
+          3478,
+          "Fixture Proxy via Weixin.exe"
+        ],
+        [
+          "TCP",
+          "unclassified.example.net",
+          443,
+          "Fixture Proxy via Weixin.exe"
+        ],
+        [
+          "UDP",
+          "2001:db8::77",
+          443,
+          "REJECT via Weixin.exe"
+        ],
+        [
+          "TCP",
+          "198.51.100.77",
+          443,
+          "Fixture Direct via WeChat.exe"
+        ],
+        [
+          "UDP",
+          "198.51.100.77",
+          443,
+          "Fixture Direct via WeChat.exe"
+        ],
+        [
+          "UDP",
+          "198.51.100.77",
+          3478,
+          "Fixture Proxy via WeChat.exe"
+        ],
+        [
+          "TCP",
+          "unclassified.example.net",
+          443,
+          "Fixture Proxy via WeChat.exe"
+        ],
+        [
+          "UDP",
+          "2001:db8::77",
+          443,
+          "REJECT via WeChat.exe"
+        ]
+      ]
+    },
+    "releases/v14.3-ipv4-only/src/android/v14.3-android-flclash-ipv4-only.js": {
+      "sha256": "12e501d30bd61903344422421cd7b4faaee9218abb2e5cbd7786e8deec1878b5",
+      "checks": [
+        [
+          "TCP",
+          "controlplane.tailscale.com",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "TCP",
+          "log.tailscale.com",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "TCP",
+          "192.200.0.112",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "TCP",
+          "172.237.28.183",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "205.147.105.78",
+          3478,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "2403:2500:8000:1::e9a",
+          3478,
+          "REJECT"
+        ],
+        [
+          "UDP",
+          "100.101.102.103",
+          41641,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "fd7a:115c:a1e0::21",
+          41641,
+          "REJECT"
+        ],
+        [
+          "TCP",
+          "peer.example-tailnet.ts.net",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "198.51.100.77",
+          3478,
+          "Fixture Proxy"
+        ],
+        [
+          "UDP",
+          "198.51.100.77",
+          41641,
+          "Fixture Proxy"
+        ],
+        [
+          "TCP",
+          "chatgpt.com",
+          443,
+          "Fixture Company"
+        ],
+        [
+          "UDP",
+          "stun.l.google.com",
+          3478,
+          "Fixture Company"
+        ]
+      ]
+    },
+    "releases/v14.3-ipv4-only/src/ios/v14.3-clashmi-domestic-protocol-r1-ipv4-only.js": {
+      "sha256": "c83baf9ba0c484c1a8807b22535a0b80c0730db28ff4432041e55c5fd3e166e6",
+      "checks": [
+        [
+          "TCP",
+          "controlplane.tailscale.com",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "TCP",
+          "log.tailscale.com",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "TCP",
+          "192.200.0.112",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "TCP",
+          "172.237.28.183",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "205.147.105.78",
+          3478,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "2403:2500:8000:1::e9a",
+          3478,
+          "REJECT"
+        ],
+        [
+          "UDP",
+          "100.101.102.103",
+          41641,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "fd7a:115c:a1e0::21",
+          41641,
+          "REJECT"
+        ],
+        [
+          "TCP",
+          "peer.example-tailnet.ts.net",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "198.51.100.77",
+          3478,
+          "Fixture Proxy"
+        ],
+        [
+          "UDP",
+          "198.51.100.77",
+          41641,
+          "Fixture Proxy"
+        ],
+        [
+          "TCP",
+          "chatgpt.com",
+          443,
+          "Fixture Company"
+        ],
+        [
+          "UDP",
+          "stun.l.google.com",
+          3478,
+          "Fixture Company"
+        ]
+      ]
+    },
+    "releases/v14.3-ipv4-only/src/macos/v14.3-macos-flclash-ipv4-only.js": {
+      "sha256": "a3ee7286a77245f7198620e48fb4dd4efe72decf41a219836a3165fe67ca657e",
+      "checks": [
+        [
+          "TCP",
+          "controlplane.tailscale.com",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "TCP",
+          "log.tailscale.com",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "TCP",
+          "192.200.0.112",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "TCP",
+          "172.237.28.183",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "205.147.105.78",
+          3478,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "2403:2500:8000:1::e9a",
+          3478,
+          "REJECT"
+        ],
+        [
+          "UDP",
+          "100.101.102.103",
+          41641,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "fd7a:115c:a1e0::21",
+          41641,
+          "REJECT"
+        ],
+        [
+          "TCP",
+          "peer.example-tailnet.ts.net",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "198.51.100.77",
+          3478,
+          "Fixture Proxy"
+        ],
+        [
+          "UDP",
+          "198.51.100.77",
+          41641,
+          "Fixture Proxy"
+        ],
+        [
+          "TCP",
+          "chatgpt.com",
+          443,
+          "Fixture Company"
+        ],
+        [
+          "UDP",
+          "stun.l.google.com",
+          3478,
+          "Fixture Company"
+        ]
+      ]
+    },
+    "releases/v14.3-ipv4-only/src/macos/v14.3-macos-clashmi-ipv4-only.js": {
+      "sha256": "fa46c8ec6c340aca1f6e61ec7b04ecc9ce10c2bc46eeb4a6d6bdc126ebda9213",
+      "checks": [
+        [
+          "TCP",
+          "controlplane.tailscale.com",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "TCP",
+          "log.tailscale.com",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "TCP",
+          "192.200.0.112",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "TCP",
+          "172.237.28.183",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "205.147.105.78",
+          3478,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "2403:2500:8000:1::e9a",
+          3478,
+          "REJECT"
+        ],
+        [
+          "UDP",
+          "100.101.102.103",
+          41641,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "fd7a:115c:a1e0::21",
+          41641,
+          "REJECT"
+        ],
+        [
+          "TCP",
+          "peer.example-tailnet.ts.net",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "198.51.100.77",
+          3478,
+          "Fixture Proxy"
+        ],
+        [
+          "UDP",
+          "198.51.100.77",
+          41641,
+          "Fixture Proxy"
+        ],
+        [
+          "TCP",
+          "chatgpt.com",
+          443,
+          "Fixture Company"
+        ],
+        [
+          "UDP",
+          "stun.l.google.com",
+          3478,
+          "Fixture Company"
+        ]
+      ]
+    },
+    "releases/v14.3-ipv4-only/src/clash-verge/v14.3-clash-verge-ipv4-only.js": {
+      "sha256": "c696f0dff5a4b55a990dd2b83202b34c1fd5a787d699ab84ac5d4cbec8c31072",
+      "checks": [
+        [
+          "TCP",
+          "controlplane.tailscale.com",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "TCP",
+          "log.tailscale.com",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "TCP",
+          "192.200.0.112",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "TCP",
+          "172.237.28.183",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "205.147.105.78",
+          3478,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "2403:2500:8000:1::e9a",
+          3478,
+          "REJECT"
+        ],
+        [
+          "UDP",
+          "100.101.102.103",
+          41641,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "fd7a:115c:a1e0::21",
+          41641,
+          "REJECT"
+        ],
+        [
+          "TCP",
+          "peer.example-tailnet.ts.net",
+          443,
+          "Fixture Direct"
+        ],
+        [
+          "UDP",
+          "198.51.100.77",
+          3478,
+          "Fixture Proxy"
+        ],
+        [
+          "UDP",
+          "198.51.100.77",
+          41641,
+          "Fixture Proxy"
+        ],
+        [
+          "TCP",
+          "chatgpt.com",
+          443,
+          "Fixture Company"
+        ],
+        [
+          "UDP",
+          "stun.l.google.com",
+          3478,
+          "Fixture Company"
+        ],
+        [
+          "UDP",
+          "198.51.100.77",
+          41641,
+          "Fixture Direct via tailscaled.exe"
+        ],
+        [
+          "TCP",
+          "198.51.100.77",
+          443,
+          "Fixture Direct via Weixin.exe"
+        ],
+        [
+          "UDP",
+          "198.51.100.77",
+          443,
+          "Fixture Direct via Weixin.exe"
+        ],
+        [
+          "UDP",
+          "198.51.100.77",
+          3478,
+          "Fixture Proxy via Weixin.exe"
+        ],
+        [
+          "TCP",
+          "unclassified.example.net",
+          443,
+          "Fixture Proxy via Weixin.exe"
+        ],
+        [
+          "UDP",
+          "2001:db8::77",
+          443,
+          "REJECT via Weixin.exe"
+        ],
+        [
+          "TCP",
+          "198.51.100.77",
+          443,
+          "Fixture Direct via WeChat.exe"
+        ],
+        [
+          "UDP",
+          "198.51.100.77",
+          443,
+          "Fixture Direct via WeChat.exe"
+        ],
+        [
+          "UDP",
+          "198.51.100.77",
+          3478,
+          "Fixture Proxy via WeChat.exe"
+        ],
+        [
+          "TCP",
+          "unclassified.example.net",
+          443,
+          "Fixture Proxy via WeChat.exe"
+        ],
+        [
+          "UDP",
+          "2001:db8::77",
+          443,
+          "REJECT via WeChat.exe"
+        ]
+      ]
+    }
+  }
+}

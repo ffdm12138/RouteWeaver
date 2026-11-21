@@ -232,6 +232,7 @@ function main(input) {
     for (const port of V14.stunPorts) add("AND,((NETWORK," + network + "),(DST-PORT," + port + "),(NOT,((IN-TYPE,INNER))))", groupName("漏网之鱼"));
     for (const host of V14.stunHostPatterns) add("AND,((NETWORK," + network + "),(DOMAIN-WILDCARD," + host + "),(NOT,((IN-TYPE,INNER))))", groupName("漏网之鱼"));
   }
+  v14AddWeChatRules(config, add);
   const domesticPolicy = groupName("国内网站");
   for (const d of V14_DOMESTIC_SEEDS) add("DOMAIN-SUFFIX," + d, domesticPolicy);
   for (const tag of V14_DOMESTIC_SETS) addDomainSet(tag, domesticPolicy);
@@ -282,6 +283,10 @@ function main(input) {
   // policy or explicit system/manual literal already identifies it.
   dnsPolicy["rule-set:" + embeddedDomainSet("private")] = v14DnsFor(groupName("漏网之鱼"));
   dnsPolicy["rule-set:" + embeddedDomainSet("category-doh")] = v14DnsFor(groupName("漏网之鱼"));
+  // Keep ordered company and STUN DNS policies before the media exception.
+  const wechatDns = v14IPv4LocalResolver(V14.directDns);
+  for (const pattern of V14_WECHAT_PATTERNS)
+    if (!Object.prototype.hasOwnProperty.call(dnsPolicy, pattern)) dnsPolicy[pattern] = wechatDns;
   let domesticSeedsSet = "v14-domestic-protocol-seeds", domesticSetIndex = 1;
   while (config["rule-providers"][domesticSeedsSet]) domesticSeedsSet = "v14-domestic-protocol-seeds-" + (++domesticSetIndex);
   config["rule-providers"][domesticSeedsSet] = {type:"inline", behavior:"classical", payload:V14_DOMESTIC_SEEDS.concat(["cn"]).map(d=>"DOMAIN-SUFFIX,"+d)};
@@ -290,11 +295,8 @@ function main(input) {
     if (V14_REVIEWED_DOMAINS[tag]) dnsPolicy["rule-set:" + embeddedDomainSet(tag)] = v14DnsFor(domesticPolicy);
     dnsPolicy["rule-set:" + ruleSet("domain", tag)] = v14DnsFor(domesticPolicy);
   }
-  // api.openai.com is the only name excluded from Fake-IP, so it is the only
-  // one that must resolve for real. Keep the OpenAI group egress, but resolve
-  // it over DoH/443 instead of the shared DoT/853 policy: 853 is blocked on
-  // some carriers and node providers, which turned this host into SERVFAIL
-  // while every Fake-IP name kept working.
+  // OpenAI's real-answer API still uses its group's egress. Resolve it over
+  // DoH/443 because some carriers and nodes block the shared DoT/853 policy.
   const oldDns = v14Object(config.dns) ? config.dns : {};
   config.dns = Object.assign({}, oldDns, {
     enable: true, ipv6: true, "enhanced-mode": "fake-ip", "fake-ip-range": "198.18.0.1/16",
@@ -302,7 +304,7 @@ function main(input) {
     // Chromium treats the IPv6 Fake-IP ULA as local network access. Return
     // real A/AAAA for this public API (resolved over DoH/443 above); company
     // rules still retain fail-closed routing.
-    "fake-ip-filter": V14.privateNames.concat(V14_TAILSCALE.tailnetDomain).map(d => "+." + d).concat(["api.openai.com"]), "use-hosts": true,
+    "fake-ip-filter": V14.privateNames.concat(V14_TAILSCALE.tailnetDomain).map(d => "+." + d).concat(["api.openai.com"], V14_WECHAT_PATTERNS), "use-hosts": true,
     "use-system-hosts": true, "respect-rules": false, "prefer-h3": false,
     "default-nameserver": V14.bootstrapDns.slice(), "proxy-server-nameserver": V14.nodeDns.slice(),
     nameserver: v14DnsFor(groupName("漏网之鱼")), fallback: [], "nameserver-policy": dnsPolicy,
@@ -333,6 +335,7 @@ function main(input) {
   const oldSniffer = v14Object(config.sniffer) ? config.sniffer : {};
   config.sniffer = Object.assign({}, oldSniffer, { enable: true, "force-dns-mapping": true,
     "parse-pure-ip": true, "override-destination": false,
+    "skip-domain": v14Unique(v14Strings(oldSniffer["skip-domain"], "sniffer.skip-domain").concat(V14_WECHAT_PATTERNS)),
     sniff: Object.assign({}, v14Object(oldSniffer.sniff) ? oldSniffer.sniff : {}, {
       HTTP: { ports: [80, "8080-8880"], "override-destination": false },
       TLS: { ports: [443, 8443] }, QUIC: { ports: [443, 8443] },

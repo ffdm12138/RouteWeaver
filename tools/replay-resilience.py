@@ -20,6 +20,20 @@ H = runpy.run_path(str(ROOT / 'tools/stock-core-host.py'))
 F = runpy.run_path(str(ROOT / 'tools/test-proxy-failover.py'))
 N = F['HELPERS']
 sha = lambda p: hashlib.sha256(Path(p).read_bytes()).hexdigest()
+MEDIA_HOST = 'szextshort.weixin.qq.com'
+MEDIA_QNAME = b''.join(bytes([len(label)]) + label.encode('ascii') for label in MEDIA_HOST.split('.')) + b'\0'
+
+
+class MediaResolver(F['ResolverUDP']):
+    def handle(self):
+        query, sock = self.request
+        assert query[12:].startswith(MEDIA_QNAME), query
+        qtype = struct.unpack_from('!H', query, 12 + len(MEDIA_QNAME))[0]
+        self.server.queries.append(qtype)
+        response = F['reply_dns'](query)
+        if qtype == 1:
+            response = response[:-4] + socket.inet_aton('127.0.0.1')
+        sock.sendto(response, self.client_address)
 
 
 def generate(file, mode, nodes, engine=None):
@@ -44,6 +58,8 @@ def run_case(core, file, mode, engine, directory):
         start = lambda server, ctx=None: F['start'](stack, server, ctx)
         origin = start(N['TCP'](('127.0.0.1', 0), N['Origin'])); origin.hits = []
         https = start(N['TCP'](('127.0.0.1', 0), F['HTTPS']), tls)
+        media_resolver = start(N['UDP'](('127.0.0.1', 0), MediaResolver))
+        media_resolver.queries = []
         dot = start(N['TCP'](('127.0.0.1', 0), F['ResolverTLS']), tls)
         bootstrap = start(N['UDP'](('127.0.0.1', 0), N['DNSHandler']))
         relays = {}
@@ -99,7 +115,12 @@ def run_case(core, file, mode, engine, directory):
             translated = []
             for server in servers:
                 fragment = server.split('#', 1)[1] if '#' in server else 'DIRECT'
-                transport = f'https://{F["RESOLVER"]}:{https.server_address[1]}/dns-query' if server.startswith('https') else f'tls://{F["RESOLVER"]}:{dot.server_address[1]}'
+                if key == '+.weixin.qq.com':
+                    transport = f'udp://127.0.0.1:{media_resolver.server_address[1]}'
+                elif server.startswith('https'):
+                    transport = f'https://{F["RESOLVER"]}:{https.server_address[1]}/dns-query'
+                else:
+                    transport = f'tls://{F["RESOLVER"]}:{dot.server_address[1]}'
                 translated.append(transport + '#' + fragment)
             cfg['dns']['nameserver-policy'][key] = translated
         directory.mkdir()
@@ -110,6 +131,16 @@ def run_case(core, file, mode, engine, directory):
         child.call('config.setup'); child.call('listener.start')
         assert 'start download' not in (directory / 'core.log').read_text(encoding='utf-8', errors='replace'), 'unexpected geodata download'
         checks.append('native_accepts_original_dns_mode_and_empty_providers')
+        # In the generated Fake-IP mode the media host answers with its real
+        # IPv4 address, while an unrelated domestic name keeps Fake-IP.
+        media = N['dns_answers'](dns, MEDIA_HOST, 1)
+        assert media == ['127.0.0.1'], (media, media_resolver.queries)
+        assert N['dns_answers'](dns, MEDIA_HOST, 28) == []
+        assert N['dns_answers'](dns, MEDIA_HOST, 65) == []
+        assert media_resolver.queries and set(media_resolver.queries) == {1}, media_resolver.queries
+        ordinary = N['dns_answers'](dns, 'fake-probe.amemv.com', 1)
+        assert len(ordinary) == 1 and ordinary[0].startswith('198.18.'), ordinary
+        checks.append('wechat_real_ipv4_with_ordinary_fakeip_and_filtered_aaaa_https')
         # Encrypted DNS egress must observe upstream queries, so this phase uses
         # real responses. Fake-IP configuration acceptance is a separate check.
         cfg['dns']['enhanced-mode'] = 'redir-host'; save(); child.call('config.setup')
@@ -167,10 +198,12 @@ def run_case(core, file, mode, engine, directory):
         dot_port = dot.server_address[1]
         https_port = https.server_address[1]
         api_port = https_port if 'api.openai.com' in original['dns']['nameserver-policy'] else dot_port
-        for host in ['api.amemv.com', 'v5.douyinvod.com', 'p3.douyinpic.com', 'szextshort.weixin.qq.com', 'apd-pcdnwxlogin.teg.tencent-cloud.net', 'openaifoundation.org']:
+        for host in ['api.amemv.com', 'v5.douyinvod.com', 'p3.douyinpic.com', 'apd-pcdnwxlogin.teg.tencent-cloud.net', 'openaifoundation.org']:
             via('A', host); checks.append('empty_provider_tcp:' + host)
+        via(None, MEDIA_HOST); checks.append('wechat_tcp_direct_even_with_domestic_proxy')
         udp('A'); checks.append('domestic_udp_A')
         udp('X','stun.amemv.com'); checks.append('generic_stun_stays_on_distinct_catchall')
+        udp('X', 'stun.' + MEDIA_HOST); checks.append('generic_stun_precedes_wechat_media')
         for name in ['B', 'C', 'D', 'A']:
             probe(name)
         for dead, expected in [('A', 'B'), ('B', 'C'), ('C', 'D')]:
@@ -261,7 +294,7 @@ def main():
         engine = H['QuickJS'](args.quickjs)
         with tempfile.TemporaryDirectory(prefix='routeweaver-resilience-') as temp:
             home = Path(temp)
-            openssl = Path('C:/Program Files/Git/usr/bin/openssl.exe')
+            openssl = Path('C:/Program Files/Git/mingw64/bin/openssl.exe')
             subprocess.run([str(openssl), 'req', '-x509', '-newkey', 'rsa:2048', '-nodes', '-keyout', str(home / 'key.pem'),
                             '-out', str(home / 'cert.pem'), '-days', '1', '-subj', '/CN=routeweaver-test',
                             '-addext', 'subjectAltName=DNS:www.gstatic.com,DNS:dns.failover.test,IP:127.0.0.1'],

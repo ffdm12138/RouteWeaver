@@ -11,8 +11,9 @@ function cidrRule(row) {
 
 // These models have no OS process metadata. Keep the original rule indices and
 // let the real core replay handle process identification.
+const usesProcess = rule => rule.startsWith('PROCESS-') || rule.includes('(PROCESS-NAME,');
 function currentModel(model) {
-  const rules = model.rules.map(rule => rule.startsWith('PROCESS-')
+  const rules = model.rules.map(rule => usesProcess(rule)
     ? 'NOT,((MATCH)),' + sealed.split(rule).at(-1) : rule);
   const name = model.config?.['x-v14-generated']?.tailscalePublicProvider;
   const payload = model.sources.get(name);
@@ -23,7 +24,7 @@ function currentModel(model) {
 module.exports = {
   ...sealed,
   cidrRule,
-  matches: (rule, flow, model) => !rule.startsWith('PROCESS-') && sealed.matches(cidrRule(rule), flow, model),
+  matches: (rule, flow, model) => !usesProcess(rule) && sealed.matches(cidrRule(rule), flow, model),
   route: (model, flow, options) => sealed.route(currentModel(model), flow, options),
   routeSlow: (model, flow, options) => sealed.routeSlow(currentModel(model), flow, options),
 };

@@ -26,27 +26,32 @@ const report={version:'14.3',date:'2026-10-13',revision:manifest.revision,domest
 function check(name,body){try{body();report.checks.push({name,status:'PASS'});}catch(e){report.failures.push({name,error:e.stack});report.checks.push({name,status:'FAIL'});}}
 check('size-groups-fixed-sources-and-general-settings',()=>{
  assert.equal(f.sha(f.local(manifest.file)),manifest.sha256);assert.equal(Buffer.byteLength(raw),manifest.bytes);assert.ok(manifest.bytes<1800000&&manifest.bytes<manifest.before.bytes*0.3);
- assert.equal(manifest.groups.length,26);assert.equal(sources.size,15);assert.equal(section('Proxy Group').length,26);assert.deepEqual(current.config.general,before.config.general);
+ assert.equal(manifest.groups.length,26);assert.equal(sources.size,15);assert.equal(section('Proxy Group').length,26);
+ const {'always-real-ip': realIP,...general}=current.config.general;
+ assert.deepEqual(general,before.config.general);
+ assert.deepEqual(realIP.split(','),require('../data/rules/wechat-media.json').flatMap(domain=>[domain,'*.'+domain]));
  for(const url of sources.keys())assert.match(url,/\/[a-f0-9]{40}\//);
  assert.equal(current.rules.filter(r=>r.startsWith('RULE-SET,')).length,manifest.sources.reduce((n,s)=>n+s.uses.length,0));
 });
 check('all-reviewed-domain-TCP-preserved-and-ordinary-UDP-follows-domestic',()=>{
- const mismatches=[];for(const host of hosts){const a=oldRoute(host),b=route(host);if(a.group!==b.group&&mismatches.length<12)mismatches.push({host,before:a.group,after:b.group});report.metrics.tcp++;
-  const oldUDP=oldRoute(host,'UDP'),expected=contract.known(host,oldRoute)?'国内网站':oldUDP.group,actual=route(host,'UDP');if(expected!==actual.group&&mismatches.length<12)mismatches.push({host,protocol:'UDP',expected,actual:actual.group});report.metrics.udp++;
+ const mismatches=[];for(const host of hosts){const a=contract.expectedRoute(host,'TCP',true,oldRoute),b=route(host);if(a.group!==b.group&&mismatches.length<12)mismatches.push({host,expected:a.group,actual:b.group});report.metrics.tcp++;
+  const expected=contract.expectedRoute(host,'UDP',true,oldRoute).group,actual=route(host,'UDP');if(expected!==actual.group&&mismatches.length<12)mismatches.push({host,protocol:'UDP',expected,actual:actual.group});report.metrics.udp++;
  }assert.deepEqual(mismatches,[]);
 });
 check('business-Host-DNS-preserved-except-authorized-domestic-keys',()=>{
- const mismatches=[];for(const host of businessDNSHosts){const a=dns(before,host),b=dns(current,host);if(JSON.stringify(a.groups)!==JSON.stringify(b.groups)&&!contract.known(host,oldRoute)&&mismatches.length<12)mismatches.push({host,before:a,after:b});report.metrics.businessDNS++;}assert.deepEqual(mismatches,[]);
+ const mismatches=[];for(const host of businessDNSHosts){const a=dns(before,host),b=dns(current,host);const expected=contract.mediaDirect(host,oldRoute)?['DIRECT']:a.groups;if(JSON.stringify(expected)!==JSON.stringify(b.groups)&&(!contract.known(host,oldRoute)||contract.mediaDirect(host,oldRoute))&&mismatches.length<12)mismatches.push({host,expected,after:b});report.metrics.businessDNS++;}assert.deepEqual(mismatches,[]);
 });
 const cold={...current,sources:new Map([...sources.keys()].map(k=>[k,[]]))};
 check('critical-domestic-WeChat-selector-and-DNS-affinity',()=>{
  for(const host of ['baidu.com','szfile.weixin.qq.com','szextshort.weixin.qq.com','wxapp.tc.qq.com','qlogo.cn','mmbiz.qpic.cn']){
-  assert.deepEqual(dns(current,host).groups,['国内网站'],host);report.metrics.criticalDomesticDNS++;
+  const media=contract.mediaHost(host);
+  assert.deepEqual(dns(current,host).groups,[media?'DIRECT':'国内网站'],host);report.metrics.criticalDomesticDNS++;
   for(const protocol of ['TCP','UDP'])for(const selection of ['DIRECT','高纯净度AI用','高网速视频用']){
-   assert.equal(f.route(current,{host,protocol,port:443},{selections:{'国内网站':selection}}).policy,selection,host);
-   assert.equal(f.route(cold,{host,protocol,port:443},{selections:{'国内网站':selection}}).policy,selection,host);report.metrics.coldRouting++;
+   const expected=media?'DIRECT':selection;
+   assert.equal(f.route(current,{host,protocol,port:443},{selections:{'国内网站':selection}}).policy,expected,host);
+   assert.equal(f.route(cold,{host,protocol,port:443},{selections:{'国内网站':selection}}).policy,expected,host);report.metrics.coldRouting++;
   }
-  assert.equal(f.route(current,{host,protocol:'UDP',port:443},{udpSupported:false,selections:{'国内网站':'高纯净度AI用'}}).policy,'REJECT',host);
+  assert.equal(f.route(current,{host,protocol:'UDP',port:443},{udpSupported:false,selections:{'国内网站':'高纯净度AI用'}}).policy,media?'DIRECT':'REJECT',host);
  }
 });
 check('unknown-IP-STUN-company-priority-and-no-UDP-DIRECT-fallback',()=>{

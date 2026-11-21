@@ -859,8 +859,5 @@ for(const t of cases){
  if(t.flow.protocol==='UDP'&&!protocolStunPort(t.flow.port)&&(t.policy==='漏网之鱼'||t.name.startsWith('domestic-site-no-udp-')||t.policy==='REJECT'&&t.dnsGroup==='国内网站'))t.policy=t.options?.selections?.['国内网站']?(t.options.udpSupported===false&&t.options.selections['国内网站']!=='DIRECT'?'REJECT':t.options.selections['国内网站']):'DIRECT';
 }
 for(const host of ['szfile.weixin.qq.com','szextshort.weixin.qq.com','wxapp.tc.qq.com','qlogo.cn','mmbiz.qpic.cn'])for(const protocol of ['TCP','UDP']){
- add('domestic-protocol-wechat-direct-'+host+'-'+protocol,host,443,protocol,'DIRECT',{},'国内网站');
- add('domestic-protocol-wechat-ai-'+host+'-'+protocol,host,443,protocol,'国内网站',{selections:{'国内网站':'国内网站'}},'国内网站');
- add('domestic-protocol-wechat-video-'+host+'-'+protocol,host,443,protocol,'国内网站',{selections:{'国内网站':'国内网站'}},'国内网站');cases.at(-1).followVideo=true;
- if(protocol==='UDP')add('domestic-protocol-wechat-no-udp-'+host,host,443,protocol,'REJECT',{selections:{'国内网站':'国内网站'},udpSupported:false},'国内网站');
+ add('wechat-media-direct-with-domestic-proxy-'+host+'-'+protocol,host,443,protocol,'DIRECT',{selections:{'国内网站':'国内网站'},udpSupported:false},'DIRECT');
 }

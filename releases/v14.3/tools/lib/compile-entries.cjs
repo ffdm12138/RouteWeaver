@@ -4,6 +4,13 @@
 const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict');
 const {render}=require('./render-runtime.cjs');
 const {loadTailscalePolicy,processRules}=require('./tailscale-policy.cjs');
+const windowsWeChatProcesses = ['Weixin.exe', 'WeChat.exe'];
+const wechatProcesses = {
+ windows: windowsWeChatProcesses,
+ clashVerge: windowsWeChatProcesses,
+ macosFlClash: ['WeChat'],
+ android: ['com.tencent.mm'],
+};
 function replaceOnce(code,needle,value){assert.equal(code.split(needle).length,2,'Client adapter anchor: '+needle);return code.replace(needle,value);}
 function omitExplicitTunRouteAddress(code) {
  return replaceOnce(code, '  config.tun["route-address"] = ["0.0.0.0/0", "::/0"];\n', '');
@@ -33,6 +40,8 @@ function compile(root){
  const policy=require('./reviewed-policy.cjs')(root),{core,services,embedded,pins}=policy;
  const tailscale=loadTailscalePolicy(root);
  const tailscaleRuntime='runtime/shared/v14Tailscale.js.in';
+ const wechatFile='data/rules/wechat-media.json', wechatRuntime='runtime/shared/v14WeChat.js.in';
+ const wechatDomains=JSON.parse(read(wechatFile));
  const directFile='data/rules/manual-direct-ip.json';
  const vps=fs.existsSync(path.join(root,directFile))?JSON.parse(read(directFile)):null;
  if(vps)assert.equal(vps.rule,'IP-CIDR,'+vps.address+',DIRECT,no-resolve');
@@ -45,6 +54,7 @@ function compile(root){
  const fallbackFile='runtime/shared/v14NativeFallback.js.in',fallback=read(fallbackFile);
  inputs.push(fallbackFile);
  inputs.push(tailscaleRuntime,'tools/lib/tailscale-policy.cjs',tailscale.source.file);
+ inputs.push(wechatFile,wechatRuntime);
  const shared={};
  for(const platform of ['desktop','android']){
   const file='runtime/platforms/'+platform+'/layout.json',layout=JSON.parse(read(file));inputs.push(file,layout.preamble);
@@ -83,7 +93,9 @@ function compile(root){
   };
   // Keep the authoring templates readable within the standalone script budget.
   const base=entry.raw.replace(/^[\t ]*\/\/[^\r\n]*(?:\r?\n|$)/gm,'');
-  const raw='const V14_TAILSCALE = '+JSON.stringify(runtimePolicy)+';\n'+read(tailscaleRuntime)+'\n'+base;
+  const raw='const V14_TAILSCALE = '+JSON.stringify(runtimePolicy)+';\n'+read(tailscaleRuntime)+'\n'+
+   'const V14_WECHAT_DOMAINS = '+JSON.stringify(wechatDomains)+';\n'+
+   'const V14_WECHAT_PROCESSES = '+JSON.stringify(wechatProcesses[entry.platform] || [])+';\n'+read(wechatRuntime)+'\n'+base;
   return {...entry,code:networkModes(raw,
     entry.platform === 'macosFlClash' ? omitExplicitTunRouteAddress(optional) : optional,
     ['clashmi','macosClashMi'].includes(entry.platform),read('tools/auto-local-adapter.js'))};

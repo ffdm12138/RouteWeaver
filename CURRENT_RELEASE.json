@@ -151,8 +151,11 @@
   "nativeFallback": {
     "revision": "backup-slot-skip-r1",
     "guide": "docs/guides/故障转移.md",
-    "verification": "releases/v14.3/validation/proxy-failover/tailscale-direct-r1.json",
-    "releaseTags": null,
+    "verification": "releases/v14.3/validation/proxy-failover/wechat-media-r1.json",
+    "releaseTags": {
+      "main": "v14.3.0-rc.16",
+      "ipv4-only": "v14.3.0-ipv4-only-rc.7"
+    },
     "deviceAcceptance": "NOT_RUN"
   },
   "proxyFailover": {
@@ -227,7 +230,15 @@
       "publicReleaseRemoteSHA256": "ALL_15_ANONYMOUS_DOWNLOADS_MATCH"
     }
   },
-  "currentRevision": "darwin-tun-r1",
+  "currentRevision": "wechat-media-r1",
+  "wechatMedia": {
+    "revision": "wechat-media-r1",
+    "domains": "releases/v14.3/data/rules/wechat-media.json",
+    "guide": "docs/guides/微信发图优化.md",
+    "staticVerification": "releases/v14.3/validation/domestic-resilience/wechat-media-r1.json",
+    "isolatedProcessVerification": "releases/v14.3/validation/domestic-resilience/wechat-process-r1.json",
+    "deviceAcceptance": "NOT_RUN"
+  },
   "macosFlClashTun": {
     "revision": "darwin-tun-r1",
     "guide": "docs/guides/macOS-FlClash故障小本子.md",

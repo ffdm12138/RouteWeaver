@@ -3,7 +3,8 @@ const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/st
 const entries={'macos-flclash':'src/macos/v14.3-macos-flclash.js','macos-clashmi':'src/macos/v14.3-macos-clashmi.js'};
 const {processRules}=require('../tools/lib/tailscale-policy.cjs');
 const tailscaleProcessRules=new Set(Object.values(processRules).flat().map(rule=>rule+',DIRECT'));
-const businessRules=rules=>rules.filter(rule=>!tailscaleProcessRules.has(rule));
+const businessRules=rules=>rules.filter(rule=>!tailscaleProcessRules.has(rule)
+  && !rule.startsWith('AND,((DOMAIN-REGEX,^$),(IP-CIDR,0.0.0.0/0,no-resolve),(PROCESS-NAME,'));
 function generate(platform,input){
   assert.ok(entries[platform],platform);const ctx=vm.createContext({console:{log(){}}});
   vm.runInContext(fs.readFileSync(base.local(entries[platform]),'utf8'),ctx,{filename:entries[platform],timeout:3000});

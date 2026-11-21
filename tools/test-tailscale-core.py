@@ -1,4 +1,4 @@
-"""Replay Tailscale routing with the installed Windows FlClash core and loopback relays."""
+"""Replay Tailscale and Windows WeChat process rules with isolated loopback relays."""
 from contextlib import ExitStack
 import argparse
 import hashlib
@@ -106,6 +106,9 @@ def replay(home, core, entries):
     stock_core = runpy.run_path(str(CORE_HOST))['StockCore']
     renamed = home / 'tailscaled.exe'
     shutil.copyfile(sys.executable, renamed)
+    wechat_probes = [home / name for name in ('Weixin.exe', 'WeChat.exe')]
+    for executable in wechat_probes:
+        shutil.copyfile(sys.executable, executable)
     for library in Path(sys.base_prefix).glob('*.dll'):
         if library.name.startswith(('python', 'vcruntime')):
             shutil.copyfile(library, home / library.name)
@@ -177,6 +180,28 @@ def replay(home, core, entries):
                         assert probe.returncode == 0, probe.stderr.decode('utf-8', errors='replace')
                         assert (len(relays[DIRECT].udp.events), len(relays[PROXY].udp.events)) == (before[0] + 1, before[1]), name
                         checks.append(['UDP', '198.51.100.77', 41641, 'Fixture Direct via tailscaled.exe'])
+                        process_cases = [
+                            ('TCP', '198.51.100.77', 443, DIRECT),
+                            ('UDP', '198.51.100.77', 443, DIRECT),
+                            ('UDP', '198.51.100.77', 3478, PROXY),
+                            ('TCP', 'unclassified.example.net', 443, PROXY),
+                            ('UDP', '2001:db8::77', 443, None if mode == 'ipv4-only' else PROXY),
+                        ]
+                        for executable in wechat_probes:
+                            for protocol, target, port, expected in process_cases:
+                                events = {label: relay.udp.events if protocol == 'UDP' else relay.events
+                                          for label, relay in relays.items()}
+                                before = {label: len(items) for label, items in events.items()}
+                                probe = subprocess.run(
+                                    [str(executable), '-B', str(Path(__file__).resolve()),
+                                     '--wechat-probe', str(mixed), protocol, target, str(port),
+                                     'allow' if expected else 'reject'],
+                                    env=python_env, capture_output=True, timeout=12,
+                                )
+                                assert probe.returncode == 0, probe.stderr.decode('utf-8', errors='replace')
+                                actual = [label for label, items in events.items() if len(items) > before[label]]
+                                assert actual == ([expected] if expected else []), (name, executable.name, target, port, actual)
+                                checks.append([protocol, target, port, (expected or 'REJECT') + ' via ' + executable.name])
                 except Exception:
                     print((folder / 'core.log').read_text(encoding='utf-8', errors='replace')[-3000:], file=sys.stderr)
                     raise
@@ -210,5 +235,11 @@ def main():
 if __name__ == '__main__':
     if sys.argv[1:2] == ['--process-probe']:
         udp_exchange(int(sys.argv[2]), '198.51.100.77', 41641)
+    elif sys.argv[1:2] == ['--wechat-probe']:
+        mixed, protocol, target, port, expected = sys.argv[2:]
+        if protocol == 'UDP':
+            udp_exchange(int(mixed), target, int(port), allow_timeout=expected == 'reject')
+        else:
+            tcp_exchange(int(mixed), target, int(port))
     else:
         main()

@@ -12,6 +12,8 @@ const lock=read(prefix+'data/rule-sources.lock.json'),oldManifest=read(prefix+'m
 const source=fs.readFileSync(local('src/android/v14.3-android-flclash.js'),'utf8'),ctx=vm.createContext({console:{log(){}}});vm.runInContext(source,ctx);
 const data=JSON.parse(vm.runInContext('JSON.stringify({settings:V14,domestic:V14_DOMESTIC_SEEDS,stunNames:V14.stunHostPatterns})',ctx));
 const policy=read('data/rules/embedded-policy.json');assert.equal(policy.domesticProtocolRevision,'domestic-protocol-r1');
+const wechatFile='data/rules/wechat-media.json',wechatDomains=read(wechatFile);
+const wechatPatterns=wechatDomains.flatMap(domain=>[domain,'*.'+domain]);
 const tailscale=require('./lib/tailscale-policy.cjs').loadTailscalePolicy(root);
 const tailscaleIP=network=>(network.includes(':')?'IP-CIDR6,':'IP-CIDR,')+network+',DIRECT,no-resolve';
 const tailscaleRules=[tailscale.publicDomain,tailscale.tailnetDomain].map(domain=>'DOMAIN-SUFFIX,'+domain+',DIRECT')
@@ -51,7 +53,8 @@ kept.splice(tailnetStart,1,...tailscale.tailnetNetworks.map(tailscaleIP));
 const guard=kept.findIndex(r=>r==='AND,((PROTOCOL,UDP),(NOT,((PROTOCOL,TCP)))),漏网之鱼');assert.ok(guard>=0);
 const udpStun=[];for(const port of data.settings.stunPorts)udpStun.push('AND,((PROTOCOL,UDP),(DST-PORT,'+port+')),漏网之鱼');
 for(const host of data.stunNames)udpStun.push('AND,((PROTOCOL,UDP),(DOMAIN-WILDCARD,'+host+')),漏网之鱼');
-const uncompressedRules=[...tailscaleRules,...kept.slice(0,guard),...udpStun,...domestic,kept[guard],...geographic,...kept.slice(guard+1)];
+const wechatRules=wechatDomains.map(domain=>'DOMAIN-SUFFIX,'+domain+',DIRECT');
+const uncompressedRules=[...tailscaleRules,...kept.slice(0,guard),...udpStun,...wechatRules,...domestic,kept[guard],...geographic,...kept.slice(guard+1)];
 // Remove only rows already dominated by an earlier literal suffix with the
 // identical group. No provider, wildcard or cross-group precedence is inferred.
 const priorSuffixes=new Map(), redundantRules=[];
@@ -87,6 +90,9 @@ for(const match of critical){
  // Keep generic named STUN on the fallback, without taking company-owned roots.
  if(host!=='cn'&&kind==='DOMAIN-SUFFIX')for(const name of ['stun','turn'])for(const key of [name+'.'+host,'*.'+name+'.'+host,name+'.*.'+host,'*.'+name+'.*.'+host])put(key,stunDNS);
 }
+for(const pattern of wechatPatterns)hosts.set(pattern,valueFor('DIRECT'));
+for(const domain of wechatDomains)for(const label of ['stun','turn'])
+ for(const key of [label+'.'+domain,'*.'+label+'.'+domain,label+'.*.'+domain,'*.'+label+'.*.'+domain])put(key,stunDNS);
 const nonFinite=[...hosts.keys()].filter(k=>k.includes('*')&&!/^\*\.[^*]+$/.test(k));
 const protectedTails=nonFinite.map(k=>k.split('.').filter(x=>!x.includes('*')).join('.')).filter(Boolean);
 const outputHosts=[];const eliminated=[];
@@ -105,7 +111,8 @@ const header=['# V14.3 Shadowrocket — 2026-10-13; shadowrocket-lean-r1 / domes
  '# 业务与关键国内 Host DNS 显式跟组；其余国内 DNS 依赖原生 DIRECT DNS / 所选节点远端解析。',
  '# Shadowrocket 原生编译、完整国内 DNS 切换和 iOS VPN 接管仍待实机验收。'];
 header.push('# auto-local-family-r1: Mihomo native extension is unavailable in this conf; IPv6 stays enabled with native IPv4 preference.');
-const output=header.join('\n')+'\n\n[General]\n'+section('General').join('\n')+'\n\n[Proxy Group]\n'+section('Proxy Group').join('\n')+'\n\n[Rule]\n'+rules.join('\n')+'\n\n[Host]\n'+outputHosts.map(([k,v])=>k+' = '+v).join('\n')+'\n';
+const general=section('General').concat('always-real-ip = '+wechatPatterns.join(','));
+const output=header.join('\n')+'\n\n[General]\n'+general.join('\n')+'\n\n[Proxy Group]\n'+section('Proxy Group').join('\n')+'\n\n[Rule]\n'+rules.join('\n')+'\n\n[Host]\n'+outputHosts.map(([k,v])=>k+' = '+v).join('\n')+'\n';
 assert.ok(Buffer.byteLength(output)<1800000,'Self-contained DNS budget exceeded');
 const file='src/ios/v14.3-shadowrocket.conf';
 const contractPath=fs.existsSync(path.resolve(root,'../../CURRENT_RELEASE.json'))?path.resolve(root,'../../docs/需求.md'):local('docs/需求.md');
@@ -120,7 +127,7 @@ const manifest={version:'14.3',date:'2026-10-13',revision:'shadowrocket-lean-r1'
   standaloneDomesticDNSAffinity:'NOT_NATIVE_VERIFIED'},
  groups:section('Proxy Group').map(r=>r.split(' = ')[0]),sources,
  sourceContract:{file:'docs/需求.md',sha256:sha(contractPath)},
- inputs:['tools/build-shadowrocket-lean.cjs','tools/lib/tailscale-policy.cjs',tailscale.source.file,'src/android/v14.3-android-flclash.js','data/rules/embedded-policy.json',prefix+'manifest.json',prefix+'metadata/shadowrocket-sources.json',prefix+'data/rule-sources.lock.json'].map(file=>({file,sha256:sha(local(file))})),
+ inputs:['tools/build-shadowrocket-lean.cjs','tools/lib/tailscale-policy.cjs',tailscale.source.file,wechatFile,'src/android/v14.3-android-flclash.js','data/rules/embedded-policy.json',prefix+'manifest.json',prefix+'metadata/shadowrocket-sources.json',prefix+'data/rule-sources.lock.json'].map(file=>({file,sha256:sha(local(file))})),
  clientDeployment:false,nativeCompilation:'NOT_RUN',nativeDNSAffinity:'NOT_RUN',deviceAcceptance:'NOT_RUN'};
 const text=JSON.stringify(manifest,null,2)+'\n';
 if(process.argv.includes('--check')){assert.equal(fs.readFileSync(local(file),'utf8'),output);assert.equal(fs.readFileSync(local('metadata/shadowrocket-lean.json'),'utf8'),text);}

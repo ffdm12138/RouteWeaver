@@ -1,8 +1,10 @@
 # RouteWeaver
 
-当前修订 `darwin-tun-r1` 修复 Mac FlClash 开启 TUN 时的默认路由冲突。下表提供公开预发布附件。 [Mac 故障小本子](docs/guides/macOS-FlClash故障小本子.md) · [两轨七端复审](docs/reports/v14.3/两轨七端复审与微信媒体链路.md)
+当前修订 `wechat-media-r1` 为微信媒体域名提供真实解析和直连例外。下表提供公开预发布附件。 [微信发图优化](docs/guides/微信发图优化.md)
 
 跨平台分流覆写，按客户端选择对应入口。每个网络版本都提供六份 Mihomo JS 和一份 Shadowrocket 原生配置。本目录是独立公开版源码。
+
+## 版本与下载
 
 | 版本 | 本地入口 | GitHub 预发布 |
 |---|---|---|

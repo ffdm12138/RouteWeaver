@@ -1,0 +1,10 @@
+const V14_WECHAT_PATTERNS = V14_WECHAT_DOMAINS.map(domain => "+." + domain);
+
+function v14AddWeChatRules(config, add) {
+  for (const domain of V14_WECHAT_DOMAINS) add("DOMAIN-SUFFIX," + domain, "DIRECT");
+  // The process exception covers IPv4 literals after company, LAN and STUN rules.
+  for (const name of V14_WECHAT_PROCESSES)
+    add("AND,((DOMAIN-REGEX,^$),(IP-CIDR,0.0.0.0/0,no-resolve),(PROCESS-NAME," + name + "))", "DIRECT");
+  if (V14_WECHAT_PROCESSES.length && config["find-process-mode"] !== "always")
+    config["find-process-mode"] = "strict";
+}

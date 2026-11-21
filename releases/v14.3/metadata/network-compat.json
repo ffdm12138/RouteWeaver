@@ -46,7 +46,7 @@
     },
     {
       "file": "tools/lib/compile-entries.cjs",
-      "sha256": "6c383069c0646f6e0a8eda1cb22a8de8366e5849439691d596435f164ad33bf2"
+      "sha256": "5182c43b312e1f6bb16a0cf1483adf969fcd31432225fee6bd38f0fa05a9cff7"
     },
     {
       "file": "tools/lib/render-runtime.cjs",
@@ -95,6 +95,14 @@
     {
       "file": "data/rules/tailscale-derp-map.json",
       "sha256": "0c8d3433db696e18e26a1ce8464c1c29d75963ecf81b28e280341bfd323cdb3a"
+    },
+    {
+      "file": "data/rules/wechat-media.json",
+      "sha256": "b041e63cc178060fd545a0bc8ef8952b7b85fcaf034b0defc32112e79edf0551"
+    },
+    {
+      "file": "runtime/shared/v14WeChat.js.in",
+      "sha256": "376f2147712485b00e2e1021d13906677f27035b8de05590b1948e6fd338b062"
     },
     {
       "file": "runtime/platforms/desktop/layout.json",
@@ -190,7 +198,7 @@
     },
     {
       "file": "runtime/shared/main.js.in",
-      "sha256": "87a7f311843ee5f18cdf86e36484ef3af70ac59add40e74e043e6af179b4a5d1"
+      "sha256": "6e30194c4aa202c663516b2aa80d1367fec7ab6bc4110cfe7f89e9e10edf65d3"
     },
     {
       "file": "runtime/platforms/android/layout.json",
@@ -206,7 +214,7 @@
     },
     {
       "file": "runtime/platforms/android/main.js.in",
-      "sha256": "63f18523243054a63e54e332f19695b5c86013de92f76264284065d422919f57"
+      "sha256": "617e760a360d6ca4da7bc758d8872d46f645351e91c72dc832f7a69a424f3b1c"
     },
     {
       "file": "tools/validate-azure-async.cjs",
@@ -238,8 +246,8 @@
       "platform": "windows",
       "source": "src/windows/v14.3-windows-flclash.js",
       "file": "src/windows/v14.3-windows-flclash.js",
-      "sha256": "5819328fe3ae8609ae71a68f5500f5d126dd455620e985ad354d3c4c767f3bcf",
-      "bytes": 123149,
+      "sha256": "25252d8763b69944d4674a98e4ac666918ced21e8dd50fbf6f6851c290cc279c",
+      "bytes": 124397,
       "modes": [
         "auto",
         "dual-stack",
@@ -250,8 +258,8 @@
       "platform": "android",
       "source": "src/android/v14.3-android-flclash.js",
       "file": "src/android/v14.3-android-flclash.js",
-      "sha256": "5041ce89a320048ae7ecaef01111aa4d98dbf8130e4b70269a02cb580bf186d9",
-      "bytes": 122717,
+      "sha256": "3f5115fce915254fdeea23992328eb9e0a09dd4383d1dd9cfa2ac192164553f8",
+      "bytes": 123956,
       "modes": [
         "auto",
         "dual-stack",
@@ -262,8 +270,8 @@
       "platform": "clashmi",
       "source": "src/ios/v14.3-clashmi-domestic-protocol-r1.js",
       "file": "src/ios/v14.3-clashmi-domestic-protocol-r1.js",
-      "sha256": "709fdeefb5f620527fc92d65d4a13f50c8b0698299b4c94d59588a8c287c4dbe",
-      "bytes": 125043,
+      "sha256": "5124b9362e4e01922dd49a08e332ec49475362ab60598a883f37d40ceb9070ed",
+      "bytes": 126266,
       "modes": [
         "auto",
         "dual-stack",
@@ -274,8 +282,8 @@
       "platform": "macosFlClash",
       "source": "src/macos/v14.3-macos-flclash.js",
       "file": "src/macos/v14.3-macos-flclash.js",
-      "sha256": "0490b0851139077511ead538bed13b8b12776a98223f516ca2627ecbe7a471f2",
-      "bytes": 125009,
+      "sha256": "293a293a9cf6fb1f533e01a7b2ca5edc9646529160f82493a5c395f31d15e3a8",
+      "bytes": 126240,
       "modes": [
         "auto",
         "dual-stack",
@@ -286,8 +294,8 @@
       "platform": "macosClashMi",
       "source": "src/macos/v14.3-macos-clashmi.js",
       "file": "src/macos/v14.3-macos-clashmi.js",
-      "sha256": "74779aea1703ded22dbf2b0d6a052747a8e576f62a2cbf9a1d9fd71d66f2afed",
-      "bytes": 125041,
+      "sha256": "459ad17b380ccc7babc984cb670e191f536dd99311980f85861806b254cb059a",
+      "bytes": 126264,
       "modes": [
         "auto",
         "dual-stack",
@@ -298,8 +306,8 @@
       "platform": "clashVerge",
       "source": "src/clash-verge/v14.3-clash-verge.js",
       "file": "src/clash-verge/v14.3-clash-verge.js",
-      "sha256": "ba30dd542b43d7c1cf13c691ba4a9bd90018027099a9fd8b44828e6cd4826c9a",
-      "bytes": 125087,
+      "sha256": "37286102c382045b15592687792ad04b48f824f976706b3b6e9b7d31eb86a119",
+      "bytes": 126335,
       "modes": [
         "auto",
         "dual-stack",
@@ -310,8 +318,8 @@
       "platform": "shadowrocket",
       "source": "src/ios/v14.3-shadowrocket.conf",
       "file": "src/ios/v14.3-shadowrocket.conf",
-      "sha256": "c79e3a874d88410e8cb3974ad46417e58ebc7ab2aeec99f5fd3326b800d0c619",
-      "bytes": 1789875,
+      "sha256": "fd055ff1620487ab7c9947a5d19a312087ba5abfff3c650a19723c093393d85d",
+      "bytes": 1797384,
       "modes": [
         "native-ipv4-prefer"
       ]

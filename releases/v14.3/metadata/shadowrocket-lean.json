@@ -5,8 +5,8 @@
   "domesticProtocolRevision": "domestic-protocol-r1",
   "status": "GENERATED_NATIVE_ACCEPTANCE_PENDING",
   "file": "src/ios/v14.3-shadowrocket.conf",
-  "sha256": "c79e3a874d88410e8cb3974ad46417e58ebc7ab2aeec99f5fd3326b800d0c619",
-  "bytes": 1789875,
+  "sha256": "fd055ff1620487ab7c9947a5d19a312087ba5abfff3c650a19723c093393d85d",
+  "bytes": 1797384,
   "tailscaleDerpSource": {
     "file": "data/rules/tailscale-derp-map.json",
     "url": "https://controlplane.tailscale.com/derpmap/default",
@@ -20,7 +20,7 @@
   },
   "rules": {
     "before": 116974,
-    "after": 5308,
+    "after": 5322,
     "removedDuplicateCNRows": 111400,
     "removedDominatedLiteralRows": [
       "DOMAIN-SUFFIX,firebase.google.com,谷歌服务",
@@ -678,8 +678,8 @@
   },
   "dns": {
     "beforeHostRows": 9130,
-    "afterHostRows": 9894,
-    "removedRedundantRows": 1044,
+    "afterHostRows": 9968,
+    "removedRedundantRows": 1040,
     "redundantRowCertificates": [
       {
         "key": "go.microsoft.com",
@@ -4714,22 +4714,6 @@
         "parent": "*.cn"
       },
       {
-        "key": "qpic.cn",
-        "parent": "*.cn"
-      },
-      {
-        "key": "*.qpic.cn",
-        "parent": "*.cn"
-      },
-      {
-        "key": "weixin.qq.com",
-        "parent": "*.qq.com"
-      },
-      {
-        "key": "*.weixin.qq.com",
-        "parent": "*.qq.com"
-      },
-      {
         "key": "weibo.cn",
         "parent": "*.cn"
       },
@@ -5461,12 +5445,12 @@
   ],
   "sourceContract": {
     "file": "docs/需求.md",
-    "sha256": "e4fffeae38f76a315450851f32195dd64d693b0ed796f443fbcae58847ee2847"
+    "sha256": "6085d3e8b8059f035e99a9458afdb221506d12f8a7b53445130ba265d92c7989"
   },
   "inputs": [
     {
       "file": "tools/build-shadowrocket-lean.cjs",
-      "sha256": "ded6176549e6614db9c60e363d471aebab636c6b67cb5b8fd6ab61dcc4a1404d"
+      "sha256": "630a43713b09d421d07b185aac8898831116cc52bcf3b89694c1589bc6600898"
     },
     {
       "file": "tools/lib/tailscale-policy.cjs",
@@ -5477,8 +5461,12 @@
       "sha256": "0c8d3433db696e18e26a1ce8464c1c29d75963ecf81b28e280341bfd323cdb3a"
     },
     {
+      "file": "data/rules/wechat-media.json",
+      "sha256": "b041e63cc178060fd545a0bc8ef8952b7b85fcaf034b0defc32112e79edf0551"
+    },
+    {
       "file": "src/android/v14.3-android-flclash.js",
-      "sha256": "5041ce89a320048ae7ecaef01111aa4d98dbf8130e4b70269a02cb580bf186d9"
+      "sha256": "3f5115fce915254fdeea23992328eb9e0a09dd4383d1dd9cfa2ac192164553f8"
     },
     {
       "file": "data/rules/embedded-policy.json",

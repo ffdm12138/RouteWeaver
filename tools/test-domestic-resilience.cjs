@@ -5,9 +5,16 @@ const fs = require('node:fs'), path = require('node:path'), vm = require('node:v
 const crypto = require('node:crypto'), assert = require('node:assert/strict');
 const root = path.resolve(__dirname, '..'), releaseRoot = path.join(root, 'releases/v14.3');
 const f = require(path.join(releaseRoot, 'tests/current-fixture.cjs'));
+const { indexDNS } = require(path.join(releaseRoot, 'tests/domain-index.cjs'));
+const { mediaHost } = require(path.join(releaseRoot, 'tests/domestic-contract.cjs'));
 const read = file => JSON.parse(fs.readFileSync(path.join(root, file), 'utf8'));
 const hash = file => crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
 const release = read('CURRENT_RELEASE.json');
+const mediaDomains = read('releases/v14.3/data/rules/wechat-media.json');
+const mediaProcessNames = {
+  windows: ['Weixin.exe', 'WeChat.exe'], clashVerge: ['Weixin.exe', 'WeChat.exe'],
+  android: ['com.tencent.mm'], macosFlClash: ['WeChat'],
+};
 const review = read('releases/v14.3/data/rules/domestic-resilience.json');
 const locks = [...read('releases/v14.3/data/rule-sources.lock.json').sources,
   ...read('releases/v14.3/validation/inputs/v14.2-baseline/data/rule-sources.lock.json').sources];
@@ -37,7 +44,7 @@ const sourceProbes = review.sourceIds.flatMap(id => {
     return [domain, 'media.' + domain];
   });
 });
-const hosts = [...new Set([...observed, ...sourceProbes, ...review.suffixes.flatMap(h => [h, 'media.' + h])])];
+const hosts = [...new Set([...observed, ...sourceProbes, ...review.suffixes.concat(mediaDomains).flatMap(h => [h, 'media.' + h])])];
 const sources = {}, failures = [], counts = {}, sizes = [];
 let checks = 0;
 function check(name, body) {
@@ -72,21 +79,43 @@ for (const entry of entries) {
     providers = [...new Set(rules.filter(r => r.startsWith('RULE-SET,')).map(r => f.split(r)[1]))]
       .map(url => ({name: url, remote: true, rows: remoteRows(url)}));
   }
+  check(entry.client + ':' + entry.mode + ':media-config', () => {
+    if (platform === 'shadowrocket') {
+      assert.deepEqual(config.general['always-real-ip'].split(','), mediaDomains.flatMap(h => [h, '*.' + h]));
+      assert.ok(!rules.some(rule => rule.includes('PROCESS-NAME')));
+      return;
+    }
+    assert.equal(config.dns['fake-ip-filter-mode'], 'blacklist');
+    for (const domain of mediaDomains) {
+      const pattern = '+.' + domain;
+      assert.equal(config.dns['fake-ip-filter'].filter(x => x === pattern).length, 1);
+      assert.equal(config.sniffer['skip-domain'].filter(x => x === pattern).length, 1);
+      assert.ok(config.dns['nameserver-policy'][pattern].every(server =>
+        /^https:\/\//.test(server) && server.includes('#DIRECT&') &&
+        ['disable-ipv6', 'disable-qtype-64', 'disable-qtype-65'].every(flag => server.includes(flag + '=true'))));
+    }
+    const processRules = rules.filter(rule => rule.includes('(PROCESS-NAME,'));
+    assert.deepEqual(processRules, (mediaProcessNames[entry.client] || []).map(name =>
+      'AND,((DOMAIN-REGEX,^$),(IP-CIDR,0.0.0.0/0,no-resolve),(PROCESS-NAME,' + name + ')),DIRECT'));
+    if (processRules.length) assert.equal(config['find-process-mode'], 'strict');
+  });
   const full = {platform, config, rules, sources: new Map(providers.map(p => [p.name, p.rows]))};
   for (const stage of ['full', 'empty', 'partial', 'restored']) {
     const model = {...full, sources: new Map(providers.map(p => [p.name,
       p.remote && (stage === 'empty' || stage === 'partial' && /(?:domain-cn|domain-douyin|\/cn\.|\/douyin\.)/.test(p.name)) ? [] : p.rows]))};
     const label = entry.client + ':' + entry.mode + ':' + stage;
     counts[stage] = (counts[stage] || 0) + 1;
+    const dnsPolicyFor = indexDNS(model);
     for (const host of hosts) {
-      check(label + ':dns:' + host, () => assert.deepEqual(f.dnsPolicyFor(model, host).groups, ['国内网站']));
+      const group = mediaHost(host) ? 'DIRECT' : '国内网站';
+      check(label + ':dns:' + host, () => assert.deepEqual(dnsPolicyFor(host).groups, [group]));
       for (const protocol of ['TCP', 'UDP']) {
         check(label + ':' + protocol + ':' + host, () => {
           for (const choice of ['DIRECT', '高纯净度AI用', '高网速视频用', 'Synthetic']) {
             const flow = {host, protocol, port: 443}, options = {selections: {'国内网站': choice}};
             const result = f.route(model, flow, options);
-            assert.equal(result.group, '国内网站'); assert.equal(result.policy, choice);
-            if (protocol === 'UDP' && choice !== 'DIRECT') assert.equal(f.route(model, flow, {...options, udpSupported: false}).policy, 'REJECT');
+            assert.equal(result.group, group); assert.equal(result.policy, group === 'DIRECT' ? 'DIRECT' : choice);
+            if (protocol === 'UDP' && group === '国内网站' && choice !== 'DIRECT') assert.equal(f.route(model, flow, {...options, udpSupported: false}).policy, 'REJECT');
           }
         });
       }
@@ -94,7 +123,7 @@ for (const entry of entries) {
     for (const host of ['www.tiktok.com', 'api.openai.com', 'www.google.com', 'challenges.cloudflare.com']) {
       check(label + ':company:' + host, () => {
         assert.notEqual(f.route(model, {host, port: 443, protocol: 'UDP'}).group, '国内网站');
-        assert.notDeepEqual(f.dnsPolicyFor(model, host).groups, ['国内网站']);
+        assert.notDeepEqual(dnsPolicyFor(host).groups, ['国内网站']);
       });
     }
     for (const host of ['unknown.byteeffecttos.com', 'unknown.tencent-cloud.net', 'unknown.bytedance.com'])
@@ -102,17 +131,20 @@ for (const entry of entries) {
         if (stage === 'empty') assert.notEqual(f.route(model, {host, port: 443, protocol: 'UDP'}).group, '国内网站');
       });
     for (const flow of [{host: 'stun.amemv.com', protocol: 'UDP', port: 443},
+      {host: 'stun.qpic.cn', protocol: 'UDP', port: 443}, {host: 'mmbiz.qpic.cn', protocol: 'UDP', port: 3478},
       {host: 'api.amemv.com', protocol: 'UDP', port: 3478},
       {ip: '203.0.113.17', protocol: 'UDP', port: 443}, {ip: '2001:db8::17', protocol: 'UDP', port: 443}])
       check(label + ':guard:' + JSON.stringify(flow), () => assert.equal(f.route(model, flow).group,
         entry.mode === 'ipv4-only' && flow.ip?.includes(':') ? 'REJECT' : '漏网之鱼'));
-    check(label + ':stun-dns', () => assert.deepEqual(f.dnsPolicyFor(model, 'stun.amemv.com').groups, ['漏网之鱼']));
+    for (const host of ['stun.amemv.com', 'stun.qpic.cn'])
+      check(label + ':stun-dns:' + host, () => assert.deepEqual(dnsPolicyFor(host).groups, ['漏网之鱼']));
   }
 }
-const result = {revision: 'domestic-resilience-r1', scope: 'OFFLINE_MODELS_NOT_DEVICE_ACCEPTANCE',
+const result = {revision: 'wechat-media-r1', scope: 'OFFLINE_MODELS_NOT_DEVICE_ACCEPTANCE',
   edition: release.vpsDirectRevision ? 'personal' : 'public', status: failures.length ? 'FAIL' : 'PASS',
   checks, failed: failures.length, stages: counts, sources, sizes,
   testSHA256: hash(__filename), dataSHA256: hash(path.join(releaseRoot, 'data/rules/domestic-resilience.json')),
+  mediaDomainsSHA256: hash(path.join(releaseRoot, 'data/rules/wechat-media.json')),
   failures: failures.slice(0, 30)};
 const at = process.argv.indexOf('--output');
 if (at >= 0) { const out = path.resolve(process.argv[at + 1]); fs.mkdirSync(path.dirname(out), {recursive: true}); fs.writeFileSync(out, JSON.stringify(result, null, 2) + '\n'); }
