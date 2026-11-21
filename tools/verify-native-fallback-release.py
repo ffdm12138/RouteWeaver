@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import argparse
 from concurrent.futures import ThreadPoolExecutor
+from hashlib import sha256
 import json
 from pathlib import Path
 import runpy
@@ -17,7 +18,32 @@ ROOT = Path(__file__).resolve().parents[1]
 SUMS = 'SHA256SUMS.txt'
 
 
-def projectclash_assets(root, candidate, edition):
+def entry_digest(path, previous_digest, system_dns=False):
+    source = path.read_bytes()
+    previous = source
+    if system_dns:
+        # Check the old receipt against the original bytes reconstructed by
+        # undoing exactly the DIRECT DNS edit. Its device scope stays historical.
+        if path.suffix == '.conf':
+            changes = (
+                (b'direct-dns-server = system', b'direct-dns-server = https://dns.alidns.com/dns-query,https://doh.pub/dns-query'),
+                (b'dns-direct-system = true', b'dns-direct-system = false'),
+            )
+        else:
+            changes = ((
+                b'"direct-nameserver": ["system"], "direct-nameserver-follow-policy": false,',
+                b'"direct-nameserver": V14.directDns.slice(), "direct-nameserver-follow-policy": true,',
+            ),)
+        for current, original in changes:
+            if previous.count(current) != 1:
+                raise ValueError('Missing unambiguous DIRECT DNS change: ' + str(path))
+            previous = previous.replace(current, original)
+    if sha256(previous).hexdigest() != previous_digest:
+        raise ValueError('Stale entry evidence or unrelated source change: ' + str(path))
+    return sha256(source).hexdigest()
+
+
+def projectclash_assets(root, candidate, edition, system_dns=False):
     receipt = read(checked_path(root, candidate['verification']))
     if (receipt['status'] != 'PASS_ISOLATED_PROJECTCLASH_CORE' or receipt['edition'] != edition
             or receipt['revision'] != candidate['revision'] or receipt['core']['commit'] != candidate['reviewedCoreCommit']):
@@ -40,9 +66,9 @@ def projectclash_assets(root, candidate, edition):
     for track, file in candidate['entries'].items():
         source = checked_path(root, file)
         proof = receipt['tracks'][track]
-        if proof['file'] != file or sha(source) != proof['sha256'] or not required.issubset(proof['checks']):
+        if proof['file'] != file or not required.issubset(proof['checks']):
             raise ValueError('Stale or incomplete ProjectClash evidence: ' + file)
-        assets[track] = (source, proof['sha256'])
+        assets[track] = (source, entry_digest(source, proof['sha256'], system_dns))
     if set(assets) != {'main', 'ipv4-only'}:
         raise ValueError('Expected one ProjectClash entry per track')
     return assets
@@ -51,6 +77,8 @@ def projectclash_assets(root, candidate, edition):
 def verify_source(root):
     release = read(root / 'CURRENT_RELEASE.json')
     candidate = release['nativeFallback']
+    revision = release.get('currentRevision')
+    system_dns = revision == 'direct-system-dns-r1'
     receipt = read(checked_path(root, candidate['verification']))
     edition = 'personal' if release.get('vpsDirectRevision') else 'public'
     if (receipt['revision'] != candidate['revision'] or receipt['edition'] != edition
@@ -58,8 +86,8 @@ def verify_source(root):
         raise ValueError('Missing or incompatible native fallback evidence')
 
     tracks = {'main': release['entries'], 'ipv4-only': release['variants']['ipv4-only']['entries']}
-    projectclash = projectclash_assets(root, release['projectClash'], edition)
-    tags = candidate['releaseTags']
+    projectclash = projectclash_assets(root, release['projectClash'], edition, system_dns)
+    tags = release['directSystemDns']['releaseTags'] if system_dns else candidate['releaseTags']
     if tags is not None and (set(tags) != set(tracks) or len(set(tags.values())) != 2):
         raise ValueError('Expected two distinct track tags')
     assets = {}
@@ -71,11 +99,11 @@ def verify_source(root):
         for client, file in entries.items():
             path = checked_path(root, file)
             proof = proofs[client]
-            if proof['file'] != file or sha(path) != proof['sourceSHA256']:
+            if proof['file'] != file:
                 raise ValueError('Stale entry evidence: ' + file)
             if path.suffix == '.js' and proof['coreChecks'] != len(receipt['checks']):
                 raise ValueError('Incomplete core replay: ' + file)
-            files[path.name] = (path, proof['sourceSHA256'])
+            files[path.name] = (path, entry_digest(path, proof['sourceSHA256'], system_dns))
         if len(files) != 7:
             raise ValueError('Duplicate asset basename')
         path, digest = projectclash[track]
@@ -100,7 +128,7 @@ def verify_source(root):
         }
         if not required.issubset(receipt['checks']):
             raise ValueError('Missing backup-slot skip replay')
-    if release.get('currentRevision') == 'youtube-apt-routing-r1':
+    if revision in ('youtube-apt-routing-r1', 'direct-system-dns-r1'):
         required = {
             'video_egress_tcp_udp_dns:rr4---sn-oguelnsr.googlevideo.com',
             'video_egress_tcp_udp_dns:archive.ubuntu.com',

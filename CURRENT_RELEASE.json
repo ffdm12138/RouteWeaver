@@ -242,7 +242,16 @@
       "publicReleaseRemoteSHA256": "ALL_15_ANONYMOUS_DOWNLOADS_MATCH"
     }
   },
-  "currentRevision": "youtube-apt-routing-r1",
+  "currentRevision": "direct-system-dns-r1",
+  "directSystemDns": {
+    "releaseTags": {
+      "main": "v14.3.0-rc.20",
+      "ipv4-only": "v14.3.0-ipv4-only-rc.11"
+    },
+    "scope": "DIRECT_DNS_ONLY",
+    "verification": "releases/v14.3/validation/direct-system-dns-r1.json",
+    "deviceAcceptance": "NOT_RUN"
+  },
   "domesticPolicyDefaults": {
     "revision": "domestic-policy-defaults-r1",
     "domainSuffix": "19212021.xyz",

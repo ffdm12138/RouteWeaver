@@ -133,7 +133,10 @@ for(const [key,value]of hosts){
 const header=['# RouteWeaver v14.3 Shadowrocket',
  '# 保留订阅，选择「配置」路由和公共组节点。',
  '# IPv6 已启用，iOS VPN 和 DNS 待实机验证。'];
-const general=section('General').concat('always-real-ip = '+wechatPatterns.join(','));
+const general=section('General').map(row=>row
+ .replace(/^direct-dns-server = .+$/, 'direct-dns-server = system')
+ .replace(/^dns-direct-system = false$/, 'dns-direct-system = true'))
+ .concat('always-real-ip = '+wechatPatterns.join(','));
 const groupRows=section('Proxy Group').map(row=>row.replace(/\(\?i\)\^\(\?!\(\?:([^)]*)\)\$\)/,(_,names)=>{
  let reserved=names.split('|').concat('YouTube');
  for(const suffix of ['服务','国际']){

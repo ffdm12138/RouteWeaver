@@ -37,7 +37,9 @@ check('size-groups-fixed-sources-and-general-settings',()=>{
   assert.equal(pattern.test('剩余流量 10GB'),false);
  }
  const {'always-real-ip': realIP,...general}=current.config.general;
- assert.deepEqual(general,before.config.general);
+ assert.deepEqual(general,{
+  ...before.config.general,'direct-dns-server':'system','dns-direct-system':'true',
+ });
  assert.deepEqual(realIP.split(','),require('../data/rules/wechat-media.json').flatMap(domain=>[domain,'*.'+domain]));
  for(const url of sources.keys())assert.match(url,/\/[a-f0-9]{40}\//);
  assert.equal(current.rules.filter(r=>r.startsWith('RULE-SET,')).length,manifest.sources.reduce((n,s)=>n+s.uses.length,0));

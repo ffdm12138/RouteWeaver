@@ -210,7 +210,7 @@
     },
     {
       "file": "runtime/shared/main.js.in",
-      "sha256": "b5095eaeedb70334be3cd679c8444facb7e443e872666b39091189c6ba78c4ab"
+      "sha256": "8994b556eb0a10b7307d59b596692d0d13b9ece8e369c082cccc6f348f271feb"
     },
     {
       "file": "runtime/platforms/android/layout.json",
@@ -226,7 +226,7 @@
     },
     {
       "file": "runtime/platforms/android/main.js.in",
-      "sha256": "e29e36c7c89909fd4c15a937324786712884270c25c51fe04325c3774c685d57"
+      "sha256": "611d6066d1b000bd432d9e9314ff2d231789f639384dc65ad9aa92b5d5422119"
     },
     {
       "file": "tools/validate-azure-async.cjs",
@@ -258,8 +258,8 @@
       "platform": "windows",
       "source": "src/windows/v14.3-windows-flclash.js",
       "file": "src/windows/v14.3-windows-flclash.js",
-      "sha256": "aef9152ec58ed8d61165352bdff750792dfffccda48a047d4b9290d549b7fab4",
-      "bytes": 125295,
+      "sha256": "aa728c68ca3462010eb848dbf5d1650df715acf597d7fe8f05999876b381fe61",
+      "bytes": 125285,
       "modes": [
         "auto",
         "dual-stack",
@@ -270,8 +270,8 @@
       "platform": "android",
       "source": "src/android/v14.3-android-flclash.js",
       "file": "src/android/v14.3-android-flclash.js",
-      "sha256": "c52824060ad376085e2f60e630089e33bd3dad219f66722e08a04a108170de8e",
-      "bytes": 124854,
+      "sha256": "ebe7683a49db3d8467c6d12d5cfe9a8e6adf004e4a8cd600359336d208111e02",
+      "bytes": 124844,
       "modes": [
         "auto",
         "dual-stack",
@@ -282,8 +282,8 @@
       "platform": "clashmi",
       "source": "src/ios/v14.3-clashmi-domestic-protocol-r1.js",
       "file": "src/ios/v14.3-clashmi-domestic-protocol-r1.js",
-      "sha256": "35a9292aafaef60418d000f79306a3f42b3f3ba4d308ba13de31a3b6e244b95d",
-      "bytes": 127164,
+      "sha256": "99cb80d9942f3f7090fde7fba1b3f433e1e0faa0171647fa2352dd1b809f9ae5",
+      "bytes": 127154,
       "modes": [
         "auto",
         "dual-stack",
@@ -294,8 +294,8 @@
       "platform": "macosFlClash",
       "source": "src/macos/v14.3-macos-flclash.js",
       "file": "src/macos/v14.3-macos-flclash.js",
-      "sha256": "c99a180a75cfbb4125efa04168aae7f038e1be01427d1b6cafb103a579d16f56",
-      "bytes": 127138,
+      "sha256": "ec06bbf8c2e55e5eb2c220d5b920bf7d75036e39dabeee7b69892777c54bd924",
+      "bytes": 127128,
       "modes": [
         "auto",
         "dual-stack",
@@ -306,8 +306,8 @@
       "platform": "macosClashMi",
       "source": "src/macos/v14.3-macos-clashmi.js",
       "file": "src/macos/v14.3-macos-clashmi.js",
-      "sha256": "bfcb98edac433678f1ce950ffb71494a00db3b965b6cca1427a6a3b05cf0887c",
-      "bytes": 127162,
+      "sha256": "3540c0195fee2e6db9879a372a8865bc3f1ea6f66766e726597ea7167b4085c6",
+      "bytes": 127152,
       "modes": [
         "auto",
         "dual-stack",
@@ -318,8 +318,8 @@
       "platform": "clashVerge",
       "source": "src/clash-verge/v14.3-clash-verge.js",
       "file": "src/clash-verge/v14.3-clash-verge.js",
-      "sha256": "48ecf3c827dea48a262a78ea7209b736da7d7ef4c163f3ef2402f046b850024a",
-      "bytes": 127233,
+      "sha256": "14aa003b413dfa6d728f4e63eeb73e0583bc0913309b6317ad54ebf473a2d3da",
+      "bytes": 127223,
       "modes": [
         "auto",
         "dual-stack",
@@ -330,8 +330,8 @@
       "platform": "shadowrocket",
       "source": "src/ios/v14.3-shadowrocket.conf",
       "file": "src/ios/v14.3-shadowrocket.conf",
-      "sha256": "a9376cc3b9215cdbab50cf565350b85a1b74434c5fa9d2af1ad9c6d5a36e80bf",
-      "bytes": 1799888,
+      "sha256": "752b7acf37f07516ca4a32ad2fd262fe790af70d031b0b11da3ce4e72e803f92",
+      "bytes": 1799835,
       "modes": [
         "native-ipv4-prefer"
       ]

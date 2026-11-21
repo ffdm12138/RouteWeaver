@@ -41,7 +41,8 @@ for(const [platform,entry]of Object.entries(manifest.entries)){
    }
    for(const node of c.proxies)assert.equal(node['ip-version'],'ipv4');
    for(const p of Object.values(c['proxy-providers'])){assert.equal(p.override['ip-version'],'ipv4');assert.equal(p.override['override-expr'].at(-1),'.["ip-version"] = "ipv4"');for(const n of p.payload||[])assert.equal(n['ip-version'],'ipv4');}
-   for(const key of ['nameserver','direct-nameserver','default-nameserver','proxy-server-nameserver'])for(const s of c.dns[key])assert.ok(s.includes('disable-ipv6=true')&&s.includes('disable-qtype-65=true'));
+   assert.deepEqual(c.dns['direct-nameserver'],['system']);assert.equal(c.dns['direct-nameserver-follow-policy'],false);
+   for(const key of ['nameserver','default-nameserver','proxy-server-nameserver'])for(const s of c.dns[key])assert.ok(s.includes('disable-ipv6=true')&&s.includes('disable-qtype-65=true'));
    assert.ok(c.rules.includes('IP-CIDR6,::/0,REJECT,no-resolve'));assert.equal(c.rules.filter(s=>s==='IP-CIDR6,::/0,REJECT,no-resolve').length,1);
    const raw=typeof input==='string'?JSON.parse(input):input;
    const baseline=generate(fs.readFileSync(path.join(root,entry.source),'utf8'),{...raw,'x-routeweaver':{...raw['x-routeweaver'],'network-mode':'ipv4-local'}});

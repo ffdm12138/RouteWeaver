@@ -1082,7 +1082,7 @@ function v14NetworkModeBase(input) {
     "use-system-hosts": true, "respect-rules": false, "prefer-h3": false,
     "default-nameserver": V14.bootstrapDns.slice(), "proxy-server-nameserver": V14.nodeDns.slice(),
     nameserver: v14DnsFor(groupName("漏网之鱼")), fallback: [], "nameserver-policy": dnsPolicy,
-    "direct-nameserver": V14.directDns.slice(), "direct-nameserver-follow-policy": true,
+    "direct-nameserver": ["system"], "direct-nameserver-follow-policy": false,
   });
   delete config.dns["fallback-filter"];
   delete config.dns["proxy-server-nameserver-policy"];

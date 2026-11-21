@@ -1,5 +1,7 @@
 > **纯 IPv4 版**。七份 JS 支持三档原生故障转移。 [使用说明](../../docs/guides/故障转移.md)
 
+**DIRECT 拨号需要可用的 IPv4 系统 DNS。** 如果网络只提供 IPv6 DNS，纯 IPv4 版的 DIRECT 域名可能无法解析。原有业务 DoT 保留禁复用设置。本轮完成配置对照和 Windows 原版核心隔离验证，设备验收待补。
+
 <!-- ARCHITECTURE_AUDIT_CURRENT:BEGIN -->
 > **历史架构审计基线 architecture-audit-r1（2026-11-01）**。两轨七客户端的当时源码、有限静态清单及隔离 Windows 核心已验证；跨端设备、原生 auto 能力和真实 AI 账号任务未验收。
 > 本轮未安装脚本、改动现用客户端、重启服务或发布 GitHub。历史 rc.5–rc.8 段落及旧回执仅作当时记录，不认证本轮新字节。
@@ -29,7 +31,7 @@
 
 JS 强制 `ipv6: false`、`dns.ipv6: false`，移除 IPv6 Fake-IP 池和 TUN IPv6 接口地址。原节点、内联节点和 provider 刷新成员统一使用 `ip-version: ipv4`，且强制表达式在原 provider 表达式后执行。入口始终执行纯 IPv4，需要核心支持 provider override-expr。
 
-业务 DNS、直连 DNS 和节点引导 DNS 均过滤 AAAA/SVCB/HTTPS，保留解析服务器与策略组。首段增加不触发解析的 IPv6 全地址拒绝，阻止到达核心的 IPv6 字面量 TCP/UDP；显式 hosts 的双栈列表保留 IPv4，IPv6-only 映射和关联别名拒绝。系统 hosts 不再读取，避免未受覆写管理的 IPv6 映射重新引入 IPv6。
+业务 DNS 和节点引导 DNS 保留原服务器、策略组及 AAAA/SVCB/HTTPS 过滤。DIRECT 拨号使用系统 DNS。首段增加不触发解析的 IPv6 全地址拒绝，阻止到达核心的 IPv6 字面量 TCP/UDP；显式 hosts 的双栈列表保留 IPv4，IPv6-only 映射和关联别名拒绝。系统 hosts 不再读取，避免未受覆写管理的 IPv6 映射重新引入 IPv6。
 
 ### 全机纯 IPv4 的客户端设置
 
@@ -37,7 +39,7 @@ JS 强制 `ipv6: false`、`dns.ipv6: false`，移除 IPv6 Fake-IP 池和 TUN IPv
 
 `ipv6: false` 可能同时关闭客户端的 IPv6 TUN 接管，因此保留 `::/0` 路由字段并不能证明物理 IPv6 已被阻止。若要求设备所有流量都纯 IPv4，还须在 App 的 VPN/防旁路设置阻止 IPv6，或在所用物理网卡/路由器禁用 IPv6。仅开系统代理不能接管任意应用的 UDP、DNS 和 IPv6。
 
-局域网 `system`/DHCP DNS 保留原语义，它们的服务器地址由宿主决定。严格纯 IPv4 使用时，系统 DNS 必须也是 IPv4；可以通过输入配置显式指定局域网 IPv4 DNS，避免系统选择 IPv6 DNS。填实际路由器/DNS 地址，不要直接照抄例子：
+局域网 `system`/DHCP DNS 的服务器地址由宿主决定。输入配置中的 `ipv4-lan-dns` 仅用于局域网 DNS 策略项。DIRECT 拨号仍由设备当前生效的系统 DNS 解析。下面的配置示意使用局域网 IPv4 地址。
 
 ```yaml
 x-routeweaver:
@@ -45,7 +47,7 @@ x-routeweaver:
     - 192.168.1.1
 ```
 
-只有原来走 `system` 的局域网 DNS 条目采用此地址；公司和国内 DNS 仍按原组查询。仅关闭 `dns.ipv6` 不能控制系统 DNS 的网络传输地址族。此项和 App/物理网卡设置是严格纯 IPv4 的前置条件，不能把脚本生成结果当作全机验收。
+只有原来走 `system` 的局域网 DNS 策略条目采用此地址。公司和国内 DNS 仍按原组查询。设备生效的 DNS 服务器及网络传输地址族以 App 和物理网络设置为准。
 
 ## Shadowrocket 必须额外处理节点
 

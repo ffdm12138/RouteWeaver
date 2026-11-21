@@ -13,27 +13,27 @@
     {
       "platform": "windows",
       "file": "src/windows/v14.3-windows-flclash.js",
-      "sha256": "aef9152ec58ed8d61165352bdff750792dfffccda48a047d4b9290d549b7fab4",
-      "bytes": 125295,
-      "generatedConfigBytes": 193143,
+      "sha256": "aa728c68ca3462010eb848dbf5d1650df715acf597d7fe8f05999876b381fe61",
+      "bytes": 125285,
+      "generatedConfigBytes": 193076,
       "inlineRows": 1098,
       "remoteSources": 30
     },
     {
       "platform": "android",
       "file": "src/android/v14.3-android-flclash.js",
-      "sha256": "c52824060ad376085e2f60e630089e33bd3dad219f66722e08a04a108170de8e",
-      "bytes": 124854,
-      "generatedConfigBytes": 192795,
+      "sha256": "ebe7683a49db3d8467c6d12d5cfe9a8e6adf004e4a8cd600359336d208111e02",
+      "bytes": 124844,
+      "generatedConfigBytes": 192728,
       "inlineRows": 1098,
       "remoteSources": 29
     },
     {
       "platform": "clashmi",
       "file": "src/ios/v14.3-clashmi-domestic-protocol-r1.js",
-      "sha256": "35a9292aafaef60418d000f79306a3f42b3f3ba4d308ba13de31a3b6e244b95d",
-      "bytes": 127164,
-      "generatedConfigBytes": 193720,
+      "sha256": "99cb80d9942f3f7090fde7fba1b3f433e1e0faa0171647fa2352dd1b809f9ae5",
+      "bytes": 127154,
+      "generatedConfigBytes": 193653,
       "inlineRows": 1098,
       "remoteSources": 29
     }
@@ -240,7 +240,7 @@
     },
     {
       "file": "runtime/shared/main.js.in",
-      "sha256": "b5095eaeedb70334be3cd679c8444facb7e443e872666b39091189c6ba78c4ab"
+      "sha256": "8994b556eb0a10b7307d59b596692d0d13b9ece8e369c082cccc6f348f271feb"
     },
     {
       "file": "runtime/platforms/android/layout.json",
@@ -256,7 +256,7 @@
     },
     {
       "file": "runtime/platforms/android/main.js.in",
-      "sha256": "e29e36c7c89909fd4c15a937324786712884270c25c51fe04325c3774c685d57"
+      "sha256": "611d6066d1b000bd432d9e9314ff2d231789f639384dc65ad9aa92b5d5422119"
     },
     {
       "file": "tools/validate-azure-async.cjs",

@@ -5,8 +5,8 @@
   "domesticProtocolRevision": "domestic-protocol-r1",
   "status": "GENERATED_NATIVE_ACCEPTANCE_PENDING",
   "file": "src/ios/v14.3-shadowrocket.conf",
-  "sha256": "a9376cc3b9215cdbab50cf565350b85a1b74434c5fa9d2af1ad9c6d5a36e80bf",
-  "bytes": 1799888,
+  "sha256": "752b7acf37f07516ca4a32ad2fd262fe790af70d031b0b11da3ce4e72e803f92",
+  "bytes": 1799835,
   "tailscaleDerpSource": {
     "file": "data/rules/tailscale-derp-map.json",
     "url": "https://controlplane.tailscale.com/derpmap/default",
@@ -5449,7 +5449,7 @@
   "inputs": [
     {
       "file": "tools/build-shadowrocket-lean.cjs",
-      "sha256": "19b6c8ed06b83df4ec30427edcff97e323ba5046cbe9b547177a0fc0f7578d1a"
+      "sha256": "6ca4d4377b747773ee1f173f16ba1c1b18c4992ccf1e77c8c12ea81bd469b858"
     },
     {
       "file": "tools/lib/tailscale-policy.cjs",
@@ -5465,7 +5465,7 @@
     },
     {
       "file": "src/android/v14.3-android-flclash.js",
-      "sha256": "c52824060ad376085e2f60e630089e33bd3dad219f66722e08a04a108170de8e"
+      "sha256": "ebe7683a49db3d8467c6d12d5cfe9a8e6adf004e4a8cd600359336d208111e02"
     },
     {
       "file": "data/rules/embedded-policy.json",
