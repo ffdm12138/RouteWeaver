@@ -104,7 +104,7 @@
     },
     {
       "file": "runtime/platforms/desktop/preamble.js.in",
-      "sha256": "d74ea0b981c56f06a5ab5f27a437ed4d7b964d23a94724f0fee2db7f9500ef6b"
+      "sha256": "350df69e632e771a1040e576c45075d6aad83f7bf6f60a6aaa94248e935fdf7c"
     },
     {
       "file": "runtime/shared/v14Fail.js.in",
@@ -136,7 +136,7 @@
     },
     {
       "file": "runtime/shared/v14DnsFor.js.in",
-      "sha256": "53fa059396e04f160c8475d5326ab5909c480670c1b48760cc916efb872d4cca"
+      "sha256": "2d3cd45c016403aeffd45e66a1d7dcf3fbcc4a20844f66ba71b901141aa9eea9"
     },
     {
       "file": "runtime/shared/v14Strings.js.in",
@@ -192,7 +192,7 @@
     },
     {
       "file": "runtime/shared/main.js.in",
-      "sha256": "3e93dcb9f142050aa9b703df039bbd73a2fa2021e9e7d61a09e236cdbc454677"
+      "sha256": "15ef3feafa2e2a6e8b3fab187a8e275b7fc9cf2edcef591c4a2156703c31a18e"
     },
     {
       "file": "runtime/platforms/android/layout.json",
@@ -200,7 +200,7 @@
     },
     {
       "file": "runtime/platforms/android/preamble.js.in",
-      "sha256": "2adb3543f1e01fdb3def9ecb1754b6bff1c6dafc3313491d7481ffad1c125bc9"
+      "sha256": "891ae02950e6eacf433807de2965e6f01af72b1b77a4402555c6c9814bd08114"
     },
     {
       "file": "runtime/platforms/android/v14RuleRegistry.js.in",
@@ -239,9 +239,9 @@
     {
       "platform": "clashVerge",
       "file": "src/clash-verge/v14.3-clash-verge.js",
-      "sha256": "9498e0775dddf25faec6ef8d5669f768b009b9e6c92545b9cdd6a390c3386c99",
-      "bytes": 127989,
-      "generatedConfigBytes": 194515,
+      "sha256": "c81e7b553c5f12266be81bbe57923e609853d9f1ac04e1ae5b824be527111e6f",
+      "bytes": 127915,
+      "generatedConfigBytes": 181959,
       "inlineRows": 1098,
       "remoteSources": 30
     }

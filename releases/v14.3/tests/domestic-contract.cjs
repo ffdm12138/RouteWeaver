@@ -26,7 +26,7 @@ function expectedDNS(host,beforeRoute,beforeDNS){
  const group=addedServiceGroup(host);
  if(group)return [group];
  const old=beforeDNS(host);
- if(mediaDirect(host,beforeRoute))return ['DIRECT'];
+ if(mediaDirect(host,beforeRoute))return ['system'];
  return known(host,beforeRoute)&&old.groups.length===1&&old.groups[0]==='漏网之鱼'?['国内网站']:old.groups;
 }
 module.exports={known,mediaHost,mediaDirect,stunName,stunPort,addedServiceGroup,expectedRoute,expectedDNS};

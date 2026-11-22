@@ -8,8 +8,8 @@
 
 | 版本 | 本地入口 | GitHub 预发布 |
 |---|---|---|
-| 支持 IPv6 的主版 | [各客户端导入文件](releases/v14.3/README.md) | [主版 v14.3.0-rc.21](https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-rc.21) |
-| 纯 IPv4 版 | [各客户端导入文件](releases/v14.3-ipv4-only/README.md) | [纯 IPv4 v14.3.0-ipv4-only-rc.12](https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-ipv4-only-rc.12) |
+| 支持 IPv6 的主版 | [各客户端导入文件](releases/v14.3/README.md) | [主版 v14.3.0-rc.22](https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-rc.22) |
+| 纯 IPv4 版 | [各客户端导入文件](releases/v14.3-ipv4-only/README.md) | [纯 IPv4 v14.3.0-ipv4-only-rc.13](https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-ipv4-only-rc.13) |
 
 两条发布线的 JS 都支持三档原生故障转移。规则模式下在原组选择 A，再手选所需的三个备用，按 A → 1 → 2 → 3 选路。活动链探测间隔 3 秒，超时 3 秒。 [故障转移说明](docs/guides/故障转移.md)
 
@@ -32,6 +32,8 @@
 
 - [使用与维护文档](docs/README.md) · [需求](docs/需求.md) · [当前验收](docs/status/当前验收.md) · [变更记录](CHANGELOG.md)
 - [当前文件与发布记录](CURRENT_RELEASE.json) · [开源与发布流程](docs/maintenance/开源与发布.md)
+
+业务 DNS 沿用原业务组，使用阿里云和 DNSPod 的标准 DoH/443。DIRECT 拨号和明确直连域名使用设备系统 DNS。原版 Mihomo 配置解析已通过。 [迁移与回滚](docs/guides/业务DoH迁移.md)
 
 原装 Windows FlClash 0.9.4 和固定 ProjectClash 内核的隔离回放覆盖首次默认值、手选、订阅刷新及 TCP、UDP、DoH、DoT 选路。各端导入界面与 TUN/VPN 待实机验收。 [FlClash 回执](releases/v14.3/validation/proxy-failover/selector-option-order-r1.json) · [ProjectClash 回执](releases/v14.3/validation/projectclash-selector-option-order-r1.json)
 

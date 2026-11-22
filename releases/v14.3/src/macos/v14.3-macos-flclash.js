@@ -43,13 +43,13 @@ const V14 = Object.freeze({
   manualDirect: ["shiyi.click"],
   manualProxy: ["net.coffee", "browserleaks.com", "browserleaks.org", "dnsleaktest.com", "dnscheck.tools", "ipleak.net"],
   privateNames: ["localhost", "lan", "local", "localdomain", "home.arpa"],
-  directDns: ["https://dns.alidns.com/dns-query#DIRECT", "https://doh.pub/dns-query#DIRECT"],
+  directDns: ["system://"],
   nodeDns: [
     "https://223.5.5.5/dns-query#DIRECT",
     "https://223.6.6.6/dns-query#DIRECT",
   ],
   bootstrapDns: ["https://223.5.5.5/dns-query", "https://223.6.6.6/dns-query"],
-  groupDnsUrls: ["tls://dns.alidns.com:853", "tls://dot.pub:853"],
+  groupDnsUrls: ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"],
   apiRealDns: ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"],
 });
 
@@ -343,7 +343,7 @@ function v14Ipv6Literal(s) {
   return /^[0-9a-fA-F:.%]+$/.test(s.replace(/^\[/, "").replace(/\]$/, "")) && s.includes(":");
 }
 function v14Transport(p) { return !V14_NOT_NODES.has(String(p.type || "").toLowerCase()); }
-function v14DnsFor(group) { return V14.groupDnsUrls.map(url => url + "#" + group + "&disable-reuse=true"); }
+function v14DnsFor(group) { return V14.groupDnsUrls.map(url => url + "#" + group); }
 
 function v14Strings(xs, owner) {
   if (xs == null) return [];

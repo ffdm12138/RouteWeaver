@@ -56,7 +56,12 @@ function indexDNS(fixture){
    }
   }
   const servers=selected?selected.servers:ios?fixture.config.general['dns-server'].split(','):fixture.config.dns.nameserver;
-  return {key:selected?.key||'default',servers,groups:[...new Set(servers.map(s=>ios?decodeURIComponent(s.split('#proxy=')[1]?.split('&')[0]||'DIRECT'):s==='system'?s:decodeURIComponent(s.slice(s.lastIndexOf('#')+1).split('&')[0])))]};
+  const groups=servers.map(server=>{
+   if(ios)return decodeURIComponent(server.split('#proxy=')[1]?.split('&')[0]||'DIRECT');
+   if(server==='system'||server.startsWith('system://'))return 'system';
+   return decodeURIComponent(server.slice(server.lastIndexOf('#')+1).split('&')[0]);
+  });
+  return {key:selected?.key||'default',servers,groups:[...new Set(groups)]};
  };
 }
 module.exports={indexRoute,indexDNS};

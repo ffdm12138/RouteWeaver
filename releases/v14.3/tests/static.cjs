@@ -14,7 +14,7 @@ const reviewedChanges=read('data/rules/company-supplement.json').additions;
 function revisedCompany(host){return domestic.addedServiceGroup(host)||reviewedChanges.find(a=>{const[k,h]=f.split(a.row);return host===h||k==='DOMAIN-SUFFIX'&&host.endsWith('.'+h);})?.group;}
 const tailscaleDNS=host=>{
  if(host==='ts.net'||host.endsWith('.ts.net'))return 'system';
- if(host==='tailscale.com'||host.endsWith('.tailscale.com'))return 'DIRECT';
+ if(host==='tailscale.com'||host.endsWith('.tailscale.com'))return 'system';
 };
 const baselineRoute=(host,protocol='TCP',supported=true)=>{if(tailscaleDNS(host))return {group:'DIRECT',policy:'DIRECT'};const group=revisedCompany(host);return group?{group,policy:protocol==='UDP'&&!supported?'REJECT':group}:originalRoute(host,protocol,supported);};
 const baselineDNS=host=>{const group=tailscaleDNS(host)||revisedCompany(host);return group?{groups:[group]}:originalDNS(host);};
@@ -31,7 +31,22 @@ function empty(model,only){return {...model,sources:new Map([...model.sources].m
 for(const platform of ['desktop','android','clashmi']){
  const model=f.load(platform),normal=index.indexRoute(model),dns=index.indexDNS(model),cold=empty(model),coldRoute=index.indexRoute(cold),coldDNS=index.indexDNS(cold),metrics={platform,fullInventoryHosts:hosts.size,normalRouting:0,normalDNS:0,criticalColdRouting:0,criticalColdDNS:0,existingCases:0};
  check(platform+':all-domain-inventories-full-remote-same-routing-and-DNS',()=>{const mismatches=[];for(const host of hosts){const a=domestic.expectedRoute(host,'TCP',true,baselineRoute),b=normal(host);if(a.group!==b.group&&mismatches.length<24)mismatches.push({host,expected:a.group,after:b.group,rule:b.rule,member:b.member});metrics.normalRouting++;const expectedDNS={groups:domestic.expectedDNS(host,baselineRoute,baselineDNS)},actualDNS=dns(host);if(JSON.stringify(expectedDNS.groups)!==JSON.stringify(actualDNS.groups)&&mismatches.length<24)mismatches.push({host,beforeDNS:expectedDNS.groups,afterDNS:actualDNS.groups,key:actualDNS.key});metrics.normalDNS++;}report.normalMismatches=(report.normalMismatches||[]).concat(mismatches.map(x=>({platform,...x})));assert.deepEqual(mismatches,[]);});
- check(platform+':existing-business-UDP-IPv6-and-explicit-DIRECT-cases',()=>{for(const test of cases){const expected=test.policyByPlatform?.[platform==='clashmi'?'android':platform]||test.policy;assert.equal(f.route(model,test.flow,test.options).policy,expected,test.name);const dg=test.dnsGroupByPlatform?.[platform==='clashmi'?'android':platform]||test.dnsGroup;if(test.flow.host&&dg&&dg!=='REJECT')assert.deepEqual(f.dnsPolicyFor(model,test.flow.host).groups,[dg],test.name);metrics.existingCases++;}});
+ check(platform+':existing-business-UDP-IPv6-and-explicit-DIRECT-cases',()=>{
+  for(const test of cases){
+   const expected=test.policyByPlatform?.[platform==='clashmi'?'android':platform]||test.policy;
+   assert.equal(f.route(model,test.flow,test.options).policy,expected,test.name);
+   const dg=test.dnsGroupByPlatform?.[platform==='clashmi'?'android':platform]||test.dnsGroup;
+   if(test.flow.host&&dg&&dg!=='REJECT'){
+    const actual=f.dnsPolicyFor(model,test.flow.host);
+    if(dg==='DIRECT'){
+     const resolver=domestic.mediaHost(test.flow.host)
+      ? 'system://#disable-ipv6=true&disable-qtype-64=true&disable-qtype-65=true' : 'system://';
+     assert.deepEqual(actual.servers,[resolver],test.name);
+    }else assert.deepEqual(actual.groups,[dg],test.name);
+   }
+   metrics.existingCases++;
+  }
+ });
  const critical=new Set();
  for(const s of policy.services){for(const h of s.seeds){critical.add(h);critical.add('critical-probe.'+h);}for(const h of s.exact||[])critical.add(h);}
  for(const rows of Object.values(policy.core))for(const row of rows){const[k,h]=f.split(row);if(k==='DOMAIN'||k==='DOMAIN-SUFFIX'){critical.add(h);if(k==='DOMAIN-SUFFIX')critical.add('critical-probe.'+h);}}
@@ -39,7 +54,7 @@ for(const platform of ['desktop','android','clashmi']){
  check(platform+':critical-domains-with-all-remote-files-empty',()=>{const mismatches=[];for(const host of critical){for(const protocol of ['TCP','UDP'])for(const supported of [true,false]){const expected=domestic.expectedRoute(host,protocol,supported,baselineRoute),actual=coldRoute(host,protocol,supported);if(expected.policy!==actual.policy&&mismatches.length<24)mismatches.push({host,protocol,supported,before:expected.policy,after:actual.policy,rule:actual.rule});metrics.criticalColdRouting++;}const a={groups:domestic.expectedDNS(host,baselineRoute,baselineDNS)},b=coldDNS(host);if(JSON.stringify(a.groups)!==JSON.stringify(b.groups)&&mismatches.length<24)mismatches.push({host,beforeDNS:a.groups,afterDNS:b.groups,key:b.key});metrics.criticalColdDNS++;}report.coldMismatches=(report.coldMismatches||[]).concat(mismatches.map(x=>({platform,...x})));assert.deepEqual(mismatches,[]);});
  check(platform+':business-table-loss-does-not-expose-domestic-DIRECT-on-critical-hosts',()=>{const missing=new Set(lock.sources.filter(s=>s.id.startsWith('v12r-domain-')&&!['cn','private','category-doh','douyin','apple_at_cn','google_at_cn','microsoft_at_cn','steam_at_cn'].includes(s.id.slice(12))).map(s=>s.id)),partial=empty(model,missing),route=index.indexRoute(partial);for(const host of critical){const expected=baselineRoute(host);if(!['DIRECT','国内网站','漏网之鱼','REJECT'].includes(expected.group))assert.equal(route(host).group,expected.group,host);}});
  // The native-fallback suite compares selector changes against the same base.
- check(platform+':same-transport-DNS-upstreams-and-inbound-config',()=>{
+ check(platform+':standard-DoH-upstreams-and-same-inbound-config',()=>{
   const before=old.generate(platform==='desktop'?'desktop':'android'),after=f.generate(platform);
   assert.equal(after['routeweaver-local-family'],'auto');
   assert.equal(after['find-process-mode'],platform==='clashmi'?'off':'strict');
@@ -50,6 +65,7 @@ for(const platform of ['desktop','android','clashmi']){
   if(platform==='clashmi'){for(const k of ['tun','extension','interface-name','routing-mark','find-process-mode','allow-lan','bind-address']){delete before[k];delete after[k];}delete before.dns.listen;delete after.dns.listen;before.android=false;delete before.android;delete after.android;}
   before.dns['direct-nameserver']=['system'];
   before.dns['direct-nameserver-follow-policy']=false;
+  before.dns.nameserver=['https://dns.alidns.com/dns-query#漏网之鱼','https://doh.pub/dns-query#漏网之鱼'];
   assert.deepEqual(after,before);
  });
  check(platform+':three-pass-idempotence-and-upgrade-from-full-V14.2',()=>{const now=f.generate(platform);assert.deepEqual(f.generate(platform,now),now);assert.deepEqual(f.generate(platform,f.generate(platform,now)),now);const previous=old.generate(platform==='desktop'?'desktop':'android');assert.deepEqual(f.generate(platform,previous),now);});

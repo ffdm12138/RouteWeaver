@@ -13,27 +13,27 @@
     {
       "platform": "windows",
       "file": "src/windows/v14.3-windows-flclash.js",
-      "sha256": "0ddd35ba7f730b9a2f54c5ef3295cfdbf50eb192394d1434aa814f27980a9561",
-      "bytes": 126051,
-      "generatedConfigBytes": 193937,
+      "sha256": "8ec99ae1b0f0673c21f9cae0105fe4efcb9bffb27852d3696dab51389148433b",
+      "bytes": 125977,
+      "generatedConfigBytes": 181381,
       "inlineRows": 1098,
       "remoteSources": 30
     },
     {
       "platform": "android",
       "file": "src/android/v14.3-android-flclash.js",
-      "sha256": "f580ea319d9349da2667cb16f8fe3bc1083fb739c64f126e9f48829f77263cb7",
-      "bytes": 125610,
-      "generatedConfigBytes": 193589,
+      "sha256": "ed585481413632dee2a0c94d3ffb4485e0d17c1648c9a3a8923bbe126c11678c",
+      "bytes": 125536,
+      "generatedConfigBytes": 181033,
       "inlineRows": 1098,
       "remoteSources": 29
     },
     {
       "platform": "clashmi",
       "file": "src/ios/v14.3-clashmi-domestic-protocol-r1.js",
-      "sha256": "64bb4c6b19d65e5e8a9e665d292a5d11344d22958c12ddc3438e0c5f1800d285",
-      "bytes": 127920,
-      "generatedConfigBytes": 194514,
+      "sha256": "0a8dee7ee44f33c7c2de0b11369e1d8f3ff02b371ec07701fa31a349903d5717",
+      "bytes": 127846,
+      "generatedConfigBytes": 181958,
       "inlineRows": 1098,
       "remoteSources": 29
     }
@@ -152,7 +152,7 @@
     },
     {
       "file": "runtime/platforms/desktop/preamble.js.in",
-      "sha256": "d74ea0b981c56f06a5ab5f27a437ed4d7b964d23a94724f0fee2db7f9500ef6b"
+      "sha256": "350df69e632e771a1040e576c45075d6aad83f7bf6f60a6aaa94248e935fdf7c"
     },
     {
       "file": "runtime/shared/v14Fail.js.in",
@@ -184,7 +184,7 @@
     },
     {
       "file": "runtime/shared/v14DnsFor.js.in",
-      "sha256": "53fa059396e04f160c8475d5326ab5909c480670c1b48760cc916efb872d4cca"
+      "sha256": "2d3cd45c016403aeffd45e66a1d7dcf3fbcc4a20844f66ba71b901141aa9eea9"
     },
     {
       "file": "runtime/shared/v14Strings.js.in",
@@ -240,7 +240,7 @@
     },
     {
       "file": "runtime/shared/main.js.in",
-      "sha256": "3e93dcb9f142050aa9b703df039bbd73a2fa2021e9e7d61a09e236cdbc454677"
+      "sha256": "15ef3feafa2e2a6e8b3fab187a8e275b7fc9cf2edcef591c4a2156703c31a18e"
     },
     {
       "file": "runtime/platforms/android/layout.json",
@@ -248,7 +248,7 @@
     },
     {
       "file": "runtime/platforms/android/preamble.js.in",
-      "sha256": "2adb3543f1e01fdb3def9ecb1754b6bff1c6dafc3313491d7481ffad1c125bc9"
+      "sha256": "891ae02950e6eacf433807de2965e6f01af72b1b77a4402555c6c9814bd08114"
     },
     {
       "file": "runtime/platforms/android/v14RuleRegistry.js.in",

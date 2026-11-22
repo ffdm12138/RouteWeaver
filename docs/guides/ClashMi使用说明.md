@@ -45,9 +45,11 @@ ipv6: true
 dns:
   enable: true
   ipv6: true
+  direct-nameserver: [system]
+  direct-nameserver-follow-policy: false
   nameserver:
-    - tls://dns.alidns.com:853#漏网之鱼&disable-reuse=true
-    - tls://dot.pub:853#漏网之鱼&disable-reuse=true
+    - 'https://dns.alidns.com/dns-query#漏网之鱼'
+    - 'https://doh.pub/dns-query#漏网之鱼'
   fallback: []
 tun:
   enable: true

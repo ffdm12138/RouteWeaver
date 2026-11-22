@@ -94,8 +94,10 @@ function checkMihomo(file, platform, mode) {
   const dnsPolicy = config.dns['nameserver-policy'];
   assert.deepEqual(dnsPolicy['+.ts.net'], ['system']);
   assert.ok(config.dns['fake-ip-filter'].includes('+.ts.net'));
-  assert.deepEqual(dnsPolicy['+.tailscale.com'].map(server => server.split('#')[0]), dnsServers);
-  assert.ok(dnsPolicy['+.tailscale.com'].every(server => server.split('#')[1].split('&')[0] === 'DIRECT'));
+  const system = ipv4Only || mode === 'ipv4-local'
+    ? 'system://#disable-ipv6=true&disable-qtype-64=true&disable-qtype-65=true'
+    : 'system://';
+  assert.deepEqual(dnsPolicy['+.tailscale.com'], [system]);
 
   // Suppress remote classifiers to check coverage without a provider download.
   const sources = new Map(Object.entries(config['rule-providers']).map(([name, provider]) => [

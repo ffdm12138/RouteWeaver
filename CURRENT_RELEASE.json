@@ -83,7 +83,7 @@
   "macosReport": "docs/reports/v14.3/MacBook适配.md",
   "macos": "CURRENT_SOURCE_AND_ISOLATED_CHECKS_SEPARATE_DEVICE_NOT_RUN",
   "distribution": "public",
-  "releaseTag": "v14.3.0-rc.21",
+  "releaseTag": "v14.3.0-rc.22",
   "personalRulesIncluded": false,
   "networkCompatibilityRevision": "ipv6-fallback-r2",
   "networkCompatibility": "releases/v14.3/metadata/network-compat-delivery.json",
@@ -136,14 +136,14 @@
       "wholeDeviceIPv4Requires": "APP_OS_IPV6_BLOCK_AND_IPV4_SYSTEM_DNS",
       "shadowrocket": "NODE_IPV4_PINNING_REQUIRED_NATIVE_NOT_RUN",
       "priorReleasesPreserved": 6,
-      "publicReleaseTag": "v14.3.0-ipv4-only-rc.12",
-      "publicReleaseURL": "https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-ipv4-only-rc.12",
-      "publicReleaseStatus": "PUBLISHED_PRE_RELEASE_DEVICE_NOT_RUN",
+      "publicReleaseTag": "v14.3.0-ipv4-only-rc.13",
+      "publicReleaseURL": "https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-ipv4-only-rc.13",
+      "publicReleaseStatus": "PRERELEASE_PUBLICATION_PENDING",
       "publicReleaseAssets": 9,
-      "publicReleaseCommit": "abefc00df04c6161004a70b8d119b501632058a4",
-      "publicationManifest": "harness/releases/v14.3.0-ipv4-only-rc.12.json",
-      "publicReleaseCI": "https://github.com/ffdm12138/RouteWeaver/actions/runs/44986596583",
-      "publicReleaseRemoteSHA256": "ALL_9_ANONYMOUS_DOWNLOADS_MATCH"
+      "publicReleaseCommit": null,
+      "publicationManifest": "harness/releases/v14.3.0-ipv4-only-rc.13.json",
+      "publicReleaseCI": null,
+      "publicReleaseRemoteSHA256": null
     }
   },
   "nativeEvidenceSnapshot": "validation/inputs/api-doh-before/manifest.json",
@@ -242,7 +242,27 @@
       "publicReleaseRemoteSHA256": "ALL_15_ANONYMOUS_DOWNLOADS_MATCH"
     }
   },
-  "currentRevision": "selector-option-order-r1",
+  "currentRevision": "standard-business-doh-r1",
+  "standardBusinessDoh": {
+    "proxyResolvers": [
+      "https://dns.alidns.com/dns-query",
+      "https://doh.pub/dns-query"
+    ],
+    "upstreamSelection": "MIHOMO_NATIVE_LIST_MAY_QUERY_CONCURRENTLY",
+    "proxyBinding": "EXISTING_BUSINESS_GROUPS",
+    "directResolvers": "SYSTEM",
+    "coreRequirement": "STANDARD_MIHOMO_HTTPS_DNS",
+    "verification": "releases/v14.3/validation/standard-business-doh-r1.json",
+    "releaseTags": {
+      "main": "v14.3.0-rc.22",
+      "ipv4-only": "v14.3.0-ipv4-only-rc.13"
+    },
+    "rollbackTags": {
+      "main": "v14.3.0-rc.21",
+      "ipv4-only": "v14.3.0-ipv4-only-rc.12"
+    },
+    "deviceAcceptance": "NOT_RUN"
+  },
   "directSystemDns": {
     "releaseTags": {
       "main": "v14.3.0-rc.20",
@@ -278,9 +298,9 @@
     "crossPlatformAudit": "docs/reports/v14.3/两轨七端复审与微信媒体链路.md",
     "deviceAcceptance": "NOT_RUN"
   },
-  "publicReleaseTag": "v14.3.0-rc.21",
-  "publicReleaseURL": "https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-rc.21",
-  "publicReleaseStatus": "PUBLISHED_PRE_RELEASE_DEVICE_NOT_RUN",
+  "publicReleaseTag": "v14.3.0-rc.22",
+  "publicReleaseURL": "https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-rc.22",
+  "publicReleaseStatus": "PRERELEASE_PUBLICATION_PENDING",
   "publicReleaseAssets": 9,
   "embeddedDomesticExactHosts": 11,
   "cloudRuleAudit": {
@@ -299,8 +319,8 @@
   },
   "historicalEmbeddedDomainRows": 309,
   "embeddedCompanyRows": 482,
-  "publicReleaseCommit": "abefc00df04c6161004a70b8d119b501632058a4",
-  "publicationManifest": "harness/releases/v14.3.0-rc.21.json",
-  "publicReleaseCI": "https://github.com/ffdm12138/RouteWeaver/actions/runs/44986587645",
-  "publicReleaseRemoteSHA256": "ALL_9_ANONYMOUS_DOWNLOADS_MATCH"
+  "publicReleaseCommit": null,
+  "publicationManifest": "harness/releases/v14.3.0-rc.22.json",
+  "publicReleaseCI": null,
+  "publicReleaseRemoteSHA256": null
 }

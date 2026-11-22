@@ -18,7 +18,7 @@ for(const entries of [release.entries,release.variants['ipv4-only'].entries])for
   assert.equal(actual.key,'api.openai.com');assert.ok(actual.servers.every(s=>s.startsWith('https://')&&s.includes('#OpenAI 服务')));
   // Reproduce the former insertion-order bug: the earlier company trie wins.
   const policy=config.dns['nameserver-policy'],value=policy['api.openai.com'];delete policy['api.openai.com'];policy['api.openai.com']=value;
-  assert.ok(index.indexDNS(model)('api.openai.com').servers.every(s=>s.startsWith('tls://')));
+  assert.notEqual(index.indexDNS(model)('api.openai.com').key,'api.openai.com');
   checks.push(file+':'+mode);
   }catch(error){failures.push({file,mode,key:actual.key,servers:actual.servers,error:error.message});}
  }

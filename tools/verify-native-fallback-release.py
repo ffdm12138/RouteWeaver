@@ -12,6 +12,7 @@ import subprocess
 import tempfile
 
 from current_audit import checked_path, read, sha
+from standard_business_doh import REVISION as DOH_REVISION, before_doh, verify_receipt
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -25,9 +26,9 @@ SELECTOR_ORDER_CHECKS = {
 }
 
 
-def entry_digest(path, previous_digest, system_dns=False):
+def entry_digest(path, previous_digest, system_dns=False, standard_doh=False):
     source = path.read_bytes()
-    previous = source
+    previous = before_doh(source) if standard_doh and path.suffix == '.js' else source
     if system_dns:
         # Check the old receipt against the original bytes reconstructed by
         # undoing exactly the DIRECT DNS edit. Its device scope stays historical.
@@ -50,7 +51,7 @@ def entry_digest(path, previous_digest, system_dns=False):
     return sha256(source).hexdigest()
 
 
-def projectclash_assets(root, candidate, edition, system_dns=False, selector_order=False):
+def projectclash_assets(root, candidate, edition, system_dns=False, selector_order=False, standard_doh=False):
     receipt = read(checked_path(root, candidate['verification']))
     if (receipt['status'] != 'PASS_ISOLATED_PROJECTCLASH_CORE' or receipt['edition'] != edition
             or receipt['revision'] != candidate['revision'] or receipt['core']['commit'] != candidate['reviewedCoreCommit']):
@@ -77,7 +78,7 @@ def projectclash_assets(root, candidate, edition, system_dns=False, selector_ord
         proof = receipt['tracks'][track]
         if proof['file'] != file or not required.issubset(proof['checks']):
             raise ValueError('Stale or incomplete ProjectClash evidence: ' + file)
-        assets[track] = (source, entry_digest(source, proof['sha256'], system_dns))
+        assets[track] = (source, entry_digest(source, proof['sha256'], system_dns, standard_doh))
     if set(assets) != {'main', 'ipv4-only'}:
         raise ValueError('Expected one ProjectClash entry per track')
     return assets
@@ -88,16 +89,21 @@ def verify_source(root):
     candidate = release['nativeFallback']
     revision = release.get('currentRevision')
     system_dns = revision == 'direct-system-dns-r1'
-    selector_order = revision == 'selector-option-order-r1'
+    standard_doh = revision == DOH_REVISION
+    selector_order = revision == 'selector-option-order-r1' or standard_doh
     receipt = read(checked_path(root, candidate['verification']))
     edition = 'personal' if release.get('vpsDirectRevision') else 'public'
+    if standard_doh:
+        verify_receipt(root, release, edition)
     if (receipt['revision'] != candidate['revision'] or receipt['edition'] != edition
             or receipt['status'] != 'PASS_ISOLATED_STOCK_CORE'):
         raise ValueError('Missing or incompatible native fallback evidence')
 
     tracks = {'main': release['entries'], 'ipv4-only': release['variants']['ipv4-only']['entries']}
-    projectclash = projectclash_assets(root, release['projectClash'], edition, system_dns, selector_order)
+    projectclash = projectclash_assets(root, release['projectClash'], edition, system_dns, selector_order, standard_doh)
     tags = release['directSystemDns']['releaseTags'] if system_dns else candidate['releaseTags']
+    if standard_doh:
+        tags = release['standardBusinessDoh']['releaseTags']
     if tags is not None and (set(tags) != set(tracks) or len(set(tags.values())) != 2):
         raise ValueError('Expected two distinct track tags')
     assets = {}
@@ -113,7 +119,7 @@ def verify_source(root):
                 raise ValueError('Stale entry evidence: ' + file)
             if path.suffix == '.js' and proof['coreChecks'] != len(receipt['checks']):
                 raise ValueError('Incomplete core replay: ' + file)
-            files[path.name] = (path, entry_digest(path, proof['sourceSHA256'], system_dns))
+            files[path.name] = (path, entry_digest(path, proof['sourceSHA256'], system_dns, standard_doh))
         if len(files) != 7:
             raise ValueError('Duplicate asset basename')
         path, digest = projectclash[track]
@@ -187,6 +193,8 @@ def verify_static():
                     ['node', 'tools/test-native-fallback.cjs'], ['node', 'tools/test-tailscale-direct.cjs'],
                     ['node', 'tools/test-company-audit.cjs'], ['node', 'tools/test-dns-policy-order.cjs'],
                     *suites['regression'], *suites['platform']]
+        if read(snapshot / 'CURRENT_RELEASE.json').get('currentRevision') == DOH_REVISION:
+            commands.append(['python', '-B', 'tools/standard_business_doh.py'])
         for command in commands:
             subprocess.run(command, cwd=snapshot, check=True, timeout=90)
         subprocess.run(['node', 'tools/test-domestic-resilience.cjs'], cwd=snapshot, check=True, timeout=900)

@@ -299,8 +299,7 @@ function main(input) {
     if (V14_REVIEWED_DOMAINS[tag]) dnsPolicy["rule-set:" + embeddedDomainSet(tag)] = v14DnsFor(domesticPolicy);
     dnsPolicy["rule-set:" + ruleSet("domain", tag)] = v14DnsFor(domesticPolicy);
   }
-  // OpenAI's real-answer API still uses its group's egress. Resolve it over
-  // DoH/443 because some carriers and nodes block the shared DoT/853 policy.
+  // Keep the exact real-answer API policy ahead of broader provider matches.
   const oldDns = v14Object(config.dns) ? config.dns : {};
   config.dns = Object.assign({}, oldDns, {
     enable: true, ipv6: true, "enhanced-mode": "fake-ip", "fake-ip-range": "198.18.0.1/16",

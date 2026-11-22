@@ -128,9 +128,8 @@ for (const entry of entries) {
       const pattern = '+.' + domain;
       assert.equal(config.dns['fake-ip-filter'].filter(x => x === pattern).length, 1);
       assert.equal(config.sniffer['skip-domain'].filter(x => x === pattern).length, 1);
-      assert.ok(config.dns['nameserver-policy'][pattern].every(server =>
-        /^https:\/\//.test(server) && server.includes('#DIRECT&') &&
-        ['disable-ipv6', 'disable-qtype-64', 'disable-qtype-65'].every(flag => server.includes(flag + '=true'))));
+      assert.deepEqual(config.dns['nameserver-policy'][pattern],
+        ['system://#disable-ipv6=true&disable-qtype-64=true&disable-qtype-65=true']);
     }
     const processRules = rules.filter(rule => rule.includes('(PROCESS-NAME,'));
     assert.deepEqual(processRules, (mediaProcessNames[entry.client] || []).map(name =>
@@ -146,7 +145,8 @@ for (const entry of entries) {
     const dnsPolicyFor = indexDNS(model);
     for (const host of hosts) {
       const group = mediaHost(host) ? 'DIRECT' : '国内网站';
-      check(label + ':dns:' + host, () => assert.deepEqual(dnsPolicyFor(host).groups, [group]));
+      const dnsGroup = group === 'DIRECT' && platform !== 'shadowrocket' ? 'system' : group;
+      check(label + ':dns:' + host, () => assert.deepEqual(dnsPolicyFor(host).groups, [dnsGroup]));
       for (const protocol of ['TCP', 'UDP']) {
         check(label + ':' + protocol + ':' + host, () => {
           for (const choice of ['DIRECT', '高纯净度AI用', '高网速视频用', 'Synthetic']) {
