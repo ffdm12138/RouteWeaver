@@ -19,9 +19,10 @@ const review = read('releases/v14.3/data/rules/domestic-resilience.json');
 const newDomain = '19212021.xyz';
 assert.ok(review.authorizedSuffixes.includes(newDomain));
 const authorizedHosts = new Set(review.authorizedSuffixes.flatMap(h => [h, 'edge.' + h, 'nested.edge.' + h]));
+const manualLabels = new Map([['DIRECT', '直连 direct'], ['REJECT', '拒绝 reject']]);
 const businessDefaults = {
   DIRECT: ['国内网站', 'Steam', 'Epic Games', '苹果国际', '哔哩国际'],
-  '高网速视频用': ['Telegram', 'TikTok', 'Twitter', 'Discord', 'Netflix', 'Disney+', 'Spotify'],
+  '高网速视频用': ['YouTube', 'Telegram', 'TikTok', 'Twitter', 'Discord', 'Netflix', 'Disney+', 'Spotify'],
   '高纯净度AI用': ['公共基础服务', '漏网之鱼', 'OpenAI 服务', 'Anthropic 服务', '谷歌服务', '微软生态',
     'OpenRouter', 'Perplexity', 'Hugging Face', 'xAI', 'Meta 服务'],
 };
@@ -94,15 +95,24 @@ for (const entry of entries) {
     for (const [preferred, names] of Object.entries({...businessDefaults, REJECT: ['高纯净度AI用', '高网速视频用']})) {
       for (const name of names) {
         const group = groups.get(name);
-        const direct = preferred === 'DIRECT';
+        const selected = manualLabels.get(preferred) || preferred;
         if (platform === 'shadowrocket') {
-          assert.ok(group.includes('policy-select-name=' + preferred) && group.includes(preferred), name);
-          assert.equal(group[1], direct ? 'REJECT' : preferred, name);
+          assert.ok(group.includes('policy-select-name=' + selected) && group.includes(selected), name);
         } else {
-          assert.equal(group['default-selected'], preferred, name);
-          assert.ok(group.proxies.includes(preferred), name);
+          assert.equal(group['default-selected'], selected, name);
+          assert.ok(group.proxies.includes(selected), name);
           assert.equal(group['empty-fallback'], 'REJECT', name);
-          if (direct) assert.match(group.proxies[0], /^主节点缺失 · 已选备用/, name);
+        }
+        const publicGroup = preferred === 'REJECT';
+        const options = publicGroup ? ['直连 direct'] : ['高纯净度AI用', '高网速视频用', '直连 direct'];
+        if (platform === 'shadowrocket') {
+          if (preferred === 'DIRECT' || publicGroup) options.unshift('拒绝 reject');
+          else options.push('拒绝 reject');
+          assert.deepEqual(group.slice(1, 1 + options.length), options, name);
+        } else {
+          options.unshift('主节点缺失 · 已选备用');
+          options.push('拒绝 reject', 'Synthetic ↻');
+          assert.deepEqual(group.proxies, options, name);
         }
       }
     }
@@ -176,7 +186,7 @@ for (const entry of entries) {
       check(label + ':stun-dns:' + host, () => assert.deepEqual(dnsPolicyFor(host).groups, ['漏网之鱼']));
   }
 }
-const result = {revision: 'domestic-policy-defaults-r1', scope: 'OFFLINE_MODELS_NOT_DEVICE_ACCEPTANCE',
+const result = {revision: 'selector-option-order-r1', scope: 'OFFLINE_MODELS_NOT_DEVICE_ACCEPTANCE',
   edition: release.vpsDirectRevision ? 'personal' : 'public', status: failures.length ? 'FAIL' : 'PASS',
   checks, failed: failures.length, stages: counts, sources, sizes,
   testSHA256: hash(__filename), dataSHA256: hash(path.join(releaseRoot, 'data/rules/domestic-resilience.json')),

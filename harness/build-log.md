@@ -186,3 +186,7 @@ Windows FlClash 主版与纯 IPv4 入口增加可选原生描述。两种口味�
 ProjectClash 主版和纯 IPv4 版从当前共享规则生成，覆盖 iPhone、iPad、Mac 和 Apple TV。固定内核回环测试每份脚本通过 66 项，包含 TCP、UDP、DoH、DoT、三档切换及订阅刷新后的历史选择恢复。Apple App 和 VPN 接管待实机验收。 [导入说明](../docs/guides/ProjectClash使用说明.md) · [内核回执](../releases/v14.3/validation/projectclash-r1.json)
 
 公开主版 v14.3.0-rc.19 与纯 IPv4 版 v14.3.0-ipv4-only-rc.10 绑定 `af31a759921281410e1545a3d066066718dce563`。Windows、Ubuntu 的源码和发布 CI 以及 macOS JavaScriptCore 检查均通过。18 个附件的匿名下载与发布 SHA-256 相符。 [主版发布回执](releases/v14.3.0-rc.19.json) · [纯 IPv4 发布回执](releases/v14.3.0-ipv4-only-rc.10.json)
+
+## 2026-11-22 · 策略组选项、手动直连与拒绝
+
+两轨业务组统一使用固定候选顺序，显示「直连 direct」和「拒绝 reject」。既有默认出口与路由规则继续沿用。「漏网之鱼」和两个公共组提供手动直连。包含实际 TCP、UDP、DoH、DoT 的公开版隔离回放覆盖 12 份 FlClash/Mihomo JS 和 2 份 ProjectClash JS，每份通过 71 项。无手选记录时，原先默认直连的组在隔离重载后仍走内建 DIRECT。Shadowrocket 完成配置和分流模型检查，Apple App 与 VPN 接管待验收。 [FlClash 回执](../releases/v14.3/validation/proxy-failover/selector-option-order-r1.json) · [ProjectClash 回执](../releases/v14.3/validation/projectclash-selector-option-order-r1.json)

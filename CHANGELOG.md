@@ -1,3 +1,9 @@
+## v14.3.0-rc.21 / v14.3.0-ipv4-only-rc.12 · 策略组选项顺序
+
+- 业务组统一按「主节点缺失 · 已选备用 → 高纯净度AI用 → 高网速视频用 → 直连 direct → 拒绝 reject」排列，随后列出节点。
+- 「漏网之鱼」和两个公共组支持手动 DIRECT。海外用户可以让「国内网站」走代理，由「漏网之鱼」直连其覆盖的流量。
+- 首次导入沿用既有默认值。自动选择与三档备用只使用可用代理节点及原有跳过或拒绝项。 [使用说明](docs/guides/使用说明.md)
+
 ## v14.3.0-rc.19 / v14.3.0-ipv4-only-rc.10 · ProjectClash
 
 - 新增 iPhone、iPad、Mac 和 Apple TV 可共用的 ProjectClash 覆写。两轨继承 YouTube 播放与 Ubuntu APT 分流、微信媒体、Tailscale、业务 DNS 和三档故障转移。

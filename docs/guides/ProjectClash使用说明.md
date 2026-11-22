@@ -21,7 +21,7 @@
 - 主版默认按双栈策略工作，保留 HTTP、TLS 和 QUIC 域名恢复。只有 IPv4 的本地网络可在导入前把脚本顶部的 `ROUTEWEAVER_DEFAULT_NETWORK_MODE` 改成 `ipv4-local`，过滤业务 DNS 的 AAAA、SVCB 和 HTTPS 记录。ProjectClash 的 NetworkExtension 自行决定设备 IPv6 路由。
 - 纯 IPv4 版限制内核本机直连、DNS 和节点拨号使用 IPv4，并拒绝进入内核的 IPv6 流量。Apple TV 的 IP Stack 设置应跟随配置，设备级 IPv6 防旁路仍取决于 App/VPN 和网络。局域网的 `system` DNS 使用系统设置。 [纯 IPv4 说明](../../releases/v14.3-ipv4-only/README.md)
 - macOS 内核支持按进程识别微信和 Tailscale。iPhone、iPad 和 Apple TV 走相同的域名与 IP 规则。 [上游内核能力](https://clash.md/zh/core)
-- 固定 ProjectClash 内核已在隔离回环中验证 TCP、UDP、DoH、DoT 和订阅刷新后的三档回退。Apple App 导入、VPN 接管与真实流量待实机验收。 [回执](../../releases/v14.3/validation/projectclash-r1.json)
+- 固定 ProjectClash 内核已在隔离回环中验证 TCP、UDP、DoH、DoT 和订阅刷新后的三档回退。Apple App 导入、VPN 接管与真实流量待实机验收。 [回执](../../releases/v14.3/validation/projectclash-selector-option-order-r1.json)
 
 更改共享策略后，依次重新生成主版、纯 IPv4 版和 ProjectClash 入口，再回放 ProjectClash 规则。命令在仓库根执行。
 

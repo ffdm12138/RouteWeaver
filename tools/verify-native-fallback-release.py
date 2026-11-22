@@ -16,6 +16,13 @@ from current_audit import checked_path, read, sha
 
 ROOT = Path(__file__).resolve().parents[1]
 SUMS = 'SHA256SUMS.txt'
+SELECTOR_ORDER_CHECKS = {
+    'selector_order_and_fresh_defaults',
+    'selector_order_after_manual_choice',
+    'selector_order_and_saved_choices_after_node_removal',
+    'public_manual_DIRECT_tcp_udp_dns',
+    'catchall_manual_DIRECT_while_domestic_proxies_tcp_udp_dns',
+}
 
 
 def entry_digest(path, previous_digest, system_dns=False):
@@ -43,7 +50,7 @@ def entry_digest(path, previous_digest, system_dns=False):
     return sha256(source).hexdigest()
 
 
-def projectclash_assets(root, candidate, edition, system_dns=False):
+def projectclash_assets(root, candidate, edition, system_dns=False, selector_order=False):
     receipt = read(checked_path(root, candidate['verification']))
     if (receipt['status'] != 'PASS_ISOLATED_PROJECTCLASH_CORE' or receipt['edition'] != edition
             or receipt['revision'] != candidate['revision'] or receipt['core']['commit'] != candidate['reviewedCoreCommit']):
@@ -62,6 +69,8 @@ def projectclash_assets(root, candidate, edition, system_dns=False):
         'reload_removed_primary_and_all_backups_rejects',
         'openai_mode_correct_encrypted_dns_selected_group',
     }
+    if selector_order:
+        required.update(SELECTOR_ORDER_CHECKS)
     assets = {}
     for track, file in candidate['entries'].items():
         source = checked_path(root, file)
@@ -79,6 +88,7 @@ def verify_source(root):
     candidate = release['nativeFallback']
     revision = release.get('currentRevision')
     system_dns = revision == 'direct-system-dns-r1'
+    selector_order = revision == 'selector-option-order-r1'
     receipt = read(checked_path(root, candidate['verification']))
     edition = 'personal' if release.get('vpsDirectRevision') else 'public'
     if (receipt['revision'] != candidate['revision'] or receipt['edition'] != edition
@@ -86,7 +96,7 @@ def verify_source(root):
         raise ValueError('Missing or incompatible native fallback evidence')
 
     tracks = {'main': release['entries'], 'ipv4-only': release['variants']['ipv4-only']['entries']}
-    projectclash = projectclash_assets(root, release['projectClash'], edition, system_dns)
+    projectclash = projectclash_assets(root, release['projectClash'], edition, system_dns, selector_order)
     tags = release['directSystemDns']['releaseTags'] if system_dns else candidate['releaseTags']
     if tags is not None and (set(tags) != set(tracks) or len(set(tags.values())) != 2):
         raise ValueError('Expected two distinct track tags')
@@ -128,7 +138,9 @@ def verify_source(root):
         }
         if not required.issubset(receipt['checks']):
             raise ValueError('Missing backup-slot skip replay')
-    if revision in ('youtube-apt-routing-r1', 'direct-system-dns-r1'):
+    if selector_order and not SELECTOR_ORDER_CHECKS.issubset(receipt['checks']):
+        raise ValueError('Missing selector order, default or saved choice replay')
+    if selector_order or revision in ('youtube-apt-routing-r1', 'direct-system-dns-r1'):
         required = {
             'video_egress_tcp_udp_dns:rr4---sn-oguelnsr.googlevideo.com',
             'video_egress_tcp_udp_dns:archive.ubuntu.com',

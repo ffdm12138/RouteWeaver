@@ -85,6 +85,8 @@ class ProjectCore:
             return {}
         if method == 'listener.start':
             return self.ready()
+        if method == 'proxy.list':
+            return self.request('/proxies')
         if method == 'proxy.select':
             route = '/proxies/' + urllib.parse.quote(arguments['group-name'], safe='')
             return self.request(route, 'PUT', {'name': arguments['proxy-name']})

@@ -76,7 +76,7 @@
     },
     {
       "file": "runtime/shared/v14NativeFallback.js.in",
-      "sha256": "5478831b4798915f428c5911ad8cd82de1f38a848084832db233478d1756d15a"
+      "sha256": "e5cf53ddda9a581565a8e934873a6d43e8683e30179806e3940cc7773407a33f"
     },
     {
       "file": "runtime/shared/v14Tailscale.js.in",
@@ -104,7 +104,7 @@
     },
     {
       "file": "runtime/platforms/desktop/preamble.js.in",
-      "sha256": "10d9921102f5047521ad792b15a37fa4535a6b66a69d7ffe8a713b57f620a161"
+      "sha256": "d74ea0b981c56f06a5ab5f27a437ed4d7b964d23a94724f0fee2db7f9500ef6b"
     },
     {
       "file": "runtime/shared/v14Fail.js.in",
@@ -192,7 +192,7 @@
     },
     {
       "file": "runtime/shared/main.js.in",
-      "sha256": "8994b556eb0a10b7307d59b596692d0d13b9ece8e369c082cccc6f348f271feb"
+      "sha256": "3e93dcb9f142050aa9b703df039bbd73a2fa2021e9e7d61a09e236cdbc454677"
     },
     {
       "file": "runtime/platforms/android/layout.json",
@@ -200,7 +200,7 @@
     },
     {
       "file": "runtime/platforms/android/preamble.js.in",
-      "sha256": "a5b46b60ec0e0aa32ebed4508ce14605f95cdbfd7d28c60d57b3cd240c24cc1f"
+      "sha256": "2adb3543f1e01fdb3def9ecb1754b6bff1c6dafc3313491d7481ffad1c125bc9"
     },
     {
       "file": "runtime/platforms/android/v14RuleRegistry.js.in",
@@ -208,7 +208,7 @@
     },
     {
       "file": "runtime/platforms/android/main.js.in",
-      "sha256": "611d6066d1b000bd432d9e9314ff2d231789f639384dc65ad9aa92b5d5422119"
+      "sha256": "519c20e231c8648d70ac77f78ded886833e40c5144bf9763ffca6cdbddabf7a9"
     },
     {
       "file": "tools/validate-azure-async.cjs",
@@ -239,9 +239,9 @@
     {
       "platform": "clashVerge",
       "file": "src/clash-verge/v14.3-clash-verge.js",
-      "sha256": "14aa003b413dfa6d728f4e63eeb73e0583bc0913309b6317ad54ebf473a2d3da",
-      "bytes": 127223,
-      "generatedConfigBytes": 193654,
+      "sha256": "9498e0775dddf25faec6ef8d5669f768b009b9e6c92545b9cdd6a390c3386c99",
+      "bytes": 127989,
+      "generatedConfigBytes": 194515,
       "inlineRows": 1098,
       "remoteSources": 30
     }

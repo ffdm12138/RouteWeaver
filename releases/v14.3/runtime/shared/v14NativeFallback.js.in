@@ -4,14 +4,11 @@ function v14NativeFallback(config, poolName, policies) {
   const byName = new Map(groups.map(group => [group.name, group]));
   const pool = byName.get(poolName);
   const marker = config["x-v14-generated"];
-  if (pool.use && pool.use.length) {
-    const warning = "本订阅由 proxy-providers 提供节点，沿用原分流，三档故障转移未启用。";
-    marker.validationWarnings.push(warning);
-    if (typeof console !== "undefined" && console.log) console.log("[V14] " + warning);
-    return;
+  const providers = config["proxy-providers"];
+  const occupied = new Set([...V14_BUILTINS, ...byName.keys(), ...config.proxies.map(node => node.name), ...Object.keys(providers)]);
+  for (const provider of Object.values(providers)) {
+    for (const node of provider.payload || []) occupied.add(node.name);
   }
-
-  const occupied = new Set([...V14_BUILTINS, ...byName.keys(), ...config.proxies.map(node => node.name)]);
   function addGroup(label, fields) {
     let name = label;
     for (let i = 1; occupied.has(name); i++) {
@@ -24,8 +21,28 @@ function v14NativeFallback(config, poolName, policies) {
     marker.groups.push(name);
     return name;
   }
+  const nodes = pool.proxies.filter(name => !V14_BUILTINS.has(name));
+  function addManual(label, target) {
+    return addGroup(label, {
+      type: "select", proxies: [target], hidden: true, "empty-fallback": "REJECT",
+    });
+  }
+  const reject = addManual("拒绝 reject", "REJECT");
+  const labels = new Map([["DIRECT", addManual("直连 direct", "DIRECT")], ["REJECT", reject]]);
+  for (const policy of policies) {
+    const group = byName.get(policy);
+    group.proxies = group.proxies.map(name => labels.get(name) || name);
+    group["default-selected"] = labels.get(group["default-selected"]) || group["default-selected"];
+  }
+  if (pool.use && pool.use.length) {
+    const warning = "本订阅由 proxy-providers 提供节点，沿用原分流，三档故障转移未启用。";
+    marker.validationWarnings.push(warning);
+    if (typeof console !== "undefined" && console.log) console.log("[V14] " + warning);
+    return;
+  }
+
   const manual = {
-    type: "select", proxies: pool.proxies.slice(), "default-selected": "REJECT", "empty-fallback": "REJECT",
+    type: "select", proxies: [reject, ...nodes], "default-selected": reject, "empty-fallback": "REJECT",
   };
   const backups = [1, 2, 3].map(slot => addGroup("故障转移" + slot, manual));
   function addFallback(label, members) {
@@ -36,7 +53,6 @@ function v14NativeFallback(config, poolName, policies) {
       "expected-status": 204, "empty-fallback": "REJECT",
     });
   }
-  const nodes = pool.proxies.filter(name => name !== "REJECT");
   const skips = [
     addFallback("跳过本档（1）", backups.slice(1)),
     addGroup("跳过本档（2）", {

@@ -925,20 +925,20 @@ function v14NetworkModeBase(input) {
   const rawNodeNames = selectable.map(p => p.name);
   const providerGroupFields = providerNames.length ? { use: providerNames.slice(), "exclude-filter": "(?i)^@v14-nontransport:|" + V14.infoPattern } : {};
   const groups = [];
-  groups.push({ name: groupName("高纯净度AI用"), type: "select", proxies: ["REJECT"].concat(rawNodeNames),
+  const publicOptions = providerNames.length ? ["REJECT", "DIRECT"] : ["DIRECT", "REJECT"];
+  groups.push({ name: groupName("高纯净度AI用"), type: "select", proxies: publicOptions.concat(rawNodeNames),
     ...providerGroupFields, "default-selected": "REJECT", "empty-fallback": "REJECT" });
   groups.push({ name: groupName("自动选择"), type: "url-test", proxies: rawNodeNames.slice(), ...providerGroupFields,
     url: V14.testUrl, interval: V14.testInterval, lazy: true, "empty-fallback": "REJECT" });
-  groups.push({name: groupName("高网速视频用"), type: "select", proxies: ["REJECT"].concat(rawNodeNames),
+  groups.push({name: groupName("高网速视频用"), type: "select", proxies: publicOptions.concat(rawNodeNames),
     ...providerGroupFields, "default-selected": "REJECT", "empty-fallback": "REJECT"});
   groups.sort((a,b) => logicalGroups.indexOf(Array.from(groupNames).find(([,name])=>name===a.name)[0]) - logicalGroups.indexOf(Array.from(groupNames).find(([,name])=>name===b.name)[0]));
   const business = logicalGroups.filter(name => !["高纯净度AI用", "高网速视频用", "自动选择"].includes(name));
   for (const logical of business) {
     const preferred = V14_SELECTOR_DEFAULTS[logical];
-    const choices = [groupName("高纯净度AI用"), groupName("高网速视频用")];
-    if (preferred === "高网速视频用") choices.reverse();
-    if (logical !== "漏网之鱼") choices.push("DIRECT");
-    if (preferred === "DIRECT") choices.unshift("REJECT"); // Reject an unavailable saved node before considering any direct option.
+    const choices = [groupName("高纯净度AI用"), groupName("高网速视频用"), "DIRECT"];
+    if (providerNames.length && preferred === "DIRECT") choices.unshift("REJECT");
+    else choices.push("REJECT");
     groups.push({ name: groupName(logical), type: "select", proxies: choices.concat(rawNodeNames), ...providerGroupFields,
       "default-selected": preferred === "DIRECT" ? preferred : groupName(preferred), "empty-fallback": "REJECT" });
   }
@@ -1116,9 +1116,9 @@ function v14NetworkModeBase(input) {
   }
   for (const logical of business) {
     const g = allGroups.get(groupName(logical));
-    if (!g.proxies.includes(groupName("高纯净度AI用")) ||
-        (logical === "漏网之鱼" ? g.proxies.includes("DIRECT") : !g.proxies.includes("DIRECT")))
-      v14Fail("业务组的 DIRECT 边界不正确：" + logical);
+    if (!g.proxies.includes(groupName("高纯净度AI用")) || !g.proxies.includes(groupName("高网速视频用")) ||
+        !g.proxies.includes("DIRECT") || !g.proxies.includes("REJECT"))
+      v14Fail("业务组缺少手动选项：" + logical);
     for (const ref of rawNodeNames) if (!g.proxies.includes(ref)) v14Fail("业务组缺少节点：" + logical + " -> " + ref);
     for (const ref of providerNames) if (!(g.use || []).includes(ref)) v14Fail("业务组缺少 provider：" + logical + " -> " + ref);
   }
@@ -1149,7 +1149,7 @@ function v14NetworkModeBase(input) {
     openIssues: ["device/browser DNS caches and application connection migration", "Windows/Android device TUN and IPv6 leak acceptance"],
     validationWarnings: v14Unique(warnings),
     releaseStatus: "offline-regression-tested-device-acceptance-pending" };
-  if (typeof console !== "undefined" && console.log) console.log("[V14 Android] " + selectable.length + " 个可用节点、" + providerNames.length + " 个 provider、" + business.length + " 个可选业务组；公司规则优先；未分类公网 UDP 不直连，国内 TCP 由国内网站组选择，默认 DIRECT。");
+  if (typeof console !== "undefined" && console.log) console.log("[V14 Android] " + selectable.length + " 个可用节点、" + providerNames.length + " 个 provider、" + business.length + " 个可选业务组；公司规则优先；未分类公网 UDP 跟随漏网之鱼，国内 TCP 由国内网站组选择，默认 DIRECT。");
   if (typeof console !== "undefined" && console.log) console.log("[V14 Android] " + ruleSources.length + " 个远程分类按 24h 更新；首次无缓存须可用节点。检查规则已加载，不要把生成成功当成下载成功。");
   if (typeof console !== "undefined" && console.log) for (const w of v14Unique(warnings)) console.log("[V14 检查范围] " + w);
   v14NativeFallback(config, groupName("高纯净度AI用"),
@@ -1164,14 +1164,11 @@ function v14NativeFallback(config, poolName, policies) {
   const byName = new Map(groups.map(group => [group.name, group]));
   const pool = byName.get(poolName);
   const marker = config["x-v14-generated"];
-  if (pool.use && pool.use.length) {
-    const warning = "本订阅由 proxy-providers 提供节点，沿用原分流，三档故障转移未启用。";
-    marker.validationWarnings.push(warning);
-    if (typeof console !== "undefined" && console.log) console.log("[V14] " + warning);
-    return;
+  const providers = config["proxy-providers"];
+  const occupied = new Set([...V14_BUILTINS, ...byName.keys(), ...config.proxies.map(node => node.name), ...Object.keys(providers)]);
+  for (const provider of Object.values(providers)) {
+    for (const node of provider.payload || []) occupied.add(node.name);
   }
-
-  const occupied = new Set([...V14_BUILTINS, ...byName.keys(), ...config.proxies.map(node => node.name)]);
   function addGroup(label, fields) {
     let name = label;
     for (let i = 1; occupied.has(name); i++) {
@@ -1184,8 +1181,28 @@ function v14NativeFallback(config, poolName, policies) {
     marker.groups.push(name);
     return name;
   }
+  const nodes = pool.proxies.filter(name => !V14_BUILTINS.has(name));
+  function addManual(label, target) {
+    return addGroup(label, {
+      type: "select", proxies: [target], hidden: true, "empty-fallback": "REJECT",
+    });
+  }
+  const reject = addManual("拒绝 reject", "REJECT");
+  const labels = new Map([["DIRECT", addManual("直连 direct", "DIRECT")], ["REJECT", reject]]);
+  for (const policy of policies) {
+    const group = byName.get(policy);
+    group.proxies = group.proxies.map(name => labels.get(name) || name);
+    group["default-selected"] = labels.get(group["default-selected"]) || group["default-selected"];
+  }
+  if (pool.use && pool.use.length) {
+    const warning = "本订阅由 proxy-providers 提供节点，沿用原分流，三档故障转移未启用。";
+    marker.validationWarnings.push(warning);
+    if (typeof console !== "undefined" && console.log) console.log("[V14] " + warning);
+    return;
+  }
+
   const manual = {
-    type: "select", proxies: pool.proxies.slice(), "default-selected": "REJECT", "empty-fallback": "REJECT",
+    type: "select", proxies: [reject, ...nodes], "default-selected": reject, "empty-fallback": "REJECT",
   };
   const backups = [1, 2, 3].map(slot => addGroup("故障转移" + slot, manual));
   function addFallback(label, members) {
@@ -1195,7 +1212,6 @@ function v14NativeFallback(config, poolName, policies) {
       "expected-status": 204, "empty-fallback": "REJECT",
     });
   }
-  const nodes = pool.proxies.filter(name => name !== "REJECT");
   const skips = [
     addFallback("跳过本档（1）", backups.slice(1)),
     addGroup("跳过本档（2）", {

@@ -131,14 +131,14 @@ for(const [key,value]of hosts){
  if(value.slice(7)===inherited)eliminated.push({key,parent});else outputHosts.push([key,value]);
 }
 const header=['# RouteWeaver v14.3 Shadowrocket',
- '# 保留订阅，选择「配置」路由和公共组节点。',
- '# IPv6 已启用，iOS VPN 和 DNS 待实机验证。'];
+ '# 保留订阅，选择「配置」路由和公共组节点。'];
 const general=section('General').map(row=>row
  .replace(/^direct-dns-server = .+$/, 'direct-dns-server = system')
  .replace(/^dns-direct-system = false$/, 'dns-direct-system = true'))
  .concat('always-real-ip = '+wechatPatterns.join(','));
+const manualLabels=new Map([['DIRECT','直连 direct'],['REJECT','拒绝 reject']]);
 const groupRows=section('Proxy Group').map(row=>row.replace(/\(\?i\)\^\(\?!\(\?:([^)]*)\)\$\)/,(_,names)=>{
- let reserved=names.split('|').concat('YouTube');
+ let reserved=names.split('|').concat('YouTube',...manualLabels.values());
  for(const suffix of ['服务','国际']){
   const matching=reserved.filter(name=>name.endsWith(suffix));
   reserved=reserved.filter(name=>!name.endsWith(suffix));
@@ -152,23 +152,32 @@ assert.ok(googleGroupIndex>=0&&videoSelector,'Missing Shadowrocket video selecto
 groupRows.splice(googleGroupIndex+1,0,videoSelector.replace(/^Netflix /,'YouTube '));
 const groups=groupRows.map(row=>{
  const [name,options]=row.split(' = ',2);
- if(!Object.hasOwn(data.selectorDefaults,name))return row;
- const preferred=data.selectorDefaults[name];
- const fields=split(options), member=fields.indexOf(preferred);
+ const publicGroup=name==='高纯净度AI用'||name==='高网速视频用';
+ if(!publicGroup&&!Object.hasOwn(data.selectorDefaults,name))return row;
+ const fields=split(options);
+ const preferred=publicGroup?'REJECT':data.selectorDefaults[name];
  const selection=fields.findIndex(field=>field.startsWith('policy-select-name='));
- assert.ok(fields[0]==='select'&&member>0&&selection>0,name);
- fields[selection]='policy-select-name='+preferred;
- if(preferred==='DIRECT'){
-  // Use the domestic selector's reject-first fallback and explicit default name.
-  if(fields[1]!=='REJECT')fields.splice(1,0,'REJECT');
- }else{
-  fields.splice(member,1);
-  fields.splice(1,0,preferred);
+ assert.ok(fields[0]==='select'&&fields.indexOf(preferred)>0&&selection>0,name);
+ fields[selection]='policy-select-name='+(manualLabels.get(preferred)||preferred);
+ if(publicGroup){
+  assert.equal(fields[1],'REJECT',name);
+  fields.splice(2,0,'DIRECT');
+  return name+' = '+fields.map(field=>manualLabels.get(field)||field).join(',');
  }
- return name+' = '+fields.join(',');
+ const ai=fields.indexOf('高纯净度AI用'),video=fields.indexOf('高网速视频用');
+ assert.ok(ai>0&&video>0,name);
+ if(video<ai)[fields[ai],fields[video]]=[fields[video],fields[ai]];
+ if(!fields.includes('DIRECT'))fields.splice(Math.max(ai,video)+1,0,'DIRECT');
+ if(!fields.includes('REJECT')){
+  const position=preferred==='DIRECT'?1:fields.indexOf('DIRECT')+1;
+  fields.splice(position,0,'REJECT');
+ }
+ return name+' = '+fields.map(field=>manualLabels.get(field)||field).join(',');
 });
+for(const [target,label] of manualLabels)groups.push(label+' = select,'+target+',hidden=1');
 const output=header.join('\n')+'\n\n[General]\n'+general.join('\n')+'\n\n[Proxy Group]\n'+groups.join('\n')+'\n\n[Rule]\n'+rules.join('\n')+'\n\n[Host]\n'+outputHosts.map(([k,v])=>k+' = '+v).join('\n')+'\n';
-assert.ok(Buffer.byteLength(output)<1800000,'Self-contained DNS budget exceeded');
+// Allow up to 2 KB for the translated selectors and their name filters.
+assert.ok(Buffer.byteLength(output)<1802000,'Self-contained DNS budget exceeded');
 const file='src/ios/v14.3-shadowrocket.conf';
 const contractPath=fs.existsSync(path.resolve(root,'../../CURRENT_RELEASE.json'))?path.resolve(root,'../../docs/需求.md'):local('docs/需求.md');
 const manifest={version:'14.3',date:'2026-10-13',revision:'shadowrocket-lean-r1',domesticProtocolRevision:'domestic-protocol-r1',

@@ -7,6 +7,7 @@ import hashlib
 import json
 import runpy
 import socket
+import socketserver
 import ssl
 import struct
 import subprocess
@@ -20,6 +21,8 @@ H = runpy.run_path(str(ROOT / 'tools/stock-core-host.py'))
 F = runpy.run_path(str(ROOT / 'tools/test-proxy-failover.py'))
 N = F['HELPERS']
 sha = lambda p: hashlib.sha256(Path(p).read_bytes()).hexdigest()
+DIRECT_CHOICE = '直连 direct'
+REJECT_CHOICE = '拒绝 reject'
 MEDIA_HOST = 'szextshort.weixin.qq.com'
 DOMESTIC_DOMAIN = '19212021.xyz'
 DOMESTIC_CHILD = 'edge.' + DOMESTIC_DOMAIN
@@ -38,6 +41,12 @@ class MediaResolver(F['ResolverUDP']):
         if qtype == 1:
             response = response[:-4] + socket.inet_aton('127.0.0.1')
         sock.sendto(response, self.client_address)
+
+
+class DirectUDP(socketserver.BaseRequestHandler):
+    def handle(self):
+        packet, sock = self.request
+        sock.sendto(b'ACK:' + packet, self.client_address)
 
 
 def generate(file, mode, nodes, engine=None):
@@ -61,6 +70,7 @@ def run_case(core, file, mode, engine, directory):
         tls.load_cert_chain(directory.parent / 'cert.pem', directory.parent / 'key.pem')
         start = lambda server, ctx=None: F['start'](stack, server, ctx)
         origin = start(N['TCP'](('127.0.0.1', 0), N['Origin'])); origin.hits = []
+        direct_udp = start(N['UDP'](('127.0.0.1', 0), DirectUDP)).server_address[1]
         https = start(N['TCP'](('127.0.0.1', 0), F['HTTPS']), tls)
         media_resolver = start(N['UDP'](('127.0.0.1', 0), MediaResolver))
         media_resolver.queries = []
@@ -112,27 +122,47 @@ def run_case(core, file, mode, engine, directory):
         cfg['dns'].update({'listen': f'127.0.0.1:{dns}', 'use-system-hosts': False,
                            'default-nameserver': [bootstrap_url], 'proxy-server-nameserver': [bootstrap_url],
                            'fallback-filter': {'geoip': False, 'geosite': [], 'ipcidr': [], 'domain': []}})
-        for key in ['nameserver', 'fallback', 'direct-nameserver']:
-            if key in cfg['dns']:
-                cfg['dns'][key] = [bootstrap_url]
-        for key, servers in cfg['dns']['nameserver-policy'].items():
+        def translate_resolvers(servers, *, media_policy=False):
             translated = []
             for server in servers:
                 fragment = server.split('#', 1)[1] if '#' in server else 'DIRECT'
-                if key == '+.weixin.qq.com':
+                if media_policy:
                     transport = f'udp://127.0.0.1:{media_resolver.server_address[1]}'
                 elif server.startswith('https'):
                     transport = f'https://{F["RESOLVER"]}:{https.server_address[1]}/dns-query'
                 else:
                     transport = f'tls://{F["RESOLVER"]}:{dot.server_address[1]}'
                 translated.append(transport + '#' + fragment)
-            cfg['dns']['nameserver-policy'][key] = translated
+            return translated
+
+        for key in ('nameserver', 'fallback'):
+            cfg['dns'][key] = translate_resolvers(cfg['dns'][key])
+        cfg['dns']['direct-nameserver'] = [bootstrap_url]
+        for key, servers in cfg['dns']['nameserver-policy'].items():
+            cfg['dns']['nameserver-policy'][key] = translate_resolvers(servers, media_policy=key == '+.weixin.qq.com')
         directory.mkdir()
         def save():
             (directory / 'config.yaml').write_text(json.dumps(cfg, ensure_ascii=False), encoding='utf-8')
         save()
         child = H['StockCore'](core, directory); stack.callback(child.close)
+
+        def check_selector_state(selections):
+            views = child.call('proxy.list')['proxies']
+            for group in cfg['proxy-groups']:
+                if 'default-selected' not in group:
+                    continue
+                name, members = group['name'], group['proxies']
+                assert views[name]['all'] == members, (name, views[name]['all'], members)
+                if name in selections:
+                    expected = selections[name]
+                    if expected not in members:
+                        expected = members[0]
+                    assert views[name]['now'] == expected, (name, views[name]['now'], expected)
+
         child.call('config.setup'); child.call('listener.start')
+        check_selector_state({group['name']: group['default-selected'] for group in cfg['proxy-groups']
+                              if 'default-selected' in group})
+        checks.append('selector_order_and_fresh_defaults')
         assert 'start download' not in (directory / 'core.log').read_text(encoding='utf-8', errors='replace'), 'unexpected geodata download'
         checks.append('native_accepts_original_dns_mode_and_empty_providers')
         # In the generated Fake-IP mode the media host answers with its real
@@ -155,6 +185,11 @@ def run_case(core, file, mode, engine, directory):
         def choose(group, name):
             result = child.call('proxy.select', {'group-name': group, 'proxy-name': name})
             assert not result.get('message'), (group, name, result)
+
+        choose('Disney+', 'A ↻')
+        check_selector_state({'Disney+': 'A ↻'})
+        choose('Disney+', '高网速视频用')
+        checks.append('selector_order_after_manual_choice')
         slots = ['故障转移' + str(slot) for slot in range(1, 4)]
         backups = dict(zip(slots, ['B', 'C', 'D']))
         defaults = {group['name']: group['default-selected'] for group in cfg['proxy-groups']
@@ -180,18 +215,20 @@ def run_case(core, file, mode, engine, directory):
             # Use the same per-URL health cache key as the generated chain.
             url = next(g['url'] for g in cfg['proxy-groups'] if g['type'] == 'fallback')
             child.call('proxy.testDelay', {'proxy-name': name, 'test-url': url, 'timeout': 3000})
-        def udp(expected, host='v5.douyinvod.com'):
+        def udp(expected, host='v5.douyinvod.com', *, direct_port=None):
             prior = {k: len(v.udp.events) for k, v in relays.items()}
             with socket.create_connection(('127.0.0.1', mixed), timeout=3) as conn, socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as sock:
                 conn.sendall(b'\x05\x01\0'); assert N['exact'](conn, 2) == b'\x05\0'
                 conn.sendall(b'\x05\x03\0\x01' + b'\0' * 6)
                 head = N['exact'](conn, 4); _, port = N['address'](conn, head[3])
                 encoded = host.encode(); sock.settimeout(1)
-                sock.sendto(b'\0\0\0\x03' + bytes([len(encoded)]) + encoded + b'\x01\xbbPING', ('127.0.0.1', port))
+                target_port = struct.pack('!H', direct_port or 443)
+                sock.sendto(b'\0\0\0\x03' + bytes([len(encoded)]) + encoded + target_port + b'PING', ('127.0.0.1', port))
                 try: answer = sock.recv(4096)
                 except socket.timeout: answer = b''
-                assert answer.endswith(b'ACK:PING') if expected else not answer
-            assert [k for k, v in relays.items() if len(v.udp.events) > prior[k]] == ([expected] if expected else [])
+                assert answer.endswith(b'ACK:PING') if expected or direct_port else not answer
+            actual = [k for k, v in relays.items() if len(v.udp.events) > prior[k]]
+            assert actual == ([expected] if expected else []), (host, actual, expected)
         def dns_via(host, expected, ports):
             child.call('dns.clearCache')
             prior = {k: len(v.events) for k, v in relays.items()}
@@ -235,6 +272,38 @@ def run_case(core, file, mode, engine, directory):
         choose('Steam', '高纯净度AI用')
         via('A', DIRECT_DEFAULT_HOSTS[0])
         checks.append('direct_default_can_be_manually_switched_to_proxy')
+
+        dns_ports = {dot_port, https_port}
+        for group, relay, host in [('高纯净度AI用', 'A', 'manual-direct.chatgpt.com'),
+                                    ('高网速视频用', 'B', 'manual-direct.googlevideo.com')]:
+            via(relay, host)
+            udp(relay, host)
+            dns_via(host, relay, dns_ports)
+            choose(group, DIRECT_CHOICE)
+            check_selector_state({group: DIRECT_CHOICE})
+            via(None, host)
+            udp(None, host, direct_port=direct_udp)
+            dns_via(host, None, dns_ports)
+            choose(group, relay + ' ↻')
+        checks.append('public_manual_DIRECT_tcp_udp_dns')
+
+        outside = 'outside.example.net'
+        via('A', outside)
+        udp('A', 'stun.' + outside)
+        dns_via(outside, 'A', dns_ports)
+        choose('国内网站', '高纯净度AI用')
+        choose('漏网之鱼', DIRECT_CHOICE)
+        check_selector_state({'国内网站': '高纯净度AI用', '漏网之鱼': DIRECT_CHOICE})
+        via(None, outside)
+        udp(None, 'stun.' + outside, direct_port=direct_udp)
+        dns_via(outside, None, dns_ports)
+        via('A', DOMESTIC_CHILD)
+        udp('A', DOMESTIC_CHILD)
+        dns_via(DOMESTIC_CHILD, 'A', dns_ports)
+        choose('漏网之鱼', '高纯净度AI用')
+        choose('国内网站', DIRECT_CHOICE)
+        checks.append('catchall_manual_DIRECT_while_domestic_proxies_tcp_udp_dns')
+
         for slot, name in backups.items():
             choose(slot, name)
         choose('漏网之鱼', 'X ↻'); choose('国内网站', 'A ↻'); choose('OpenAI 服务', 'A ↻')
@@ -277,14 +346,14 @@ def run_case(core, file, mode, engine, directory):
         dns_via('api.openai.com', 'D', {api_port})
         checks.append('skipped_tiers_openai_encrypted_dns_D')
 
-        for label, selection, expected in [('single', 'B ↻', 'B'), ('public', '高纯净度AI用', 'C'), ('direct', 'DIRECT', None)]:
+        for label, selection, expected in [('single', 'B ↻', 'B'), ('public', '高纯净度AI用', 'C'), ('direct', DIRECT_CHOICE, None)]:
             choose('高纯净度AI用', 'C ↻'); choose('国内网站', selection)
             dns_via(label + '.amemv.com', expected, {dot_port, https_port})
             checks.append('domestic_dns_' + label)
         choose('OpenAI 服务', 'B ↻')
         dns_via('api.openai.com', 'B', {api_port})
         checks.append('openai_mode_correct_encrypted_dns_selected_group')
-        choose('国内网站', 'DIRECT'); cfg['hosts']['direct.amemv.com'] = '127.0.0.1'; save(); child.call('config.setup', {'selected-map': {'国内网站': 'DIRECT'}})
+        choose('国内网站', DIRECT_CHOICE); cfg['hosts']['direct.amemv.com'] = '127.0.0.1'; save(); child.call('config.setup', {'selected-map': {'国内网站': DIRECT_CHOICE}})
         via(None, 'direct.amemv.com'); checks.append('domestic_explicit_DIRECT_tcp')
         choose('国内网站', 'NoUDP ↻'); udp(None); checks.append('unsupported_udp_rejected')
         # No unselected X and no DIRECT may rescue a failed selected chain.
@@ -305,6 +374,8 @@ def run_case(core, file, mode, engine, directory):
         F['wait_until'](lambda: via('D'), seconds=10)
         checks.append('reload_legacy_reject_skips_to_tier3')
         reload_without({'A', 'B'}, selected)
+        check_selector_state(selected)
+        checks.append('selector_order_and_saved_choices_after_node_removal')
         F['wait_until'](lambda: via('C'), seconds=10)
         checks.append('reload_removed_primary_and_tier1_uses_tier2')
         reload_without({'A', 'B', 'C'}, selected)
@@ -313,7 +384,7 @@ def run_case(core, file, mode, engine, directory):
         dns_via('reload.amemv.com', 'D', {dot_port})
         dns_via('api.openai.com', 'D', {api_port})
         checks.append('reload_removed_primary_and_first_two_tiers_uses_tier3')
-        choose('国内网站', 'REJECT')
+        choose('国内网站', REJECT_CHOICE)
         via(None, blocked=True)
         checks.append('explicit_REJECT_still_blocks')
         reload_without({'A', 'B', 'C', 'D'}, selected)

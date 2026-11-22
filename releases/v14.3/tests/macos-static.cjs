@@ -19,7 +19,7 @@ for(const platform of Object.keys(f.entries)){
     assert.deepEqual(current,before);
     assert.equal(model.config['proxy-groups'].filter(group=>!group.hidden).length,30);
     assert.equal(model.config['proxy-groups'].find(group=>group.name==='YouTube')['default-selected'],'高网速视频用');
-    for(const name of ['高纯净度AI用','高网速视频用']){const group=model.config['proxy-groups'].find(g=>g.name===name);assert.equal(group.type,'select');assert.ok(!group.proxies.includes('DIRECT'));assert.equal(group['default-selected'],'REJECT');}
+    for(const name of ['高纯净度AI用','高网速视频用']){const group=model.config['proxy-groups'].find(g=>g.name===name);assert.equal(group.type,'select');assert.ok(group.proxies.includes('直连 direct'));assert.equal(group['default-selected'],'拒绝 reject');}
   });
   check(platform+':complete-reviewed-domain-inventory-and-existing-failure-cases',()=>{
     const hosts=new Set(['api.openai.com','gemini.google.com','szfile.weixin.qq.com','mmbiz.qpic.cn','crixet.com','51drv.com','stun.audit.cn','unknown.audit.net']);

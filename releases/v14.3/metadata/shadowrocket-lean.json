@@ -5,8 +5,8 @@
   "domesticProtocolRevision": "domestic-protocol-r1",
   "status": "GENERATED_NATIVE_ACCEPTANCE_PENDING",
   "file": "src/ios/v14.3-shadowrocket.conf",
-  "sha256": "752b7acf37f07516ca4a32ad2fd262fe790af70d031b0b11da3ce4e72e803f92",
-  "bytes": 1799835,
+  "sha256": "03976c1d568828c12b6699afea9b85d0c8556a16114cc5927cd665d10910542b",
+  "bytes": 1801182,
   "tailscaleDerpSource": {
     "file": "data/rules/tailscale-derp-map.json",
     "url": "https://controlplane.tailscale.com/derpmap/default",
@@ -5168,7 +5168,9 @@
     "Spotify",
     "Meta 服务",
     "苹果国际",
-    "哔哩国际"
+    "哔哩国际",
+    "直连 direct",
+    "拒绝 reject"
   ],
   "sources": [
     {
@@ -5444,12 +5446,12 @@
   ],
   "sourceContract": {
     "file": "docs/需求.md",
-    "sha256": "127a44e063409981ed6dffa69cc66234023ff99e95415b2b46c882b5db39a4ce"
+    "sha256": "d11868e60614cce12f5ed030d5500b3d07041020e094997570c13c90dc5ece3e"
   },
   "inputs": [
     {
       "file": "tools/build-shadowrocket-lean.cjs",
-      "sha256": "6ca4d4377b747773ee1f173f16ba1c1b18c4992ccf1e77c8c12ea81bd469b858"
+      "sha256": "9e4dee13159ec399cabec3d15835b8e5a47ce2dc9bcc10ab3ef7b54f13cb1ec1"
     },
     {
       "file": "tools/lib/tailscale-policy.cjs",
@@ -5465,7 +5467,7 @@
     },
     {
       "file": "src/android/v14.3-android-flclash.js",
-      "sha256": "ebe7683a49db3d8467c6d12d5cfe9a8e6adf004e4a8cd600359336d208111e02"
+      "sha256": "f580ea319d9349da2667cb16f8fe3bc1083fb739c64f126e9f48829f77263cb7"
     },
     {
       "file": "data/rules/embedded-policy.json",

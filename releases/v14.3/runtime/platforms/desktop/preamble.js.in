@@ -178,7 +178,7 @@ const V14_DOMESTIC_SEEDS = {{DOMESTIC_SEEDS}};
 // OpenAI's published ChatGPT Voice IPv4 list (created 2026-03-26).
 // Downloaded and compared on 2026-10-10: all 23 prefixes unchanged.
 // Refresh from the official list when it changes; unknown UDP uses
-// the no-DIRECT 漏网之鱼 group rather than falling through to DIRECT.
+// the configured 漏网之鱼 selector for an explicit egress choice.
 const V14_OPENAI_VOICE_HOSTS = ["chatgpt.livekit.cloud", "host.livekit.cloud", "turn.livekit.cloud"];
 // Dynamic LiveKit names do not identify the tenant. Keep known exact hosts
 // and official Voice IPs above this safe fallback, across TCP and UDP.

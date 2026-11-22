@@ -25,10 +25,13 @@ for(const [key,value]of before.config.hosts)if(value.startsWith('server:')){busi
 const report={version:'14.3',date:'2026-10-13',revision:manifest.revision,domesticProtocolRevision:manifest.domesticProtocolRevision,status:'RUNNING',checks:[],failures:[],metrics:{routingHosts:hosts.size,tcp:0,udp:0,businessDNS:0,criticalDomesticDNS:0,coldRouting:0,protectedFlows:0},sourceFiles:[],scope:'Finite domain/selector/Host model and SHA verification only; native parsing, DNS order/remote resolution and iOS VPN NOT_RUN',nativeAcceptance:'NOT_RUN',deviceAcceptance:'NOT_RUN',clientDeployment:false};
 function check(name,body){try{body();report.checks.push({name,status:'PASS'});}catch(e){report.failures.push({name,error:e.stack});report.checks.push({name,status:'FAIL'});}}
 check('size-groups-fixed-sources-and-general-settings',()=>{
- assert.equal(f.sha(f.local(manifest.file)),manifest.sha256);assert.equal(Buffer.byteLength(raw),manifest.bytes);assert.ok(manifest.bytes<1800000&&manifest.bytes<manifest.before.bytes*0.3);
- assert.equal(manifest.groups.length,27);assert.equal(sources.size,15);assert.equal(section('Proxy Group').length,27);
- assert.match(section('Proxy Group').find(row=>row.startsWith('YouTube = ')),/^YouTube = select,高网速视频用,.*policy-select-name=高网速视频用,/);
+ assert.equal(f.sha(f.local(manifest.file)),manifest.sha256);assert.equal(Buffer.byteLength(raw),manifest.bytes);assert.ok(manifest.bytes<1802000&&manifest.bytes<manifest.before.bytes*0.3);
+ assert.equal(manifest.groups.length,29);assert.equal(sources.size,15);assert.equal(section('Proxy Group').length,29);
+ const manual=new Map([['直连 direct','DIRECT'],['拒绝 reject','REJECT']]);
+ for(const [label,target]of manual)assert.ok(section('Proxy Group').includes(label+' = select,'+target+',hidden=1'));
+ assert.match(section('Proxy Group').find(row=>row.startsWith('YouTube = ')),/^YouTube = select,高纯净度AI用,高网速视频用,直连 direct,拒绝 reject,.*policy-select-name=高网速视频用,/);
  for(const row of section('Proxy Group')){
+  if(manual.has(row.split(' = ',1)[0]))continue;
   const prefix='policy-regex-filter=';
   const filter=f.split(row).find(field=>field.startsWith(prefix));
   const pattern=new RegExp(filter.slice(prefix.length).replace(/^\(\?i\)/,''),'i');

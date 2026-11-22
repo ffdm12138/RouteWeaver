@@ -18,7 +18,7 @@ for(const [platform,file]of Object.entries(manifest.entries)){
    const input={...good(),'x-routeweaver':{'network-mode':mode}},before=JSON.stringify(input),c=generate(input);
    assert.equal(JSON.stringify(input),before,'mutated caller input');assert.equal(c['x-v14-generated'].networkMode,mode);
    assert.equal(c.ipv6,true);assert.equal(c.dns.ipv6,mode!=='ipv4-local');assert.deepEqual(generate(c),c);
-   for(const group of ['高纯净度AI用','高网速视频用']){const g=c['proxy-groups'].find(g=>g.name===group);assert.equal(g.type,'select');assert.ok(!g.proxies.includes('DIRECT'));assert.equal(g['empty-fallback'],'REJECT');}
+   for(const group of ['高纯净度AI用','高网速视频用']){const g=c['proxy-groups'].find(g=>g.name===group);assert.equal(g.type,'select');assert.ok(g.proxies.includes('直连 direct'));assert.equal(g['empty-fallback'],'REJECT');}
    assert.deepEqual(c.rules.slice(-2),['MATCH,漏网之鱼','MATCH,REJECT']);
    if(platform==='android')assert.ok(!c.tun||c.tun.enable!==true,'script enabled Android VPN');
   });

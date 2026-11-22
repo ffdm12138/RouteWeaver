@@ -29,7 +29,7 @@
     "高纯净度AI用",
     "高网速视频用"
   ],
-  "masterSelection": "visible-selectors-manual-node-only-no-DIRECT-no-url-test; hidden-controlled-fallback-A-1-2-3",
+  "masterSelection": "visible-selectors-manual-node-DIRECT-REJECT; hidden-controlled-proxy-fallback-A-1-2-3",
   "managedRemoteSources": 45,
   "runtimeFloatingManagedSources": 0,
   "layoutRevision": 8,
@@ -53,7 +53,7 @@
     "guide": "docs/guides/ProjectClash使用说明.md",
     "reviewedClientCommit": "f84db6a964505c9f8592cc2dd1b16a25454b3dd7",
     "reviewedCoreCommit": "c8f2fc1d58bf9ac856a0bf161bc9489591821f45",
-    "verification": "releases/v14.3/validation/projectclash-r1.json",
+    "verification": "releases/v14.3/validation/projectclash-selector-option-order-r1.json",
     "deviceAcceptance": "NOT_RUN"
   },
   "classificationRevision": "review-fixes-r1",
@@ -163,10 +163,10 @@
   "nativeFallback": {
     "revision": "backup-slot-skip-r1",
     "guide": "docs/guides/故障转移.md",
-    "verification": "releases/v14.3/validation/proxy-failover/youtube-apt-routing-r1.json",
+    "verification": "releases/v14.3/validation/proxy-failover/selector-option-order-r1.json",
     "releaseTags": {
-      "main": "v14.3.0-rc.19",
-      "ipv4-only": "v14.3.0-ipv4-only-rc.10"
+      "main": "v14.3.0-rc.21",
+      "ipv4-only": "v14.3.0-ipv4-only-rc.12"
     },
     "deviceAcceptance": "NOT_RUN"
   },
@@ -242,7 +242,7 @@
       "publicReleaseRemoteSHA256": "ALL_15_ANONYMOUS_DOWNLOADS_MATCH"
     }
   },
-  "currentRevision": "direct-system-dns-r1",
+  "currentRevision": "selector-option-order-r1",
   "directSystemDns": {
     "releaseTags": {
       "main": "v14.3.0-rc.20",

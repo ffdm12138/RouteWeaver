@@ -1,6 +1,6 @@
 # RouteWeaver
 
-当前版本新增 ProjectClash 覆写，支持在 iPhone、iPad、Mac 和 Apple TV 绑定同一份脚本。 [ProjectClash 使用说明](docs/guides/ProjectClash使用说明.md)
+业务组统一按「主节点缺失 · 已选备用 → 高纯净度AI用 → 高网速视频用 → 直连 direct → 拒绝 reject」排列。两个公共组和「漏网之鱼」也可手选 DIRECT，首次导入沿用各组的原默认值。 [使用说明](docs/guides/使用说明.md)
 
 跨平台分流覆写，按客户端选择对应入口。每个网络版本都提供七份 JS 和一份 Shadowrocket 原生配置。本目录是独立公开版源码。
 
@@ -8,8 +8,8 @@
 
 | 版本 | 本地入口 | GitHub 预发布 |
 |---|---|---|
-| 支持 IPv6 的主版 | [各客户端导入文件](releases/v14.3/README.md) | [主版 v14.3.0-rc.20](https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-rc.20) |
-| 纯 IPv4 版 | [各客户端导入文件](releases/v14.3-ipv4-only/README.md) | [纯 IPv4 v14.3.0-ipv4-only-rc.11](https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-ipv4-only-rc.11) |
+| 支持 IPv6 的主版 | [各客户端导入文件](releases/v14.3/README.md) | [主版 v14.3.0-rc.21](https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-rc.21) |
+| 纯 IPv4 版 | [各客户端导入文件](releases/v14.3-ipv4-only/README.md) | [纯 IPv4 v14.3.0-ipv4-only-rc.12](https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-ipv4-only-rc.12) |
 
 两条发布线的 JS 都支持三档原生故障转移。规则模式下在原组选择 A，再手选所需的三个备用，按 A → 1 → 2 → 3 选路。活动链探测间隔 3 秒，超时 3 秒。 [故障转移说明](docs/guides/故障转移.md)
 
@@ -33,6 +33,6 @@
 - [使用与维护文档](docs/README.md) · [需求](docs/需求.md) · [当前验收](docs/status/当前验收.md) · [变更记录](CHANGELOG.md)
 - [当前文件与发布记录](CURRENT_RELEASE.json) · [开源与发布流程](docs/maintenance/开源与发布.md)
 
-原装 Windows FlClash 0.9.3 和固定 ProjectClash 内核的隔离回放覆盖订阅刷新、TCP、UDP、DoH 和 DoT。各端导入界面与 TUN/VPN 待实机验收。 [FlClash 回执](releases/v14.3/validation/proxy-failover/youtube-apt-routing-r1.json) · [ProjectClash 回执](releases/v14.3/validation/projectclash-r1.json)
+原装 Windows FlClash 0.9.4 和固定 ProjectClash 内核的隔离回放覆盖首次默认值、手选、订阅刷新及 TCP、UDP、DoH、DoT 选路。各端导入界面与 TUN/VPN 待实机验收。 [FlClash 回执](releases/v14.3/validation/proxy-failover/selector-option-order-r1.json) · [ProjectClash 回执](releases/v14.3/validation/projectclash-selector-option-order-r1.json)
 
 原创内容采用 [MIT](LICENSE)，上游规则与历史可选核心使用各自的许可。 [第三方声明](THIRD_PARTY_NOTICES.md)
