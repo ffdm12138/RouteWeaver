@@ -1,0 +1,154 @@
+{
+  "tag": "v14.3.0-ipv4-only-rc.13",
+  "releaseUrl": "https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-ipv4-only-rc.13",
+  "prerelease": true,
+  "sourceCommit": "4247c21d623b86f211ceecc7387122b6df2055b5",
+  "remoteTagCommit": "4247c21d623b86f211ceecc7387122b6df2055b5",
+  "publishedAtUTC": "2026-11-22T09:00:40Z",
+  "assets": [
+    {
+      "name": "SHA256SUMS.txt",
+      "bytes": 809,
+      "sha256": "8a7719b3d766cec2907e347d4bda33e11b148d6528f5b63477b97d3714f4f6cc",
+      "url": "https://github.com/ffdm12138/RouteWeaver/releases/download/v14.3.0-ipv4-only-rc.13/SHA256SUMS.txt",
+      "githubDigest": "sha256:8a7719b3d766cec2907e347d4bda33e11b148d6528f5b63477b97d3714f4f6cc"
+    },
+    {
+      "name": "v14.3-android-flclash-ipv4-only.js",
+      "bytes": 128130,
+      "sha256": "54d0fe306528d256c6bdf59f1d24b2dea56ddff30151f5f98a71eb8a0c6324b8",
+      "url": "https://github.com/ffdm12138/RouteWeaver/releases/download/v14.3.0-ipv4-only-rc.13/v14.3-android-flclash-ipv4-only.js",
+      "githubDigest": "sha256:54d0fe306528d256c6bdf59f1d24b2dea56ddff30151f5f98a71eb8a0c6324b8"
+    },
+    {
+      "name": "v14.3-clash-verge-ipv4-only.js",
+      "bytes": 130509,
+      "sha256": "7ed5d2ca4be50d67699899b22b8c780d842d15024256b82e8d882ab4b8575487",
+      "url": "https://github.com/ffdm12138/RouteWeaver/releases/download/v14.3.0-ipv4-only-rc.13/v14.3-clash-verge-ipv4-only.js",
+      "githubDigest": "sha256:7ed5d2ca4be50d67699899b22b8c780d842d15024256b82e8d882ab4b8575487"
+    },
+    {
+      "name": "v14.3-clashmi-domestic-protocol-r1-ipv4-only.js",
+      "bytes": 130311,
+      "sha256": "b2f0dfc9f9f92c9d0164122a9e9216fb0a3d34e66fb5a031a78fe1e7348ff932",
+      "url": "https://github.com/ffdm12138/RouteWeaver/releases/download/v14.3.0-ipv4-only-rc.13/v14.3-clashmi-domestic-protocol-r1-ipv4-only.js",
+      "githubDigest": "sha256:b2f0dfc9f9f92c9d0164122a9e9216fb0a3d34e66fb5a031a78fe1e7348ff932"
+    },
+    {
+      "name": "v14.3-macos-clashmi-ipv4-only.js",
+      "bytes": 130309,
+      "sha256": "9d80cd380ce42d8ddaaea4f300eb53fc3450c9f4ef8793d2f5c1e5cf137de5c5",
+      "url": "https://github.com/ffdm12138/RouteWeaver/releases/download/v14.3.0-ipv4-only-rc.13/v14.3-macos-clashmi-ipv4-only.js",
+      "githubDigest": "sha256:9d80cd380ce42d8ddaaea4f300eb53fc3450c9f4ef8793d2f5c1e5cf137de5c5"
+    },
+    {
+      "name": "v14.3-macos-flclash-ipv4-only.js",
+      "bytes": 130359,
+      "sha256": "d7f0bbabbe27c574aaad1107517f0441e166db67b74feb34c176b1e30bc511b9",
+      "url": "https://github.com/ffdm12138/RouteWeaver/releases/download/v14.3.0-ipv4-only-rc.13/v14.3-macos-flclash-ipv4-only.js",
+      "githubDigest": "sha256:d7f0bbabbe27c574aaad1107517f0441e166db67b74feb34c176b1e30bc511b9"
+    },
+    {
+      "name": "v14.3-projectclash-ipv4-only.js",
+      "bytes": 130213,
+      "sha256": "4ca4e6b1e9ca6757714b0fa6efbae721235f20b304c2ae00f1b7b25e6ccda64a",
+      "url": "https://github.com/ffdm12138/RouteWeaver/releases/download/v14.3.0-ipv4-only-rc.13/v14.3-projectclash-ipv4-only.js",
+      "githubDigest": "sha256:4ca4e6b1e9ca6757714b0fa6efbae721235f20b304c2ae00f1b7b25e6ccda64a"
+    },
+    {
+      "name": "v14.3-shadowrocket-ipv4-only.conf",
+      "bytes": 1801367,
+      "sha256": "5c3263d12d051904400257b42aecf1a774773fc6cdf656ea10edc087ad040cae",
+      "url": "https://github.com/ffdm12138/RouteWeaver/releases/download/v14.3.0-ipv4-only-rc.13/v14.3-shadowrocket-ipv4-only.conf",
+      "githubDigest": "sha256:5c3263d12d051904400257b42aecf1a774773fc6cdf656ea10edc087ad040cae"
+    },
+    {
+      "name": "v14.3-windows-flclash-ipv4-only.js",
+      "bytes": 128571,
+      "sha256": "9bb674b5426327340910e80564397bfd75bdbfe77b0e4702a61aa78c2de119e4",
+      "url": "https://github.com/ffdm12138/RouteWeaver/releases/download/v14.3.0-ipv4-only-rc.13/v14.3-windows-flclash-ipv4-only.js",
+      "githubDigest": "sha256:9bb674b5426327340910e80564397bfd75bdbfe77b0e4702a61aa78c2de119e4"
+    }
+  ],
+  "attachmentVerification": "ALL_9_ANONYMOUS_DOWNLOADS_MATCH",
+  "deviceAcceptance": "NOT_RUN",
+  "sourceCI": {
+    "conclusion": "success",
+    "databaseId": 45004785764,
+    "url": "https://github.com/ffdm12138/RouteWeaver/actions/runs/45004785764",
+    "jobs": [
+      {
+        "name": "verify (windows-latest)",
+        "id": 137153826937,
+        "state": "success"
+      },
+      {
+        "name": "javascript-engines (windows-latest, routeweaver-engine-check.exe)",
+        "id": 137153827114,
+        "state": "success"
+      },
+      {
+        "name": "javascript-engines (ubuntu-latest, routeweaver-engine-check)",
+        "id": 137153827151,
+        "state": "success"
+      },
+      {
+        "name": "projectclash-javascriptcore",
+        "id": 137153827154,
+        "state": "success"
+      },
+      {
+        "name": "verify (ubuntu-24.04)",
+        "id": 137153827465,
+        "state": "success"
+      },
+      {
+        "name": "bound-release",
+        "id": 137153828540,
+        "state": "skipped"
+      }
+    ]
+  },
+  "releaseCI": {
+    "conclusion": "success",
+    "databaseId": 45005444018,
+    "url": "https://github.com/ffdm12138/RouteWeaver/actions/runs/45005444018",
+    "jobs": [
+      {
+        "name": "verify (ubuntu-24.04)",
+        "id": 137155906508,
+        "state": "success"
+      },
+      {
+        "name": "projectclash-javascriptcore",
+        "id": 137155906585,
+        "state": "success"
+      },
+      {
+        "name": "bound-release (windows-latest)",
+        "id": 137155906602,
+        "state": "success"
+      },
+      {
+        "name": "javascript-engines (ubuntu-latest, routeweaver-engine-check)",
+        "id": 137155906603,
+        "state": "success"
+      },
+      {
+        "name": "verify (windows-latest)",
+        "id": 137155906711,
+        "state": "success"
+      },
+      {
+        "name": "bound-release (ubuntu-24.04)",
+        "id": 137155906713,
+        "state": "success"
+      },
+      {
+        "name": "javascript-engines (windows-latest, routeweaver-engine-check.exe)",
+        "id": 137155907082,
+        "state": "success"
+      }
+    ]
+  }
+}
