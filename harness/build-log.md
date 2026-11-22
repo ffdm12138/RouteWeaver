@@ -190,3 +190,5 @@ ProjectClash 主版和纯 IPv4 版从当前共享规则生成，覆盖 iPhone、
 ## 2026-11-22 · 策略组选项、手动直连与拒绝
 
 两轨业务组统一使用固定候选顺序，显示「直连 direct」和「拒绝 reject」。既有默认出口与路由规则继续沿用。「漏网之鱼」和两个公共组提供手动直连。包含实际 TCP、UDP、DoH、DoT 的公开版隔离回放覆盖 12 份 FlClash/Mihomo JS 和 2 份 ProjectClash JS，每份通过 71 项。无手选记录时，原先默认直连的组在隔离重载后仍走内建 DIRECT。Shadowrocket 完成配置和分流模型检查，Apple App 与 VPN 接管待验收。 [FlClash 回执](../releases/v14.3/validation/proxy-failover/selector-option-order-r1.json) · [ProjectClash 回执](../releases/v14.3/validation/projectclash-selector-option-order-r1.json)
+
+公开主版 v14.3.0-rc.21 和纯 IPv4 版 v14.3.0-ipv4-only-rc.12 均绑定公开提交 `abefc00df04c6161004a70b8d119b501632058a4`。Windows、Ubuntu、macOS JavaScriptCore 及 JavaScript 引擎的源码和发布检查通过。18 个附件的匿名下载 SHA-256 与已验证字节一致。 [主版回执](releases/v14.3.0-rc.21.json) · [纯 IPv4 回执](releases/v14.3.0-ipv4-only-rc.12.json)
