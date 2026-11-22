@@ -1,6 +1,8 @@
 > **纯 IPv4 版**。七份 JS 支持三档原生故障转移。 [使用说明](../../docs/guides/故障转移.md)
 
-**DIRECT 拨号需要可用的 IPv4 系统 DNS。** 如果网络只提供 IPv6 DNS，纯 IPv4 版的 DIRECT 域名可能无法解析。原有业务 DoT 保留禁复用设置。本轮完成配置对照和 Windows 原版核心隔离验证，设备验收待补。
+业务 DoH 候选需要匹配核心。使用原装客户端时，导入既有发布附件。 [迁移与回滚](../../docs/guides/业务DoH迁移.md)
+
+**DIRECT 拨号需要可用的 IPv4 系统 DNS。** 如果网络只提供 IPv6 DNS，纯 IPv4 版的 DIRECT 域名可能无法解析。既有发布附件的业务 DoT 保留禁复用设置。Windows 隔离验证的范围见各版回执。
 
 <!-- ARCHITECTURE_AUDIT_CURRENT:BEGIN -->
 > **历史架构审计基线 architecture-audit-r1（2026-11-01）**。两轨七客户端的当时源码、有限静态清单及隔离 Windows 核心已验证；跨端设备、原生 auto 能力和真实 AI 账号任务未验收。

@@ -49,8 +49,7 @@ const V14 = Object.freeze({
     "https://223.6.6.6/dns-query#DIRECT",
   ],
   bootstrapDns: ["https://223.5.5.5/dns-query", "https://223.6.6.6/dns-query"],
-  groupDnsUrls: ["tls://dns.alidns.com:853", "tls://dot.pub:853"],
-  apiRealDns: ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"],
+  groupDnsUrls: ["routeweaver-doh://dns.alidns.com/dns-query", "routeweaver-doh://doh.pub/dns-query"],
 });
 
 const V14_BUILTINS = new Set(["DIRECT", "REJECT", "REJECT-DROP", "REJECT-NO-DROP", "PASS", "PASS-RULE", "COMPATIBLE", "GLOBAL"]);
@@ -347,7 +346,10 @@ function v14Ipv6Literal(s) {
   return /^[0-9a-fA-F:.%]+$/.test(s.replace(/^\[/, "").replace(/\]$/, "")) && s.includes(":");
 }
 function v14Transport(p) { return !V14_NOT_NODES.has(String(p.type || "").toLowerCase()); }
-function v14DnsFor(group) { return V14.groupDnsUrls.map(url => url + "#" + group + "&disable-reuse=true"); }
+function v14DnsFor(group) {
+  const policy = group.replace(/[%#&=]/g, character => encodeURIComponent(character));
+  return V14.groupDnsUrls.map(url => url + "#" + policy);
+}
 
 function v14Strings(xs, owner) {
   if (xs == null) return [];
@@ -1042,7 +1044,7 @@ function v14ClashMiBase(input) {
     for (const d of service.seeds) if (service.name !== V14_SHARED_INFRA.name || d !== "webpubsub.azure.com")
       if (dnsPolicy["+." + d] === undefined) dnsPolicy["+." + d] = servers;
   }
-  dnsPolicy["api.openai.com"] = V14.apiRealDns.map(url => url + "#" + groupName("OpenAI 服务"));
+  dnsPolicy["api.openai.com"] = v14DnsFor(groupName("OpenAI 服务"));
   dnsPolicy["rule-set:" + cdnGuardName] = v14DnsFor(groupName("公共基础服务"));
   for (const logical of ["OpenAI 服务", "Anthropic 服务", "公共基础服务", "谷歌服务", "微软生态"])
     dnsPolicy["rule-set:" + coreNames.get(logical)] = v14DnsFor(groupName(logical));

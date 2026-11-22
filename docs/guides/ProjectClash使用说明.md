@@ -1,5 +1,7 @@
 # ProjectClash 使用说明
 
+此分支的 JS 候选已通过 ProjectClash 固定内核的隔离解析。Apple App 须编译并接入包含补丁的内核。使用原装客户端时，导入既有发布附件。 [业务 DoH 迁移](业务DoH迁移.md)
+
 同一份 RouteWeaver 脚本可绑定到 ProjectClash 的 iPhone、iPad、Mac 和 Apple TV 配置。上游源码核对版本为 iOS/iPadOS 1.0.13 (133)、macOS 1.0.15 (100) 和 tvOS 1.0.16 (49)。 [客户端源码](https://github.com/ProjectClash/Clash-Client/tree/f84db6a964505c9f8592cc2dd1b16a25454b3dd7) · [固定内核](https://github.com/ProjectClash/Clash/tree/c8f2fc1d58bf9ac856a0bf161bc9489591821f45)
 
 | 版本 | 导入文件 |

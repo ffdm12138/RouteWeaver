@@ -1,8 +1,10 @@
 > **支持 IPv6 的主版**。七份 JS 支持三档原生故障转移。 [使用说明](../../docs/guides/故障转移.md)
 
+业务 DoH 候选需要匹配核心。使用原装客户端时，导入既有发布附件。 [迁移与回滚](../../docs/guides/业务DoH迁移.md)
+
 DIRECT 拨号使用设备当前的系统 DNS。应用主动查询真实记录时，原有业务 DNS 策略仍然适用。
 
-**Windows FlClash 0.9.4 建议开启「自动关闭连接」。** 关闭时，手动从 DIRECT 切到代理后，主版 DoH 仍可能复用旧直连。隔离测试确认关连接完成后的首笔新查询走新节点。这项证据仅覆盖手动切组。开启时会关闭核心追踪的业务连接。自动故障转移期间，主版 DNS 仍可能复用旧代理连接。 [FlClash 切组逻辑](https://github.com/chen08209/FlClash/blob/v0.9.4/lib/providers/actions/proxies.dart#L166-L211)
+**Windows FlClash 0.9.4 建议开启「自动关闭连接」。** 使用原装核心时，手动从 DIRECT 切到代理后，既有 DoH 查询仍可能复用旧直连。隔离测试确认关连接完成后的首笔新查询走新节点。这项证据仅覆盖手动切组。开启时会关闭核心追踪的业务连接。原装核心的自动故障转移仍可能复用旧 DNS 连接。 [FlClash 切组逻辑](https://github.com/chen08209/FlClash/blob/v0.9.4/lib/providers/actions/proxies.dart#L166-L211)
 
 本轮完成配置对照和 Windows 原版核心隔离验证，设备验收待补。Shadowrocket 使用其原生 DIRECT DNS 字段，建议使用支持直连域名专用 DNS 的 2.2.92 或更新版本，实际 DNS 优先级待设备确认。 [Shadowrocket 2.2.92 版本记录](https://t.me/s/ShadowrocketNews?before=1641)
 

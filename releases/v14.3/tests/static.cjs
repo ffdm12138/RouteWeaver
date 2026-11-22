@@ -39,7 +39,7 @@ for(const platform of ['desktop','android','clashmi']){
  check(platform+':critical-domains-with-all-remote-files-empty',()=>{const mismatches=[];for(const host of critical){for(const protocol of ['TCP','UDP'])for(const supported of [true,false]){const expected=domestic.expectedRoute(host,protocol,supported,baselineRoute),actual=coldRoute(host,protocol,supported);if(expected.policy!==actual.policy&&mismatches.length<24)mismatches.push({host,protocol,supported,before:expected.policy,after:actual.policy,rule:actual.rule});metrics.criticalColdRouting++;}const a={groups:domestic.expectedDNS(host,baselineRoute,baselineDNS)},b=coldDNS(host);if(JSON.stringify(a.groups)!==JSON.stringify(b.groups)&&mismatches.length<24)mismatches.push({host,beforeDNS:a.groups,afterDNS:b.groups,key:b.key});metrics.criticalColdDNS++;}report.coldMismatches=(report.coldMismatches||[]).concat(mismatches.map(x=>({platform,...x})));assert.deepEqual(mismatches,[]);});
  check(platform+':business-table-loss-does-not-expose-domestic-DIRECT-on-critical-hosts',()=>{const missing=new Set(lock.sources.filter(s=>s.id.startsWith('v12r-domain-')&&!['cn','private','category-doh','douyin','apple_at_cn','google_at_cn','microsoft_at_cn','steam_at_cn'].includes(s.id.slice(12))).map(s=>s.id)),partial=empty(model,missing),route=index.indexRoute(partial);for(const host of critical){const expected=baselineRoute(host);if(!['DIRECT','国内网站','漏网之鱼','REJECT'].includes(expected.group))assert.equal(route(host).group,expected.group,host);}});
  // The native-fallback suite compares selector changes against the same base.
- check(platform+':same-transport-DNS-upstreams-and-inbound-config',()=>{
+ check(platform+':scoped-business-DNS-and-otherwise-same-inbound-config',()=>{
   const before=old.generate(platform==='desktop'?'desktop':'android'),after=f.generate(platform);
   assert.equal(after['routeweaver-local-family'],'auto');
   assert.equal(after['find-process-mode'],platform==='clashmi'?'off':'strict');
@@ -50,6 +50,10 @@ for(const platform of ['desktop','android','clashmi']){
   if(platform==='clashmi'){for(const k of ['tun','extension','interface-name','routing-mark','find-process-mode','allow-lan','bind-address']){delete before[k];delete after[k];}delete before.dns.listen;delete after.dns.listen;before.android=false;delete before.android;delete after.android;}
   before.dns['direct-nameserver']=['system'];
   before.dns['direct-nameserver-follow-policy']=false;
+  before.dns.nameserver=[
+   'routeweaver-doh://dns.alidns.com/dns-query#漏网之鱼',
+   'routeweaver-doh://doh.pub/dns-query#漏网之鱼',
+  ];
   assert.deepEqual(after,before);
  });
  check(platform+':three-pass-idempotence-and-upgrade-from-full-V14.2',()=>{const now=f.generate(platform);assert.deepEqual(f.generate(platform,now),now);assert.deepEqual(f.generate(platform,f.generate(platform,now)),now);const previous=old.generate(platform==='desktop'?'desktop':'android');assert.deepEqual(f.generate(platform,previous),now);});

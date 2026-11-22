@@ -7,7 +7,7 @@
   "directory": "releases/v14.3",
   "documentation": "docs/README.md",
   "report": "docs/reports/v14.3/云端规则审核与离线修复.md",
-  "status": "CURRENT_SOURCE_AND_ISOLATED_CORE_PASS_DEVICE_NOT_RUN",
+  "status": "SCOPED_DOH_MIGRATION_CANDIDATE",
   "apiDohRevision": "api-doh-egress-r1",
   "apiDohReport": "docs/reports/v14.3/API真实解析DNS出口修复.md",
   "apiDohScope": "Ordered api.openai.com real-answer DoH/443 exception in six main JS entries in auto/dual-stack; ipv4-local and ipv4-only keep their existing Fake-IP and group-encrypted DNS contract",
@@ -242,7 +242,19 @@
       "publicReleaseRemoteSHA256": "ALL_15_ANONYMOUS_DOWNLOADS_MATCH"
     }
   },
-  "currentRevision": "selector-option-order-r1",
+  "currentRevision": "scoped-business-doh-r1-candidate",
+  "scopedBusinessDns": {
+    "status": "CANDIDATE_REQUIRES_MATCHING_CORE",
+    "migration": "RouteWeaver Mihomo defaults and business DNS policies use ordered HTTPS/443 on the selected egress",
+    "requiredScheme": "routeweaver-doh",
+    "coreBase": "0455d0d28c4526937380505153e65a843d8612e8",
+    "coreSource": "releases/v14.3/research/scoped-business-doh",
+    "shadowrocket": "EXISTING_NATIVE_DOH_NO_SCOPED_CORE",
+    "stockRollbackTags": {
+      "main": "v14.3.0-rc.21",
+      "ipv4-only": "v14.3.0-ipv4-only-rc.12"
+    }
+  },
   "directSystemDns": {
     "releaseTags": {
       "main": "v14.3.0-rc.20",

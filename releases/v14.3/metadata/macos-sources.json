@@ -11,9 +11,9 @@
       "platform": "macosFlClash",
       "client": "FlClash",
       "file": "src/macos/v14.3-macos-flclash.js",
-      "sha256": "e2baa0d8214145cd65ab4bddc7d2637bf9146e1fc711c6673fa9b31918602fc5",
-      "bytes": 127894,
-      "generatedConfigBytes": 194216,
+      "sha256": "5eb9fdc83ad9b072dc122ca1aed13e579e58c84f116c735f49fcfe65a0bfca4d",
+      "bytes": 127887,
+      "generatedConfigBytes": 193268,
       "inlineRows": 1098,
       "remoteSources": 30
     },
@@ -21,9 +21,9 @@
       "platform": "macosClashMi",
       "client": "Clash Mi",
       "file": "src/macos/v14.3-macos-clashmi.js",
-      "sha256": "2106cfc82c9dba37386fa2b849222dfebbf98550624cdc9aebcf7f146d75abbe",
-      "bytes": 127918,
-      "generatedConfigBytes": 194512,
+      "sha256": "b079b8c1cb5e5ed84034deae561f538230ca3c660d6a519a50845b53a23568c6",
+      "bytes": 127911,
+      "generatedConfigBytes": 193564,
       "inlineRows": 1098,
       "remoteSources": 29
     }
@@ -128,7 +128,7 @@
     },
     {
       "file": "runtime/platforms/desktop/preamble.js.in",
-      "sha256": "d74ea0b981c56f06a5ab5f27a437ed4d7b964d23a94724f0fee2db7f9500ef6b"
+      "sha256": "ea28b38a752b3308f1f05e8bd960c3e55a9e59da522727b4c725e6d90a39aa89"
     },
     {
       "file": "runtime/shared/v14Fail.js.in",
@@ -160,7 +160,7 @@
     },
     {
       "file": "runtime/shared/v14DnsFor.js.in",
-      "sha256": "53fa059396e04f160c8475d5326ab5909c480670c1b48760cc916efb872d4cca"
+      "sha256": "de04292b175d7cf48c2a02323c9d33d249ea597d087ce7285bbdacdd68b96247"
     },
     {
       "file": "runtime/shared/v14Strings.js.in",
@@ -216,7 +216,7 @@
     },
     {
       "file": "runtime/shared/main.js.in",
-      "sha256": "3e93dcb9f142050aa9b703df039bbd73a2fa2021e9e7d61a09e236cdbc454677"
+      "sha256": "5a98a2edbf6ade4a6937a74251bfce5e23d84e763cf790595799fe99fabb9979"
     },
     {
       "file": "runtime/platforms/android/layout.json",
@@ -224,7 +224,7 @@
     },
     {
       "file": "runtime/platforms/android/preamble.js.in",
-      "sha256": "2adb3543f1e01fdb3def9ecb1754b6bff1c6dafc3313491d7481ffad1c125bc9"
+      "sha256": "d995cec3a59c25f7b951863cb64cf65b2db2392739a8926afba606bd3394c2b2"
     },
     {
       "file": "runtime/platforms/android/v14RuleRegistry.js.in",
@@ -232,7 +232,7 @@
     },
     {
       "file": "runtime/platforms/android/main.js.in",
-      "sha256": "519c20e231c8648d70ac77f78ded886833e40c5144bf9763ffca6cdbddabf7a9"
+      "sha256": "820811e74f18533d6a109cf7669afeacef4622fb014c1bff8b907a2e974cc4f6"
     },
     {
       "file": "tools/validate-azure-async.cjs",

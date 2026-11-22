@@ -1,1 +1,4 @@
-function v14DnsFor(group) { return V14.groupDnsUrls.map(url => url + "#" + group + "&disable-reuse=true"); }
+function v14DnsFor(group) {
+  const policy = group.replace(/[%#&=]/g, character => encodeURIComponent(character));
+  return V14.groupDnsUrls.map(url => url + "#" + policy);
+}

@@ -1,0 +1,36 @@
+{
+  "upstreamTag": "v1.19.34",
+  "upstreamCommit": "0455d0d28c4526937380505153e65a843d8612e8",
+  "sourceArchive": "https://codeload.github.com/MetaCubeX/mihomo/zip/0455d0d28c4526937380505153e65a843d8612e8",
+  "replayedArchiveSHA256": "186e8fe5efccedeb01a0545fc27eff152ec196d70a9ecc030d5d06f105d3cab9",
+  "patchSHA256": "5350b051379f921d5f5f943ed13975f3c11501e9361b2e87cbe15b7f30316613",
+  "license": "GPL-3.0",
+  "replayToolchain": "Go 1.27.2 Windows amd64",
+  "prototypePatchSHA256": "ff8080daad8791643c358ed0e7309530a95444e1df81ec439ab8b2dad8809f23",
+  "ports": {
+    "flclash-0.9.4": {
+      "appCommit": "89791d7c11978bf9b580ba71bffcb00506a17659",
+      "appSource": "https://github.com/chen08209/FlClash/tree/89791d7c11978bf9b580ba71bffcb00506a17659",
+      "appArchiveSHA256": "7d1e65a3be4838416535de8126015aec35036aa92bdb94d305bb560f9fb6caad",
+      "engineCommit": "5b453f80dbcee6b3ecfb0415bcace24a48c88707",
+      "engineSource": "https://github.com/chen08209/Clash.Meta/tree/5b453f80dbcee6b3ecfb0415bcace24a48c88707",
+      "engineArchiveSHA256": "ed7259c201b52b6ef7f10fabb892bf68c6bae88cc0f572c0500bea803802ea87",
+      "overlay": "flclash-0.9.4.patch",
+      "overlaySHA256": "82bce308c3e045dc1a5d5ecb25dd14a61fc4902b3bf9d2ef6c803549ee2ef7b5",
+      "verification": "WINDOWS_HOST_CORE_BUILD_AND_ENGINE_LOOPBACK"
+    },
+    "projectclash": {
+      "engineCommit": "c8f2fc1d58bf9ac856a0bf161bc9489591821f45",
+      "engineSource": "https://github.com/ProjectClash/Clash/tree/c8f2fc1d58bf9ac856a0bf161bc9489591821f45",
+      "engineArchiveSHA256": "682526bd082fc6c814546ddd28a233fd328c7e238a3ab0acace0165c71feeeaf",
+      "patch": "projectclash.patch",
+      "patchSHA256": "022b3f778f5162c53af2bf1e6e016a302873ff196870f88458634017cc699b9b",
+      "embeddedWindowsDependency": {
+        "module": "github.com/metacubex/sing-tun@v0.4.29",
+        "file": "internal/wintun/amd64/wintun.dll",
+        "sha256": "e5da8447dc2c320edc0fc52fa01885c103de8c118481f683643cacc3220dafce"
+      },
+      "verification": "WINDOWS_ENGINE_BUILD_AND_LOOPBACK"
+    }
+  }
+}

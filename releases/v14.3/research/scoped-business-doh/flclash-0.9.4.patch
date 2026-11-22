@@ -1,0 +1,140 @@
+diff --git a/adapter/outboundgroup/urltest.go b/adapter/outboundgroup/urltest.go
+--- a/adapter/outboundgroup/urltest.go
++++ b/adapter/outboundgroup/urltest.go
+@@ -5,6 +5,7 @@
+ 	"encoding/json"
+ 	"errors"
+ 	"math"
++	"sync"
+ 	"time"
+
+ 	"github.com/metacubex/mihomo/common/callback"
+@@ -23,13 +24,16 @@
+
+ type URLTest struct {
+ 	*GroupBase
+-	selected       string
+-	testUrl        string
+-	expectedStatus string
+-	tolerance      uint16
+-	disableUDP     bool
+-	fastNode       C.Proxy
+-	fastSingle     *singledo.Single[C.Proxy]
++	selected            string
++	testUrl             string
++	expectedStatus      string
++	tolerance           uint16
++	disableUDP          bool
++	fastNode            C.Proxy
++	fastSingle          *singledo.Single[C.Proxy]
++	selectionMu         sync.Mutex
++	selectionGeneration uint64
++	dnsLast             C.Proxy
+ }
+
+ func (u *URLTest) Now() string {
+@@ -52,13 +56,41 @@
+ }
+
+ func (u *URLTest) ForceSet(name string) {
+-	u.selected = name
++	u.selectionMu.Lock()
++	if u.selected != name {
++		u.selected = name
++		u.selectionGeneration++
++	}
++	u.selectionMu.Unlock()
+ 	u.fastSingle.Reset()
++}
++
++func (u *URLTest) DNSSelection() (C.Proxy, uint64) {
++	u.selectionMu.Lock()
++	start := u.selectionGeneration
++	u.selectionMu.Unlock()
++	proxy := u.fast(false)
++	u.selectionMu.Lock()
++	defer u.selectionMu.Unlock()
++	if start != u.selectionGeneration {
++		return nil, u.selectionGeneration
++	}
++	if proxy != nil && !proxy.AliveForTestUrl(u.testUrl) {
++		proxy = nil
++	}
++	if proxy != u.dnsLast {
++		u.dnsLast = proxy
++		u.selectionGeneration++
++	}
++	return proxy, u.selectionGeneration
+ }
+
+ // DialContext implements C.ProxyAdapter
+ func (u *URLTest) DialContext(ctx context.Context, metadata *C.Metadata) (c C.Conn, err error) {
+-	proxy := u.fast(true)
++	proxy, err := dnsChild(ctx, u, u.Touch, func() C.Proxy { return u.fast(true) })
++	if err != nil {
++		return nil, err
++	}
+ 	c, err = proxy.DialContext(ctx, metadata)
+ 	if err == nil {
+ 		c.AppendToChains(u)
+@@ -81,7 +113,10 @@
+
+ // ListenPacketContext implements C.ProxyAdapter
+ func (u *URLTest) ListenPacketContext(ctx context.Context, metadata *C.Metadata) (C.PacketConn, error) {
+-	proxy := u.fast(true)
++	proxy, err := dnsChild(ctx, u, u.Touch, func() C.Proxy { return u.fast(true) })
++	if err != nil {
++		return nil, err
++	}
+ 	pc, err := proxy.ListenPacketContext(ctx, metadata)
+ 	if err == nil {
+ 		pc.AppendToChains(u)
+@@ -113,6 +148,8 @@
+ 	})
+ 	elm, _, shared := u.fastSingle.Do(func() (C.Proxy, error) {
+ 		proxies := u.GetProxies(touch)
++		u.selectionMu.Lock()
++		defer u.selectionMu.Unlock()
+ 		if u.selected != "" {
+ 			for _, proxy := range proxies {
+ 				if !proxy.AliveForTestUrl(u.testUrl) {
+diff --git a/component/proxydialer/byname.go b/component/proxydialer/byname.go
+--- a/component/proxydialer/byname.go
++++ b/component/proxydialer/byname.go
+@@ -24,6 +24,12 @@
+ 	if err != nil {
+ 		return nil, err
+ 	}
++	if plan := C.DNSEgressPlanFrom(ctx); plan != nil {
++		if proxy, ok := plan.Detour(d.proxyName); ok {
++			return New(proxy, true).DialContext(ctx, network, address)
++		}
++		return nil, C.ErrUnpinnedDNSEgress
++	}
+ 	tunnel, _ := d.tunnel.(Tunnel)
+ 	if tunnel == nil {
+ 		return nil, fmt.Errorf("tunnel is invalid, must be proxydialer.Tunnel, but got: %T", d.tunnel)
+@@ -41,6 +47,12 @@
+ 	if err != nil {
+ 		return nil, err
+ 	}
++	if plan := C.DNSEgressPlanFrom(ctx); plan != nil {
++		if proxy, ok := plan.Detour(d.proxyName); ok {
++			return New(proxy, true).ListenPacket(ctx, network, address, rAddrPort)
++		}
++		return nil, C.ErrUnpinnedDNSEgress
++	}
+ 	tunnel, _ := d.tunnel.(Tunnel)
+ 	if tunnel == nil {
+ 		return nil, fmt.Errorf("tunnel is invalid, must be proxydialer.Tunnel, but got: %T", d.tunnel)
+diff --git a/tunnel/tunnel.go b/tunnel/tunnel.go
+--- a/tunnel/tunnel.go
++++ b/tunnel/tunnel.go
+@@ -230,6 +230,7 @@
+ func UpdateProxies(newProxies map[string]C.Proxy, newProviders map[string]P.ProxyProvider) {
+ 	configMux.Lock()
+ 	proxies = newProxies
++	updateDNSProxySnapshot(newProxies)
+ 	providers = newProviders
+ 	invalidateAllProxies()
+ 	configMux.Unlock()

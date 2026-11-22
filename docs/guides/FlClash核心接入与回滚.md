@@ -1,5 +1,7 @@
 # FlClash 可选核心接入与回滚
 
+此分支的 JS 候选需要支持 `routeweaver-doh` 的宿主内核。使用原装客户端时，导入既有发布附件。 [业务 DoH 迁移](业务DoH迁移.md)
+
 脚本和核心解决不同层的问题。单入口脚本保留两种网络模式、原分流和 DNS 跟组；无域名 IPv6 的操作系统错误重试及 TLS 短首包等待需要核心支持。当前可选核心仅适配 Windows amd64、FlClash 0.9.0 原装核心 SHA256 `ff0bfb9172a8331da6c5dac38028f47d805b433e8b2796b61c1767d8fb6792d3`。
 
 从同一 [rc.5 Release](https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-rc.5) 下载 `v14.3-flclash-windows-core.zip` 和对应源码包。核对 `SHA256SUMS.txt`，解压到可写目录。使用管理员 PowerShell 在解压目录执行：

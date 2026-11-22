@@ -15,10 +15,15 @@ for(const entries of [release.entries,release.variants['ipv4-only'].entries])for
    assert.equal(config.dns['nameserver-policy']['api.openai.com'],undefined);assert.deepEqual(actual.groups,['OpenAI 服务']);checks.push(file+':'+mode+':fake-ip-preserved');continue;
   }
   try{
-  assert.equal(actual.key,'api.openai.com');assert.ok(actual.servers.every(s=>s.startsWith('https://')&&s.includes('#OpenAI 服务')));
-  // Reproduce the former insertion-order bug: the earlier company trie wins.
+  const scoped=config.dns.nameserver[0].startsWith('routeweaver-doh://');
+  const doh=['dns.alidns.com','doh.pub'].map(host=>`${scoped?'routeweaver-doh':'https'}://${host}/dns-query#OpenAI 服务`);
+  assert.equal(actual.key,'api.openai.com');assert.deepEqual(actual.servers,doh);
+  // Moving the exact name behind a provider boundary selects the earlier company policy.
   const policy=config.dns['nameserver-policy'],value=policy['api.openai.com'];delete policy['api.openai.com'];policy['api.openai.com']=value;
-  assert.ok(index.indexDNS(model)('api.openai.com').servers.every(s=>s.startsWith('tls://')));
+  const earlier=index.indexDNS(model)('api.openai.com');
+  assert.notEqual(earlier.key,'api.openai.com');assert.deepEqual(earlier.groups,['OpenAI 服务']);
+  const expected=scoped?doh:['dns.alidns.com','dot.pub'].map(host=>`tls://${host}:853#OpenAI 服务&disable-reuse=true`);
+  assert.deepEqual(earlier.servers,expected);
   checks.push(file+':'+mode);
   }catch(error){failures.push({file,mode,key:actual.key,servers:actual.servers,error:error.message});}
  }

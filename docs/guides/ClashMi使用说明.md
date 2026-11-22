@@ -6,6 +6,8 @@
 
 # V14.3 iOS Clash Mi 使用说明
 
+此分支的 JS 候选需要支持 `routeweaver-doh` 的宿主内核。使用原装客户端时，导入既有发布附件。 [业务 DoH 迁移](业务DoH迁移.md)
+
 选择支持 IPv6 的主版或纯 IPv4 版，再在相应目录导入本客户端入口。Mihomo 的规则模式提供三档原生故障转移，活动链按 3 秒间隔探测，超时 3 秒。从未带 ↻ 的旧版升级时需要重选一次。 [主版](../../releases/v14.3/README.md) · [纯 IPv4 版](../../releases/v14.3-ipv4-only/README.md) · [故障转移](故障转移.md)
 
 ## rc.6：自动模式与原生能力边界
@@ -37,7 +39,7 @@
 
 若面板仍显示旧组，核对其连接的是否为本机当前核心，并在日志查找脚本名、`evaluate` 或配置错误。官方 JS 加载路径在脚本未找到、空内容或返回值不支持时可能继续使用订阅原配置，因此“VPN 已连接”本身不能证明 JS 生效。
 
-最终配置至少应保留以下内容；这是核对标准，不需要手工粘贴覆盖自己的节点：
+匹配核心的候选配置可按下例核对。应用继续使用既有发布附件时，以该附件生成的 DNS 字段为准。
 
 ```yaml
 mode: rule
@@ -46,8 +48,8 @@ dns:
   enable: true
   ipv6: true
   nameserver:
-    - tls://dns.alidns.com:853#漏网之鱼&disable-reuse=true
-    - tls://dot.pub:853#漏网之鱼&disable-reuse=true
+    - 'routeweaver-doh://dns.alidns.com/dns-query#漏网之鱼'
+    - 'routeweaver-doh://doh.pub/dns-query#漏网之鱼'
   fallback: []
 tun:
   enable: true

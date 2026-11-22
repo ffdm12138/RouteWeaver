@@ -6,6 +6,8 @@
 
 # Clash Verge Rev 使用说明
 
+此分支的 JS 候选需要支持 `routeweaver-doh` 的宿主内核。使用原装客户端时，导入既有发布附件。 [业务 DoH 迁移](业务DoH迁移.md)
+
 选择支持 IPv6 的主版或纯 IPv4 版，再在相应目录导入本客户端入口。Mihomo 的规则模式提供三档原生故障转移，活动链按 3 秒间隔探测，超时 3 秒。从未带 ↻ 的旧版升级时需要重选一次。 [主版](../../releases/v14.3/README.md) · [纯 IPv4 版](../../releases/v14.3-ipv4-only/README.md) · [故障转移](故障转移.md)
 
 ## rc.6：自动模式与原生能力边界

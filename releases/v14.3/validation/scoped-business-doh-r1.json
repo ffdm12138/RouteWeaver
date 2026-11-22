@@ -1,0 +1,278 @@
+{
+  "revision": "scoped-business-doh-r1-candidate",
+  "status": "PASS_WINDOWS_STANDALONE_AND_STATIC_CLIENT_MATRIX",
+  "date": "2026-11-22",
+  "flavor": "public",
+  "candidateCoreSHA256": "7c9be628ff62302b4a49ee66da1953f127cbb4afb7bf3e398eacf2335168210a",
+  "patchSHA256": "5350b051379f921d5f5f943ed13975f3c11501e9361b2e87cbe15b7f30316613",
+  "expectedConfigurationDigestsSHA256": "597bfbfd4142b9dbe50870e018b18c997a7dd70e3bccfd7b7dd3a70dd979dcec",
+  "runtimeChecks": 56,
+  "shadowrocketChecks": 2,
+  "nativeLoopback": {
+    "countPerSuite": 2,
+    "testNames": [
+      "TestEgressDoHPrototype",
+      "TestScopedDoHRejectsInvalidCertificate",
+      "TestScopedDoHInterfaceChange",
+      "TestScopedDoHAutomaticFallback",
+      "TestScopedDoHDialerProxy",
+      "TestScopedDoHParser"
+    ],
+    "skipped": {
+      "TestScopedDoHIPv6": "Windows network denied a native IPv6 loopback TCP connection (WSAEACCES)"
+    }
+  },
+  "entries": {
+    "main": {
+      "windows": {
+        "file": "releases/v14.3/src/windows/v14.3-windows-flclash.js",
+        "sha256": "47cd25a6549124c713a5b8577a0fa0018ce7a029cc8b765d33b5590168984b9b",
+        "validation": {
+          "flavor": "public",
+          "track": "main",
+          "platform": "windows",
+          "candidate": "PARSE_PASS",
+          "stock": "REFUSED_UNKNOWN_SCHEME"
+        }
+      },
+      "android": {
+        "file": "releases/v14.3/src/android/v14.3-android-flclash.js",
+        "sha256": "cf1cc7b7a4c23cfdd111aa41ca26d8e1e9c98b74d233feae2a467dbd1dafccd3",
+        "validation": {
+          "flavor": "public",
+          "track": "main",
+          "platform": "android",
+          "candidate": "PARSE_PASS",
+          "stock": "REFUSED_UNKNOWN_SCHEME"
+        }
+      },
+      "clashmi": {
+        "file": "releases/v14.3/src/ios/v14.3-clashmi-domestic-protocol-r1.js",
+        "sha256": "d880d6881dc06098bae9e582edff93f500e72f686832eadab7d61389d40dc47c",
+        "validation": {
+          "flavor": "public",
+          "track": "main",
+          "platform": "clashmi",
+          "candidate": "PARSE_PASS",
+          "stock": "REFUSED_UNKNOWN_SCHEME"
+        }
+      },
+      "shadowrocket": {
+        "file": "releases/v14.3/src/ios/v14.3-shadowrocket.conf",
+        "sha256": "03976c1d568828c12b6699afea9b85d0c8556a16114cc5927cd665d10910542b",
+        "validation": {
+          "candidate": "EXISTING_DOH_IDENTICAL_BYTES",
+          "device": "NOT_RUN"
+        }
+      },
+      "macosFlClash": {
+        "file": "releases/v14.3/src/macos/v14.3-macos-flclash.js",
+        "sha256": "5eb9fdc83ad9b072dc122ca1aed13e579e58c84f116c735f49fcfe65a0bfca4d",
+        "validation": {
+          "flavor": "public",
+          "track": "main",
+          "platform": "macosFlClash",
+          "candidate": "PARSE_PASS",
+          "stock": "REFUSED_UNKNOWN_SCHEME"
+        }
+      },
+      "macosClashMi": {
+        "file": "releases/v14.3/src/macos/v14.3-macos-clashmi.js",
+        "sha256": "b079b8c1cb5e5ed84034deae561f538230ca3c660d6a519a50845b53a23568c6",
+        "validation": {
+          "flavor": "public",
+          "track": "main",
+          "platform": "macosClashMi",
+          "candidate": "PARSE_PASS",
+          "stock": "REFUSED_UNKNOWN_SCHEME"
+        }
+      },
+      "clashVerge": {
+        "file": "releases/v14.3/src/clash-verge/v14.3-clash-verge.js",
+        "sha256": "7b44830ae2e242d6133e0842e83a2a98f106bf0c1d2e7ce64af33d934f76b800",
+        "validation": {
+          "flavor": "public",
+          "track": "main",
+          "platform": "clashVerge",
+          "candidate": "PARSE_PASS",
+          "stock": "REFUSED_UNKNOWN_SCHEME"
+        }
+      },
+      "projectclash": {
+        "file": "releases/v14.3/src/projectclash/v14.3-projectclash.js",
+        "sha256": "908f16c8a994c84349171056161edf35ecb95b91d19730691e2910f732c73e55",
+        "validation": {
+          "flavor": "public",
+          "track": "main",
+          "platform": "projectclash",
+          "candidate": "PARSE_PASS",
+          "stock": "REFUSED_UNKNOWN_SCHEME"
+        }
+      }
+    },
+    "ipv4-only": {
+      "windows": {
+        "file": "releases/v14.3-ipv4-only/src/windows/v14.3-windows-flclash-ipv4-only.js",
+        "sha256": "a2152f2301b09a651f78b18169a55e9b02637dad05903262ac501951afbc2a11",
+        "validation": {
+          "flavor": "public",
+          "track": "ipv4-only",
+          "platform": "windows",
+          "candidate": "PARSE_PASS",
+          "stock": "REFUSED_UNKNOWN_SCHEME"
+        }
+      },
+      "android": {
+        "file": "releases/v14.3-ipv4-only/src/android/v14.3-android-flclash-ipv4-only.js",
+        "sha256": "14253a1e5270ecfac45df58d9a93f531bf255ae292f5b49e549e47a132b56e39",
+        "validation": {
+          "flavor": "public",
+          "track": "ipv4-only",
+          "platform": "android",
+          "candidate": "PARSE_PASS",
+          "stock": "REFUSED_UNKNOWN_SCHEME"
+        }
+      },
+      "clashmi": {
+        "file": "releases/v14.3-ipv4-only/src/ios/v14.3-clashmi-domestic-protocol-r1-ipv4-only.js",
+        "sha256": "eac1c3049b0581af43924da1ea28864d533ce56e225af748a1bc218d39514e1f",
+        "validation": {
+          "flavor": "public",
+          "track": "ipv4-only",
+          "platform": "clashmi",
+          "candidate": "PARSE_PASS",
+          "stock": "REFUSED_UNKNOWN_SCHEME"
+        }
+      },
+      "shadowrocket": {
+        "file": "releases/v14.3-ipv4-only/src/ios/v14.3-shadowrocket-ipv4-only.conf",
+        "sha256": "5c3263d12d051904400257b42aecf1a774773fc6cdf656ea10edc087ad040cae",
+        "validation": {
+          "candidate": "EXISTING_DOH_IDENTICAL_BYTES",
+          "device": "NOT_RUN"
+        }
+      },
+      "macosFlClash": {
+        "file": "releases/v14.3-ipv4-only/src/macos/v14.3-macos-flclash-ipv4-only.js",
+        "sha256": "97bfb4d42265344f09d86ec43787a2f4c4a3bb0c86db7343be0bfcace31f4b9d",
+        "validation": {
+          "flavor": "public",
+          "track": "ipv4-only",
+          "platform": "macosFlClash",
+          "candidate": "PARSE_PASS",
+          "stock": "REFUSED_UNKNOWN_SCHEME"
+        }
+      },
+      "macosClashMi": {
+        "file": "releases/v14.3-ipv4-only/src/macos/v14.3-macos-clashmi-ipv4-only.js",
+        "sha256": "086091febe20f35e66effc3d35cc8a87d1d5908cc08955057e3761f368755c79",
+        "validation": {
+          "flavor": "public",
+          "track": "ipv4-only",
+          "platform": "macosClashMi",
+          "candidate": "PARSE_PASS",
+          "stock": "REFUSED_UNKNOWN_SCHEME"
+        }
+      },
+      "clashVerge": {
+        "file": "releases/v14.3-ipv4-only/src/clash-verge/v14.3-clash-verge-ipv4-only.js",
+        "sha256": "0d7259da9c77b11af4eda4e5a7dbeba4f3d19dd7e3ecea99325859c00b3db102",
+        "validation": {
+          "flavor": "public",
+          "track": "ipv4-only",
+          "platform": "clashVerge",
+          "candidate": "PARSE_PASS",
+          "stock": "REFUSED_UNKNOWN_SCHEME"
+        }
+      },
+      "projectclash": {
+        "file": "releases/v14.3-ipv4-only/src/projectclash/v14.3-projectclash-ipv4-only.js",
+        "sha256": "5d285816510a6c8ca01102c7704c33389305ad86e63b1937910adb5a2d4e3ef1",
+        "validation": {
+          "flavor": "public",
+          "track": "ipv4-only",
+          "platform": "projectclash",
+          "candidate": "PARSE_PASS",
+          "stock": "REFUSED_UNKNOWN_SCHEME"
+        }
+      }
+    }
+  },
+  "hostAppIntegration": "NOT_COMPLETED",
+  "deviceAcceptance": "NOT_RUN",
+  "wanIPv6": "NOT_RUN",
+  "stableRelease": "UNCHANGED",
+  "baseRegression": {
+    "v14.3/static.json": {
+      "status": "BALANCED_STATIC_PASS",
+      "checks": 27
+    },
+    "v14.3/network-compat-static.json": {
+      "status": "NETWORK_COMPAT_STATIC_PASS",
+      "checks": 73
+    },
+    "v14.3-ipv4-only/static.json": {
+      "status": "IPV4_ONLY_STATIC_BUSINESS_PARITY_PASS",
+      "checks": 68
+    },
+    "dnsPolicyOrder": {
+      "status": "PASS",
+      "checks": 36
+    },
+    "projectClash": {
+      "status": "PASS",
+      "checks": 12,
+      "engine": "Node"
+    },
+    "nativeFallback": {
+      "status": "PASS",
+      "checks": 72
+    }
+  },
+  "hostCorePorts": {
+    "flclash-0.9.4": {
+      "build": "WINDOWS_AMD64_HOST_CORE_PASS",
+      "binarySHA256": "e46b4cc7f1b31b4ee08c9036cf7057a130599866e2c1fb8f3bbb25420adf4034",
+      "patchSHA256": "82bce308c3e045dc1a5d5ecb25dd14a61fc4902b3bf9d2ef6c803549ee2ef7b5",
+      "nativeLoopback": {
+        "countPerSuite": 1,
+        "testNames": [
+          "TestEgressDoHPrototype",
+          "TestScopedDoHRejectsInvalidCertificate",
+          "TestScopedDoHInterfaceChange",
+          "TestScopedDoHAutomaticFallback",
+          "TestScopedDoHDialerProxy",
+          "TestScopedDoHParser"
+        ],
+        "skipped": {
+          "TestScopedDoHIPv6": "Windows network denied a native IPv6 loopback TCP connection (WSAEACCES)"
+        }
+      }
+    },
+    "projectclash": {
+      "build": "WINDOWS_AMD64_ENGINE_PASS",
+      "binarySHA256": "36559ff38a187d637e51fbd80b3c48dc06deacd00df0a0370fdf199ea9588bf7",
+      "patchSHA256": "022b3f778f5162c53af2bf1e6e016a302873ff196870f88458634017cc699b9b",
+      "nativeLoopback": {
+        "countPerSuite": 1,
+        "testNames": [
+          "TestEgressDoHPrototype",
+          "TestScopedDoHRejectsInvalidCertificate",
+          "TestScopedDoHInterfaceChange",
+          "TestScopedDoHAutomaticFallback",
+          "TestScopedDoHDialerProxy",
+          "TestScopedDoHParser"
+        ],
+        "skipped": {
+          "TestScopedDoHIPv6": "Windows network denied a native IPv6 loopback TCP connection (WSAEACCES)"
+        }
+      }
+    }
+  },
+  "engineConfigChecks": {
+    "scopedMihomo": 14,
+    "stockMihomoRejected": 14,
+    "scopedProjectClash": 2
+  },
+  "ipv6Transport": "BLOCKED_ON_WINDOWS_LOOPBACK"
+}

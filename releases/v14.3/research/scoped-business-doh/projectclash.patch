@@ -1,0 +1,2025 @@
+diff --git a/adapter/adapter.go b/adapter/adapter.go
+--- a/adapter/adapter.go
++++ b/adapter/adapter.go
+@@ -30,21 +30,23 @@
+ )
+
+ type internalProxyState struct {
+-	alive   atomic.Bool
+-	history *queue.Queue[C.DelayHistory]
+-	asked   string
+-	failure stdatomic.Pointer[URLTestFailure]
++	dnsHealthGeneration atomic.Uint64
++	alive               atomic.Bool
++	history             *queue.Queue[C.DelayHistory]
++	asked               string
++	failure             stdatomic.Pointer[URLTestFailure]
+ }
+
+ type Proxy struct {
++	dnsHealthGeneration atomic.Uint64
+ 	C.ProxyAdapter
+-	alive   atomic.Bool
+-	history nodeHistory
+-	extra   proxyStates
+-	failure stdatomic.Pointer[URLTestFailure]
+-	records sync.Mutex
+-	now func() time.Time
+-	urlTests urlTestFlights
++	alive         atomic.Bool
++	history       nodeHistory
++	extra         proxyStates
++	failure       stdatomic.Pointer[URLTestFailure]
++	records       sync.Mutex
++	now           func() time.Time
++	urlTests      urlTestFlights
+ 	clashRecorded func(url string, record C.DelayHistory, alive bool, failure *URLTestFailure, urlRecord C.DelayHistory, urlAlive bool, urlFailure *URLTestFailure, asked string)
+ }
+
+@@ -70,6 +72,15 @@
+ 	}
+
+ 	return p.alive.Load()
++}
++
++// DNSHealthGeneration changes on an actual health transition, including
++// outages and recoveries between two requests.
++func (p *Proxy) DNSHealthGeneration(url string) uint64 {
++	if state, ok := p.extra.Load(url); ok {
++		return state.dnsHealthGeneration.Load()
++	}
++	return p.dnsHealthGeneration.Load()
+ }
+
+ // DialContext implements C.ProxyAdapter
+@@ -261,7 +272,9 @@
+ 			record.Delay = t
+ 		}
+
+-		p.alive.Store(alive)
++		if p.alive.Swap(alive) != alive {
++			p.dnsHealthGeneration.Add(1)
++		}
+ 		historyRecord, historyAlive := record, alive
+ 		failure, urlFailure := ClassifyURLTestFailure(err, true, status), ClassifyURLTestFailure(err, satisfied, status)
+ 		p.failure.Store(failure)
+@@ -282,7 +295,9 @@
+ 			alive = false
+ 		}
+
+-		state.alive.Store(alive)
++		if state.alive.Swap(alive) != alive {
++			state.dnsHealthGeneration.Add(1)
++		}
+ 		state.failure.Store(urlFailure)
+ 		state.history.Put(record)
+ 		if state.history.Len() > defaultHistoriesNum {
+diff --git a/adapter/outbound/vless.go b/adapter/outbound/vless.go
+--- a/adapter/outbound/vless.go
++++ b/adapter/outbound/vless.go
+@@ -413,6 +413,10 @@
+ 	info := v.Base.ProxyInfo()
+ 	info.DialerProxy = v.option.DialerProxy
+ 	return info
++}
++
++func (v *Vless) DNSFreshDetour() bool {
++	return v.option.Network == "" || v.option.Network == "tcp"
+ }
+
+ // Close implements C.ProxyAdapter
+diff --git a/adapter/outboundgroup/clash_group_selection.go b/adapter/outboundgroup/clash_group_selection.go
+--- a/adapter/outboundgroup/clash_group_selection.go
++++ b/adapter/outboundgroup/clash_group_selection.go
+@@ -2,13 +2,39 @@
+
+ import "sync/atomic"
+
+-type groupSelection struct{ name atomic.Pointer[string] }
++type groupSelectionValue struct {
++	name       string
++	generation uint64
++}
++
++type groupSelection struct {
++	value atomic.Pointer[groupSelectionValue]
++}
+
+ func (s *groupSelection) Load() string {
+-	if name := s.name.Load(); name != nil {
+-		return *name
+-	}
+-	return ""
++	name, _ := s.Snapshot()
++	return name
+ }
+
+-func (s *groupSelection) Store(name string) { s.name.Store(&name) }
++func (s *groupSelection) Snapshot() (string, uint64) {
++	if current := s.value.Load(); current != nil {
++		return current.name, current.generation
++	}
++	return "", 0
++}
++
++func (s *groupSelection) Store(name string) {
++	for {
++		current := s.value.Load()
++		generation := uint64(1)
++		if current != nil {
++			if current.name == name {
++				return
++			}
++			generation = current.generation + 1
++		}
++		if s.value.CompareAndSwap(current, &groupSelectionValue{name: name, generation: generation}) {
++			return
++		}
++	}
++}
+diff --git a/adapter/outboundgroup/dns_egress.go b/adapter/outboundgroup/dns_egress.go
+new file mode 100644
+--- /dev/null
++++ b/adapter/outboundgroup/dns_egress.go
+@@ -0,0 +1,18 @@
++package outboundgroup
++
++import (
++	"context"
++
++	C "github.com/ProjectClash/Clash/constant"
++)
++
++func dnsChild(ctx context.Context, parent C.ProxyAdapter, touch func(), ordinary func() C.Proxy) (C.Proxy, error) {
++	if plan := C.DNSEgressPlanFrom(ctx); plan != nil {
++		if child, ok := plan.Child(parent); ok {
++			touch()
++			return child, nil
++		}
++		return nil, C.ErrUnpinnedDNSEgress
++	}
++	return ordinary(), nil
++}
+diff --git a/adapter/outboundgroup/fallback.go b/adapter/outboundgroup/fallback.go
+--- a/adapter/outboundgroup/fallback.go
++++ b/adapter/outboundgroup/fallback.go
+@@ -4,6 +4,7 @@
+ 	"context"
+ 	"encoding/json"
+ 	"errors"
++	"sync"
+ 	"time"
+
+ 	"github.com/ProjectClash/Clash/common/callback"
+@@ -11,6 +12,7 @@
+ 	"github.com/ProjectClash/Clash/common/utils"
+ 	C "github.com/ProjectClash/Clash/constant"
+ 	P "github.com/ProjectClash/Clash/constant/provider"
++	"golang.org/x/exp/slices"
+ )
+
+ type FallbackOption struct{}
+@@ -20,6 +22,11 @@
+ 	disableUDP     bool
+ 	testUrl        string
+ 	selected       groupSelection
++	dnsMu          sync.Mutex
++	dnsGeneration  uint64
++	dnsSelected    uint64
++	dnsLast        C.Proxy
++	dnsHealth      []uint64
+ 	expectedStatus string
+ }
+
+@@ -30,7 +37,10 @@
+
+ // DialContext implements C.ProxyAdapter
+ func (f *Fallback) DialContext(ctx context.Context, metadata *C.Metadata) (C.Conn, error) {
+-	proxy := f.findAliveProxy(true)
++	proxy, err := dnsChild(ctx, f, f.Touch, func() C.Proxy { return f.findAliveProxy(true) })
++	if err != nil {
++		return nil, err
++	}
+ 	c, err := proxy.DialContext(ctx, metadata)
+ 	if err == nil {
+ 		c.AppendToChains(f)
+@@ -53,7 +63,10 @@
+
+ // ListenPacketContext implements C.ProxyAdapter
+ func (f *Fallback) ListenPacketContext(ctx context.Context, metadata *C.Metadata) (C.PacketConn, error) {
+-	proxy := f.findAliveProxy(true)
++	proxy, err := dnsChild(ctx, f, f.Touch, func() C.Proxy { return f.findAliveProxy(true) })
++	if err != nil {
++		return nil, err
++	}
+ 	pc, err := proxy.ListenPacketContext(ctx, metadata)
+ 	if err == nil {
+ 		pc.AppendToChains(f)
+@@ -101,6 +114,35 @@
+ func (f *Fallback) Unwrap(metadata *C.Metadata, touch bool) C.Proxy {
+ 	proxy := f.findAliveProxy(touch)
+ 	return proxy
++}
++
++func (f *Fallback) DNSSelection() (C.Proxy, uint64) {
++	f.dnsMu.Lock()
++	defer f.dnsMu.Unlock()
++	_, start := f.selected.Snapshot()
++	proxy := f.findAliveProxy(false)
++	_, generation := f.selected.Snapshot()
++	if start != generation || !proxy.AliveForTestUrl(f.testUrl) {
++		proxy = nil
++	}
++	members := f.Members(false)
++	health := make([]uint64, 0, members.Len())
++	for i := 0; i < members.Len(); i++ {
++		candidate := members.At(i)
++		epoch := uint64(0)
++		if state, ok := candidate.(interface{ DNSHealthGeneration(string) uint64 }); ok {
++			epoch = state.DNSHealthGeneration(f.testUrl)
++		}
++		health = append(health, epoch)
++		if candidate == proxy {
++			break
++		}
++	}
++	if proxy != f.dnsLast || generation != f.dnsSelected || !slices.Equal(f.dnsHealth, health) {
++		f.dnsLast, f.dnsSelected, f.dnsHealth = proxy, generation, health
++		f.dnsGeneration++
++	}
++	return proxy, f.dnsGeneration
+ }
+
+ func (f *Fallback) findAliveProxy(touch bool) C.Proxy {
+diff --git a/adapter/outboundgroup/loadbalance.go b/adapter/outboundgroup/loadbalance.go
+--- a/adapter/outboundgroup/loadbalance.go
++++ b/adapter/outboundgroup/loadbalance.go
+@@ -120,7 +120,10 @@
+
+ // DialContext implements C.ProxyAdapter
+ func (lb *LoadBalance) DialContext(ctx context.Context, metadata *C.Metadata) (c C.Conn, err error) {
+-	proxy := lb.Unwrap(metadata, true)
++	proxy, err := dnsChild(ctx, lb, lb.Touch, func() C.Proxy { return lb.Unwrap(metadata, true) })
++	if err != nil {
++		return nil, err
++	}
+ 	c, err = proxy.DialContext(ctx, metadata)
+
+ 	if err == nil {
+@@ -150,7 +153,10 @@
+ 		}
+ 	}()
+
+-	proxy := lb.Unwrap(metadata, true)
++	proxy, err := dnsChild(ctx, lb, lb.Touch, func() C.Proxy { return lb.Unwrap(metadata, true) })
++	if err != nil {
++		return nil, err
++	}
+ 	return proxy.ListenPacketContext(ctx, metadata)
+ }
+
+@@ -254,6 +260,19 @@
+ func (lb *LoadBalance) Unwrap(metadata *C.Metadata, touch bool) C.Proxy {
+ 	proxies := lb.Members(touch)
+ 	return lb.strategyFn(proxies, metadata, touch)
++}
++
++func (lb *LoadBalance) DNSBalancedChoice(metadata *C.Metadata) C.Proxy {
++	return lb.Unwrap(metadata, true)
++}
++
++func (lb *LoadBalance) DNSBalancedChoiceActive(chosen C.Proxy) bool {
++	for _, proxy := range lb.GetProxies(false) {
++		if proxy == chosen {
++			return proxy.AliveForTestUrl(lb.testUrl)
++		}
++	}
++	return false
+ }
+
+ // MarshalJSON implements C.ProxyAdapter
+diff --git a/adapter/outboundgroup/selector.go b/adapter/outboundgroup/selector.go
+--- a/adapter/outboundgroup/selector.go
++++ b/adapter/outboundgroup/selector.go
+@@ -22,7 +22,11 @@
+
+ // DialContext implements C.ProxyAdapter
+ func (s *Selector) DialContext(ctx context.Context, metadata *C.Metadata) (C.Conn, error) {
+-	c, err := s.selectedProxy(true).DialContext(ctx, metadata)
++	proxy, err := dnsChild(ctx, s, s.Touch, func() C.Proxy { return s.selectedProxy(true) })
++	if err != nil {
++		return nil, err
++	}
++	c, err := proxy.DialContext(ctx, metadata)
+ 	if err == nil {
+ 		c.AppendToChains(s)
+ 	}
+@@ -31,7 +35,11 @@
+
+ // ListenPacketContext implements C.ProxyAdapter
+ func (s *Selector) ListenPacketContext(ctx context.Context, metadata *C.Metadata) (C.PacketConn, error) {
+-	pc, err := s.selectedProxy(true).ListenPacketContext(ctx, metadata)
++	proxy, err := dnsChild(ctx, s, s.Touch, func() C.Proxy { return s.selectedProxy(true) })
++	if err != nil {
++		return nil, err
++	}
++	pc, err := proxy.ListenPacketContext(ctx, metadata)
+ 	if err == nil {
+ 		pc.AppendToChains(s)
+ 	}
+@@ -99,6 +107,15 @@
+ 	return s.selectedProxy(touch)
+ }
+
++func (s *Selector) DNSSelection() (C.Proxy, uint64) {
++	selected, generation := s.selected.Snapshot()
++	proxy, members, exists := s.memberNamed(false, selected)
++	if exists {
++		return proxy, generation
++	}
++	return members.At(0), generation
++}
++
+ func (s *Selector) selectedProxy(touch bool) C.Proxy {
+ 	proxy, proxies, ok := s.memberNamed(touch, s.selected.Load())
+ 	if ok {
+diff --git a/adapter/outboundgroup/urltest.go b/adapter/outboundgroup/urltest.go
+--- a/adapter/outboundgroup/urltest.go
++++ b/adapter/outboundgroup/urltest.go
+@@ -4,6 +4,7 @@
+ 	"context"
+ 	"encoding/json"
+ 	"errors"
++	"sync"
+ 	"time"
+
+ 	"github.com/ProjectClash/Clash/common/callback"
+@@ -21,6 +22,11 @@
+ type URLTest struct {
+ 	*GroupBase
+ 	selected       groupSelection
++	dnsMu          sync.Mutex
++	dnsGeneration  uint64
++	dnsSelected    uint64
++	dnsLast        C.Proxy
++	dnsHealth      uint64
+ 	testUrl        string
+ 	expectedStatus string
+ 	tolerance      uint16
+@@ -53,9 +59,32 @@
+ 	u.fastSingle.Reset()
+ }
+
++func (u *URLTest) DNSSelection() (C.Proxy, uint64) {
++	u.dnsMu.Lock()
++	defer u.dnsMu.Unlock()
++	_, start := u.selected.Snapshot()
++	proxy := u.fast(false)
++	_, generation := u.selected.Snapshot()
++	if proxy != nil && (start != generation || !proxy.AliveForTestUrl(u.testUrl)) {
++		proxy = nil
++	}
++	epoch := uint64(0)
++	if state, ok := proxy.(interface{ DNSHealthGeneration(string) uint64 }); ok {
++		epoch = state.DNSHealthGeneration(u.testUrl)
++	}
++	if proxy != u.dnsLast || generation != u.dnsSelected || epoch != u.dnsHealth {
++		u.dnsLast, u.dnsSelected, u.dnsHealth = proxy, generation, epoch
++		u.dnsGeneration++
++	}
++	return proxy, u.dnsGeneration
++}
++
+ // DialContext implements C.ProxyAdapter
+ func (u *URLTest) DialContext(ctx context.Context, metadata *C.Metadata) (c C.Conn, err error) {
+-	proxy := u.fast(true)
++	proxy, err := dnsChild(ctx, u, u.Touch, func() C.Proxy { return u.fast(true) })
++	if err != nil {
++		return nil, err
++	}
+ 	c, err = proxy.DialContext(ctx, metadata)
+ 	if err == nil {
+ 		c.AppendToChains(u)
+@@ -78,7 +107,10 @@
+
+ // ListenPacketContext implements C.ProxyAdapter
+ func (u *URLTest) ListenPacketContext(ctx context.Context, metadata *C.Metadata) (C.PacketConn, error) {
+-	proxy := u.fast(true)
++	proxy, err := dnsChild(ctx, u, u.Touch, func() C.Proxy { return u.fast(true) })
++	if err != nil {
++		return nil, err
++	}
+ 	pc, err := proxy.ListenPacketContext(ctx, metadata)
+ 	if err == nil {
+ 		pc.AppendToChains(u)
+diff --git a/component/dialer/options.go b/component/dialer/options.go
+--- a/component/dialer/options.go
++++ b/component/dialer/options.go
+@@ -18,6 +18,19 @@
+
+ type InterfaceFinder interface {
+ 	FindInterfaceName(destination netip.Addr) string
++}
++
++// DNSInterfaceFinder exposes the generation of the physical route used by an
++// automatic interface finder. A missing route must not reuse a cached answer.
++type DNSInterfaceFinder interface {
++	InterfaceFinder
++	DNSInterfaceState() (DNSInterfaceState, bool)
++}
++
++type DNSInterfaceState struct {
++	Generation uint64
++	Name       string
++	Index      int
+ }
+
+ type NetDialer interface {
+diff --git a/component/proxydialer/byname.go b/component/proxydialer/byname.go
+--- a/component/proxydialer/byname.go
++++ b/component/proxydialer/byname.go
+@@ -20,6 +20,12 @@
+ }
+
+ func (d byNameProxyDialer) DialContext(ctx context.Context, network, address string) (net.Conn, error) {
++	if plan := C.DNSEgressPlanFrom(ctx); plan != nil {
++		if proxy, ok := plan.Detour(d.proxyName); ok {
++			return New(proxy, true).DialContext(ctx, network, address)
++		}
++		return nil, C.ErrUnpinnedDNSEgress
++	}
+ 	tunnel, _ := d.tunnel.(Tunnel)
+ 	if tunnel == nil {
+ 		return nil, fmt.Errorf("tunnel is invalid, must be proxydialer.Tunnel, but got: %T", d.tunnel)
+@@ -32,6 +38,12 @@
+ }
+
+ func (d byNameProxyDialer) ListenPacket(ctx context.Context, network, address string, rAddrPort netip.AddrPort) (net.PacketConn, error) {
++	if plan := C.DNSEgressPlanFrom(ctx); plan != nil {
++		if proxy, ok := plan.Detour(d.proxyName); ok {
++			return New(proxy, true).ListenPacket(ctx, network, address, rAddrPort)
++		}
++		return nil, C.ErrUnpinnedDNSEgress
++	}
+ 	tunnel, _ := d.tunnel.(Tunnel)
+ 	if tunnel == nil {
+ 		return nil, fmt.Errorf("tunnel is invalid, must be proxydialer.Tunnel, but got: %T", d.tunnel)
+diff --git a/config/config.go b/config/config.go
+--- a/config/config.go
++++ b/config/config.go
+@@ -48,29 +48,29 @@
+ // General config
+ type General struct {
+ 	Inbound
+-	Mode              T.TunnelMode            `json:"mode"`
+-	UnifiedDelay      bool                    `json:"unified-delay"`
+-	LogLevel          log.LogLevel            `json:"log-level"`
+-	IPv6              bool                    `json:"ipv6"`
+-	Interface         string                  `json:"interface-name"`
+-	RoutingMark       int                     `json:"routing-mark"`
+-	GeoXUrl           GeoXUrl                 `json:"geox-url"`
+-	GeoAutoUpdate     bool                    `json:"geo-auto-update"`
+-	GeoUpdateInterval int                     `json:"geo-update-interval"`
+-	GeodataMode       bool                    `json:"geodata-mode"`
+-	GeodataLoader     string                  `json:"geodata-loader"`
+-	GeositeMatcher    string                  `json:"geosite-matcher"`
+-	TCPConcurrent     bool                    `json:"tcp-concurrent"`
+-	FindProcessMode   process.FindProcessMode `json:"find-process-mode"`
+-	Sniffing          bool                    `json:"sniffing"`
+-	GlobalUA          string                  `json:"global-ua"`
+-	ETagSupport       bool                    `json:"etag-support"`
+-	KeepAliveIdle     int                     `json:"keep-alive-idle"`
+-	KeepAliveInterval int                     `json:"keep-alive-interval"`
+-	DisableKeepAlive  bool                    `json:"disable-keep-alive"`
+-	NetworkStrategy     string   `json:"network-strategy"`
+-	NetworkType         []string `json:"network-type"`
+-	FallbackNetworkType []string `json:"fallback-network-type"`
++	Mode                T.TunnelMode            `json:"mode"`
++	UnifiedDelay        bool                    `json:"unified-delay"`
++	LogLevel            log.LogLevel            `json:"log-level"`
++	IPv6                bool                    `json:"ipv6"`
++	Interface           string                  `json:"interface-name"`
++	RoutingMark         int                     `json:"routing-mark"`
++	GeoXUrl             GeoXUrl                 `json:"geox-url"`
++	GeoAutoUpdate       bool                    `json:"geo-auto-update"`
++	GeoUpdateInterval   int                     `json:"geo-update-interval"`
++	GeodataMode         bool                    `json:"geodata-mode"`
++	GeodataLoader       string                  `json:"geodata-loader"`
++	GeositeMatcher      string                  `json:"geosite-matcher"`
++	TCPConcurrent       bool                    `json:"tcp-concurrent"`
++	FindProcessMode     process.FindProcessMode `json:"find-process-mode"`
++	Sniffing            bool                    `json:"sniffing"`
++	GlobalUA            string                  `json:"global-ua"`
++	ETagSupport         bool                    `json:"etag-support"`
++	KeepAliveIdle       int                     `json:"keep-alive-idle"`
++	KeepAliveInterval   int                     `json:"keep-alive-interval"`
++	DisableKeepAlive    bool                    `json:"disable-keep-alive"`
++	NetworkStrategy     string                  `json:"network-strategy"`
++	NetworkType         []string                `json:"network-type"`
++	FallbackNetworkType []string                `json:"fallback-network-type"`
+ }
+
+ // Inbound config
+@@ -256,7 +256,7 @@
+ 	ProxyServerNameserverPolicy  *orderedmap.OrderedMap[string, any] `yaml:"proxy-server-nameserver-policy" json:"proxy-server-nameserver-policy"`
+ 	DirectNameServer             []string                            `yaml:"direct-nameserver" json:"direct-nameserver"`
+ 	DirectNameServerFollowPolicy bool                                `yaml:"direct-nameserver-follow-policy" json:"direct-nameserver-follow-policy"`
+-	ClashSSIDNameservers *orderedmap.OrderedMap[string, any] `yaml:"x-clash-ssid-nameservers" json:"x-clash-ssid-nameservers"`
++	ClashSSIDNameservers         *orderedmap.OrderedMap[string, any] `yaml:"x-clash-ssid-nameservers" json:"x-clash-ssid-nameservers"`
+
+ 	ClashAnswerSVCB       *bool `yaml:"x-clash-answer-svcb" json:"x-clash-answer-svcb"`
+ 	ClashAnswerOtherTypes *bool `yaml:"x-clash-answer-other-types" json:"x-clash-answer-other-types"`
+@@ -490,14 +490,14 @@
+
+ 	ClashForAndroid RawClashForAndroid `yaml:"clash-for-android" json:"clash-for-android"`
+
+-	ClashEveryModeRules   []string `yaml:"x-clash-every-mode-rules" json:"x-clash-every-mode-rules"`
+-	ClashUDPUnsupported   string   `yaml:"x-clash-udp-unsupported" json:"x-clash-udp-unsupported"`
+-	ClashSTUNResponseIP   string   `yaml:"x-clash-stun-response-ip" json:"x-clash-stun-response-ip"`
+-	ClashSTUNResponseIPv6 string   `yaml:"x-clash-stun-response-ipv6" json:"x-clash-stun-response-ipv6"`
+-	ClashRejectPage       bool     `yaml:"x-clash-show-error-page-for-reject" json:"x-clash-show-error-page-for-reject"`
+-	ClashIPRewrite []string `yaml:"x-clash-ip-rewrite" json:"x-clash-ip-rewrite"`
+-	ClashBlockQUIC string `yaml:"x-clash-block-quic" json:"x-clash-block-quic"`
+-	ClashProxyHosts map[string]any `yaml:"x-clash-proxy-hosts" json:"x-clash-proxy-hosts"`
++	ClashEveryModeRules   []string       `yaml:"x-clash-every-mode-rules" json:"x-clash-every-mode-rules"`
++	ClashUDPUnsupported   string         `yaml:"x-clash-udp-unsupported" json:"x-clash-udp-unsupported"`
++	ClashSTUNResponseIP   string         `yaml:"x-clash-stun-response-ip" json:"x-clash-stun-response-ip"`
++	ClashSTUNResponseIPv6 string         `yaml:"x-clash-stun-response-ipv6" json:"x-clash-stun-response-ipv6"`
++	ClashRejectPage       bool           `yaml:"x-clash-show-error-page-for-reject" json:"x-clash-show-error-page-for-reject"`
++	ClashIPRewrite        []string       `yaml:"x-clash-ip-rewrite" json:"x-clash-ip-rewrite"`
++	ClashBlockQUIC        string         `yaml:"x-clash-block-quic" json:"x-clash-block-quic"`
++	ClashProxyHosts       map[string]any `yaml:"x-clash-proxy-hosts" json:"x-clash-proxy-hosts"`
+
+ 	ClashRules ClashRuleSource `yaml:"-" json:"-"`
+ }
+@@ -1361,8 +1361,21 @@
+
+ 		var proxyName string
+ 		params := map[string]string{}
+-		for _, s := range strings.Split(u.Fragment, "&") {
++		fragment := u.Fragment
++		scopedDoH := u.Scheme == "routeweaver-doh"
++		if scopedDoH {
++			fragment = u.EscapedFragment()
++		}
++		for _, s := range strings.Split(fragment, "&") {
+ 			arr := strings.SplitN(s, "=", 2)
++			if scopedDoH {
++				for i, escaped := range arr {
++					arr[i], err = url.PathUnescape(escaped)
++					if err != nil {
++						return nil, fmt.Errorf("DNS NameServer[%d]: invalid scoped policy", idx)
++					}
++				}
++			}
+ 			switch len(arr) {
+ 			case 1:
+ 				proxyName = arr[0]
+@@ -1373,6 +1386,19 @@
+
+ 		var addr, dnsNetType string
+ 		switch u.Scheme {
++		case "routeweaver-doh":
++			if proxyName == "" || proxyName == dns.RespectRules || u.User != nil || params["skip-cert-verify"] == "true" {
++				return nil, fmt.Errorf("DNS NameServer[%d]: routeweaver-doh requires a named policy and verified TLS", idx)
++			}
++			addr, err = hostWithDefaultPort(u.Host, "443")
++			if err == nil && u.Port() != "" && u.Port() != "443" {
++				err = errors.New("routeweaver-doh uses HTTPS port 443")
++			}
++			dnsNetType = "https"
++			clearURL := url.URL{Scheme: "https", Host: addr, Path: u.Path}
++			addr = clearURL.String()
++			params["isolate-egress"] = "true"
++			params["h3"] = "false"
+ 		case "udp":
+ 			addr, err = hostWithDefaultPort(u.Host, "53")
+ 			dnsNetType = "" // UDP
+@@ -1446,7 +1472,7 @@
+ 			Addr:      addr,
+ 			ProxyName: proxyName,
+ 			Params:    params,
+-			PreferH3:  preferH3,
++			PreferH3:  preferH3 && u.Scheme != "routeweaver-doh",
+ 		}
+ 		if slices.ContainsFunc(nameservers, nameserver.Equal) {
+ 			continue // skip duplicates nameserver
+diff --git a/config/scoped_doh_test.go b/config/scoped_doh_test.go
+new file mode 100644
+--- /dev/null
++++ b/config/scoped_doh_test.go
+@@ -0,0 +1,28 @@
++package config
++
++import "testing"
++
++func TestScopedDoHParser(t *testing.T) {
++	const endpoint = "routeweaver-doh://dns.alidns.com/dns-query#"
++	upstreams, err := parseNameServer([]string{endpoint + "DNS%26policy%3D1&disable-ipv6=true"}, false, true)
++	if err != nil {
++		t.Fatal(err)
++	}
++	if len(upstreams) != 1 {
++		t.Fatalf("parsed %d upstreams", len(upstreams))
++	}
++	upstream := upstreams[0]
++	if upstream.Addr != "https://dns.alidns.com:443/dns-query" || upstream.Net != "https" ||
++		upstream.ProxyName != "DNS&policy=1" || upstream.PreferH3 ||
++		upstream.Params["disable-ipv6"] != "true" || upstream.Params["isolate-egress"] != "true" {
++		t.Fatalf("unexpected scoped upstream: %+v", upstream)
++	}
++	for _, invalid := range []string{
++		endpoint, endpoint + "RULES", endpoint + "DNS&skip-cert-verify=true",
++		"routeweaver-doh://dns.alidns.com:853/dns-query#DNS",
++	} {
++		if _, err := parseNameServer([]string{invalid}, false, false); err == nil {
++			t.Fatalf("accepted invalid scoped upstream %s", invalid)
++		}
++	}
++}
+diff --git a/constant/dns_egress.go b/constant/dns_egress.go
+new file mode 100644
+--- /dev/null
++++ b/constant/dns_egress.go
+@@ -0,0 +1,26 @@
++package constant
++
++import (
++	"context"
++	"errors"
++)
++
++var ErrUnpinnedDNSEgress = errors.New("DNS dial outside the selected egress")
++
++// DNSEgressPlan confines a DNS dial and its nested detours to the choices made
++// before the query was admitted to a connection pool or answer cache.
++type DNSEgressPlan interface {
++	Child(ProxyAdapter) (Proxy, bool)
++	Detour(string) (Proxy, bool)
++}
++
++type dnsEgressContextKey struct{}
++
++func WithDNSEgressPlan(ctx context.Context, plan DNSEgressPlan) context.Context {
++	return context.WithValue(ctx, dnsEgressContextKey{}, plan)
++}
++
++func DNSEgressPlanFrom(ctx context.Context) DNSEgressPlan {
++	plan, _ := ctx.Value(dnsEgressContextKey{}).(DNSEgressPlan)
++	return plan
++}
+diff --git a/dns/doh.go b/dns/doh.go
+--- a/dns/doh.go
++++ b/dns/doh.go
+@@ -36,9 +36,9 @@
+ 	// connections in HTTP transport.
+ 	transportDefaultIdleConnTimeout = 5 * time.Minute
+
+-	dialTimeout        = 10 * time.Second
+-
+-	maxElapsedTime  = time.Second * 30
++	dialTimeout = 10 * time.Second
++
++	maxElapsedTime = time.Second * 30
+ )
+
+ var DefaultHTTPVersions = []C.HTTPVersion{C.HTTPVersion11, C.HTTPVersion2}
+@@ -57,12 +57,13 @@
+ 	quicConfig      *quic.Config
+ 	quicConfigGuard sync.Mutex
+
+-	url            *url.URL
+-	httpVersions   []C.HTTPVersion
+-	dialer         *dnsDialer
+-	addr           string
+-	skipCertVerify bool
+-	nameCertVerify string
++	url              *url.URL
++	httpVersions     []C.HTTPVersion
++	dialer           *dnsDialer
++	addr             string
++	skipCertVerify   bool
++	nameCertVerify   string
++	scopedNoRedirect bool
+ }
+
+ // type check
+@@ -96,6 +97,9 @@
+ 	}
+ 	doh.nameCertVerify = params["name-cert-verify"]
+
++	if params["isolate-egress"] == "true" {
++		return newEgressDoH(doh)
++	}
+ 	runtime.SetFinalizer(doh, (*dnsOverHTTPS).Close)
+
+ 	return doh
+@@ -295,7 +299,6 @@
+ // resetClient triggers re-creation of the *http.Client that is used by this
+ // upstream.  This method accepts the error that caused resetting client as
+ // depending on the error we may also reset the QUIC config.
+-//
+ func (doh *dnsOverHTTPS) resetClient(ctx context.Context, failed *http.Client, resetErr error) (client *http.Client, err error) {
+ 	doh.clientMu.Lock()
+ 	defer doh.clientMu.Unlock()
+@@ -380,6 +383,11 @@
+ 		Transport: transport,
+ 		Timeout:   DefaultTimeout,
+ 		Jar:       nil,
++	}
++	if doh.scopedNoRedirect {
++		client.CheckRedirect = func(*http.Request, []*http.Request) error {
++			return http.ErrUseLastResponse
++		}
+ 	}
+
+ 	doh.client = client
+@@ -405,7 +413,7 @@
+ 		},
+ 		IdleConnTimeout:     transportDefaultIdleConnTimeout,
+ 		TLSHandshakeTimeout: dialTimeout,
+-		MaxConnsPerHost: 2,
++		MaxConnsPerHost:     2,
+ 	}
+
+ 	if doh.url.Scheme == "http" {
+diff --git a/dns/egress_doh.go b/dns/egress_doh.go
+new file mode 100644
+--- /dev/null
++++ b/dns/egress_doh.go
+@@ -0,0 +1,297 @@
++package dns
++
++import (
++	"context"
++	"crypto/sha256"
++	"errors"
++	"fmt"
++	"hash"
++	"runtime"
++	"sort"
++	"sync"
++	"time"
++
++	"github.com/ProjectClash/Clash/component/resolver"
++	C "github.com/ProjectClash/Clash/constant"
++	"github.com/ProjectClash/Clash/log"
++	"github.com/ProjectClash/Clash/tunnel"
++
++	D "github.com/miekg/dns"
++)
++
++const maxDoHEgressPools = 16
++
++// egressDoH holds a bounded pool per frozen path and generation.
++type egressDoH struct {
++	template *dnsOverHTTPS
++	mu       sync.Mutex
++	pools    map[string]*egressPool
++}
++
++type egressPool struct {
++	route    *tunnel.DNSRouteScope
++	client   *dnsOverHTTPS
++	used     time.Time
++	inFlight int
++}
++
++func newEgressDoH(template *dnsOverHTTPS) *egressDoH {
++	client := &egressDoH{template: template, pools: make(map[string]*egressPool)}
++	runtime.SetFinalizer(client, (*egressDoH).ResetConnection)
++	return client
++}
++
++func (c *egressDoH) Address() string { return c.template.Address() }
++
++func (c *egressDoH) ResetConnection() {
++	c.mu.Lock()
++	defer c.mu.Unlock()
++	for key, entry := range c.pools {
++		entry.client.ResetConnection()
++		delete(c.pools, key)
++	}
++}
++
++func (c *egressDoH) snapshot(domain string) (*tunnel.DNSRouteScope, error) {
++	if c.template.url.Scheme != "https" || c.template.skipCertVerify {
++		return nil, errors.New("egress-isolated DoH requires verified HTTPS")
++	}
++	for _, version := range c.template.httpVersions {
++		if version == C.HTTPVersion3 {
++			return nil, errors.New("egress-isolated DoH prototype does not support HTTP/3")
++		}
++	}
++	return c.template.dialer.SnapshotDNSRoute(domain)
++}
++
++func (c *egressDoH) clientFor(route *tunnel.DNSRouteScope) (*egressPool, error) {
++	c.mu.Lock()
++	defer c.mu.Unlock()
++	if !route.Current() {
++		return nil, tunnel.ErrDNSRouteChanged
++	}
++	for key, entry := range c.pools {
++		if !entry.route.Current() {
++			entry.client.ResetConnection()
++			delete(c.pools, key)
++		}
++	}
++	key := route.Key()
++	entry := c.pools[key]
++	if entry == nil {
++		if len(c.pools) >= maxDoHEgressPools {
++			var oldest *egressPool
++			var oldestKey string
++			for candidateKey, candidate := range c.pools {
++				if candidate.inFlight == 0 && (oldest == nil || candidate.used.Before(oldest.used)) {
++					oldest, oldestKey = candidate, candidateKey
++				}
++			}
++			if oldest == nil {
++				return nil, errors.New("all scoped DoH transports are busy")
++			}
++			oldest.client.ResetConnection()
++			delete(c.pools, oldestKey)
++		}
++		d := c.template
++		active := &dnsOverHTTPS{
++			url: d.url, addr: d.addr, httpVersions: d.httpVersions,
++			dialer:         d.dialer.GuardDNSRoute(route),
++			nameCertVerify: d.nameCertVerify, scopedNoRedirect: true,
++		}
++		runtime.SetFinalizer(active, (*dnsOverHTTPS).Close)
++		entry = &egressPool{route: route, client: active}
++		c.pools[key] = entry
++	}
++	entry.inFlight++
++	entry.used = time.Now()
++	return entry, nil
++}
++
++func (c *egressDoH) release(entry *egressPool) {
++	c.mu.Lock()
++	entry.inFlight--
++	entry.used = time.Now()
++	c.mu.Unlock()
++}
++
++type egressPlanKey struct{}
++type egressPlan map[*egressDoH]*tunnel.DNSRouteScope
++
++func (p egressPlan) current() bool {
++	for _, scope := range p {
++		if !scope.Current() {
++			return false
++		}
++	}
++	return true
++}
++
++func (c *egressDoH) ExchangeContext(ctx context.Context, m *D.Msg) (*D.Msg, error) {
++	p, _ := ctx.Value(egressPlanKey{}).(egressPlan)
++	route := p[c]
++	if route == nil {
++		return nil, errors.New("missing DoH egress plan")
++	}
++	entry, err := c.clientFor(route)
++	if err != nil {
++		return nil, err
++	}
++	defer c.release(entry)
++	answer, err := entry.client.ExchangeContext(ctx, m)
++	if !route.Current() {
++		return nil, tunnel.ErrDNSRouteChanged
++	}
++	return answer, err
++}
++
++func unwrappedEgressClient(client dnsClient) *egressDoH {
++	for {
++		unwrapper, ok := client.(interface{ Unwrap() dnsClient })
++		if !ok {
++			result, _ := client.(*egressDoH)
++			return result
++		}
++		client = unwrapper.Unwrap()
++	}
++}
++
++func writeEgressWrappers(key hash.Hash, client dnsClient) {
++	for {
++		switch wrapped := client.(type) {
++		case clientWithDisableTypes:
++			types := make([]int, 0, len(wrapped.disableTypes))
++			for qtype := range wrapped.disableTypes {
++				types = append(types, int(qtype))
++			}
++			sort.Ints(types)
++			fmt.Fprintf(key, "|types=%v", types)
++			client = wrapped.dnsClient
++		case clientWithEdns0Subnet:
++			fmt.Fprintf(key, "|ecs=%v/%t", wrapped.ecsPrefix, wrapped.ecsOverride)
++			client = wrapped.dnsClient
++		default:
++			return
++		}
++	}
++}
++
++// Each configured upstream gets a bounded share of the exchange deadline.
++// Valid negative answers are terminal. The backup inherits the same route.
++func orderedEgressExchange(ctx context.Context, clients []dnsClient, m *D.Msg) (*D.Msg, error) {
++	plan, _ := ctx.Value(egressPlanKey{}).(egressPlan)
++	var failures []error
++	domain, qtype := msgToDomain(m), D.TypeToString[m.Question[0].Qtype]
++	for i, client := range clients {
++		if !plan.current() {
++			return nil, tunnel.ErrDNSRouteChanged
++		}
++		requestCtx, cancel := context.WithCancel(ctx)
++		if deadline, ok := ctx.Deadline(); ok && i+1 < len(clients) {
++			cancel()
++			requestCtx, cancel = context.WithTimeout(ctx, time.Until(deadline)/time.Duration(len(clients)-i))
++		}
++		log.Debugln("[DNS] resolve %s %s from %s", domain, qtype, client.Address())
++		msg, err := client.ExchangeContext(requestCtx, m)
++		cancel()
++		if err == nil && msg != nil && (msg.Rcode == D.RcodeSuccess || msg.Rcode == D.RcodeNameError) {
++			log.Debugln("[DNS] %s --> %s from %s", domain, msgToLogString(msg), client.Address())
++			return msg, nil
++		}
++		if err == nil {
++			err = errors.New("unusable DNS upstream response")
++		}
++		failures = append(failures, err)
++	}
++	return nil, errors.Join(failures...)
++}
++
++func (r *Resolver) exchangeEgressDoH(ctx context.Context, m *D.Msg) (*D.Msg, error, bool) {
++	clients := r.matchPolicy(m)
++	hasFallback := len(clients) == 0 && isIPRequest(m.Question[0]) && len(r.fallback) != 0
++	if len(clients) == 0 {
++		clients = r.main
++		if hasFallback {
++			for _, client := range r.fallback {
++				if unwrappedEgressClient(client) != nil {
++					return nil, errors.New("egress-isolated DoH does not support fallback DNS lists"), true
++				}
++			}
++		}
++	}
++	var scoped []*egressDoH
++	for _, client := range clients {
++		if doh := unwrappedEgressClient(client); doh != nil {
++			scoped = append(scoped, doh)
++		}
++	}
++	if len(scoped) == 0 {
++		return nil, nil, false
++	}
++	if hasFallback || len(scoped) != len(clients) || m.IsTsig() != nil || len(m.Question) != 1 {
++		return nil, errors.New("unsupported query or mixed upstreams in egress-isolated DoH"), true
++	}
++	copyForKey := m.Copy()
++	copyForKey.Id = 0
++	wire, err := copyForKey.Pack()
++	if err != nil {
++		return nil, err, true
++	}
++	digest := sha256.New()
++	digest.Write(wire)
++	plan := make(egressPlan, len(scoped))
++	policy := scoped[0].template.dialer.DNSPolicy()
++	route, err := scoped[0].snapshot(m.Question[0].Name)
++	if err != nil {
++		return nil, err, true
++	}
++	for i, client := range scoped {
++		if client.template.dialer.DNSPolicy() != policy {
++			return nil, errors.New("scoped DoH primary and backup must use the same policy"), true
++		}
++		plan[client] = route
++		fmt.Fprintf(digest, "|%p|%q", client, route.Key())
++		writeEgressWrappers(digest, clients[i])
++	}
++	key := fmt.Sprintf("egress-doh:%x", digest.Sum(nil))
++	if cached, expires, hit := r.cache.GetWithExpire(key); hit && time.Now().Before(expires) {
++		if !plan.current() {
++			return nil, tunnel.ErrDNSRouteChanged, true
++		}
++		msg := cached.Copy()
++		msg.Id = m.Id
++		updateMsgTTL(msg, uint32(time.Until(expires).Seconds()))
++		return msg, nil, true
++	}
++
++	inflight := r.group.DoChan(key, func() (*D.Msg, error) {
++		if !plan.current() {
++			return nil, tunnel.ErrDNSRouteChanged
++		}
++		exchangeCtx, cancel := context.WithTimeout(context.WithValue(r.queryContext(), egressPlanKey{}, plan),
++			resolver.DefaultDNSTimeout)
++		defer cancel()
++		msg, err := orderedEgressExchange(exchangeCtx, clients, m)
++		if !plan.current() {
++			return nil, tunnel.ErrDNSRouteChanged
++		}
++		if err == nil {
++			putMsgToCacheKey(r.cache, m.Question[0], key, msg)
++		}
++		return msg, err
++	})
++	select {
++	case <-ctx.Done():
++		return nil, ctx.Err(), true
++	case result := <-inflight:
++		if !plan.current() {
++			return nil, tunnel.ErrDNSRouteChanged, true
++		}
++		if result.Err != nil {
++			return nil, result.Err, true
++		}
++		msg := result.Val.Copy()
++		msg.Id = m.Id
++		return msg, nil, true
++	}
++}
+diff --git a/dns/egress_doh_test.go b/dns/egress_doh_test.go
+new file mode 100644
+--- /dev/null
++++ b/dns/egress_doh_test.go
+@@ -0,0 +1,582 @@
++package dns_test
++
++import (
++	"context"
++	"encoding/base64"
++	"encoding/pem"
++	"errors"
++	"io"
++	"net"
++	"net/http"
++	"net/http/httptest"
++	"net/netip"
++	"strings"
++	"sync/atomic"
++	"testing"
++	"time"
++
++	"github.com/ProjectClash/Clash/adapter"
++	"github.com/ProjectClash/Clash/adapter/outbound"
++	"github.com/ProjectClash/Clash/adapter/outboundgroup"
++	"github.com/ProjectClash/Clash/adapter/provider"
++	"github.com/ProjectClash/Clash/component/ca"
++	"github.com/ProjectClash/Clash/component/dialer"
++	R "github.com/ProjectClash/Clash/component/resolver"
++	C "github.com/ProjectClash/Clash/constant"
++	P "github.com/ProjectClash/Clash/constant/provider"
++	"github.com/ProjectClash/Clash/dns"
++	"github.com/ProjectClash/Clash/transport/socks5"
++	"github.com/ProjectClash/Clash/tunnel"
++
++	D "github.com/miekg/dns"
++)
++
++type egressLeg struct {
++	*outbound.Base
++	socket string
++}
++
++func (e *egressLeg) DialContext(ctx context.Context, _ *C.Metadata) (C.Conn, error) {
++	if e.socket == "" {
++		return nil, errors.New("fixture outbound offline")
++	}
++	var dialer net.Dialer
++	conn, err := dialer.DialContext(ctx, "tcp", e.socket)
++	if err != nil {
++		return nil, err
++	}
++	return outbound.NewConn(conn, e), nil
++}
++
++type dohEvent struct {
++	name, peer, protocol string
++	qtype                uint16
++	path                 string
++}
++
++func openEgress(t *testing.T, suffix string) (*httptest.Server, chan dohEvent, chan struct{}) {
++	t.Helper()
++	return openEgressOn(t, suffix, nil)
++}
++
++func openEgressOn(t *testing.T, suffix string, listener net.Listener) (*httptest.Server, chan dohEvent, chan struct{}) {
++	t.Helper()
++	events := make(chan dohEvent, 48)
++	release := make(chan struct{})
++	upstream := httptest.NewUnstartedServer(http.HandlerFunc(func(w http.ResponseWriter, request *http.Request) {
++		var query D.Msg
++		body, err := base64.RawURLEncoding.DecodeString(request.URL.Query().Get("dns"))
++		if request.Method != http.MethodGet || err != nil || query.Unpack(body) != nil ||
++			len(query.Question) != 1 || (request.URL.Path != "/dns-query" && request.URL.Path != "/backup-query") {
++			w.WriteHeader(400)
++			return
++		}
++		question := query.Question[0]
++		events <- dohEvent{question.Name, request.RemoteAddr, request.Proto, question.Qtype, request.URL.Path}
++		if strings.HasPrefix(question.Name, "backup.") && request.URL.Path == "/dns-query" {
++			w.WriteHeader(503)
++			return
++		}
++		if strings.HasPrefix(question.Name, "pause.") && suffix == "9" {
++			select {
++			case <-release:
++			case <-request.Context().Done():
++				return
++			}
++		}
++		answer := new(D.Msg).SetReply(&query)
++		answer.RecursionAvailable = true
++		ip := "198.51.100." + suffix
++		if question.Qtype == D.TypeAAAA {
++			ip = "2001:db8::" + suffix
++		}
++		record, err := D.NewRR(question.Name + " 90 IN " + D.TypeToString[question.Qtype] + " " + ip)
++		if err != nil {
++			w.WriteHeader(400)
++			return
++		}
++		answer.Answer = []D.RR{record}
++		wire, err := answer.Pack()
++		if err != nil {
++			w.WriteHeader(500)
++			return
++		}
++		w.Header().Set("Content-Type", "application/dns-message")
++		_, _ = w.Write(wire)
++	}))
++	if listener != nil {
++		_ = upstream.Listener.Close()
++		upstream.Listener = listener
++	}
++	upstream.EnableHTTP2 = true
++	upstream.StartTLS()
++	t.Cleanup(upstream.Close)
++	if err := ca.AddCertificate(string(pem.EncodeToMemory(&pem.Block{Type: "CERTIFICATE", Bytes: upstream.Certificate().Raw}))); err != nil {
++		t.Fatal(err)
++	}
++	return upstream, events, release
++}
++
++func mockSelector(t *testing.T, name string, reject C.Proxy, choices ...C.Proxy) *outboundgroup.Selector {
++	t.Helper()
++	hc := provider.NewHealthCheck(choices, "", 1000, 0, true, nil)
++	source, err := provider.NewCompatibleProvider(name, choices, hc)
++	if err != nil {
++		t.Fatal(err)
++	}
++	t.Cleanup(func() { _ = source.Close() })
++	selector, err := outboundgroup.NewSelector(outboundgroup.GroupCommonOption{Name: name},
++		outboundgroup.SelectorOption{}, reject, []P.ProxyProvider{source})
++	if err != nil {
++		t.Fatal(err)
++	}
++	return selector
++}
++
++func exchange(t *testing.T, res *dns.Resolver, name string, qtype uint16) (*D.Msg, error) {
++	t.Helper()
++	ctx, cancel := context.WithTimeout(context.Background(), 4*time.Second)
++	defer cancel()
++	return res.ExchangeContext(ctx, new(D.Msg).SetQuestion(name, qtype))
++}
++
++func expectAnswer(t *testing.T, res *dns.Resolver, name string, qtype uint16, expect string) {
++	t.Helper()
++	answer, err := exchange(t, res, name, qtype)
++	if err != nil || answer == nil || answer.Rcode != 0 {
++		t.Fatalf("%s unexpected DNS result: %v, %v", name, answer, err)
++	}
++	if expect == "" && len(answer.Answer) == 0 {
++		return
++	}
++	if len(answer.Answer) != 1 || !strings.HasSuffix(answer.Answer[0].String(), "\t"+expect) {
++		t.Fatalf("%s %v, want %s", name, answer.Answer, expect)
++	}
++}
++
++func event(t *testing.T, channel chan dohEvent, name string) dohEvent {
++	t.Helper()
++	select {
++	case e := <-channel:
++		if e.name != name || e.protocol != "HTTP/2.0" {
++			t.Fatalf("unexpected resolver receipt: %+v", e)
++		}
++		t.Logf("%s qtype=%d peer=%s %s", e.name, e.qtype, e.peer, e.protocol)
++		return e
++	case <-time.After(700 * time.Millisecond):
++		t.Fatalf("resolver did not receive %s", name)
++		return dohEvent{}
++	}
++}
++
++func noEvent(t *testing.T, channels ...chan dohEvent) {
++	t.Helper()
++	for _, ch := range channels {
++		select {
++		case e := <-ch:
++			t.Fatalf("unexpected resolver traffic: %+v", e)
++		default:
++		}
++	}
++}
++
++func bootstrap(t *testing.T) (dns.NameServer, chan string) {
++	t.Helper()
++	packet, err := net.ListenPacket("udp4", "127.0.0.1:0")
++	if err != nil {
++		t.Fatal(err)
++	}
++	seen := make(chan string, 8)
++	srv := &D.Server{PacketConn: packet, Handler: D.HandlerFunc(func(w D.ResponseWriter, m *D.Msg) {
++		name := m.Question[0].Name
++		seen <- name
++		reply := new(D.Msg).SetReply(m)
++		rr, _ := D.NewRR(name + " 60 IN A 198.51.100.88")
++		reply.Answer = []D.RR{rr}
++		_ = w.WriteMsg(reply)
++	})}
++	go func() { _ = srv.ActivateAndServe() }()
++	t.Cleanup(func() { _ = srv.Shutdown(); _ = packet.Close() })
++	return dns.NameServer{Net: "udp", Addr: packet.LocalAddr().String()}, seen
++}
++
++func TestEgressDoHPrototype(t *testing.T) {
++	t.Cleanup(ca.ResetCertificate)
++	trap, directEvents, _ := openEgress(t, "11")
++	jp, jpEvents, release := openEgress(t, "9")
++	tw, twEvents, _ := openEgress(t, "10")
++	defer close(release)
++	reject := adapter.NewProxy(outbound.NewReject())
++	direct := adapter.NewProxy(outbound.NewDirect())
++	j := adapter.NewProxy(&egressLeg{Base: outbound.NewBase(outbound.BaseOption{Name: "JP", Type: C.Socks5}), socket: jp.Listener.Addr().String()})
++	w := adapter.NewProxy(&egressLeg{Base: outbound.NewBase(outbound.BaseOption{Name: "TW", Type: C.Socks5}), socket: tw.Listener.Addr().String()})
++	offline := adapter.NewProxy(&egressLeg{Base: outbound.NewBase(outbound.BaseOption{Name: "OFFLINE", Type: C.Socks5})})
++	choice := mockSelector(t, "CHOICE", reject, j, w, reject, direct, offline)
++	business := mockSelector(t, "BUSINESS", reject, adapter.NewProxy(choice))
++	fixed := mockSelector(t, "FIXED-JP", reject, j)
++	proxies := map[string]C.Proxy{"BUSINESS": adapter.NewProxy(business), "FIXED-JP": adapter.NewProxy(fixed)}
++	tunnel.UpdateProxies(proxies, nil)
++	t.Cleanup(func() { tunnel.UpdateProxies(map[string]C.Proxy{}, nil) })
++
++	ns := func(group string, v4only bool) dns.NameServer {
++		params := map[string]string{"isolate-egress": "true"}
++		if v4only {
++			params["disable-ipv6"] = "true"
++		}
++		return dns.NameServer{Net: "https", Addr: trap.URL + "/dns-query", ProxyName: group, Params: params}
++	}
++	boot, bootEvents := bootstrap(t)
++	systems := dns.NewResolver(dns.Config{IPv6: true, Main: []dns.NameServer{ns("BUSINESS", false)},
++		ProxyServer: []dns.NameServer{boot}, Policy: []dns.Policy{
++			{Domain: "fixed.test", NameServers: []dns.NameServer{ns("FIXED-JP", false)}},
++			{Domain: "ipv4only.test", NameServers: []dns.NameServer{ns("BUSINESS", true)}},
++		}})
++	t.Cleanup(systems.ResetConnection)
++	selectExit := func(name string) {
++		t.Helper()
++		if err := choice.Set(name); err != nil {
++			t.Fatal(err)
++		}
++	}
++	const reused = "same.test."
++	expectAnswer(t, systems.Resolver, reused, D.TypeA, "198.51.100.9")
++	jp1 := event(t, jpEvents, reused)
++	expectAnswer(t, systems.Resolver, "warm.test.", D.TypeA, "198.51.100.9")
++	if got := event(t, jpEvents, "warm.test."); got.peer != jp1.peer {
++		t.Fatal("Japan pool was not reused")
++	}
++	expectAnswer(t, systems.Resolver, reused, D.TypeA, "198.51.100.9")
++	noEvent(t, jpEvents, twEvents, directEvents)
++
++	selectExit("TW")
++	expectAnswer(t, systems.Resolver, reused, D.TypeA, "198.51.100.10")
++	tw1 := event(t, twEvents, reused)
++	expectAnswer(t, systems.Resolver, reused, D.TypeAAAA, "2001:db8::10")
++	if got := event(t, twEvents, reused); got.peer != tw1.peer || got.qtype != D.TypeAAAA {
++		t.Fatal("AAAA did not use Taiwan HTTP/2 pool")
++	}
++	expectAnswer(t, systems.Resolver, "fixed.test.", D.TypeA, "198.51.100.9")
++	event(t, jpEvents, "fixed.test.")
++	expectAnswer(t, systems.Resolver, "ipv4only.test.", D.TypeAAAA, "")
++	noEvent(t, jpEvents, twEvents, directEvents)
++	ips, err := R.LookupIPv4WithResolver(context.Background(), reused, systems.ProxyResolver)
++	if err != nil || len(ips) != 1 || ips[0].String() != "198.51.100.88" {
++		t.Fatalf("bootstrap resolver: %v %v", ips, err)
++	}
++	if got := <-bootEvents; got != reused {
++		t.Fatalf("bootstrap got %s", got)
++	}
++	noEvent(t, jpEvents, twEvents, directEvents)
++
++	selectExit("JP")
++	expectAnswer(t, systems.Resolver, reused, D.TypeA, "198.51.100.9")
++	jp2 := event(t, jpEvents, reused)
++	if jp2.peer == jp1.peer {
++		t.Fatal("old Japan generation was reused")
++	}
++	tunnel.UpdateProxies(proxies, nil)
++	expectAnswer(t, systems.Resolver, reused, D.TypeA, "198.51.100.9")
++	if got := event(t, jpEvents, reused); got.peer == jp2.peer {
++		t.Fatal("old configuration generation was reused")
++	}
++
++	for _, exit := range []string{"OFFLINE", "REJECT"} {
++		selectExit(exit)
++		for _, name := range []string{reused, "uncached.test."} {
++			if msg, err := exchange(t, systems.Resolver, name, D.TypeA); err == nil || msg != nil {
++				t.Fatalf("fail-closed %s %s returned %v, %v", exit, name, msg, err)
++			}
++		}
++	}
++	noEvent(t, jpEvents, twEvents, directEvents)
++
++	selectExit("DIRECT")
++	expectAnswer(t, systems.Resolver, reused, D.TypeA, "198.51.100.11")
++	event(t, directEvents, reused)
++	selectExit("JP")
++	expectAnswer(t, systems.Resolver, reused, D.TypeA, "198.51.100.9")
++	event(t, jpEvents, reused)
++	noEvent(t, directEvents, twEvents)
++
++	done := make(chan error, 1)
++	go func() {
++		ctx, cancel := context.WithTimeout(context.Background(), 4*time.Second)
++		defer cancel()
++		_, err := systems.Resolver.ExchangeContext(ctx, new(D.Msg).SetQuestion("pause.test.", D.TypeA))
++		done <- err
++	}()
++	event(t, jpEvents, "pause.test.")
++	selectExit("TW")
++	expectAnswer(t, systems.Resolver, "pause.test.", D.TypeA, "198.51.100.10")
++	event(t, twEvents, "pause.test.")
++	select {
++	case err := <-done:
++		if err == nil {
++			t.Fatal("in-flight result from old generation succeeded")
++		}
++	case <-time.After(2 * time.Second):
++		t.Fatal("old HTTP/2 exchange did not end after its pool was retired")
++	}
++	noEvent(t, jpEvents, twEvents, directEvents)
++
++	t.Log("checked same-exit reuse, generation and cache isolation, per-domain policy, A/AAAA over IPv4 loopback, IPv4-only query filter, UDP bootstrap, concrete and rejected exits, and in-flight query isolation")
++}
++
++func TestScopedDoHIPv6(t *testing.T) {
++	listener, err := net.Listen("tcp6", "[::1]:0")
++	if err != nil {
++		t.Skipf("IPv6 loopback unavailable: %v", err)
++	}
++	t.Cleanup(func() { _ = listener.Close() })
++	probe, err := net.DialTimeout("tcp6", listener.Addr().String(), time.Second)
++	if err != nil {
++		t.Skipf("Windows network cannot connect to IPv6 loopback: %v", err)
++	}
++	_ = probe.Close()
++	t.Cleanup(ca.ResetCertificate)
++	upstream, receipts, _ := openEgressOn(t, "10", listener)
++	proxy := adapter.NewProxy(&egressLeg{
++		Base:   outbound.NewBase(outbound.BaseOption{Name: "IPV6", Type: C.Socks5}),
++		socket: upstream.Listener.Addr().String(),
++	})
++	tunnel.UpdateProxies(map[string]C.Proxy{"IPV6": proxy}, nil)
++	t.Cleanup(func() { tunnel.UpdateProxies(map[string]C.Proxy{}, nil) })
++	ok := dns.NewResolver(dns.Config{IPv6: true, Main: []dns.NameServer{
++		{Net: "https", Addr: upstream.URL + "/dns-query", ProxyName: "IPV6", Params: map[string]string{"isolate-egress": "true"}},
++	}})
++	t.Cleanup(ok.ResetConnection)
++	const name = "ipv6.test."
++	expectAnswer(t, ok.Resolver, name, D.TypeA, "198.51.100.10")
++	first := event(t, receipts, name)
++	host, _, err := net.SplitHostPort(first.peer)
++	if err != nil || host != "::1" {
++		t.Fatalf("expected an IPv6 loopback transport: %s %v", first.peer, err)
++	}
++	expectAnswer(t, ok.Resolver, name, D.TypeAAAA, "2001:db8::10")
++	if next := event(t, receipts, name); next.peer != first.peer || next.qtype != D.TypeAAAA {
++		t.Fatalf("AAAA did not use the same IPv6 HTTP/2 connection: %+v", next)
++	}
++}
++
++func TestScopedDoHRejectsInvalidCertificate(t *testing.T) {
++	t.Cleanup(ca.ResetCertificate)
++	upstream, receipts, _ := openEgress(t, "10")
++	proxy := adapter.NewProxy(&egressLeg{
++		Base:   outbound.NewBase(outbound.BaseOption{Name: "VERIFY", Type: C.Socks5}),
++		socket: upstream.Listener.Addr().String(),
++	})
++	tunnel.UpdateProxies(map[string]C.Proxy{"VERIFY": proxy}, nil)
++	t.Cleanup(func() { tunnel.UpdateProxies(map[string]C.Proxy{}, nil) })
++	wrongName := dns.NewResolver(dns.Config{IPv6: true, Main: []dns.NameServer{
++		{Net: "https", Addr: "https://wrong-name.invalid/dns-query", ProxyName: "VERIFY", Params: map[string]string{"isolate-egress": "true"}},
++	}})
++	t.Cleanup(wrongName.ResetConnection)
++	if answer, err := exchange(t, wrongName.Resolver, "cert.test.", D.TypeA); answer != nil || err == nil || !strings.Contains(err.Error(), "certificate") {
++		t.Fatalf("expected TLS hostname validation failure: %v, %v", answer, err)
++	}
++	noEvent(t, receipts)
++}
++
++type fixtureInterfaceFinder struct {
++	generation atomic.Uint64
++	available  atomic.Bool
++}
++
++func (f *fixtureInterfaceFinder) FindInterfaceName(netip.Addr) string { return "loopback-test" }
++
++func (f *fixtureInterfaceFinder) DNSInterfaceState() (dialer.DNSInterfaceState, bool) {
++	return dialer.DNSInterfaceState{Generation: f.generation.Load(), Name: "loopback-test", Index: 1}, f.available.Load()
++}
++
++func TestScopedDoHInterfaceChange(t *testing.T) {
++	t.Cleanup(ca.ResetCertificate)
++	upstream, receipts, _ := openEgress(t, "10")
++	proxy := adapter.NewProxy(&egressLeg{
++		Base:   outbound.NewBase(outbound.BaseOption{Name: "INTERFACE", Type: C.Socks5}),
++		socket: upstream.Listener.Addr().String(),
++	})
++	tunnel.UpdateProxies(map[string]C.Proxy{"INTERFACE": proxy}, nil)
++	t.Cleanup(func() { tunnel.UpdateProxies(map[string]C.Proxy{}, nil) })
++	finder := &fixtureInterfaceFinder{}
++	finder.available.Store(true)
++	previous := dialer.DefaultInterfaceFinder.Swap(finder)
++	t.Cleanup(func() { dialer.DefaultInterfaceFinder.Store(previous) })
++	res := dns.NewResolver(dns.Config{IPv6: true, Main: []dns.NameServer{
++		{Net: "https", Addr: upstream.URL + "/dns-query", ProxyName: "INTERFACE", Params: map[string]string{"isolate-egress": "true"}},
++	}})
++	t.Cleanup(res.ResetConnection)
++	const name = "interface.test."
++	expectAnswer(t, res.Resolver, name, D.TypeA, "198.51.100.10")
++	first := event(t, receipts, name)
++	expectAnswer(t, res.Resolver, name, D.TypeA, "198.51.100.10")
++	noEvent(t, receipts)
++	finder.generation.Add(1)
++	expectAnswer(t, res.Resolver, name, D.TypeA, "198.51.100.10")
++	if next := event(t, receipts, name); next.peer == first.peer {
++		t.Fatal("interface change reused the previous connection")
++	}
++	finder.available.Store(false)
++	if answer, err := exchange(t, res.Resolver, name, D.TypeA); answer != nil || err == nil {
++		t.Fatalf("unavailable interface returned %v, %v", answer, err)
++	}
++	noEvent(t, receipts)
++}
++
++type fixtureHealth struct {
++	C.Proxy
++	alive      atomic.Bool
++	generation atomic.Uint64
++}
++
++func healthFixture(proxy C.Proxy) *fixtureHealth {
++	choice := &fixtureHealth{Proxy: proxy}
++	choice.alive.Store(true)
++	return choice
++}
++
++func (f *fixtureHealth) AliveForTestUrl(string) bool       { return f.alive.Load() }
++func (f *fixtureHealth) DNSHealthGeneration(string) uint64 { return f.generation.Load() }
++func (f *fixtureHealth) setAlive(alive bool) {
++	if f.alive.Swap(alive) != alive {
++		f.generation.Add(1)
++	}
++}
++
++func TestScopedDoHAutomaticFallback(t *testing.T) {
++	t.Cleanup(ca.ResetCertificate)
++	trap, directEvents, _ := openEgress(t, "11")
++	jp, jpEvents, _ := openEgress(t, "9")
++	tw, twEvents, _ := openEgress(t, "10")
++	reject := adapter.NewProxy(outbound.NewReject())
++	direct := adapter.NewProxy(outbound.NewDirect())
++	j := healthFixture(adapter.NewProxy(&egressLeg{Base: outbound.NewBase(outbound.BaseOption{Name: "JP", Type: C.Socks5}), socket: jp.Listener.Addr().String()}))
++	w := healthFixture(adapter.NewProxy(&egressLeg{Base: outbound.NewBase(outbound.BaseOption{Name: "TW", Type: C.Socks5}), socket: tw.Listener.Addr().String()}))
++	choices := []C.Proxy{j, w, direct}
++	source, err := provider.NewCompatibleProvider("automatic", choices, provider.NewHealthCheck(choices, "", 1000, 0, true, nil))
++	if err != nil {
++		t.Fatal(err)
++	}
++	t.Cleanup(func() { _ = source.Close() })
++	selector, err := outboundgroup.NewFallback(outboundgroup.GroupCommonOption{Name: "AUTO"}, outboundgroup.FallbackOption{}, reject, []P.ProxyProvider{source})
++	if err != nil {
++		t.Fatal(err)
++	}
++	tunnel.UpdateProxies(map[string]C.Proxy{"AUTO": adapter.NewProxy(selector)}, nil)
++	t.Cleanup(func() { tunnel.UpdateProxies(map[string]C.Proxy{}, nil) })
++	config := dns.Config{IPv6: true, Main: []dns.NameServer{
++		{Net: "https", Addr: trap.URL + "/dns-query", ProxyName: "AUTO", Params: map[string]string{"isolate-egress": "true"}},
++		{Net: "https", Addr: trap.URL + "/backup-query", ProxyName: "AUTO", Params: map[string]string{"isolate-egress": "true"}},
++	}}
++	res := dns.NewResolver(config)
++	t.Cleanup(res.ResetConnection)
++	const name = "fallback.test."
++	expectAnswer(t, res.Resolver, name, D.TypeA, "198.51.100.9")
++	entry := event(t, jpEvents, name)
++	if entry.path != "/dns-query" {
++		t.Fatalf("backup was used first: %+v", entry)
++	}
++	noEvent(t, jpEvents, twEvents, directEvents)
++
++	j.setAlive(false)
++	j.setAlive(true)
++	expectAnswer(t, res.Resolver, name, D.TypeA, "198.51.100.9")
++	recovered := event(t, jpEvents, name)
++	if recovered.peer == entry.peer {
++		t.Fatal("pre-outage connection or cache was reused after recovery")
++	}
++	j.setAlive(false)
++	expectAnswer(t, res.Resolver, name, D.TypeA, "198.51.100.10")
++	event(t, twEvents, name)
++	expectAnswer(t, res.Resolver, "backup.order.test.", D.TypeA, "198.51.100.10")
++	if e := event(t, twEvents, "backup.order.test."); e.path != "/dns-query" {
++		t.Fatalf("primary was not tried first: %+v", e)
++	}
++	if e := event(t, twEvents, "backup.order.test."); e.path != "/backup-query" {
++		t.Fatalf("backup was not tried after primary failed: %+v", e)
++	}
++	j.setAlive(true)
++	expectAnswer(t, res.Resolver, name, D.TypeA, "198.51.100.9")
++	if e := event(t, jpEvents, name); e.peer == recovered.peer {
++		t.Fatal("old automatic generation was reused")
++	}
++	j.setAlive(false)
++	w.setAlive(false)
++	if msg, err := exchange(t, res.Resolver, name, D.TypeA); err == nil || msg != nil {
++		t.Fatal("automatic DIRECT or old cache was accepted")
++	}
++	noEvent(t, jpEvents, twEvents, directEvents)
++}
++
++func startSocksRoute(t *testing.T, target string) string {
++	t.Helper()
++	listener, err := net.Listen("tcp4", "127.0.0.1:0")
++	if err != nil {
++		t.Fatal(err)
++	}
++	t.Cleanup(func() { _ = listener.Close() })
++	go func() {
++		for {
++			stream, err := listener.Accept()
++			if err != nil {
++				return
++			}
++			go func() {
++				defer stream.Close()
++				_, cmd, _, err := socks5.ServerHandshake(stream, nil)
++				if err != nil || cmd != socks5.CmdConnect {
++					return
++				}
++				origin, err := net.DialTimeout("tcp", target, time.Second)
++				if err != nil {
++					return
++				}
++				defer origin.Close()
++				go func() {
++					_, _ = io.Copy(origin, stream)
++					_ = origin.Close()
++				}()
++				_, _ = io.Copy(stream, origin)
++			}()
++		}
++	}()
++	return listener.Addr().String()
++}
++
++func TestScopedDoHDialerProxy(t *testing.T) {
++	t.Cleanup(ca.ResetCertificate)
++	trap, directEvents, _ := openEgress(t, "11")
++	jp, jpEvents, _ := openEgress(t, "9")
++	tw, twEvents, _ := openEgress(t, "10")
++	reject := adapter.NewProxy(outbound.NewReject())
++	j := adapter.NewProxy(&egressLeg{Base: outbound.NewBase(outbound.BaseOption{Name: "JP-detour", Type: C.Socks5}), socket: startSocksRoute(t, jp.Listener.Addr().String())})
++	w := adapter.NewProxy(&egressLeg{Base: outbound.NewBase(outbound.BaseOption{Name: "TW-detour", Type: C.Socks5}), socket: startSocksRoute(t, tw.Listener.Addr().String())})
++	detour := mockSelector(t, "DETOUR", reject, j, w)
++	top, err := outbound.NewSocks5(outbound.Socks5Option{BasicOption: outbound.BasicOption{DialerProxy: "DETOUR", TunnelForAPI: tunnel.Tunnel},
++		Name: "same-top", Server: "127.0.0.1", Port: 9})
++	if err != nil {
++		t.Fatal(err)
++	}
++	group := mockSelector(t, "BUSINESS", reject, adapter.NewProxy(top))
++	tunnel.UpdateProxies(map[string]C.Proxy{"BUSINESS": adapter.NewProxy(group), "DETOUR": adapter.NewProxy(detour)}, nil)
++	t.Cleanup(func() { tunnel.UpdateProxies(map[string]C.Proxy{}, nil) })
++	res := dns.NewResolver(dns.Config{IPv6: true, Main: []dns.NameServer{
++		{Net: "https", Addr: trap.URL + "/dns-query", ProxyName: "BUSINESS", Params: map[string]string{"isolate-egress": "true"}},
++	}})
++	t.Cleanup(res.ResetConnection)
++	const name = "detour.test."
++	expectAnswer(t, res.Resolver, name, D.TypeA, "198.51.100.9")
++	entry := event(t, jpEvents, name)
++	if err := detour.Set("TW-detour"); err != nil {
++		t.Fatal(err)
++	}
++	expectAnswer(t, res.Resolver, name, D.TypeA, "198.51.100.10")
++	event(t, twEvents, name)
++	if err := detour.Set("JP-detour"); err != nil {
++		t.Fatal(err)
++	}
++	expectAnswer(t, res.Resolver, name, D.TypeA, "198.51.100.9")
++	if got := event(t, jpEvents, name); got.peer == entry.peer {
++		t.Fatal("old detour generation was reused")
++	}
++	noEvent(t, jpEvents, twEvents, directEvents)
++}
+diff --git a/dns/resolver.go b/dns/resolver.go
+--- a/dns/resolver.go
++++ b/dns/resolver.go
+@@ -51,10 +51,10 @@
+ 	cache                 dnsCache
+ 	policy                []dnsPolicy
+ 	defaultResolver       *Resolver
+-	queryMu     sync.Mutex
+-	queryCtx    context.Context
+-	queryCancel context.CancelFunc
+-	queryClosed bool
++	queryMu               sync.Mutex
++	queryCtx              context.Context
++	queryCancel           context.CancelFunc
++	queryClosed           bool
+ }
+
+ func (r *Resolver) LookupIPPrimaryIPv4(ctx context.Context, host string) (ips []netip.Addr, err error) {
+@@ -161,6 +161,9 @@
+ 		return nil, errors.New("should have one question at least")
+ 	}
+ 	if msg, ok, err := exchangeLocalZone(ctx, m); ok {
++		return msg, err
++	}
++	if msg, err, handled := r.exchangeEgressDoH(ctx, m); handled {
+ 		return msg, err
+ 	}
+ 	continueFetch := false
+diff --git a/dns/util.go b/dns/util.go
+--- a/dns/util.go
++++ b/dns/util.go
+@@ -59,6 +59,10 @@
+ // putMsgToCache puts a dns message into the cache.
+ // the msg is copied before being stored in the cache, so it can be modified without affecting the original msg.
+ func putMsgToCache(c dnsCache, q D.Question, msg *D.Msg) {
++	putMsgToCacheKey(c, q, q.String(), msg)
++}
++
++func putMsgToCacheKey(c dnsCache, q D.Question, key string, msg *D.Msg) {
+ 	// skip dns cache for acme challenge
+ 	if q.Qtype == D.TypeTXT && strings.HasPrefix(q.Name, "_acme-challenge.") {
+ 		log.Debugln("[DNS] dns cache ignored because of acme challenge for: %s", q.Name)
+@@ -84,7 +88,7 @@
+ 		return
+ 	}
+
+-	c.SetWithExpire(q.String(), msg, time.Now().Add(time.Duration(ttl)*time.Second))
++	c.SetWithExpire(key, msg, time.Now().Add(time.Duration(ttl)*time.Second))
+ }
+
+ func setMsgTTL(msg *D.Msg, ttl uint32) {
+diff --git a/listener/sing_tun/server.go b/listener/sing_tun/server.go
+--- a/listener/sing_tun/server.go
++++ b/listener/sing_tun/server.go
+@@ -74,6 +74,7 @@
+ 	autoRedirectOutputMark  int32
+
+ 	cDialerInterfaceFinder dialer.InterfaceFinder
++	dnsInterfaceGeneration atomic.Uint64
+
+ 	ruleUpdateCallbackCloser io.Closer
+ 	ruleUpdateMutex          sync.Mutex
+@@ -364,6 +365,9 @@
+ 			return
+ 		}
+ 		l.networkUpdateMonitor = networkUpdateMonitor
++		if options.AutoDetectInterface {
++			networkUpdateMonitor.RegisterCallback(func() { l.dnsInterfaceGeneration.Add(1) })
++		}
+ 		err = networkUpdateMonitor.Start()
+ 		if err != nil {
+ 			err = E.Cause(err, "start NetworkUpdateMonitor")
+@@ -381,6 +385,7 @@
+ 		}
+ 		l.defaultInterfaceMonitor = defaultInterfaceMonitor
+ 		defaultInterfaceMonitor.RegisterCallback(func(defaultInterface *control.Interface, event int) {
++			l.dnsInterfaceGeneration.Add(1)
+ 			if defaultInterface != nil {
+ 				log.Warnln("[TUN] default interface changed by monitor, => %s", defaultInterface.Name)
+ 			} else {
+@@ -399,6 +404,7 @@
+ 			l.cDialerInterfaceFinder = &cDialerInterfaceFinder{
+ 				tunName:                 tunName,
+ 				defaultInterfaceMonitor: defaultInterfaceMonitor,
++				dnsInterfaceGeneration:  &l.dnsInterfaceGeneration,
+ 			}
+ 			if !dialer.DefaultInterfaceFinder.CompareAndSwap(nil, l.cDialerInterfaceFinder) {
+ 				err = E.New("not allowed two tun listener using auto-detect-interface")
+@@ -621,6 +627,15 @@
+ type cDialerInterfaceFinder struct {
+ 	tunName                 string
+ 	defaultInterfaceMonitor tun.DefaultInterfaceMonitor
++	dnsInterfaceGeneration  *atomic.Uint64
++}
++
++func (d *cDialerInterfaceFinder) DNSInterfaceState() (dialer.DNSInterfaceState, bool) {
++	physical := d.defaultInterfaceMonitor.DefaultInterface()
++	if physical == nil || physical.Name == "" || physical.Name == d.tunName {
++		return dialer.DNSInterfaceState{}, false
++	}
++	return dialer.DNSInterfaceState{Generation: d.dnsInterfaceGeneration.Load(), Name: physical.Name, Index: physical.Index}, true
+ }
+
+ func (d *cDialerInterfaceFinder) DefaultInterfaceName(destination netip.Addr) string {
+diff --git a/tunnel/dns_dialer.go b/tunnel/dns_dialer.go
+--- a/tunnel/dns_dialer.go
++++ b/tunnel/dns_dialer.go
+@@ -21,6 +21,7 @@
+ 	r            resolver.Resolver
+ 	proxyAdapter C.ProxyAdapter
+ 	proxyName    string
++	scope        *DNSRouteScope
+ }
+
+ func NewDNSDialer(r resolver.Resolver, proxyAdapter C.ProxyAdapter, proxyName string) *DNSDialer {
+@@ -31,6 +32,12 @@
+ 	r := d.r
+ 	proxyName := d.proxyName
+ 	proxyAdapter := d.proxyAdapter
++	if d.scope != nil {
++		if !strings.Contains(network, "tcp") || !d.scope.Current() {
++			return nil, ErrDNSRouteChanged
++		}
++		proxyAdapter = d.scope.root
++	}
+ 	var opts []dialer.Option
+ 	var rule C.Rule
+ 	metadata := &C.Metadata{
+@@ -87,7 +94,12 @@
+ 			return dialer.DialContext(ctx, network, addr, opts...)
+ 		}
+
+-		if proxyAdapter.IsL3Protocol(metadata) { // L3 proxy should resolve domain before to avoid loopback
++		leaf := proxyAdapter
++		if d.scope != nil {
++			leaf = d.scope.leaf
++			ctx = C.WithDNSEgressPlan(ctx, d.scope)
++		}
++		if leaf.IsL3Protocol(metadata) { // L3 proxy should resolve domain before to avoid loopback
+ 			if !metadata.Resolved() {
+ 				dstIP, err := resolver.ResolveIPWithResolver(ctx, metadata.Host, r)
+ 				if err != nil {
+@@ -102,6 +114,13 @@
+ 		if err != nil {
+ 			logMetadataErr(metadata, rule, proxyAdapter, err)
+ 			return nil, err
++		}
++		if d.scope != nil {
++			if !d.scope.Current() || !d.scope.matches(conn.Chains()) {
++				conn.Close()
++				return nil, ErrDNSRouteChanged
++			}
++			metadata.SpecialProxy = proxyName
+ 		}
+ 		logMetadata(metadata, rule, conn)
+
+diff --git a/tunnel/dns_route_scope.go b/tunnel/dns_route_scope.go
+new file mode 100644
+--- /dev/null
++++ b/tunnel/dns_route_scope.go
+@@ -0,0 +1,230 @@
++package tunnel
++
++import (
++	"errors"
++	"fmt"
++	"reflect"
++	"strings"
++
++	"github.com/ProjectClash/Clash/component/dialer"
++	C "github.com/ProjectClash/Clash/constant"
++)
++
++var (
++	ErrDNSRouteChanged  = errors.New("DNS egress changed during exchange")
++	errUnscopedDNSRoute = errors.New("scoped DoH egress unavailable or unsupported")
++)
++
++type dnsSelection interface {
++	DNSSelection() (C.Proxy, uint64)
++}
++
++type dnsBalancer interface {
++	DNSBalancedChoice(*C.Metadata) C.Proxy
++	DNSBalancedChoiceActive(C.Proxy) bool
++}
++
++type DNSRouteScope struct {
++	snapshot            *runtimeVersion
++	root                C.Proxy
++	leaf                C.Proxy
++	path                []C.Proxy
++	key                 string
++	iface               string
++	mark                int32
++	children            map[C.ProxyAdapter]C.Proxy
++	detours             map[string]C.Proxy
++	valid               []func() bool
++	tracksAutoInterface bool
++}
++
++func (s *DNSRouteScope) Key() string { return s.key }
++
++func (s *DNSRouteScope) Current() bool {
++	if loadVersion().proxyTable != s.snapshot.proxyTable || dialer.DefaultInterface.Load() != s.iface ||
++		dialer.DefaultRoutingMark.Load() != s.mark {
++		return false
++	}
++	for _, verify := range s.valid {
++		if !verify() {
++			return false
++		}
++	}
++	return true
++}
++
++func (s *DNSRouteScope) Child(parent C.ProxyAdapter) (C.Proxy, bool) {
++	child, ok := s.children[parent]
++	return child, ok
++}
++
++func (s *DNSRouteScope) Detour(name string) (C.Proxy, bool) {
++	proxy, ok := s.detours[name]
++	return proxy, ok
++}
++
++func (s *DNSRouteScope) matches(chain C.Chain) bool {
++	if len(chain) != len(s.path) {
++		return false
++	}
++	for i, name := range chain {
++		if name != s.path[len(s.path)-1-i].Name() {
++			return false
++		}
++	}
++	return true
++}
++
++func (d *DNSDialer) GuardDNSRoute(scope *DNSRouteScope) *DNSDialer {
++	return &DNSDialer{r: d.r, proxyName: d.proxyName, scope: scope}
++}
++
++func (d *DNSDialer) DNSPolicy() string { return d.proxyName }
++
++func (d *DNSDialer) SnapshotDNSRoute(domain string) (*DNSRouteScope, error) {
++	snapshot := loadVersion()
++	if d.proxyAdapter != nil || d.proxyName == DnsRespectRules {
++		return nil, errUnscopedDNSRoute
++	}
++	root, _ := snapshot.lookup(d.proxyName)
++	if root == nil {
++		return nil, errUnscopedDNSRoute
++	}
++	route := &DNSRouteScope{snapshot: snapshot, root: root,
++		iface: dialer.DefaultInterface.Load(), mark: dialer.DefaultRoutingMark.Load(),
++		children: make(map[C.ProxyAdapter]C.Proxy), detours: make(map[string]C.Proxy)}
++	var key strings.Builder
++	fmt.Fprintf(&key, "%d|%q|%q|%d", snapshot.proxyTable, d.proxyName, route.iface, route.mark)
++	metadata := &C.Metadata{Type: C.INNER, NetWork: C.TCP, Host: strings.TrimSuffix(domain, ".")}
++	seen := make(map[uintptr]bool)
++	path, err := route.walk(root, metadata, false, seen, &key)
++	if err != nil || len(path) == 0 {
++		return nil, errUnscopedDNSRoute
++	}
++	route.path = path
++	route.leaf = path[len(path)-1]
++	route.key = key.String()
++	return route, nil
++}
++
++// walk freezes built-in proxy-group choices and resolves named dialer-proxy
++// links from the same proxy generation. Unguarded automatic DIRECT is rejected.
++func (s *DNSRouteScope) walk(proxy C.Proxy, metadata *C.Metadata, automatic bool,
++	seen map[uintptr]bool, key *strings.Builder) ([]C.Proxy, error) {
++	value := reflect.ValueOf(proxy)
++	if value.Kind() != reflect.Pointer || value.IsNil() || seen[value.Pointer()] || len(seen) >= 32 {
++		return nil, errUnscopedDNSRoute
++	}
++	id := value.Pointer()
++	seen[id] = true
++	defer delete(seen, id)
++
++	info := proxy.ProxyInfo()
++	fmt.Fprintf(key, "|%x/%q/%q/%d", id, proxy.Name(), info.Interface, info.RoutingMark)
++	adapter := proxy.Adapter()
++	var next C.Proxy
++	switch proxy.Type() {
++	case C.Selector, C.URLTest, C.Fallback:
++		selected, ok := adapter.(dnsSelection)
++		if !ok {
++			return nil, errUnscopedDNSRoute
++		}
++		var generation uint64
++		next, generation = selected.DNSSelection()
++		if next == nil {
++			return nil, errUnscopedDNSRoute
++		}
++		fmt.Fprintf(key, "/%d", generation)
++		chosen := next
++		s.valid = append(s.valid, func() bool {
++			current, currentGeneration := selected.DNSSelection()
++			return current == chosen && currentGeneration == generation
++		})
++		automatic = automatic || proxy.Type() != C.Selector
++	case C.LoadBalance:
++		group, ok := adapter.(dnsBalancer)
++		if !ok {
++			return nil, errUnscopedDNSRoute
++		}
++		next = s.children[adapter]
++		if next == nil {
++			next = group.DNSBalancedChoice(metadata)
++		}
++		if next == nil || !group.DNSBalancedChoiceActive(next) {
++			return nil, errUnscopedDNSRoute
++		}
++		chosen := next
++		s.valid = append(s.valid, func() bool { return group.DNSBalancedChoiceActive(chosen) })
++		automatic = true
++	case C.Direct:
++		if automatic {
++			return nil, errUnscopedDNSRoute
++		}
++	case C.Reject, C.RejectDrop, C.Shadowsocks, C.ShadowsocksR, C.Snell,
++		C.Socks5, C.Http, C.Vmess, C.Vless, C.Trojan, C.Hysteria, C.Hysteria2,
++		C.WireGuard, C.Tuic, C.Ssh, C.Mieru, C.AnyTLS, C.Sudoku, C.Masque,
++		C.TrustTunnel, C.ShadowQuic, C.OpenVPN, C.Tailscale, C.ZeroTier,
++		C.EasyTier, C.GostRelay:
++		// Stable adapter identity suffices when there is no dynamic underlay.
++	default:
++		return nil, errUnscopedDNSRoute
++	}
++	if next != nil {
++		if seenChild, exists := s.children[adapter]; exists && seenChild != next {
++			return nil, errUnscopedDNSRoute
++		}
++		s.children[adapter] = next
++		rest, err := s.walk(next, metadata, automatic, seen, key)
++		return append([]C.Proxy{proxy}, rest...), err
++	}
++
++	if info.DialerProxy != "" {
++		fresh, ok := adapter.(interface{ DNSFreshDetour() bool })
++		if info.SMUX || (proxy.Type() != C.Socks5 && proxy.Type() != C.Http && (!ok || !fresh.DNSFreshDetour())) {
++			return nil, errUnscopedDNSRoute
++		}
++		underlay, _ := s.snapshot.lookup(info.DialerProxy)
++		underlayMeta := &C.Metadata{Type: C.INNER, NetWork: C.TCP}
++		if underlay == nil || underlayMeta.SetRemoteAddress(proxy.Addr()) != nil {
++			return nil, errUnscopedDNSRoute
++		}
++		fmt.Fprintf(key, "|via:%q", info.DialerProxy)
++		s.detours[info.DialerProxy] = underlay
++		if _, err := s.walk(underlay, underlayMeta, false, seen, key); err != nil {
++			return nil, err
++		}
++	} else if proxy.Type() != C.Reject && proxy.Type() != C.RejectDrop &&
++		info.Interface == "" && s.iface == "" && !s.trackInterface(key) {
++		return nil, errUnscopedDNSRoute
++	}
++	return []C.Proxy{proxy}, nil
++}
++
++func (s *DNSRouteScope) trackInterface(key *strings.Builder) bool {
++	if s.tracksAutoInterface {
++		return true
++	}
++	finder := dialer.DefaultInterfaceFinder.Load()
++	if finder == nil {
++		s.valid = append(s.valid, func() bool { return dialer.DefaultInterfaceFinder.Load() == nil })
++	} else {
++		scoped, ok := finder.(dialer.DNSInterfaceFinder)
++		if !ok || reflect.ValueOf(scoped).Kind() != reflect.Pointer || reflect.ValueOf(scoped).IsNil() {
++			return false
++		}
++		state, available := scoped.DNSInterfaceState()
++		if !available {
++			return false
++		}
++		fmt.Fprintf(key, "|interface:%p/%d/%q/%d", scoped, state.Generation, state.Name, state.Index)
++		s.valid = append(s.valid, func() bool {
++			if dialer.DefaultInterfaceFinder.Load() != finder {
++				return false
++			}
++			current, available := scoped.DNSInterfaceState()
++			return available && current == state
++		})
++	}
++	s.tracksAutoInterface = true
++	return true
++}
