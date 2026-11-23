@@ -80,9 +80,14 @@ for (const [track, file] of Object.entries(release.projectClash.entries)) {
       assert.ok(config.rules.includes('PROCESS-NAME,tailscaled,DIRECT'));
       assert.ok(config.rules.some(rule => rule.includes('(PROCESS-NAME,WeChat)')));
       assert.deepEqual(config['proxy-groups'], current['proxy-groups']);
+      const front = config['proxy-groups'].slice(0, 5).map(group => group.name);
+      assert.deepEqual(front.slice(0, 2), ['高纯净度AI用', '高网速视频用']);
+      if (fixture['proxy-providers']) assert.equal(front[2], '公共基础服务');
+      else assert.deepEqual(front.slice(2), ['故障转移1 [原生]', '故障转移2', '故障转移3']);
       assert.deepEqual(config['rule-providers'], current['rule-providers']);
       assert.deepEqual(config.proxies, current.proxies);
       assert.deepEqual(config['proxy-providers'], current['proxy-providers']);
+      assert.deepEqual(config.sniffer, current.sniffer);
       assert.equal(JSON.stringify(config.dns['nameserver-policy']), JSON.stringify(current.dns['nameserver-policy']));
       if (release.vpsDirectRule) assert.equal(config.rules[0], release.vpsDirectRule);
       if (ipv4Only) {

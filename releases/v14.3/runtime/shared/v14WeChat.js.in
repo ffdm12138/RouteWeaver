@@ -1,5 +1,16 @@
 const V14_WECHAT_PATTERNS = V14_WECHAT_DOMAINS.map(domain => "+." + domain);
 
+function v14WeChatSnifferSkips(input, sniffer) {
+  const domains = v14Unique(v14Strings(sniffer["skip-domain"], "sniffer.skip-domain"));
+  const previous = input["x-v14-generated"], filter = input.dns?.["fake-ip-filter"];
+  // Older generated profiles folded the media exclusions into user settings.
+  // Readable HTTP Host or TLS/QUIC SNI should reach the existing domain rules.
+  if (previous?.version === V14.version && !previous.wechatSniffRevision &&
+      Array.isArray(filter) && V14_WECHAT_PATTERNS.every(domain => filter.includes(domain)))
+    return domains.filter(domain => !V14_WECHAT_PATTERNS.includes(domain));
+  return domains;
+}
+
 function v14AddWeChatRules(config, add) {
   for (const domain of V14_WECHAT_DOMAINS) add("DOMAIN-SUFFIX," + domain, "DIRECT");
   // The process exception covers IPv4 literals after company, LAN and STUN rules.

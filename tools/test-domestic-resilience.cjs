@@ -11,6 +11,11 @@ const read = file => JSON.parse(fs.readFileSync(path.join(root, file), 'utf8'));
 const hash = file => crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
 const release = read('CURRENT_RELEASE.json');
 const mediaDomains = read('releases/v14.3/data/rules/wechat-media.json');
+const priorityGroups = ['高纯净度AI用', '高网速视频用', '公共基础服务', '谷歌服务', '微软生态',
+  'Steam', '苹果国际', '哔哩国际', '国内网站'];
+const remainingGroups = ['自动选择', '漏网之鱼', 'OpenAI 服务', 'Anthropic 服务', 'YouTube',
+  'Epic Games', 'Telegram', 'TikTok', 'Twitter', 'Discord', 'OpenRouter', 'Perplexity', 'Hugging Face',
+  'xAI', 'Netflix', 'Disney+', 'Spotify', 'Meta 服务'];
 const mediaProcessNames = {
   windows: ['Weixin.exe', 'WeChat.exe'], clashVerge: ['Weixin.exe', 'WeChat.exe'],
   android: ['com.tencent.mm'], macosFlClash: ['WeChat'],
@@ -75,6 +80,16 @@ for (const entry of entries) {
       'x-routeweaver': {'network-mode': entry.mode === 'ipv4-only' ? 'ipv4-local' : entry.mode}};
     const ctx = vm.createContext({input, console: {log() {}}});
     config = JSON.parse(JSON.stringify(vm.runInContext(source + '\nmain(input)', ctx, {timeout: 5000})));
+    check(entry.client + ':' + entry.mode + ':media-sniffer-upgrade', () => {
+      const userSkips = ['+.keep.example.net', 'mmbiz.qpic.cn'];
+      const previous = JSON.parse(JSON.stringify(config));
+      delete previous['x-v14-generated'].wechatSniffRevision;
+      previous.sniffer['skip-domain'].push(...mediaDomains.map(h => '+.' + h), ...userSkips);
+      ctx.input = previous;
+      const upgraded = JSON.parse(JSON.stringify(vm.runInContext('main(input)', ctx, {timeout: 5000})));
+      for (const pattern of mediaDomains.map(h => '+.' + h)) assert.ok(!upgraded.sniffer['skip-domain'].includes(pattern));
+      for (const pattern of userSkips) assert.ok(upgraded.sniffer['skip-domain'].includes(pattern));
+    });
     rules = config.rules;
     groups = new Map(config['proxy-groups'].map(group => [group.name, group]));
     providers = Object.entries(config['rule-providers']).map(([name, p]) => ({name, remote: p.type !== 'inline',
@@ -117,6 +132,13 @@ for (const entry of entries) {
       }
     }
   });
+  check(entry.client + ':' + entry.mode + ':group-display-order', () => {
+    const visible = Array.from(groups).filter(([, group]) => platform === 'shadowrocket'
+      ? !group.includes('hidden=1') : !group.hidden).map(([name]) => name);
+    const expected = priorityGroups.slice();
+    if (platform !== 'shadowrocket') expected.splice(2, 0, '故障转移1', '故障转移2', '故障转移3');
+    assert.deepEqual(visible, expected.concat(remainingGroups));
+  });
   check(entry.client + ':' + entry.mode + ':media-config', () => {
     if (platform === 'shadowrocket') {
       assert.deepEqual(config.general['always-real-ip'].split(','), mediaDomains.flatMap(h => [h, '*.' + h]));
@@ -124,10 +146,12 @@ for (const entry of entries) {
       return;
     }
     assert.equal(config.dns['fake-ip-filter-mode'], 'blacklist');
+    assert.equal(config['x-v14-generated'].wechatSniffRevision, 'wechat-media-sniff-r1');
+    assert.deepEqual(config.sniffer.sniff.QUIC.ports, [443, 8443, 8000]);
     for (const domain of mediaDomains) {
       const pattern = '+.' + domain;
       assert.equal(config.dns['fake-ip-filter'].filter(x => x === pattern).length, 1);
-      assert.equal(config.sniffer['skip-domain'].filter(x => x === pattern).length, 1);
+      assert.ok(!config.sniffer['skip-domain'].includes(pattern));
       assert.deepEqual(config.dns['nameserver-policy'][pattern],
         ['system://#disable-ipv6=true&disable-qtype-64=true&disable-qtype-65=true']);
     }
@@ -186,7 +210,7 @@ for (const entry of entries) {
       check(label + ':stun-dns:' + host, () => assert.deepEqual(dnsPolicyFor(host).groups, ['漏网之鱼']));
   }
 }
-const result = {revision: 'selector-option-order-r1', scope: 'OFFLINE_MODELS_NOT_DEVICE_ACCEPTANCE',
+const result = {revision: 'wechat-media-sniff-r1', scope: 'OFFLINE_MODELS_NOT_DEVICE_ACCEPTANCE',
   edition: release.vpsDirectRevision ? 'personal' : 'public', status: failures.length ? 'FAIL' : 'PASS',
   checks, failed: failures.length, stages: counts, sources, sizes,
   testSHA256: hash(__filename), dataSHA256: hash(path.join(releaseRoot, 'data/rules/domestic-resilience.json')),

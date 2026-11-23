@@ -128,7 +128,7 @@ function main(input) {
     while (occupied.has(name)) name = logical + " [V14" + (++i > 1 ? "-" + i : "") + "]";
     occupied.add(name); groupNames.set(logical, name); return name;
   }
-  for (const logical of logicalGroups) groupName(logical);
+  const groupOrder = logicalGroups.map(groupName);
   const rawNodeNames = selectable.map(p => p.name);
   const providerGroupFields = providerNames.length ? { use: providerNames.slice(), "exclude-filter": "(?i)^@v14-nontransport:|" + V14.infoPattern } : {};
   const groups = [];
@@ -139,7 +139,6 @@ function main(input) {
     url: V14.testUrl, interval: V14.testInterval, lazy: true, "empty-fallback": "REJECT" });
   groups.push({name: groupName("高网速视频用"), type: "select", proxies: publicOptions.concat(rawNodeNames),
     ...providerGroupFields, "default-selected": "REJECT", "empty-fallback": "REJECT"});
-  groups.sort((a,b) => logicalGroups.indexOf(Array.from(groupNames).find(([,name])=>name===a.name)[0]) - logicalGroups.indexOf(Array.from(groupNames).find(([,name])=>name===b.name)[0]));
   const business = logicalGroups.filter(name => !["高纯净度AI用", "高网速视频用", "自动选择"].includes(name));
   for (const logical of business) {
     const preferred = V14_SELECTOR_DEFAULTS[logical];
@@ -151,6 +150,7 @@ function main(input) {
     groups.push({ name: groupName(logical), type: "select", proxies: choices.concat(rawNodeNames), ...providerGroupFields,
       "default-selected": preferred === "DIRECT" ? preferred : groupName(preferred), "empty-fallback": "REJECT" });
   }
+  groups.sort((a, b) => groupOrder.indexOf(a.name) - groupOrder.indexOf(b.name));
   config["proxy-groups"] = groups.concat(keptGroups);
   config["proxy-providers"] = providers;
   config["rule-providers"] = legacyRuleProviders;
@@ -338,10 +338,10 @@ function main(input) {
   const oldSniffer = v14Object(config.sniffer) ? config.sniffer : {};
   config.sniffer = Object.assign({}, oldSniffer, { enable: true, "force-dns-mapping": true,
     "parse-pure-ip": true, "override-destination": false,
-    "skip-domain": v14Unique(v14Strings(oldSniffer["skip-domain"], "sniffer.skip-domain").concat(V14_WECHAT_PATTERNS)),
+    "skip-domain": v14WeChatSnifferSkips(input, oldSniffer),
     sniff: Object.assign({}, v14Object(oldSniffer.sniff) ? oldSniffer.sniff : {}, {
       HTTP: { ports: [80, "8080-8880"], "override-destination": false },
-      TLS: { ports: [443, 8443] }, QUIC: { ports: [443, 8443] },
+      TLS: { ports: [443, 8443] }, QUIC: { ports: [443, 8443, 8000] },
     }),
   });
 
@@ -376,6 +376,7 @@ function main(input) {
   v14GraphCheck(config, warnings);
   for (const key of previous) delete config[key];
   config["x-v14-generated"] = { version: V14.version, revision: "domestic-selector-r1-20261010", routingRevision: "domestic-selector-r1-20261010", compatibilityRevision: "api-real-ip-r1-20261010", platform: "desktop", groups: groups.map(g => g.name), proxies: [],
+    wechatSniffRevision: "wechat-media-sniff-r1",
     ruleDataMode: "reviewed-inline-domains-with-pinned-remote-supplements-no-local-geo",
     ruleProviders: ruleSources.map(s => s.name), ruleSources, tailscalePublicProvider,
     auditRepairRevision: "balanced-r1", domesticProtocolRevision: "domestic-protocol-r1"{{DIRECT_RULE_MARKER}},

@@ -84,8 +84,10 @@ for (const {entries, modes} of tracks) {
       const slots = ['故障转移1 [原生]', '故障转移2', '故障转移3'];
       const skip1 = '跳过本档（1） [原生]';
       const skip2 = '跳过本档（2） [原生]';
-      const added = candidate['proxy-groups'].slice(original['proxy-groups'].length);
+      const originalNames = new Set(original['proxy-groups'].map(group => group.name));
+      const added = candidate['proxy-groups'].filter(group => !originalNames.has(group.name));
       assert.deepEqual(added.filter(g => !g.hidden).map(g => g.name), slots);
+      assert.deepEqual(candidate['proxy-groups'].slice(2, 5).map(g => g.name), slots);
       for (const [index, name] of slots.entries()) {
         const first = [skip1, skip2, '拒绝 reject'][index];
         const group = groups.get(name);
@@ -138,7 +140,7 @@ for (const {entries, modes} of tracks) {
         actual['default-selected'] = selected;
       }
       assert.ok(policies.some(g => g.name === '漏网之鱼') && policies.some(g => g.name === '国内网站'));
-      candidate['proxy-groups'] = candidate['proxy-groups'].slice(0, original['proxy-groups'].length);
+      candidate['proxy-groups'] = candidate['proxy-groups'].filter(group => originalNames.has(group.name));
       candidate['x-v14-generated'].groups = original['x-v14-generated'].groups;
       assert.deepEqual(candidate, original, 'only fallback groups and selector options may change');
 
@@ -151,8 +153,10 @@ for (const {entries, modes} of tracks) {
       legacy['proxy-groups'].find(g => g.name === '漏网之鱼').proxies.push(fallback);
       const upgraded = run(source, legacy);
       assert.equal(upgraded['proxy-groups'].some(g => g.name === primary || g.name === fallback), false);
+      const upgradeOrder = original['proxy-groups'].filter(g => !g.hidden).map(g => g.name);
+      upgradeOrder.splice(2, 0, ...slots);
       assert.deepEqual(upgraded['proxy-groups'].filter(g => !g.hidden).map(g => g.name),
-        original['proxy-groups'].filter(g => !g.hidden).map(g => g.name).concat(slots));
+        upgradeOrder);
       cases++;
     }
   }

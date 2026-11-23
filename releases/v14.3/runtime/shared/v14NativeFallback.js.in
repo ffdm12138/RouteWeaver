@@ -45,6 +45,8 @@ function v14NativeFallback(config, poolName, policies) {
     type: "select", proxies: [reject, ...nodes], "default-selected": reject, "empty-fallback": "REJECT",
   };
   const backups = [1, 2, 3].map(slot => addGroup("故障转移" + slot, manual));
+  const backupGroups = groups.splice(-backups.length);
+  groups.splice(2, 0, ...backupGroups);
   function addFallback(label, members) {
     // The URL fragment gives this probe a separate cache key on the same HTTPS endpoint.
     return addGroup(label, {

@@ -12,11 +12,12 @@ import subprocess
 import tempfile
 
 from current_audit import checked_path, read, sha
-from standard_business_doh import REVISION as DOH_REVISION, before_doh, verify_receipt
+from standard_business_doh import CORE_EXE_SHA256, REVISION as DOH_REVISION, before_doh, verify_receipt
 
 
 ROOT = Path(__file__).resolve().parents[1]
 SUMS = 'SHA256SUMS.txt'
+WECHAT_REVISION = 'wechat-media-sniff-r1'
 SELECTOR_ORDER_CHECKS = {
     'selector_order_and_fresh_defaults',
     'selector_order_after_manual_choice',
@@ -84,12 +85,43 @@ def projectclash_assets(root, candidate, edition, system_dns=False, selector_ord
     return assets
 
 
+def verify_media_transport(root, release, tracks):
+    settings = release['wechatMedia']
+    receipt = read(checked_path(root, settings['transportVerification']))
+    project = release['projectClash']
+    project_core = read(checked_path(root, project['verification']))['core']
+    if (receipt['status'] != 'PASS' or receipt['revision'] != WECHAT_REVISION
+            or receipt['baselineCommit'] != settings['baselineCommit']
+            or receipt['mihomoSHA256'] != CORE_EXE_SHA256 or receipt['projectClashCore'] != project_core):
+        raise ValueError('Missing verified media transport replay')
+    for file, digest in receipt['harness'].items():
+        if sha(checked_path(root, file)) != digest:
+            raise ValueError('Stale media transport replay harness: ' + file)
+    after = dict.fromkeys(('wechat_quic_443', 'wechat_quic_8000', 'qq_image_quic_443'), 'DIRECT')
+    after.update(dict.fromkeys(('stun_hostname_443', 'unclassified_quic_443', 'opaque_udp_443', 'opaque_udp_8000'),
+                               'catch-all proxy'))
+    before = dict.fromkeys(after, 'catch-all proxy')
+    for track, entries in tracks.items():
+        entries = {**entries, 'projectClash': project['entries'][track]}
+        results = receipt['tracks'][track]
+        if set(entries) != set(results):
+            raise ValueError('Incomplete media replay entry inventory: ' + track)
+        for client, file in entries.items():
+            proof = results[client]
+            if proof['file'] != file or proof['sha256'] != sha(checked_path(root, file)):
+                raise ValueError('Stale media replay source: ' + file)
+            if file.endswith('.js') and (proof['before'] != before or proof['after'] != after):
+                raise ValueError('Wrong media or protected UDP route: ' + file)
+
+
 def verify_source(root):
     release = read(root / 'CURRENT_RELEASE.json')
     candidate = release['nativeFallback']
     revision = release.get('currentRevision')
     system_dns = revision == 'direct-system-dns-r1'
-    standard_doh = revision == DOH_REVISION
+    media_repair = revision == WECHAT_REVISION
+    standard_doh = revision == DOH_REVISION or media_repair
+    historical_core_receipts = revision == DOH_REVISION
     selector_order = revision == 'selector-option-order-r1' or standard_doh
     receipt = read(checked_path(root, candidate['verification']))
     edition = 'personal' if release.get('vpsDirectRevision') else 'public'
@@ -100,10 +132,13 @@ def verify_source(root):
         raise ValueError('Missing or incompatible native fallback evidence')
 
     tracks = {'main': release['entries'], 'ipv4-only': release['variants']['ipv4-only']['entries']}
-    projectclash = projectclash_assets(root, release['projectClash'], edition, system_dns, selector_order, standard_doh)
+    projectclash = projectclash_assets(root, release['projectClash'], edition, system_dns, selector_order, historical_core_receipts)
     tags = release['directSystemDns']['releaseTags'] if system_dns else candidate['releaseTags']
     if standard_doh:
         tags = release['standardBusinessDoh']['releaseTags']
+    if media_repair:
+        verify_media_transport(root, release, tracks)
+        tags = release['wechatMedia']['releaseTags']
     if tags is not None and (set(tags) != set(tracks) or len(set(tags.values())) != 2):
         raise ValueError('Expected two distinct track tags')
     assets = {}
@@ -119,7 +154,7 @@ def verify_source(root):
                 raise ValueError('Stale entry evidence: ' + file)
             if path.suffix == '.js' and proof['coreChecks'] != len(receipt['checks']):
                 raise ValueError('Incomplete core replay: ' + file)
-            files[path.name] = (path, entry_digest(path, proof['sourceSHA256'], system_dns, standard_doh))
+            files[path.name] = (path, entry_digest(path, proof['sourceSHA256'], system_dns, historical_core_receipts))
         if len(files) != 7:
             raise ValueError('Duplicate asset basename')
         path, digest = projectclash[track]
@@ -193,7 +228,7 @@ def verify_static():
                     ['node', 'tools/test-native-fallback.cjs'], ['node', 'tools/test-tailscale-direct.cjs'],
                     ['node', 'tools/test-company-audit.cjs'], ['node', 'tools/test-dns-policy-order.cjs'],
                     *suites['regression'], *suites['platform']]
-        if read(snapshot / 'CURRENT_RELEASE.json').get('currentRevision') == DOH_REVISION:
+        if read(snapshot / 'CURRENT_RELEASE.json').get('currentRevision') in (DOH_REVISION, WECHAT_REVISION):
             commands.append(['python', '-B', 'tools/standard_business_doh.py'])
         for command in commands:
             subprocess.run(command, cwd=snapshot, check=True, timeout=90)

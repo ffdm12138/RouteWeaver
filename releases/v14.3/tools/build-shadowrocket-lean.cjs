@@ -11,6 +11,8 @@ const beforeRoute=index.indexRoute(before),beforeDNS=index.indexDNS(before);
 const lock=read(prefix+'data/rule-sources.lock.json'),oldManifest=read(prefix+'metadata/shadowrocket-sources.json');
 const source=fs.readFileSync(local('src/android/v14.3-android-flclash.js'),'utf8'),ctx=vm.createContext({console:{log(){}}});vm.runInContext(source,ctx);
 const data=JSON.parse(vm.runInContext('JSON.stringify({settings:V14,domestic:V14_DOMESTIC_SEEDS,stunNames:V14.stunHostPatterns,selectorDefaults:V14_SELECTOR_DEFAULTS})',ctx));
+const businessFile='data/rules/business-services.json';
+const displayPriority=read(businessFile).groupDisplayPriority;
 const policy=read('data/rules/embedded-policy.json');assert.equal(policy.domesticProtocolRevision,'domestic-protocol-r1');
 const splitServices=policy.services.filter(service=>['YouTube','高网速视频用'].includes(service.name));
 assert.equal(splitServices.length,2);
@@ -175,6 +177,9 @@ const groups=groupRows.map(row=>{
  return name+' = '+fields.map(field=>manualLabels.get(field)||field).join(',');
 });
 for(const [target,label] of manualLabels)groups.push(label+' = select,'+target+',hidden=1');
+const displayRank=new Map(displayPriority.map((name,index)=>[name,index]));
+const rank=row=>displayRank.get(row.split(' = ',1)[0])??displayRank.size;
+groups.sort((a,b)=>rank(a)-rank(b));
 const output=header.join('\n')+'\n\n[General]\n'+general.join('\n')+'\n\n[Proxy Group]\n'+groups.join('\n')+'\n\n[Rule]\n'+rules.join('\n')+'\n\n[Host]\n'+outputHosts.map(([k,v])=>k+' = '+v).join('\n')+'\n';
 // Allow up to 2 KB for the translated selectors and their name filters.
 assert.ok(Buffer.byteLength(output)<1802000,'Self-contained DNS budget exceeded');
@@ -191,7 +196,7 @@ const manifest={version:'14.3',date:'2026-10-13',revision:'shadowrocket-lean-r1'
   standaloneDomesticDNSAffinity:'NOT_NATIVE_VERIFIED'},
  groups:groups.map(r=>r.split(' = ')[0]),sources,
  sourceContract:{file:'docs/需求.md',sha256:sha(contractPath)},
- inputs:['tools/build-shadowrocket-lean.cjs','tools/lib/tailscale-policy.cjs',tailscale.source.file,wechatFile,'src/android/v14.3-android-flclash.js','data/rules/embedded-policy.json',prefix+'manifest.json',prefix+'metadata/shadowrocket-sources.json',prefix+'data/rule-sources.lock.json'].map(file=>({file,sha256:sha(local(file))})),
+ inputs:['tools/build-shadowrocket-lean.cjs','tools/lib/tailscale-policy.cjs',tailscale.source.file,wechatFile,businessFile,'src/android/v14.3-android-flclash.js','data/rules/embedded-policy.json',prefix+'manifest.json',prefix+'metadata/shadowrocket-sources.json',prefix+'data/rule-sources.lock.json'].map(file=>({file,sha256:sha(local(file))})),
  clientDeployment:false,nativeCompilation:'NOT_RUN',nativeDNSAffinity:'NOT_RUN',deviceAcceptance:'NOT_RUN'};
 const text=JSON.stringify(manifest,null,2)+'\n';
 if(process.argv.includes('--check')){assert.equal(fs.readFileSync(local(file),'utf8'),output);assert.equal(fs.readFileSync(local('metadata/shadowrocket-lean.json'),'utf8'),text);}

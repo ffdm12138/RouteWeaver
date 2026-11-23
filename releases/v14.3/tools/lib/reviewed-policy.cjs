@@ -90,5 +90,6 @@ const selected={version:'14.3',date:'2026-10-12',revision:'balanced-r1',scope:'R
   resilienceRevision:resilience.revision,authorizedDomesticSuffixes,
   inputs:['data/rules/company-core.json','data/rules/business-services.json','data/rules/domestic-direct.json','data/rules/domestic-resilience.json','data/rules/company-supplement.json','data/rules/safety-classifiers.json','data/rule-sources.lock.json',baseline+'manifest.json'].map(file=>({file,sha256:sha(file)}))};
 const selectedText=JSON.stringify(selected,null,2)+'\n';
-return {selected,selectedText,lock,before,baseline,core,services,embedded,pins,domesticSeeds,selectorDefaults:business.selectorDefaults};
+return {selected,selectedText,lock,before,baseline,core,services,embedded,pins,domesticSeeds,
+  selectorDefaults:business.selectorDefaults,groupDisplayPriority:business.groupDisplayPriority};
 };

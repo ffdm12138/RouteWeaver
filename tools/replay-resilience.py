@@ -238,7 +238,9 @@ def run_case(core, file, mode, engine, directory):
             assert actual == ([expected] if expected else []), ('DNS egress', host, actual, expected)
         dot_port = dot.server_address[1]
         https_port = https.server_address[1]
-        api_port = https_port if 'api.openai.com' in original['dns']['nameserver-policy'] else dot_port
+        business_ports = {https_port if url.startswith('https://') else dot_port
+                          for url in original['dns']['nameserver']}
+        api_ports = {https_port} if 'api.openai.com' in original['dns']['nameserver-policy'] else business_ports
         via(None, 'api.openai.com', blocked=True)
         checks.append('unconfigured_public_selectors_reject')
         choose('高纯净度AI用', 'A ↻')
@@ -341,9 +343,9 @@ def run_case(core, file, mode, engine, directory):
         via('D')
         checks.append('skip_tiers1_and2_first_connection_uses_tier3')
         udp('D'); checks.append('skipped_tiers_udp_D')
-        dns_via('skip.amemv.com', 'D', {dot_port})
-        checks.append('skipped_tiers_domestic_dot_D')
-        dns_via('api.openai.com', 'D', {api_port})
+        dns_via('skip.amemv.com', 'D', business_ports)
+        checks.append('skipped_tiers_domestic_encrypted_dns_D')
+        dns_via('api.openai.com', 'D', api_ports)
         checks.append('skipped_tiers_openai_encrypted_dns_D')
 
         for label, selection, expected in [('single', 'B ↻', 'B'), ('public', '高纯净度AI用', 'C'), ('direct', DIRECT_CHOICE, None)]:
@@ -351,7 +353,7 @@ def run_case(core, file, mode, engine, directory):
             dns_via(label + '.amemv.com', expected, {dot_port, https_port})
             checks.append('domestic_dns_' + label)
         choose('OpenAI 服务', 'B ↻')
-        dns_via('api.openai.com', 'B', {api_port})
+        dns_via('api.openai.com', 'B', api_ports)
         checks.append('openai_mode_correct_encrypted_dns_selected_group')
         choose('国内网站', DIRECT_CHOICE); cfg['hosts']['direct.amemv.com'] = '127.0.0.1'; save(); child.call('config.setup', {'selected-map': {'国内网站': DIRECT_CHOICE}})
         via(None, 'direct.amemv.com'); checks.append('domestic_explicit_DIRECT_tcp')
@@ -381,8 +383,8 @@ def run_case(core, file, mode, engine, directory):
         reload_without({'A', 'B', 'C'}, selected)
         F['wait_until'](lambda: via('D'), seconds=10)
         udp('D')
-        dns_via('reload.amemv.com', 'D', {dot_port})
-        dns_via('api.openai.com', 'D', {api_port})
+        dns_via('reload.amemv.com', 'D', business_ports)
+        dns_via('api.openai.com', 'D', api_ports)
         checks.append('reload_removed_primary_and_first_two_tiers_uses_tier3')
         choose('国内网站', REJECT_CHOICE)
         via(None, blocked=True)

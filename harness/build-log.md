@@ -192,3 +192,9 @@ ProjectClash 主版和纯 IPv4 版从当前共享规则生成，覆盖 iPhone、
 两轨业务组统一使用固定候选顺序，显示「直连 direct」和「拒绝 reject」。既有默认出口与路由规则继续沿用。「漏网之鱼」和两个公共组提供手动直连。包含实际 TCP、UDP、DoH、DoT 的公开版隔离回放覆盖 12 份 FlClash/Mihomo JS 和 2 份 ProjectClash JS，每份通过 71 项。无手选记录时，原先默认直连的组在隔离重载后仍走内建 DIRECT。Shadowrocket 完成配置和分流模型检查，Apple App 与 VPN 接管待验收。 [FlClash 回执](../releases/v14.3/validation/proxy-failover/selector-option-order-r1.json) · [ProjectClash 回执](../releases/v14.3/validation/projectclash-selector-option-order-r1.json)
 
 公开主版 v14.3.0-rc.21 和纯 IPv4 版 v14.3.0-ipv4-only-rc.12 均绑定公开提交 `abefc00df04c6161004a70b8d119b501632058a4`。Windows、Ubuntu、macOS JavaScriptCore 及 JavaScript 引擎的源码和发布检查通过。18 个附件的匿名下载 SHA-256 与已验证字节一致。 [主版回执](releases/v14.3.0-rc.21.json) · [纯 IPv4 回执](releases/v14.3.0-ipv4-only-rc.12.json)
+
+## 2026-11-24 · 微信、QQ 图片分流与策略组显示
+
+两轨 14 个 JS 入口通过 196 项合成 UDP 传输对照，对照基线为主版 rc.22 与纯 IPv4 版 rc.13 的共同提交。微信 QUIC/443、8000 和 QQ 图片 QUIC/443 的可读域名进入已有直连规则。STUN 主机名和无法识别域名的 UDP 仍由兜底代理接收。 [传输回执](../releases/v14.3/validation/domestic-resilience/wechat-media-transport-r1.json)
+
+两轨完成 62,398 项离线模型检查、56 份官方 Mihomo 配置解析，以及每个 JS 入口 71 项隔离核心和 QuickJS 回归。Shadowrocket 两份配置的策略组行按要求前置，规则、DNS 和各行内容经字节核对。新版客户端导入、TUN/VPN 和真实收图待设备验收。 [配置回执](../releases/v14.3/validation/domestic-resilience/wechat-media-sniff-r1.json) · [FlClash 回执](../releases/v14.3/validation/proxy-failover/wechat-media-sniff-r1.json) · [ProjectClash 回执](../releases/v14.3/validation/projectclash-wechat-media-sniff-r1.json)

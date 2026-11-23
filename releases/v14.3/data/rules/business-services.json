@@ -2,6 +2,17 @@
   "version": "14.2",
   "revision": "apple-inline-r1",
   "provenance": "Common V14.2 service table; Apple suffixes apple.com.cn and aaplimg.com promoted from the already reviewed pinned Apple classifier to embedded routing and DNS protection; remote sources unchanged",
+  "groupDisplayPriority": [
+    "高纯净度AI用",
+    "高网速视频用",
+    "公共基础服务",
+    "谷歌服务",
+    "微软生态",
+    "Steam",
+    "苹果国际",
+    "哔哩国际",
+    "国内网站"
+  ],
   "selectorDefaults": {
     "公共基础服务": "高纯净度AI用",
     "漏网之鱼": "高纯净度AI用",

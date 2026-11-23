@@ -5,7 +5,7 @@
   "domesticProtocolRevision": "domestic-protocol-r1",
   "status": "GENERATED_NATIVE_ACCEPTANCE_PENDING",
   "file": "src/ios/v14.3-shadowrocket.conf",
-  "sha256": "03976c1d568828c12b6699afea9b85d0c8556a16114cc5927cd665d10910542b",
+  "sha256": "0054cc3fd607e917b77c4f83607cce87156c70f6486dad638de8c45beebf04e1",
   "bytes": 1801182,
   "tailscaleDerpSource": {
     "file": "data/rules/tailscale-derp-map.json",
@@ -5144,16 +5144,18 @@
   "groups": [
     "高纯净度AI用",
     "高网速视频用",
-    "自动选择",
     "公共基础服务",
-    "漏网之鱼",
-    "国内网站",
-    "OpenAI 服务",
-    "Anthropic 服务",
     "谷歌服务",
-    "YouTube",
     "微软生态",
     "Steam",
+    "苹果国际",
+    "哔哩国际",
+    "国内网站",
+    "自动选择",
+    "漏网之鱼",
+    "OpenAI 服务",
+    "Anthropic 服务",
+    "YouTube",
     "Epic Games",
     "Telegram",
     "TikTok",
@@ -5167,8 +5169,6 @@
     "Disney+",
     "Spotify",
     "Meta 服务",
-    "苹果国际",
-    "哔哩国际",
     "直连 direct",
     "拒绝 reject"
   ],
@@ -5446,12 +5446,12 @@
   ],
   "sourceContract": {
     "file": "docs/需求.md",
-    "sha256": "d11868e60614cce12f5ed030d5500b3d07041020e094997570c13c90dc5ece3e"
+    "sha256": "5d525143e12450b25c4ff95d1cf617a08bfd9a399317e323bf4052de5783f45a"
   },
   "inputs": [
     {
       "file": "tools/build-shadowrocket-lean.cjs",
-      "sha256": "9e4dee13159ec399cabec3d15835b8e5a47ce2dc9bcc10ab3ef7b54f13cb1ec1"
+      "sha256": "7b92aa6c02e0ad153d3877c1bd29a0bd36d466a457cd9c235cc406a0da39959f"
     },
     {
       "file": "tools/lib/tailscale-policy.cjs",
@@ -5466,12 +5466,16 @@
       "sha256": "b041e63cc178060fd545a0bc8ef8952b7b85fcaf034b0defc32112e79edf0551"
     },
     {
+      "file": "data/rules/business-services.json",
+      "sha256": "bece4a24dab69f5d97f806dc2ced7859cdf63c3d3342890ec8e934fe954d6061"
+    },
+    {
       "file": "src/android/v14.3-android-flclash.js",
-      "sha256": "ed585481413632dee2a0c94d3ffb4485e0d17c1648c9a3a8923bbe126c11678c"
+      "sha256": "012ccc4d2c55b11d266f29a1b659845a9ec2d0b58baec53efd59606265c30c48"
     },
     {
       "file": "data/rules/embedded-policy.json",
-      "sha256": "ad765b126d1977e0543cac6c85277b7b76935c97b018a07455bc78fbdc231f84"
+      "sha256": "5d3cc29579ea65e4bb30e74ebf5e495d837a265ab4e8d32fd90b1ae9dd49f2e2"
     },
     {
       "file": "validation/inputs/v14.2-baseline/manifest.json",

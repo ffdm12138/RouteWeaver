@@ -11,9 +11,9 @@
       "platform": "macosFlClash",
       "client": "FlClash",
       "file": "src/macos/v14.3-macos-flclash.js",
-      "sha256": "3112f5b806ab208d669977fb6d9065f2fcd4a437eb5ed3c514e778071849a039",
-      "bytes": 127820,
-      "generatedConfigBytes": 181660,
+      "sha256": "84ba5fb70b626bfc3d1c08d2fab7b37369c3092552ca02ed6c1376964837bb6c",
+      "bytes": 128476,
+      "generatedConfigBytes": 181461,
       "inlineRows": 1098,
       "remoteSources": 30
     },
@@ -21,9 +21,9 @@
       "platform": "macosClashMi",
       "client": "Clash Mi",
       "file": "src/macos/v14.3-macos-clashmi.js",
-      "sha256": "9844781cf66a4502826d3d9efd83087e5f4ddf94fec1b7d2f0eca6ecdc9ac334",
-      "bytes": 127844,
-      "generatedConfigBytes": 181956,
+      "sha256": "163901dd7fc3207dbad9ce7a341590a73b57cdd21c21054afce153156d5a844d",
+      "bytes": 128500,
+      "generatedConfigBytes": 181757,
       "inlineRows": 1098,
       "remoteSources": 29
     }
@@ -52,7 +52,7 @@
     },
     {
       "file": "tools/lib/compile-entries.cjs",
-      "sha256": "694f15825ecd020e794083488e9ecc2698659132f5b7e4195c4f0d4736fedc84"
+      "sha256": "1a84c032c7b2cd8084ce43eea2b61d9ca813d40b75ffd576daa60c466a0b3017"
     },
     {
       "file": "tools/lib/render-runtime.cjs",
@@ -60,11 +60,11 @@
     },
     {
       "file": "tools/lib/reviewed-policy.cjs",
-      "sha256": "176d659a3ae21b21e49ddb9fcaab5316bba9790440b7001f89d0f858007c970f"
+      "sha256": "0e843cab6856efb070b303c44586445afccbdf5b514662f7e8738dea7950e3ce"
     },
     {
       "file": "data/rules/business-services.json",
-      "sha256": "40414713f3e75e8f1ab8d3e0adcac2603ea6c64fd2050651a586eb45cc1fd974"
+      "sha256": "bece4a24dab69f5d97f806dc2ced7859cdf63c3d3342890ec8e934fe954d6061"
     },
     {
       "file": "data/rules/domestic-direct.json",
@@ -100,7 +100,7 @@
     },
     {
       "file": "runtime/shared/v14NativeFallback.js.in",
-      "sha256": "e5cf53ddda9a581565a8e934873a6d43e8683e30179806e3940cc7773407a33f"
+      "sha256": "6d07363971200b69e27a94b8ada178ccbb5a58dc50693e6123a28dfb4e39d037"
     },
     {
       "file": "runtime/shared/v14Tailscale.js.in",
@@ -120,7 +120,7 @@
     },
     {
       "file": "runtime/shared/v14WeChat.js.in",
-      "sha256": "376f2147712485b00e2e1021d13906677f27035b8de05590b1948e6fd338b062"
+      "sha256": "41d739b9f8bc0833508517e9859ce6e37d037d64fe0ad3e07ab1de2d34fbc120"
     },
     {
       "file": "runtime/platforms/desktop/layout.json",
@@ -128,7 +128,7 @@
     },
     {
       "file": "runtime/platforms/desktop/preamble.js.in",
-      "sha256": "350df69e632e771a1040e576c45075d6aad83f7bf6f60a6aaa94248e935fdf7c"
+      "sha256": "528f4967d161c0664148fd59e5be01dcb95439bf5f5bd51f9edd4d4e7b9fb038"
     },
     {
       "file": "runtime/shared/v14Fail.js.in",
@@ -216,7 +216,7 @@
     },
     {
       "file": "runtime/shared/main.js.in",
-      "sha256": "15ef3feafa2e2a6e8b3fab187a8e275b7fc9cf2edcef591c4a2156703c31a18e"
+      "sha256": "6b656fb7cd20e276a847aabfb7c3fbf1e38fac9d5d2a8617b231beebdb88a7e4"
     },
     {
       "file": "runtime/platforms/android/layout.json",
@@ -224,7 +224,7 @@
     },
     {
       "file": "runtime/platforms/android/preamble.js.in",
-      "sha256": "891ae02950e6eacf433807de2965e6f01af72b1b77a4402555c6c9814bd08114"
+      "sha256": "9a30cab60ee0afc85bbbabd7e5c14aeb67ea044941cc4cd15c6995128a255b03"
     },
     {
       "file": "runtime/platforms/android/v14RuleRegistry.js.in",
@@ -232,7 +232,7 @@
     },
     {
       "file": "runtime/platforms/android/main.js.in",
-      "sha256": "519c20e231c8648d70ac77f78ded886833e40c5144bf9763ffca6cdbddabf7a9"
+      "sha256": "e65cf2798462477b0e46109fa1baa662a71761694873a24759f178ddddc44e51"
     },
     {
       "file": "tools/validate-azure-async.cjs",
