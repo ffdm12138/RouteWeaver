@@ -6,7 +6,7 @@ const crypto = require('node:crypto'), assert = require('node:assert/strict');
 const root = path.resolve(__dirname, '..'), releaseRoot = path.join(root, 'releases/v14.3');
 const f = require(path.join(releaseRoot, 'tests/current-fixture.cjs'));
 const { indexDNS } = require(path.join(releaseRoot, 'tests/domain-index.cjs'));
-const { mediaHost } = require(path.join(releaseRoot, 'tests/domestic-contract.cjs'));
+const { driveExactHosts, mediaHost } = require(path.join(releaseRoot, 'tests/domestic-contract.cjs'));
 const read = file => JSON.parse(fs.readFileSync(path.join(root, file), 'utf8'));
 const hash = file => crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
 const release = read('CURRENT_RELEASE.json');
@@ -30,6 +30,11 @@ const businessDefaults = {
   '高网速视频用': ['YouTube', 'Google Drive', 'Telegram', 'TikTok', 'Twitter', 'Discord', 'Netflix', 'Disney+', 'Spotify'],
   '高纯净度AI用': ['公共基础服务', '漏网之鱼', 'OpenAI 服务', 'Anthropic 服务', '谷歌服务', '微软生态',
     'OpenRouter', 'Perplexity', 'Hugging Face', 'xAI', 'Meta 服务'],
+};
+const driveRoutes = {
+  'Google Drive': ['drive.google.com', 'sync.drive.google.com', 'googledrive.com', ...driveExactHosts],
+  '谷歌服务': ['accounts.google.com', 'docs.google.com', 'www.googleapis.com', 'lh3.googleusercontent.com',
+    'edge.drivefrontend-pa.googleapis.com'],
 };
 const locks = [...read('releases/v14.3/data/rule-sources.lock.json').sources,
   ...read('releases/v14.3/validation/inputs/v14.2-baseline/data/rule-sources.lock.json').sources];
@@ -167,6 +172,16 @@ for (const entry of entries) {
     const label = entry.client + ':' + entry.mode + ':' + stage;
     counts[stage] = (counts[stage] || 0) + 1;
     const dnsPolicyFor = indexDNS(model);
+    for (const [group, probes] of Object.entries(driveRoutes)) {
+      for (const host of probes) {
+        check(label + ':drive:' + host, () => {
+          assert.deepEqual(dnsPolicyFor(host).groups, [group]);
+          for (const protocol of ['TCP', 'UDP']) {
+            assert.equal(f.route(model, {host, protocol, port: 443}).group, group);
+          }
+        });
+      }
+    }
     for (const host of hosts) {
       const group = mediaHost(host) ? 'DIRECT' : '国内网站';
       const dnsGroup = group === 'DIRECT' && platform !== 'shadowrocket' ? 'system' : group;

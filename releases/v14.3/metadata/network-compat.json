@@ -58,7 +58,7 @@
     },
     {
       "file": "data/rules/business-services.json",
-      "sha256": "cb7b8a108566f56e61f97bc96c51b03a287bf032b240fc7a3ee4d0f6328dac63"
+      "sha256": "3cf9d45f37ee0f1d4ee430e778acc9d3ed32c1a6b5288cc05b9b3612d12cf211"
     },
     {
       "file": "data/rules/domestic-direct.json",
@@ -258,8 +258,8 @@
       "platform": "windows",
       "source": "src/windows/v14.3-windows-flclash.js",
       "file": "src/windows/v14.3-windows-flclash.js",
-      "sha256": "abda0c3f241751004baccdacfb239921ff1545dfbe2a6b7563d1158297ff807f",
-      "bytes": 126393,
+      "sha256": "0c35624106975f1330ce9c804f04214f48bbbc59bcc36001fd064eef8bafe689",
+      "bytes": 126650,
       "modes": [
         "auto",
         "dual-stack",
@@ -270,8 +270,8 @@
       "platform": "android",
       "source": "src/android/v14.3-android-flclash.js",
       "file": "src/android/v14.3-android-flclash.js",
-      "sha256": "ee2462c6501447d17e55fb695e91866744c3c2a2efb6eeb2f4f08f49396144df",
-      "bytes": 125952,
+      "sha256": "b6c67101221c423c5becc6ddb2c3ccb5fe92e2b8132fb7c9d59c35344ab0ac8b",
+      "bytes": 126209,
       "modes": [
         "auto",
         "dual-stack",
@@ -282,8 +282,8 @@
       "platform": "clashmi",
       "source": "src/ios/v14.3-clashmi-domestic-protocol-r1.js",
       "file": "src/ios/v14.3-clashmi-domestic-protocol-r1.js",
-      "sha256": "c7cd42f33dac113624aacdcbf0063eb093ce19f6454898e7b30d6e373b1b7e77",
-      "bytes": 128262,
+      "sha256": "bd049564e492320fba4864549e6ba9268820cc088b55b8cce0f0910f43639ae2",
+      "bytes": 128519,
       "modes": [
         "auto",
         "dual-stack",
@@ -294,8 +294,8 @@
       "platform": "macosFlClash",
       "source": "src/macos/v14.3-macos-flclash.js",
       "file": "src/macos/v14.3-macos-flclash.js",
-      "sha256": "fda5ff237d79a58650c967ee50792ec5ada8fc6bcc9a809e43917c79da02c542",
-      "bytes": 128236,
+      "sha256": "fc9aeb640dcdc60d582741e22ff74c56500f8d6fdb64c5869f80f2819a3c6c9f",
+      "bytes": 128493,
       "modes": [
         "auto",
         "dual-stack",
@@ -306,8 +306,8 @@
       "platform": "macosClashMi",
       "source": "src/macos/v14.3-macos-clashmi.js",
       "file": "src/macos/v14.3-macos-clashmi.js",
-      "sha256": "1e64d893f3ecbcdb19ab1aa93cfaa9636fdfc3375d979c376627bb4779f1cd7c",
-      "bytes": 128260,
+      "sha256": "9376e20e77abcf9c9eba5955655a3fcacf3b00524fbd711921b982d37ca4b6c4",
+      "bytes": 128517,
       "modes": [
         "auto",
         "dual-stack",
@@ -318,8 +318,8 @@
       "platform": "clashVerge",
       "source": "src/clash-verge/v14.3-clash-verge.js",
       "file": "src/clash-verge/v14.3-clash-verge.js",
-      "sha256": "a84c65c23aa3dd98dc1977b3a5a8053f106febd7594f9a58993a24744f3ca2ea",
-      "bytes": 128331,
+      "sha256": "3551b2a782ec34f1e70fc109a45494ee00787acf5ac9ac7632c3771085fef0ab",
+      "bytes": 128588,
       "modes": [
         "auto",
         "dual-stack",
@@ -330,8 +330,8 @@
       "platform": "shadowrocket",
       "source": "src/ios/v14.3-shadowrocket.conf",
       "file": "src/ios/v14.3-shadowrocket.conf",
-      "sha256": "49eff27df62a49f367fea6ccc7c4def88bc9e32014ada15a7c328a4345bfb40f",
-      "bytes": 1803188,
+      "sha256": "ce8b4d90bdee7ee3714a7491802484a98470556dc9819a09e1f133c6f9d568c4",
+      "bytes": 1804584,
       "modes": [
         "native-ipv4-prefer"
       ]

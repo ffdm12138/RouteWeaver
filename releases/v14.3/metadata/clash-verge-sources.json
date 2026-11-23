@@ -40,7 +40,7 @@
     },
     {
       "file": "data/rules/business-services.json",
-      "sha256": "cb7b8a108566f56e61f97bc96c51b03a287bf032b240fc7a3ee4d0f6328dac63"
+      "sha256": "3cf9d45f37ee0f1d4ee430e778acc9d3ed32c1a6b5288cc05b9b3612d12cf211"
     },
     {
       "file": "data/rules/domestic-direct.json",
@@ -239,9 +239,9 @@
     {
       "platform": "clashVerge",
       "file": "src/clash-verge/v14.3-clash-verge.js",
-      "sha256": "a84c65c23aa3dd98dc1977b3a5a8053f106febd7594f9a58993a24744f3ca2ea",
-      "bytes": 128331,
-      "generatedConfigBytes": 183344,
+      "sha256": "3551b2a782ec34f1e70fc109a45494ee00787acf5ac9ac7632c3771085fef0ab",
+      "bytes": 128588,
+      "generatedConfigBytes": 184990,
       "inlineRows": 1098,
       "remoteSources": 30
     }

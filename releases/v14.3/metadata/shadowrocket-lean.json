@@ -5,8 +5,8 @@
   "domesticProtocolRevision": "domestic-protocol-r1",
   "status": "GENERATED_NATIVE_ACCEPTANCE_PENDING",
   "file": "src/ios/v14.3-shadowrocket.conf",
-  "sha256": "49eff27df62a49f367fea6ccc7c4def88bc9e32014ada15a7c328a4345bfb40f",
-  "bytes": 1803188,
+  "sha256": "ce8b4d90bdee7ee3714a7491802484a98470556dc9819a09e1f133c6f9d568c4",
+  "bytes": 1804584,
   "tailscaleDerpSource": {
     "file": "data/rules/tailscale-derp-map.json",
     "url": "https://controlplane.tailscale.com/derpmap/default",
@@ -20,7 +20,7 @@
   },
   "rules": {
     "before": 116974,
-    "after": 5334,
+    "after": 5341,
     "removedDuplicateCNRows": 111400,
     "removedDominatedLiteralRows": [
       "DOMAIN-SUFFIX,firebase.google.com,谷歌服务",
@@ -678,7 +678,7 @@
   },
   "dns": {
     "beforeHostRows": 9130,
-    "afterHostRows": 9994,
+    "afterHostRows": 10001,
     "removedRedundantRows": 1039,
     "redundantRowCertificates": [
       {
@@ -5447,12 +5447,12 @@
   ],
   "sourceContract": {
     "file": "docs/需求.md",
-    "sha256": "00e2e33ea47b5a02ed2ed5767956dde47d4e21a5a7a843a3b2c5a52612c38b1c"
+    "sha256": "4446e08c40c42cab6e9b882bf317ddbdb0d05bc0803e96392b6c0a1d3a5adfe2"
   },
   "inputs": [
     {
       "file": "tools/build-shadowrocket-lean.cjs",
-      "sha256": "785f8d6e53a46f92bb3f12af0378ac00bc2b255ba19f2b2e463b586277555c16"
+      "sha256": "a8c8a90cd39fafa965f505facda27ca0b5be8d743339d3156dec01c68e384fcb"
     },
     {
       "file": "tools/lib/tailscale-policy.cjs",
@@ -5468,15 +5468,15 @@
     },
     {
       "file": "data/rules/business-services.json",
-      "sha256": "cb7b8a108566f56e61f97bc96c51b03a287bf032b240fc7a3ee4d0f6328dac63"
+      "sha256": "3cf9d45f37ee0f1d4ee430e778acc9d3ed32c1a6b5288cc05b9b3612d12cf211"
     },
     {
       "file": "src/android/v14.3-android-flclash.js",
-      "sha256": "ee2462c6501447d17e55fb695e91866744c3c2a2efb6eeb2f4f08f49396144df"
+      "sha256": "b6c67101221c423c5becc6ddb2c3ccb5fe92e2b8132fb7c9d59c35344ab0ac8b"
     },
     {
       "file": "data/rules/embedded-policy.json",
-      "sha256": "e23dde4108e23c475f7d91f993ca13e367a57653eaa47ff891c349038298cece"
+      "sha256": "94fb8db4c7b8d26dcb9b70f4757de1c0927005483a5db7ae86cb6d085dbbe070"
     },
     {
       "file": "validation/inputs/v14.2-baseline/manifest.json",

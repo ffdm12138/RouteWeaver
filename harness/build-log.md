@@ -206,3 +206,9 @@ ProjectClash 主版和纯 IPv4 版从当前共享规则生成，覆盖 iPhone、
 每个 JS 入口通过更新后的 74 项隔离核心和 QuickJS 检查。两轨同时验证 Drive 独立换节点、共享 Google 不跟随、TCP/UDP/DoH 和节点不支持 UDP 时的拒绝。196 项微信与 QQ 合成传输对照和 56 份官方 Mihomo 配置解析重新通过。Shadowrocket 保留原生能力范围。 [当前验收](../docs/status/当前验收.md)
 
 公开主版 `v14.3.0-rc.23` 和纯 IPv4 版 `v14.3.0-ipv4-only-rc.14` 均绑定提交 `e91b1993f5b77bb453612579a010e90aa711d190`。源码与两条发布 CI 通过，18 个公开附件的匿名下载 SHA-256 全部匹配。 [主版回执](releases/v14.3.0-rc.23.json) · [纯 IPv4 回执](releases/v14.3.0-ipv4-only-rc.14.json)
+
+## 2026-11-24 · 补齐 Google Drive 前端、共享和专用 API 主机
+
+原版已将 Drive 站点和专用下载主机送入独立组。七个新核实的精确域名原先命中「谷歌服务」，现由「Google Drive」处理 TCP、UDP 和 DNS。56 份合成配置与两份 Shadowrocket 配置的完整差异限于这七个主机。Shadowrocket 主版增至 1,804,584 字节，生成上限调至 1,806,000 字节并保留低于原配置体积 30% 的校验。 [分流合同](../docs/需求.md)
+
+通过 64,374 项离线模型检查、56 份官方 Mihomo 解析、196 项图片传输对照。12 份 FlClash/Mihomo JS 每份通过 75 项隔离核心与 QuickJS 检查。纯 IPv4 Windows 首次回放在既有备用档 UDP 检查中未收到预期应答，同一原装核心复测旧版和修复版均通过。 [分流模型](../releases/v14.3/validation/domestic-resilience/google-drive-hosts-r1.json) · [FlClash 回执](../releases/v14.3/validation/proxy-failover/google-drive-hosts-r1.json)

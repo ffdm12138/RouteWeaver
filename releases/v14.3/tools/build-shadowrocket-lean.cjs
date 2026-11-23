@@ -185,8 +185,8 @@ const displayRank=new Map(displayPriority.map((name,index)=>[name,index]));
 const rank=row=>displayRank.get(row.split(' = ',1)[0])??displayRank.size;
 groups.sort((a,b)=>rank(a)-rank(b));
 const output=header.join('\n')+'\n\n[General]\n'+general.join('\n')+'\n\n[Proxy Group]\n'+groups.join('\n')+'\n\n[Rule]\n'+rules.join('\n')+'\n\n[Host]\n'+outputHosts.map(([k,v])=>k+' = '+v).join('\n')+'\n';
-// Include the dedicated Drive DNS rows and translated selector name filters.
-assert.ok(Buffer.byteLength(output)<1804000,'Self-contained DNS budget exceeded');
+// The Drive frontend rows need both per-host DoH resolvers in this profile.
+assert.ok(Buffer.byteLength(output)<1806000,'Self-contained DNS budget exceeded');
 const file='src/ios/v14.3-shadowrocket.conf';
 const contractPath=fs.existsSync(path.resolve(root,'../../CURRENT_RELEASE.json'))?path.resolve(root,'../../docs/需求.md'):local('docs/需求.md');
 const manifest={version:'14.3',date:'2026-10-13',revision:'shadowrocket-lean-r1',domesticProtocolRevision:'domestic-protocol-r1',

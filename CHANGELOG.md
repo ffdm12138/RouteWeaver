@@ -1,3 +1,8 @@
+## v14.3.0-rc.24 / v14.3.0-ipv4-only-rc.15 · 补齐 Google Drive 专用主机
+
+- Drive 网页前端、共享前端、附加组件图标和 Activity、Labels API 的七个精确域名跟随「Google Drive」的 TCP、UDP 和 DNS 出口。
+- 通过 www.googleapis.com 的 Drive API 请求按共用主机规则走「谷歌服务」。 [分流合同](docs/需求.md)
+
 ## v14.3.0-rc.23 / v14.3.0-ipv4-only-rc.14 · 收图分流、Google Drive 与策略组顺序
 
 - 各 Mihomo 和 ProjectClash 入口恢复可读的微信与 QQ 图片域名，识别到域名的连接按现有媒体规则直连。QUIC 识别覆盖 UDP/443、8443、8000。 [微信与 QQ 图片分流](docs/guides/微信发图优化.md)

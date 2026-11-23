@@ -273,6 +273,14 @@ def run_case(core, file, mode, engine, directory):
             udp('B', host)
             dns_via(host, 'B', business_ports)
         checks.append('drive_default_video_web_api_download_export_tcp_udp_dns')
+        for host in ('drivefrontend-pa.clients6.google.com', 'drivefrontend-pa.googleapis.com',
+                     'drivesharefrontend-pa.clients6.google.com', 'drivesharefrontend-pa.googleapis.com',
+                     'drive-thirdparty.googleusercontent.com', 'driveactivity.googleapis.com',
+                     'drivelabels.googleapis.com'):
+            via('B', host)
+            udp('B', host)
+            dns_via(host, 'B', business_ports)
+        checks.append('drive_frontend_sharing_and_dedicated_apis_tcp_udp_dns')
         for host in ('accounts.google.com', 'docs.google.com', 'www.googleapis.com',
                      'lh3.googleusercontent.com', 'shared.usercontent.google.com', 'edge.drive.usercontent.google.com'):
             via('A', host)

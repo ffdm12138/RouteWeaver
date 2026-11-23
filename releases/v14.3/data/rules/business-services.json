@@ -125,7 +125,14 @@
         "drive.usercontent.google.com",
         "drive-data-export.usercontent.google.com",
         "drive-data-export-eu.usercontent.google.com",
-        "drive.googleapis.com"
+        "drive.googleapis.com",
+        "drive-thirdparty.googleusercontent.com",
+        "driveactivity.googleapis.com",
+        "drivefrontend-pa.clients6.google.com",
+        "drivefrontend-pa.googleapis.com",
+        "drivelabels.googleapis.com",
+        "drivesharefrontend-pa.clients6.google.com",
+        "drivesharefrontend-pa.googleapis.com"
       ]
     },
     {

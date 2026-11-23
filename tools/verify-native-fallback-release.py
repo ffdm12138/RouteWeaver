@@ -18,6 +18,7 @@ from standard_business_doh import CORE_EXE_SHA256, REVISION as DOH_REVISION, bef
 ROOT = Path(__file__).resolve().parents[1]
 SUMS = 'SHA256SUMS.txt'
 WECHAT_REVISION = 'wechat-media-sniff-r1'
+DRIVE_REVISION = 'google-drive-hosts-r1'
 SELECTOR_ORDER_CHECKS = {
     'selector_order_and_fresh_defaults',
     'selector_order_after_manual_choice',
@@ -119,7 +120,7 @@ def verify_source(root):
     candidate = release['nativeFallback']
     revision = release.get('currentRevision')
     system_dns = revision == 'direct-system-dns-r1'
-    media_repair = revision == WECHAT_REVISION
+    media_repair = revision in (WECHAT_REVISION, DRIVE_REVISION)
     standard_doh = revision == DOH_REVISION or media_repair
     historical_core_receipts = revision == DOH_REVISION
     selector_order = revision == 'selector-option-order-r1' or standard_doh
@@ -138,7 +139,8 @@ def verify_source(root):
         tags = release['standardBusinessDoh']['releaseTags']
     if media_repair:
         verify_media_transport(root, release, tracks)
-        tags = release['wechatMedia']['releaseTags']
+        feature = 'googleDrive' if revision == DRIVE_REVISION else 'wechatMedia'
+        tags = release[feature]['releaseTags']
     if tags is not None and (set(tags) != set(tracks) or len(set(tags.values())) != 2):
         raise ValueError('Expected two distinct track tags')
     assets = {}
@@ -168,6 +170,8 @@ def verify_source(root):
     if release.get('googleDrive'):
         required = {'drive_default_video_web_api_download_export_tcp_udp_dns', 'drive_shared_google_hosts_tcp_udp_dns',
                     'drive_unsupported_udp_rejected'}
+        if revision == DRIVE_REVISION:
+            required.add('drive_frontend_sharing_and_dedicated_apis_tcp_udp_dns')
         project = read(checked_path(root, release['projectClash']['verification']))
         for checks in [receipt['checks'], *(track['checks'] for track in project['tracks'].values())]:
             if not required.issubset(checks):
@@ -235,7 +239,7 @@ def verify_static():
                     ['node', 'tools/test-native-fallback.cjs'], ['node', 'tools/test-tailscale-direct.cjs'],
                     ['node', 'tools/test-company-audit.cjs'], ['node', 'tools/test-dns-policy-order.cjs'],
                     *suites['regression'], *suites['platform']]
-        if read(snapshot / 'CURRENT_RELEASE.json').get('currentRevision') in (DOH_REVISION, WECHAT_REVISION):
+        if read(snapshot / 'CURRENT_RELEASE.json').get('currentRevision') in (DOH_REVISION, WECHAT_REVISION, DRIVE_REVISION):
             commands.append(['python', '-B', 'tools/standard_business_doh.py'])
         for command in commands:
             subprocess.run(command, cwd=snapshot, check=True, timeout=90)

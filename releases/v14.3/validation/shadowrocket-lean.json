@@ -18,6 +18,10 @@
       "status": "PASS"
     },
     {
+      "name": "Drive-dedicated-data-and-shared-Google-routing",
+      "status": "PASS"
+    },
+    {
       "name": "critical-domestic-WeChat-selector-and-DNS-affinity",
       "status": "PASS"
     },
@@ -39,11 +43,11 @@
   "sourceFiles": [
     {
       "file": "tests/shadowrocket-lean.cjs",
-      "sha256": "4cbea35c88e4d0dc06d9bfd1efc124761ec31f26b2e295c0e8da21cd1a5251e6"
+      "sha256": "bb58d4136b0c94e30d2d4eb2ba110fbb248e37a452ed3bb37f815ef4caa1249b"
     },
     {
       "file": "tests/domestic-contract.cjs",
-      "sha256": "58f777c8c9de152ed9b232885a10fd68596e6740efdf95750ff7c680521cee26"
+      "sha256": "801d1532c43f170bfa9c2491d231024224e8bfda2e329efd425536b5edb43ee0"
     },
     {
       "file": "tests/fixture.cjs",
@@ -51,27 +55,43 @@
     },
     {
       "file": "tests/domain-index.cjs",
-      "sha256": "4b3314187dc88fafb30902b04c122079b3c71dd2ba85055e2bf6a6cf85df48d0"
+      "sha256": "4f96b7bf21882b470911c8b5824d398a05e4635d277bb7d8b085dcc4f72248da"
     },
     {
       "file": "tools/build-shadowrocket-lean.cjs",
-      "sha256": "280aecceb7462701a35ccaa3aca1aa4f54074391a6a40c466fe298d273e99bd0"
+      "sha256": "a8c8a90cd39fafa965f505facda27ca0b5be8d743339d3156dec01c68e384fcb"
     },
     {
       "file": "metadata/shadowrocket-lean.json",
-      "sha256": "a6d0d59b5a4be074464a64f8f561296d02402f532d9be86274d89c93727a93fa"
+      "sha256": "27090bccb8f5b0c139caa32e77acb81dff2f1d3a7758f145abc1b07ed6bf493f"
     },
     {
       "file": "src/ios/v14.3-shadowrocket.conf",
-      "sha256": "36b83e9069308567c9497eb4a1902536c78572c6786bbb4d712cb976148c6088"
+      "sha256": "ce8b4d90bdee7ee3714a7491802484a98470556dc9819a09e1f133c6f9d568c4"
+    },
+    {
+      "file": "tools/lib/tailscale-policy.cjs",
+      "sha256": "2502faa83ec8d23d9344fb3e2bb6c1a6b9092193f660e6ecad55f0b5790a3eac"
+    },
+    {
+      "file": "data/rules/tailscale-derp-map.json",
+      "sha256": "0c8d3433db696e18e26a1ce8464c1c29d75963ecf81b28e280341bfd323cdb3a"
+    },
+    {
+      "file": "data/rules/wechat-media.json",
+      "sha256": "b041e63cc178060fd545a0bc8ef8952b7b85fcaf034b0defc32112e79edf0551"
+    },
+    {
+      "file": "data/rules/business-services.json",
+      "sha256": "3cf9d45f37ee0f1d4ee430e778acc9d3ed32c1a6b5288cc05b9b3612d12cf211"
     },
     {
       "file": "src/android/v14.3-android-flclash.js",
-      "sha256": "a6af2f7b4a75b12f6f14ac9c8efe5b83fca71a862b82c396d4a97cbe754158da"
+      "sha256": "b6c67101221c423c5becc6ddb2c3ccb5fe92e2b8132fb7c9d59c35344ab0ac8b"
     },
     {
       "file": "data/rules/embedded-policy.json",
-      "sha256": "059d71af3ec13dd1de8ac2e8303e4045f589f9257f210d08f519a033a8795a75"
+      "sha256": "94fb8db4c7b8d26dcb9b70f4757de1c0927005483a5db7ae86cb6d085dbbe070"
     },
     {
       "file": "validation/inputs/v14.2-baseline/manifest.json",

@@ -1,0 +1,128 @@
+{
+  "revision": "standard-business-doh-r1",
+  "edition": "public",
+  "status": "PASS_OFFICIAL_MIHOMO_PARSE_AND_DNS_DELTA",
+  "runnerSHA256": "ea132f9a1d9933cc7383bbe91ab8ddc5d4e66cfad0293a6ffaacf749326aceae",
+  "core": {
+    "tag": "v1.19.34",
+    "executableSHA256": "3252ed9449c0e904fd07452b18366b90da77e14a5696e567de11d7839d6cf4b6",
+    "archiveSHA256": "f6b855de8722781caea62686f0301f89625fc558d48c1103ffdd98dad7f7f488"
+  },
+  "tracks": {
+    "main": {
+      "windows": {
+        "file": "releases/v14.3/src/windows/v14.3-windows-flclash.js",
+        "sha256": "0c35624106975f1330ce9c804f04214f48bbbc59bcc36001fd064eef8bafe689",
+        "profileChecks": 6,
+        "officialCoreParses": 6,
+        "baselineSHA256": "912b1432eae10ffafe0d695f3fd73ceb151dd10c38af1e9a964fa9a73bbd0caf"
+      },
+      "android": {
+        "file": "releases/v14.3/src/android/v14.3-android-flclash.js",
+        "sha256": "b6c67101221c423c5becc6ddb2c3ccb5fe92e2b8132fb7c9d59c35344ab0ac8b",
+        "profileChecks": 6,
+        "officialCoreParses": 6,
+        "baselineSHA256": "50c8f4573911bfe0d60a2161bb51b6f951986d3f19af733bac886ffded5910f3"
+      },
+      "clashmi": {
+        "file": "releases/v14.3/src/ios/v14.3-clashmi-domestic-protocol-r1.js",
+        "sha256": "bd049564e492320fba4864549e6ba9268820cc088b55b8cce0f0910f43639ae2",
+        "profileChecks": 6,
+        "officialCoreParses": 6,
+        "baselineSHA256": "8db2b6dec940795e7ce3ce7a2aaace8d2d20fc6c3bdf77752d1b613c3d7fc059"
+      },
+      "shadowrocket": {
+        "file": "releases/v14.3/src/ios/v14.3-shadowrocket.conf",
+        "sha256": "ce8b4d90bdee7ee3714a7491802484a98470556dc9819a09e1f133c6f9d568c4",
+        "profileChecks": 0,
+        "officialCoreParses": 0
+      },
+      "macosFlClash": {
+        "file": "releases/v14.3/src/macos/v14.3-macos-flclash.js",
+        "sha256": "fc9aeb640dcdc60d582741e22ff74c56500f8d6fdb64c5869f80f2819a3c6c9f",
+        "profileChecks": 6,
+        "officialCoreParses": 6,
+        "baselineSHA256": "ddced701e7a9be9863e107ddb7b9fec6ad8651e1dc7dd6da8f3a4ff0e83f1f42"
+      },
+      "macosClashMi": {
+        "file": "releases/v14.3/src/macos/v14.3-macos-clashmi.js",
+        "sha256": "9376e20e77abcf9c9eba5955655a3fcacf3b00524fbd711921b982d37ca4b6c4",
+        "profileChecks": 6,
+        "officialCoreParses": 6,
+        "baselineSHA256": "9743510dcac4e725dc843233cd31bb16f37f7e2b6136c9da91b5d630f4585dca"
+      },
+      "clashVerge": {
+        "file": "releases/v14.3/src/clash-verge/v14.3-clash-verge.js",
+        "sha256": "3551b2a782ec34f1e70fc109a45494ee00787acf5ac9ac7632c3771085fef0ab",
+        "profileChecks": 6,
+        "officialCoreParses": 6,
+        "baselineSHA256": "6275afb2ee157261b5c2b721833eed4889d96e5b10b4b56af0494112d8a3fa5a"
+      },
+      "projectclash": {
+        "file": "releases/v14.3/src/projectclash/v14.3-projectclash.js",
+        "sha256": "8527cc12f4cc6310fe6dba10d1cc9ee785197c9afc34c4a77792491b24f37373",
+        "profileChecks": 6,
+        "officialCoreParses": 6,
+        "baselineSHA256": "84489a9cdeff14a086dc8b7268dbd5d2f3b965e4b85e66bb1665ea6e202b0a1e"
+      }
+    },
+    "ipv4-only": {
+      "windows": {
+        "file": "releases/v14.3-ipv4-only/src/windows/v14.3-windows-flclash-ipv4-only.js",
+        "sha256": "2f89bc0af8407744d10e92a2bfed2501f9f5f01ccbbcc02615a2b60bd1852615",
+        "profileChecks": 2,
+        "officialCoreParses": 2,
+        "baselineSHA256": "ad672b08bafabc36790c2d1c8196dbeafc4f3e449e74a7d75e5eb43967ae9d85"
+      },
+      "android": {
+        "file": "releases/v14.3-ipv4-only/src/android/v14.3-android-flclash-ipv4-only.js",
+        "sha256": "b0916262199920d8c4f63d009787aee8d023f582a107efb3fe6baade4c0beabd",
+        "profileChecks": 2,
+        "officialCoreParses": 2,
+        "baselineSHA256": "ddb79f45044ffd9dd07630c00a03379d57e9521730caa0bcd4fd15088601d19c"
+      },
+      "clashmi": {
+        "file": "releases/v14.3-ipv4-only/src/ios/v14.3-clashmi-domestic-protocol-r1-ipv4-only.js",
+        "sha256": "1c1bcf91c070e541e856a849f2b76f39a72026c66fe6abc1f11924076b697f9a",
+        "profileChecks": 2,
+        "officialCoreParses": 2,
+        "baselineSHA256": "6a0feb086fbf846a233bbb228c7af963cad0cc65336582048bc6d6aa442d1de9"
+      },
+      "shadowrocket": {
+        "file": "releases/v14.3-ipv4-only/src/ios/v14.3-shadowrocket-ipv4-only.conf",
+        "sha256": "b32a343a5e5a4dd88226a3525d01fbdbbeff070d0d424d3e5c61fb5df5b60575",
+        "profileChecks": 0,
+        "officialCoreParses": 0
+      },
+      "macosFlClash": {
+        "file": "releases/v14.3-ipv4-only/src/macos/v14.3-macos-flclash-ipv4-only.js",
+        "sha256": "21455a59fc2d839d6f28fde167064db2ac5afdd6b7a5771ad9a34b3bf3d0df76",
+        "profileChecks": 2,
+        "officialCoreParses": 2,
+        "baselineSHA256": "d8ccbb22b7325290b627bf14e2c60bc4051585e1ad02ad0b4ec12bf66dc97542"
+      },
+      "macosClashMi": {
+        "file": "releases/v14.3-ipv4-only/src/macos/v14.3-macos-clashmi-ipv4-only.js",
+        "sha256": "68f0d8318b561e533f215cf6b153b10f36ab343678089877fd73d84acb50dd3a",
+        "profileChecks": 2,
+        "officialCoreParses": 2,
+        "baselineSHA256": "bded34b104c5c5b03f45d33326a199fb8c1d1b05d0c46136c157c917b3cc7fdd"
+      },
+      "clashVerge": {
+        "file": "releases/v14.3-ipv4-only/src/clash-verge/v14.3-clash-verge-ipv4-only.js",
+        "sha256": "984076f2fa3f255af867f88bb66b18579eeae8c6fc4d893d6fa9eda420f73a0d",
+        "profileChecks": 2,
+        "officialCoreParses": 2,
+        "baselineSHA256": "9d93d48a5182cea48d5c958dd68586f43affdfa41fe54253376e02566bb9714b"
+      },
+      "projectclash": {
+        "file": "releases/v14.3-ipv4-only/src/projectclash/v14.3-projectclash-ipv4-only.js",
+        "sha256": "ed1fd32878067d5cb5455c48623e4df89e9dd4cca51793c017ab69e30f7827c5",
+        "profileChecks": 2,
+        "officialCoreParses": 2,
+        "baselineSHA256": "4beab7e4d37936c9ae9552df27a2af30aeabfd9c7a226e2b25e69b2502158a60"
+      }
+    }
+  },
+  "deviceAcceptance": "NOT_RUN"
+}

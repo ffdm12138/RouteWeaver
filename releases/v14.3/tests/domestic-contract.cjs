@@ -8,12 +8,17 @@ const stunPort=port=>Number(port)===3478||Number(port)===5349||Number(port)>=193
 const known=(host,beforeRoute)=>!!host&&!net.isIP(host)&&!stunName(host)&&beforeRoute(host).group==='国内网站';
 const mediaDirect=(host,beforeRoute)=>mediaHost(host)&&!stunName(host)&&
  ['DIRECT','国内网站','漏网之鱼'].includes(beforeRoute(host).group);
+const driveExactHosts = [
+ 'drive.googleapis.com', 'drive.usercontent.google.com', 'drive-data-export.usercontent.google.com',
+ 'drive-data-export-eu.usercontent.google.com', 'drive-thirdparty.googleusercontent.com',
+ 'driveactivity.googleapis.com', 'drivefrontend-pa.clients6.google.com', 'drivefrontend-pa.googleapis.com',
+ 'drivelabels.googleapis.com', 'drivesharefrontend-pa.clients6.google.com', 'drivesharefrontend-pa.googleapis.com',
+];
 function addedServiceGroup(host){
  if(host==='accounts.youtube.com')return '谷歌服务';
  if(host==='youtubei.googleapis.com'||['youtube.com','youtu.be','googlevideo.com','ytimg.com','youtube-nocookie.com']
    .some(domain=>host===domain||host.endsWith('.'+domain)))return 'YouTube';
- if(['drive.googleapis.com','drive.usercontent.google.com','drive-data-export.usercontent.google.com',
-     'drive-data-export-eu.usercontent.google.com'].includes(host)||['drive.google.com','googledrive.com']
+ if(driveExactHosts.includes(host)||['drive.google.com','googledrive.com']
    .some(domain=>host===domain||host.endsWith('.'+domain)))return 'Google Drive';
  if(['archive.ubuntu.com','security.ubuntu.com','ports.ubuntu.com','old-releases.ubuntu.com']
    .some(domain=>host===domain||host.endsWith('.'+domain)))return '高网速视频用';
@@ -32,4 +37,4 @@ function expectedDNS(host,beforeRoute,beforeDNS){
  if(mediaDirect(host,beforeRoute))return ['system'];
  return known(host,beforeRoute)&&old.groups.length===1&&old.groups[0]==='漏网之鱼'?['国内网站']:old.groups;
 }
-module.exports={known,mediaHost,mediaDirect,stunName,stunPort,addedServiceGroup,expectedRoute,expectedDNS};
+module.exports={known,mediaHost,mediaDirect,stunName,stunPort,driveExactHosts,addedServiceGroup,expectedRoute,expectedDNS};
