@@ -48,7 +48,7 @@ function compile(root){
  // Compact the generated service data to leave room for the native fallback
  // runtime within the standalone script budget.
  const values={CORE:JSON.stringify(core),SERVICES:JSON.stringify(services),EMBEDDED:JSON.stringify(embedded),PINS:JSON.stringify(pins),
-  DOMESTIC_SEEDS:JSON.stringify(policy.domesticSeeds,null,2), SELECTOR_DEFAULTS:JSON.stringify(policy.selectorDefaults),
+  DOMESTIC_SEEDS:JSON.stringify(policy.domesticSeeds), SELECTOR_DEFAULTS:JSON.stringify(policy.selectorDefaults),
   GROUP_DISPLAY_PRIORITY:JSON.stringify(policy.groupDisplayPriority),
   DIRECT_RULE_INITIALIZER:vps?'  // Explicit user-authorized IPv4 exception, all protocols/ports, before all other rules.\n  const rules = ['+JSON.stringify(vps.rule)+', "DOMAIN,v14-runtime-check.invalid,REJECT"], emitted = new Set(['+JSON.stringify('IP-CIDR,'+vps.address+',no-resolve')+']);':'  const rules = ["DOMAIN,v14-runtime-check.invalid,REJECT"], emitted = new Set();',
   DIRECT_RULE_MARKER:vps?', vpsDirectRevision: '+JSON.stringify(vps.revision):''};
@@ -94,7 +94,9 @@ function compile(root){
     processRules:processRules[entry.platform]||[],
   };
   // Keep the authoring templates readable within the standalone script budget.
-  const base=entry.raw.replace(/^[\t ]*\/\/[^\r\n]*(?:\r?\n|$)/gm,'');
+  const base=entry.raw.replace(/^[\t ]*\/\/[^\r\n]*(?:\r?\n|$)/gm,'')
+    .replace(/^(const V14_SHARED_INFRA = )(\{[\s\S]*?^\})(;)/m,
+      (_,prefix,table,suffix)=>prefix+JSON.stringify(JSON.parse(table))+suffix);
   const raw='const V14_TAILSCALE = '+JSON.stringify(runtimePolicy)+';\n'+read(tailscaleRuntime)+'\n'+
    'const V14_WECHAT_DOMAINS = '+JSON.stringify(wechatDomains)+';\n'+
    'const V14_WECHAT_PROCESSES = '+JSON.stringify(wechatProcesses[entry.platform] || [])+';\n'+read(wechatRuntime)+'\n'+base;

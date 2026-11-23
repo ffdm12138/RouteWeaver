@@ -10,6 +10,7 @@
     "微软生态",
     "Steam",
     "苹果国际",
+    "Google Drive",
     "哔哩国际",
     "国内网站"
   ],
@@ -21,6 +22,7 @@
     "Anthropic 服务": "高纯净度AI用",
     "谷歌服务": "高纯净度AI用",
     "YouTube": "高网速视频用",
+    "Google Drive": "高纯净度AI用",
     "微软生态": "高纯净度AI用",
     "Steam": "DIRECT",
     "Epic Games": "DIRECT",
@@ -110,6 +112,20 @@
         "security.ubuntu.com",
         "ports.ubuntu.com",
         "old-releases.ubuntu.com"
+      ]
+    },
+    {
+      "name": "Google Drive",
+      "sets": [],
+      "seeds": [
+        "drive.google.com",
+        "googledrive.com"
+      ],
+      "exact": [
+        "drive.usercontent.google.com",
+        "drive-data-export.usercontent.google.com",
+        "drive-data-export-eu.usercontent.google.com",
+        "drive.googleapis.com"
       ]
     },
     {

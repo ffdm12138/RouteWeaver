@@ -12,7 +12,7 @@ const hash = file => crypto.createHash('sha256').update(fs.readFileSync(file)).d
 const release = read('CURRENT_RELEASE.json');
 const mediaDomains = read('releases/v14.3/data/rules/wechat-media.json');
 const priorityGroups = ['高纯净度AI用', '高网速视频用', '公共基础服务', '谷歌服务', '微软生态',
-  'Steam', '苹果国际', '哔哩国际', '国内网站'];
+  'Steam', '苹果国际', 'Google Drive', '哔哩国际', '国内网站'];
 const remainingGroups = ['自动选择', '漏网之鱼', 'OpenAI 服务', 'Anthropic 服务', 'YouTube',
   'Epic Games', 'Telegram', 'TikTok', 'Twitter', 'Discord', 'OpenRouter', 'Perplexity', 'Hugging Face',
   'xAI', 'Netflix', 'Disney+', 'Spotify', 'Meta 服务'];
@@ -29,7 +29,7 @@ const businessDefaults = {
   DIRECT: ['国内网站', 'Steam', 'Epic Games', '苹果国际', '哔哩国际'],
   '高网速视频用': ['YouTube', 'Telegram', 'TikTok', 'Twitter', 'Discord', 'Netflix', 'Disney+', 'Spotify'],
   '高纯净度AI用': ['公共基础服务', '漏网之鱼', 'OpenAI 服务', 'Anthropic 服务', '谷歌服务', '微软生态',
-    'OpenRouter', 'Perplexity', 'Hugging Face', 'xAI', 'Meta 服务'],
+    'OpenRouter', 'Perplexity', 'Hugging Face', 'xAI', 'Meta 服务', 'Google Drive'],
 };
 const locks = [...read('releases/v14.3/data/rule-sources.lock.json').sources,
   ...read('releases/v14.3/validation/inputs/v14.2-baseline/data/rule-sources.lock.json').sources];

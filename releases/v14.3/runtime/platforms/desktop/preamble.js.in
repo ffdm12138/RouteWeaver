@@ -289,12 +289,10 @@ const V14_COMPANY_CORE = {{CORE}};
 
 // Display order is independent of V14_SERVICES' routing precedence.
 // Unlisted services keep their relative order after these pinned groups.
-const V14_PINNED_GROUPS = {{GROUP_DISPLAY_PRIORITY}}.concat([
+const V14_GROUP_ORDER = v14Unique({{GROUP_DISPLAY_PRIORITY}}.concat([
   "自动选择", "漏网之鱼", "OpenAI 服务", "Anthropic 服务", "YouTube",
   "Epic Games", "Telegram", "TikTok", "Twitter", "Discord",
-]);
-const V14_GROUP_ORDER = V14_PINNED_GROUPS.concat(
-  V14_SERVICES.map(s => s.name).filter(name => !V14_PINNED_GROUPS.includes(name)));
+], V14_SERVICES.map(service => service.name)));
 
 // Telegram official CIDR snapshot, retrieved 2026-09-24 via the web reader.
 // Source: https://core.telegram.org/resources/cidr.txt

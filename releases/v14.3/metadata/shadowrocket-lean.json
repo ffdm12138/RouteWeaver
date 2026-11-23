@@ -5,8 +5,8 @@
   "domesticProtocolRevision": "domestic-protocol-r1",
   "status": "GENERATED_NATIVE_ACCEPTANCE_PENDING",
   "file": "src/ios/v14.3-shadowrocket.conf",
-  "sha256": "0054cc3fd607e917b77c4f83607cce87156c70f6486dad638de8c45beebf04e1",
-  "bytes": 1801182,
+  "sha256": "86ecf1c20de6981f078c034f8e4b8bfd90eb45755032a878a4e87cc109d3b9d5",
+  "bytes": 1803187,
   "tailscaleDerpSource": {
     "file": "data/rules/tailscale-derp-map.json",
     "url": "https://controlplane.tailscale.com/derpmap/default",
@@ -20,7 +20,7 @@
   },
   "rules": {
     "before": 116974,
-    "after": 5329,
+    "after": 5334,
     "removedDuplicateCNRows": 111400,
     "removedDominatedLiteralRows": [
       "DOMAIN-SUFFIX,firebase.google.com,谷歌服务",
@@ -678,7 +678,7 @@
   },
   "dns": {
     "beforeHostRows": 9130,
-    "afterHostRows": 9988,
+    "afterHostRows": 9994,
     "removedRedundantRows": 1039,
     "redundantRowCertificates": [
       {
@@ -5149,6 +5149,7 @@
     "微软生态",
     "Steam",
     "苹果国际",
+    "Google Drive",
     "哔哩国际",
     "国内网站",
     "自动选择",
@@ -5446,12 +5447,12 @@
   ],
   "sourceContract": {
     "file": "docs/需求.md",
-    "sha256": "5d525143e12450b25c4ff95d1cf617a08bfd9a399317e323bf4052de5783f45a"
+    "sha256": "269c32d3f367e2235ed94f5bcd2da8ceabecd337ed77f989ea322ae6fdfad123"
   },
   "inputs": [
     {
       "file": "tools/build-shadowrocket-lean.cjs",
-      "sha256": "7b92aa6c02e0ad153d3877c1bd29a0bd36d466a457cd9c235cc406a0da39959f"
+      "sha256": "785f8d6e53a46f92bb3f12af0378ac00bc2b255ba19f2b2e463b586277555c16"
     },
     {
       "file": "tools/lib/tailscale-policy.cjs",
@@ -5467,15 +5468,15 @@
     },
     {
       "file": "data/rules/business-services.json",
-      "sha256": "bece4a24dab69f5d97f806dc2ced7859cdf63c3d3342890ec8e934fe954d6061"
+      "sha256": "d34d344733cf13f6db33c7c562649c2853d7b3ccc7534ab3c8c8341d590fa51a"
     },
     {
       "file": "src/android/v14.3-android-flclash.js",
-      "sha256": "012ccc4d2c55b11d266f29a1b659845a9ec2d0b58baec53efd59606265c30c48"
+      "sha256": "b380daeab8d23f9c6b3087e129ad1994137156f09fc1be31bf02f9c13c796a79"
     },
     {
       "file": "data/rules/embedded-policy.json",
-      "sha256": "5d3cc29579ea65e4bb30e74ebf5e495d837a265ab4e8d32fd90b1ae9dd49f2e2"
+      "sha256": "c231599d4aa792e9ee2e902538151faffcfb702a8e1176604943b47d3425aedf"
     },
     {
       "file": "validation/inputs/v14.2-baseline/manifest.json",

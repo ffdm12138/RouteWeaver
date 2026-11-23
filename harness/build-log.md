@@ -198,3 +198,9 @@ ProjectClash 主版和纯 IPv4 版从当前共享规则生成，覆盖 iPhone、
 两轨 14 个 JS 入口通过 196 项合成 UDP 传输对照，对照基线为主版 rc.22 与纯 IPv4 版 rc.13 的共同提交。微信 QUIC/443、8000 和 QQ 图片 QUIC/443 的可读域名进入已有直连规则。STUN 主机名和无法识别域名的 UDP 仍由兜底代理接收。 [传输回执](../releases/v14.3/validation/domestic-resilience/wechat-media-transport-r1.json)
 
 两轨完成 62,398 项离线模型检查、56 份官方 Mihomo 配置解析，以及每个 JS 入口 71 项隔离核心和 QuickJS 回归。Shadowrocket 两份配置的策略组行按要求前置，规则、DNS 和各行内容经字节核对。新版客户端导入、TUN/VPN 和真实收图待设备验收。 [配置回执](../releases/v14.3/validation/domestic-resilience/wechat-media-sniff-r1.json) · [FlClash 回执](../releases/v14.3/validation/proxy-failover/wechat-media-sniff-r1.json) · [ProjectClash 回执](../releases/v14.3/validation/projectclash-wechat-media-sniff-r1.json)
+
+## 2026-11-24 · Google Drive 独立分流
+
+两轨全部入口新增「Google Drive」，位置在「苹果国际」与「哔哩国际」之间。专用站点、下载、区域导出及 API 主机经 Drive 组选路，Google 登录、Docs、通用 API 与共享内容域名继续经「谷歌服务」。首次导入沿用「高纯净度AI用」作为默认出口。 [分流合同](../docs/需求.md)
+
+每个 JS 入口通过更新后的 74 项隔离核心和 QuickJS 检查。两轨同时验证 Drive 独立换节点、共享 Google 不跟随、TCP/UDP/DoH 和节点不支持 UDP 时的拒绝。196 项微信与 QQ 合成传输对照和 56 份官方 Mihomo 配置解析重新通过。Shadowrocket 保留原生能力范围。当前提交仅在本地，公开预发布暂停。 [当前验收](../docs/status/当前验收.md)

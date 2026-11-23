@@ -566,6 +566,20 @@
       ]
     },
     {
+      "name": "Google Drive",
+      "sets": [],
+      "seeds": [
+        "drive.google.com",
+        "googledrive.com"
+      ],
+      "exact": [
+        "drive.usercontent.google.com",
+        "drive-data-export.usercontent.google.com",
+        "drive-data-export-eu.usercontent.google.com",
+        "drive.googleapis.com"
+      ]
+    },
+    {
       "name": "谷歌服务",
       "sets": [
         "google-gemini",
@@ -2077,7 +2091,7 @@
     },
     {
       "file": "data/rules/business-services.json",
-      "sha256": "bece4a24dab69f5d97f806dc2ced7859cdf63c3d3342890ec8e934fe954d6061"
+      "sha256": "d34d344733cf13f6db33c7c562649c2853d7b3ccc7534ab3c8c8341d590fa51a"
     },
     {
       "file": "data/rules/domestic-direct.json",

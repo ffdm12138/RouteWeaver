@@ -17,7 +17,9 @@ for(const platform of Object.keys(f.entries)){
     const current=structuredClone(model.config),before=structuredClone(reference.config);
     for(const c of [current,before]){delete c.tun;delete c['x-v14-generated'];c.rules=f.businessRules(c.rules);}
     assert.deepEqual(current,before);
-    assert.equal(model.config['proxy-groups'].filter(group=>!group.hidden).length,30);
+    const visible=model.config['proxy-groups'].filter(group=>!group.hidden).map(group=>group.name);
+    const driveIndex=visible.indexOf('Google Drive');
+    assert.deepEqual(visible.slice(driveIndex-1,driveIndex+2),['苹果国际','Google Drive','哔哩国际']);
     assert.equal(model.config['proxy-groups'].find(group=>group.name==='YouTube')['default-selected'],'高网速视频用');
     for(const name of ['高纯净度AI用','高网速视频用']){const group=model.config['proxy-groups'].find(g=>g.name===name);assert.equal(group.type,'select');assert.ok(group.proxies.includes('直连 direct'));assert.equal(group['default-selected'],'拒绝 reject');}
   });

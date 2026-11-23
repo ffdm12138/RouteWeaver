@@ -14,12 +14,15 @@ const data=JSON.parse(vm.runInContext('JSON.stringify({settings:V14,domestic:V14
 const businessFile='data/rules/business-services.json';
 const displayPriority=read(businessFile).groupDisplayPriority;
 const policy=read('data/rules/embedded-policy.json');assert.equal(policy.domesticProtocolRevision,'domestic-protocol-r1');
-const splitServices=policy.services.filter(service=>['YouTube','高网速视频用'].includes(service.name));
-assert.equal(splitServices.length,2);
-const youtube=splitServices.find(service=>service.name==='YouTube');
+const additionalGroups=['YouTube','Google Drive'];
+const splitServices=policy.services.filter(service=>[...additionalGroups,'高网速视频用'].includes(service.name));
+assert.equal(splitServices.length,3);
+const dedicatedGoogleServices=splitServices.filter(service=>additionalGroups.includes(service.name));
 const matchesSuffix=(host,suffix)=>host===suffix||host.endsWith('.'+suffix);
+const isDedicatedGoogleDomain=(host,exact)=>dedicatedGoogleServices.some(service=>
+ service.seeds.some(suffix=>matchesSuffix(host,suffix))||(exact&&service.exact?.includes(host)));
 const googleExceptions=policy.services.find(service=>service.name==='谷歌服务').exact
- .filter(host=>youtube.seeds.some(suffix=>matchesSuffix(host,suffix)));
+ .filter(host=>isDedicatedGoogleDomain(host,true));
 const authorizedSuffixes=new Set(policy.authorizedDomesticSuffixes);
 const isDomestic=host=>host==='cn'||authorizedSuffixes.has(host)||beforeRoute(host).group==='国内网站';
 const wechatFile='data/rules/wechat-media.json',wechatDomains=read(wechatFile);
@@ -41,7 +44,7 @@ const all=section('Rule'),kept=[],domestic=[],geographic=[];let removed=0;
 for(const rule of all){
  const a=split(rule),tail=a.at(-1)==='no-resolve'?-2:-1,group=a.at(tail),match=a.slice(0,tail).join(',');
  if(group==='谷歌服务'&&['DOMAIN','DOMAIN-SUFFIX'].includes(a[0])&&
-    youtube.seeds.some(suffix=>matchesSuffix(a[1],suffix))&&!googleExceptions.includes(a[1]))continue;
+    isDedicatedGoogleDomain(a[1],a[0]==='DOMAIN')&&!googleExceptions.includes(a[1]))continue;
  if(group==='国内网站'&&cnRows.has(match)&&!critical.has(match)){removed++;continue;}
  if(group==='国内网站'){
   const e=a[0]==='RULE-SET'?sources.find(s=>s.url===a[1]):null;
@@ -140,7 +143,7 @@ const general=section('General').map(row=>row
  .concat('always-real-ip = '+wechatPatterns.join(','));
 const manualLabels=new Map([['DIRECT','直连 direct'],['REJECT','拒绝 reject']]);
 const groupRows=section('Proxy Group').map(row=>row.replace(/\(\?i\)\^\(\?!\(\?:([^)]*)\)\$\)/,(_,names)=>{
- let reserved=names.split('|').concat('YouTube',...manualLabels.values());
+ let reserved=names.split('|').concat(additionalGroups,...manualLabels.values());
  for(const suffix of ['服务','国际']){
   const matching=reserved.filter(name=>name.endsWith(suffix));
   reserved=reserved.filter(name=>!name.endsWith(suffix));
@@ -150,8 +153,9 @@ const groupRows=section('Proxy Group').map(row=>row.replace(/\(\?i\)\^\(\?!\(\?:
 }));
 const googleGroupIndex=groupRows.findIndex(row=>row.startsWith('谷歌服务 = '));
 const videoSelector=groupRows.find(row=>row.startsWith('Netflix = '));
-assert.ok(googleGroupIndex>=0&&videoSelector,'Missing Shadowrocket video selector template');
-groupRows.splice(googleGroupIndex+1,0,videoSelector.replace(/^Netflix /,'YouTube '));
+assert.ok(googleGroupIndex>=0&&videoSelector,'Missing Shadowrocket selector template');
+const driveSelector=groupRows[googleGroupIndex].replace(/^谷歌服务 /,'Google Drive ');
+groupRows.splice(googleGroupIndex+1,0,videoSelector.replace(/^Netflix /,'YouTube '),driveSelector);
 const groups=groupRows.map(row=>{
  const [name,options]=row.split(' = ',2);
  const publicGroup=name==='高纯净度AI用'||name==='高网速视频用';
@@ -181,8 +185,8 @@ const displayRank=new Map(displayPriority.map((name,index)=>[name,index]));
 const rank=row=>displayRank.get(row.split(' = ',1)[0])??displayRank.size;
 groups.sort((a,b)=>rank(a)-rank(b));
 const output=header.join('\n')+'\n\n[General]\n'+general.join('\n')+'\n\n[Proxy Group]\n'+groups.join('\n')+'\n\n[Rule]\n'+rules.join('\n')+'\n\n[Host]\n'+outputHosts.map(([k,v])=>k+' = '+v).join('\n')+'\n';
-// Allow up to 2 KB for the translated selectors and their name filters.
-assert.ok(Buffer.byteLength(output)<1802000,'Self-contained DNS budget exceeded');
+// Include the dedicated Drive DNS rows and translated selector name filters.
+assert.ok(Buffer.byteLength(output)<1804000,'Self-contained DNS budget exceeded');
 const file='src/ios/v14.3-shadowrocket.conf';
 const contractPath=fs.existsSync(path.resolve(root,'../../CURRENT_RELEASE.json'))?path.resolve(root,'../../docs/需求.md'):local('docs/需求.md');
 const manifest={version:'14.3',date:'2026-10-13',revision:'shadowrocket-lean-r1',domesticProtocolRevision:'domestic-protocol-r1',

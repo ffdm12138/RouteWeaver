@@ -10,7 +10,7 @@
   "quickJSSHA256": "e2051274a1d7599d131d45b96c7cc53519a9009bf43a802b922f73031d3d3b4b",
   "harness": {
     "tools/replay-projectclash.py": "ac657e5cb4b48b1f4578851723ae0914acf87b22a83c30e76e7b75c4d037f963",
-    "tools/replay-resilience.py": "e1495ce0b682bde8ed6e83b32de6d375d0a90f523b58398fb27b65b8723c4f1a",
+    "tools/replay-resilience.py": "3bba44328090abcb6a4fabc323e59c623a4563eae162358febcadc6c12457c7d",
     "tools/stock-core-host.py": "a02cbf358822c5e7fbcf7d6b4497c3f49ed43e2e95f68485c9bd6e10c2a82ce2",
     "tools/test-proxy-failover.py": "5750447c349f33b3162b64600b3b3e2e6ef316d339227455c769683dd5e5255a",
     "tools/native-architecture.py": "305d7dcbc414b6dc643489a43e425bba847fba512f3d2ecb88276edd138db367"
@@ -19,7 +19,7 @@
   "tracks": {
     "main": {
       "file": "releases/v14.3/src/projectclash/v14.3-projectclash.js",
-      "sha256": "e59f97d00aa1d94c0d8957cb7716efe46642b223d0f7428c02a110261871c75d",
+      "sha256": "bfb8ff67a904b8235a5aea193825cfc1ce333ef7acf340040cc24556d19e06c0",
       "checks": [
         "quickjs_node_parity",
         "quickjs_idempotence",
@@ -51,6 +51,9 @@
         "google_egress_tcp_udp_dns:accounts.youtube.com",
         "google_egress_tcp_udp_dns:youtube.googleapis.com",
         "google_egress_tcp_udp_dns:workspacevideo-pa.clients6.google.com",
+        "drive_dedicated_web_api_download_export_tcp_udp_dns",
+        "drive_shared_google_hosts_tcp_udp_dns",
+        "drive_unsupported_udp_rejected",
         "domestic_suffix_apex_child_and_dns_default_direct",
         "direct_default_can_be_manually_switched_to_proxy",
         "public_manual_DIRECT_tcp_udp_dns",
@@ -96,7 +99,7 @@
     },
     "ipv4-only": {
       "file": "releases/v14.3-ipv4-only/src/projectclash/v14.3-projectclash-ipv4-only.js",
-      "sha256": "8445adefce263f8ac56d4d9f86b63d0da95e7482015a1f29bf6b14d9e8f99236",
+      "sha256": "26a92e74b75ab082c031cee7283002de2b86f140419e6932c1f8cd4bd31363f6",
       "checks": [
         "quickjs_node_parity",
         "quickjs_idempotence",
@@ -128,6 +131,9 @@
         "google_egress_tcp_udp_dns:accounts.youtube.com",
         "google_egress_tcp_udp_dns:youtube.googleapis.com",
         "google_egress_tcp_udp_dns:workspacevideo-pa.clients6.google.com",
+        "drive_dedicated_web_api_download_export_tcp_udp_dns",
+        "drive_shared_google_hosts_tcp_udp_dns",
+        "drive_unsupported_udp_rejected",
         "domestic_suffix_apex_child_and_dns_default_direct",
         "direct_default_can_be_manually_switched_to_proxy",
         "public_manual_DIRECT_tcp_udp_dns",

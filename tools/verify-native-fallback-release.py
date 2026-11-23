@@ -165,6 +165,13 @@ def verify_source(root):
             assets[tags[track]] = files
     if not receipt['checks']:
         raise ValueError('Empty core replay inventory')
+    if release.get('googleDrive'):
+        required = {'drive_dedicated_web_api_download_export_tcp_udp_dns', 'drive_shared_google_hosts_tcp_udp_dns',
+                    'drive_unsupported_udp_rejected'}
+        project = read(checked_path(root, release['projectClash']['verification']))
+        for checks in [receipt['checks'], *(track['checks'] for track in project['tracks'].values())]:
+            if not required.issubset(checks):
+                raise ValueError('Missing dedicated Google Drive or shared Google routing replay')
     if candidate['revision'] in ('domestic-resilience-r1', 'backup-slot-skip-r1'):
         if receipt['runnerSHA256'] != sha(root / 'tools/replay-resilience.py') or receipt['hostSHA256'] != sha(root / 'tools/stock-core-host.py'):
             raise ValueError('Stale isolated replay runner')

@@ -12,6 +12,9 @@ function addedServiceGroup(host){
  if(host==='accounts.youtube.com')return '谷歌服务';
  if(host==='youtubei.googleapis.com'||['youtube.com','youtu.be','googlevideo.com','ytimg.com','youtube-nocookie.com']
    .some(domain=>host===domain||host.endsWith('.'+domain)))return 'YouTube';
+ if(['drive.googleapis.com','drive.usercontent.google.com','drive-data-export.usercontent.google.com',
+     'drive-data-export-eu.usercontent.google.com'].includes(host)||['drive.google.com','googledrive.com']
+   .some(domain=>host===domain||host.endsWith('.'+domain)))return 'Google Drive';
  if(['archive.ubuntu.com','security.ubuntu.com','ports.ubuntu.com','old-releases.ubuntu.com']
    .some(domain=>host===domain||host.endsWith('.'+domain)))return '高网速视频用';
 }

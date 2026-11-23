@@ -25,11 +25,12 @@ for(const [key,value]of before.config.hosts)if(value.startsWith('server:')){busi
 const report={version:'14.3',date:'2026-10-13',revision:manifest.revision,domesticProtocolRevision:manifest.domesticProtocolRevision,status:'RUNNING',checks:[],failures:[],metrics:{routingHosts:hosts.size,tcp:0,udp:0,businessDNS:0,criticalDomesticDNS:0,coldRouting:0,protectedFlows:0},sourceFiles:[],scope:'Finite domain/selector/Host model and SHA verification only; native parsing, DNS order/remote resolution and iOS VPN NOT_RUN',nativeAcceptance:'NOT_RUN',deviceAcceptance:'NOT_RUN',clientDeployment:false};
 function check(name,body){try{body();report.checks.push({name,status:'PASS'});}catch(e){report.failures.push({name,error:e.stack});report.checks.push({name,status:'FAIL'});}}
 check('size-groups-fixed-sources-and-general-settings',()=>{
- assert.equal(f.sha(f.local(manifest.file)),manifest.sha256);assert.equal(Buffer.byteLength(raw),manifest.bytes);assert.ok(manifest.bytes<1802000&&manifest.bytes<manifest.before.bytes*0.3);
- assert.equal(manifest.groups.length,29);assert.equal(sources.size,15);assert.equal(section('Proxy Group').length,29);
+ assert.equal(f.sha(f.local(manifest.file)),manifest.sha256);assert.equal(Buffer.byteLength(raw),manifest.bytes);assert.ok(manifest.bytes<1804000&&manifest.bytes<manifest.before.bytes*0.3);
+ assert.equal(manifest.groups.length,30);assert.equal(sources.size,15);assert.equal(section('Proxy Group').length,30);
  const manual=new Map([['直连 direct','DIRECT'],['拒绝 reject','REJECT']]);
  for(const [label,target]of manual)assert.ok(section('Proxy Group').includes(label+' = select,'+target+',hidden=1'));
  assert.match(section('Proxy Group').find(row=>row.startsWith('YouTube = ')),/^YouTube = select,高纯净度AI用,高网速视频用,直连 direct,拒绝 reject,.*policy-select-name=高网速视频用,/);
+ assert.match(section('Proxy Group').find(row=>row.startsWith('Google Drive = ')),/^Google Drive = select,高纯净度AI用,高网速视频用,直连 direct,拒绝 reject,.*policy-select-name=高纯净度AI用,/);
  for(const row of section('Proxy Group')){
   if(manual.has(row.split(' = ',1)[0]))continue;
   const prefix='policy-regex-filter=';
@@ -56,6 +57,17 @@ check('business-Host-DNS-preserved-except-authorized-domestic-keys',()=>{
  const mismatches=[];for(const host of businessDNSHosts){const a=dns(before,host),b=dns(current,host);const group=contract.addedServiceGroup(host),expected=group?[group]:contract.mediaDirect(host,oldRoute)?['DIRECT']:a.groups;if(JSON.stringify(expected)!==JSON.stringify(b.groups)&&(group||!contract.known(host,oldRoute)||contract.mediaDirect(host,oldRoute))&&mismatches.length<12)mismatches.push({host,expected,after:b});report.metrics.businessDNS++;}assert.deepEqual(mismatches,[]);
 });
 const cold={...current,sources:new Map([...sources.keys()].map(k=>[k,[]]))};
+check('Drive-dedicated-data-and-shared-Google-routing',()=>{
+ for(const [group,probes] of Object.entries({
+  'Google Drive':['drive.google.com','sync.drive.google.com','googledrive.com','drive.googleapis.com',
+   'drive.usercontent.google.com','drive-data-export.usercontent.google.com','drive-data-export-eu.usercontent.google.com'],
+  '谷歌服务':['accounts.google.com','docs.google.com','www.googleapis.com','lh3.googleusercontent.com',
+   'shared.usercontent.google.com','edge.drive.usercontent.google.com'],
+ }))for(const host of probes){
+  assert.deepEqual(dns(current,host).groups,[group],host);
+  for(const protocol of ['TCP','UDP'])assert.equal(f.route(cold,{host,protocol,port:443}).group,group,host);
+ }
+});
 check('critical-domestic-WeChat-selector-and-DNS-affinity',()=>{
  for(const host of ['baidu.com','szfile.weixin.qq.com','szextshort.weixin.qq.com','wxapp.tc.qq.com','qlogo.cn','mmbiz.qpic.cn']){
   const media=contract.mediaHost(host);

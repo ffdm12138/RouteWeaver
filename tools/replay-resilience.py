@@ -266,6 +266,24 @@ def run_case(core, file, mode, engine, directory):
             udp('A', host)
             dns_via(host, 'A', {dot_port, https_port})
             checks.append('google_egress_tcp_udp_dns:' + host)
+        choose('Google Drive', '高网速视频用')
+        for host in ('drive.google.com', 'sync.drive.google.com', 'googledrive.com', 'drive.googleapis.com',
+                     'drive.usercontent.google.com', 'drive-data-export.usercontent.google.com',
+                     'drive-data-export-eu.usercontent.google.com'):
+            via('B', host)
+            udp('B', host)
+            dns_via(host, 'B', business_ports)
+        checks.append('drive_dedicated_web_api_download_export_tcp_udp_dns')
+        for host in ('accounts.google.com', 'docs.google.com', 'www.googleapis.com',
+                     'lh3.googleusercontent.com', 'shared.usercontent.google.com', 'edge.drive.usercontent.google.com'):
+            via('A', host)
+            udp('A', host)
+            dns_via(host, 'A', business_ports)
+        checks.append('drive_shared_google_hosts_tcp_udp_dns')
+        choose('Google Drive', 'NoUDP ↻')
+        udp(None, 'drive.usercontent.google.com')
+        checks.append('drive_unsupported_udp_rejected')
+        choose('Google Drive', '高纯净度AI用')
         choose('YouTube', '高网速视频用')
         for host in (DOMESTIC_DOMAIN, DOMESTIC_CHILD):
             via(None, host)
