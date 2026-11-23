@@ -212,3 +212,9 @@ ProjectClash 主版和纯 IPv4 版从当前共享规则生成，覆盖 iPhone、
 原版已将 Drive 站点和专用下载主机送入独立组。七个新核实的精确域名原先命中「谷歌服务」，现由「Google Drive」处理 TCP、UDP 和 DNS。56 份合成配置与两份 Shadowrocket 配置的完整差异限于这七个主机。Shadowrocket 主版增至 1,804,584 字节，生成上限调至 1,806,000 字节并保留低于原配置体积 30% 的校验。 [分流合同](../docs/需求.md)
 
 通过 64,374 项离线模型检查、56 份官方 Mihomo 解析、196 项图片传输对照。12 份 FlClash/Mihomo JS 每份通过 75 项隔离核心与 QuickJS 检查。纯 IPv4 Windows 首次回放在既有备用档 UDP 检查中未收到预期应答，同一原装核心复测旧版和修复版均通过。 [分流模型](../releases/v14.3/validation/domestic-resilience/google-drive-hosts-r1.json) · [FlClash 回执](../releases/v14.3/validation/proxy-failover/google-drive-hosts-r1.json)
+
+公开主版 v14.3.0-rc.24 和纯 IPv4 版 v14.3.0-ipv4-only-rc.15 绑定提交 `3a6e858db299215e6183150a7504682b780b2859`。源码与两条发布 CI 均通过，18 个公开附件的匿名下载 SHA-256 与本地验证字节一致。 [主版回执](releases/v14.3.0-rc.24.json) · [纯 IPv4 回执](releases/v14.3.0-ipv4-only-rc.15.json)
+
+## 2026-11-24 · GitHub 托管 macOS 作业重跑
+
+发布回执提交 94dcfaa 的 projectclash-javascriptcore 作业等待约 15 分钟后取消。GitHub 注释记录托管 macOS ARM64 runner 容量不足，作业未取得 runner 或执行步骤。只重跑该作业，第二次通过，原 workflow 总体成功。 [首轮作业](https://github.com/ffdm12138/RouteWeaver/actions/runs/45237576421/job/137913287894) · [重跑结果](https://github.com/ffdm12138/RouteWeaver/actions/runs/45237576421/attempts/2)
