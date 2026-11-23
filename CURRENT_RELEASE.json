@@ -138,12 +138,12 @@
       "priorReleasesPreserved": 6,
       "publicReleaseTag": "v14.3.0-ipv4-only-rc.14",
       "publicReleaseURL": "https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-ipv4-only-rc.14",
-      "publicReleaseStatus": "PRERELEASE_PUBLICATION_PENDING",
+      "publicReleaseStatus": "PUBLISHED_PRE_RELEASE_DEVICE_NOT_RUN",
       "publicReleaseAssets": 9,
-      "publicReleaseCommit": null,
+      "publicReleaseCommit": "e91b1993f5b77bb453612579a010e90aa711d190",
       "publicationManifest": "harness/releases/v14.3.0-ipv4-only-rc.14.json",
-      "publicReleaseCI": null,
-      "publicReleaseRemoteSHA256": "PENDING"
+      "publicReleaseCI": "https://github.com/ffdm12138/RouteWeaver/actions/runs/45235606256",
+      "publicReleaseRemoteSHA256": "ALL_9_ANONYMOUS_DOWNLOADS_MATCH"
     }
   },
   "nativeEvidenceSnapshot": "validation/inputs/api-doh-before/manifest.json",
@@ -314,7 +314,7 @@
   },
   "publicReleaseTag": "v14.3.0-rc.23",
   "publicReleaseURL": "https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-rc.23",
-  "publicReleaseStatus": "PRERELEASE_PUBLICATION_PENDING",
+  "publicReleaseStatus": "PUBLISHED_PRE_RELEASE_DEVICE_NOT_RUN",
   "publicReleaseAssets": 9,
   "embeddedDomesticExactHosts": 11,
   "cloudRuleAudit": {
@@ -333,8 +333,8 @@
   },
   "historicalEmbeddedDomainRows": 309,
   "embeddedCompanyRows": 482,
-  "publicReleaseCommit": null,
+  "publicReleaseCommit": "e91b1993f5b77bb453612579a010e90aa711d190",
   "publicationManifest": "harness/releases/v14.3.0-rc.23.json",
-  "publicReleaseCI": null,
-  "publicReleaseRemoteSHA256": "PENDING"
+  "publicReleaseCI": "https://github.com/ffdm12138/RouteWeaver/actions/runs/45235583497",
+  "publicReleaseRemoteSHA256": "ALL_9_ANONYMOUS_DOWNLOADS_MATCH"
 }

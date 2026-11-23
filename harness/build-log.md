@@ -204,3 +204,5 @@ ProjectClash 主版和纯 IPv4 版从当前共享规则生成，覆盖 iPhone、
 两轨全部入口新增「Google Drive」，位置在「苹果国际」与「哔哩国际」之间。专用站点、下载、区域导出及 API 主机经 Drive 组选路，Google 登录、Docs、通用 API 与共享内容域名继续经「谷歌服务」。「Google Drive」首次导入默认走「高网速视频用」。 [分流合同](../docs/需求.md)
 
 每个 JS 入口通过更新后的 74 项隔离核心和 QuickJS 检查。两轨同时验证 Drive 独立换节点、共享 Google 不跟随、TCP/UDP/DoH 和节点不支持 UDP 时的拒绝。196 项微信与 QQ 合成传输对照和 56 份官方 Mihomo 配置解析重新通过。Shadowrocket 保留原生能力范围。 [当前验收](../docs/status/当前验收.md)
+
+公开主版 `v14.3.0-rc.23` 和纯 IPv4 版 `v14.3.0-ipv4-only-rc.14` 均绑定提交 `e91b1993f5b77bb453612579a010e90aa711d190`。源码与两条发布 CI 通过，18 个公开附件的匿名下载 SHA-256 全部匹配。 [主版回执](releases/v14.3.0-rc.23.json) · [纯 IPv4 回执](releases/v14.3.0-ipv4-only-rc.14.json)
