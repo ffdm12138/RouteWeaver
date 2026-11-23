@@ -11,9 +11,9 @@
       "platform": "macosFlClash",
       "client": "FlClash",
       "file": "src/macos/v14.3-macos-flclash.js",
-      "sha256": "9a1d0c1c0cb252c2956ed3ffa0fe4db05643b272f19d0d0d0781ae5fbce4a85f",
-      "bytes": 128235,
-      "generatedConfigBytes": 183044,
+      "sha256": "fda5ff237d79a58650c967ee50792ec5ada8fc6bcc9a809e43917c79da02c542",
+      "bytes": 128236,
+      "generatedConfigBytes": 183045,
       "inlineRows": 1098,
       "remoteSources": 30
     },
@@ -21,9 +21,9 @@
       "platform": "macosClashMi",
       "client": "Clash Mi",
       "file": "src/macos/v14.3-macos-clashmi.js",
-      "sha256": "28ea3c19b430a05569a53997aa6c3b1ee7000cd790249d8f7ab3f00d0095d17b",
-      "bytes": 128259,
-      "generatedConfigBytes": 183340,
+      "sha256": "1e64d893f3ecbcdb19ab1aa93cfaa9636fdfc3375d979c376627bb4779f1cd7c",
+      "bytes": 128260,
+      "generatedConfigBytes": 183341,
       "inlineRows": 1098,
       "remoteSources": 29
     }
@@ -64,7 +64,7 @@
     },
     {
       "file": "data/rules/business-services.json",
-      "sha256": "d34d344733cf13f6db33c7c562649c2853d7b3ccc7534ab3c8c8341d590fa51a"
+      "sha256": "cb7b8a108566f56e61f97bc96c51b03a287bf032b240fc7a3ee4d0f6328dac63"
     },
     {
       "file": "data/rules/domestic-direct.json",

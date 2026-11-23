@@ -13,27 +13,27 @@
     {
       "platform": "windows",
       "file": "src/windows/v14.3-windows-flclash.js",
-      "sha256": "1009c9576a47741c4d0a70edae39d516434a71465088f7f7ea8b3c13d8a12830",
-      "bytes": 126392,
-      "generatedConfigBytes": 182765,
+      "sha256": "abda0c3f241751004baccdacfb239921ff1545dfbe2a6b7563d1158297ff807f",
+      "bytes": 126393,
+      "generatedConfigBytes": 182766,
       "inlineRows": 1098,
       "remoteSources": 30
     },
     {
       "platform": "android",
       "file": "src/android/v14.3-android-flclash.js",
-      "sha256": "b380daeab8d23f9c6b3087e129ad1994137156f09fc1be31bf02f9c13c796a79",
-      "bytes": 125951,
-      "generatedConfigBytes": 182417,
+      "sha256": "ee2462c6501447d17e55fb695e91866744c3c2a2efb6eeb2f4f08f49396144df",
+      "bytes": 125952,
+      "generatedConfigBytes": 182418,
       "inlineRows": 1098,
       "remoteSources": 29
     },
     {
       "platform": "clashmi",
       "file": "src/ios/v14.3-clashmi-domestic-protocol-r1.js",
-      "sha256": "515cc6123afe3575b8b02f385bed98bdefdd0399f81582443a58b55f2ce04bdd",
-      "bytes": 128261,
-      "generatedConfigBytes": 183342,
+      "sha256": "c7cd42f33dac113624aacdcbf0063eb093ce19f6454898e7b30d6e373b1b7e77",
+      "bytes": 128262,
+      "generatedConfigBytes": 183343,
       "inlineRows": 1098,
       "remoteSources": 29
     }
@@ -45,7 +45,7 @@
   },
   "policy": {
     "file": "data/rules/embedded-policy.json",
-    "sha256": "c231599d4aa792e9ee2e902538151faffcfb702a8e1176604943b47d3425aedf"
+    "sha256": "e23dde4108e23c475f7d91f993ca13e367a57653eaa47ff891c349038298cece"
   },
   "tailscaleDerpSource": {
     "file": "data/rules/tailscale-derp-map.json",
@@ -88,7 +88,7 @@
     },
     {
       "file": "data/rules/business-services.json",
-      "sha256": "d34d344733cf13f6db33c7c562649c2853d7b3ccc7534ab3c8c8341d590fa51a"
+      "sha256": "cb7b8a108566f56e61f97bc96c51b03a287bf032b240fc7a3ee4d0f6328dac63"
     },
     {
       "file": "data/rules/domestic-direct.json",

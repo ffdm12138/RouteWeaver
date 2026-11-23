@@ -27,9 +27,9 @@ const authorizedHosts = new Set(review.authorizedSuffixes.flatMap(h => [h, 'edge
 const manualLabels = new Map([['DIRECT', '直连 direct'], ['REJECT', '拒绝 reject']]);
 const businessDefaults = {
   DIRECT: ['国内网站', 'Steam', 'Epic Games', '苹果国际', '哔哩国际'],
-  '高网速视频用': ['YouTube', 'Telegram', 'TikTok', 'Twitter', 'Discord', 'Netflix', 'Disney+', 'Spotify'],
+  '高网速视频用': ['YouTube', 'Google Drive', 'Telegram', 'TikTok', 'Twitter', 'Discord', 'Netflix', 'Disney+', 'Spotify'],
   '高纯净度AI用': ['公共基础服务', '漏网之鱼', 'OpenAI 服务', 'Anthropic 服务', '谷歌服务', '微软生态',
-    'OpenRouter', 'Perplexity', 'Hugging Face', 'xAI', 'Meta 服务', 'Google Drive'],
+    'OpenRouter', 'Perplexity', 'Hugging Face', 'xAI', 'Meta 服务'],
 };
 const locks = [...read('releases/v14.3/data/rule-sources.lock.json').sources,
   ...read('releases/v14.3/validation/inputs/v14.2-baseline/data/rule-sources.lock.json').sources];

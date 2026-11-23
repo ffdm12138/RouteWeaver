@@ -166,7 +166,7 @@ def verify_source(root):
     if not receipt['checks']:
         raise ValueError('Empty core replay inventory')
     if release.get('googleDrive'):
-        required = {'drive_dedicated_web_api_download_export_tcp_udp_dns', 'drive_shared_google_hosts_tcp_udp_dns',
+        required = {'drive_default_video_web_api_download_export_tcp_udp_dns', 'drive_shared_google_hosts_tcp_udp_dns',
                     'drive_unsupported_udp_rejected'}
         project = read(checked_path(root, release['projectClash']['verification']))
         for checks in [receipt['checks'], *(track['checks'] for track in project['tracks'].values())]:

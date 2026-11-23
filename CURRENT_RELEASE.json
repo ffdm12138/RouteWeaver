@@ -53,7 +53,7 @@
     "guide": "docs/guides/ProjectClash使用说明.md",
     "reviewedClientCommit": "f84db6a964505c9f8592cc2dd1b16a25454b3dd7",
     "reviewedCoreCommit": "c8f2fc1d58bf9ac856a0bf161bc9489591821f45",
-    "verification": "releases/v14.3/validation/projectclash-wechat-media-sniff-r1.json",
+    "verification": "releases/v14.3/validation/projectclash-wechat-media-sniff-r1-drive-video.json",
     "deviceAcceptance": "NOT_RUN"
   },
   "classificationRevision": "review-fixes-r1",
@@ -163,7 +163,7 @@
   "nativeFallback": {
     "revision": "backup-slot-skip-r1",
     "guide": "docs/guides/故障转移.md",
-    "verification": "releases/v14.3/validation/proxy-failover/wechat-media-sniff-r1.json",
+    "verification": "releases/v14.3/validation/proxy-failover/wechat-media-sniff-r1-drive-video.json",
     "releaseTags": {
       "main": "v14.3.0-rc.21",
       "ipv4-only": "v14.3.0-ipv4-only-rc.12"
@@ -252,7 +252,7 @@
     "proxyBinding": "EXISTING_BUSINESS_GROUPS",
     "directResolvers": "SYSTEM",
     "coreRequirement": "STANDARD_MIHOMO_HTTPS_DNS",
-    "verification": "releases/v14.3/validation/standard-business-doh-wechat-media-sniff-r1.json",
+    "verification": "releases/v14.3/validation/standard-business-doh-wechat-media-sniff-r1-drive-video.json",
     "releaseTags": {
       "main": "v14.3.0-rc.22",
       "ipv4-only": "v14.3.0-ipv4-only-rc.13"
@@ -284,8 +284,8 @@
     "revision": "wechat-media-sniff-r1",
     "domains": "releases/v14.3/data/rules/wechat-media.json",
     "guide": "docs/guides/微信发图优化.md",
-    "staticVerification": "releases/v14.3/validation/domestic-resilience/wechat-media-sniff-r1.json",
-    "transportVerification": "releases/v14.3/validation/domestic-resilience/wechat-media-transport-r1.json",
+    "staticVerification": "releases/v14.3/validation/domestic-resilience/wechat-media-sniff-r1-drive-video.json",
+    "transportVerification": "releases/v14.3/validation/domestic-resilience/wechat-media-transport-r1-drive-video.json",
     "priorProcessVerification": "releases/v14.3/validation/domestic-resilience/wechat-process-r1.json",
     "baselineCommit": "4247c21d623b86f211ceecc7387122b6df2055b5",
     "releaseTags": {
@@ -296,7 +296,7 @@
   },
   "googleDrive": {
     "group": "Google Drive",
-    "defaultSelection": "高纯净度AI用",
+    "defaultSelection": "高网速视频用",
     "policyData": "releases/v14.3/data/rules/business-services.json",
     "scope": "DRIVE_WEB_AND_DEDICATED_DOWNLOAD_EXPORT_API_HOSTS",
     "sharedGoogleHosts": "RETAIN_EXISTING_GOOGLE_SERVICE_POLICY",

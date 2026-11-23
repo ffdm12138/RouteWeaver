@@ -5,8 +5,8 @@
   "domesticProtocolRevision": "domestic-protocol-r1",
   "status": "GENERATED_NATIVE_ACCEPTANCE_PENDING",
   "file": "src/ios/v14.3-shadowrocket.conf",
-  "sha256": "86ecf1c20de6981f078c034f8e4b8bfd90eb45755032a878a4e87cc109d3b9d5",
-  "bytes": 1803187,
+  "sha256": "49eff27df62a49f367fea6ccc7c4def88bc9e32014ada15a7c328a4345bfb40f",
+  "bytes": 1803188,
   "tailscaleDerpSource": {
     "file": "data/rules/tailscale-derp-map.json",
     "url": "https://controlplane.tailscale.com/derpmap/default",
@@ -5447,7 +5447,7 @@
   ],
   "sourceContract": {
     "file": "docs/需求.md",
-    "sha256": "269c32d3f367e2235ed94f5bcd2da8ceabecd337ed77f989ea322ae6fdfad123"
+    "sha256": "00e2e33ea47b5a02ed2ed5767956dde47d4e21a5a7a843a3b2c5a52612c38b1c"
   },
   "inputs": [
     {
@@ -5468,15 +5468,15 @@
     },
     {
       "file": "data/rules/business-services.json",
-      "sha256": "d34d344733cf13f6db33c7c562649c2853d7b3ccc7534ab3c8c8341d590fa51a"
+      "sha256": "cb7b8a108566f56e61f97bc96c51b03a287bf032b240fc7a3ee4d0f6328dac63"
     },
     {
       "file": "src/android/v14.3-android-flclash.js",
-      "sha256": "b380daeab8d23f9c6b3087e129ad1994137156f09fc1be31bf02f9c13c796a79"
+      "sha256": "ee2462c6501447d17e55fb695e91866744c3c2a2efb6eeb2f4f08f49396144df"
     },
     {
       "file": "data/rules/embedded-policy.json",
-      "sha256": "c231599d4aa792e9ee2e902538151faffcfb702a8e1176604943b47d3425aedf"
+      "sha256": "e23dde4108e23c475f7d91f993ca13e367a57653eaa47ff891c349038298cece"
     },
     {
       "file": "validation/inputs/v14.2-baseline/manifest.json",

@@ -30,7 +30,7 @@ check('size-groups-fixed-sources-and-general-settings',()=>{
  const manual=new Map([['直连 direct','DIRECT'],['拒绝 reject','REJECT']]);
  for(const [label,target]of manual)assert.ok(section('Proxy Group').includes(label+' = select,'+target+',hidden=1'));
  assert.match(section('Proxy Group').find(row=>row.startsWith('YouTube = ')),/^YouTube = select,高纯净度AI用,高网速视频用,直连 direct,拒绝 reject,.*policy-select-name=高网速视频用,/);
- assert.match(section('Proxy Group').find(row=>row.startsWith('Google Drive = ')),/^Google Drive = select,高纯净度AI用,高网速视频用,直连 direct,拒绝 reject,.*policy-select-name=高纯净度AI用,/);
+ assert.match(section('Proxy Group').find(row=>row.startsWith('Google Drive = ')),/^Google Drive = select,高纯净度AI用,高网速视频用,直连 direct,拒绝 reject,.*policy-select-name=高网速视频用,/);
  for(const row of section('Proxy Group')){
   if(manual.has(row.split(' = ',1)[0]))continue;
   const prefix='policy-regex-filter=';
