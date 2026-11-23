@@ -138,7 +138,7 @@
       "priorReleasesPreserved": 6,
       "publicReleaseTag": "v14.3.0-ipv4-only-rc.14",
       "publicReleaseURL": "https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-ipv4-only-rc.14",
-      "publicReleaseStatus": "PRERELEASE_PUBLICATION_PAUSED",
+      "publicReleaseStatus": "PRERELEASE_PUBLICATION_PENDING",
       "publicReleaseAssets": 9,
       "publicReleaseCommit": null,
       "publicationManifest": "harness/releases/v14.3.0-ipv4-only-rc.14.json",
@@ -314,7 +314,7 @@
   },
   "publicReleaseTag": "v14.3.0-rc.23",
   "publicReleaseURL": "https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-rc.23",
-  "publicReleaseStatus": "PRERELEASE_PUBLICATION_PAUSED",
+  "publicReleaseStatus": "PRERELEASE_PUBLICATION_PENDING",
   "publicReleaseAssets": 9,
   "embeddedDomesticExactHosts": 11,
   "cloudRuleAudit": {
