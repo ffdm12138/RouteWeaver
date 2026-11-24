@@ -18,6 +18,16 @@ for(const [platform,file]of Object.entries(manifest.entries)){
    const input={...good(),'x-routeweaver':{'network-mode':mode}},before=JSON.stringify(input),c=generate(input);
    assert.equal(JSON.stringify(input),before,'mutated caller input');assert.equal(c['x-v14-generated'].networkMode,mode);
    assert.equal(c.ipv6,true);assert.equal(c.dns.ipv6,mode!=='ipv4-local');assert.deepEqual(generate(c),c);
+   assert.equal(c.dns['direct-nameserver'].length,3);assert.equal(c.dns['direct-nameserver-follow-policy'],true);
+   for(const u of c.dns['direct-nameserver'])assert.ok(!u.startsWith('system'));
+   assert.ok(c.dns['fake-ip-filter'].includes('+.edu.cn')&&c.dns['fake-ip-filter'].includes('+.ac.cn'));
+   const policyKeys=Object.keys(c.dns['nameserver-policy']);
+   const stunIdx=policyKeys.findIndex(k=>k.startsWith('rule-set:v14-generic-stun-domain-guard'));
+   assert.ok(stunIdx>=0&&policyKeys.indexOf('+.edu.cn')>stunIdx&&policyKeys.indexOf('+.ac.cn')>stunIdx);
+   const desktop=['windows','macosFlClash','clashVerge'].includes(platform);
+   if(desktop&&mode!=='ipv4-local')assert.deepEqual(c.tun['route-exclude-address'],['2001:250::/32','2001:da8::/32','2001:cc0::/32']);
+   else assert.equal(c.tun?.['route-exclude-address'],undefined);
+   assert.ok(!(c.tun?.['route-exclude-address']||[]).includes('fc00::/7'));
    for(const group of ['高纯净度AI用','高网速视频用']){const g=c['proxy-groups'].find(g=>g.name===group);assert.equal(g.type,'select');assert.ok(g.proxies.includes('直连 direct'));assert.equal(g['empty-fallback'],'REJECT');}
    assert.deepEqual(c.rules.slice(-2),['MATCH,漏网之鱼','MATCH,REJECT']);
    if(platform==='android')assert.ok(!c.tun||c.tun.enable!==true,'script enabled Android VPN');

@@ -11,7 +11,7 @@
 
 1. 导入完整的 Clash/Mihomo 订阅，规则方案选「配置自带规则」。运行模式选「规则（Rule）」。
 2. iPhone 和 iPad 打开配置库，点对应订阅右侧的 ⓘ，进入「配置覆写 → 覆写脚本」。Mac 在侧边栏进「配置（Profiles）」，打开对应配置的「覆写脚本」。导入上表的文件或公开附件 URL，并选中该脚本。 [iPhone 与 iPad 指南](https://clash.md/zh/guide/ios) · [Mac 指南](https://clash.md/zh/guide/macos)
-3. Apple TV 在当前 Profile 的「脚本（Script）」填可访问的 HTTPS 脚本地址，再点「立即更新」。公开版可填 GitHub 预发布的 JS 附件地址。个人版可使用自己的私有 HTTPS 地址。 [Apple TV 指南](https://clash.md/zh/guide/tvos) · [公开预发布](../../README.md#版本与下载)
+3. Apple TV 在当前 Profile 的「脚本（Script）」填可访问的 HTTPS 脚本地址，再点「立即更新」。可填 GitHub 预发布的 JS 附件地址。 [Apple TV 指南](https://clash.md/zh/guide/tvos) · [公开预发布](../../README.md#版本与下载)
 4. 检查配置并更新订阅。为「高纯净度AI用」「高网速视频用」手选节点，按需为「故障转移1～3」指定备用。三档原生回退适用于直接列出节点的订阅。使用代理 provider 的订阅沿用分流与手动选择。 [三档故障转移](故障转移.md)
 
 同一配置绑定一份 RouteWeaver 脚本。应用的全局脚本、自定义前置规则、模块和 DNS 强制覆写可以在脚本后生效。让 RouteWeaver 管理分流时，请关闭会改写这些设置的选项，并核对最终配置。

@@ -1,6 +1,6 @@
 > **纯 IPv4 版**。七份 JS 支持三档原生故障转移。 [使用说明](../../docs/guides/故障转移.md)
 
-**DIRECT 拨号需要可用的 IPv4 系统 DNS。** 如果网络只提供 IPv6 DNS，纯 IPv4 版的 DIRECT 域名可能无法解析。业务 DNS 使用标准 DoH/443，原版核心解析通过，设备验收待补。 [DNS 迁移与回滚](../../docs/guides/业务DoH迁移.md)
+**通用 DIRECT 拨号走三路直连 DoH（已附加 IPv4/SVCB/HTTPS 过滤），校园网 `edu.cn` / `ac.cn` 优先 `system://` 并自动回退至同组 DoH。** 若校园网私有内网域名仅存于本地 DNS 且当前系统 DNS 不可用（或被客户端系统 DNS 接管写成 TUN 地址），对应纯内网记录将无法解析，需要可用 IPv4 系统 DNS 并关闭覆盖系统 DNS 的客户端选项。业务 DNS 使用标准 DoH/443，原版核心 56 份合成解析与 78 项隔离核心回放通过，设备验收待补。 [DNS 迁移与回滚](../../docs/guides/业务DoH迁移.md)
 
 <!-- ARCHITECTURE_AUDIT_CURRENT:BEGIN -->
 > **历史架构审计基线 architecture-audit-r1（2026-11-01）**。两轨七客户端的当时源码、有限静态清单及隔离 Windows 核心已验证；跨端设备、原生 auto 能力和真实 AI 账号任务未验收。
@@ -14,7 +14,7 @@
 
 本机直连目标、连接代理服务器都限定 IPv4。代理服务器往后的出口与远端 DNS 地址族由服务器决定。三档备用按同一纯 IPv4 配置拨号。
 
-公司、共享基础设施、国内、未知流量的分组和顺序、公共组手动选择、业务组 DIRECT、DNS 跟组、UDP 防回落及固定规则来源沿用本版本各自的原入口。个人与公开版本分别从各自原入口生成，个人目的地址例外只在个人版本保留。
+公司、共享基础设施、国内、未知流量的分组和顺序、公共组手动选择、业务组 DIRECT、DNS 跟组、UDP 防回落及固定规则来源沿用主版。
 
 | 客户端 | 导入文件 |
 |---|---|
@@ -31,7 +31,7 @@
 
 JS 强制 `ipv6: false`、`dns.ipv6: false`，移除 IPv6 Fake-IP 池和 TUN IPv6 接口地址。原节点、内联节点和 provider 刷新成员统一使用 `ip-version: ipv4`，且强制表达式在原 provider 表达式后执行。入口始终执行纯 IPv4，需要核心支持 provider override-expr。
 
-业务 DNS 保留原策略组及 AAAA/SVCB/HTTPS 过滤。节点引导继续使用原独立上游。DIRECT 拨号和明确直连域名使用系统 DNS。首段增加不触发解析的 IPv6 全地址拒绝，阻止到达核心的 IPv6 字面量 TCP/UDP；显式 hosts 的双栈列表保留 IPv4，IPv6-only 映射和关联别名拒绝。系统 hosts 不再读取，避免未受覆写管理的 IPv6 映射重新引入 IPv6。
+业务 DNS 保留原策略组及 AAAA/SVCB/HTTPS 过滤。节点引导继续使用原独立上游。通用 DIRECT 与明确直连域名使用三路 DoH（`223.5.5.5`、`223.6.6.6`、`doh.pub`）并过滤 AAAA/SVCB/HTTPS；`edu.cn` 与 `ac.cn` 优先 `system://` 并回退同组 DoH（过滤同样适用且不被 `ipv4-lan-dns` 覆盖）；桌面纯 IPv4 入口不保留 IPv6 校园网 TUN 旁路前缀。首段增加不触发解析的 IPv6 全地址拒绝，阻止到达核心的 IPv6 字面量 TCP/UDP；显式 hosts 的双栈列表保留 IPv4，IPv6-only 映射和关联别名拒绝。系统 hosts 不再读取，避免未受覆写管理的 IPv6 映射重新引入 IPv6。
 
 ### 全机纯 IPv4 的客户端设置
 

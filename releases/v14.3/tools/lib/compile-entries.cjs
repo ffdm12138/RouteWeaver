@@ -96,7 +96,10 @@ function compile(root){
   // Keep the authoring templates readable within the standalone script budget.
   const base=entry.raw.replace(/^[\t ]*\/\/[^\r\n]*(?:\r?\n|$)/gm,'')
     .replace(/^(const V14_SHARED_INFRA = )(\{[\s\S]*?^\})(;)/m,
-      (_,prefix,table,suffix)=>prefix+JSON.stringify(JSON.parse(table))+suffix);
+      (_,prefix,table,suffix)=>prefix+JSON.stringify(JSON.parse(table))+suffix)
+    .replace(/^(const V14_EXTERNAL_DNS_RULES = )(\[[\s\S]*?^\])(;)/m,
+      (_,prefix,list,suffix)=>prefix+JSON.stringify(JSON.parse(list))+suffix)
+    .replace(/^[\t ]+/gm,'').replace(/\n{2,}/g,'\n');
   const raw='const V14_TAILSCALE = '+JSON.stringify(runtimePolicy)+';\n'+read(tailscaleRuntime)+'\n'+
    'const V14_WECHAT_DOMAINS = '+JSON.stringify(wechatDomains)+';\n'+
    'const V14_WECHAT_PROCESSES = '+JSON.stringify(wechatProcesses[entry.platform] || [])+';\n'+read(wechatRuntime)+'\n'+base;

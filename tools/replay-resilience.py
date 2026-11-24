@@ -2,6 +2,7 @@
 from contextlib import ExitStack
 from pathlib import Path
 import argparse
+import base64
 import copy
 import hashlib
 import json
@@ -15,6 +16,7 @@ import tempfile
 import threading
 import time
 import traceback
+import urllib.parse
 
 ROOT = Path(__file__).resolve().parents[1]
 H = runpy.run_path(str(ROOT / 'tools/stock-core-host.py'))
@@ -24,11 +26,50 @@ sha = lambda p: hashlib.sha256(Path(p).read_bytes()).hexdigest()
 DIRECT_CHOICE = '直连 direct'
 REJECT_CHOICE = '拒绝 reject'
 MEDIA_HOST = 'szextshort.weixin.qq.com'
+EDU_HOST = 'mirrors.tuna.tsinghua.edu.cn'
+AC_HOST = 'www.ucas.ac.cn'
+EDU_STUN_HOST = 'stun.tsinghua.edu.cn'
 DOMESTIC_DOMAIN = '19212021.xyz'
 DOMESTIC_CHILD = 'edge.' + DOMESTIC_DOMAIN
 DIRECT_DEFAULT_HOSTS = ('store.steampowered.com', 'www.epicgames.com', 'www.apple.com', 'b23.tv')
 VIDEO_DEFAULT_HOSTS = ('t.me', 'www.tiktok.com', 'x.com', 'discord.com')
 MEDIA_QNAME = b''.join(bytes([len(label)]) + label.encode('ascii') for label in MEDIA_HOST.split('.')) + b'\0'
+
+
+class EduPrimaryResolver(F['ResolverUDP']):
+    def handle(self):
+        query, sock = self.request
+        index = 12
+        while query[index]:
+            index += 1 + query[index]
+        end = index + 5
+        self.server.queries.append((query[12:end], struct.unpack_from('!H', query, index + 1)[0]))
+        if self.server.fail:
+            sock.sendto(query[:2] + struct.pack('!HHHHH', 0x8182, 1, 0, 0, 0) + query[12:end], self.client_address)
+            return
+        response = F['reply_dns'](query)
+        if query[index + 1:index + 3] == b'\0\1':
+            response = response[:-4] + socket.inet_aton('127.0.0.1')
+        sock.sendto(response, self.client_address)
+
+
+class DirectHTTPS(F['HTTPS']):
+    def reply_direct(self, query):
+        self.server.hits.append(query)
+        response = F['reply_dns'](query)
+        index = 12
+        while query[index]:
+            index += 1 + query[index]
+        if query[index + 1:index + 3] == b'\0\1':
+            response = response[:-4] + socket.inet_aton('127.0.0.1')
+        return response
+
+    def do_POST(self):
+        self.respond(200, self.reply_direct(self.rfile.read(int(self.headers['Content-Length']))))
+
+    def do_GET(self):
+        query = urllib.parse.parse_qs(urllib.parse.urlsplit(self.path).query)['dns'][0]
+        self.respond(200, self.reply_direct(base64.urlsafe_b64decode(query + '===')))
 
 
 class MediaResolver(F['ResolverUDP']):
@@ -47,6 +88,10 @@ class DirectUDP(socketserver.BaseRequestHandler):
     def handle(self):
         packet, sock = self.request
         sock.sendto(b'ACK:' + packet, self.client_address)
+
+
+class LoopbackTCP(N['TCP']):
+    request_queue_size = 128
 
 
 def generate(file, mode, nodes, engine=None):
@@ -69,17 +114,22 @@ def run_case(core, file, mode, engine, directory):
         tls = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
         tls.load_cert_chain(directory.parent / 'cert.pem', directory.parent / 'key.pem')
         start = lambda server, ctx=None: F['start'](stack, server, ctx)
-        origin = start(N['TCP'](('127.0.0.1', 0), N['Origin'])); origin.hits = []
+        origin = start(LoopbackTCP(('127.0.0.1', 0), N['Origin'])); origin.hits = []
         direct_udp = start(N['UDP'](('127.0.0.1', 0), DirectUDP)).server_address[1]
-        https = start(N['TCP'](('127.0.0.1', 0), F['HTTPS']), tls)
+        https = start(LoopbackTCP(('127.0.0.1', 0), F['HTTPS']), tls)
+        direct_https = start(LoopbackTCP(('127.0.0.1', 0), DirectHTTPS), tls)
+        direct_https.hits = []
         media_resolver = start(N['UDP'](('127.0.0.1', 0), MediaResolver))
         media_resolver.queries = []
-        dot = start(N['TCP'](('127.0.0.1', 0), F['ResolverTLS']), tls)
+        edu_primary = start(N['UDP'](('127.0.0.1', 0), EduPrimaryResolver))
+        edu_primary.queries = []
+        edu_primary.fail = True
+        dot = start(LoopbackTCP(('127.0.0.1', 0), F['ResolverTLS']), tls)
         bootstrap = start(N['UDP'](('127.0.0.1', 0), N['DNSHandler']))
         relays = {}
         for label in ['A', 'B', 'C', 'D', 'X', 'NoUDP']:
             udp = start(N['UDP'](('127.0.0.1', 0), N['ProxyUDP'])); udp.events = []
-            relay = start(N['TCP'](('127.0.0.1', 0), F['Relay']))
+            relay = start(LoopbackTCP(('127.0.0.1', 0), F['Relay']))
             relay.udp, relay.events, relay.state = udp, [], 'up'
             relay.origin = origin.server_address[1]
             relay.probe_gate = threading.Event(); relay.probe_gate.set()
@@ -122,12 +172,16 @@ def run_case(core, file, mode, engine, directory):
         cfg['dns'].update({'listen': f'127.0.0.1:{dns}', 'use-system-hosts': False,
                            'default-nameserver': [bootstrap_url], 'proxy-server-nameserver': [bootstrap_url],
                            'fallback-filter': {'geoip': False, 'geosite': [], 'ipcidr': [], 'domain': []}})
-        def translate_resolvers(servers, *, media_policy=False):
+        def translate_resolvers(servers, *, media_policy=False, edu_policy=False, direct_policy=False):
             translated = []
             for server in servers:
                 fragment = server.split('#', 1)[1] if '#' in server else 'DIRECT'
                 if media_policy:
                     transport = f'udp://127.0.0.1:{media_resolver.server_address[1]}'
+                elif edu_policy and server.startswith('system://'):
+                    transport = f'udp://127.0.0.1:{edu_primary.server_address[1]}'
+                elif direct_policy:
+                    transport = f'https://{F["RESOLVER"]}:{direct_https.server_address[1]}/dns-query'
                 elif server.startswith('https'):
                     transport = f'https://{F["RESOLVER"]}:{https.server_address[1]}/dns-query'
                 else:
@@ -137,9 +191,10 @@ def run_case(core, file, mode, engine, directory):
 
         for key in ('nameserver', 'fallback'):
             cfg['dns'][key] = translate_resolvers(cfg['dns'][key])
-        cfg['dns']['direct-nameserver'] = [bootstrap_url]
+        cfg['dns']['direct-nameserver'] = translate_resolvers(cfg['dns']['direct-nameserver'], direct_policy=True)
         for key, servers in cfg['dns']['nameserver-policy'].items():
-            cfg['dns']['nameserver-policy'][key] = translate_resolvers(servers, media_policy=key == '+.weixin.qq.com')
+            cfg['dns']['nameserver-policy'][key] = translate_resolvers(
+                servers, media_policy=key == '+.weixin.qq.com', edu_policy=key in ('+.edu.cn', '+.ac.cn'))
         directory.mkdir()
         def save():
             (directory / 'config.yaml').write_text(json.dumps(cfg, ensure_ascii=False), encoding='utf-8')
@@ -175,6 +230,16 @@ def run_case(core, file, mode, engine, directory):
         ordinary = N['dns_answers'](dns, 'fake-probe.amemv.com', 1)
         assert len(ordinary) == 1 and ordinary[0].startswith('198.18.'), ordinary
         checks.append('wechat_real_ipv4_with_ordinary_fakeip_and_filtered_aaaa_https')
+        edu_primary.fail = True
+        edu_primary.queries.clear()
+        for host in (EDU_HOST, AC_HOST):
+            edu_ip = N['dns_answers'](dns, host, 1)
+            assert edu_ip == [F['ANSWER']], (host, edu_ip)
+            if mode == 'ipv4-local':
+                assert N['dns_answers'](dns, host, 28) == []
+                assert N['dns_answers'](dns, host, 65) == []
+        assert len(edu_primary.queries) >= 2, edu_primary.queries
+        checks.append('edu_real_ip_and_fallback_when_primary_fails')
         # Encrypted DNS egress must observe upstream queries, so this phase uses
         # real responses. Fake-IP configuration acceptance is a separate check.
         # Direct dials resolve to the loopback origin only after route selection.
@@ -217,7 +282,9 @@ def run_case(core, file, mode, engine, directory):
             child.call('proxy.testDelay', {'proxy-name': name, 'test-url': url, 'timeout': 3000})
         def udp(expected, host='v5.douyinvod.com', *, direct_port=None):
             prior = {k: len(v.udp.events) for k, v in relays.items()}
-            with socket.create_connection(('127.0.0.1', mixed), timeout=3) as conn, socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as sock:
+            sock = stack.enter_context(socket.socket(socket.AF_INET, socket.SOCK_DGRAM))
+            sock.bind(('127.0.0.1', 0))
+            with socket.create_connection(('127.0.0.1', mixed), timeout=3) as conn:
                 conn.sendall(b'\x05\x01\0'); assert N['exact'](conn, 2) == b'\x05\0'
                 conn.sendall(b'\x05\x03\0\x01' + b'\0' * 6)
                 head = N['exact'](conn, 4); _, port = N['address'](conn, head[3])
@@ -298,6 +365,11 @@ def run_case(core, file, mode, engine, directory):
             via(None, host)
         dns_via('dns-probe.' + DOMESTIC_DOMAIN, None, {dot_port, https_port})
         checks.append('domestic_suffix_apex_child_and_dns_default_direct')
+        direct_https.hits.clear()
+        via(None, 'init.ess.apple.com')
+        assert direct_https.hits, 'expected direct-nameserver DoH query for init.ess.apple.com'
+        dns_via('controlplane.tailscale.com', None, {https_port})
+        checks.append('direct_doh_without_system_dependency')
         choose('Steam', '高纯净度AI用')
         via('A', DIRECT_DEFAULT_HOSTS[0])
         checks.append('direct_default_can_be_manually_switched_to_proxy')
@@ -344,6 +416,13 @@ def run_case(core, file, mode, engine, directory):
         for host in ['api.amemv.com', 'v5.douyinvod.com', 'p3.douyinpic.com', 'apd-pcdnwxlogin.teg.tencent-cloud.net', 'openaifoundation.org']:
             via('A', host); checks.append('empty_provider_tcp:' + host)
         via(None, MEDIA_HOST); checks.append('wechat_tcp_direct_even_with_domestic_proxy')
+        for host in (EDU_HOST, AC_HOST):
+            via(None, host)
+            udp(None, host, direct_port=direct_udp)
+        udp('X', EDU_STUN_HOST)
+        udp('X', EDU_HOST, direct_port=3478)
+        dns_via(EDU_STUN_HOST, 'X', {dot_port, https_port})
+        checks.append('edu_direct_and_stun_protected')
         udp('A'); checks.append('domestic_udp_A')
         udp('X','stun.amemv.com'); checks.append('generic_stun_stays_on_distinct_catchall')
         udp('X', 'stun.' + MEDIA_HOST); checks.append('generic_stun_precedes_wechat_media')

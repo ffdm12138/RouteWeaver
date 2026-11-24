@@ -5,8 +5,8 @@
   "domesticProtocolRevision": "domestic-protocol-r1",
   "status": "GENERATED_NATIVE_ACCEPTANCE_PENDING",
   "file": "src/ios/v14.3-shadowrocket.conf",
-  "sha256": "ce8b4d90bdee7ee3714a7491802484a98470556dc9819a09e1f133c6f9d568c4",
-  "bytes": 1804584,
+  "sha256": "296e85750cd6d294417d9d380e34823739b97e6024f10c2601e05b910f3371a8",
+  "bytes": 1807029,
   "tailscaleDerpSource": {
     "file": "data/rules/tailscale-derp-map.json",
     "url": "https://controlplane.tailscale.com/derpmap/default",
@@ -20,7 +20,7 @@
   },
   "rules": {
     "before": 116974,
-    "after": 5341,
+    "after": 5343,
     "removedDuplicateCNRows": 111400,
     "removedDominatedLiteralRows": [
       "DOMAIN-SUFFIX,firebase.google.com,谷歌服务",
@@ -678,7 +678,7 @@
   },
   "dns": {
     "beforeHostRows": 9130,
-    "afterHostRows": 10001,
+    "afterHostRows": 10021,
     "removedRedundantRows": 1039,
     "redundantRowCertificates": [
       {
@@ -5447,12 +5447,12 @@
   ],
   "sourceContract": {
     "file": "docs/需求.md",
-    "sha256": "0d8cc17ff47ee5eeb2d3e0bb54d414a8a4e602fb7a878c03ec13f6acbc089341"
+    "sha256": "2529203699e7d4bdf8edda1506a105990d760a0187665dc2cf30e9adf38192b1"
   },
   "inputs": [
     {
       "file": "tools/build-shadowrocket-lean.cjs",
-      "sha256": "a8c8a90cd39fafa965f505facda27ca0b5be8d743339d3156dec01c68e384fcb"
+      "sha256": "2decf5c2d971d25ce2b0079ec9ddb7ef757b9a82405dc69c4f1db796d32712be"
     },
     {
       "file": "tools/lib/tailscale-policy.cjs",
@@ -5472,7 +5472,7 @@
     },
     {
       "file": "src/android/v14.3-android-flclash.js",
-      "sha256": "cde76e7430ea131397fcdb381b1d6cf006135026499d361e555550b75e8f26b8"
+      "sha256": "50a79b7a6e51d2ef66c8efbf75cf43a917bb9721c36d02ff25d6fae6f1f8fd12"
     },
     {
       "file": "data/rules/embedded-policy.json",

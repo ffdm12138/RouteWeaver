@@ -58,9 +58,12 @@ for(const platform of Object.keys(f.entries)){
       assert.equal(upgraded.tun.enable, true);
       assert.equal(upgraded.tun['auto-route'], true);
       assert.equal(upgraded.tun['strict-route'], true);
+      assert.deepEqual(config.tun['route-exclude-address'], ['2001:250::/32', '2001:da8::/32', '2001:cc0::/32']);
+      assert.ok(config['x-v14-generated'].validationWarnings.some(w => w.includes('route-exclude-address')));
       assert.deepEqual(f.generate(platform, upgraded), upgraded);
     } else {
       assert.deepEqual(config.tun['route-address'], ['0.0.0.0/0', '::/0']);
+      assert.equal(config.tun['route-exclude-address'], undefined);
     }
     if(platform==='macos-flclash'){assert.equal(config.tun.enable,false);assert.equal(config.tun['auto-route'],false);assert.equal(config.tun['auto-detect-interface'],true);assert.ok(!config.tun.device&&!config.tun['file-descriptor']&&!config.tun['include-package']&&!config.android);const valid=f.generate(platform,{...input,tun:{enable:true,'auto-route':true,device:'utun23',stack:'mixed'},'interface-name':'en0'});assert.equal(valid.tun.device,'utun23');assert.equal(valid['interface-name'],'en0');assert.equal(valid.tun.enable,true);}
     else{assert.equal(config.tun.enable,true);assert.equal(config.tun.stack,'gvisor');assert.equal(config.tun.mtu,1280);assert.equal(config.tun['auto-detect-interface'],false);assert.ok(!config.tun.device&&!config.tun['file-descriptor']);assert.equal(config['x-v14-generated'].platform,'clashmi-macos');assert.deepEqual(f.generate(platform,JSON.stringify(input)),config);}

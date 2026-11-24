@@ -21,7 +21,13 @@ const V14 = Object.freeze({
   manualDirect: ["shiyi.click"],
   manualProxy: ["net.coffee", "browserleaks.com", "browserleaks.org", "dnsleaktest.com", "dnscheck.tools", "ipleak.net"],
   privateNames: ["localhost", "lan", "local", "localdomain", "home.arpa"],
-  directDns: ["system://"],
+  eduDomains: ["edu.cn", "ac.cn"],
+  eduBypassIpv6: ["2001:250::/32", "2001:da8::/32", "2001:cc0::/32"],
+  directDns: [
+    "https://223.5.5.5/dns-query#DIRECT",
+    "https://223.6.6.6/dns-query#DIRECT",
+    "https://doh.pub/dns-query#DIRECT",
+  ],
   nodeDns: [
     "https://223.5.5.5/dns-query#DIRECT",
     "https://223.6.6.6/dns-query#DIRECT",

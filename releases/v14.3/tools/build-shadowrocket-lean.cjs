@@ -76,7 +76,8 @@ const guard=kept.findIndex(r=>r==='AND,((PROTOCOL,UDP),(NOT,((PROTOCOL,TCP)))),�
 const udpStun=[];for(const port of data.settings.stunPorts)udpStun.push('AND,((PROTOCOL,UDP),(DST-PORT,'+port+')),漏网之鱼');
 for(const host of data.stunNames)udpStun.push('AND,((PROTOCOL,UDP),(DOMAIN-WILDCARD,'+host+')),漏网之鱼');
 const wechatRules=wechatDomains.map(domain=>'DOMAIN-SUFFIX,'+domain+',DIRECT');
-const uncompressedRules=[...tailscaleRules,...kept.slice(0,guard),...udpStun,...wechatRules,...domestic,kept[guard],...geographic,...kept.slice(guard+1)];
+const eduRules=data.settings.eduDomains.map(domain=>'DOMAIN-SUFFIX,'+domain+',DIRECT');
+const uncompressedRules=[...tailscaleRules,...kept.slice(0,guard),...udpStun,...wechatRules,...eduRules,...domestic,kept[guard],...geographic,...kept.slice(guard+1)];
 // Remove only rows already dominated by an earlier literal suffix with the
 // identical group. No provider, wildcard or cross-group precedence is inferred.
 const priorSuffixes=new Map(), redundantRules=[];
@@ -91,7 +92,8 @@ assert.equal(rules.at(-1),'FINAL,漏网之鱼');
 
 const hosts=new Map(section('Host').map(row=>{const at=row.indexOf('=');return [row.slice(0,at).trim(),row.slice(at+1).trim()];}));
 const defaultDNS=before.config.general['dns-server'];
-const valueFor=group=>'server:'+data.settings.bootstrapDns.slice(0,0).concat(['https://dns.alidns.com/dns-query','https://doh.pub/dns-query']).map(u=>group==='DIRECT'?u:u+'#proxy='+encodeURIComponent(group)).join(',');
+const directValue='server:'+data.settings.directDns.map(u=>u.split('#')[0]).join(',');
+const valueFor=group=>group==='DIRECT'?directValue:'server:'+data.settings.groupDnsUrls.map(u=>u+'#proxy='+encodeURIComponent(group)).join(',');
 const stunDNS='server:https://dns.alidns.com/dns-query#proxy='+encodeURIComponent('漏网之鱼');
 const put=(key,value)=>{if(!hosts.has(key))hosts.set(key,value);};
 for(const domain of [tailscale.publicDomain,'*.'+tailscale.publicDomain])hosts.set(domain,valueFor('DIRECT'));
@@ -124,6 +126,10 @@ for(const match of critical){
 for(const pattern of wechatPatterns)hosts.set(pattern,valueFor('DIRECT'));
 for(const domain of wechatDomains)for(const label of ['stun','turn'])
  for(const key of [label+'.'+domain,'*.'+label+'.'+domain,label+'.*.'+domain,'*.'+label+'.*.'+domain])put(key,stunDNS);
+const eduPatterns=data.settings.eduDomains.flatMap(domain=>[domain,'*.'+domain]);
+for(const pattern of eduPatterns)hosts.set(pattern,'server:system');
+for(const domain of data.settings.eduDomains)for(const label of ['stun','turn'])
+ for(const key of [label+'.'+domain,'*.'+label+'.'+domain,label+'.*.'+domain,'*.'+label+'.*.'+domain])put(key,stunDNS);
 const nonFinite=[...hosts.keys()].filter(k=>k.includes('*')&&!/^\*\.[^*]+$/.test(k));
 const protectedTails=nonFinite.map(k=>k.split('.').filter(x=>!x.includes('*')).join('.')).filter(Boolean);
 const outputHosts=[];const eliminated=[];
@@ -140,7 +146,7 @@ const header=['# RouteWeaver v14.3 Shadowrocket',
 const general=section('General').map(row=>row
  .replace(/^direct-dns-server = .+$/, 'direct-dns-server = system')
  .replace(/^dns-direct-system = false$/, 'dns-direct-system = true'))
- .concat('always-real-ip = '+wechatPatterns.join(','));
+ .concat('always-real-ip = '+wechatPatterns.concat(eduPatterns).join(','));
 const manualLabels=new Map([['DIRECT','直连 direct'],['REJECT','拒绝 reject']]);
 const groupRows=section('Proxy Group').map(row=>row.replace(/\(\?i\)\^\(\?!\(\?:([^)]*)\)\$\)/,(_,names)=>{
  let reserved=names.split('|').concat(additionalGroups,...manualLabels.values());
@@ -185,8 +191,8 @@ const displayRank=new Map(displayPriority.map((name,index)=>[name,index]));
 const rank=row=>displayRank.get(row.split(' = ',1)[0])??displayRank.size;
 groups.sort((a,b)=>rank(a)-rank(b));
 const output=header.join('\n')+'\n\n[General]\n'+general.join('\n')+'\n\n[Proxy Group]\n'+groups.join('\n')+'\n\n[Rule]\n'+rules.join('\n')+'\n\n[Host]\n'+outputHosts.map(([k,v])=>k+' = '+v).join('\n')+'\n';
-// The Drive frontend rows need both per-host DoH resolvers in this profile.
-assert.ok(Buffer.byteLength(output)<1806000,'Self-contained DNS budget exceeded');
+// The Drive frontend rows, edu/ac hosts and 3 DIRECT DoH resolvers stay under 30% of the baseline config.
+assert.ok(Buffer.byteLength(output)<1810000,'Self-contained DNS budget exceeded');
 const file='src/ios/v14.3-shadowrocket.conf';
 const contractPath=fs.existsSync(path.resolve(root,'../../CURRENT_RELEASE.json'))?path.resolve(root,'../../docs/需求.md'):local('docs/需求.md');
 const manifest={version:'14.3',date:'2026-10-13',revision:'shadowrocket-lean-r1',domesticProtocolRevision:'domestic-protocol-r1',

@@ -87,6 +87,11 @@ function main(input) {
   // Raw Android subscriptions can omit TUN. Supply policy fields without
   // enabling VPN or taking ownership of the app's file descriptor.
   if (!v14Object(config.tun)) config.tun = {};
+  if (Array.isArray(config.tun["route-exclude-address"])) {
+    const kept = config.tun["route-exclude-address"].filter(prefix => !prefix.includes(":"));
+    if (kept.length) config.tun["route-exclude-address"] = kept;
+    else delete config.tun["route-exclude-address"];
+  }
   config.tun["inet6-address"] = ["fdfe:dcba:9876::1/126"];
   config.tun["route-address"] = ["0.0.0.0/0", "::/0"];
   v14RecoverNetworkDestination(config);

@@ -70,7 +70,9 @@ function main(input) {
     ? priorMarker.validationWarnings : [];
   for (const key of tunBypassKeys) {
     const warning = "V14.2 已移除 TUN 路由旁路字段 " + key + "；直连在业务规则之后由核心判断。";
-    if ((suppliedTun[key] && suppliedTun[key].length) || priorTunWarnings.includes(warning)) warnings.push(warning);
+    const values = key === "route-exclude-address" && Array.isArray(suppliedTun[key])
+      ? suppliedTun[key].filter(prefix => !V14.eduBypassIpv6.includes(prefix)) : suppliedTun[key];
+    if ((values && values.length) || priorTunWarnings.includes(warning)) warnings.push(warning);
     delete suppliedTun[key];
   }
   v14InboundGuard(config);
@@ -237,6 +239,7 @@ function main(input) {
     for (const host of V14.stunHostPatterns) add("AND,((NETWORK," + network + "),(DOMAIN-WILDCARD," + host + "),(NOT,((IN-TYPE,INNER))))", groupName("漏网之鱼"));
   }
   v14AddWeChatRules(config, add);
+  for (const d of V14.eduDomains) add("DOMAIN-SUFFIX," + d, "DIRECT");
   const domesticPolicy = groupName("国内网站");
   for (const d of V14_DOMESTIC_SEEDS) add("DOMAIN-SUFFIX," + d, domesticPolicy);
   for (const tag of V14_DOMESTIC_SETS) addDomainSet(tag, domesticPolicy);
@@ -291,6 +294,9 @@ function main(input) {
   const wechatDns = v14IPv4LocalResolver(V14.directDns);
   for (const pattern of V14_WECHAT_PATTERNS)
     if (!Object.prototype.hasOwnProperty.call(dnsPolicy, pattern)) dnsPolicy[pattern] = wechatDns;
+  const eduDns = ["system://"].concat(V14.directDns);
+  for (const d of V14.eduDomains)
+    if (!Object.prototype.hasOwnProperty.call(dnsPolicy, "+." + d)) dnsPolicy["+." + d] = eduDns.slice();
   let domesticSeedsSet = "v14-domestic-protocol-seeds", domesticSetIndex = 1;
   while (config["rule-providers"][domesticSeedsSet]) domesticSeedsSet = "v14-domestic-protocol-seeds-" + (++domesticSetIndex);
   config["rule-providers"][domesticSeedsSet] = {type:"inline", behavior:"classical", payload:V14_DOMESTIC_SEEDS.concat(["cn"]).map(d=>"DOMAIN-SUFFIX,"+d)};
@@ -307,11 +313,11 @@ function main(input) {
     // Chromium treats the IPv6 Fake-IP ULA as local network access. Return
     // real A/AAAA for this public API (resolved over DoH/443 above); company
     // rules still retain fail-closed routing.
-    "fake-ip-filter": V14.privateNames.concat(V14_TAILSCALE.tailnetDomain).map(d => "+." + d).concat(["api.openai.com"], V14_WECHAT_PATTERNS), "use-hosts": true,
+    "fake-ip-filter": V14.privateNames.concat(V14_TAILSCALE.tailnetDomain, V14.eduDomains).map(d => "+." + d).concat(["api.openai.com"], V14_WECHAT_PATTERNS), "use-hosts": true,
     "use-system-hosts": true, "respect-rules": false, "prefer-h3": false,
     "default-nameserver": V14.bootstrapDns.slice(), "proxy-server-nameserver": V14.nodeDns.slice(),
     nameserver: v14DnsFor(groupName("漏网之鱼")), fallback: [], "nameserver-policy": dnsPolicy,
-    "direct-nameserver": ["system"], "direct-nameserver-follow-policy": false,
+    "direct-nameserver": V14.directDns.slice(), "direct-nameserver-follow-policy": true,
   });
   delete config.dns["fallback-filter"];
   delete config.dns["proxy-server-nameserver-policy"];
@@ -330,6 +336,7 @@ function main(input) {
   // V14.2 requires strict-route for its Windows DNS privacy contract.
   config.tun["strict-route"] = true; // V14.2 privacy contract
   config.tun["route-address"] = ["0.0.0.0/0", "::/0"];
+  config.tun["route-exclude-address"] = V14.eduBypassIpv6.slice();
   // Remove V11's obsolete interface address, keeping the current dual-stack
   // route-address contract. FlClash still owns enable and auto-route.
   if (config["x-v11-generated"]) {

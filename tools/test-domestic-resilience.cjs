@@ -6,11 +6,14 @@ const crypto = require('node:crypto'), assert = require('node:assert/strict');
 const root = path.resolve(__dirname, '..'), releaseRoot = path.join(root, 'releases/v14.3');
 const f = require(path.join(releaseRoot, 'tests/current-fixture.cjs'));
 const { indexDNS } = require(path.join(releaseRoot, 'tests/domain-index.cjs'));
-const { driveExactHosts, mediaHost } = require(path.join(releaseRoot, 'tests/domestic-contract.cjs'));
+const { driveExactHosts, eduHost, mediaHost } = require(path.join(releaseRoot, 'tests/domestic-contract.cjs'));
 const read = file => JSON.parse(fs.readFileSync(path.join(root, file), 'utf8'));
 const hash = file => crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
 const release = read('CURRENT_RELEASE.json');
 const mediaDomains = read('releases/v14.3/data/rules/wechat-media.json');
+const eduDomains = ['edu.cn', 'ac.cn'];
+const directDnsUrls = ['https://223.5.5.5/dns-query#DIRECT', 'https://223.6.6.6/dns-query#DIRECT', 'https://doh.pub/dns-query#DIRECT'];
+const eduBypassIpv6 = ['2001:250::/32', '2001:da8::/32', '2001:cc0::/32'];
 const priorityGroups = ['高纯净度AI用', '高网速视频用', '公共基础服务', '谷歌服务', '微软生态',
   'Steam', '苹果国际', 'Google Drive', '哔哩国际', '国内网站'];
 const remainingGroups = ['自动选择', '漏网之鱼', 'OpenAI 服务', 'Anthropic 服务', 'YouTube',
@@ -64,7 +67,7 @@ const sourceProbes = review.sourceIds.flatMap(id => {
     return [domain, 'media.' + domain];
   });
 });
-const hosts = [...new Set([...authorizedHosts, ...observed, ...sourceProbes, ...review.suffixes.concat(mediaDomains).flatMap(h => [h, 'media.' + h])])];
+const hosts = [...new Set([...authorizedHosts, ...observed, ...sourceProbes, ...review.suffixes.concat(mediaDomains, eduDomains, ['mirrors.tuna.tsinghua.edu.cn', 'www.ucas.ac.cn']).flatMap(h => [h, 'media.' + h])])];
 const sources = {}, failures = [], counts = {}, sizes = [];
 let checks = 0;
 function check(name, body) {
@@ -146,19 +149,33 @@ for (const entry of entries) {
   });
   check(entry.client + ':' + entry.mode + ':media-config', () => {
     if (platform === 'shadowrocket') {
-      assert.deepEqual(config.general['always-real-ip'].split(','), mediaDomains.flatMap(h => [h, '*.' + h]));
+      assert.deepEqual(config.general['always-real-ip'].split(','), mediaDomains.concat(eduDomains).flatMap(h => [h, '*.' + h]));
       assert.ok(!rules.some(rule => rule.includes('PROCESS-NAME')));
       return;
     }
+    const ipv4Mode = entry.mode === 'ipv4-local' || entry.mode === 'ipv4-only';
+    const ipv4Suffix = '&disable-ipv6=true&disable-qtype-64=true&disable-qtype-65=true';
+    const expectedDirect = ipv4Mode ? directDnsUrls.map(u => u + ipv4Suffix) : directDnsUrls;
+    const expectedEdu = [ipv4Mode ? 'system://#' + ipv4Suffix.slice(1) : 'system://', ...expectedDirect];
     assert.equal(config.dns['fake-ip-filter-mode'], 'blacklist');
     assert.equal(config['x-v14-generated'].wechatSniffRevision, 'wechat-media-sniff-r1');
     assert.deepEqual(config.sniffer.sniff.QUIC.ports, [80, 443, 8443, 8000]);
+    assert.deepEqual(config.dns['direct-nameserver'], expectedDirect);
+    assert.equal(config.dns['direct-nameserver-follow-policy'], true);
+    const desktop = ['windows', 'macosFlClash', 'clashVerge'].includes(entry.client);
+    if (desktop && !ipv4Mode) assert.deepEqual(config.tun['route-exclude-address'], eduBypassIpv6);
+    else assert.equal(config.tun?.['route-exclude-address'], undefined);
     for (const domain of mediaDomains) {
       const pattern = '+.' + domain;
       assert.equal(config.dns['fake-ip-filter'].filter(x => x === pattern).length, 1);
       assert.ok(!config.sniffer['skip-domain'].includes(pattern));
       assert.deepEqual(config.dns['nameserver-policy'][pattern],
-        ['system://#disable-ipv6=true&disable-qtype-64=true&disable-qtype-65=true']);
+        directDnsUrls.map(u => u + ipv4Suffix));
+    }
+    for (const domain of eduDomains) {
+      const pattern = '+.' + domain;
+      assert.equal(config.dns['fake-ip-filter'].filter(x => x === pattern).length, 1);
+      assert.deepEqual(config.dns['nameserver-policy'][pattern], expectedEdu);
     }
     const processRules = rules.filter(rule => rule.includes('(PROCESS-NAME,'));
     assert.deepEqual(processRules, (mediaProcessNames[entry.client] || []).map(name =>
@@ -183,9 +200,10 @@ for (const entry of entries) {
       }
     }
     for (const host of hosts) {
-      const group = mediaHost(host) ? 'DIRECT' : '国内网站';
-      const dnsGroup = group === 'DIRECT' && platform !== 'shadowrocket' ? 'system' : group;
-      check(label + ':dns:' + host, () => assert.deepEqual(dnsPolicyFor(host).groups, [dnsGroup]));
+      const edu = eduHost(host);
+      const group = mediaHost(host) || edu ? 'DIRECT' : '国内网站';
+      const dnsGroups = mediaHost(host) ? ['DIRECT'] : edu ? (platform === 'shadowrocket' ? ['DIRECT'] : ['system', 'DIRECT']) : [group];
+      check(label + ':dns:' + host, () => assert.deepEqual(dnsPolicyFor(host).groups, dnsGroups));
       for (const protocol of ['TCP', 'UDP']) {
         check(label + ':' + protocol + ':' + host, () => {
           for (const choice of ['DIRECT', '高纯净度AI用', '高网速视频用', 'Synthetic']) {
@@ -216,16 +234,19 @@ for (const entry of entries) {
     for (const flow of [{host: 'stun.amemv.com', protocol: 'UDP', port: 443},
       {host: 'stun.qpic.cn', protocol: 'UDP', port: 443}, {host: 'mmbiz.qpic.cn', protocol: 'UDP', port: 3478},
       {host: 'api.amemv.com', protocol: 'UDP', port: 3478},
+      {host: 'stun.tsinghua.edu.cn', protocol: 'UDP', port: 443},
+      {host: 'turn.cas.ac.cn', protocol: 'UDP', port: 443},
+      {host: 'mirrors.tuna.tsinghua.edu.cn', protocol: 'UDP', port: 3478},
       {host: 'stun.' + newDomain, protocol: 'UDP', port: 443},
       {host: 'edge.' + newDomain, protocol: 'UDP', port: 3478},
       {ip: '203.0.113.17', protocol: 'UDP', port: 443}, {ip: '2001:db8::17', protocol: 'UDP', port: 443}])
       check(label + ':guard:' + JSON.stringify(flow), () => assert.equal(f.route(model, flow).group,
         entry.mode === 'ipv4-only' && flow.ip?.includes(':') ? 'REJECT' : '漏网之鱼'));
-    for (const host of ['stun.amemv.com', 'stun.qpic.cn', 'stun.' + newDomain])
+    for (const host of ['stun.amemv.com', 'stun.qpic.cn', 'stun.tsinghua.edu.cn', 'turn.cas.ac.cn', 'stun.' + newDomain])
       check(label + ':stun-dns:' + host, () => assert.deepEqual(dnsPolicyFor(host).groups, ['漏网之鱼']));
   }
 }
-const result = {revision: 'wechat-media-sniff-r1', scope: 'OFFLINE_MODELS_NOT_DEVICE_ACCEPTANCE',
+const result = {revision: 'direct-doh-edu-r1', scope: 'OFFLINE_MODELS_NOT_DEVICE_ACCEPTANCE',
   edition: release.vpsDirectRevision ? 'personal' : 'public', status: failures.length ? 'FAIL' : 'PASS',
   checks, failed: failures.length, stages: counts, sources, sizes,
   testSHA256: hash(__filename), dataSHA256: hash(path.join(releaseRoot, 'data/rules/domestic-resilience.json')),

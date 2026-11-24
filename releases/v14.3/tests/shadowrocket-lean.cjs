@@ -25,7 +25,7 @@ for(const [key,value]of before.config.hosts)if(value.startsWith('server:')){busi
 const report={version:'14.3',date:'2026-10-13',revision:manifest.revision,domesticProtocolRevision:manifest.domesticProtocolRevision,status:'RUNNING',checks:[],failures:[],metrics:{routingHosts:hosts.size,tcp:0,udp:0,businessDNS:0,criticalDomesticDNS:0,coldRouting:0,protectedFlows:0},sourceFiles:[],scope:'Finite domain/selector/Host model and SHA verification only; native parsing, DNS order/remote resolution and iOS VPN NOT_RUN',nativeAcceptance:'NOT_RUN',deviceAcceptance:'NOT_RUN',clientDeployment:false};
 function check(name,body){try{body();report.checks.push({name,status:'PASS'});}catch(e){report.failures.push({name,error:e.stack});report.checks.push({name,status:'FAIL'});}}
 check('size-groups-fixed-sources-and-general-settings',()=>{
- assert.equal(f.sha(f.local(manifest.file)),manifest.sha256);assert.equal(Buffer.byteLength(raw),manifest.bytes);assert.ok(manifest.bytes<1806000&&manifest.bytes<manifest.before.bytes*0.3);
+ assert.equal(f.sha(f.local(manifest.file)),manifest.sha256);assert.equal(Buffer.byteLength(raw),manifest.bytes);assert.ok(manifest.bytes<1810000&&manifest.bytes<manifest.before.bytes*0.3);
  assert.equal(manifest.groups.length,30);assert.equal(sources.size,15);assert.equal(section('Proxy Group').length,30);
  const manual=new Map([['直连 direct','DIRECT'],['拒绝 reject','REJECT']]);
  for(const [label,target]of manual)assert.ok(section('Proxy Group').includes(label+' = select,'+target+',hidden=1'));
@@ -44,7 +44,7 @@ check('size-groups-fixed-sources-and-general-settings',()=>{
  assert.deepEqual(general,{
   ...before.config.general,'direct-dns-server':'system','dns-direct-system':'true',
  });
- assert.deepEqual(realIP.split(','),require('../data/rules/wechat-media.json').flatMap(domain=>[domain,'*.'+domain]));
+ assert.deepEqual(realIP.split(','),require('../data/rules/wechat-media.json').concat(['edu.cn','ac.cn']).flatMap(domain=>[domain,'*.'+domain]));
  for(const url of sources.keys())assert.match(url,/\/[a-f0-9]{40}\//);
  assert.equal(current.rules.filter(r=>r.startsWith('RULE-SET,')).length,manifest.sources.reduce((n,s)=>n+s.uses.length,0));
 });
@@ -78,6 +78,17 @@ check('critical-domestic-WeChat-selector-and-DNS-affinity',()=>{
   }
   assert.equal(f.route(current,{host,protocol:'UDP',port:443},{udpSupported:false,selections:{'国内网站':'高纯净度AI用'}}).policy,media?'DIRECT':'REJECT',host);
  }
+ for(const host of ['edu.cn','mirrors.tuna.tsinghua.edu.cn','ac.cn','www.ucas.ac.cn']){
+  assert.deepEqual(dns(current,host).groups,['DIRECT'],host);
+  for(const protocol of ['TCP','UDP']){
+   assert.equal(f.route(current,{host,protocol,port:443},{selections:{'国内网站':'高纯净度AI用'}}).policy,'DIRECT',host);
+   assert.equal(f.route(cold,{host,protocol,port:443},{selections:{'国内网站':'高纯净度AI用'}}).policy,'DIRECT',host);
+  }
+ }
+ for(const flow of [{host:'stun.tsinghua.edu.cn',protocol:'UDP',port:443},{host:'turn.cas.ac.cn',protocol:'TCP',port:443},{host:'mirrors.tuna.tsinghua.edu.cn',protocol:'UDP',port:3478}]){
+  assert.equal(f.route(current,flow).group,'漏网之鱼',flow.host);
+ }
+ for(const host of ['stun.tsinghua.edu.cn','turn.cas.ac.cn'])assert.deepEqual(dns(current,host).groups,['漏网之鱼'],host);
 });
 check('unknown-IP-STUN-company-priority-and-no-UDP-DIRECT-fallback',()=>{
  for(const flow of [{ip:'203.0.113.7',protocol:'UDP',port:443},{ip:'2001:db8::7',protocol:'UDP',port:443},{host:'relay.stun.audit.cn',protocol:'UDP',port:443},{host:'ordinary.audit.cn',protocol:'UDP',port:3478},{host:'unreviewed.protocol-audit.net',protocol:'UDP',port:49000}]){

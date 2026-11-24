@@ -28,7 +28,7 @@
     },
     {
       "file": "tools/lib/compile-entries.cjs",
-      "sha256": "6193d79489453c2354b6614efba43734db792f01cf517ba235bddfe63f140bb1"
+      "sha256": "4d5f5e212501cf011aaacbc1d7e27ffd7c0158262d802fcc7ffa5b3b97b4b59e"
     },
     {
       "file": "tools/lib/render-runtime.cjs",
@@ -64,7 +64,7 @@
     },
     {
       "file": "tools/ipv4-local-adapter.js",
-      "sha256": "a23578a6500b440876255745e01297d5f178db84cf9447383942121345b031ab"
+      "sha256": "0755cfbad6c381ae6883945cef201c41f45b416c8f29f3f34898b9853636745d"
     },
     {
       "file": "tools/auto-local-adapter.js",
@@ -104,7 +104,7 @@
     },
     {
       "file": "runtime/platforms/desktop/preamble.js.in",
-      "sha256": "e10f27e02f8448da297d87c8c1488755f30dfa38433baf03a97c4874ed1efcde"
+      "sha256": "d9f1bd90943d4b5518181d018d5b198977cbcf34660f4d62e8b65b8b569a5510"
     },
     {
       "file": "runtime/shared/v14Fail.js.in",
@@ -192,7 +192,7 @@
     },
     {
       "file": "runtime/shared/main.js.in",
-      "sha256": "3a7407ff77985241c7311cbc04c541a30143993316335067ac33aeac1fe95004"
+      "sha256": "91ae57835c6ffeacc16235d0df2a072019c636e32d704045123207dfc8667def"
     },
     {
       "file": "runtime/platforms/android/layout.json",
@@ -200,7 +200,7 @@
     },
     {
       "file": "runtime/platforms/android/preamble.js.in",
-      "sha256": "463bad25af65ee90bdabe3dc16cb1399e342b238b5475610b76c8f81dadd26af"
+      "sha256": "7b1fc1677929f31ba3ad062f780c37faccce28060a68d1fc0ffa24a05ec387b0"
     },
     {
       "file": "runtime/platforms/android/v14RuleRegistry.js.in",
@@ -208,7 +208,7 @@
     },
     {
       "file": "runtime/platforms/android/main.js.in",
-      "sha256": "962f9b218a0f20e9ef3b353c819fe24d0306ba254145436836aa5c4dd4be2429"
+      "sha256": "9e857b4b50ee85620d7f7696293ddff6306b9ed77a04b74cce590b472a5a700f"
     },
     {
       "file": "tools/validate-azure-async.cjs",
@@ -239,9 +239,9 @@
     {
       "platform": "clashVerge",
       "file": "src/clash-verge/v14.3-clash-verge.js",
-      "sha256": "c602789be4b168052fa62a3886065c65df905140c2073e8f769105457f609ffc",
-      "bytes": 128592,
-      "generatedConfigBytes": 184993,
+      "sha256": "a0a5c07a96ee1b10051adc544c5612826a7eb4bd8dd1722841d22ebdaf74b517",
+      "bytes": 125940,
+      "generatedConfigBytes": 188801,
       "inlineRows": 1098,
       "remoteSources": 30
     }

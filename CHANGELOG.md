@@ -1,3 +1,9 @@
+## v14.3.0-rc.26 / v14.3.0-ipv4-only-rc.17 · 双路直连 DNS 与校园网域分流
+
+- 修复 macOS / Linux / Android 开启 TUN 系统 DNS 接管导致 `direct-nameserver: ["system"]` 回环中断 `DIRECT`（如苹果 IDS / 通用剪贴板及国内直连）的问题：通用 `DIRECT` 改为阿里 `https://223.5.5.5/dns-query#DIRECT`、`https://223.6.6.6/dns-query#DIRECT` 与 DNSPod `https://doh.pub/dns-query#DIRECT`，并开启 `direct-nameserver-follow-policy: true`（`ipv4-local` / `ipv4-only` 自动附加 IPv4/SVCB/HTTPS 过滤）。
+- 校园与科研域名 `edu.cn`、`ac.cn` 在公司、DoH 拒绝、私网及通用 STUN/TURN 守卫之后进入 `DIRECT` 与 `fake-ip-filter`，DNS 策略为 `["system://", ...directDns]`，优先尝试系统 DNS 并在不可达或 `SERVFAIL` 时回退直连 DoH；桌面双栈/自动模式另写入 `tun.route-exclude-address` 放行 CERNET/CERNET2/CSTNET 原生 IPv6 网段。
+- Shadowrocket 保留原生 `direct-dns-server = system`，并将 `DIRECT` 兜底 DoH 列表、STUN 后置 `edu.cn`/`ac.cn` 直连规则及 `[Host]` / `always-real-ip` 同步更新；两轨 16 份入口完成离线分流（67,390 项）、官方 Mihomo v1.19.34 解析（56 份）、FlClashCore 与 ProjectClash 隔离回归（各 78 项/JS）及 QUIC 传输对照（280 项），实机待验收。 [分流合同](docs/需求.md) · [Mac 故障说明](docs/guides/macOS-FlClash故障小本子.md)
+
 ## v14.3.0-rc.25 / v14.3.0-ipv4-only-rc.16 · 补齐 QUIC UDP/80 嗅探端口
 
 - 各 Mihomo 和 ProjectClash 入口的 QUIC 嗅探端口由 UDP/443、8443、8000 补齐至 UDP/80、443、8443、8000。

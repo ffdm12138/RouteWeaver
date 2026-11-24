@@ -13,6 +13,7 @@ import tempfile
 
 from current_audit import checked_path, read, sha
 from standard_business_doh import CORE_EXE_SHA256, REVISION as DOH_REVISION, before_doh, verify_receipt
+from verify_direct_doh_edu import REVISION as DIRECT_DOH_EDU_REVISION, verify_receipt as verify_direct_doh_edu_receipt
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -20,6 +21,11 @@ SUMS = 'SHA256SUMS.txt'
 WECHAT_REVISION = 'wechat-media-sniff-r1'
 DRIVE_REVISION = 'google-drive-hosts-r1'
 WECHAT_QUIC80_REVISION = 'wechat-quic-port80-r1'
+DIRECT_DOH_EDU_CHECKS = {
+    'edu_real_ip_and_fallback_when_primary_fails',
+    'direct_doh_without_system_dependency',
+    'edu_direct_and_stun_protected',
+}
 SELECTOR_ORDER_CHECKS = {
     'selector_order_and_fresh_defaults',
     'selector_order_after_manual_choice',
@@ -128,14 +134,17 @@ def verify_source(root):
     candidate = release['nativeFallback']
     revision = release.get('currentRevision')
     system_dns = revision == 'direct-system-dns-r1'
-    media_repair = revision in (WECHAT_REVISION, DRIVE_REVISION, WECHAT_QUIC80_REVISION)
-    standard_doh = revision == DOH_REVISION or media_repair
+    direct_doh_edu = revision == DIRECT_DOH_EDU_REVISION
+    media_repair = revision in (WECHAT_REVISION, DRIVE_REVISION, WECHAT_QUIC80_REVISION, DIRECT_DOH_EDU_REVISION)
+    standard_doh = revision in (DOH_REVISION, WECHAT_REVISION, DRIVE_REVISION, WECHAT_QUIC80_REVISION)
     historical_core_receipts = revision == DOH_REVISION
-    selector_order = revision == 'selector-option-order-r1' or standard_doh
+    selector_order = revision == 'selector-option-order-r1' or standard_doh or direct_doh_edu
     receipt = read(checked_path(root, candidate['verification']))
     edition = 'personal' if release.get('vpsDirectRevision') else 'public'
     if standard_doh:
         verify_receipt(root, release, edition)
+    if direct_doh_edu:
+        verify_direct_doh_edu_receipt(root, release, edition)
     if (receipt['revision'] != candidate['revision'] or receipt['edition'] != edition
             or receipt['status'] != 'PASS_ISOLATED_STOCK_CORE'):
         raise ValueError('Missing or incompatible native fallback evidence')
@@ -149,6 +158,8 @@ def verify_source(root):
         verify_media_transport(root, release, tracks)
         feature = 'googleDrive' if revision == DRIVE_REVISION else 'wechatMedia'
         tags = release[feature]['releaseTags']
+    if direct_doh_edu:
+        tags = release['directDohEdu']['releaseTags']
     if tags is not None and (set(tags) != set(tracks) or len(set(tags.values())) != 2):
         raise ValueError('Expected two distinct track tags')
     assets = {}
@@ -178,12 +189,14 @@ def verify_source(root):
     if release.get('googleDrive'):
         required = {'drive_default_video_web_api_download_export_tcp_udp_dns', 'drive_shared_google_hosts_tcp_udp_dns',
                     'drive_unsupported_udp_rejected'}
-        if revision in (DRIVE_REVISION, WECHAT_QUIC80_REVISION):
+        if revision in (DRIVE_REVISION, WECHAT_QUIC80_REVISION, DIRECT_DOH_EDU_REVISION):
             required.add('drive_frontend_sharing_and_dedicated_apis_tcp_udp_dns')
         project = read(checked_path(root, release['projectClash']['verification']))
         for checks in [receipt['checks'], *(track['checks'] for track in project['tracks'].values())]:
             if not required.issubset(checks):
                 raise ValueError('Missing dedicated Google Drive or shared Google routing replay')
+            if direct_doh_edu and not DIRECT_DOH_EDU_CHECKS.issubset(checks):
+                raise ValueError('Missing DIRECT DoH or edu/ac routing replay')
     if candidate['revision'] in ('domestic-resilience-r1', 'backup-slot-skip-r1'):
         if receipt['runnerSHA256'] != sha(root / 'tools/replay-resilience.py') or receipt['hostSHA256'] != sha(root / 'tools/stock-core-host.py'):
             raise ValueError('Stale isolated replay runner')
@@ -247,8 +260,11 @@ def verify_static():
                     ['node', 'tools/test-native-fallback.cjs'], ['node', 'tools/test-tailscale-direct.cjs'],
                     ['node', 'tools/test-company-audit.cjs'], ['node', 'tools/test-dns-policy-order.cjs'],
                     *suites['regression'], *suites['platform']]
-        if read(snapshot / 'CURRENT_RELEASE.json').get('currentRevision') in (DOH_REVISION, WECHAT_REVISION, DRIVE_REVISION, WECHAT_QUIC80_REVISION):
+        revision = read(snapshot / 'CURRENT_RELEASE.json').get('currentRevision')
+        if revision in (DOH_REVISION, WECHAT_REVISION, DRIVE_REVISION, WECHAT_QUIC80_REVISION):
             commands.append(['python', '-B', 'tools/standard_business_doh.py'])
+        elif revision == DIRECT_DOH_EDU_REVISION:
+            commands.append(['python', '-B', 'tools/verify_direct_doh_edu.py'])
         for command in commands:
             subprocess.run(command, cwd=snapshot, check=True, timeout=90)
         subprocess.run(['node', 'tools/test-domestic-resilience.cjs'], cwd=snapshot, check=True, timeout=900)

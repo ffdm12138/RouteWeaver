@@ -1,0 +1,442 @@
+{
+  "revision": "wechat-quic-port80-r1",
+  "status": "PASS",
+  "deviceAcceptance": "NOT_RUN",
+  "scope": "Synthetic QUIC Initial and UDP payload delivery over loopback SOCKS, no TUN or Apple runtime.",
+  "baselineCommit": "4247c21d623b86f211ceecc7387122b6df2055b5",
+  "mihomoSHA256": "3252ed9449c0e904fd07452b18366b90da77e14a5696e567de11d7839d6cf4b6",
+  "projectClashCore": {
+    "commit": "c8f2fc1d58bf9ac856a0bf161bc9489591821f45",
+    "sha256": "dcb52d584817c28f65d899da17f3f5e0f169a1308cd957cebf721e58dea3a76d"
+  },
+  "harness": {
+    "tools/replay-wechat-sniffer.py": "98afef3d1f06570659e88cbeeacf5667264c4e321c06db852dc7e78aa7126c34",
+    "tools/wechat-quic-probe.go": "bcf99ddc0245e3b3fb3466202a858dd1acbdb5452a920cbc3bd8a59ff3931962",
+    "tools/replay-projectclash.py": "ac657e5cb4b48b1f4578851723ae0914acf87b22a83c30e76e7b75c4d037f963",
+    "tools/replay-resilience.py": "25384afc721bfed6a8bd45ac72e753787d84750a209c4db1bf1aa63cdf9f310e",
+    "tools/test-proxy-failover.py": "5750447c349f33b3162b64600b3b3e2e6ef316d339227455c769683dd5e5255a",
+    "tools/native-architecture.py": "305d7dcbc414b6dc643489a43e425bba847fba512f3d2ecb88276edd138db367"
+  },
+  "tracks": {
+    "main": {
+      "windows": {
+        "file": "releases/v14.3/src/windows/v14.3-windows-flclash.js",
+        "sha256": "3c443df6baca1ff744563ab7731795122abbbb17556250b5aa66cd3368e9d3e7",
+        "baselineSHA256": "8ec99ae1b0f0673c21f9cae0105fe4efcb9bffb27852d3696dab51389148433b",
+        "before": {
+          "wechat_quic_80": "catch-all proxy",
+          "wechat_quic_443": "catch-all proxy",
+          "wechat_quic_8000": "catch-all proxy",
+          "qq_image_quic_443": "catch-all proxy",
+          "stun_hostname_80": "catch-all proxy",
+          "stun_hostname_443": "catch-all proxy",
+          "unclassified_quic_443": "catch-all proxy",
+          "opaque_udp_80": "catch-all proxy",
+          "opaque_udp_443": "catch-all proxy",
+          "opaque_udp_8000": "catch-all proxy"
+        },
+        "after": {
+          "wechat_quic_80": "DIRECT",
+          "wechat_quic_443": "DIRECT",
+          "wechat_quic_8000": "DIRECT",
+          "qq_image_quic_443": "DIRECT",
+          "stun_hostname_80": "catch-all proxy",
+          "stun_hostname_443": "catch-all proxy",
+          "unclassified_quic_443": "catch-all proxy",
+          "opaque_udp_80": "catch-all proxy",
+          "opaque_udp_443": "catch-all proxy",
+          "opaque_udp_8000": "catch-all proxy"
+        }
+      },
+      "android": {
+        "file": "releases/v14.3/src/android/v14.3-android-flclash.js",
+        "sha256": "50a79b7a6e51d2ef66c8efbf75cf43a917bb9721c36d02ff25d6fae6f1f8fd12",
+        "baselineSHA256": "ed585481413632dee2a0c94d3ffb4485e0d17c1648c9a3a8923bbe126c11678c",
+        "before": {
+          "wechat_quic_80": "catch-all proxy",
+          "wechat_quic_443": "catch-all proxy",
+          "wechat_quic_8000": "catch-all proxy",
+          "qq_image_quic_443": "catch-all proxy",
+          "stun_hostname_80": "catch-all proxy",
+          "stun_hostname_443": "catch-all proxy",
+          "unclassified_quic_443": "catch-all proxy",
+          "opaque_udp_80": "catch-all proxy",
+          "opaque_udp_443": "catch-all proxy",
+          "opaque_udp_8000": "catch-all proxy"
+        },
+        "after": {
+          "wechat_quic_80": "DIRECT",
+          "wechat_quic_443": "DIRECT",
+          "wechat_quic_8000": "DIRECT",
+          "qq_image_quic_443": "DIRECT",
+          "stun_hostname_80": "catch-all proxy",
+          "stun_hostname_443": "catch-all proxy",
+          "unclassified_quic_443": "catch-all proxy",
+          "opaque_udp_80": "catch-all proxy",
+          "opaque_udp_443": "catch-all proxy",
+          "opaque_udp_8000": "catch-all proxy"
+        }
+      },
+      "clashmi": {
+        "file": "releases/v14.3/src/ios/v14.3-clashmi-domestic-protocol-r1.js",
+        "sha256": "f71afc8494a6eda40a14dc96d8323a1166a4d0ee676bbd14494429854f264a59",
+        "baselineSHA256": "0a8dee7ee44f33c7c2de0b11369e1d8f3ff02b371ec07701fa31a349903d5717",
+        "before": {
+          "wechat_quic_80": "catch-all proxy",
+          "wechat_quic_443": "catch-all proxy",
+          "wechat_quic_8000": "catch-all proxy",
+          "qq_image_quic_443": "catch-all proxy",
+          "stun_hostname_80": "catch-all proxy",
+          "stun_hostname_443": "catch-all proxy",
+          "unclassified_quic_443": "catch-all proxy",
+          "opaque_udp_80": "catch-all proxy",
+          "opaque_udp_443": "catch-all proxy",
+          "opaque_udp_8000": "catch-all proxy"
+        },
+        "after": {
+          "wechat_quic_80": "DIRECT",
+          "wechat_quic_443": "DIRECT",
+          "wechat_quic_8000": "DIRECT",
+          "qq_image_quic_443": "DIRECT",
+          "stun_hostname_80": "catch-all proxy",
+          "stun_hostname_443": "catch-all proxy",
+          "unclassified_quic_443": "catch-all proxy",
+          "opaque_udp_80": "catch-all proxy",
+          "opaque_udp_443": "catch-all proxy",
+          "opaque_udp_8000": "catch-all proxy"
+        }
+      },
+      "shadowrocket": {
+        "file": "releases/v14.3/src/ios/v14.3-shadowrocket.conf",
+        "sha256": "296e85750cd6d294417d9d380e34823739b97e6024f10c2601e05b910f3371a8",
+        "scope": "NATIVE_CONFIGURATION_ONLY"
+      },
+      "macosFlClash": {
+        "file": "releases/v14.3/src/macos/v14.3-macos-flclash.js",
+        "sha256": "deb25a60c4f6f58d00fba9240d14d9127fd96cb794debea461c4e6295e6b1bc9",
+        "baselineSHA256": "3112f5b806ab208d669977fb6d9065f2fcd4a437eb5ed3c514e778071849a039",
+        "before": {
+          "wechat_quic_80": "catch-all proxy",
+          "wechat_quic_443": "catch-all proxy",
+          "wechat_quic_8000": "catch-all proxy",
+          "qq_image_quic_443": "catch-all proxy",
+          "stun_hostname_80": "catch-all proxy",
+          "stun_hostname_443": "catch-all proxy",
+          "unclassified_quic_443": "catch-all proxy",
+          "opaque_udp_80": "catch-all proxy",
+          "opaque_udp_443": "catch-all proxy",
+          "opaque_udp_8000": "catch-all proxy"
+        },
+        "after": {
+          "wechat_quic_80": "DIRECT",
+          "wechat_quic_443": "DIRECT",
+          "wechat_quic_8000": "DIRECT",
+          "qq_image_quic_443": "DIRECT",
+          "stun_hostname_80": "catch-all proxy",
+          "stun_hostname_443": "catch-all proxy",
+          "unclassified_quic_443": "catch-all proxy",
+          "opaque_udp_80": "catch-all proxy",
+          "opaque_udp_443": "catch-all proxy",
+          "opaque_udp_8000": "catch-all proxy"
+        }
+      },
+      "macosClashMi": {
+        "file": "releases/v14.3/src/macos/v14.3-macos-clashmi.js",
+        "sha256": "bb551fb9fd24f0bd5f2aa90f6fc18dad39519a5e8811366fec6cb2ec319e77cc",
+        "baselineSHA256": "9844781cf66a4502826d3d9efd83087e5f4ddf94fec1b7d2f0eca6ecdc9ac334",
+        "before": {
+          "wechat_quic_80": "catch-all proxy",
+          "wechat_quic_443": "catch-all proxy",
+          "wechat_quic_8000": "catch-all proxy",
+          "qq_image_quic_443": "catch-all proxy",
+          "stun_hostname_80": "catch-all proxy",
+          "stun_hostname_443": "catch-all proxy",
+          "unclassified_quic_443": "catch-all proxy",
+          "opaque_udp_80": "catch-all proxy",
+          "opaque_udp_443": "catch-all proxy",
+          "opaque_udp_8000": "catch-all proxy"
+        },
+        "after": {
+          "wechat_quic_80": "DIRECT",
+          "wechat_quic_443": "DIRECT",
+          "wechat_quic_8000": "DIRECT",
+          "qq_image_quic_443": "DIRECT",
+          "stun_hostname_80": "catch-all proxy",
+          "stun_hostname_443": "catch-all proxy",
+          "unclassified_quic_443": "catch-all proxy",
+          "opaque_udp_80": "catch-all proxy",
+          "opaque_udp_443": "catch-all proxy",
+          "opaque_udp_8000": "catch-all proxy"
+        }
+      },
+      "clashVerge": {
+        "file": "releases/v14.3/src/clash-verge/v14.3-clash-verge.js",
+        "sha256": "a0a5c07a96ee1b10051adc544c5612826a7eb4bd8dd1722841d22ebdaf74b517",
+        "baselineSHA256": "c81e7b553c5f12266be81bbe57923e609853d9f1ac04e1ae5b824be527111e6f",
+        "before": {
+          "wechat_quic_80": "catch-all proxy",
+          "wechat_quic_443": "catch-all proxy",
+          "wechat_quic_8000": "catch-all proxy",
+          "qq_image_quic_443": "catch-all proxy",
+          "stun_hostname_80": "catch-all proxy",
+          "stun_hostname_443": "catch-all proxy",
+          "unclassified_quic_443": "catch-all proxy",
+          "opaque_udp_80": "catch-all proxy",
+          "opaque_udp_443": "catch-all proxy",
+          "opaque_udp_8000": "catch-all proxy"
+        },
+        "after": {
+          "wechat_quic_80": "DIRECT",
+          "wechat_quic_443": "DIRECT",
+          "wechat_quic_8000": "DIRECT",
+          "qq_image_quic_443": "DIRECT",
+          "stun_hostname_80": "catch-all proxy",
+          "stun_hostname_443": "catch-all proxy",
+          "unclassified_quic_443": "catch-all proxy",
+          "opaque_udp_80": "catch-all proxy",
+          "opaque_udp_443": "catch-all proxy",
+          "opaque_udp_8000": "catch-all proxy"
+        }
+      },
+      "projectClash": {
+        "file": "releases/v14.3/src/projectclash/v14.3-projectclash.js",
+        "sha256": "cd98ad122da92c22accfe4d281a66d5a11a14296edc04a0b9765d8e441eed934",
+        "baselineSHA256": "d6ff53441d00ab08fba672c17a911fed5f9a9d555714932f2a76daa8a33fdbec",
+        "before": {
+          "wechat_quic_80": "catch-all proxy",
+          "wechat_quic_443": "catch-all proxy",
+          "wechat_quic_8000": "catch-all proxy",
+          "qq_image_quic_443": "catch-all proxy",
+          "stun_hostname_80": "catch-all proxy",
+          "stun_hostname_443": "catch-all proxy",
+          "unclassified_quic_443": "catch-all proxy",
+          "opaque_udp_80": "catch-all proxy",
+          "opaque_udp_443": "catch-all proxy",
+          "opaque_udp_8000": "catch-all proxy"
+        },
+        "after": {
+          "wechat_quic_80": "DIRECT",
+          "wechat_quic_443": "DIRECT",
+          "wechat_quic_8000": "DIRECT",
+          "qq_image_quic_443": "DIRECT",
+          "stun_hostname_80": "catch-all proxy",
+          "stun_hostname_443": "catch-all proxy",
+          "unclassified_quic_443": "catch-all proxy",
+          "opaque_udp_80": "catch-all proxy",
+          "opaque_udp_443": "catch-all proxy",
+          "opaque_udp_8000": "catch-all proxy"
+        }
+      }
+    },
+    "ipv4-only": {
+      "windows": {
+        "file": "releases/v14.3-ipv4-only/src/windows/v14.3-windows-flclash-ipv4-only.js",
+        "sha256": "716e307d059e593bf81f3a5be9727ad2ac6fa01507ba849dbecfb37bdbe0e5af",
+        "baselineSHA256": "9bb674b5426327340910e80564397bfd75bdbfe77b0e4702a61aa78c2de119e4",
+        "before": {
+          "wechat_quic_80": "catch-all proxy",
+          "wechat_quic_443": "catch-all proxy",
+          "wechat_quic_8000": "catch-all proxy",
+          "qq_image_quic_443": "catch-all proxy",
+          "stun_hostname_80": "catch-all proxy",
+          "stun_hostname_443": "catch-all proxy",
+          "unclassified_quic_443": "catch-all proxy",
+          "opaque_udp_80": "catch-all proxy",
+          "opaque_udp_443": "catch-all proxy",
+          "opaque_udp_8000": "catch-all proxy"
+        },
+        "after": {
+          "wechat_quic_80": "DIRECT",
+          "wechat_quic_443": "DIRECT",
+          "wechat_quic_8000": "DIRECT",
+          "qq_image_quic_443": "DIRECT",
+          "stun_hostname_80": "catch-all proxy",
+          "stun_hostname_443": "catch-all proxy",
+          "unclassified_quic_443": "catch-all proxy",
+          "opaque_udp_80": "catch-all proxy",
+          "opaque_udp_443": "catch-all proxy",
+          "opaque_udp_8000": "catch-all proxy"
+        }
+      },
+      "android": {
+        "file": "releases/v14.3-ipv4-only/src/android/v14.3-android-flclash-ipv4-only.js",
+        "sha256": "fff07446d744b629f11bf345d222f9e56126a3137158671858054158a10b8e6f",
+        "baselineSHA256": "54d0fe306528d256c6bdf59f1d24b2dea56ddff30151f5f98a71eb8a0c6324b8",
+        "before": {
+          "wechat_quic_80": "catch-all proxy",
+          "wechat_quic_443": "catch-all proxy",
+          "wechat_quic_8000": "catch-all proxy",
+          "qq_image_quic_443": "catch-all proxy",
+          "stun_hostname_80": "catch-all proxy",
+          "stun_hostname_443": "catch-all proxy",
+          "unclassified_quic_443": "catch-all proxy",
+          "opaque_udp_80": "catch-all proxy",
+          "opaque_udp_443": "catch-all proxy",
+          "opaque_udp_8000": "catch-all proxy"
+        },
+        "after": {
+          "wechat_quic_80": "DIRECT",
+          "wechat_quic_443": "DIRECT",
+          "wechat_quic_8000": "DIRECT",
+          "qq_image_quic_443": "DIRECT",
+          "stun_hostname_80": "catch-all proxy",
+          "stun_hostname_443": "catch-all proxy",
+          "unclassified_quic_443": "catch-all proxy",
+          "opaque_udp_80": "catch-all proxy",
+          "opaque_udp_443": "catch-all proxy",
+          "opaque_udp_8000": "catch-all proxy"
+        }
+      },
+      "clashmi": {
+        "file": "releases/v14.3-ipv4-only/src/ios/v14.3-clashmi-domestic-protocol-r1-ipv4-only.js",
+        "sha256": "bd62db1c0bf90a1ce79fdc1f60d1c551508fcd588325b2879d712a21b880890b",
+        "baselineSHA256": "b2f0dfc9f9f92c9d0164122a9e9216fb0a3d34e66fb5a031a78fe1e7348ff932",
+        "before": {
+          "wechat_quic_80": "catch-all proxy",
+          "wechat_quic_443": "catch-all proxy",
+          "wechat_quic_8000": "catch-all proxy",
+          "qq_image_quic_443": "catch-all proxy",
+          "stun_hostname_80": "catch-all proxy",
+          "stun_hostname_443": "catch-all proxy",
+          "unclassified_quic_443": "catch-all proxy",
+          "opaque_udp_80": "catch-all proxy",
+          "opaque_udp_443": "catch-all proxy",
+          "opaque_udp_8000": "catch-all proxy"
+        },
+        "after": {
+          "wechat_quic_80": "DIRECT",
+          "wechat_quic_443": "DIRECT",
+          "wechat_quic_8000": "DIRECT",
+          "qq_image_quic_443": "DIRECT",
+          "stun_hostname_80": "catch-all proxy",
+          "stun_hostname_443": "catch-all proxy",
+          "unclassified_quic_443": "catch-all proxy",
+          "opaque_udp_80": "catch-all proxy",
+          "opaque_udp_443": "catch-all proxy",
+          "opaque_udp_8000": "catch-all proxy"
+        }
+      },
+      "shadowrocket": {
+        "file": "releases/v14.3-ipv4-only/src/ios/v14.3-shadowrocket-ipv4-only.conf",
+        "sha256": "942db7747abbf890479aade5245ca0ce61f601c1cef4a229ce8fe1ebc06fcf60",
+        "scope": "NATIVE_CONFIGURATION_ONLY"
+      },
+      "macosFlClash": {
+        "file": "releases/v14.3-ipv4-only/src/macos/v14.3-macos-flclash-ipv4-only.js",
+        "sha256": "75a938e06f637938e9506127cc7c6ac837c0adbe1e8e756f3348c8ea20aba5b1",
+        "baselineSHA256": "d7f0bbabbe27c574aaad1107517f0441e166db67b74feb34c176b1e30bc511b9",
+        "before": {
+          "wechat_quic_80": "catch-all proxy",
+          "wechat_quic_443": "catch-all proxy",
+          "wechat_quic_8000": "catch-all proxy",
+          "qq_image_quic_443": "catch-all proxy",
+          "stun_hostname_80": "catch-all proxy",
+          "stun_hostname_443": "catch-all proxy",
+          "unclassified_quic_443": "catch-all proxy",
+          "opaque_udp_80": "catch-all proxy",
+          "opaque_udp_443": "catch-all proxy",
+          "opaque_udp_8000": "catch-all proxy"
+        },
+        "after": {
+          "wechat_quic_80": "DIRECT",
+          "wechat_quic_443": "DIRECT",
+          "wechat_quic_8000": "DIRECT",
+          "qq_image_quic_443": "DIRECT",
+          "stun_hostname_80": "catch-all proxy",
+          "stun_hostname_443": "catch-all proxy",
+          "unclassified_quic_443": "catch-all proxy",
+          "opaque_udp_80": "catch-all proxy",
+          "opaque_udp_443": "catch-all proxy",
+          "opaque_udp_8000": "catch-all proxy"
+        }
+      },
+      "macosClashMi": {
+        "file": "releases/v14.3-ipv4-only/src/macos/v14.3-macos-clashmi-ipv4-only.js",
+        "sha256": "70dd7663970be3ab2135626796c75af3c401f1e518e91f3769aaa8bb46d56ca4",
+        "baselineSHA256": "9d80cd380ce42d8ddaaea4f300eb53fc3450c9f4ef8793d2f5c1e5cf137de5c5",
+        "before": {
+          "wechat_quic_80": "catch-all proxy",
+          "wechat_quic_443": "catch-all proxy",
+          "wechat_quic_8000": "catch-all proxy",
+          "qq_image_quic_443": "catch-all proxy",
+          "stun_hostname_80": "catch-all proxy",
+          "stun_hostname_443": "catch-all proxy",
+          "unclassified_quic_443": "catch-all proxy",
+          "opaque_udp_80": "catch-all proxy",
+          "opaque_udp_443": "catch-all proxy",
+          "opaque_udp_8000": "catch-all proxy"
+        },
+        "after": {
+          "wechat_quic_80": "DIRECT",
+          "wechat_quic_443": "DIRECT",
+          "wechat_quic_8000": "DIRECT",
+          "qq_image_quic_443": "DIRECT",
+          "stun_hostname_80": "catch-all proxy",
+          "stun_hostname_443": "catch-all proxy",
+          "unclassified_quic_443": "catch-all proxy",
+          "opaque_udp_80": "catch-all proxy",
+          "opaque_udp_443": "catch-all proxy",
+          "opaque_udp_8000": "catch-all proxy"
+        }
+      },
+      "clashVerge": {
+        "file": "releases/v14.3-ipv4-only/src/clash-verge/v14.3-clash-verge-ipv4-only.js",
+        "sha256": "7b23c36b55e4003bf787dcb3031b0bb6cf907cb65851e40a30eb8e17ce6c063e",
+        "baselineSHA256": "7ed5d2ca4be50d67699899b22b8c780d842d15024256b82e8d882ab4b8575487",
+        "before": {
+          "wechat_quic_80": "catch-all proxy",
+          "wechat_quic_443": "catch-all proxy",
+          "wechat_quic_8000": "catch-all proxy",
+          "qq_image_quic_443": "catch-all proxy",
+          "stun_hostname_80": "catch-all proxy",
+          "stun_hostname_443": "catch-all proxy",
+          "unclassified_quic_443": "catch-all proxy",
+          "opaque_udp_80": "catch-all proxy",
+          "opaque_udp_443": "catch-all proxy",
+          "opaque_udp_8000": "catch-all proxy"
+        },
+        "after": {
+          "wechat_quic_80": "DIRECT",
+          "wechat_quic_443": "DIRECT",
+          "wechat_quic_8000": "DIRECT",
+          "qq_image_quic_443": "DIRECT",
+          "stun_hostname_80": "catch-all proxy",
+          "stun_hostname_443": "catch-all proxy",
+          "unclassified_quic_443": "catch-all proxy",
+          "opaque_udp_80": "catch-all proxy",
+          "opaque_udp_443": "catch-all proxy",
+          "opaque_udp_8000": "catch-all proxy"
+        }
+      },
+      "projectClash": {
+        "file": "releases/v14.3-ipv4-only/src/projectclash/v14.3-projectclash-ipv4-only.js",
+        "sha256": "c9907f42b2f489f895ac4c72eff47a632443b3b26e7c43eae6076b0927529488",
+        "baselineSHA256": "4ca4e6b1e9ca6757714b0fa6efbae721235f20b304c2ae00f1b7b25e6ccda64a",
+        "before": {
+          "wechat_quic_80": "catch-all proxy",
+          "wechat_quic_443": "catch-all proxy",
+          "wechat_quic_8000": "catch-all proxy",
+          "qq_image_quic_443": "catch-all proxy",
+          "stun_hostname_80": "catch-all proxy",
+          "stun_hostname_443": "catch-all proxy",
+          "unclassified_quic_443": "catch-all proxy",
+          "opaque_udp_80": "catch-all proxy",
+          "opaque_udp_443": "catch-all proxy",
+          "opaque_udp_8000": "catch-all proxy"
+        },
+        "after": {
+          "wechat_quic_80": "DIRECT",
+          "wechat_quic_443": "DIRECT",
+          "wechat_quic_8000": "DIRECT",
+          "qq_image_quic_443": "DIRECT",
+          "stun_hostname_80": "catch-all proxy",
+          "stun_hostname_443": "catch-all proxy",
+          "unclassified_quic_443": "catch-all proxy",
+          "opaque_udp_80": "catch-all proxy",
+          "opaque_udp_443": "catch-all proxy",
+          "opaque_udp_8000": "catch-all proxy"
+        }
+      }
+    }
+  }
+}

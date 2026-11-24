@@ -53,7 +53,7 @@
     "guide": "docs/guides/ProjectClash使用说明.md",
     "reviewedClientCommit": "f84db6a964505c9f8592cc2dd1b16a25454b3dd7",
     "reviewedCoreCommit": "c8f2fc1d58bf9ac856a0bf161bc9489591821f45",
-    "verification": "releases/v14.3/validation/projectclash-wechat-quic-port80-r1.json",
+    "verification": "releases/v14.3/validation/projectclash-direct-doh-edu-r1.json",
     "deviceAcceptance": "NOT_RUN"
   },
   "classificationRevision": "review-fixes-r1",
@@ -83,7 +83,7 @@
   "macosReport": "docs/reports/v14.3/MacBook适配.md",
   "macos": "CURRENT_SOURCE_AND_ISOLATED_CHECKS_SEPARATE_DEVICE_NOT_RUN",
   "distribution": "public",
-  "releaseTag": "v14.3.0-rc.25",
+  "releaseTag": "v14.3.0-rc.26",
   "personalRulesIncluded": false,
   "networkCompatibilityRevision": "ipv6-fallback-r2",
   "networkCompatibility": "releases/v14.3/metadata/network-compat-delivery.json",
@@ -136,14 +136,14 @@
       "wholeDeviceIPv4Requires": "APP_OS_IPV6_BLOCK_AND_IPV4_SYSTEM_DNS",
       "shadowrocket": "NODE_IPV4_PINNING_REQUIRED_NATIVE_NOT_RUN",
       "priorReleasesPreserved": 6,
-      "publicReleaseTag": "v14.3.0-ipv4-only-rc.16",
-      "publicReleaseURL": "https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-ipv4-only-rc.16",
-      "publicReleaseStatus": "PUBLISHED_PRE_RELEASE_DEVICE_NOT_RUN",
+      "publicReleaseTag": "v14.3.0-ipv4-only-rc.17",
+      "publicReleaseURL": "https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-ipv4-only-rc.17",
+      "publicReleaseStatus": "PRERELEASE_PUBLICATION_PENDING",
       "publicReleaseAssets": 9,
-      "publicReleaseCommit": "6c77726f5d04eadfbe11855f4cf5cffd5001eeb7",
-      "publicationManifest": "harness/releases/v14.3.0-ipv4-only-rc.16.json",
-      "publicReleaseCI": "https://github.com/ffdm12138/RouteWeaver/actions/runs/45326322962",
-      "publicReleaseRemoteSHA256": "ALL_9_ANONYMOUS_DOWNLOADS_MATCH"
+      "publicReleaseCommit": null,
+      "publicationManifest": "harness/releases/v14.3.0-ipv4-only-rc.17.json",
+      "publicReleaseCI": null,
+      "publicReleaseRemoteSHA256": null
     }
   },
   "nativeEvidenceSnapshot": "validation/inputs/api-doh-before/manifest.json",
@@ -163,7 +163,7 @@
   "nativeFallback": {
     "revision": "backup-slot-skip-r1",
     "guide": "docs/guides/故障转移.md",
-    "verification": "releases/v14.3/validation/proxy-failover/wechat-quic-port80-r1.json",
+    "verification": "releases/v14.3/validation/proxy-failover/direct-doh-edu-r1.json",
     "releaseTags": {
       "main": "v14.3.0-rc.21",
       "ipv4-only": "v14.3.0-ipv4-only-rc.12"
@@ -242,7 +242,30 @@
       "publicReleaseRemoteSHA256": "ALL_15_ANONYMOUS_DOWNLOADS_MATCH"
     }
   },
-  "currentRevision": "wechat-quic-port80-r1",
+  "currentRevision": "direct-doh-edu-r1",
+  "directDohEdu": {
+    "revision": "direct-doh-edu-r1",
+    "directResolvers": [
+      "https://223.5.5.5/dns-query#DIRECT",
+      "https://223.6.6.6/dns-query#DIRECT",
+      "https://doh.pub/dns-query#DIRECT"
+    ],
+    "eduDomains": [
+      "edu.cn",
+      "ac.cn"
+    ],
+    "desktopEduBypassIpv6": [
+      "2001:250::/32",
+      "2001:da8::/32",
+      "2001:cc0::/32"
+    ],
+    "verification": "releases/v14.3/validation/direct-doh-edu-r1.json",
+    "releaseTags": {
+      "main": "v14.3.0-rc.26",
+      "ipv4-only": "v14.3.0-ipv4-only-rc.17"
+    },
+    "deviceAcceptance": "NOT_RUN"
+  },
   "standardBusinessDoh": {
     "proxyResolvers": [
       "https://dns.alidns.com/dns-query",
@@ -284,8 +307,8 @@
     "revision": "wechat-quic-port80-r1",
     "domains": "releases/v14.3/data/rules/wechat-media.json",
     "guide": "docs/guides/微信发图优化.md",
-    "staticVerification": "releases/v14.3/validation/domestic-resilience/wechat-quic-port80-r1.json",
-    "transportVerification": "releases/v14.3/validation/domestic-resilience/wechat-media-transport-r1-quic80.json",
+    "staticVerification": "releases/v14.3/validation/domestic-resilience/direct-doh-edu-r1.json",
+    "transportVerification": "releases/v14.3/validation/domestic-resilience/wechat-media-transport-direct-doh-edu-r1.json",
     "priorProcessVerification": "releases/v14.3/validation/domestic-resilience/wechat-process-r1.json",
     "baselineCommit": "4247c21d623b86f211ceecc7387122b6df2055b5",
     "releaseTags": {
@@ -318,9 +341,9 @@
     "crossPlatformAudit": "docs/reports/v14.3/两轨七端复审与微信媒体链路.md",
     "deviceAcceptance": "NOT_RUN"
   },
-  "publicReleaseTag": "v14.3.0-rc.25",
-  "publicReleaseURL": "https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-rc.25",
-  "publicReleaseStatus": "PUBLISHED_PRE_RELEASE_DEVICE_NOT_RUN",
+  "publicReleaseTag": "v14.3.0-rc.26",
+  "publicReleaseURL": "https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-rc.26",
+  "publicReleaseStatus": "PRERELEASE_PUBLICATION_PENDING",
   "publicReleaseAssets": 9,
   "embeddedDomesticExactHosts": 11,
   "cloudRuleAudit": {
@@ -339,8 +362,8 @@
   },
   "historicalEmbeddedDomainRows": 309,
   "embeddedCompanyRows": 482,
-  "publicReleaseCommit": "6c77726f5d04eadfbe11855f4cf5cffd5001eeb7",
-  "publicationManifest": "harness/releases/v14.3.0-rc.25.json",
-  "publicReleaseCI": "https://github.com/ffdm12138/RouteWeaver/actions/runs/45326305826",
-  "publicReleaseRemoteSHA256": "ALL_9_ANONYMOUS_DOWNLOADS_MATCH"
+  "publicReleaseCommit": null,
+  "publicationManifest": "harness/releases/v14.3.0-rc.26.json",
+  "publicReleaseCI": null,
+  "publicReleaseRemoteSHA256": null
 }

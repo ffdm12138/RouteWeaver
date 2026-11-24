@@ -37,7 +37,7 @@ Mac 适配修订 **macos-r1**，业务合同仍为 **domestic-protocol-r1**。Ap
 
 适配会移除跨平台遗留的 Windows/Linux TUN 名称、文件描述符和不适用的 Linux/Android 参数；有效的 `utun数字` 与 Mac 物理出口 `en数字` 等显式配置保留。未指定设备名时由 Mihomo 选择空闲的 utun 编号，避免固定占用 utun0。出口网卡自动检测开启，Wi-Fi/有线切换仍须实机检查。[Mihomo v1.19.31 实现](https://github.com/MetaCubeX/mihomo/blob/v1.19.31/listener/sing_tun/server.go)
 
-仅使用系统代理时，接管范围限于实际使用代理入口的应用。系统 UDP、应用自有 DNS 和未使用代理的连接需要 TUN 接管。Mihomo 官方还注明 macOS 不能自动劫持发往局域网的 DNS；应核对最终系统 DNS、TUN 内 DNS 及实际出口，JS 不修改系统网络设置。[官方 TUN 文档](https://wiki.metacubex.one/config/inbound/tun/)
+仅使用系统代理时，接管范围限于实际使用代理入口的应用。系统 UDP、应用自有 DNS 和未使用代理的连接需要 TUN 接管。自 `direct-doh-edu-r1` 起，通用直连 DNS 改用阿里与 DNSPod 三路 DoH 并保留 `edu.cn`/`ac.cn` 的 `system://` 优先与 DoH 回退，避免 macOS 开启 TUN 自动接管系统 DNS 时连带中断苹果 IDS / 通用剪贴板等直连服务；在 FlClash 中请保持关闭「追加系统DNS」，在 `auto` / `dual-stack` 模式下桌面入口会经 `tun.route-exclude-address` 放行校园网原生 IPv6 网段。仅校内本地 DNS 解析的纯内网域名仍要求系统 DNS 未被 TUN 地址覆盖。Mihomo 官方还注明 macOS 不能自动劫持发往局域网的 DNS；应核对最终系统 DNS、TUN 内 DNS 及实际出口，JS 不修改系统网络设置。[官方 TUN 文档](https://wiki.metacubex.one/config/inbound/tun/)
 
 ## Clash Mi
 

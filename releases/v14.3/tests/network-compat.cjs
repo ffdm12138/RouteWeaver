@@ -24,6 +24,16 @@ for(const entry of manifest.entries.filter(e=>e.file.endsWith('.js'))){
   } else {
    assert.deepEqual(compat.tun['route-address'],['0.0.0.0/0','::/0']);
   }
+  const desktop = ['windows', 'macosFlClash', 'clashVerge'].includes(entry.platform);
+  const eduBypass = ['2001:250::/32', '2001:da8::/32', '2001:cc0::/32'];
+  if (desktop) {
+   assert.deepEqual(automatic.tun['route-exclude-address'], eduBypass);
+   assert.deepEqual(normal.tun['route-exclude-address'], eduBypass);
+  } else {
+   assert.equal(automatic.tun['route-exclude-address'], undefined);
+   assert.equal(normal.tun['route-exclude-address'], undefined);
+  }
+  assert.equal(compat.tun['route-exclude-address'], undefined);
   assert.ok(compat.tun['inet6-address'].length);
   assert.deepEqual(compat['proxy-groups'],normal['proxy-groups']);
   assert.deepEqual(compat.rules,normal.rules);

@@ -96,6 +96,11 @@ function main(input, profileName) {
   config.rules = first.concat(guard, hostRejects, original);
   delete config.tun["inet6-address"];
   delete config.tun["inet6-route-address"];
+  if (Array.isArray(config.tun["route-exclude-address"])) {
+    const kept = config.tun["route-exclude-address"].filter(prefix => !prefix.includes(":"));
+    if (kept.length) config.tun["route-exclude-address"] = kept;
+    else delete config.tun["route-exclude-address"];
+  }
   // Retain the requested catch-all route as an anti-bypass intention. With
   // core IPv6 disabled, physical IPv6 blocking is the app/OS owner's duty.
   config.tun["route-address"] = ["0.0.0.0/0", "::/0"];

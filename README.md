@@ -8,8 +8,8 @@
 
 | 版本 | 本地入口 | GitHub 预发布 |
 |---|---|---|
-| 支持 IPv6 的主版 | [各客户端导入文件](releases/v14.3/README.md) | [主版 v14.3.0-rc.25](https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-rc.25) |
-| 纯 IPv4 版 | [各客户端导入文件](releases/v14.3-ipv4-only/README.md) | [纯 IPv4 v14.3.0-ipv4-only-rc.16](https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-ipv4-only-rc.16) |
+| 支持 IPv6 的主版 | [各客户端导入文件](releases/v14.3/README.md) | [主版 v14.3.0-rc.26](https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-rc.26) |
+| 纯 IPv4 版 | [各客户端导入文件](releases/v14.3-ipv4-only/README.md) | [纯 IPv4 v14.3.0-ipv4-only-rc.17](https://github.com/ffdm12138/RouteWeaver/releases/tag/v14.3.0-ipv4-only-rc.17) |
 
 两条发布线的 JS 都支持三档原生故障转移。规则模式下在原组选择 A，再手选所需的三个备用，按 A → 1 → 2 → 3 选路。活动链探测间隔 3 秒，超时 3 秒。 [故障转移说明](docs/guides/故障转移.md)
 
@@ -33,8 +33,8 @@
 - [使用与维护文档](docs/README.md) · [需求](docs/需求.md) · [当前验收](docs/status/当前验收.md) · [变更记录](CHANGELOG.md)
 - [当前文件与发布记录](CURRENT_RELEASE.json) · [开源与发布流程](docs/maintenance/开源与发布.md)
 
-业务 DNS 沿用原业务组，使用阿里云和 DNSPod 的标准 DoH/443。DIRECT 拨号和明确直连域名使用设备系统 DNS。原版 Mihomo 配置解析已通过。 [迁移与回滚](docs/guides/业务DoH迁移.md)
+业务 DNS 沿用原业务组，使用阿里云和 DNSPod 的标准 DoH/443。通用 `DIRECT` 使用阿里 `223.5.5.5` / `223.6.6.6` 与 DNSPod `doh.pub` 三路 DoH；`edu.cn` 与 `ac.cn` 在通用 STUN 守卫后直连，采用 `system://` 优先并回退直连 DoH；桌面双栈/自动模式另行在 `tun.route-exclude-address` 排除教育网/科技网原生 IPv6 网段。原版 Mihomo v1.19.34 的 56 份合成配置解析已通过。 [迁移与回滚](docs/guides/业务DoH迁移.md) · [官方解析回执](releases/v14.3/validation/direct-doh-edu-r1.json)
 
-原装 Windows FlClash 0.9.4 和固定 ProjectClash 内核的隔离回放覆盖首次默认值、手选、订阅刷新及 TCP、UDP、DoH、DoT 选路。各端导入界面与 TUN/VPN 待实机验收。 [FlClash 回执](releases/v14.3/validation/proxy-failover/selector-option-order-r1.json) · [ProjectClash 回执](releases/v14.3/validation/projectclash-selector-option-order-r1.json)
+原装 Windows FlClash 0.9.4 和固定 ProjectClash 内核的隔离回放各通过 78 项检查，覆盖首次默认值、手选、订阅刷新、TCP/UDP/DoH/DoT 选路、不依赖 `system` 的直连 DoH、校园域失效回退及 STUN 保护，另有 280 项合成 QUIC 传输对照与 67,390 项离线分流检查通过。各端导入界面、真实网络与 TUN/VPN 待实机验收。 [FlClash 回执](releases/v14.3/validation/proxy-failover/direct-doh-edu-r1.json) · [ProjectClash 回执](releases/v14.3/validation/projectclash-direct-doh-edu-r1.json) · [传输回执](releases/v14.3/validation/domestic-resilience/wechat-media-transport-direct-doh-edu-r1.json)
 
 原创内容采用 [MIT](LICENSE)，上游规则与历史可选核心使用各自的许可。 [第三方声明](THIRD_PARTY_NOTICES.md)

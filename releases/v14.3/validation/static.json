@@ -12,21 +12,21 @@
     "desktop:existing-business-UDP-IPv6-and-explicit-DIRECT-cases",
     "desktop:critical-domains-with-all-remote-files-empty",
     "desktop:business-table-loss-does-not-expose-domestic-DIRECT-on-critical-hosts",
-    "desktop:same-transport-DNS-upstreams-selectors-and-inbound-config",
+    "desktop:standard-DoH-upstreams-and-same-inbound-config",
     "desktop:three-pass-idempotence-and-upgrade-from-full-V14.2",
     "desktop:selectors-fixed-cache-and-proxy-failure-contract",
     "android:all-domain-inventories-full-remote-same-routing-and-DNS",
     "android:existing-business-UDP-IPv6-and-explicit-DIRECT-cases",
     "android:critical-domains-with-all-remote-files-empty",
     "android:business-table-loss-does-not-expose-domestic-DIRECT-on-critical-hosts",
-    "android:same-transport-DNS-upstreams-selectors-and-inbound-config",
+    "android:standard-DoH-upstreams-and-same-inbound-config",
     "android:three-pass-idempotence-and-upgrade-from-full-V14.2",
     "android:selectors-fixed-cache-and-proxy-failure-contract",
     "clashmi:all-domain-inventories-full-remote-same-routing-and-DNS",
     "clashmi:existing-business-UDP-IPv6-and-explicit-DIRECT-cases",
     "clashmi:critical-domains-with-all-remote-files-empty",
     "clashmi:business-table-loss-does-not-expose-domestic-DIRECT-on-critical-hosts",
-    "clashmi:same-transport-DNS-upstreams-selectors-and-inbound-config",
+    "clashmi:standard-DoH-upstreams-and-same-inbound-config",
     "clashmi:three-pass-idempotence-and-upgrade-from-full-V14.2",
     "clashmi:selectors-fixed-cache-and-proxy-failure-contract",
     "actual-Clash-Mi-object-return-and-string-counterexample",
@@ -37,30 +37,30 @@
   "platforms": [
     {
       "platform": "desktop",
-      "fullInventoryHosts": 233396,
-      "normalRouting": 233396,
-      "normalDNS": 233396,
-      "criticalColdRouting": 4232,
-      "criticalColdDNS": 1058,
-      "existingCases": 917
+      "fullInventoryHosts": 233439,
+      "normalRouting": 233439,
+      "normalDNS": 233439,
+      "criticalColdRouting": 4692,
+      "criticalColdDNS": 1173,
+      "existingCases": 1082
     },
     {
       "platform": "android",
-      "fullInventoryHosts": 233396,
-      "normalRouting": 233396,
-      "normalDNS": 233396,
-      "criticalColdRouting": 4232,
-      "criticalColdDNS": 1058,
-      "existingCases": 917
+      "fullInventoryHosts": 233439,
+      "normalRouting": 233439,
+      "normalDNS": 233439,
+      "criticalColdRouting": 4692,
+      "criticalColdDNS": 1173,
+      "existingCases": 1082
     },
     {
       "platform": "clashmi",
-      "fullInventoryHosts": 233396,
-      "normalRouting": 233396,
-      "normalDNS": 233396,
-      "criticalColdRouting": 4232,
-      "criticalColdDNS": 1058,
-      "existingCases": 917
+      "fullInventoryHosts": 233439,
+      "normalRouting": 233439,
+      "normalDNS": 233439,
+      "criticalColdRouting": 4692,
+      "criticalColdDNS": 1173,
+      "existingCases": 1082
     }
   ],
   "sourceFiles": [
@@ -78,11 +78,11 @@
     },
     {
       "file": "tests/static.cjs",
-      "sha256": "d035093464029110ce9b9a890c4e8063fae3384311c680d30f804a12da715af4"
+      "sha256": "85af7e951531296f7cc2e9faaeff2fdb10d77c547ff390a8b85303ddf95c3621"
     },
     {
       "file": "tests/domestic-contract.cjs",
-      "sha256": "58f777c8c9de152ed9b232885a10fd68596e6740efdf95750ff7c680521cee26"
+      "sha256": "5e140f885ff01f18979356ad6794eee1dc4bab46de13327dd8ef5185a57ddcbf"
     },
     {
       "file": "tests/fixture.cjs",
@@ -90,15 +90,15 @@
     },
     {
       "file": "tests/domain-index.cjs",
-      "sha256": "4b3314187dc88fafb30902b04c122079b3c71dd2ba85055e2bf6a6cf85df48d0"
+      "sha256": "4f96b7bf21882b470911c8b5824d398a05e4635d277bb7d8b085dcc4f72248da"
     },
     {
       "file": "tests/cases.cjs",
-      "sha256": "13fb907db82fbbe99044becf697e168c68212f90a2789c8020e6e5aae5c7c86c"
+      "sha256": "6f091db3120ea776de594a8e4ea601468867eb8b7cc0d247a3396366a5386678"
     },
     {
       "file": "data/rules/embedded-policy.json",
-      "sha256": "059d71af3ec13dd1de8ac2e8303e4045f589f9257f210d08f519a033a8795a75"
+      "sha256": "94fb8db4c7b8d26dcb9b70f4757de1c0927005483a5db7ae86cb6d085dbbe070"
     },
     {
       "file": "data/rules/company-core.json",
@@ -106,7 +106,7 @@
     },
     {
       "file": "data/rules/business-services.json",
-      "sha256": "6fddabd1e91a404bc7362b776ed72c943d6bf6a09d0f7367a8541820055ddd2f"
+      "sha256": "3cf9d45f37ee0f1d4ee430e778acc9d3ed32c1a6b5288cc05b9b3612d12cf211"
     },
     {
       "file": "data/rule-sources.lock.json",
@@ -114,7 +114,7 @@
     },
     {
       "file": "metadata/balanced-sources.json",
-      "sha256": "ed00af5e0dfaebfced5fe35d7207f5ad0a7f7593841dcf3fdda95be3758fbdac"
+      "sha256": "9ed90f831c6ea589caac14d9db9c7968945e965023cf360c4ad04e24792ef707"
     },
     {
       "file": "metadata/source-comparison.json",
@@ -138,15 +138,15 @@
     },
     {
       "file": "src/windows/v14.3-windows-flclash.js",
-      "sha256": "5186074bd47902f69a4d9e076b5969bc05f7e515b13c0536319d5ebc81eb279b"
+      "sha256": "3c443df6baca1ff744563ab7731795122abbbb17556250b5aa66cd3368e9d3e7"
     },
     {
       "file": "src/android/v14.3-android-flclash.js",
-      "sha256": "a6af2f7b4a75b12f6f14ac9c8efe5b83fca71a862b82c396d4a97cbe754158da"
+      "sha256": "50a79b7a6e51d2ef66c8efbf75cf43a917bb9721c36d02ff25d6fae6f1f8fd12"
     },
     {
       "file": "src/ios/v14.3-clashmi-domestic-protocol-r1.js",
-      "sha256": "0beb8d6201a2823d94331b95baf51e0cf8de1f69a55c4847e4d2d118525c6cbd"
+      "sha256": "f71afc8494a6eda40a14dc96d8323a1166a4d0ee676bbd14494429854f264a59"
     },
     {
       "file": "data/rules/reviewed/v12r-domain-private.yaml",

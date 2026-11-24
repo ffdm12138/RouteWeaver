@@ -43,11 +43,11 @@
   "sourceFiles": [
     {
       "file": "tests/shadowrocket-lean.cjs",
-      "sha256": "bb58d4136b0c94e30d2d4eb2ba110fbb248e37a452ed3bb37f815ef4caa1249b"
+      "sha256": "b4a4c06dfa501f76087e634555a1a1b38ec6a1b2b1e1f3c713e4a36eb83bfc2c"
     },
     {
       "file": "tests/domestic-contract.cjs",
-      "sha256": "801d1532c43f170bfa9c2491d231024224e8bfda2e329efd425536b5edb43ee0"
+      "sha256": "5e140f885ff01f18979356ad6794eee1dc4bab46de13327dd8ef5185a57ddcbf"
     },
     {
       "file": "tests/fixture.cjs",
@@ -59,15 +59,15 @@
     },
     {
       "file": "tools/build-shadowrocket-lean.cjs",
-      "sha256": "a8c8a90cd39fafa965f505facda27ca0b5be8d743339d3156dec01c68e384fcb"
+      "sha256": "2decf5c2d971d25ce2b0079ec9ddb7ef757b9a82405dc69c4f1db796d32712be"
     },
     {
       "file": "metadata/shadowrocket-lean.json",
-      "sha256": "27090bccb8f5b0c139caa32e77acb81dff2f1d3a7758f145abc1b07ed6bf493f"
+      "sha256": "03a57c7464ed37d4aa822a0cc969a1e68a3119bbf05735de5ef53da72256da94"
     },
     {
       "file": "src/ios/v14.3-shadowrocket.conf",
-      "sha256": "ce8b4d90bdee7ee3714a7491802484a98470556dc9819a09e1f133c6f9d568c4"
+      "sha256": "296e85750cd6d294417d9d380e34823739b97e6024f10c2601e05b910f3371a8"
     },
     {
       "file": "tools/lib/tailscale-policy.cjs",
@@ -87,7 +87,7 @@
     },
     {
       "file": "src/android/v14.3-android-flclash.js",
-      "sha256": "b6c67101221c423c5becc6ddb2c3ccb5fe92e2b8132fb7c9d59c35344ab0ac8b"
+      "sha256": "50a79b7a6e51d2ef66c8efbf75cf43a917bb9721c36d02ff25d6fae6f1f8fd12"
     },
     {
       "file": "data/rules/embedded-policy.json",

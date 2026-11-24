@@ -11,7 +11,7 @@ const root = path.resolve(__dirname, '..');
 const policy = loadTailscalePolicy(path.join(root, 'releases/v14.3'));
 const release = require('../CURRENT_RELEASE.json');
 const guard = 'IP-CIDR6,::/0,REJECT,no-resolve';
-const dnsServers = ['https://dns.alidns.com/dns-query', 'https://doh.pub/dns-query'];
+const dnsServers = ['https://223.5.5.5/dns-query', 'https://223.6.6.6/dns-query', 'https://doh.pub/dns-query'];
 const ipRule = cidr => (cidr.includes(':') ? 'IP-CIDR6,' : 'IP-CIDR,') + cidr;
 const cases = [
   { host: 'controlplane.tailscale.com', protocol: 'TCP', port: 443, group: 'DIRECT' },
@@ -94,10 +94,10 @@ function checkMihomo(file, platform, mode) {
   const dnsPolicy = config.dns['nameserver-policy'];
   assert.deepEqual(dnsPolicy['+.ts.net'], ['system']);
   assert.ok(config.dns['fake-ip-filter'].includes('+.ts.net'));
-  const system = ipv4Only || mode === 'ipv4-local'
-    ? 'system://#disable-ipv6=true&disable-qtype-64=true&disable-qtype-65=true'
-    : 'system://';
-  assert.deepEqual(dnsPolicy['+.tailscale.com'], [system]);
+  const tailscaleDns = dnsServers.map(url => url + '#DIRECT' + (ipv4Only || mode === 'ipv4-local'
+    ? '&disable-ipv6=true&disable-qtype-64=true&disable-qtype-65=true'
+    : ''));
+  assert.deepEqual(dnsPolicy['+.tailscale.com'], tailscaleDns);
 
   // Suppress remote classifiers to check coverage without a provider download.
   const sources = new Map(Object.entries(config['rule-providers']).map(([name, provider]) => [

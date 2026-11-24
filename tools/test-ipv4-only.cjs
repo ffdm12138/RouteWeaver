@@ -41,8 +41,10 @@ for(const [platform,entry]of Object.entries(manifest.entries)){
    }
    for(const node of c.proxies)assert.equal(node['ip-version'],'ipv4');
    for(const p of Object.values(c['proxy-providers'])){assert.equal(p.override['ip-version'],'ipv4');assert.equal(p.override['override-expr'].at(-1),'.["ip-version"] = "ipv4"');for(const n of p.payload||[])assert.equal(n['ip-version'],'ipv4');}
-   assert.deepEqual(c.dns['direct-nameserver'],['system']);assert.equal(c.dns['direct-nameserver-follow-policy'],false);
-   for(const key of ['nameserver','default-nameserver','proxy-server-nameserver'])for(const s of c.dns[key])assert.ok(s.includes('disable-ipv6=true')&&s.includes('disable-qtype-65=true'));
+   assert.equal(c.dns['direct-nameserver'].length,3);assert.equal(c.dns['direct-nameserver-follow-policy'],true);
+   assert.equal(c.tun['route-exclude-address'],undefined);
+   for(const key of ['nameserver','direct-nameserver','default-nameserver','proxy-server-nameserver'])for(const s of c.dns[key])assert.ok(s.includes('disable-ipv6=true')&&s.includes('disable-qtype-64=true')&&s.includes('disable-qtype-65=true'));
+   for(const domain of ['+.edu.cn','+.ac.cn']){assert.ok(c.dns['fake-ip-filter'].includes(domain));const servers=c.dns['nameserver-policy'][domain];assert.equal(servers.length,4);assert.ok(servers[0].startsWith('system://#'));for(const s of servers)assert.ok(s.includes('disable-ipv6=true')&&s.includes('disable-qtype-64=true')&&s.includes('disable-qtype-65=true'));}
    assert.ok(c.rules.includes('IP-CIDR6,::/0,REJECT,no-resolve'));assert.equal(c.rules.filter(s=>s==='IP-CIDR6,::/0,REJECT,no-resolve').length,1);
    const raw=typeof input==='string'?JSON.parse(input):input;
    const baseline=generate(fs.readFileSync(path.join(root,entry.source),'utf8'),{...raw,'x-routeweaver':{...raw['x-routeweaver'],'network-mode':'ipv4-local'}});
@@ -50,8 +52,10 @@ for(const [platform,entry]of Object.entries(manifest.entries)){
    assert.deepEqual(c.rules.filter(s=>s!=='IP-CIDR6,::/0,REJECT,no-resolve'&&!['DOMAIN,six.test,REJECT','DOMAIN,alias.test,REJECT','DOMAIN-SUFFIX,v6.test,REJECT'].includes(s)),baseline.rules);
    if(label==='hosts'){assert.deepEqual(c.hosts['both.test'],['192.0.2.1']);assert.ok(c.rules.includes('DOMAIN,six.test,REJECT'));assert.ok(c.rules.includes('DOMAIN,alias.test,REJECT'));}
    if(label==='LAN-dns'){
-    const {['+.ts.net']:magicDNS,...lanPolicies}=c.dns['nameserver-policy'];
+    const {['+.ts.net']:magicDNS,['+.edu.cn']:edu,['+.ac.cn']:ac,...lanPolicies}=c.dns['nameserver-policy'];
     assert.deepEqual(magicDNS,['system']);
+    assert.ok(edu[0].startsWith('system://#')&&edu.length===4);
+    assert.ok(ac[0].startsWith('system://#')&&ac.length===4);
     assert.ok(!Object.values(lanPolicies).flat().includes('system'));
    }
   });

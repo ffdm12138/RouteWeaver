@@ -1,6 +1,6 @@
 > **支持 IPv6 的主版**。七份 JS 支持三档原生故障转移。 [使用说明](../../docs/guides/故障转移.md)
 
-业务 DNS 沿用原业务组，使用阿里云和 DNSPod 的标准 DoH/443。DIRECT 拨号与明确直连域名使用设备系统 DNS。应用主动查询真实记录时，原有业务 DNS 策略仍然适用。 [DNS 迁移与回滚](../../docs/guides/业务DoH迁移.md)
+业务 DNS 沿用原业务组，使用阿里云和 DNSPod 的标准 DoH/443。通用 DIRECT 拨号、Tailscale 官方控制域、显式直连与媒体域名使用阿里 `223.5.5.5` / `223.6.6.6` 与 DNSPod `doh.pub` 三路 DoH 并开启 `direct-nameserver-follow-policy: true`；`edu.cn` 与 `ac.cn` 在通用 STUN 守卫后进入 DIRECT 与真实 IP，DNS 优先尝试 `system://` 并在失败时自动回退至三路 DoH；桌面双栈/自动模式写入 `tun.route-exclude-address` 放行 CERNET/CERNET2/CSTNET IPv6 前缀。应用主动查询真实记录时，原有业务 DNS 策略仍然适用。 [DNS 迁移与回滚](../../docs/guides/业务DoH迁移.md) · [Mac 故障说明](../../docs/guides/macOS-FlClash故障小本子.md)
 
 **Windows FlClash 0.9.4 建议开启「自动关闭连接」。** 关闭时，手动从 DIRECT 切到代理后，主版 DoH 仍可能复用旧直连。隔离测试确认关连接完成后的首笔新查询走新节点。这项证据仅覆盖手动切组。开启时会关闭核心追踪的业务连接。自动故障转移期间，主版 DNS 仍可能复用旧代理连接。 [FlClash 切组逻辑](https://github.com/chen08209/FlClash/blob/v0.9.4/lib/providers/actions/proxies.dart#L166-L211)
 

@@ -12,9 +12,11 @@ check('deterministic-standalone-generation-and-size-budget',()=>{cp.execFileSync
 const baseline=old.load('android'),originalRoute=index.indexRoute(baseline),originalDNS=index.indexDNS(baseline);
 const reviewedChanges=read('data/rules/company-supplement.json').additions;
 function revisedCompany(host){return domestic.addedServiceGroup(host)||reviewedChanges.find(a=>{const[k,h]=f.split(a.row);return host===h||k==='DOMAIN-SUFFIX'&&host.endsWith('.'+h);})?.group;}
+const directDns=['https://223.5.5.5/dns-query#DIRECT','https://223.6.6.6/dns-query#DIRECT','https://doh.pub/dns-query#DIRECT'];
+const eduBypass=['2001:250::/32','2001:da8::/32','2001:cc0::/32'];
 const tailscaleDNS=host=>{
  if(host==='ts.net'||host.endsWith('.ts.net'))return 'system';
- if(host==='tailscale.com'||host.endsWith('.tailscale.com'))return 'system';
+ if(host==='tailscale.com'||host.endsWith('.tailscale.com'))return 'DIRECT';
 };
 const baselineRoute=(host,protocol='TCP',supported=true)=>{if(tailscaleDNS(host))return {group:'DIRECT',policy:'DIRECT'};const group=revisedCompany(host);return group?{group,policy:protocol==='UDP'&&!supported?'REJECT':group}:originalRoute(host,protocol,supported);};
 const baselineDNS=host=>{const group=tailscaleDNS(host)||revisedCompany(host);return group?{groups:[group]}:originalDNS(host);};
@@ -26,7 +28,7 @@ for(const s of policy.services)hostRows([...s.seeds.map(h=>'DOMAIN-SUFFIX,'+h),.
 for(const rows of Object.values(policy.core))hostRows(rows);
 const extras=['unknown-balanced.example.net','api.openai.com.evil.example.net','apple.com.evil.example.net','tenant.blob.core.windows.net','tenant.cloudfunctions.net','tenant.storage.googleapis.com','storage.googleapis.com','chatgpt-async-webps-prod-eastus-99.webpubsub.azure.com','child.chatgpt-async-webps-prod-eastus-1.webpubsub.azure.com','tenant.workos.com','stun.unknown-balanced.example.net'];
 for(const h of extras)hosts.add(h);
-for(const h of ['tailscale.com','controlplane.tailscale.com','peer.example-tailnet.ts.net'])hosts.add(h);
+for(const h of ['tailscale.com','controlplane.tailscale.com','peer.example-tailnet.ts.net','mirrors.tuna.tsinghua.edu.cn','www.ucas.ac.cn','stun.tsinghua.edu.cn','turn.cas.ac.cn'])hosts.add(h);
 function empty(model,only){return {...model,sources:new Map([...model.sources].map(([name,rows])=>[name,model.config['rule-providers'][name].type!=='inline'&&(!only||only.has(name))?[]:rows]))};}
 for(const platform of ['desktop','android','clashmi']){
  const model=f.load(platform),normal=index.indexRoute(model),dns=index.indexDNS(model),cold=empty(model),coldRoute=index.indexRoute(cold),coldDNS=index.indexDNS(cold),metrics={platform,fullInventoryHosts:hosts.size,normalRouting:0,normalDNS:0,criticalColdRouting:0,criticalColdDNS:0,existingCases:0};
@@ -39,9 +41,10 @@ for(const platform of ['desktop','android','clashmi']){
    if(test.flow.host&&dg&&dg!=='REJECT'){
     const actual=f.dnsPolicyFor(model,test.flow.host);
     if(dg==='DIRECT'){
-     const resolver=domestic.mediaHost(test.flow.host)
-      ? 'system://#disable-ipv6=true&disable-qtype-64=true&disable-qtype-65=true' : 'system://';
-     assert.deepEqual(actual.servers,[resolver],test.name);
+     const servers=domestic.mediaHost(test.flow.host)
+      ? directDns.map(u=>u+'&disable-ipv6=true&disable-qtype-64=true&disable-qtype-65=true')
+      : domestic.eduHost(test.flow.host) ? ['system://',...directDns] : directDns;
+     assert.deepEqual(actual.servers,servers,test.name);
     }else assert.deepEqual(actual.groups,[dg],test.name);
    }
    metrics.existingCases++;
@@ -59,17 +62,19 @@ for(const platform of ['desktop','android','clashmi']){
   assert.equal(after['routeweaver-local-family'],'auto');
   assert.equal(after['find-process-mode'],platform==='clashmi'?'off':'strict');
   assert.equal(after.dns['fake-ip-filter'].filter(domain=>domain==='+.ts.net').length,1);
-  after.dns['fake-ip-filter']=after.dns['fake-ip-filter'].filter(domain=>domain!=='+.ts.net'&&!domestic.mediaHost(domain));
+  for(const domain of ['+.edu.cn','+.ac.cn'])assert.equal(after.dns['fake-ip-filter'].filter(x=>x===domain).length,1);
+  after.dns['fake-ip-filter']=after.dns['fake-ip-filter'].filter(domain=>domain!=='+.ts.net'&&!domestic.mediaHost(domain)&&!domestic.eduHost(domain));
   if(platform!=='clashmi')delete after['find-process-mode'];
   for(const c of [before,after]){delete c['routeweaver-local-family'];delete c['proxy-groups'];delete c.sniffer;delete c.rules;delete c['rule-providers'];delete c['x-v14-generated'];delete c.dns['nameserver-policy'];}
   if(platform==='clashmi'){for(const k of ['tun','extension','interface-name','routing-mark','find-process-mode','allow-lan','bind-address']){delete before[k];delete after[k];}delete before.dns.listen;delete after.dns.listen;before.android=false;delete before.android;delete after.android;}
-  before.dns['direct-nameserver']=['system'];
-  before.dns['direct-nameserver-follow-policy']=false;
+  before.dns['direct-nameserver']=directDns;
+  before.dns['direct-nameserver-follow-policy']=true;
+  if(platform==='desktop')before.tun['route-exclude-address']=eduBypass;
   before.dns.nameserver=['https://dns.alidns.com/dns-query#漏网之鱼','https://doh.pub/dns-query#漏网之鱼'];
   assert.deepEqual(after,before);
  });
  check(platform+':three-pass-idempotence-and-upgrade-from-full-V14.2',()=>{const now=f.generate(platform);assert.deepEqual(f.generate(platform,now),now);assert.deepEqual(f.generate(platform,f.generate(platform,now)),now);const previous=old.generate(platform==='desktop'?'desktop':'android');assert.deepEqual(f.generate(platform,previous),now);});
- check(platform+':selectors-fixed-cache-and-proxy-failure-contract',()=>{const c=model.config;assert.equal(c['x-v14-generated'].version,'14.3');for(const name of ['高纯净度AI用','高网速视频用']){const g=c['proxy-groups'].find(g=>g.name===name);assert.equal(g.type,'select');assert.equal(g['default-selected'],'拒绝 reject');assert.equal(g['empty-fallback'],'REJECT');assert.ok(g.proxies.includes('直连 direct')&&!g.proxies.includes('自动选择'));}assert.equal(c.rules.at(-1),'MATCH,REJECT');assert.equal(c.rules.at(-2),'MATCH,漏网之鱼');for(const p of Object.values(c['rule-providers']).filter(p=>p.type==='http')){assert.equal(p.interval,86400);assert.equal(p.proxy,'高纯净度AI用');assert.match(p.path,/v12-managed/);}assert.deepEqual(c.dns.fallback,[]);assert.deepEqual(c.dns['direct-nameserver'],['system']);assert.equal(c.dns['direct-nameserver-follow-policy'],false);});
+ check(platform+':selectors-fixed-cache-and-proxy-failure-contract',()=>{const c=model.config;assert.equal(c['x-v14-generated'].version,'14.3');for(const name of ['高纯净度AI用','高网速视频用']){const g=c['proxy-groups'].find(g=>g.name===name);assert.equal(g.type,'select');assert.equal(g['default-selected'],'拒绝 reject');assert.equal(g['empty-fallback'],'REJECT');assert.ok(g.proxies.includes('直连 direct')&&!g.proxies.includes('自动选择'));}assert.equal(c.rules.at(-1),'MATCH,REJECT');assert.equal(c.rules.at(-2),'MATCH,漏网之鱼');for(const p of Object.values(c['rule-providers']).filter(p=>p.type==='http')){assert.equal(p.interval,86400);assert.equal(p.proxy,'高纯净度AI用');assert.match(p.path,/v12-managed/);}assert.deepEqual(c.dns.fallback,[]);assert.deepEqual(c.dns['direct-nameserver'],directDns);assert.equal(c.dns['direct-nameserver-follow-policy'],true);});
  report.platforms.push(metrics);console.log(JSON.stringify(metrics));
 }
 check('actual-Clash-Mi-object-return-and-string-counterexample',()=>{const ctx=vm.createContext({console:{log(){}}});vm.runInContext(fs.readFileSync(f.local('src/ios/v14.3-clashmi-domestic-protocol-r1.js'),'utf8'),ctx);const value=ctx.main({proxies:[{name:'Bridge-only',type:'socks5',server:'192.0.2.1',port:1080,udp:true}]});assert.equal(typeof value,'object');assert.ok(value&&!Array.isArray(value));assert.equal(value['x-v14-generated'].clashMi.bridgeResult,'config-object');assert.notEqual(typeof JSON.stringify(value),'object');});

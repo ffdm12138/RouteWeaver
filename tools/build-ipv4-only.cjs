@@ -55,7 +55,7 @@ const manifest={version:'14.3-ipv4-only',revision:'ipv4-only-r1',date:'2026-10-1
   requestedScope:'IPv4 local DIRECT and local connection to proxies; proxy onward family unconstrained',
   entryMapSHA256:sha(JSON.stringify(current.entries)),entries,inputs:sourceInputs,
   tailscaleDerpSource:tailscale.source,
-  systemDNS:'DIRECT_REQUIRES_IPV4_SYSTEM_DNS',
+  systemDNS:'DIRECT_DOH_IPV4_FILTERED_AND_LAN_SYSTEM_DNS_REQUIRES_IPV4',
   deviceAcceptance:'NOT_RUN',clientDeployment:false,originalEntriesModified:false};
 emit(target+'/MANIFEST.json',JSON.stringify(manifest,null,2)+'\n');
 console.log(JSON.stringify({status:'IPV4_ONLY_GENERATION_PASS',flavor:manifest.flavor,entries:Object.keys(entries).length,check}));
