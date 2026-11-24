@@ -11,9 +11,9 @@
       "platform": "macosFlClash",
       "client": "FlClash",
       "file": "src/macos/v14.3-macos-flclash.js",
-      "sha256": "fc9aeb640dcdc60d582741e22ff74c56500f8d6fdb64c5869f80f2819a3c6c9f",
-      "bytes": 128493,
-      "generatedConfigBytes": 184691,
+      "sha256": "e29ce5e6a62d222cda538816597f5d319b53f3729ee71e672bf7a01c915fc897",
+      "bytes": 128497,
+      "generatedConfigBytes": 184694,
       "inlineRows": 1098,
       "remoteSources": 30
     },
@@ -21,9 +21,9 @@
       "platform": "macosClashMi",
       "client": "Clash Mi",
       "file": "src/macos/v14.3-macos-clashmi.js",
-      "sha256": "9376e20e77abcf9c9eba5955655a3fcacf3b00524fbd711921b982d37ca4b6c4",
-      "bytes": 128517,
-      "generatedConfigBytes": 184987,
+      "sha256": "54a2ec8bd265d32982fd2b01ebb1cf74df02fc944f017bc93b15469ebbd69416",
+      "bytes": 128521,
+      "generatedConfigBytes": 184990,
       "inlineRows": 1098,
       "remoteSources": 29
     }
@@ -216,7 +216,7 @@
     },
     {
       "file": "runtime/shared/main.js.in",
-      "sha256": "6b656fb7cd20e276a847aabfb7c3fbf1e38fac9d5d2a8617b231beebdb88a7e4"
+      "sha256": "3a7407ff77985241c7311cbc04c541a30143993316335067ac33aeac1fe95004"
     },
     {
       "file": "runtime/platforms/android/layout.json",
@@ -232,7 +232,7 @@
     },
     {
       "file": "runtime/platforms/android/main.js.in",
-      "sha256": "e65cf2798462477b0e46109fa1baa662a71761694873a24759f178ddddc44e51"
+      "sha256": "962f9b218a0f20e9ef3b353c819fe24d0306ba254145436836aa5c4dd4be2429"
     },
     {
       "file": "tools/validate-azure-async.cjs",

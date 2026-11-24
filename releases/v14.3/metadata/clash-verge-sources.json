@@ -192,7 +192,7 @@
     },
     {
       "file": "runtime/shared/main.js.in",
-      "sha256": "6b656fb7cd20e276a847aabfb7c3fbf1e38fac9d5d2a8617b231beebdb88a7e4"
+      "sha256": "3a7407ff77985241c7311cbc04c541a30143993316335067ac33aeac1fe95004"
     },
     {
       "file": "runtime/platforms/android/layout.json",
@@ -208,7 +208,7 @@
     },
     {
       "file": "runtime/platforms/android/main.js.in",
-      "sha256": "e65cf2798462477b0e46109fa1baa662a71761694873a24759f178ddddc44e51"
+      "sha256": "962f9b218a0f20e9ef3b353c819fe24d0306ba254145436836aa5c4dd4be2429"
     },
     {
       "file": "tools/validate-azure-async.cjs",
@@ -239,9 +239,9 @@
     {
       "platform": "clashVerge",
       "file": "src/clash-verge/v14.3-clash-verge.js",
-      "sha256": "3551b2a782ec34f1e70fc109a45494ee00787acf5ac9ac7632c3771085fef0ab",
-      "bytes": 128588,
-      "generatedConfigBytes": 184990,
+      "sha256": "c602789be4b168052fa62a3886065c65df905140c2073e8f769105457f609ffc",
+      "bytes": 128592,
+      "generatedConfigBytes": 184993,
       "inlineRows": 1098,
       "remoteSources": 30
     }

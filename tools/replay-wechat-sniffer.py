@@ -17,7 +17,7 @@ ROOT = Path(__file__).resolve().parents[1]
 PROJECT = runpy.run_path(str(ROOT / 'tools/replay-projectclash.py'))
 REPLAY = PROJECT['REPLAY']
 F, N = REPLAY['F'], REPLAY['N']
-PORTS = (443, 8000)
+PORTS = (80, 443, 8000)
 WECHAT = 'c2c.cdn.weixin.qq.com'
 QQ = 'gchat.qpic.cn'
 STUN = 'stun.qpic.cn'
@@ -144,15 +144,18 @@ def main():
     tracks = {'main': release['entries'], 'ipv4-only': release['variants']['ipv4-only']['entries']}
     packets = {host: subprocess.check_output([str(args.quic_probe.resolve()), host], timeout=6)
                for host in (WECHAT, QQ, STUN, UNKNOWN)}
-    probes = [('wechat_quic_443', 443, packets[WECHAT], True),
+    probes = [('wechat_quic_80', 80, packets[WECHAT], True),
+              ('wechat_quic_443', 443, packets[WECHAT], True),
               ('wechat_quic_8000', 8000, packets[WECHAT], True),
               ('qq_image_quic_443', 443, packets[QQ], True),
+              ('stun_hostname_80', 80, packets[STUN], False),
               ('stun_hostname_443', 443, packets[STUN], False),
               ('unclassified_quic_443', 443, packets[UNKNOWN], False),
+              ('opaque_udp_80', 80, b'fixture-without-a-hostname', False),
               ('opaque_udp_443', 443, b'fixture-without-a-hostname', False),
               ('opaque_udp_8000', 8000, b'fixture-without-a-hostname', False)]
     baseline = subprocess.check_output(['git', 'rev-parse', args.baseline + '^{commit}'], cwd=ROOT, text=True).strip()
-    result = {'revision': 'wechat-media-sniff-r1', 'status': 'PASS', 'deviceAcceptance': 'NOT_RUN',
+    result = {'revision': 'wechat-quic-port80-r1', 'status': 'PASS', 'deviceAcceptance': 'NOT_RUN',
               'scope': 'Synthetic QUIC Initial and UDP payload delivery over loopback SOCKS, no TUN or Apple runtime.',
               'baselineCommit': baseline, 'mihomoSHA256': sha(args.mihomo),
               'projectClashCore': {'commit': release['projectClash']['reviewedCoreCommit'], 'sha256': sha(args.project_core)},

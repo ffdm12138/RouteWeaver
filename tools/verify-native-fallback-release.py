@@ -19,6 +19,7 @@ ROOT = Path(__file__).resolve().parents[1]
 SUMS = 'SHA256SUMS.txt'
 WECHAT_REVISION = 'wechat-media-sniff-r1'
 DRIVE_REVISION = 'google-drive-hosts-r1'
+WECHAT_QUIC80_REVISION = 'wechat-quic-port80-r1'
 SELECTOR_ORDER_CHECKS = {
     'selector_order_and_fresh_defaults',
     'selector_order_after_manual_choice',
@@ -91,16 +92,23 @@ def verify_media_transport(root, release, tracks):
     receipt = read(checked_path(root, settings['transportVerification']))
     project = release['projectClash']
     project_core = read(checked_path(root, project['verification']))['core']
-    if (receipt['status'] != 'PASS' or receipt['revision'] != WECHAT_REVISION
+    if (receipt['status'] != 'PASS' or receipt['revision'] != settings['revision']
+            or settings['revision'] not in (WECHAT_REVISION, WECHAT_QUIC80_REVISION)
             or receipt['baselineCommit'] != settings['baselineCommit']
             or receipt['mihomoSHA256'] != CORE_EXE_SHA256 or receipt['projectClashCore'] != project_core):
         raise ValueError('Missing verified media transport replay')
     for file, digest in receipt['harness'].items():
         if sha(checked_path(root, file)) != digest:
             raise ValueError('Stale media transport replay harness: ' + file)
-    after = dict.fromkeys(('wechat_quic_443', 'wechat_quic_8000', 'qq_image_quic_443'), 'DIRECT')
-    after.update(dict.fromkeys(('stun_hostname_443', 'unclassified_quic_443', 'opaque_udp_443', 'opaque_udp_8000'),
-                               'catch-all proxy'))
+    if settings['revision'] == WECHAT_QUIC80_REVISION:
+        after = dict.fromkeys(('wechat_quic_80', 'wechat_quic_443', 'wechat_quic_8000', 'qq_image_quic_443'), 'DIRECT')
+        after.update(dict.fromkeys(('stun_hostname_80', 'stun_hostname_443', 'unclassified_quic_443',
+                                    'opaque_udp_80', 'opaque_udp_443', 'opaque_udp_8000'),
+                                   'catch-all proxy'))
+    else:
+        after = dict.fromkeys(('wechat_quic_443', 'wechat_quic_8000', 'qq_image_quic_443'), 'DIRECT')
+        after.update(dict.fromkeys(('stun_hostname_443', 'unclassified_quic_443', 'opaque_udp_443', 'opaque_udp_8000'),
+                                   'catch-all proxy'))
     before = dict.fromkeys(after, 'catch-all proxy')
     for track, entries in tracks.items():
         entries = {**entries, 'projectClash': project['entries'][track]}
@@ -120,7 +128,7 @@ def verify_source(root):
     candidate = release['nativeFallback']
     revision = release.get('currentRevision')
     system_dns = revision == 'direct-system-dns-r1'
-    media_repair = revision in (WECHAT_REVISION, DRIVE_REVISION)
+    media_repair = revision in (WECHAT_REVISION, DRIVE_REVISION, WECHAT_QUIC80_REVISION)
     standard_doh = revision == DOH_REVISION or media_repair
     historical_core_receipts = revision == DOH_REVISION
     selector_order = revision == 'selector-option-order-r1' or standard_doh
@@ -170,7 +178,7 @@ def verify_source(root):
     if release.get('googleDrive'):
         required = {'drive_default_video_web_api_download_export_tcp_udp_dns', 'drive_shared_google_hosts_tcp_udp_dns',
                     'drive_unsupported_udp_rejected'}
-        if revision == DRIVE_REVISION:
+        if revision in (DRIVE_REVISION, WECHAT_QUIC80_REVISION):
             required.add('drive_frontend_sharing_and_dedicated_apis_tcp_udp_dns')
         project = read(checked_path(root, release['projectClash']['verification']))
         for checks in [receipt['checks'], *(track['checks'] for track in project['tracks'].values())]:
@@ -239,7 +247,7 @@ def verify_static():
                     ['node', 'tools/test-native-fallback.cjs'], ['node', 'tools/test-tailscale-direct.cjs'],
                     ['node', 'tools/test-company-audit.cjs'], ['node', 'tools/test-dns-policy-order.cjs'],
                     *suites['regression'], *suites['platform']]
-        if read(snapshot / 'CURRENT_RELEASE.json').get('currentRevision') in (DOH_REVISION, WECHAT_REVISION, DRIVE_REVISION):
+        if read(snapshot / 'CURRENT_RELEASE.json').get('currentRevision') in (DOH_REVISION, WECHAT_REVISION, DRIVE_REVISION, WECHAT_QUIC80_REVISION):
             commands.append(['python', '-B', 'tools/standard_business_doh.py'])
         for command in commands:
             subprocess.run(command, cwd=snapshot, check=True, timeout=90)

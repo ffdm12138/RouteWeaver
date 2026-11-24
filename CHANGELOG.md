@@ -1,3 +1,8 @@
+## v14.3.0-rc.25 / v14.3.0-ipv4-only-rc.16 · 补齐 QUIC UDP/80 嗅探端口
+
+- 各 Mihomo 和 ProjectClash 入口的 QUIC 嗅探端口由 UDP/443、8443、8000 补齐至 UDP/80、443、8443、8000。
+- 带可读微信/QQ 媒体域名的 UDP/80 QUIC 连接经既有直连规则分流；STUN 主机名与无可读域名的 UDP/80 流量继续走「漏网之鱼」保护。 [微信与 QQ 图片分流](docs/guides/微信发图优化.md)
+
 ## v14.3.0-rc.24 / v14.3.0-ipv4-only-rc.15 · 补齐 Google Drive 专用主机
 
 - Drive 网页前端、共享前端、附加组件图标和 Activity、Labels API 的七个精确域名跟随「Google Drive」的 TCP、UDP 和 DNS 出口。

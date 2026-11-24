@@ -218,3 +218,7 @@ ProjectClash 主版和纯 IPv4 版从当前共享规则生成，覆盖 iPhone、
 ## 2026-11-24 · GitHub 托管 macOS 作业重跑
 
 发布回执提交 94dcfaa 的 projectclash-javascriptcore 作业等待约 15 分钟后取消。GitHub 注释记录托管 macOS ARM64 runner 容量不足，作业未取得 runner 或执行步骤。只重跑该作业，第二次通过，原 workflow 总体成功。 [首轮作业](https://github.com/ffdm12138/RouteWeaver/actions/runs/45237576421/job/137913287894) · [重跑结果](https://github.com/ffdm12138/RouteWeaver/actions/runs/45237576421/attempts/2)
+
+## 2026-11-24 · 补齐 QUIC UDP/80 嗅探端口
+
+两轨全部 Mihomo 和 ProjectClash 入口的 `sniffer.sniff.QUIC.ports` 由 `[443, 8443, 8000]` 补齐至 `[80, 443, 8443, 8000]`。通过 64,374 项离线模型检查、56 份官方 Mihomo v1.19.34 配置解析、280 项合成 QUIC/UDP 传输对照（覆盖 UDP/80、443、8000 的媒体直连与 STUN/无域名反例保护），以及 12 份 FlClash/Mihomo JS 和 2 份 ProjectClash JS 各 75 项隔离核心与 QuickJS 回放。实际客户端导入、TUN/VPN 与实机收图仍待设备验收。 [分流模型](../releases/v14.3/validation/domestic-resilience/wechat-quic-port80-r1.json) · [传输回执](../releases/v14.3/validation/domestic-resilience/wechat-media-transport-r1-quic80.json) · [FlClash 回执](../releases/v14.3/validation/proxy-failover/wechat-quic-port80-r1.json) · [ProjectClash 回执](../releases/v14.3/validation/projectclash-wechat-quic-port80-r1.json)

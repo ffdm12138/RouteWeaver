@@ -152,7 +152,7 @@ for (const entry of entries) {
     }
     assert.equal(config.dns['fake-ip-filter-mode'], 'blacklist');
     assert.equal(config['x-v14-generated'].wechatSniffRevision, 'wechat-media-sniff-r1');
-    assert.deepEqual(config.sniffer.sniff.QUIC.ports, [443, 8443, 8000]);
+    assert.deepEqual(config.sniffer.sniff.QUIC.ports, [80, 443, 8443, 8000]);
     for (const domain of mediaDomains) {
       const pattern = '+.' + domain;
       assert.equal(config.dns['fake-ip-filter'].filter(x => x === pattern).length, 1);

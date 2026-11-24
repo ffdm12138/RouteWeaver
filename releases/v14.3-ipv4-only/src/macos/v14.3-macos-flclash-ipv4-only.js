@@ -1010,7 +1010,7 @@ function v14MacOSBase(input) {
     "skip-domain": v14WeChatSnifferSkips(input, oldSniffer),
     sniff: Object.assign({}, v14Object(oldSniffer.sniff) ? oldSniffer.sniff : {}, {
       HTTP: { ports: [80, "8080-8880"], "override-destination": false },
-      TLS: { ports: [443, 8443] }, QUIC: { ports: [443, 8443, 8000] },
+      TLS: { ports: [443, 8443] }, QUIC: { ports: [80, 443, 8443, 8000] },
     }),
   });
 
