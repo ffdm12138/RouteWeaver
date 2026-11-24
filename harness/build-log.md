@@ -222,3 +222,5 @@ ProjectClash 主版和纯 IPv4 版从当前共享规则生成，覆盖 iPhone、
 ## 2026-11-24 · 补齐 QUIC UDP/80 嗅探端口
 
 两轨全部 Mihomo 和 ProjectClash 入口的 `sniffer.sniff.QUIC.ports` 由 `[443, 8443, 8000]` 补齐至 `[80, 443, 8443, 8000]`。通过 64,374 项离线模型检查、56 份官方 Mihomo v1.19.34 配置解析、280 项合成 QUIC/UDP 传输对照（覆盖 UDP/80、443、8000 的媒体直连与 STUN/无域名反例保护），以及 12 份 FlClash/Mihomo JS 和 2 份 ProjectClash JS 各 75 项隔离核心与 QuickJS 回放。实际客户端导入、TUN/VPN 与实机收图仍待设备验收。 [分流模型](../releases/v14.3/validation/domestic-resilience/wechat-quic-port80-r1.json) · [传输回执](../releases/v14.3/validation/domestic-resilience/wechat-media-transport-r1-quic80.json) · [FlClash 回执](../releases/v14.3/validation/proxy-failover/wechat-quic-port80-r1.json) · [ProjectClash 回执](../releases/v14.3/validation/projectclash-wechat-quic-port80-r1.json)
+
+公开主版 `v14.3.0-rc.25` 和纯 IPv4 版 `v14.3.0-ipv4-only-rc.16` 绑定提交 `6c77726f5d04eadfbe11855f4cf5cffd5001eeb7`。源码与两条发布 CI 均通过，18 个公开附件的匿名下载 SHA-256 与本地验证字节一致。 [主版回执](releases/v14.3.0-rc.25.json) · [纯 IPv4 回执](releases/v14.3.0-ipv4-only-rc.16.json)
